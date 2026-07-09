@@ -8,8 +8,8 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="会いに行こう！全国水族館ツアーMAP">
 <meta property="og:description" content="さかなのおにいさん かわちゃんと巡る全国136館の水族館MAP。キミはいくつ行ったことある？🐟">
-<meta property="og:image" content="https://honmachi169.github.io/aquarium-tour-map/assets/kawachan_web.png">
-<meta property="og:url" content="https://honmachi169.github.io/aquarium-tour-map/">
+<meta property="og:image" content="https://aquarium.yasasea.com/assets/kawachan_web.png">
+<meta property="og:url" content="https://aquarium.yasasea.com/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
@@ -411,7 +411,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     const text = n>0
       ? `わたしは全国の水族館 ${n}/${total}館 制覇！🐟🏆\nキミはいくつ行ったことある？`
       : `全国の水族館めぐり、はじめよう！🐟`;
-    const url = 'https://honmachi169.github.io/aquarium-tour-map/';
+    const url = 'https://aquarium.yasasea.com/';
     if(navigator.share){
       try{ await navigator.share({text: text+'\n#全国水族館ツアーMAP', url}); return; }catch(e){ if(e.name==='AbortError') return; }
     }

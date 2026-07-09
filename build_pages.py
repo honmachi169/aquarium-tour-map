@@ -3,7 +3,7 @@
 # 使い方: python3 build_pages.py  → git add spot sitemap.xml → commit/push
 import json, os, html, re, unicodedata
 
-SITE = "https://honmachi169.github.io/aquarium-tour-map"
+SITE = "https://aquarium.yasasea.com"
 os.makedirs("spot", exist_ok=True)
 
 TAG_LABEL = {"rain":"☔️ 雨の日におすすめ","kids":"👶 未就学児におすすめ","same":"🦈 サメ好きにおすすめ",
