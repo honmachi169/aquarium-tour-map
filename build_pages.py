@@ -10,7 +10,8 @@ os.makedirs("spot", exist_ok=True)
 
 TAG_LABEL = {"rain":"☔️ 雨の日におすすめ","kids":"👶 未就学児におすすめ","same":"🦈 サメ好きにおすすめ",
              "dolphin":"🐬 イルカショーおすすめ","deep":"🐙 深海生物好きにおすすめ",
-             "penguin":"🐧 ペンギン好きにおすすめ","summer":"☀️ 夏休みおすすめ"}
+             "penguin":"🐧 ペンギン好きにおすすめ","summer":"☀️ 夏休みおすすめ",
+             "baby":"🍼 赤ちゃん連れにおすすめ"}
 ANIMAL_ICONS = {"シャチ":"🐋","ラッコ":"🦦","ジンベエザメ":"🦈","シロワニ":"🦈","マンボウ":"🐟",
                 "ピラルクー":"🐠","エンペラーペンギン":"🐧","フェアリーペンギン":"🐧","クラゲ":"🪼"}
 
@@ -51,6 +52,9 @@ for slug, a, intro in entries:
     if a.get("closed"): info += f"<tr><th>🗓 休館日</th><td>{E(a['closed'])}</td></tr>"
     if a.get("gift"): info += f"<tr><th>🎁 おみやげ</th><td>{E(a['gift'])}</td></tr>"
     if a.get("access"): info += f"<tr><th>🚃 アクセス</th><td>{E(a['access'])}</td></tr>"
+    if a.get("stroller"): info += f"<tr><th>🛻 ベビーカー</th><td>{E(a['stroller'])}</td></tr>"
+    if a.get("nursing"): info += f"<tr><th>🍼 授乳室</th><td>{E(a['nursing'])}</td></tr>"
+    if a.get("locker"): info += f"<tr><th>🔒 ロッカー</th><td>{E(a['locker'])}</td></tr>"
 
     hitokoto = ""
     if a.get("hitokoto"):

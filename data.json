@@ -24,7 +24,8 @@
    "highlight": "飼育種類数 日本一！ラッコ「メイ」「キラ」の愛らしさと、日本で唯一のジュゴン「セレナ」の神秘的な泳ぎに心を奪われる🦦",
    "tags": [
     "rain",
-    "kids"
+    "kids",
+    "baby"
    ],
    "sns": {
     "x": "https://x.com/TOBA_AQUARIUM",
@@ -34,7 +35,10 @@
     "ラッコ"
    ],
    "only": "ジュゴン",
-   "gift": "ラッコのメイちゃん・キラちゃんグッズ"
+   "gift": "ラッコのメイちゃん・キラちゃんグッズ",
+   "stroller": "貸し出しあり・館内持ち込みOK",
+   "nursing": "あり（多目的室）",
+   "locker": "あり（有料）"
   },
   {
    "no": 2,
@@ -55,7 +59,8 @@
    "highlight": "西日本で唯一シャチに会える！母「ステラ」と娘「ラン」の親子シャチがオルカスタジアムで大迫力パフォーマンス🐋",
    "tags": [
     "dolphin",
-    "kids"
+    "kids",
+    "baby"
    ],
    "sns": {
     "x": "https://x.com/Kobe_SumaSea",
@@ -64,7 +69,10 @@
    "animals": [
     "シャチ"
    ],
-   "gift": "シャチグッズ"
+   "gift": "シャチグッズ",
+   "stroller": "貸し出しあり・館内持ち込みOK",
+   "nursing": "あり",
+   "locker": "あり（有料）"
   },
   {
    "no": 46,
@@ -117,7 +125,8 @@
     "rain",
     "kids",
     "penguin",
-    "summer"
+    "summer",
+    "baby"
    ],
    "sns": {
     "instagram": "https://www.instagram.com/port_of_nagoya_public_aquarium/"
@@ -127,7 +136,10 @@
     "エンペラーペンギン"
    ],
    "gift": "シャチのぬいぐるみ",
-   "summer": "サマーナイトアクアリウム（夏休み期間は夜まで延長営業）"
+   "summer": "サマーナイトアクアリウム（夏休み期間は夜まで延長営業）",
+   "stroller": "館内持ち込みOK",
+   "nursing": "あり（多目的トイレ内）",
+   "locker": "あり（有料）"
   },
   {
    "no": 4,
@@ -183,7 +195,8 @@
    "tags": [
     "dolphin",
     "kids",
-    "summer"
+    "summer",
+    "baby"
    ],
    "sns": {
     "x": "https://x.com/_seaparadise_",
@@ -192,7 +205,10 @@
    "animals": [
     "シロワニ"
    ],
-   "summer": "花火ショー（7〜8月開催）＆自由研究に役立つ体験プログラム"
+   "summer": "花火ショー（7〜8月開催）＆自由研究に役立つ体験プログラム",
+   "stroller": "貸し出しあり・館内持ち込みOK",
+   "nursing": "あり",
+   "locker": "あり（有料）"
   },
   {
    "no": 6,
@@ -219,7 +235,8 @@
     "same",
     "rain",
     "kids",
-    "summer"
+    "summer",
+    "baby"
    ],
    "sns": {
     "x": "https://x.com/osaka_kaiyukan",
@@ -229,7 +246,10 @@
     "ジンベエザメ"
    ],
    "gift": "ジンベエザメのぬいぐるみ",
-   "summer": "17時からは照明と音楽が変わる「夜の海遊館」に変身"
+   "summer": "17時からは照明と音楽が変わる「夜の海遊館」に変身",
+   "stroller": "貸し出しあり・館内持ち込みOK",
+   "nursing": "あり（複数か所）",
+   "locker": "あり（有料）"
   },
   {
    "no": 7,
@@ -256,7 +276,8 @@
     "same",
     "kids",
     "deep",
-    "summer"
+    "summer",
+    "baby"
    ],
    "sns": {
     "x": "https://x.com/kaiyohakukoen",
@@ -266,7 +287,10 @@
     "ジンベエザメ"
    ],
    "gift": "ジンベエザメグッズ",
-   "summer": "美ら海ナイトアクアリウム（8/1〜8/31は21時まで！17時以降は入館割引も）"
+   "summer": "美ら海ナイトアクアリウム（8/1〜8/31は21時まで！17時以降は入館割引も）",
+   "stroller": "貸し出しあり・館内持ち込みOK",
+   "nursing": "あり",
+   "locker": "あり（有料）"
   },
   {
    "no": 8,
@@ -326,7 +350,8 @@
     "dolphin",
     "kids",
     "penguin",
-    "summer"
+    "summer",
+    "baby"
    ],
    "sns": {
     "instagram": "https://www.instagram.com/adventureworld_official/"
@@ -336,7 +361,10 @@
    ],
    "summer": "新生マリンライブ「Always Together」が7/18スタート！名曲と紡ぐ40分のシネマティック・ライブ。午後からお得な「ハーフデー入園券」で夜のナイトLIVE！アドベンチャーも🌙",
    "access": "JR白浜駅から路線バス約10分（京都・新大阪からはパンダくろしお号も運行）／南紀白浜空港から路線バス約5分（羽田から約70分）",
-   "hitokoto": "アンバサダーを務めさせてもらってる大好きなパーク！海の動物も陸の動物もぜんぶ会えるよ🐬🐼"
+   "hitokoto": "アンバサダーを務めさせてもらってる大好きなパーク！海の動物も陸の動物もぜんぶ会えるよ🐬🐼",
+   "stroller": "貸し出しあり・園内持ち込みOK",
+   "nursing": "あり（複数か所）",
+   "locker": "あり（有料）"
   },
   {
    "no": 10,
@@ -358,7 +386,8 @@
    "tags": [
     "rain",
     "kids",
-    "penguin"
+    "penguin",
+    "baby"
    ],
    "sns": {
     "x": "https://x.com/Sumida_Aquarium",
@@ -367,7 +396,10 @@
    "animals": [
     "クラゲ"
    ],
-   "gift": "ペンギングッズ"
+   "gift": "ペンギングッズ",
+   "stroller": "館内持ち込みOK",
+   "nursing": "あり",
+   "locker": "あり（有料）"
   },
   {
    "no": 11,
@@ -422,12 +454,16 @@
    "tags": [
     "dolphin",
     "rain",
-    "kids"
+    "kids",
+    "baby"
    ],
    "sns": {
     "x": "https://x.com/_aquapark_",
     "instagram": "https://www.instagram.com/aquapark_official/"
-   }
+   },
+   "stroller": "館内持ち込みOK",
+   "nursing": "あり",
+   "locker": "あり（有料）"
   },
   {
    "no": 13,
@@ -479,7 +515,8 @@
    "tags": [
     "dolphin",
     "deep",
-    "kids"
+    "kids",
+    "baby"
    ],
    "sns": {
     "x": "https://x.com/enosui_com",
@@ -488,7 +525,10 @@
    "animals": [
     "クラゲ"
    ],
-   "gift": "クラゲグッズ"
+   "gift": "クラゲグッズ",
+   "stroller": "貸し出しあり・館内持ち込みOK",
+   "nursing": "あり",
+   "locker": "あり（有料）"
   },
   {
    "no": 15,
@@ -509,12 +549,16 @@
    "highlight": "美術館みたいな水族館！ホワイトタイガーまでいる「感性にふれる」空間",
    "tags": [
     "rain",
-    "kids"
+    "kids",
+    "baby"
    ],
    "sns": {
     "x": "https://x.com/NIFREL_official",
     "instagram": "https://www.instagram.com/nifrel_official/"
-   }
+   },
+   "stroller": "館内持ち込みOK",
+   "nursing": "あり",
+   "locker": "あり（有料）"
   },
   {
    "no": 16,
@@ -537,13 +581,17 @@
     "rain",
     "kids",
     "penguin",
-    "summer"
+    "summer",
+    "baby"
    ],
    "sns": {
     "x": "https://x.com/Sunshine_Aqua",
     "instagram": "https://www.instagram.com/sunshine_aquarium/"
    },
-   "summer": "夏のびちょぬれイベント＆自由研究コンテンツ"
+   "summer": "夏のびちょぬれイベント＆自由研究コンテンツ",
+   "stroller": "館内持ち込みOK",
+   "nursing": "あり",
+   "locker": "あり（有料）"
   },
   {
    "no": 17,
@@ -649,7 +697,8 @@
    "tags": [
     "same",
     "dolphin",
-    "kids"
+    "kids",
+    "baby"
    ],
    "sns": {
     "x": "https://x.com/ioworld_aqua",
@@ -657,7 +706,10 @@
    },
    "animals": [
     "ジンベエザメ"
-   ]
+   ],
+   "stroller": "館内持ち込みOK",
+   "nursing": "あり",
+   "locker": "あり（有料）"
   },
   {
    "no": 21,
@@ -678,12 +730,16 @@
    "highlight": "「動物とあそぶ」水族館！セイウチと生きものとの距離が近すぎる",
    "tags": [
     "dolphin",
-    "kids"
+    "kids",
+    "baby"
    ],
    "sns": {
     "x": "https://x.com/umitamago_staff",
     "instagram": "https://www.instagram.com/umitamago_staff/"
-   }
+   },
+   "stroller": "館内持ち込みOK",
+   "nursing": "あり",
+   "locker": "あり（有料）"
   },
   {
    "no": 22,
@@ -2368,7 +2424,9 @@
    "fee": "無料",
    "closed": "毎月第3日曜のみ開館（10:00〜15:00）",
    "comment": "大阪・八尾の廃校をリノベ！絶滅危惧種キンタイ（ニッポンバラタナゴ）を守る月1回だけ開く幻の水族館🐟",
-   "tags": ["kids"]
+   "tags": [
+    "kids"
+   ]
   },
   {
    "name": "アクア東条",
@@ -2379,7 +2437,10 @@
    "fee": "無料",
    "closed": "木曜・年末年始",
    "comment": "東条湖のほとりの無料水族館！コイ・ナマズ・ウーパールーパーなど約40種、カメにも触れる穴場スポット🐢",
-   "tags": ["kids", "rain"]
+   "tags": [
+    "kids",
+    "rain"
+   ]
   },
   {
    "name": "市場水族館（新屋島水族館 仮設）",
