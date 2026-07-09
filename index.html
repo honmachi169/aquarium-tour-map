@@ -136,6 +136,20 @@
   .card .tab.hp { background:var(--sky); color:var(--sea-deep); }
   .card.upcoming { opacity:.7; border:3px dashed var(--sea); }
   .badge-closed { color:var(--coral); font-size:.75rem; font-weight:bold; }
+  /* ===== かわちゃんねる紹介 ===== */
+  .about { background:linear-gradient(180deg,#e8f6fb,#caf0f8); padding:36px 16px; }
+  .about-inner { max-width:860px; margin:0 auto; display:flex; gap:24px; align-items:center; }
+  .about-img { width:200px; flex:none; filter:drop-shadow(0 4px 10px rgba(2,62,138,.2)); }
+  .about-text h2 { color:var(--sea-deep); font-size:1.15rem; margin-bottom:10px; }
+  .about-text p { font-size:.88rem; color:#345; line-height:1.8; margin-bottom:10px; }
+  .about-text .profile { font-size:.82rem; background:#fff; border-radius:12px; padding:10px 14px; }
+  .about-links { display:flex; gap:10px; flex-wrap:wrap; }
+  .about-links a { font-size:.85rem; font-weight:bold; text-decoration:none; background:var(--sea); color:#fff; border-radius:999px; padding:7px 16px; }
+  @media (max-width:640px){
+    .about-inner { flex-direction:column; text-align:left; }
+    .about-img { width:60%; max-width:220px; }
+  }
+
   footer { text-align:center; padding:26px; font-size:.8rem; color:#578; background:var(--sky); }
   footer a { color:var(--sea-deep); }
 </style>
@@ -185,6 +199,25 @@
 <div class="controls" id="regionBtns"></div>
 <div class="controls" id="tagBtns"></div>
 <div class="grid" id="cards"></div>
+
+<section class="about">
+  <div class="about-inner">
+    <img src="assets/kawachan_web.png" alt="さかなのおにいさん かわちゃん" class="about-img">
+    <div class="about-text">
+      <h2>🐟 さかなのおにいさん かわちゃんねるとは</h2>
+      <p>さかなのおにいさん かわちゃん（川田一輝）が、全国の水族館を巡って見どころや生きものの魅力を「オモロく」紹介するYouTubeチャンネル。目指せ全国100水族館！身近な自然への入口である水族館をきっかけに、親子で海や生きものを好きになってもらえたらうれしいです。</p>
+      <p class="profile">
+        <b>かわちゃんプロフィール：</b>魚の魅力を歌・イラスト・クイズで伝えるさかなのおにいさん。テレビ・ラジオ出演や講演、著書『全国クセすご！水族館図鑑』（中央公論新社）など幅広く活動中。『子どもにも海にも やさしい未来を』が合言葉！
+      </p>
+      <div class="about-links">
+        <a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA" target="_blank">▶ YouTube</a>
+        <a href="https://sakana-bro.com/" target="_blank">🌊 公式サイト</a>
+        <a href="https://www.instagram.com/kawayanfishing/" target="_blank">📷 Instagram</a>
+        <a href="https://twitter.com/sakana_bro" target="_blank">𝕏 X</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer>
   <p><img class="fishline" src="assets/fish_10ZSpO.png" alt=""><img class="fishline" src="assets/fish_14jSCk.png" alt=""><img class="fishline" src="assets/fish_1z-Hbl.png" alt=""></p>
