@@ -95,6 +95,8 @@
     .pp .info .note { display:none; }
     .pp .chips { margin:0 0 4px; }
     .pp .btn { font-size:.73rem; padding:4px 10px; }
+    .pp .btn.sns { display:none; }
+    .pp .visitbtn { font-size:.73rem; padding:4px 10px; }
   }
   #tagBtns button { border-color:#f4a261; color:#c9660a; }
   #tagBtns button.active { background:#f4a261; color:#fff; }
@@ -288,6 +290,18 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + `<span class="note">※最新は公式サイトで</span>`
       + `</div>`;
   }
+
+  // スマホ：吹き出しを開いたら地図の真ん中に来るようにパン
+  map.on('popupopen', function(e){
+    if(window.innerWidth > 640) return;
+    setTimeout(()=>{
+      const el = e.popup.getElement();
+      if(!el) return;
+      const px = map.project(e.popup.getLatLng(), map.getZoom());
+      px.y -= el.clientHeight / 2;
+      map.panTo(map.unproject(px, map.getZoom()), {animate:true});
+    }, 50);
+  });
 
   const fishIcon = L.divIcon({className:'', html:'<div style="font-size:28px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))">🐟</div>', iconSize:[28,28], iconAnchor:[14,14], popupAnchor:[0,-14]});
   const upIcon = L.divIcon({className:'', html:'<div style="font-size:24px;opacity:.55">📍</div>', iconSize:[24,24], iconAnchor:[12,24], popupAnchor:[0,-24]});
