@@ -45,6 +45,9 @@
   .pp .btn.yt { background:var(--coral); color:#fff; }
   .pp .btn.hp { background:var(--sky); color:var(--sea-deep); }
   .pp .btn.sns { background:#eef2f6; color:#334; }
+  .chips { display:flex; flex-wrap:wrap; gap:5px; margin:2px 0 6px; }
+  .chip { font-size:.72rem; font-weight:bold; background:#e8f6fb; color:#075985; border:1.5px solid #7dd3fc; border-radius:999px; padding:2px 9px; }
+  .chip.only { background:#fff7db; color:#92600a; border-color:#f4c430; }
   #tagBtns button { border-color:#f4a261; color:#c9660a; }
   #tagBtns button.active { background:#f4a261; color:#fff; }
   .pp .soon { font-size:.8rem; color:var(--sea); font-weight:bold; }
@@ -170,6 +173,19 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   const fishIcon = L.divIcon({className:'', html:'<div style="font-size:28px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))">🐟</div>', iconSize:[28,28], iconAnchor:[14,14], popupAnchor:[0,-14]});
   const upIcon = L.divIcon({className:'', html:'<div style="font-size:24px;opacity:.55">📍</div>', iconSize:[24,24], iconAnchor:[12,24], popupAnchor:[0,-24]});
 
+  const ANIMAL_ICONS = {
+    "シャチ":"🐋", "ラッコ":"🦦", "ジンベエザメ":"🦈", "シロワニ":"🦈",
+    "マンボウ":"🐟", "ピラルクー":"🐠", "エンペラーペンギン":"🐧", "フェアリーペンギン":"🐧"
+  };
+  function animalChips(a){
+    const chips = [];
+    (a.animals||[]).forEach(name=>{
+      chips.push(`<span class="chip">${ANIMAL_ICONS[name]||'🐟'} ${name}</span>`);
+    });
+    if(a.only) chips.push(`<span class="chip only">⭐ ここだけ！${a.only}</span>`);
+    return chips.length ? `<div class="chips">${chips.join('')}</div>` : '';
+  }
+
   function snsBtns(a){
     if(!a.sns) return '';
     let out = '';
@@ -188,6 +204,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + `<span class="pref">${a.pref}</span>`
       + `<h3>${a.name}</h3>`
       + `<p class="hl">${a.highlight||''}</p>`
+      + animalChips(a)
       + infoBox(a)
       + `<div class="btns">`
       + a.videos.map((vv,i)=>`<a class="btn yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):'を見る'}</a>`).join('')
@@ -209,6 +226,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + `<span class="wishtag">🔜 まだ紹介できていない水族館</span>`
       + `<h3>${a.name}</h3>`
       + `<p class="hl">${a.comment||''}<br>動画での紹介をおたのしみに！</p>`
+      + animalChips(a)
       + infoBox(a)
       + `<div class="btns">`
       + (a.url?`<a class="btn hp" href="${a.url}" target="_blank">公式サイト🔗</a>`:'')
@@ -266,6 +284,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
           <span class="pref">${a.pref}</span>
           <h3>${a.name} ${a.closed_flag?'<span class="badge-closed">閉館</span>':''}</h3>
           <p class="hl">${a.highlight||''}</p>
+          ${animalChips(a)}
           ${(a.fee||a.closed)&&!a.closed_flag?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}${a.child?`・子ども ${a.child}`:''}<br>`:''}${a.closed?`🗓 休み：${a.closed}`:''}</div>`:''}
           <div class="links">
             ${a.videos.map((vv,i)=>`<a class="tab yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):''}</a>`).join('')}

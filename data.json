@@ -29,7 +29,11 @@
       "sns": {
         "x": "https://x.com/TOBA_AQUARIUM",
         "instagram": "https://www.instagram.com/toba_aquarium.official/"
-      }
+      },
+      "animals": [
+        "ラッコ"
+      ],
+      "only": "ジュゴン（日本でここだけ！）"
     },
     {
       "no": 2,
@@ -55,7 +59,10 @@
       "sns": {
         "x": "https://x.com/Kobe_SumaSea",
         "instagram": "https://www.instagram.com/kobe_sumasea/"
-      }
+      },
+      "animals": [
+        "シャチ"
+      ]
     },
     {
       "no": 46,
@@ -110,7 +117,11 @@
       ],
       "sns": {
         "instagram": "https://www.instagram.com/port_of_nagoya_public_aquarium/"
-      }
+      },
+      "animals": [
+        "シャチ",
+        "エンペラーペンギン"
+      ]
     },
     {
       "no": 4,
@@ -137,7 +148,11 @@
       "sns": {
         "x": "https://x.com/aw_oarai",
         "instagram": "https://www.instagram.com/aquaworld_oarai/"
-      }
+      },
+      "animals": [
+        "シロワニ",
+        "マンボウ"
+      ]
     },
     {
       "no": 5,
@@ -163,7 +178,10 @@
       "sns": {
         "x": "https://x.com/_seaparadise_",
         "instagram": "https://www.instagram.com/seaparadise_official/"
-      }
+      },
+      "animals": [
+        "シロワニ"
+      ]
     },
     {
       "no": 6,
@@ -194,7 +212,10 @@
       "sns": {
         "x": "https://x.com/osaka_kaiyukan",
         "instagram": "https://www.instagram.com/kaiyukan_japan/"
-      }
+      },
+      "animals": [
+        "ジンベエザメ"
+      ]
     },
     {
       "no": 7,
@@ -225,7 +246,10 @@
       "sns": {
         "x": "https://x.com/kaiyohakukoen",
         "instagram": "https://www.instagram.com/kaiyohaku_churaumi/"
-      }
+      },
+      "animals": [
+        "ジンベエザメ"
+      ]
     },
     {
       "no": 8,
@@ -251,7 +275,11 @@
       "sns": {
         "x": "https://x.com/kamoseaOfficial",
         "instagram": "https://www.instagram.com/kamogawaseaworld/"
-      }
+      },
+      "animals": [
+        "シャチ",
+        "マンボウ"
+      ]
     },
     {
       "no": 9,
@@ -280,7 +308,10 @@
       ],
       "sns": {
         "instagram": "https://www.instagram.com/adventureworld_official/"
-      }
+      },
+      "animals": [
+        "エンペラーペンギン"
+      ]
     },
     {
       "no": 10,
@@ -387,7 +418,10 @@
       "sns": {
         "x": "https://x.com/marine_uminaka",
         "instagram": "https://www.instagram.com/marineworld.uminaka/"
-      }
+      },
+      "animals": [
+        "ラッコ"
+      ]
     },
     {
       "no": 14,
@@ -492,7 +526,10 @@
       "sns": {
         "x": "https://x.com/aquatotto",
         "instagram": "https://www.instagram.com/aquatotto_gifu/"
-      }
+      },
+      "animals": [
+        "ピラルクー"
+      ]
     },
     {
       "no": 18,
@@ -517,7 +554,10 @@
       ],
       "sns": {
         "x": "https://x.com/KasaiSuizokuen"
-      }
+      },
+      "animals": [
+        "フェアリーペンギン"
+      ]
     },
     {
       "no": 19,
@@ -569,7 +609,10 @@
       "sns": {
         "x": "https://x.com/ioworld_aqua",
         "instagram": "https://www.instagram.com/kagoshima_city_aquarium/"
-      }
+      },
+      "animals": [
+        "ジンベエザメ"
+      ]
     },
     {
       "no": 21,
@@ -666,7 +709,10 @@
       ],
       "sns": {
         "instagram": "https://www.instagram.com/nagasakipenguin/"
-      }
+      },
+      "animals": [
+        "フェアリーペンギン"
+      ]
     },
     {
       "no": 25,
@@ -795,7 +841,8 @@
       ],
       "sns": {
         "x": "https://x.com/biwahaku"
-      }
+      },
+      "only": "ビワコオオナマズ（ここでしか見られない主）"
     },
     {
       "no": 30,
@@ -893,7 +940,8 @@
       "sns": {
         "x": "https://x.com/iseseaparadise",
         "instagram": "https://www.instagram.com/iseseaparadise/"
-      }
+      },
+      "only": "ツメナシカワウソと握手（日本でここだけ！）"
     },
     {
       "no": 34,
@@ -1364,7 +1412,8 @@
       "comment": "ホッキョクグマと県魚ハタハタに会える",
       "tags": [
         "kids"
-      ]
+      ],
+      "only": "ホッキョクグマ（日本の水族館でここだけ！）"
     },
     {
       "name": "アクアマリンいなわしろカワセミ水族館",
@@ -1397,7 +1446,10 @@
       "fee": "900円",
       "child": "300円",
       "closed": "月曜・第4木曜（祝日は翌日）",
-      "comment": "栃木県唯一の水族館！那珂川の生きもの大集合"
+      "comment": "栃木県唯一の水族館！那珂川の生きもの大集合",
+      "animals": [
+        "ピラルクー"
+      ]
     },
     {
       "name": "さかなと森の観察園",
@@ -1419,7 +1471,8 @@
       "fee": "400円",
       "child": "100円",
       "closed": "月2回ほど月曜休・8月無休",
-      "comment": "荒川の生きものがテーマの淡水魚水族館"
+      "comment": "荒川の生きものがテーマの淡水魚水族館",
+      "only": "ムサシトミヨ（生息地は世界で元荒川だけ！）"
     },
     {
       "name": "板橋区立熱帯環境植物館",
@@ -1493,6 +1546,9 @@
       "tags": [
         "rain",
         "kids"
+      ],
+      "animals": [
+        "ピラルクー"
       ]
     },
     {
@@ -1611,7 +1667,8 @@
       "tags": [
         "deep",
         "rain"
-      ]
+      ],
+      "only": "シーラカンス冷凍標本（世界でここだけ！）"
     },
     {
       "name": "幼魚水族館",
@@ -1892,7 +1949,8 @@
       "tags": [
         "dolphin",
         "kids"
-      ]
+      ],
+      "only": "シロイルカ（西日本でここだけ！）"
     },
     {
       "name": "渋川マリン水族館",
