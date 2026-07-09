@@ -96,6 +96,8 @@
   }
   #tagBtns button { border-color:#f4a261; color:#c9660a; }
   #tagBtns button.active { background:#f4a261; color:#fff; }
+  #tagBtns button.visitedbtn { border-color:#2a9d8f; color:#2a9d8f; }
+  #tagBtns button.visitedbtn.active { background:#2a9d8f; color:#fff; }
   .pp .soon { font-size:.8rem; color:var(--sea); font-weight:bold; }
   .pp.wish .inner { padding-top:12px; }
   .pp .wishtag { font-size:.72rem; color:#889; background:#eef2f6; border-radius:999px; padding:2px 10px; }
@@ -388,6 +390,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   });
   Object.entries({...TAGS, "__visited":["✅ 行った水族館","✅ 行った館"]}).forEach(([key,label])=>{
     const b = document.createElement('button');
+    if(key==='__visited') b.classList.add('visitedbtn');
     b.innerHTML = `<span class="pc-only">${label[0]}</span><span class="sp-only">${label[1]}</span>`;
     b.onclick = ()=>{
       if(currentTag===key){ currentTag=null; b.classList.remove('active'); }
