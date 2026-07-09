@@ -108,19 +108,20 @@
   .pp .wishtag { font-size:.72rem; color:#889; background:#eef2f6; border-radius:999px; padding:2px 10px; }
 
   /* ===== 泳ぐ魚の飾り ===== */
-  .deco { position:absolute; pointer-events:none; opacity:.95; }
-  .deco.iruka { width:min(280px,26vw); left:2%; top:100px; animation:sway 6s ease-in-out infinite; }
-  .deco.mendako { width:min(220px,20vw); right:3%; top:140px; animation:sway 7s ease-in-out infinite reverse; }
-  .deco.d-squid { width:min(110px,9vw); left:14%; top:330px; animation:sway 8s ease-in-out infinite; }
-  .deco.d-fugu { width:min(120px,10vw); left:4%; top:430px; animation:sway 5.5s ease-in-out infinite reverse; }
-  .deco.d-penguin { width:min(100px,8vw); left:15%; top:540px; animation:sway 7.5s ease-in-out infinite; }
-  .deco.d-opah { width:min(150px,12vw); right:13%; top:360px; animation:sway 6.5s ease-in-out infinite; }
-  .deco.d-yadokari { width:min(100px,8vw); right:4%; top:470px; animation:sway 9s ease-in-out infinite reverse; }
-  .deco.d-kasago { width:min(130px,11vw); right:14%; top:560px; animation:sway 7s ease-in-out infinite; }
+  .deco { position:absolute; pointer-events:none; opacity:.97; }
+  .deco.p1 { width:min(220px,17vw); left:3%; top:90px; animation:sway 6s ease-in-out infinite; }
+  .deco.p2 { width:min(190px,15vw); left:16%; top:280px; animation:sway 7.5s ease-in-out infinite reverse; }
+  .deco.p3 { width:min(200px,16vw); left:4%; top:440px; animation:sway 5.5s ease-in-out infinite; }
+  .deco.p4 { width:min(170px,13vw); left:17%; top:600px; animation:sway 8s ease-in-out infinite reverse; }
+  .deco.p5 { width:min(220px,17vw); right:3%; top:100px; animation:sway 7s ease-in-out infinite reverse; }
+  .deco.p6 { width:min(190px,15vw); right:16%; top:300px; animation:sway 6.5s ease-in-out infinite; }
+  .deco.p7 { width:min(200px,16vw); right:4%; top:460px; animation:sway 8.5s ease-in-out infinite reverse; }
+  .deco.p8 { width:min(170px,13vw); right:17%; top:610px; animation:sway 6s ease-in-out infinite; }
   @keyframes sway { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-14px) rotate(4deg)} }
   @media (max-width:640px){
-    .deco.iruka{top:auto;bottom:130px} .deco.mendako{top:auto;bottom:150px}
-    .deco.d-squid,.deco.d-fugu,.deco.d-penguin,.deco.d-opah,.deco.d-yadokari,.deco.d-kasago{ display:none; }
+    .deco { display:none; }
+    .deco.p1 { display:block; width:26vw; top:auto; bottom:120px; left:2%; }
+    .deco.p5 { display:block; width:26vw; top:auto; bottom:140px; right:2%; }
   }
   .legend { max-width:1100px; margin:-8px auto 10px; padding:0 20px; font-size:.82rem; color:#567; display:flex; gap:18px; flex-wrap:wrap; }
   footer img.fishline { height:44px; margin:0 8px; vertical-align:middle; }
@@ -167,14 +168,14 @@
 <body>
 <header>
   <div class="bubbles" id="bubbles"></div>
-  <img class="deco iruka" src="assets/iruka.png" alt="">
-  <img class="deco mendako" src="assets/mendako.png" alt="">
-  <img class="deco d-squid" src="assets/fish_1z-Hbl.png" alt="">
-  <img class="deco d-fugu" src="assets/deco_c.png" alt="">
-  <img class="deco d-penguin" src="assets/fish_14jSCk.png" alt="">
-  <img class="deco d-opah" src="assets/deco_b.png" alt="">
-  <img class="deco d-yadokari" src="assets/deco_a.png" alt="">
-  <img class="deco d-kasago" src="assets/fish_10ZSpO.png" alt="">
+  <img class="deco p1" src="assets/punio_shark.png" alt="">
+  <img class="deco p2" src="assets/punio_takopaikapi.png" alt="">
+  <img class="deco p3" src="assets/punio_kusamochi.png" alt="">
+  <img class="deco p4" src="assets/punio_tenten.png" alt="">
+  <img class="deco p5" src="assets/punio_hanabi.png" alt="">
+  <img class="deco p6" src="assets/punio_kopemaru.png" alt="">
+  <img class="deco p7" src="assets/punio_tacchu.png" alt="">
+  <img class="deco p8" src="assets/punio_gyoran.png" alt="">
   <h1>🐟 会いに行こう！<br>全国水族館ツアーMAP</h1>
   <p class="sub">さかなのおにいさん かわちゃんと巡る<br class="sp-only">　目指せ100館！全国水族館ツアー</p>
   <img class="hero" src="assets/kawachan_web.png" alt="さかなのおにいさん かわちゃん">
