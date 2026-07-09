@@ -96,7 +96,8 @@
     .pp .chips { margin:0 0 4px; }
     .pp .btn { font-size:.73rem; padding:4px 10px; }
     .pp .btn.sns { display:none; }
-    .pp .visitbtn { font-size:.73rem; padding:4px 10px; }
+    .pp .visitbtn { font-size:.73rem !important; font-weight:normal; padding:4px 10px !important; border-width:1.5px !important; }
+    .pp img.thumb { max-height:120px; object-fit:cover; }
   }
   #tagBtns button { border-color:#f4a261; color:#c9660a; }
   #tagBtns button.active { background:#f4a261; color:#fff; }
@@ -291,9 +292,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + `</div>`;
   }
 
-  // スマホ：吹き出しを開いたら地図の真ん中に来るようにパン
+  // 吹き出しを開いたら見やすい位置に地図をパン（autoPanの代わり）
   map.on('popupopen', function(e){
-    if(window.innerWidth > 640) return;
     setTimeout(()=>{
       const el = e.popup.getElement();
       if(!el) return;
@@ -368,7 +368,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + (a.upcoming?'<span class="soon">🔜 動画は近日公開！おたのしみに</span>':'')
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:a.upcoming?upIcon:fishIcon}).addTo(map)
-      .bindPopup(html,{maxWidth:270, closeButton:true, autoPanPadding:[16,16]});
+      .bindPopup(html,{maxWidth:270, closeButton:true, autoPan:false});
     allMarkers.push({m, tags:a.tags||[], name:a.name});
   });
 
@@ -388,7 +388,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + snsBtns(a)
       + visitBtn(a)
       + `</div></div></div>`;
-    const m = L.marker([a.lat,a.lng],{icon:wishIcon}).addTo(map).bindPopup(html,{maxWidth:270, autoPanPadding:[16,16]});
+    const m = L.marker([a.lat,a.lng],{icon:wishIcon}).addTo(map).bindPopup(html,{maxWidth:270, autoPan:false});
     allMarkers.push({m, tags:a.tags||[], name:a.name});
   });
 
