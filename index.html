@@ -182,7 +182,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     (a.animals||[]).forEach(name=>{
       chips.push(`<span class="chip">${ANIMAL_ICONS[name]||'🐟'} ${name}</span>`);
     });
-    if(a.only) chips.push(`<span class="chip only">⭐ ここだけ！${a.only}</span>`);
+    if(a.only) chips.push(`<span class="chip only">⭐ ${a.only}</span>`);
     return chips.length ? `<div class="chips">${chips.join('')}</div>` : '';
   }
 
