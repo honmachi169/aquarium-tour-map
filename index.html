@@ -55,6 +55,27 @@
   .card.visited { border-color:#2a9d8f; }
   .card.visited::after { content:"行った！"; position:absolute; top:8px; right:8px; background:#2a9d8f; color:#fff; font-size:.7rem; font-weight:bold; border-radius:999px; padding:3px 10px; transform:rotate(6deg); box-shadow:0 2px 5px rgba(0,0,0,.25); }
   .card { position:relative; }
+
+  /* ===== コメント電光掲示板 ===== */
+  .ticker-wrap { background:var(--sea-deep); color:#ffe9a8; overflow:hidden; display:flex; align-items:center; height:38px; position:relative; }
+  .ticker-label { flex:none; background:var(--coral); color:#fff; font-size:.75rem; font-weight:bold; padding:0 12px; height:100%; display:flex; align-items:center; z-index:2; }
+  .ticker { flex:1; overflow:hidden; white-space:nowrap; position:relative; height:100%; }
+  .ticker-inner { display:inline-flex; align-items:center; height:100%; white-space:nowrap; padding-left:100%; animation:tick 40s linear infinite; font-size:.88rem; }
+  .ticker-inner span { margin-right:48px; }
+  .ticker-inner b { color:#7dd3fc; font-weight:bold; margin-right:6px; }
+  @keyframes tick { to { transform:translateX(-100%); } }
+  .ticker-post { flex:none; background:var(--sun); color:#5a4000; border:none; font-family:inherit; font-size:.78rem; font-weight:bold; padding:0 14px; height:100%; cursor:pointer; }
+  .cmodal { position:fixed; inset:0; background:rgba(2,62,138,.5); display:none; align-items:center; justify-content:center; z-index:2000; }
+  .cmodal.open { display:flex; }
+  .cmodal .box { background:#fff; border-radius:18px; padding:22px 20px; width:min(92vw,380px); box-shadow:0 10px 40px rgba(0,0,0,.3); }
+  .cmodal h3 { color:var(--sea-deep); margin-bottom:12px; }
+  .cmodal input, .cmodal textarea { width:100%; border:2px solid var(--sky); border-radius:10px; padding:8px 10px; font-family:inherit; font-size:.9rem; margin-bottom:10px; }
+  .cmodal textarea { height:70px; resize:none; }
+  .cmodal .row { display:flex; gap:8px; justify-content:flex-end; }
+  .cmodal button { border:none; border-radius:999px; padding:8px 18px; font-family:inherit; font-weight:bold; cursor:pointer; }
+  .cmodal .send { background:var(--sea); color:#fff; }
+  .cmodal .cancel { background:#eee; color:#456; }
+  .cmodal .msg { font-size:.8rem; color:var(--coral); min-height:1.2em; margin-bottom:6px; }
   #tagBtns button { border-color:#f4a261; color:#c9660a; }
   #tagBtns button.active { background:#f4a261; color:#fff; }
   .pp .soon { font-size:.8rem; color:var(--sea); font-weight:bold; }
@@ -110,6 +131,25 @@
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,45 350,-5 600,20 C850,45 1050,-5 1200,20 L1200,40 L0,40 Z" fill="#fff9ec"/></svg>
 </header>
 
+<div class="ticker-wrap">
+  <div class="ticker-label">みんなの声</div>
+  <div class="ticker"><div class="ticker-inner" id="tickerInner"></div></div>
+  <button class="ticker-post" onclick="document.getElementById('cmodal').classList.add('open')">📮 コメントを送る</button>
+</div>
+
+<div class="cmodal" id="cmodal">
+  <div class="box">
+    <h3>📮 みんなの声に参加しよう！</h3>
+    <input id="cname" maxlength="15" placeholder="なまえ（15文字まで）">
+    <textarea id="cmsg" maxlength="60" placeholder="すきな水族館・行った感想など（60文字まで）"></textarea>
+    <p class="msg" id="cerr"></p>
+    <div class="row">
+      <button class="cancel" onclick="document.getElementById('cmodal').classList.remove('open')">やめる</button>
+      <button class="send" id="csend" onclick="sendComment()">送る🐟</button>
+    </div>
+  </div>
+</div>
+
 <div id="map"></div>
 <div class="legend">
   <span>🐟 紹介済み（クリックで動画へ！）</span>
@@ -129,6 +169,53 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+// ===== コメント電光掲示板 =====
+const COMMENT_API = ""; // Apps ScriptのウェブアプリURLをここに入れると本稼働
+const SAMPLE_COMMENTS = [
+  {name:"かわちゃん", msg:"目指せ100館！みんなの好きな水族館おしえてね🐟"},
+  {name:"スタッフ", msg:"📮ボタンからコメントを送ると、ここに流れるよ！"}
+];
+function renderTicker(list){
+  const inner = document.getElementById('tickerInner');
+  const items = (list&&list.length?list:SAMPLE_COMMENTS)
+    .map(c=>`<span><b>${esc(c.name)}</b>${esc(c.msg)}</span>`).join('');
+  inner.innerHTML = items;
+  const dur = Math.max(25, (list?list.length:2) * 7);
+  inner.style.animationDuration = dur + 's';
+}
+function esc(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+async function loadComments(){
+  if(!COMMENT_API){ renderTicker(null); return; }
+  try{
+    const r = await fetch(COMMENT_API);
+    const list = await r.json();
+    renderTicker(list.reverse());
+  }catch(e){ renderTicker(null); }
+}
+async function sendComment(){
+  const name = document.getElementById('cname').value.trim() || 'ななしのさかな';
+  const msg = document.getElementById('cmsg').value.trim();
+  const err = document.getElementById('cerr');
+  if(!msg){ err.textContent = 'コメントを入れてね！'; return; }
+  if(!COMMENT_API){ err.textContent = 'コメント機能は準備中だよ、もうすこし待ってね🐟'; return; }
+  const btn = document.getElementById('csend');
+  btn.disabled = true; btn.textContent = '送信中…';
+  try{
+    const r = await fetch(COMMENT_API, {method:'POST', body: JSON.stringify({name, msg})});
+    const res = await r.json();
+    if(res.ok){
+      document.getElementById('cmodal').classList.remove('open');
+      document.getElementById('cmsg').value=''; err.textContent='';
+      loadComments();
+    } else {
+      err.textContent = res.error || '送信できなかった…もう一度試してね';
+    }
+  }catch(e){ err.textContent = '送信できなかった…もう一度試してね'; }
+  btn.disabled = false; btn.textContent = '送る🐟';
+}
+loadComments();
+setInterval(loadComments, 60000);
+
 // あわ演出
 const bw = document.getElementById('bubbles');
 for(let i=0;i<14;i++){
