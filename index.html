@@ -154,6 +154,9 @@
   .card .tab.yt { background:var(--coral); color:#fff; }
   .card .tab.hp { background:var(--sky); color:var(--sea-deep); }
   .card.upcoming { opacity:.7; border:3px dashed var(--sea); }
+  .card.summer-pick { border:3px solid #ffb703; background:linear-gradient(160deg,#fffbea 0%,#fff 60%); }
+  .card.summer-pick:hover { border-color:#fb8500; }
+  .summer-badge { display:inline-block; background:#ffb703; color:#fff; font-size:.72rem; font-weight:bold; border-radius:999px; padding:2px 10px; margin-bottom:4px; }
   .summerinfo { font-size:.75rem; font-weight:bold; color:#a15c00; background:linear-gradient(90deg,#fff3cd,#ffe9b8); border:1.5px solid #ffd166; border-radius:10px; padding:6px 10px; margin:0 0 6px; line-height:1.5; }
   .card .cbtn { font-size:.76rem; font-weight:bold; background:#fff; color:var(--sea); border:2px solid var(--sky); border-radius:999px; padding:4px 12px; cursor:pointer; font-family:inherit; }
   .card .ytc { display:none; background:#fffdf5; border:2px solid #ffe8a3; border-radius:12px; padding:8px 10px; font-size:.74rem; line-height:1.55; color:#333; }
@@ -541,14 +544,17 @@ fetch('data.json').then(r=>r.json()).then(data=>{
 
   function render(){
     cards.innerHTML='';
-    aqs.filter(a=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (currentTag==='__visited' ? myVisits.has(a.name) : (a.tags||[]).includes(currentTag)))).forEach(a=>{
+    const filtered = aqs.filter(a=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (currentTag==='__visited' ? myVisits.has(a.name) : (a.tags||[]).includes(currentTag))));
+    filtered.sort((a,b)=> (b.summer?1:0)-(a.summer?1:0));
+    filtered.forEach(a=>{
       const v = a.videos[0];
       const thumb = v ? `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg` : '';
       const card = document.createElement('div');
-      card.className = 'card' + (a.upcoming?' upcoming':'') + (myVisits.has(a.name)?' visited':'');
+      card.className = 'card' + (a.upcoming?' upcoming':'') + (myVisits.has(a.name)?' visited':'') + (a.summer?' summer-pick':'');
       card.innerHTML = `
         ${v?`<a href="https://www.youtube.com/watch?v=${v.id}" target="_blank"><img loading="lazy" src="${thumb}" alt="${a.name}"></a>`:`<div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:#e0f2fe;font-size:2rem">🔜</div>`}
         <div class="body">
+          ${a.summer?'<span class="summer-badge">☀️ 夏休みおすすめ</span>':''}
           <span class="pref">${a.pref}</span>
           <h3>${a.name} ${a.closed_flag?'<span class="badge-closed">閉館</span>':''}</h3>
           <p class="hl">${a.highlight||''}</p>
