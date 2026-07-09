@@ -203,7 +203,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
 
   const ANIMAL_ICONS = {
     "シャチ":"🐋", "ラッコ":"🦦", "ジンベエザメ":"🦈", "シロワニ":"🦈",
-    "マンボウ":"🐟", "ピラルクー":"🐠", "エンペラーペンギン":"🐧", "フェアリーペンギン":"🐧"
+    "マンボウ":"🐟", "ピラルクー":"🐠", "エンペラーペンギン":"🐧", "フェアリーペンギン":"🐧",
+    "クラゲ":"🪼"
   };
   function animalChips(a){
     const chips = [];
@@ -315,7 +316,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
           <h3>${a.name} ${a.closed_flag?'<span class="badge-closed">閉館</span>':''}</h3>
           <p class="hl">${a.highlight||''}</p>
           ${animalChips(a)}
-          ${(a.fee||a.closed)&&!a.closed_flag?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}${a.child?`・子ども ${a.child}`:''}<br>`:''}${a.closed?`🗓 休み：${a.closed}`:''}</div>`:''}
+          ${(a.fee||a.closed)&&!a.closed_flag?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}${a.child?`・子ども ${a.child}`:''}<br>`:''}${a.closed?`🗓 休み：${a.closed}`:''}${a.gift?`<br>🎁 おみやげ：${a.gift}`:''}</div>`:''}
           <div class="links">
             ${a.videos.map((vv,i)=>`<a class="tab yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):''}</a>`).join('')}
             ${a.url?`<a class="tab hp" href="${a.url}" target="_blank">公式サイト</a>`:''}

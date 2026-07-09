@@ -33,7 +33,8 @@
       "animals": [
         "ラッコ"
       ],
-      "only": "ジュゴン"
+      "only": "ジュゴン",
+      "gift": "ラッコのメイちゃん・キラちゃんグッズ"
     },
     {
       "no": 2,
@@ -62,7 +63,8 @@
       },
       "animals": [
         "シャチ"
-      ]
+      ],
+      "gift": "シャチグッズ"
     },
     {
       "no": 46,
@@ -121,7 +123,8 @@
       "animals": [
         "シャチ",
         "エンペラーペンギン"
-      ]
+      ],
+      "gift": "シャチのぬいぐるみ"
     },
     {
       "no": 4,
@@ -152,7 +155,8 @@
       "animals": [
         "シロワニ",
         "マンボウ"
-      ]
+      ],
+      "gift": "サメのぬいぐるみ・サメグッズ"
     },
     {
       "no": 5,
@@ -215,7 +219,8 @@
       },
       "animals": [
         "ジンベエザメ"
-      ]
+      ],
+      "gift": "ジンベエザメのぬいぐるみ"
     },
     {
       "no": 7,
@@ -249,7 +254,8 @@
       },
       "animals": [
         "ジンベエザメ"
-      ]
+      ],
+      "gift": "ジンベエザメグッズ"
     },
     {
       "no": 8,
@@ -279,7 +285,8 @@
       "animals": [
         "シャチ",
         "マンボウ"
-      ]
+      ],
+      "gift": "シャチのぬいぐるみ"
     },
     {
       "no": 9,
@@ -337,7 +344,11 @@
       "sns": {
         "x": "https://x.com/Sumida_Aquarium",
         "instagram": "https://www.instagram.com/sumida_aquarium_/"
-      }
+      },
+      "animals": [
+        "クラゲ"
+      ],
+      "gift": "ペンギングッズ"
     },
     {
       "no": 11,
@@ -364,7 +375,11 @@
       "sns": {
         "x": "https://x.com/Kyoto_Aquarium",
         "instagram": "https://www.instagram.com/kyoto_aquarium/"
-      }
+      },
+      "animals": [
+        "クラゲ"
+      ],
+      "gift": "オオサンショウウオのぬいぐるみ"
     },
     {
       "no": 12,
@@ -448,7 +463,11 @@
       "sns": {
         "x": "https://x.com/enosui_com",
         "instagram": "https://www.instagram.com/enosui_com/"
-      }
+      },
+      "animals": [
+        "クラゲ"
+      ],
+      "gift": "クラゲグッズ"
     },
     {
       "no": 15,
@@ -712,7 +731,8 @@
       },
       "animals": [
         "フェアリーペンギン"
-      ]
+      ],
+      "gift": "ペンギングッズ"
     },
     {
       "no": 25,
@@ -765,7 +785,8 @@
       "sns": {
         "x": "https://x.com/shimonoseki_aq",
         "instagram": "https://www.instagram.com/shimonoseki_aquarium_kaikyokan/"
-      }
+      },
+      "gift": "ふく（フグ）グッズ"
     },
     {
       "no": 27,
@@ -791,7 +812,8 @@
       ],
       "sns": {
         "instagram": "https://www.instagram.com/takeshimaaquarium/"
-      }
+      },
+      "gift": "超グソクムシ煎餅"
     },
     {
       "no": 28,
@@ -941,7 +963,8 @@
         "x": "https://x.com/iseseaparadise",
         "instagram": "https://www.instagram.com/iseseaparadise/"
       },
-      "only": "ツメナシカワウソと握手"
+      "only": "ツメナシカワウソと握手",
+      "gift": "ツメナシカワウソグッズ"
     },
     {
       "no": 34,
@@ -1227,7 +1250,11 @@
       ],
       "sns": {
         "instagram": "https://www.instagram.com/kamoaquarium/"
-      }
+      },
+      "animals": [
+        "クラゲ"
+      ],
+      "gift": "クラゲアイス"
     }
   ],
   "unvisited": [
