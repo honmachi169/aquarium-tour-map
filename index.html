@@ -36,8 +36,8 @@
   .pp img.thumb { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
   .pp .inner { padding:10px 12px 12px; }
   .pp .pref { font-size:.7rem; color:#fff; background:var(--sea); border-radius:999px; padding:2px 10px; }
-  .pp h3 { font-size:.98rem; margin:6px 0 4px; color:var(--sea-deep); }
-  .pp .hl { font-size:.8rem; color:#456; margin-bottom:8px; line-height:1.5; }
+  .pp h3 { font-size:.98rem; margin:4px 0 2px; color:var(--sea-deep); }
+  .pp .hl { font-size:.8rem; color:#456; margin:0 0 6px; line-height:1.45; }
   .pp .info { font-size:.78rem; color:#345; background:#f0f8fc; border-radius:10px; padding:7px 10px; margin-bottom:8px; line-height:1.7; }
   .pp .info .note { font-size:.66rem; color:#89a; display:block; }
   .pp .btns { display:flex; flex-wrap:wrap; gap:6px; }
@@ -298,7 +298,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       const el = e.popup.getElement();
       if(!el) return;
       const px = map.project(e.popup.getLatLng(), map.getZoom());
-      px.y -= el.clientHeight / 2;
+      px.y -= el.clientHeight * 0.32; // 吹き出しがやや下寄りに収まる位置
       map.panTo(map.unproject(px, map.getZoom()), {animate:true});
     }, 50);
   });
