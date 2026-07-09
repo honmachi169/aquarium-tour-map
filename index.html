@@ -140,11 +140,11 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);
 
   function infoBox(a){
-    if(!a.fee && !a.access) return '';
+    if(!a.fee && !a.closed) return '';
     return `<div class="info">`
-      + (a.fee?`💰 大人 ${a.fee}ほど　`:'')
-      + (a.access?`🚃 ${a.access}`:'')
-      + `<span class="note">※料金は目安。最新情報は公式サイトで確認してね</span>`
+      + (a.fee?`💰 大人 ${a.fee}${a.child?`・子ども ${a.child}`:''}<br>`:'')
+      + (a.closed?`🗓 休み：${a.closed}`:'')
+      + `<span class="note">※2026年7月調査。おでかけ前に公式サイトで最新情報を確認してね</span>`
       + `</div>`;
   }
 
@@ -173,7 +173,9 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   // まだ紹介できていない水族館（薄いピン）
   const wishIcon = L.divIcon({className:'', html:'<div style="width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid #9fb6c9;opacity:.85;box-shadow:0 1px 3px rgba(0,0,0,.3)"></div>', iconSize:[14,14], iconAnchor:[7,7], popupAnchor:[0,-8]});
   (data.unvisited||[]).forEach(a=>{
-    const html = `<div class="pp wish"><div class="inner">`
+    const html = `<div class="pp wish">`
+      + (a.photo?`<img class="thumb" src="${a.photo}" alt="${a.name}">`:'')
+      + `<div class="inner">`
       + `<span class="wishtag">🔜 まだ紹介できていない水族館</span>`
       + `<h3>${a.name}</h3>`
       + `<p class="hl">${a.comment||''}<br>動画での紹介をおたのしみに！</p>`
@@ -206,7 +208,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
         ${v?`<a href="https://www.youtube.com/watch?v=${v.id}" target="_blank"><img loading="lazy" src="${thumb}" alt="${a.name}"></a>`:`<div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:#e0f2fe;font-size:2rem">🔜</div>`}
         <div class="body">
           <span class="pref">${a.pref}</span>
-          <h3>${a.name} ${a.closed?'<span class="badge-closed">閉館</span>':''}</h3>
+          <h3>${a.name} ${a.closed_flag?'<span class="badge-closed">閉館</span>':''}</h3>
           <p class="hl">${a.highlight||''}</p>
           <div class="links">
             ${a.videos.map((vv,i)=>`<a href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):''}</a>`).join('')}
