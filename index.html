@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>会いに行こう！全国水族館ツアーMAP | さかなのおにいさん かわちゃんねる</title>
+<meta name="description" content="さかなのおにいさん かわちゃんと巡る全国136館の水族館MAP。料金・休館日・みどころ・夏休みイベントがひと目でわかる！行った水族館をチェックして目指せ100館制覇🐟">
+<meta property="og:type" content="website">
+<meta property="og:title" content="会いに行こう！全国水族館ツアーMAP">
+<meta property="og:description" content="さかなのおにいさん かわちゃんと巡る全国136館の水族館MAP。キミはいくつ行ったことある？🐟">
+<meta property="og:image" content="https://honmachi169.github.io/aquarium-tour-map/assets/kawachan_web.png">
+<meta property="og:url" content="https://honmachi169.github.io/aquarium-tour-map/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
   :root { --sea:#0096c7; --sea-deep:#023e8a; --sky:#caf0f8; --sand:#fff9ec; --coral:#ff6b6b; --sun:#ffd166; }
@@ -52,6 +59,8 @@
   .visitbtn.on { background:#2a9d8f; color:#fff; }
   .mycount { font-size:.85rem; margin-top:6px; color:#fff; opacity:.95; }
   .mycount b { color:var(--sun); font-size:1.1rem; }
+  .sharebtn { margin-left:8px; font-family:inherit; font-size:.78rem; font-weight:bold; background:var(--sun); color:#5a4000; border:none; border-radius:999px; padding:5px 14px; cursor:pointer; box-shadow:0 2px 6px rgba(2,62,138,.25); }
+  .sharebtn:active { transform:scale(.96); }
   .card.visited { border-color:#2a9d8f; }
   .card.visited::after { content:"行った！"; position:absolute; top:8px; right:8px; background:#2a9d8f; color:#fff; font-size:.7rem; font-weight:bold; border-radius:999px; padding:3px 10px; transform:rotate(6deg); box-shadow:0 2px 5px rgba(0,0,0,.25); }
   .card { position:relative; }
@@ -145,6 +154,7 @@
   .card .tab.yt { background:var(--coral); color:#fff; }
   .card .tab.hp { background:var(--sky); color:var(--sea-deep); }
   .card.upcoming { opacity:.7; border:3px dashed var(--sea); }
+  .summerinfo { font-size:.75rem; font-weight:bold; color:#a15c00; background:linear-gradient(90deg,#fff3cd,#ffe9b8); border:1.5px solid #ffd166; border-radius:10px; padding:6px 10px; margin:0 0 6px; line-height:1.5; }
   .card .cbtn { font-size:.76rem; font-weight:bold; background:#fff; color:var(--sea); border:2px solid var(--sky); border-radius:999px; padding:4px 12px; cursor:pointer; font-family:inherit; }
   .card .ytc { display:none; background:#fffdf5; border:2px solid #ffe8a3; border-radius:12px; padding:8px 10px; font-size:.74rem; line-height:1.55; color:#333; }
   .card .ytc.open { display:block; }
@@ -188,7 +198,8 @@
   <div class="counter">
     <div class="num"><span id="visited">0</span><small> / <span id="goal">100</span>館 制覇中！</small></div>
     <div class="bar"><div id="barfill" style="width:0%"></div></div>
-    <div class="mycount">あなたの制覇：<b id="myvisited">0</b> 館 🏆（🐟や⬜を押してチェック！）</div>
+    <div class="mycount">あなたの制覇：<b id="myvisited">0</b> 館 🏆（🐟や⬜を押してチェック！）
+      <button id="shareBtn" class="sharebtn">🕊 制覇じまんをシェア</button></div>
   </div>
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,45 350,-5 600,20 C850,45 1050,-5 1200,20 L1200,40 L0,40 Z" fill="#023e8a"/></svg>
 </header>
@@ -337,7 +348,8 @@ const TAGS = {
   "same": ["🦈 サメ好きにおすすめ", "🦈 サメ好きに"],
   "dolphin": ["🐬 イルカショーおすすめ", "🐬 イルカショー"],
   "deep": ["🐙 深海生物好きにおすすめ", "🐙 深海好きに"],
-  "penguin": ["🐧 ペンギン好きにおすすめ", "🐧 ペンギン好きに"]
+  "penguin": ["🐧 ペンギン好きにおすすめ", "🐧 ペンギン好きに"],
+  "summer": ["☀️ 夏休みおすすめ", "☀️ 夏休み"]
 };
 const REGIONS = {
   "北海道・東北": ["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県"],
@@ -393,6 +405,18 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     document.getElementById('myvisited').textContent = myVisits.size;
     localStorage.setItem('myVisits', JSON.stringify([...myVisits]));
   }
+  document.getElementById('shareBtn').onclick = async ()=>{
+    const n = myVisits.size;
+    const total = (data.aquariums||[]).length + (data.unvisited||[]).length;
+    const text = n>0
+      ? `わたしは全国の水族館 ${n}/${total}館 制覇！🐟🏆\nキミはいくつ行ったことある？`
+      : `全国の水族館めぐり、はじめよう！🐟`;
+    const url = 'https://honmachi169.github.io/aquarium-tour-map/';
+    if(navigator.share){
+      try{ await navigator.share({text: text+'\n#全国水族館ツアーMAP', url}); return; }catch(e){ if(e.name==='AbortError') return; }
+    }
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text+'\n#全国水族館ツアーMAP')}&url=${encodeURIComponent(url)}`,'_blank');
+  };
   window.toggleVisit = function(name){
     if(myVisits.has(name)) myVisits.delete(name); else myVisits.add(name);
     updateMyCount(); render();
@@ -440,12 +464,14 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + `<h3>${a.name}</h3>`
       + `<p class="hl">${a.highlight||''}</p>`
       + animalChips(a)
+      + (a.summer?`<div class="summerinfo">☀️ ${a.summer}</div>`:'')
       + infoBox(a)
       + `<div class="btns">`
       + a.videos.map((vv,i)=>`<a class="btn yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):'を見る'}</a>`).join('')
       + (a.url?`<a class="btn hp" href="${a.url}" target="_blank">公式サイト🔗</a>`:'')
       + snsBtns(a)
       + visitBtn(a)
+      + `<a class="btn hp" href="spot/${String(a.no).padStart(3,'0')}.html">📖 くわしく</a>`
       + (a.upcoming?'<span class="soon">🔜 動画は近日公開！おたのしみに</span>':'')
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:a.upcoming?upIcon:fishIcon}).addTo(map)
@@ -455,7 +481,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
 
   // まだ紹介できていない水族館（薄いピン）
   const wishIcon = L.divIcon({className:'', html:'<div style="width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid #9fb6c9;opacity:.85;box-shadow:0 1px 3px rgba(0,0,0,.3)"></div>', iconSize:[14,14], iconAnchor:[7,7], popupAnchor:[0,-8]});
-  (data.unvisited||[]).forEach(a=>{
+  (data.unvisited||[]).forEach((a,ui)=>{
+    a._slug = 'u'+String(ui).padStart(3,'0');
     const html = `<div class="pp wish">`
       + (a.photo?`<img class="thumb" src="${a.photo}" alt="${a.name}">`:'')
       + `<div class="inner">`
@@ -463,11 +490,13 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + `<h3>${a.name}</h3>`
       + `<p class="hl">${a.comment||''}<br>動画での紹介をおたのしみに！</p>`
       + animalChips(a)
+      + (a.summer?`<div class="summerinfo">☀️ ${a.summer}</div>`:'')
       + infoBox(a)
       + `<div class="btns">`
       + (a.url?`<a class="btn hp" href="${a.url}" target="_blank">公式サイト🔗</a>`:'')
       + snsBtns(a)
       + visitBtn(a)
+      + `<a class="btn hp" href="spot/${a._slug}.html">📖 くわしく</a>`
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:wishIcon}).addTo(map)
       .bindPopup(html,{maxWidth:270, autoPan:false});
@@ -524,6 +553,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
           <h3>${a.name} ${a.closed_flag?'<span class="badge-closed">閉館</span>':''}</h3>
           <p class="hl">${a.highlight||''}</p>
           ${animalChips(a)}
+          ${a.summer?`<div class="summerinfo">☀️ 夏休み：${a.summer}</div>`:''}
           ${(a.fee||a.closed)&&!a.closed_flag?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}`:''}${a.child?`<br>🧒 子ども ${a.child}`:''}${a.closed?`<br>🗓 休み：${a.closed}`:''}${a.gift?`<br>🎁 おみやげ：${a.gift}`:''}</div>`:''}
           <div class="links">
             ${a.videos.map((vv,i)=>`<a class="tab yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):''}</a>`).join('')}
@@ -531,6 +561,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
             ${a.sns&&a.sns.x?`<a class="tab hp" href="${a.sns.x}" target="_blank">𝕏</a>`:''}
             ${a.sns&&a.sns.instagram?`<a class="tab hp" href="${a.sns.instagram}" target="_blank">📷 Insta</a>`:''}
             ${visitBtn(a)}
+            <a class="tab hp" href="spot/${String(a.no).padStart(3,'0')}.html">📖 くわしく</a>
             ${v?`<button class="cbtn" data-vid="${v.id}">💬 みんなの感想</button>`:''}
           </div>
           ${v?`<div class="ytc" data-vid="${v.id}"></div>`:''}
