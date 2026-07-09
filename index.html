@@ -174,7 +174,8 @@
   .yt-cta-btn svg { width:28px; height:20px; fill:#fff; flex:none; }
   .yt-stats { display:flex; justify-content:center; gap:28px; margin-top:18px; flex-wrap:wrap; }
   .yt-stat { color:#fff; text-align:center; }
-  .yt-stat .num { font-size:1.4rem; font-weight:bold; display:block; }
+  .yt-stat .num { font-size:2.1rem; font-weight:bold; display:block; color:var(--sun); text-shadow:0 2px 4px rgba(2,62,138,.5); }
+  .yt-stat .num small { font-size:1rem; font-weight:normal; color:#fff; }
   .yt-stat .label { font-size:.75rem; color:#90e0ef; }
   /* ===== かわちゃんねる紹介 ===== */
   .about { background:linear-gradient(180deg,#e8f6fb,#caf0f8); padding:36px 16px; }
@@ -214,7 +215,7 @@
   <img class="deco p6" src="assets/punio_kopemaru.png" alt="">
   <img class="deco p7" src="assets/punio_tacchu.png" alt="">
   <img class="deco p8" src="assets/punio_gyoran.png" alt="">
-  <h1>🐟 会いに行こう！<br>全国水族館ツアーMAP</h1>
+  <h1>会いに行こう！<br>全国水族館ツアーMAP</h1>
   <p class="sub">さかなのおにいさん かわちゃんと巡る<br class="sp-only">　目指せ100館！全国水族館ツアー</p>
   <img class="hero" src="assets/kawachan_web.png" alt="さかなのおにいさん かわちゃん">
   <div class="counter">
@@ -265,8 +266,8 @@
     チャンネル登録する（無料）
   </a>
   <div class="yt-stats">
-    <div class="yt-stat"><span class="num">100館+</span><span class="label">訪問した水族館数</span></div>
-    <div class="yt-stat"><span class="num">136館</span><span class="label">このサイトの掲載館数</span></div>
+    <div class="yt-stat"><span class="num"><span id="yt-visited">46</span><small>館</small></span><span class="label">YouTubeで紹介した水族館</span></div>
+    <div class="yt-stat"><span class="num">136<small>館</small></span><span class="label">このサイトの掲載館数</span></div>
     <div class="yt-stat"><span class="num">毎週</span><span class="label">新しい動画を公開中</span></div>
   </div>
 </section>
@@ -416,6 +417,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   const aqs = data.aquariums;
   const visited = aqs.filter(a=>!a.upcoming).length;
   document.getElementById('visited').textContent = visited;
+  document.getElementById('yt-visited').textContent = visited;
   document.getElementById('goal').textContent = data.goal;
   setTimeout(()=>{ document.getElementById('barfill').style.width = (visited/data.goal*100)+'%'; }, 300);
   document.getElementById('updated').textContent = '最終更新：'+data.updated;
