@@ -96,7 +96,7 @@
     .pp .chips { margin:0 0 4px; }
     .pp .btn { font-size:.73rem; padding:4px 10px; }
     .pp .btn.sns { display:none; }
-    .pp .visitbtn { font-size:.73rem !important; font-weight:normal; padding:4px 10px !important; border-width:1.5px !important; }
+    .pp .visitbtn { font-size:.73rem !important; padding:4px 10px !important; border-width:1.5px !important; }
     .pp img.thumb { max-height:120px; object-fit:cover; }
   }
   #tagBtns button { border-color:#f4a261; color:#c9660a; }
@@ -179,7 +179,7 @@
 <div class="legend">
   <span>🐟 紹介済み（クリックで動画へ！）</span>
   <span>📍 動画近日公開</span>
-  <span>⚪ まだ紹介できていない水族館</span>
+  <span>⚪ これから紹介したい水族館</span>
 </div>
 
 <div class="controls" id="regionBtns"></div>
@@ -277,7 +277,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
 
   const map = L.map('map', {
     minZoom: 5,
-    maxBounds: [[20.0,122.0],[46.8,154.0]],
+    maxBounds: [[17.0,118.0],[52.0,156.0]],
     maxBoundsViscosity: 1.0
   }).setView([37.5,137.0],5);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);
@@ -378,7 +378,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     const html = `<div class="pp wish">`
       + (a.photo?`<img class="thumb" src="${a.photo}" alt="${a.name}">`:'')
       + `<div class="inner">`
-      + `<span class="wishtag">🔜 まだ紹介できていない水族館</span>`
+      + `<span class="wishtag">🔜 これから紹介したい水族館</span>`
       + `<h3>${a.name}</h3>`
       + `<p class="hl">${a.comment||''}<br>動画での紹介をおたのしみに！</p>`
       + animalChips(a)
@@ -404,7 +404,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     b.onclick = ()=>{ current=r; document.querySelectorAll('#regionBtns button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(); };
     btnWrap.appendChild(b);
   });
-  Object.entries({...TAGS, "__visited":["✅ 行った水族館","✅ 行った館"]}).forEach(([key,label])=>{
+  Object.entries({...TAGS, "__visited":["✅ キミが訪れた水族館","✅ 訪れた水族館"]}).forEach(([key,label])=>{
     const b = document.createElement('button');
     if(key==='__visited') b.classList.add('visitedbtn');
     b.innerHTML = `<span class="pc-only">${label[0]}</span><span class="sp-only">${label[1]}</span>`;
