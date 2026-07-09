@@ -362,15 +362,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     maxBoundsViscosity: 1.0
   }).setView([37.5,137.0],5);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);
-  // 日本以外を海色でマスク（韓国・ロシアなどの陸地を隠す）
-  fetch('japan_outline.json').then(r=>r.json()).then(rings=>{
-    const world = [[-5,100],[-5,175],[70,175],[70,100],[-5,100]];
-    const holes = rings.map(ring=> ring.map(([lng,lat])=>[lat,lng]));
-    L.polygon([world, ...holes], {
-      stroke:false, fillColor:'#aad3df', fillOpacity:1,
-      interactive:false, fillRule:'evenodd'
-    }).addTo(map);
-  });
 
   function infoBox(a){
     if(!a.fee && !a.closed) return '';
