@@ -71,6 +71,10 @@
   .card .hl { font-size:.82rem; color:#456; flex:1; line-height:1.5; }
   .card .links { display:flex; gap:8px; font-size:.8rem; flex-wrap:wrap; }
   .card a { color:var(--sea); text-decoration:none; font-weight:bold; }
+  .card .cinfo { font-size:.76rem; color:#345; background:#f0f8fc; border-radius:10px; padding:6px 10px; line-height:1.6; }
+  .card .tab { font-size:.78rem; font-weight:bold; text-decoration:none; border-radius:999px; padding:5px 12px; }
+  .card .tab.yt { background:var(--coral); color:#fff; }
+  .card .tab.hp { background:var(--sky); color:var(--sea-deep); }
   .card.upcoming { opacity:.7; border:3px dashed var(--sea); }
   .badge-closed { color:var(--coral); font-size:.75rem; font-weight:bold; }
   footer { text-align:center; padding:26px; font-size:.8rem; color:#578; background:var(--sky); }
@@ -136,7 +140,11 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   setTimeout(()=>{ document.getElementById('barfill').style.width = (visited/data.goal*100)+'%'; }, 300);
   document.getElementById('updated').textContent = '最終更新：'+data.updated;
 
-  const map = L.map('map').setView([37.5,137.0],5);
+  const map = L.map('map', {
+    minZoom: 5,
+    maxBounds: [[20.0,122.0],[46.8,154.0]],
+    maxBoundsViscosity: 1.0
+  }).setView([37.5,137.0],5);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors'}).addTo(map);
 
   function infoBox(a){
@@ -144,7 +152,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     return `<div class="info">`
       + (a.fee?`💰 大人 ${a.fee}${a.child?`・子ども ${a.child}`:''}<br>`:'')
       + (a.closed?`🗓 休み：${a.closed}`:'')
-      + `<span class="note">※2026年7月調査。おでかけ前に公式サイトで最新情報を確認してね</span>`
+      + `<span class="note">※最新情報は公式サイトでチェック！</span>`
       + `</div>`;
   }
 
@@ -210,9 +218,10 @@ fetch('data.json').then(r=>r.json()).then(data=>{
           <span class="pref">${a.pref}</span>
           <h3>${a.name} ${a.closed_flag?'<span class="badge-closed">閉館</span>':''}</h3>
           <p class="hl">${a.highlight||''}</p>
+          ${(a.fee||a.closed)&&!a.closed_flag?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}${a.child?`・子ども ${a.child}`:''}<br>`:''}${a.closed?`🗓 休み：${a.closed}`:''}</div>`:''}
           <div class="links">
-            ${a.videos.map((vv,i)=>`<a href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):''}</a>`).join('')}
-            ${a.url?`<a href="${a.url}" target="_blank">公式</a>`:''}
+            ${a.videos.map((vv,i)=>`<a class="tab yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):''}</a>`).join('')}
+            ${a.url?`<a class="tab hp" href="${a.url}" target="_blank">公式サイト</a>`:''}
           </div>
         </div>`;
       cards.appendChild(card);
