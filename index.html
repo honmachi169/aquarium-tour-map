@@ -145,6 +145,12 @@
   .card .tab.yt { background:var(--coral); color:#fff; }
   .card .tab.hp { background:var(--sky); color:var(--sea-deep); }
   .card.upcoming { opacity:.7; border:3px dashed var(--sea); }
+  .card .cbtn { font-size:.76rem; font-weight:bold; background:#fff; color:var(--sea); border:2px solid var(--sky); border-radius:999px; padding:4px 12px; cursor:pointer; font-family:inherit; }
+  .card .ytc { display:none; background:#fffdf5; border:2px solid #ffe8a3; border-radius:12px; padding:8px 10px; font-size:.74rem; line-height:1.55; color:#333; }
+  .card .ytc.open { display:block; }
+  .card .ytc .c1 { margin:0 0 6px; }
+  .card .ytc .c1:last-child { margin-bottom:0; }
+  .card .ytc .cn { color:var(--sea); font-weight:bold; margin-right:4px; }
   .badge-closed { color:var(--coral); font-size:.75rem; font-weight:bold; }
   /* ===== かわちゃんねる紹介 ===== */
   .about { background:linear-gradient(180deg,#e8f6fb,#caf0f8); padding:36px 16px; }
@@ -247,6 +253,30 @@
 <script>
 // ===== コメント電光掲示板 =====
 const COMMENT_API = "https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV1YlrB_UPx2_c3hMS9fG6YTunOrrOKROeHdHJg2QzXj/exec";
+const YT_API_KEY = "AIzaSyCASXQcc_wH8jOy9PA2oa5dUlBWUgRBGms";
+const YTC_NG = ["死ね","殺す","バカ","馬鹿","アホ","キモ","反対","抗議","虐待","動物愛護","愛護団体","保護団体","アニマルライツ","ヴィーガン","監禁","搾取","奴隷","解放しろ","閉鎖しろ","追い込み漁","boycott","ボイコット","署名","http://","https://"];
+const ytcCache = {};
+async function loadYtComments(videoId, box, btn){
+  if(box.classList.contains('open')){ box.classList.remove('open'); btn.textContent='💬 みんなの感想'; return; }
+  btn.textContent='💬 とじる';
+  box.classList.add('open');
+  if(ytcCache[videoId]){ box.innerHTML = ytcCache[videoId]; return; }
+  box.innerHTML = 'よみこみ中…🐟';
+  try{
+    const r = await fetch(`https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&order=relevance&maxResults=15&textFormat=plainText&key=${YT_API_KEY}`);
+    const d = await r.json();
+    const esc = s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const items = (d.items||[])
+      .map(it=>it.snippet.topLevelComment.snippet)
+      .filter(c=>!YTC_NG.some(w=>(c.textDisplay+c.authorDisplayName).toLowerCase().includes(w.toLowerCase())))
+      .slice(0,3);
+    const html = items.length
+      ? items.map(c=>`<p class="c1"><span class="cn">${esc(c.authorDisplayName)}</span>${esc(c.textDisplay.length>90?c.textDisplay.slice(0,90)+'…':c.textDisplay)}</p>`).join('')
+      : 'コメントはまだないみたい🐠';
+    ytcCache[videoId] = html;
+    box.innerHTML = html;
+  }catch(e){ box.innerHTML = 'コメントをよみこめなかったよ🙏'; }
+}
 const SAMPLE_COMMENTS = [
   {name:"かわちゃん", msg:"目指せ100館！みんなの好きな水族館おしえてね🐟"},
   {name:"スタッフ", msg:"📮ボタンからコメントを送ると、ここに流れるよ！"}
@@ -501,9 +531,13 @@ fetch('data.json').then(r=>r.json()).then(data=>{
             ${a.sns&&a.sns.x?`<a class="tab hp" href="${a.sns.x}" target="_blank">𝕏</a>`:''}
             ${a.sns&&a.sns.instagram?`<a class="tab hp" href="${a.sns.instagram}" target="_blank">📷 Insta</a>`:''}
             ${visitBtn(a)}
+            ${v?`<button class="cbtn" data-vid="${v.id}">💬 みんなの感想</button>`:''}
           </div>
+          ${v?`<div class="ytc" data-vid="${v.id}"></div>`:''}
         </div>`;
       cards.appendChild(card);
+      const cb = card.querySelector('.cbtn');
+      if(cb) cb.onclick = ()=> loadYtComments(cb.dataset.vid, card.querySelector('.ytc'), cb);
     });
   }
   render();
