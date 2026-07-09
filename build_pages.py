@@ -48,6 +48,11 @@ for slug, a, intro in entries:
     if a.get("child"): info += f"<tr><th>🧒 子ども</th><td>{E(a['child'])}</td></tr>"
     if a.get("closed"): info += f"<tr><th>🗓 休館日</th><td>{E(a['closed'])}</td></tr>"
     if a.get("gift"): info += f"<tr><th>🎁 おみやげ</th><td>{E(a['gift'])}</td></tr>"
+    if a.get("access"): info += f"<tr><th>🚃 アクセス</th><td>{E(a['access'])}</td></tr>"
+
+    hitokoto = ""
+    if a.get("hitokoto"):
+        hitokoto = f'<div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div>{E(a["hitokoto"])}</div>'
 
     summer = f'<div class="summer">☀️ <b>夏休み情報：</b>{E(a["summer"])}</div>' if a.get("summer") else ""
     videos = "".join(
@@ -99,6 +104,8 @@ for slug, a, intro in entries:
   .chip {{ font-size:.78rem; font-weight:bold; background:#e8f6fb; color:#075985; border:1.5px solid #7dd3fc; border-radius:999px; padding:3px 10px; }}
   .chip.only {{ background:#fff7db; color:#92600a; border-color:#f4c430; }}
   .chip.tag {{ background:#fdf1e3; color:#c9660a; border-color:#f4a261; }}
+  .hitokoto {{ background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; position:relative; }}
+  .hitokoto .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:4px; }}
   .summer {{ font-size:.9rem; color:#a15c00; background:linear-gradient(90deg,#fff3cd,#ffe9b8); border:2px solid var(--sun); border-radius:12px; padding:10px 14px; margin:12px 0; line-height:1.6; }}
   table {{ border-collapse:collapse; width:100%; margin:12px 0; background:#f0f8fc; border-radius:12px; overflow:hidden; }}
   th,td {{ text-align:left; padding:9px 14px; font-size:.9rem; border-bottom:2px solid var(--sand); }}
@@ -121,6 +128,7 @@ for slug, a, intro in entries:
   {videos or hero}
   <p class="hl">{E(a.get('highlight') or a.get('comment') or '')}</p>
   <div class="chips">{chips}{tagchips}</div>
+  {hitokoto}
   {summer}
   <table>{info}</table>
   <p class="note">※最新の料金・営業情報は公式サイトでチェックしてね</p>

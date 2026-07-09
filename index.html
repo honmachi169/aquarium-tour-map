@@ -470,8 +470,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + a.videos.map((vv,i)=>`<a class="btn yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):'を見る'}</a>`).join('')
       + (a.url?`<a class="btn hp" href="${a.url}" target="_blank">公式サイト🔗</a>`:'')
       + snsBtns(a)
-      + visitBtn(a)
       + `<a class="btn hp" href="spot/${String(a.no).padStart(3,'0')}.html">📖 くわしく</a>`
+      + visitBtn(a)
       + (a.upcoming?'<span class="soon">🔜 動画は近日公開！おたのしみに</span>':'')
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:a.upcoming?upIcon:fishIcon}).addTo(map)
@@ -495,8 +495,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + `<div class="btns">`
       + (a.url?`<a class="btn hp" href="${a.url}" target="_blank">公式サイト🔗</a>`:'')
       + snsBtns(a)
-      + visitBtn(a)
       + `<a class="btn hp" href="spot/${a._slug}.html">📖 くわしく</a>`
+      + visitBtn(a)
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:wishIcon}).addTo(map)
       .bindPopup(html,{maxWidth:270, autoPan:false});
@@ -560,8 +560,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
             ${a.url?`<a class="tab hp" href="${a.url}" target="_blank">公式サイト</a>`:''}
             ${a.sns&&a.sns.x?`<a class="tab hp" href="${a.sns.x}" target="_blank">𝕏</a>`:''}
             ${a.sns&&a.sns.instagram?`<a class="tab hp" href="${a.sns.instagram}" target="_blank">📷 Insta</a>`:''}
-            ${visitBtn(a)}
             <a class="tab hp" href="spot/${String(a.no).padStart(3,'0')}.html">📖 くわしく</a>
+            ${visitBtn(a)}
             ${v?`<button class="cbtn" data-vid="${v.id}">💬 みんなの感想</button>`:''}
           </div>
           ${v?`<div class="ytc" data-vid="${v.id}"></div>`:''}
