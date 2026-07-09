@@ -44,6 +44,9 @@
   .pp .btn { font-size:.78rem; font-weight:bold; text-decoration:none; border-radius:999px; padding:5px 12px; }
   .pp .btn.yt { background:var(--coral); color:#fff; }
   .pp .btn.hp { background:var(--sky); color:var(--sea-deep); }
+  .pp .btn.sns { background:#eef2f6; color:#334; }
+  #tagBtns button { border-color:#f4a261; color:#c9660a; }
+  #tagBtns button.active { background:#f4a261; color:#fff; }
   .pp .soon { font-size:.8rem; color:var(--sea); font-weight:bold; }
   .pp.wish .inner { padding-top:12px; }
   .pp .wishtag { font-size:.72rem; color:#889; background:#eef2f6; border-radius:999px; padding:2px 10px; }
@@ -104,6 +107,7 @@
 </div>
 
 <div class="controls" id="regionBtns"></div>
+<div class="controls" id="tagBtns"></div>
 <div class="grid" id="cards"></div>
 
 <footer>
@@ -123,6 +127,13 @@ for(let i=0;i<14;i++){
   bw.appendChild(s);
 }
 
+const TAGS = {
+  "rain": "🌂 雨の日におすすめ",
+  "kids": "👶 未就学児におすすめ",
+  "same": "🦈 サメ好きにおすすめ",
+  "dolphin": "🐬 イルカショーおすすめ",
+  "deep": "🐙 深海生物好きにおすすめ"
+};
 const REGIONS = {
   "北海道・東北": ["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県"],
   "関東": ["茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県"],
@@ -159,6 +170,15 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   const fishIcon = L.divIcon({className:'', html:'<div style="font-size:28px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))">🐟</div>', iconSize:[28,28], iconAnchor:[14,14], popupAnchor:[0,-14]});
   const upIcon = L.divIcon({className:'', html:'<div style="font-size:24px;opacity:.55">📍</div>', iconSize:[24,24], iconAnchor:[12,24], popupAnchor:[0,-24]});
 
+  function snsBtns(a){
+    if(!a.sns) return '';
+    let out = '';
+    if(a.sns.x) out += `<a class="btn sns" href="${a.sns.x}" target="_blank">𝕏</a>`;
+    if(a.sns.instagram) out += `<a class="btn sns" href="${a.sns.instagram}" target="_blank">📷 Insta</a>`;
+    return out;
+  }
+
+  const allMarkers = [];
   aqs.forEach(a=>{
     const v = a.videos[0];
     const thumb = v ? `https://i.ytimg.com/vi/${v.id}/mqdefault.jpg` : '';
@@ -172,10 +192,12 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + `<div class="btns">`
       + a.videos.map((vv,i)=>`<a class="btn yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):'を見る'}</a>`).join('')
       + (a.url?`<a class="btn hp" href="${a.url}" target="_blank">公式サイト🔗</a>`:'')
+      + snsBtns(a)
       + (a.upcoming?'<span class="soon">🔜 動画は近日公開！おたのしみに</span>':'')
       + `</div></div></div>`;
-    L.marker([a.lat,a.lng],{icon:a.upcoming?upIcon:fishIcon}).addTo(map)
+    const m = L.marker([a.lat,a.lng],{icon:a.upcoming?upIcon:fishIcon}).addTo(map)
       .bindPopup(html,{maxWidth:270, closeButton:true});
+    allMarkers.push({m, tags:a.tags||[]});
   });
 
   // まだ紹介できていない水族館（薄いピン）
@@ -190,24 +212,50 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + infoBox(a)
       + `<div class="btns">`
       + (a.url?`<a class="btn hp" href="${a.url}" target="_blank">公式サイト🔗</a>`:'')
+      + snsBtns(a)
       + `</div></div></div>`;
-    L.marker([a.lat,a.lng],{icon:wishIcon}).addTo(map).bindPopup(html,{maxWidth:270});
+    const m = L.marker([a.lat,a.lng],{icon:wishIcon}).addTo(map).bindPopup(html,{maxWidth:270});
+    allMarkers.push({m, tags:a.tags||[]});
   });
 
   const btnWrap = document.getElementById('regionBtns');
+  const tagWrap = document.getElementById('tagBtns');
   const cards = document.getElementById('cards');
   let current = 'すべて';
+  let currentTag = null;
   ['すべて', ...Object.keys(REGIONS)].forEach(r=>{
     const b = document.createElement('button');
     b.textContent = r;
     if(r===current) b.classList.add('active');
-    b.onclick = ()=>{ current=r; document.querySelectorAll('.controls button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(); };
+    b.onclick = ()=>{ current=r; document.querySelectorAll('#regionBtns button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(); };
     btnWrap.appendChild(b);
   });
+  Object.entries(TAGS).forEach(([key,label])=>{
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.onclick = ()=>{
+      if(currentTag===key){ currentTag=null; b.classList.remove('active'); }
+      else{
+        currentTag=key;
+        document.querySelectorAll('#tagBtns button').forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+      }
+      applyMapFilter(); render();
+    };
+    tagWrap.appendChild(b);
+  });
+
+  function applyMapFilter(){
+    allMarkers.forEach(({m,tags})=>{
+      const show = !currentTag || tags.includes(currentTag);
+      if(show){ if(!map.hasLayer(m)) m.addTo(map); }
+      else{ if(map.hasLayer(m)) map.removeLayer(m); }
+    });
+  }
 
   function render(){
     cards.innerHTML='';
-    aqs.filter(a=> current==='すべて' || REGIONS[current].includes(a.pref)).forEach(a=>{
+    aqs.filter(a=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (a.tags||[]).includes(currentTag))).forEach(a=>{
       const v = a.videos[0];
       const thumb = v ? `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg` : '';
       const card = document.createElement('div');
@@ -222,6 +270,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
           <div class="links">
             ${a.videos.map((vv,i)=>`<a class="tab yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):''}</a>`).join('')}
             ${a.url?`<a class="tab hp" href="${a.url}" target="_blank">公式サイト</a>`:''}
+            ${a.sns&&a.sns.x?`<a class="tab hp" href="${a.sns.x}" target="_blank">𝕏</a>`:''}
+            ${a.sns&&a.sns.instagram?`<a class="tab hp" href="${a.sns.instagram}" target="_blank">📷 Insta</a>`:''}
           </div>
         </div>`;
       cards.appendChild(card);
