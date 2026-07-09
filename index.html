@@ -87,12 +87,14 @@
     #map { height:480px; margin:14px 10px; }
     .grid { padding:0 10px; gap:12px; }
     /* 吹き出しが地図からはみ出さないように */
-    .leaflet-popup-content { width:210px !important; }
-    .pp img.thumb { max-height:85px; object-fit:cover; }
-    .pp .inner { max-height:200px; overflow-y:auto; padding:8px 10px 10px; }
-    .pp h3 { font-size:.9rem; }
-    .pp .hl { font-size:.75rem; }
-    .pp .info { font-size:.73rem; line-height:1.6; }
+    .leaflet-popup-content { width:280px !important; }
+    .pp .inner { padding:8px 12px 10px; }
+    .pp h3 { font-size:.92rem; margin:4px 0 2px; }
+    .pp .hl { font-size:.75rem; margin-bottom:5px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .pp .info { font-size:.73rem; line-height:1.55; padding:5px 9px; margin-bottom:6px; }
+    .pp .info .note { display:none; }
+    .pp .chips { margin:0 0 4px; }
+    .pp .btn { font-size:.73rem; padding:4px 10px; }
   }
   #tagBtns button { border-color:#f4a261; color:#c9660a; }
   #tagBtns button.active { background:#f4a261; color:#fff; }
@@ -283,7 +285,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + (a.fee?`💰 大人 ${a.fee}`:'')
       + (a.child?`<br>🧒 子ども ${a.child}`:'')
       + (a.closed?`<br>🗓 休み：${a.closed}`:'')
-      + `<span class="note">※最新情報は公式サイトでチェック！</span>`
+      + `<span class="note">※最新は公式サイトで</span>`
       + `</div>`;
   }
 
