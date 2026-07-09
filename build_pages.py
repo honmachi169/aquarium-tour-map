@@ -4,6 +4,8 @@
 import json, os, html, re, unicodedata
 
 SITE = "https://aquarium.yasasea.com"
+COMMENT_API = "https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV1YlrB_UPx2_c3hMS9fG6YTunOrrOKROeHdHJg2QzXj/exec"
+YT_API_KEY = "AIzaSyCASXQcc_wH8jOy9PA2oa5dUlBWUgRBGms"
 os.makedirs("spot", exist_ok=True)
 
 TAG_LABEL = {"rain":"☔️ 雨の日におすすめ","kids":"👶 未就学児におすすめ","same":"🦈 サメ好きにおすすめ",
@@ -68,6 +70,23 @@ for slug, a, intro in entries:
     if sns.get("x"): links += f'<a class="btn sns" href="{E(sns["x"])}" target="_blank" rel="noopener">𝕏</a>'
     if sns.get("instagram"): links += f'<a class="btn sns" href="{E(sns["instagram"])}" target="_blank" rel="noopener">📷 Instagram</a>'
 
+    ytc_box = '<div class="ytc-box"><h3>▶ YouTubeのコメント</h3><div id="ytc-list"><p class="loading">読み込み中…</p></div></div>' if v else ''
+    ng_list = '["死ね","殺す","バカ","馬鹿","アホ","キモ","反対","抗議","虐待","動物愛護","愛護団体","保護団体","アニマルライツ","ヴィーガン","監禁","搾取","奴隷","解放しろ","閉鎖しろ","追い込み漁","boycott","ボイコット","署名","http://","https://"]'
+    yt_js = f'''const YT_API_KEY = "{YT_API_KEY}";
+const YT_VID = "{v['id']}";
+async function loadYtComments() {{
+  const el = document.getElementById("ytc-list");
+  const NG = {ng_list};
+  try {{
+    const url = "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=" + YT_VID + "&maxResults=5&order=relevance&key=" + YT_API_KEY;
+    const res = await fetch(url);
+    const d = await res.json();
+    const items = (d.items||[]).map(i=>i.snippet.topLevelComment.snippet).filter(c=>!NG.some(w=>(c.textDisplay+c.authorDisplayName).toLowerCase().includes(w.toLowerCase())));
+    if (!items.length) {{ el.innerHTML = '<p class="empty">コメントなし</p>'; return; }}
+    el.innerHTML = items.slice(0,3).map(c=>'<div class="c-item"><span class="c-name">👤 '+c.authorDisplayName+'</span><span class="c-msg">'+c.textDisplay.slice(0,120)+'</span></div>').join('');
+  }} catch(e) {{ el.innerHTML = '<p class="empty">読み込みエラー</p>'; }}
+}}
+loadYtComments();''' if v else ''
     share_text = f"{a['name']}、行ってみたい！🐟 #全国水族館ツアーMAP"
     page_url = f"{SITE}/spot/{slug}.html"
     urls.append(page_url)
@@ -117,6 +136,20 @@ for slug, a, intro in entries:
   .btn.share {{ background:var(--coral); color:#fff; border:none; font-family:inherit; cursor:pointer; }}
   .back {{ display:inline-block; margin-top:18px; color:var(--sea); font-weight:bold; text-decoration:none; }}
   .note {{ font-size:.75rem; color:#89a; margin-top:8px; }}
+  .comments-section {{ margin-top:28px; }}
+  .comments-section h2 {{ color:var(--sea-deep); font-size:1.1rem; margin-bottom:16px; }}
+  .ytc-box, .user-comments-box {{ background:#fff; border-radius:16px; padding:16px; margin-bottom:16px; box-shadow:0 2px 8px rgba(2,62,138,.1); }}
+  .ytc-box h3, .user-comments-box h3 {{ font-size:.9rem; color:var(--sea); margin-bottom:10px; }}
+  .c-item {{ display:flex; flex-direction:column; gap:2px; padding:8px 0; border-bottom:1px solid #e8f4fb; }}
+  .c-item:last-child {{ border-bottom:none; }}
+  .c-name {{ font-size:.75rem; font-weight:bold; color:var(--sea); }}
+  .c-msg {{ font-size:.85rem; color:#234; line-height:1.6; }}
+  .empty, .loading {{ font-size:.82rem; color:#89a; }}
+  #comment-form {{ margin-top:12px; display:flex; flex-direction:column; gap:8px; }}
+  #comment-form input, #comment-form textarea {{ border:2px solid var(--sky); border-radius:10px; padding:8px 12px; font-size:.88rem; font-family:inherit; outline:none; width:100%; }}
+  #comment-form input:focus, #comment-form textarea:focus {{ border-color:var(--sea); }}
+  #comment-form button {{ background:var(--sea); color:#fff; border:none; border-radius:999px; padding:10px; font-size:.9rem; font-weight:bold; cursor:pointer; font-family:inherit; }}
+  #c-status {{ font-size:.8rem; color:var(--sea); min-height:1.2em; }}
 </style>
 </head>
 <body>
@@ -137,7 +170,54 @@ for slug, a, intro in entries:
     <a class="btn share" href="https://twitter.com/intent/tweet?text={html.escape(share_text)}&url={page_url}" target="_blank" rel="noopener">🕊 シェアする</a>
   </div>
   <a class="back" href="{SITE}/">← MAPにもどる</a>
+
+  <section class="comments-section">
+    <h2>💬 みんなのコメント</h2>
+    {ytc_box}
+    <div class="user-comments-box">
+      <h3>🐟 行った感想を書いてね！</h3>
+      <div id="user-list"><p class="loading">読み込み中…</p></div>
+      <form id="comment-form">
+        <input type="text" id="c-name" placeholder="なまえ（省略OK）" maxlength="15">
+        <textarea id="c-msg" placeholder="{E(a['name'])}の感想を書いてね！（80文字以内）" maxlength="80" rows="3" required></textarea>
+        <button type="submit">送信する 🐟</button>
+        <p id="c-status"></p>
+      </form>
+    </div>
+  </section>
 </main>
+<script>
+const COMMENT_API = "{COMMENT_API}";
+const AQ_NAME = "{E(a['name'])}";
+{yt_js}
+async function loadUserComments() {{
+  const el = document.getElementById('user-list');
+  try {{
+    const res = await fetch(COMMENT_API + '?aquarium=' + encodeURIComponent(AQ_NAME));
+    const data = await res.json();
+    if (!data.length) {{ el.innerHTML = '<p class="empty">まだコメントがないよ！最初の感想を書いてみて🐟</p>'; return; }}
+    el.innerHTML = data.reverse().map(c => `<div class="c-item"><span class="c-name">🐟 ${{c.name}}</span><span class="c-msg">${{c.msg}}</span></div>`).join('');
+  }} catch(e) {{ el.innerHTML = '<p class="empty">読み込みエラー</p>'; }}
+}}
+loadUserComments();
+document.getElementById('comment-form').onsubmit = async (ev) => {{
+  ev.preventDefault();
+  const name = document.getElementById('c-name').value.trim() || 'ななしのさかな';
+  const msg = document.getElementById('c-msg').value.trim();
+  const status = document.getElementById('c-status');
+  if (!msg) return;
+  status.textContent = '送信中…';
+  try {{
+    const res = await fetch(COMMENT_API, {{ method: 'POST', body: JSON.stringify({{ name, msg, aquarium: AQ_NAME }}) }});
+    const d = await res.json();
+    if (d.ok) {{
+      status.textContent = '送信できたよ！ありがとう🐟';
+      document.getElementById('c-msg').value = '';
+      setTimeout(loadUserComments, 800);
+    }} else {{ status.textContent = d.error || '送信エラー'; }}
+  }} catch(e) {{ status.textContent = '送信エラー'; }}
+}};
+</script>
 </body>
 </html>"""
     with open(f"spot/{slug}.html", "w") as f:
