@@ -76,6 +76,17 @@
   .cmodal .send { background:var(--sea); color:#fff; }
   .cmodal .cancel { background:#eee; color:#456; }
   .cmodal .msg { font-size:.8rem; color:var(--coral); min-height:1.2em; margin-bottom:6px; }
+
+  /* ===== スマホ表示 ===== */
+  .sp-only { display:none; }
+  @media (max-width:640px){
+    .pc-only { display:none; }
+    .sp-only { display:inline; }
+    .ticker-label { display:none; }
+    .controls button { padding:6px 12px; font-size:.8rem; }
+    #map { height:420px; margin:14px 10px; }
+    .grid { padding:0 10px; gap:12px; }
+  }
   #tagBtns button { border-color:#f4a261; color:#c9660a; }
   #tagBtns button.active { background:#f4a261; color:#fff; }
   .pp .soon { font-size:.8rem; color:var(--sea); font-weight:bold; }
@@ -134,7 +145,7 @@
 <div class="ticker-wrap">
   <div class="ticker-label">みんなの声</div>
   <div class="ticker"><div class="ticker-inner" id="tickerInner"></div></div>
-  <button class="ticker-post" onclick="document.getElementById('cmodal').classList.add('open')">📮 コメントを送る</button>
+  <button class="ticker-post" onclick="document.getElementById('cmodal').classList.add('open')"><span class="pc-only">📮 コメントを送る</span><span class="sp-only">📮 コメント</span></button>
 </div>
 
 <div class="cmodal" id="cmodal">
@@ -226,12 +237,12 @@ for(let i=0;i<14;i++){
 }
 
 const TAGS = {
-  "rain": "🌂 雨の日におすすめ",
-  "kids": "👶 未就学児におすすめ",
-  "same": "🦈 サメ好きにおすすめ",
-  "dolphin": "🐬 イルカショーおすすめ",
-  "deep": "🐙 深海生物好きにおすすめ",
-  "penguin": "🐧 ペンギン好きにおすすめ"
+  "rain": ["☔️ 雨の日におすすめ", "☔️ 雨の日に"],
+  "kids": ["👶 未就学児におすすめ", "👶 未就学児に"],
+  "same": ["🦈 サメ好きにおすすめ", "🦈 サメ好きに"],
+  "dolphin": ["🐬 イルカショーおすすめ", "🐬 イルカショー"],
+  "deep": ["🐙 深海生物好きにおすすめ", "🐙 深海好きに"],
+  "penguin": ["🐧 ペンギン好きにおすすめ", "🐧 ペンギン好きに"]
 };
 const REGIONS = {
   "北海道・東北": ["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県"],
@@ -260,8 +271,9 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   function infoBox(a){
     if(!a.fee && !a.closed) return '';
     return `<div class="info">`
-      + (a.fee?`💰 大人 ${a.fee}${a.child?`・子ども ${a.child}`:''}<br>`:'')
-      + (a.closed?`🗓 休み：${a.closed}`:'')
+      + (a.fee?`💰 大人 ${a.fee}`:'')
+      + (a.child?`<br>🧒 子ども ${a.child}`:'')
+      + (a.closed?`<br>🗓 休み：${a.closed}`:'')
       + `<span class="note">※最新情報は公式サイトでチェック！</span>`
       + `</div>`;
   }
@@ -367,9 +379,9 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     b.onclick = ()=>{ current=r; document.querySelectorAll('#regionBtns button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(); };
     btnWrap.appendChild(b);
   });
-  Object.entries({...TAGS, "__visited":"✅ 行った水族館"}).forEach(([key,label])=>{
+  Object.entries({...TAGS, "__visited":["✅ 行った水族館","✅ 行った館"]}).forEach(([key,label])=>{
     const b = document.createElement('button');
-    b.textContent = label;
+    b.innerHTML = `<span class="pc-only">${label[0]}</span><span class="sp-only">${label[1]}</span>`;
     b.onclick = ()=>{
       if(currentTag===key){ currentTag=null; b.classList.remove('active'); }
       else{
@@ -404,7 +416,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
           <h3>${a.name} ${a.closed_flag?'<span class="badge-closed">閉館</span>':''}</h3>
           <p class="hl">${a.highlight||''}</p>
           ${animalChips(a)}
-          ${(a.fee||a.closed)&&!a.closed_flag?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}${a.child?`・子ども ${a.child}`:''}<br>`:''}${a.closed?`🗓 休み：${a.closed}`:''}${a.gift?`<br>🎁 おみやげ：${a.gift}`:''}</div>`:''}
+          ${(a.fee||a.closed)&&!a.closed_flag?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}`:''}${a.child?`<br>🧒 子ども ${a.child}`:''}${a.closed?`<br>🗓 休み：${a.closed}`:''}${a.gift?`<br>🎁 おみやげ：${a.gift}`:''}</div>`:''}
           <div class="links">
             ${a.videos.map((vv,i)=>`<a class="tab yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):''}</a>`).join('')}
             ${a.url?`<a class="tab hp" href="${a.url}" target="_blank">公式サイト</a>`:''}
