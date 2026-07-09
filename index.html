@@ -165,19 +165,38 @@
   .card .ytc .c1:last-child { margin-bottom:0; }
   .card .ytc .cn { color:var(--sea); font-weight:bold; margin-right:4px; }
   .badge-closed { color:var(--coral); font-size:.75rem; font-weight:bold; }
+  /* ===== YouTube登録CTA ===== */
+  .yt-cta { background:linear-gradient(135deg,#023e8a,#0096c7); padding:28px 16px; text-align:center; }
+  .yt-cta h2 { color:#fff; font-size:1.15rem; margin-bottom:6px; }
+  .yt-cta p { color:#caf0f8; font-size:.88rem; margin-bottom:16px; line-height:1.6; }
+  .yt-cta-btn { display:inline-flex; align-items:center; gap:10px; background:#ff0000; color:#fff; font-weight:bold; font-size:1rem; text-decoration:none; border-radius:999px; padding:12px 28px; box-shadow:0 4px 14px rgba(0,0,0,.3); transition:transform .15s, box-shadow .15s; }
+  .yt-cta-btn:hover { transform:scale(1.05); box-shadow:0 6px 20px rgba(0,0,0,.4); }
+  .yt-cta-btn svg { width:28px; height:20px; fill:#fff; flex:none; }
+  .yt-stats { display:flex; justify-content:center; gap:28px; margin-top:18px; flex-wrap:wrap; }
+  .yt-stat { color:#fff; text-align:center; }
+  .yt-stat .num { font-size:1.4rem; font-weight:bold; display:block; }
+  .yt-stat .label { font-size:.75rem; color:#90e0ef; }
   /* ===== かわちゃんねる紹介 ===== */
   .about { background:linear-gradient(180deg,#e8f6fb,#caf0f8); padding:36px 16px; }
-  .about-inner { max-width:860px; margin:0 auto; display:flex; gap:24px; align-items:center; }
-  .about-img { width:200px; flex:none; filter:drop-shadow(0 4px 10px rgba(2,62,138,.2)); }
-  .about-text h2 { color:var(--sea-deep); font-size:1.15rem; margin-bottom:10px; }
+  .about-inner { max-width:940px; margin:0 auto; display:flex; gap:32px; align-items:flex-start; }
+  .about-img { width:220px; flex:none; border-radius:20px; filter:drop-shadow(0 6px 16px rgba(2,62,138,.25)); }
+  .about-text h2 { color:var(--sea-deep); font-size:1.2rem; margin-bottom:4px; }
+  .about-kicker { font-size:.82rem; color:var(--sea); font-weight:bold; margin-bottom:10px; }
   .about-text p { font-size:.88rem; color:#345; line-height:1.8; margin-bottom:10px; }
-  .about-text .profile { font-size:.82rem; background:#fff; border-radius:12px; padding:10px 14px; }
-  .about-links { display:flex; gap:10px; flex-wrap:wrap; }
-  .about-links a { font-size:.85rem; font-weight:bold; text-decoration:none; background:var(--sea); color:#fff; border-radius:999px; padding:7px 16px; }
+  .about-text .profile { font-size:.82rem; background:#fff; border-radius:12px; padding:12px 16px; line-height:1.75; }
+  .about-career { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .about-career span { font-size:.78rem; font-weight:bold; background:var(--sea-deep); color:#fff; border-radius:999px; padding:4px 12px; }
+  .about-book { display:flex; align-items:center; gap:14px; background:#fff; border-radius:14px; padding:12px 16px; margin:10px 0; border:2px solid var(--sky); }
+  .about-book img { width:60px; border-radius:6px; flex:none; }
+  .about-book-text { font-size:.82rem; color:#234; line-height:1.6; }
+  .about-book-text b { color:var(--sea-deep); }
+  .about-links { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+  .about-links a { font-size:.85rem; font-weight:bold; text-decoration:none; background:var(--sea); color:#fff; border-radius:999px; padding:8px 18px; }
   .about-links a.line { background:#06c755; }
+  .about-links a.yt { background:#ff0000; }
   @media (max-width:640px){
-    .about-inner { flex-direction:column; text-align:left; }
-    .about-img { width:60%; max-width:220px; }
+    .about-inner { flex-direction:column; align-items:center; text-align:left; }
+    .about-img { width:70%; max-width:240px; }
   }
 
   footer { text-align:center; padding:26px; font-size:.8rem; color:#578; background:var(--sky); }
@@ -237,21 +256,51 @@
 <div class="controls" id="tagBtns"></div>
 <div class="grid" id="cards"></div>
 
+<!-- YouTube登録CTA -->
+<section class="yt-cta">
+  <h2>🐟 このサイトは「さかなのおにいさん かわちゃんねる」が作る水族館MAPです</h2>
+  <p>全国の水族館を実際に訪れて動画で紹介中！新しい動画を見逃さないようにチャンネル登録してね🎬</p>
+  <a class="yt-cta-btn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 17" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 2.7S23.2.9 22.4.2C21.4-.8 20.3-.8 19.8-.7 16.5 0 12 0 12 0S7.5 0 4.2-.7C3.7-.8 2.6-.8 1.6.2.8.9.5 2.7.5 2.7S.2 4.8.2 6.9v1.9C.2 11 .5 13 .5 13s.3 1.8 1.1 2.5c1 1 2.3.97 2.9 1.07C6.4 16.8 12 17 12 17s4.5 0 7.8-.72c.5-.1 1.6-.1 2.6-1.08.8-.7 1.1-2.5 1.1-2.5s.3-2.1.3-4.2V6.9c0-2.1-.3-4.2-.3-4.2zM9.7 11.5V4.8l7 3.4-7 3.3z"/></svg>
+    チャンネル登録する（無料）
+  </a>
+  <div class="yt-stats">
+    <div class="yt-stat"><span class="num">100館+</span><span class="label">訪問した水族館数</span></div>
+    <div class="yt-stat"><span class="num">136館</span><span class="label">このサイトの掲載館数</span></div>
+    <div class="yt-stat"><span class="num">毎週</span><span class="label">新しい動画を公開中</span></div>
+  </div>
+</section>
+
+<!-- プロフィール -->
 <section class="about">
   <div class="about-inner">
     <img src="assets/kawachan_photo.png" alt="さかなのおにいさん かわちゃん" class="about-img">
     <div class="about-text">
-      <h2>🐟 さかなのおにいさん かわちゃんねるとは</h2>
-      <p>全国１００館以上の水族館をまわり、こどもたちに魅力をわかりやすく伝えています！</p>
-      <p class="profile">
-        <b>かわちゃんプロフィール：</b>さかなの魅力を歌・イラスト・クイズで伝えるさかなのおにいさん。テレビ東京「シナぷしゅ」やラジオ出演、講演など幅広く活動中。絵本作家としても活動し、著書に『全国クセすご！水族館図鑑』（中央公論新社）など。モットーは「子どもがさかなを好きになれば 海は豊かになる」
-      </p>
+      <p class="about-kicker">さかなのおにいさん</p>
+      <h2>🐟 かわちゃん（川田一輝）</h2>
+      <p>さかなの魅力を歌・イラスト・クイズで楽しく伝えるさかなのおにいさん。全国１００館以上の水族館をまわり、こどもたちに生き物の不思議と海の大切さをわかりやすく伝えています。</p>
+      <div class="about-career">
+        <span>📺 テレビ東京「シナぷしゅ」</span>
+        <span>🎙 ラジオ出演</span>
+        <span>🎤 イベント・講演</span>
+        <span>✏️ 絵本作家</span>
+        <span>🐼 アドベンチャーワールド公式アンバサダー</span>
+      </div>
+      <div class="about-book">
+        <img src="https://m.media-amazon.com/images/I/71Z7Q7Q7Q7L._AC_UY218_.jpg" alt="全国クセすご！水族館図鑑" onerror="this.style.display='none'">
+        <div class="about-book-text">
+          <b>📚 著書「全国クセすご！水族館図鑑」</b><br>
+          中央公論新社 ／ 全国の個性的な水族館を厳選紹介！<br>
+          <a href="https://sakana-bro.com/goods/" target="_blank" rel="noopener" style="color:var(--sea);font-weight:bold;">書籍情報はこちら →</a>
+        </div>
+      </div>
+      <p class="profile">💬 モットー：「子どもがさかなを好きになれば　海は豊かになる」</p>
       <div class="about-links">
-        <a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA" target="_blank">▶ YouTube</a>
-        <a href="https://sakana-bro.com/" target="_blank">🌊 公式サイト</a>
-        <a class="line" href="https://lin.ee/qMPcnPq" target="_blank">💬 公式LINE</a>
-        <a href="https://www.instagram.com/kawayanfishing/" target="_blank">📷 Instagram</a>
-        <a href="https://twitter.com/sakana_bro" target="_blank">𝕏 X</a>
+        <a class="yt" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ YouTube登録</a>
+        <a href="https://sakana-bro.com/" target="_blank" rel="noopener">🌊 公式サイト</a>
+        <a class="line" href="https://lin.ee/qMPcnPq" target="_blank" rel="noopener">💬 公式LINE</a>
+        <a href="https://www.instagram.com/kawayanfishing/" target="_blank" rel="noopener">📷 Instagram</a>
+        <a href="https://twitter.com/sakana_bro" target="_blank" rel="noopener">𝕏 X</a>
       </div>
     </div>
   </div>
