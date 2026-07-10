@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>みんなの全国水族館ツアーMAP | さかなのおにいさん かわちゃんねる</title>
+<title>会いに行こう！全国水族館ツアーMAP | さかなのおにいさん かわちゃんねる</title>
 <meta name="description" content="さかなのおにいさん かわちゃんと巡る全国136館の水族館MAP。料金・休館日・みどころ・夏休みイベントがひと目でわかる！行った水族館をチェックして目指せ100館制覇🐟">
 <meta property="og:type" content="website">
-<meta property="og:title" content="みんなの全国水族館ツアーMAP">
+<meta property="og:title" content="会いに行こう！全国水族館ツアーMAP">
 <meta property="og:description" content="さかなのおにいさん かわちゃんと巡る全国136館の水族館MAP。キミはいくつ行ったことある？🐟">
 <meta property="og:image" content="https://aquarium.yasasea.com/assets/kawachan_web.png">
 <meta property="og:url" content="https://aquarium.yasasea.com/">
@@ -98,6 +98,10 @@
     .pc-only { display:none; }
     .sp-only { display:inline; }
     .ticker-label { display:none; }
+    .ticker-post { order:-1; }
+    #tagBtns { flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; padding-bottom:6px; scrollbar-width:none; }
+    #tagBtns::-webkit-scrollbar { display:none; }
+    #tagBtns button, #tagBtns a { flex:none; white-space:nowrap; }
     .controls button { padding:6px 12px; font-size:.8rem; }
     #map { height:480px; margin:14px 10px; }
     .grid { padding:0 10px; gap:12px; }
@@ -162,6 +166,9 @@
   .card .tab.hp { background:var(--sky); color:var(--sea-deep); }
   .card .tab.detail { background:var(--sea-deep); color:#fff; }
   .card.upcoming { opacity:.7; border:3px dashed var(--sea); }
+  .card.summer-pick { border:3px solid #ffb703; background:linear-gradient(160deg,#fffbea 0%,#fff 60%); }
+  .card.summer-pick:hover { border-color:#fb8500; }
+  .summer-badge { display:inline-block; background:#ffb703; color:#fff; font-size:.72rem; font-weight:bold; border-radius:999px; padding:2px 10px; margin-bottom:4px; }
   .summerinfo { font-size:.75rem; font-weight:bold; color:#a15c00; background:linear-gradient(90deg,#fff3cd,#ffe9b8); border:1.5px solid #ffd166; border-radius:10px; padding:6px 10px; margin:0 0 6px; line-height:1.5; }
   .card .cbtn { font-size:.76rem; font-weight:bold; background:#fff; color:var(--sea); border:2px solid var(--sky); border-radius:999px; padding:4px 12px; cursor:pointer; font-family:inherit; }
   .card .ytc { display:none; background:#fffdf5; border:2px solid #ffe8a3; border-radius:12px; padding:8px 10px; font-size:.74rem; line-height:1.55; color:#333; }
@@ -222,15 +229,15 @@
   <img class="deco p6" src="assets/punio_kopemaru.png" alt="">
   <img class="deco p7" src="assets/punio_tacchu.png" alt="">
   <img class="deco p8" src="assets/punio_gyoran.png" alt="">
-  <h1>みんなの<br>全国水族館ツアーMAP</h1>
+  <h1>会いに行こう！<br>全国水族館ツアーMAP</h1>
   <p class="sub">さかなのおにいさん かわちゃんと巡る<br class="sp-only">　目指せ100館！全国水族館ツアー</p>
   <img class="hero" src="assets/kawachan_web.png" alt="さかなのおにいさん かわちゃん">
   <div class="counter">
     <div class="num"><small class="pc-only">YouTubeで </small><span id="visited">0</span><small> / <span id="goal">100</span>館 制覇中！</small></div>
     <div class="bar"><div id="barfill" style="width:0%"></div></div>
-    <div class="mycount">あなたの制覇：<b id="myvisited">0</b> 館 🏆（🐟や⬜を押してチェック！）
+    <div class="mycount">あなたの制覇：<b id="myvisited">0</b> 館 🏆（⬜を押してチェック！）
       <button id="shareBtn" class="sharebtn">🕊 制覇じまんをシェア</button></div>
-    <a class="counter-sub-btn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録🐟</a>
+    <a class="counter-sub-btn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
   </div>
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,45 350,-5 600,20 C850,45 1050,-5 1200,20 L1200,40 L0,40 Z" fill="#023e8a"/></svg>
 </header>
@@ -620,14 +627,16 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       const v = a.videos[0];
       const thumb = v ? `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg` : '';
       const card = document.createElement('div');
-      card.className = 'card' + (a.upcoming?' upcoming':'') + (myVisits.has(a.name)?' visited':'');
+      card.className = 'card' + (a.upcoming?' upcoming':'') + (myVisits.has(a.name)?' visited':'') + (a.summer?' summer-pick':'');
       card.innerHTML = `
         ${v?`<a href="https://www.youtube.com/watch?v=${v.id}" target="_blank"><img loading="lazy" src="${thumb}" alt="${a.name}"></a>`:`<div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:#e0f2fe;font-size:2rem">🔜</div>`}
         <div class="body">
+          ${a.summer?'<span class="summer-badge">☀️ 夏休みおすすめ</span>':''}
           <span class="pref">${a.pref}</span>
           <h3>${a.name} ${a.closed_flag?'<span class="badge-closed">閉館</span>':''}</h3>
           <p class="hl">${a.highlight||''}</p>
           ${animalChips(a)}
+          ${a.summer?`<div class="summerinfo">☀️ 夏休み：${a.summer}</div>`:''}
           ${(a.fee||a.closed)&&!a.closed_flag?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}`:''}${a.child?`<br>🧒 子ども ${a.child}`:''}${a.closed?`<br>🗓 休み：${a.closed}`:''}${a.gift?`<br>🎁 おみやげ：${a.gift}`:''}</div>`:''}
           <div class="links">
             ${a.videos.map((vv,i)=>`<a class="tab yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):''}</a>`).join('')}
