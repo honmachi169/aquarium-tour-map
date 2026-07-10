@@ -49,6 +49,9 @@
   .rules-box ul { margin:6px 0 0 18px; display:flex; flex-direction:column; gap:4px; line-height:1.55; }
   .agree-label { display:flex; align-items:center; gap:8px; font-size:.85rem; font-weight:bold; color:var(--sea-deep); cursor:pointer; }
   .agree-label input { width:18px; height:18px; accent-color:var(--sea); }
+  .quiz-box { background:#fff7db; border:2px solid var(--sun); border-radius:12px; padding:10px 14px; display:flex; flex-direction:column; gap:6px; }
+  .quiz-box label { font-size:.82rem; font-weight:bold; color:#8a6800; }
+  .quiz-box select { border:2px solid var(--sun); border-radius:8px; padding:6px 10px; font-size:.88rem; font-family:inherit; background:#fff; }
   .back { display:block; text-align:center; margin-top:22px; color:var(--sea); font-weight:bold; text-decoration:none; }
 </style>
 </head>
@@ -81,6 +84,15 @@
         </ul>
       </div>
       <label class="agree-label"><input type="checkbox" id="p-agree" required> おやくそくを読んで同意しました</label>
+      <div class="quiz-box">
+        <label for="p-quiz">🐟 かんたんクイズ：海にすむ生きものはどっち？</label>
+        <select id="p-quiz" required>
+          <option value="">選んでね</option>
+          <option value="ng">ライオン</option>
+          <option value="ok">ジンベエザメ</option>
+          <option value="ng">パンダ</option>
+        </select>
+      </div>
       <button type="submit">送信する 🐟</button>
       <p id="p-status"></p>
     </form>
@@ -131,9 +143,37 @@ document.getElementById('p-img').onchange = (ev)=>{
   reader.readAsDataURL(file);
 };
 
+// 投稿レート制限：1時間に3件まで（localStorage管理）
+const RATE_KEY = 'post_times';
+const RATE_LIMIT = 3;
+const RATE_WINDOW = 60 * 60 * 1000; // 1時間
+function getRecentPostTimes(){
+  try{
+    const arr = JSON.parse(localStorage.getItem(RATE_KEY) || '[]');
+    const now = Date.now();
+    return arr.filter(t => now - t < RATE_WINDOW);
+  }catch(e){ return []; }
+}
+function recordPostTime(){
+  const arr = getRecentPostTimes();
+  arr.push(Date.now());
+  localStorage.setItem(RATE_KEY, JSON.stringify(arr));
+}
+
 document.getElementById('photo-form').onsubmit = async (ev)=>{
   ev.preventDefault();
   const status = document.getElementById('p-status');
+
+  const recent = getRecentPostTimes();
+  if(recent.length >= RATE_LIMIT){
+    status.textContent = '投稿は1時間に3件までだよ🙏 また後で送ってね';
+    return;
+  }
+  const quiz = document.getElementById('p-quiz').value;
+  if(quiz !== 'ok'){
+    status.textContent = 'クイズの答えが違うみたい🐟 もう一度選んでね';
+    return;
+  }
   if(!imgData){ status.textContent = '写真を選んでね📷'; return; }
   const name = document.getElementById('p-name').value.trim() || 'ななしのさかな';
   const aquarium = document.getElementById('p-aq').value.trim();
@@ -145,6 +185,7 @@ document.getElementById('photo-form').onsubmit = async (ev)=>{
     const d = await res.json();
     if(d.ok){
       status.textContent = '送信できたよ！チームが確認したら掲載されるので待っててね🐟';
+      recordPostTime();
       document.getElementById('photo-form').reset();
       document.getElementById('p-preview').style.display = 'none';
       imgData = null;
