@@ -30,7 +30,7 @@
   .hero { max-width:540px; width:76%; margin:10px auto -6px; display:block; filter:drop-shadow(0 6px 12px rgba(2,62,138,.35)); position:relative; cursor:pointer; transition:transform .35s ease; }
   .hero:hover { transform:scale(1.04); }
   .hero.spin { animation:heroSpin .8s ease-in-out; }
-  @keyframes heroSpin { 0%{transform:rotate(0deg) scale(1);} 50%{transform:rotate(180deg) scale(1.08);} 100%{transform:rotate(360deg) scale(1);} }
+  @keyframes heroSpin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
   .counter { max-width:520px; margin:0 auto; padding-bottom:8px; position:relative; }
   .counter .num { font-size:2.1rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 4px rgba(2,62,138,.5); }
   .counter .num small { font-size:1rem; font-weight:normal; color:#fff; }
@@ -419,15 +419,21 @@ async function sendComment(){
 loadComments();
 setInterval(loadComments, 60000);
 
-// かわちゃんイラスト くるっと回転
+// かわちゃんイラスト くるっと回転（アニメーション中の再トリガーを防止）
 const heroImg = document.getElementById('heroImg');
 if(heroImg){
-  heroImg.addEventListener('mouseenter', ()=>{
-    heroImg.classList.remove('spin'); void heroImg.offsetWidth; heroImg.classList.add('spin');
+  let heroSpinning = false;
+  heroImg.addEventListener('animationend', ()=>{
+    heroImg.classList.remove('spin');
+    heroSpinning = false;
   });
-  heroImg.addEventListener('touchstart', ()=>{
-    heroImg.classList.remove('spin'); void heroImg.offsetWidth; heroImg.classList.add('spin');
-  }, {passive:true});
+  const triggerSpin = ()=>{
+    if(heroSpinning) return;
+    heroSpinning = true;
+    heroImg.classList.add('spin');
+  };
+  heroImg.addEventListener('mouseenter', triggerSpin);
+  heroImg.addEventListener('touchstart', triggerSpin, {passive:true});
 }
 
 // あわ演出
