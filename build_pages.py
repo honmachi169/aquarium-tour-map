@@ -67,6 +67,15 @@ for slug, a, intro in entries:
     if a.get("hitokoto"):
         hitokoto = f'<div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div>{E(a["hitokoto"])}</div>'
 
+    highlights_box = ""
+    if a.get("highlights"):
+        rows = "".join(f"<li>{E(h)}</li>" for h in a["highlights"])
+        highlights_box = f'<div class="highlights-box"><div class="hk-label">🔍 かわちゃん見どころポイント！</div><ul>{rows}</ul></div>'
+
+    best_time_box = ""
+    if a.get("best_time"):
+        best_time_box = f'<div class="besttime-box"><div class="hk-label">⏰ おすすめ時間帯</div>{E(a["best_time"])}</div>'
+
     RATING_LABEL = {"kuse":"🌀 クセつよポイント","suzu":"❄️ 涼しさ","kids":"👶 子ども向け度","hakuryoku":"💥 迫力","cospa":"💰 コスパ"}
     ratings = a.get("ratings") or {}
     rating_rows = ""
@@ -157,6 +166,12 @@ loadYtComments();''' if v else ''
   .chip.tag {{ background:#fdf1e3; color:#c9660a; border-color:#f4a261; }}
   .hitokoto {{ background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; position:relative; }}
   .hitokoto .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:4px; }}
+  .highlights-box {{ background:#f6fbfe; border:3px solid var(--sky); border-radius:16px; padding:12px 16px; margin:14px 0; }}
+  .highlights-box .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:8px; }}
+  .highlights-box ul {{ margin:0 0 0 20px; display:flex; flex-direction:column; gap:6px; }}
+  .highlights-box li {{ font-size:.9rem; line-height:1.6; color:#345; }}
+  .besttime-box {{ background:#eefaf7; border:3px solid #2a9d8f; border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }}
+  .besttime-box .hk-label {{ font-size:.8rem; font-weight:bold; color:#1f7a6c; margin-bottom:4px; }}
   .ratings-box {{ background:#fff9ec; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; }}
   .ratings-box .hk-label {{ font-size:.8rem; font-weight:bold; color:#a15c00; margin-bottom:8px; }}
   .rate-row {{ display:flex; justify-content:space-between; align-items:center; padding:4px 0; font-size:.88rem; }}
@@ -208,6 +223,8 @@ loadYtComments();''' if v else ''
   <p class="hl">{E(a.get('highlight') or a.get('comment') or '')}</p>
   <div class="chips">{chips}{tagchips}</div>
   {hitokoto}
+  {highlights_box}
+  {best_time_box}
   {ratings_box}
   {summer}
   <table>{info}</table>
