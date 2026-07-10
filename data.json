@@ -182,7 +182,10 @@
     "マンボウ"
    ],
    "gift": "サメのぬいぐるみ・サメグッズ",
-   "summer": "NIGHT AQUAWORLD（土曜の夜だけの特別営業 17:45〜20:00）"
+   "summer": "NIGHT AQUAWORLD（土曜の夜だけの特別営業 17:45〜20:00）",
+   "parking": "専用無料駐車場あり（大型車も可）",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "館内フードコート（10店舗）あり。入場不要で利用可、館外に寿司店も併設"
   },
   {
    "no": 5,
@@ -217,7 +220,10 @@
    "summer": "花火ショー（7〜8月開催）＆自由研究に役立つ体験プログラム",
    "stroller": "貸し出しあり・館内持ち込みOK",
    "nursing": "あり",
-   "locker": "あり（有料）"
+   "locker": "あり（有料）",
+   "parking": "島内5か所・約2,000台（有料・休日1,500〜2,000円/日）",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "「シーサイドオアシス」8店舗400席など複数のレストランあり"
   },
   {
    "no": 6,
@@ -338,7 +344,10 @@
     "マンボウ"
    ],
    "gift": "シャチのぬいぐるみ",
-   "summer": "シャチのずぶ濡れフェス＆夜の水族館探検「ナイトアドベンチャー」"
+   "summer": "シャチのずぶ濡れフェス＆夜の水族館探検「ナイトアドベンチャー」",
+   "parking": "専用駐車場あり（約1,200台・1日1,200円。ホテル宿泊者無料）",
+   "food_bring": "持込OK（弁当・おやつOK、再入園スタンプで外食も可）",
+   "restaurant": "「オーシャン」（シャチを見ながら食事）・フードコート「マウリ」あり"
   },
   {
    "no": 9,
@@ -417,7 +426,10 @@
    "gift": "ペンギングッズ",
    "stroller": "館内持ち込みOK",
    "nursing": "あり",
-   "locker": "あり（有料）"
+   "locker": "あり（有料）",
+   "parking": "専用駐車場なし（東京スカイツリータウン駐車場を利用・有料）",
+   "food_bring": "持込可（席での飲食OK・食べ歩き不可）",
+   "restaurant": "館内カフェあり（いきものモチーフのスイーツ・ドリンク）"
   },
   {
    "no": 11,
@@ -450,7 +462,10 @@
     "クラゲ"
    ],
    "gift": "オオサンショウウオのぬいぐるみ",
-   "summer": "クラゲ風鈴と京和傘の涼やか夏イベント"
+   "summer": "クラゲ風鈴と京和傘の涼やか夏イベント",
+   "parking": "専用駐車場なし（周辺民間駐車場を利用）",
+   "food_bring": "指定エリア（オットセイ・アザラシ・イルカスタジアムのベンチ）のみ持込OK",
+   "restaurant": "館内カフェあり。梅小路公園内にも複数のレストランあり"
   },
   {
    "no": 12,
@@ -481,7 +496,10 @@
    },
    "stroller": "館内持ち込みOK",
    "nursing": "あり",
-   "locker": "あり（有料）"
+   "locker": "あり（有料）",
+   "parking": "品川プリンスホテル駐車場（30分500円。館内5,000円以上利用で最大3時間無料）",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "館内に「コーラルカフェバー」「IN THE BLUE CAFÉ」あり"
   },
   {
    "no": 13,
@@ -511,7 +529,10 @@
    },
    "animals": [
     "ラッコ"
-   ]
+   ],
+   "parking": "専用有料駐車場あり（普通車388台・530円/回）",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "1Fに「restaurant Reilly」あり（イルカを見ながらカレー・麺・ハンバーガーなど）"
   },
   {
    "no": 14,
@@ -546,7 +567,10 @@
    "gift": "クラゲグッズ",
    "stroller": "貸し出しあり・館内持ち込みOK",
    "nursing": "あり",
-   "locker": "あり（有料）"
+   "locker": "あり（有料）",
+   "parking": "専用駐車場なし（周辺の民間駐車場を利用）",
+   "food_bring": "持込可（アルコール不可・水槽展示エリア内での飲食不可・屋外はトビに注意）",
+   "restaurant": "「あわたんカフェ」・スタジアム2F「スタジアムカフェ」あり"
   },
   {
    "no": 15,
@@ -576,7 +600,10 @@
    },
    "stroller": "館内持ち込みOK",
    "nursing": "あり",
-   "locker": "あり（有料）"
+   "locker": "あり（有料）",
+   "parking": "EXPOCITY駐車場（ニフレル入館で平日無料・土日祝は購入額に応じ最大5時間無料）",
+   "food_bring": "持込不可",
+   "restaurant": "館内ピクニックカフェ「EAT EAT EAT」あり（サンドイッチ・ホットドッグ中心）"
   },
   {
    "no": 16,
@@ -609,7 +636,10 @@
    "summer": "夏のびちょぬれイベント＆自由研究コンテンツ",
    "stroller": "館内持ち込みOK",
    "nursing": "あり",
-   "locker": "あり（有料）"
+   "locker": "あり（有料）",
+   "parking": "サンシャインパーキング（約1,800台・有料。館内2,000円以上購入で1時間無料）",
+   "food_bring": "外部飲食物持込不可（水筒・ペットボトルは可・屋外マリンガーデンで飲用可）",
+   "restaurant": "館内にタリーズコーヒーあり。サンシャインシティ「アルパ」にレストラン街あり"
   },
   {
    "no": 17,
@@ -638,7 +668,10 @@
    },
    "animals": [
     "ピラルクー"
-   ]
+   ],
+   "parking": "無料駐車場あり（約500台・河川環境楽園内）",
+   "food_bring": "館内展示エリアへの持込不可（当日再入館可能なので外での飲食は可）",
+   "restaurant": "1階にレストラン「AROWANA GARDEN」あり（ラーメン・うどん・定食・カフェメニュー）"
   },
   {
    "no": 18,
@@ -667,7 +700,10 @@
    },
    "animals": [
     "フェアリーペンギン"
-   ]
+   ],
+   "parking": "専用駐車場なし（葛西臨海公園駐車場が近隣に有り・有料）",
+   "food_bring": "館内展示エリアへの持込不可（屋外は可）",
+   "restaurant": "館内にカフェテリア「シーウインド」あり（まぐろカツカレーが名物）"
   },
   {
    "no": 19,
@@ -693,7 +729,10 @@
    ],
    "sns": {
     "instagram": "https://www.instagram.com/echiaqua/"
-   }
+   },
+   "parking": "無料駐車場約450台あり（繁忙期は臨時駐車場からシャトルバス運行）",
+   "food_bring": "持込OK（野外テント・休憩スペースで飲食可。トビ・カラスに注意）",
+   "restaurant": "シアタービル2階に「展望レストラン」あり（日本海を眺めながら食事）"
   },
   {
    "no": 20,
@@ -727,7 +766,10 @@
    ],
    "stroller": "館内持ち込みOK",
    "nursing": "あり",
-   "locker": "あり（有料）"
+   "locker": "あり（有料）",
+   "parking": "専用駐車場なし（周辺に県営有料駐車場3か所あり）",
+   "food_bring": "館内指定エリア以外での飲食不可",
+   "restaurant": "2階「水族館の果実堂」（ウォーターフロント眺望）＋1階「ドルフィンキッチン」あり"
   },
   {
    "no": 21,
@@ -757,7 +799,10 @@
    },
    "stroller": "館内持ち込みOK",
    "nursing": "あり",
-   "locker": "あり（有料）"
+   "locker": "あり（有料）",
+   "parking": "有料駐車場あり（乗用車420円・大型バス1,030円）",
+   "food_bring": "要公式確認",
+   "restaurant": "館内にレストラン・ショップあり"
   },
   {
    "no": 22,
@@ -779,7 +824,10 @@
    "tags": [
     "dolphin",
     "kids"
-   ]
+   ],
+   "parking": "パールシーリゾート内に700台規模の駐車場あり（有料）",
+   "food_bring": "要公式確認",
+   "restaurant": "水族館内に飲食店なし。パールシーリゾート内に複数の飲食店あり（佐世保バーガー等）"
   },
   {
    "no": 23,
@@ -804,7 +852,10 @@
    "sns": {
     "x": "https://x.com/atoa_kobe",
     "instagram": "https://www.instagram.com/atoa_kobe/"
-   }
+   },
+   "parking": "専用駐車場なし（徒歩3分の有料立体駐車場400台を推奨）",
+   "food_bring": "弁当等の持込不可（蓋付きペットボトルのみ可）",
+   "restaurant": "1階に神戸最大級フードホールあり（神戸牛・洋食・スイーツ等）＋4階「átoa café」"
   },
   {
    "no": 24,
@@ -833,7 +884,10 @@
    "animals": [
     "フェアリーペンギン"
    ],
-   "gift": "ペンギングッズ"
+   "gift": "ペンギングッズ",
+   "parking": "有料駐車場2か所あり（最初の1時間260円・以降1時間ごと200円）",
+   "food_bring": "屋内展示エリアへの持込不可。屋外（ペンギン広場・芝生広場・2階テラス）はOK",
+   "restaurant": "館内に売店程度の軽食コーナーあり"
   },
   {
    "no": 25,
@@ -859,7 +913,10 @@
    "sns": {
     "x": "https://x.com/notoaqua_jp",
     "instagram": "https://www.instagram.com/notojima_aquarium/"
-   }
+   },
+   "parking": "無料駐車場あり（バス駐車場・障害者用スペース併設）",
+   "food_bring": "建物内への持込飲食不可（無料休憩所・園内ベンチなら持込OK）",
+   "restaurant": "「レストランイルカ」（七尾北湾眺望・定食・丼・麺類）＋「ドルフィン・テイル」（ファストフード）など3か所"
   },
   {
    "no": 26,
@@ -888,7 +945,10 @@
     "x": "https://x.com/shimonoseki_aq",
     "instagram": "https://www.instagram.com/shimonoseki_aquarium_kaikyokan/"
    },
-   "gift": "ふく（フグ）グッズ"
+   "gift": "ふく（フグ）グッズ",
+   "parking": "専用駐車場なし（近隣の有料駐車場を利用）",
+   "food_bring": "館内不可・3階屋上広場や館外ボードウォークでは持込飲食可",
+   "restaurant": "1階無料ゾーンに「レストラン」あり（イルカを眺めながら食事・11:00〜17:00）"
   },
   {
    "no": 27,
@@ -915,7 +975,10 @@
    "sns": {
     "instagram": "https://www.instagram.com/takeshimaaquarium/"
    },
-   "gift": "超グソクムシ煎餅"
+   "gift": "超グソクムシ煎餅",
+   "parking": "隣接の竹島園地駐車場（約200台・平日無料・土日祝300〜500円）",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "館内に飲食施設なし。周辺の飲食店を利用"
   },
   {
    "no": 28,
@@ -940,7 +1003,10 @@
    ],
    "sns": {
     "instagram": "https://www.instagram.com/himeji_aquarium/"
-   }
+   },
+   "parking": "手柄山第1立体駐車場が最寄り（1日200円）",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "館内に飲食施設なし。周辺飲食店を利用"
   },
   {
    "no": 29,
@@ -966,7 +1032,10 @@
    "sns": {
     "x": "https://x.com/biwahaku"
    },
-   "only": "ビワコオオナマズ"
+   "only": "ビワコオオナマズ",
+   "parking": "有料駐車場あり（入館料支払いで駐車無料サービスあり）",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "館内にミュージアムレストラン「にほのうみ」あり（琵琶湖の食材メニュー）"
   },
   {
    "no": 30,
@@ -992,7 +1061,10 @@
    "sns": {
     "x": "https://x.com/uozuaquarium",
     "instagram": "https://www.instagram.com/uozuaquarium_official/"
-   }
+   },
+   "parking": "無料駐車場あり（普通車1,500台・バス50台）",
+   "food_bring": "隣接の無料休憩所は持込OK（休憩所内での飲食可）",
+   "restaurant": "土日祝は「魚津丸キッチン」、火木金はカフェ営業。近隣に漁協直営の食堂あり"
   },
   {
    "no": 31,
@@ -1018,7 +1090,10 @@
    ],
    "sns": {
     "instagram": "https://www.instagram.com/otaru_aquarium/"
-   }
+   },
+   "parking": "約1,000台の駐車場あり",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "館内に「レストランニュー三幸」「浜の屋食堂」の2か所あり"
   },
   {
    "no": 32,
@@ -1040,7 +1115,10 @@
    "tags": [
     "rain",
     "kids"
-   ]
+   ],
+   "parking": "隣接のサーモンパーク千歳駐車場（200台以上）利用",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "館内に飲食施設なし。隣接「道の駅サーモンパーク千歳」に複数の飲食店あり"
   },
   {
    "no": 33,
@@ -1067,7 +1145,10 @@
     "instagram": "https://www.instagram.com/iseseaparadise/"
    },
    "only": "ツメナシカワウソと握手",
-   "gift": "ツメナシカワウソグッズ"
+   "gift": "ツメナシカワウソグッズ",
+   "parking": "隣接駐車場あり（乗用車250台・バス40台・3時間300円〜）",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "館内に休憩エリア「UOASIS」あり。隣接「伊勢夫婦岩めおと横丁」に飲食店20店"
   },
   {
    "no": 34,
@@ -1092,7 +1173,10 @@
    ],
    "sns": {
     "instagram": "https://www.instagram.com/gobius_c/"
-   }
+   },
+   "parking": "無料駐車場あり（駐車場横の無料休憩所で軽食利用可）",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "館内にレストランなし。駐車場横の休憩所で軽食利用可"
   },
   {
    "no": 35,
@@ -1118,7 +1202,10 @@
    ],
    "sns": {
     "instagram": "https://www.instagram.com/shinasui_insta/"
-   }
+   },
+   "parking": "専用駐車場あり（96台・20分200円）",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "館内に「レストランドルフィン」とウッドデッキカフェあり"
   },
   {
    "no": 36,
@@ -1145,7 +1232,10 @@
    "sns": {
     "x": "https://x.com/marinepark_nixe",
     "instagram": "https://www.instagram.com/noboribetsumarineparknixe/"
-   }
+   },
+   "parking": "有料駐車場あり（施設内・受付にて事前清算）",
+   "food_bring": "館内・店舗内への持込不可（館外は自由）",
+   "restaurant": "館内にレストラン「リーベ」（北海道食材）と軽食「リナトレット」あり"
   },
   {
    "no": 37,
@@ -1171,7 +1261,10 @@
    "sns": {
     "x": "https://x.com/aoao_sapporo",
     "instagram": "https://www.instagram.com/aoao_sapporo/"
-   }
+   },
+   "parking": "専用駐車場なし（大通公園エリアの商業ビル内・周辺コインパーキングを利用）",
+   "food_bring": "持込可（館内全フロアで飲食可能）",
+   "restaurant": "館内に「Shirokuma Bakery &」あり（クロワッサン・コーヒー・アルコール）"
   },
   {
    "no": 38,
@@ -1197,7 +1290,10 @@
    "sns": {
     "x": "https://x.com/shikokuaquarium",
     "instagram": "https://www.instagram.com/shikoku_aquarium/"
-   }
+   },
+   "parking": "直営駐車場あり（1日600円・リアルタイム空き確認可）",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "館内に3店舗（「キッチン瀬戸内」・カフェ「オリーブ」・「PEARL CAFE」）"
   },
   {
    "no": 39,
@@ -1239,7 +1335,10 @@
    ],
    "sns": {
     "x": "https://x.com/kobe_doubutsu"
-   }
+   },
+   "parking": "第1駐車場880台（平日700円・土日祝1,000円/24時間）",
+   "food_bring": "弁当等持込可（飲食可能エリアは3か所指定）",
+   "restaurant": "「花のキッチン」「めん処 ふくろう庵」「アルパカフェ」の3店舗あり"
   },
   {
    "no": 41,
@@ -1269,7 +1368,10 @@
    "sns": {
     "x": "https://x.com/smartaqua_sz",
     "instagram": "https://www.instagram.com/smartaqua_sz/"
-   }
+   },
+   "parking": "専用駐車場なし（松坂屋静岡店本館7階入居・周辺駐車場を利用）",
+   "food_bring": "持込禁止",
+   "restaurant": "館内に専用カフェなし。松坂屋静岡店内の飲食店を利用"
   },
   {
    "no": 42,
@@ -1291,7 +1393,10 @@
    "sns": {
     "x": "https://x.com/sendaiuminomori",
     "instagram": "https://www.instagram.com/uminomori_official/"
-   }
+   },
+   "parking": "無料駐車場800台（常設）＋臨時駐車場あり",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "館内にフードコートあり（コスタコーヒーも入居）"
   },
   {
    "no": 43,
@@ -1312,7 +1417,10 @@
    ],
    "sns": {
     "x": "https://x.com/Marinepia_PR"
-   }
+   },
+   "parking": "無料駐車場670台（普通車）＋大型車スペースあり",
+   "food_bring": "弁当等持込可（建物内で敷物を広げての飲食は不可）",
+   "restaurant": "館内にレストラン・売店あり"
   },
   {
    "no": 44,
@@ -1334,7 +1442,10 @@
    "sns": {
     "x": "https://x.com/aquamarinestaff",
     "instagram": "https://www.instagram.com/aquamarinestaff/"
-   }
+   },
+   "parking": "無料駐車場1,500台（正面）",
+   "food_bring": "指定屋外エリアでの飲食可（1F南テラス・野外広場・ビーチ等）",
+   "restaurant": "館内に「アクアクロス」（小名浜湾眺望）と「潮目の海」（回転寿司）の2店舗"
   },
   {
    "no": 45,
@@ -1359,7 +1470,10 @@
    "animals": [
     "クラゲ"
    ],
-   "gift": "クラゲアイス"
+   "gift": "クラゲアイス",
+   "parking": "無料駐車場500台（大型車可）＋臨時駐車場あり",
+   "food_bring": "公式に明示なし・要確認",
+   "restaurant": "「魚匠ダイニング沖海月」（11:00〜15:00）と軽食売店「波の華」あり"
   }
  ],
  "unvisited": [
