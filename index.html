@@ -103,11 +103,13 @@
     .ticker-label { display:none; }
     .ticker-post { flex:none; padding:0 12px; }
     .legend { gap:8px; font-size:.72rem; margin:-4px auto 8px; flex-wrap:nowrap; overflow-x:auto; justify-content:center; }
-    .tag-wrap-outer { max-width:1100px; margin:0 auto 8px; padding:0 16px; }
-    #tagBtns { max-height:38px; overflow:hidden; flex-wrap:wrap; margin-bottom:0; transition:max-height .25s ease; }
-    #tagBtns.expanded { max-height:400px; }
-    .tag-toggle { display:block; margin:6px auto 0; background:none; border:none; color:var(--sea); font-size:.78rem; font-weight:bold; font-family:inherit; cursor:pointer; padding:4px; }
-    #fixedRow { margin-top:2px; }
+    .tag-wrap-outer { max-width:1100px; margin:0 auto 10px; padding:0 16px; }
+    .tag-toggle { width:100%; display:flex; align-items:center; justify-content:space-between; background:#fff; border:2px solid var(--sea); border-radius:14px; padding:10px 16px; font-size:.88rem; font-weight:bold; color:var(--sea); font-family:inherit; cursor:pointer; }
+    .tag-toggle .arrow { transition:transform .2s; }
+    .tag-toggle.open .arrow { transform:rotate(180deg); }
+    #tagBtns { max-height:0; overflow:hidden; flex-wrap:wrap; margin:0; transition:max-height .3s ease, margin .3s ease; }
+    #tagBtns.expanded { max-height:400px; margin-top:8px; }
+    #fixedRow { margin-top:8px; }
     .controls button { padding:6px 12px; font-size:.8rem; }
     #map { height:480px; margin:14px 10px; }
     .grid { padding:0 10px; gap:12px; }
@@ -279,8 +281,8 @@
 
 <div class="controls" id="regionBtns"></div>
 <div class="tag-wrap-outer">
+  <button class="tag-toggle sp-only" id="tagToggle"><span>🐟 カテゴリー別おすすめ</span><span class="arrow">▾</span></button>
   <div class="controls" id="tagBtns"></div>
-  <button class="tag-toggle sp-only" id="tagToggle">すべて表示 ▾</button>
 </div>
 <div class="controls" id="fixedRow"></div>
 <div class="grid" id="cards"></div>
@@ -656,7 +658,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   if(tagToggle){
     tagToggle.onclick = ()=>{
       const open = tagWrap.classList.toggle('expanded');
-      tagToggle.textContent = open ? '閉じる ▴' : 'すべて表示 ▾';
+      tagToggle.classList.toggle('open', open);
     };
   }
 
