@@ -70,6 +70,7 @@ for slug, a, intro in entries:
         for vv in a.get("videos", []))
     hero = f'<img class="hero" src="{thumb}" alt="{E(a["name"])}">' if (thumb and not videos) else ""
     kicker = "かわちゃんが動画で紹介した水族館🐟" if intro else "これから紹介したい水族館🔜"
+    filming_note = '<p class="filming-note">📷 動画・写真は水族館の特別な許可を得て撮影しています</p>' if intro else ''
 
     links = ""
     if a.get("url"): links += f'<a class="btn hp" href="{E(a["url"])}" target="_blank" rel="noopener">公式サイト🔗</a>'
@@ -146,14 +147,22 @@ loadYtComments();''' if v else ''
   .btn.share {{ background:var(--coral); color:#fff; border:none; font-family:inherit; cursor:pointer; }}
   .back {{ display:inline-block; margin-top:18px; color:var(--sea); font-weight:bold; text-decoration:none; }}
   .note {{ font-size:.75rem; color:#89a; margin-top:8px; }}
+  .filming-note {{ font-size:.75rem; color:#0077b6; background:#e0f7fa; border-radius:8px; padding:5px 12px; margin:6px 0 0; display:inline-block; }}
   .comments-section {{ margin-top:28px; }}
   .comments-section h2 {{ color:var(--sea-deep); font-size:1.1rem; margin-bottom:16px; }}
+  .sort-toggle {{ display:flex; gap:8px; margin-bottom:12px; }}
+  .sort-toggle button {{ font-size:.78rem; font-weight:bold; border:2px solid var(--sea); background:#fff; color:var(--sea); border-radius:999px; padding:4px 14px; cursor:pointer; font-family:inherit; }}
+  .sort-toggle button.active {{ background:var(--sea); color:#fff; }}
   .ytc-box, .user-comments-box {{ background:#fff; border-radius:16px; padding:16px; margin-bottom:16px; box-shadow:0 2px 8px rgba(2,62,138,.1); }}
   .ytc-box h3, .user-comments-box h3 {{ font-size:.9rem; color:var(--sea); margin-bottom:10px; }}
-  .c-item {{ display:flex; flex-direction:column; gap:2px; padding:8px 0; border-bottom:1px solid #e8f4fb; }}
+  .c-item {{ display:flex; flex-direction:column; gap:4px; padding:10px 0; border-bottom:1px solid #e8f4fb; }}
   .c-item:last-child {{ border-bottom:none; }}
   .c-name {{ font-size:.75rem; font-weight:bold; color:var(--sea); }}
   .c-msg {{ font-size:.85rem; color:#234; line-height:1.6; }}
+  .c-foot {{ display:flex; align-items:center; gap:8px; }}
+  .like-btn {{ background:none; border:1.5px solid #fbb6ce; border-radius:999px; padding:2px 10px; font-size:.75rem; color:#be185d; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:3px; transition:background .15s; }}
+  .like-btn:hover, .like-btn.liked {{ background:#fce7f3; }}
+  .like-btn.liked {{ border-color:#ec4899; font-weight:bold; }}
   .empty, .loading {{ font-size:.82rem; color:#89a; }}
   #comment-form {{ margin-top:12px; display:flex; flex-direction:column; gap:8px; }}
   #comment-form input, #comment-form textarea {{ border:2px solid var(--sky); border-radius:10px; padding:8px 12px; font-size:.88rem; font-family:inherit; outline:none; width:100%; }}
@@ -166,6 +175,7 @@ loadYtComments();''' if v else ''
 <header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
 <main>
   <p class="kicker">{kicker}</p>
+  {filming_note}
   <h1>{E(a['name'])}</h1>
   <span class="pref">{E(a['pref'])}</span>
   {videos or hero}
@@ -186,6 +196,10 @@ loadYtComments();''' if v else ''
     {ytc_box}
     <div class="user-comments-box">
       <h3>🐟 行った感想を書いてね！</h3>
+      <div class="sort-toggle">
+        <button id="sort-new" class="active" onclick="setSort('new')">新着順</button>
+        <button id="sort-like" onclick="setSort('like')">❤️ いいね順</button>
+      </div>
       <div id="user-list"><p class="loading">読み込み中…</p></div>
       <form id="comment-form">
         <input type="text" id="c-name" placeholder="なまえ（省略OK）" maxlength="15">
@@ -200,14 +214,56 @@ loadYtComments();''' if v else ''
 const COMMENT_API = "{COMMENT_API}";
 const AQ_NAME = "{E(a['name'])}";
 {yt_js}
+let allComments = [];
+let sortMode = 'new';
+const likedKey = 'liked_' + AQ_NAME;
+function getLiked() {{ try {{ return new Set(JSON.parse(localStorage.getItem(likedKey)||'[]')); }} catch(e) {{ return new Set(); }} }}
+function saveLiked(s) {{ localStorage.setItem(likedKey, JSON.stringify([...s])); }}
+function setSort(mode) {{
+  sortMode = mode;
+  document.getElementById('sort-new').classList.toggle('active', mode==='new');
+  document.getElementById('sort-like').classList.toggle('active', mode==='like');
+  renderComments();
+}}
+function renderComments() {{
+  const el = document.getElementById('user-list');
+  if (!allComments.length) {{ el.innerHTML = '<p class="empty">まだコメントがないよ！最初の感想を書いてみて🐟</p>'; return; }}
+  const liked = getLiked();
+  const sorted = [...allComments].sort((a,b) => sortMode==='like' ? (b.likes||0)-(a.likes||0) : 0);
+  el.innerHTML = sorted.map(c => {{
+    const isLiked = liked.has(c.id);
+    return `<div class="c-item">
+      <span class="c-name">🐟 ${{c.name}}</span>
+      <span class="c-msg">${{c.msg}}</span>
+      <div class="c-foot">
+        <button class="like-btn${{isLiked?' liked':''}}" data-id="${{c.id}}" onclick="doLike(this,'${{c.id}}')">❤️ ${{c.likes||0}}</button>
+      </div>
+    </div>`;
+  }}).join('');
+}}
 async function loadUserComments() {{
   const el = document.getElementById('user-list');
   try {{
     const res = await fetch(COMMENT_API + '?aquarium=' + encodeURIComponent(AQ_NAME));
-    const data = await res.json();
-    if (!data.length) {{ el.innerHTML = '<p class="empty">まだコメントがないよ！最初の感想を書いてみて🐟</p>'; return; }}
-    el.innerHTML = data.reverse().map(c => `<div class="c-item"><span class="c-name">🐟 ${{c.name}}</span><span class="c-msg">${{c.msg}}</span></div>`).join('');
+    allComments = await res.json();
+    renderComments();
   }} catch(e) {{ el.innerHTML = '<p class="empty">読み込みエラー</p>'; }}
+}}
+async function doLike(btn, id) {{
+  const liked = getLiked();
+  if (liked.has(id)) return;
+  liked.add(id);
+  saveLiked(liked);
+  btn.classList.add('liked');
+  try {{
+    const res = await fetch(COMMENT_API, {{ method:'POST', body:JSON.stringify({{ action:'like', id }}) }});
+    const d = await res.json();
+    if (d.ok) {{
+      const c = allComments.find(x=>x.id===id);
+      if(c) c.likes = d.likes;
+      btn.textContent = '❤️ ' + (d.likes||0);
+    }}
+  }} catch(e) {{}}
 }}
 loadUserComments();
 document.getElementById('comment-form').onsubmit = async (ev) => {{

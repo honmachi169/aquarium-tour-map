@@ -165,6 +165,21 @@
   .card.baby-pick { border:3px solid #f9a8d4; background:linear-gradient(160deg,#fdf2f8 0%,#fff 60%); }
   .card.baby-pick:hover { border-color:#ec4899; }
   .baby-badge { display:inline-block; background:#ec4899; color:#fff; font-size:.72rem; font-weight:bold; border-radius:999px; padding:2px 10px; margin-bottom:4px; }
+  /* 地域カラー（上部ストライプ） */
+  .card::before { content:''; display:block; height:4px; border-radius:18px 18px 0 0; background:var(--rc,#cde6f0); }
+  .card.summer-pick::before, .card.baby-pick::before { display:none; }
+  .r-hokkaido { --rc:#48cae4; }
+  .r-tohoku   { --rc:#52b788; }
+  .r-kanto    { --rc:#f4a261; }
+  .r-chubu    { --rc:#ffb703; }
+  .r-kinki    { --rc:#c77dff; }
+  .r-chugoku  { --rc:#4cc9f0; }
+  .r-shikoku  { --rc:#ffd166; }
+  .r-kyushu   { --rc:#ff6b6b; }
+  /* 地域凡例 */
+  .region-legend { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 10px; font-size:.72rem; }
+  .region-legend span { display:flex; align-items:center; gap:4px; }
+  .region-legend span::before { content:''; display:inline-block; width:10px; height:10px; border-radius:3px; background:var(--lc); }
   .summerinfo { font-size:.75rem; font-weight:bold; color:#a15c00; background:linear-gradient(90deg,#fff3cd,#ffe9b8); border:1.5px solid #ffd166; border-radius:10px; padding:6px 10px; margin:0 0 6px; line-height:1.5; }
   .card .cbtn { font-size:.76rem; font-weight:bold; background:#fff; color:var(--sea); border:2px solid var(--sky); border-radius:999px; padding:4px 12px; cursor:pointer; font-family:inherit; }
   .card .ytc { display:none; background:#fffdf5; border:2px solid #ffe8a3; border-radius:12px; padding:8px 10px; font-size:.74rem; line-height:1.55; color:#333; }
@@ -262,6 +277,16 @@
 </div>
 
 <div class="controls" id="regionBtns"></div>
+<div class="region-legend" style="max-width:1100px;margin:-6px auto 8px;padding:0 20px;">
+  <span style="--lc:#48cae4">北海道</span>
+  <span style="--lc:#52b788">東北</span>
+  <span style="--lc:#f4a261">関東</span>
+  <span style="--lc:#ffb703">中部</span>
+  <span style="--lc:#c77dff">近畿</span>
+  <span style="--lc:#4cc9f0">中国</span>
+  <span style="--lc:#ffd166">四国</span>
+  <span style="--lc:#ff6b6b">九州・沖縄</span>
+</div>
 <div class="controls" id="tagBtns"></div>
 <div class="grid" id="cards"></div>
 
@@ -606,17 +631,27 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   function render(){
     cards.innerHTML='';
     const filtered = aqs.filter(a=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (currentTag==='__visited' ? myVisits.has(a.name) : (a.tags||[]).includes(currentTag))));
-    filtered.sort((a,b)=> {
-      const as = a.summer?2:(a.tags||[]).includes('baby')?1:0;
-      const bs = b.summer?2:(b.tags||[]).includes('baby')?1:0;
-      return bs - as;
-    });
+    filtered.sort((a,b)=> (a.no||999) - (b.no||999));
+    const REGION_CLASS = {
+      "北海道・東北": r => ["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県"].includes(r) ? (r==="北海道" ? "r-hokkaido" : "r-tohoku") : "",
+      "関東": r => ["茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県"].includes(r) ? "r-kanto" : "",
+      "中部": r => ["新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県"].includes(r) ? "r-chubu" : "",
+      "近畿": r => ["三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県"].includes(r) ? "r-kinki" : "",
+      "中国": r => ["鳥取県","島根県","岡山県","広島県","山口県"].includes(r) ? "r-chugoku" : "",
+      "四国": r => ["徳島県","香川県","愛媛県","高知県"].includes(r) ? "r-shikoku" : "",
+      "九州・沖縄": r => ["福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"].includes(r) ? "r-kyushu" : "",
+    };
+    function getRegionClass(pref){
+      for(const fn of Object.values(REGION_CLASS)){ const c=fn(pref); if(c) return c; }
+      return "";
+    }
     filtered.forEach(a=>{
       const isBaby = (a.tags||[]).includes('baby');
       const v = a.videos[0];
       const thumb = v ? `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg` : '';
       const card = document.createElement('div');
-      card.className = 'card' + (a.upcoming?' upcoming':'') + (myVisits.has(a.name)?' visited':'') + (a.summer?' summer-pick':'') + (isBaby&&!a.summer?' baby-pick':'');
+      const rc = getRegionClass(a.pref);
+      card.className = 'card' + (a.upcoming?' upcoming':'') + (myVisits.has(a.name)?' visited':'') + (a.summer?' summer-pick':'') + (isBaby&&!a.summer?' baby-pick':'') + (rc?' '+rc:'');
       card.innerHTML = `
         ${v?`<a href="https://www.youtube.com/watch?v=${v.id}" target="_blank"><img loading="lazy" src="${thumb}" alt="${a.name}"></a>`:`<div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:#e0f2fe;font-size:2rem">🔜</div>`}
         <div class="body">
