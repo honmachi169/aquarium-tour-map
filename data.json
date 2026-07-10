@@ -1590,7 +1590,8 @@
    "comment": "一部屋だけの小さな水族館。琵琶湖畔の絶景ロケーションで、日本各地の淡水生物を100種以上展示",
    "tags": [
     "kids"
-   ]
+   ],
+   "photo": "assets/photo_biwakobase.jpg"
   },
   {
    "name": "花園教会水族館",
@@ -1605,7 +1606,8 @@
    "tags": [
     "kids",
     "rain"
-   ]
+   ],
+   "photo": "assets/photo_hanazono.jpg"
   },
   {
    "name": "大阪海遊館 海洋生物研究所 以布利センター",
@@ -1619,7 +1621,8 @@
    "comment": "海遊館のジンベエザメたちのふるさと。研究施設だけど土日祝は特別開放、ジョン万次郎資料館か足摺海洋館のチケットで見学できる",
    "tags": [
     "kids"
-   ]
+   ],
+   "photo": "assets/photo_iburi.jpg"
   },
   {
    "name": "タツノオトシゴハウス",
@@ -1633,7 +1636,8 @@
    "comment": "国内でタツノオトシゴを見られる16施設の一つ。観光養殖場で愛らしい姿をじっくり観察できる",
    "tags": [
     "kids"
-   ]
+   ],
+   "photo": "assets/photo_seahorsehouse.jpg"
   },
   {
    "name": "オホーツク流氷館",
@@ -1647,7 +1651,8 @@
    "comment": "天都山にある流氷とオホーツク海の生き物がテーマの施設。マイナス15度の「流氷体感室」で本物の流氷にさわれる",
    "tags": [
     "kids"
-   ]
+   ],
+   "photo": "assets/photo_ryuhyokan.jpg"
   },
   {
    "name": "まちなか水族館 ギョギョタウン",
@@ -1661,7 +1666,8 @@
    "comment": "淡路島・福良の空き家をリノベーションしたミニ水族館。地元漁師が獲った魚を無料で見られる",
    "tags": [
     "kids"
-   ]
+   ],
+   "photo": "assets/photo_gyogyotown.jpg"
   },
   {
    "name": "うなぎミュージアム＆Cafe 雑魚寝館",
@@ -1673,7 +1679,8 @@
    "child": "無料",
    "closed": "月1回・第3土曜17:00〜22:00のみ営業",
    "comment": "世界のうなぎが見られるカフェ併設ミュージアム。月1回だけの激レア営業日を狙って行きたい",
-   "tags": []
+   "tags": [],
+   "photo": "assets/photo_zacconekan.jpg"
   },
   {
    "name": "埼玉県立川の博物館 水族館",
@@ -1732,7 +1739,8 @@
    "comment": "金魚の産地・弥富ならではの金魚専門展示館。金魚すくい体験も楽しめる",
    "tags": [
     "kids"
-   ]
+   ],
+   "photo": "assets/photo_yatomi.jpg"
   },
   {
    "name": "小笠原海洋センター",
@@ -1865,7 +1873,8 @@
    "fee": "800円",
    "child": "400円",
    "closed": "無休",
-   "comment": "魚屋さん「釧之助」の中にあるフウセンウオの水族館"
+   "comment": "魚屋さん「釧之助」の中にあるフウセンウオの水族館",
+   "photo": "assets/photo_kushiro.jpg"
   },
   {
    "name": "わっかりうむ ノシャップ寒流水族館",
@@ -1887,7 +1896,8 @@
    "fee": "830円",
    "child": "400円",
    "closed": "4月上旬・12/26〜1/1",
-   "comment": "滝つぼ水槽と冬に凍る川！中嶋誠プロデュースの名水族館"
+   "comment": "滝つぼ水槽と冬に凍る川！中嶋誠プロデュースの名水族館",
+   "photo": "assets/photo_kitanodaichi.jpg"
   },
   {
    "name": "美深チョウザメ館",
@@ -1909,7 +1919,8 @@
    "fee": "200円",
    "child": "100円",
    "closed": "年中無休",
-   "comment": "日本唯一のアザラシ専門保護施設"
+   "comment": "日本唯一のアザラシ専門保護施設",
+   "photo": "assets/photo_okhotsk_tokkari.jpg"
   },
   {
    "name": "氷海展望塔オホーツクタワー",
@@ -1931,7 +1942,8 @@
    "fee": "650円",
    "child": "200円",
    "closed": "冬期水曜休・12〜1月休館",
-   "comment": "サケの仲間の展示種類数は世界トップクラス"
+   "comment": "サケの仲間の展示種類数は世界トップクラス",
+   "photo": "assets/photo_shibetsu.jpg"
   },
   {
    "name": "青森県営浅虫水族館",
@@ -2138,7 +2150,8 @@
    ],
    "animals": [
     "ピラルクー"
-   ]
+   ],
+   "photo": "assets/photo_kawasui.jpg"
   },
   {
    "name": "相模川ふれあい科学館 アクアリウムさがみはら",
@@ -2171,7 +2184,8 @@
    "fee": "1,600円",
    "child": "800円",
    "closed": "年中無休",
-   "comment": "標高723m、日本一高い場所の海水水族館"
+   "comment": "標高723m、日本一高い場所の海水水族館",
+   "photo": "assets/photo_hakone.jpg"
   },
   {
    "name": "上越市立水族博物館 うみがたり",
@@ -2329,7 +2343,8 @@
    "tags": [
     "dolphin",
     "kids"
-   ]
+   ],
+   "photo": "assets/photo_minamichita.jpg"
   },
   {
    "name": "碧南海浜水族館",
@@ -2351,7 +2366,8 @@
    "fee": "無料",
    "child": "無料",
    "closed": "火曜・年末年始",
-   "comment": "豊川の生きものに会える無料の淡水魚水族館"
+   "comment": "豊川の生きものに会える無料の淡水魚水族館",
+   "photo": "assets/photo_medakakan.jpg"
   },
   {
    "name": "名古屋シーライフ水族館",
@@ -2395,7 +2411,8 @@
    "fee": "【要確認】",
    "child": "【要確認】",
    "closed": "【要確認】",
-   "comment": "赤目四十八滝のオオサンショウウオ水族館"
+   "comment": "赤目四十八滝のオオサンショウウオ水族館",
+   "photo": "assets/photo_akame.jpg"
   },
   {
    "name": "高槻市立自然博物館 あくあぴあ芥川",
@@ -2432,7 +2449,8 @@
    "fee": "480円",
    "child": "高校生以下無料",
    "closed": "月曜（祝日は翌日）",
-   "comment": "和歌山の海の大水槽がある博物館"
+   "comment": "和歌山の海の大水槽がある博物館",
+   "photo": "assets/photo_wakayama.jpg"
   },
   {
    "name": "串本海中公園",
@@ -2443,7 +2461,8 @@
    "fee": "1,600円",
    "child": "800円",
    "closed": "年中無休",
-   "comment": "本物の海中を見られる海中展望塔がある！"
+   "comment": "本物の海中を見られる海中展望塔がある！",
+   "photo": "assets/photo_kushimoto.jpg"
   },
   {
    "name": "太地町立くじらの博物館",
@@ -2465,7 +2484,8 @@
    "fee": "600円",
    "child": "200円",
    "closed": "年中無休",
-   "comment": "大学研究所の水族館！白浜の海の生きもの専門"
+   "comment": "大学研究所の水族館！白浜の海の生きもの専門",
+   "photo": "assets/photo_kyodai_shirahama.jpg"
   },
   {
    "name": "すさみ町立エビとカニの水族館",
@@ -2476,7 +2496,8 @@
    "fee": "800円【要確認】",
    "child": "500円【要確認】",
    "closed": "年中無休",
-   "comment": "世界で唯一の甲殻類専門水族館！"
+   "comment": "世界で唯一の甲殻類専門水族館！",
+   "photo": "assets/photo_susami.jpg"
   },
   {
    "name": "城崎マリンワールド",
@@ -2491,7 +2512,8 @@
    "tags": [
     "dolphin",
     "kids"
-   ]
+   ],
+   "photo": "assets/photo_kinosaki.jpg"
   },
   {
    "name": "みなとやま水族館",
@@ -2502,7 +2524,8 @@
    "fee": "1,200円【要確認】",
    "child": "600円【要確認】",
    "closed": "年中無休",
-   "comment": "廃校になった小学校が水族館に！"
+   "comment": "廃校になった小学校が水族館に！",
+   "photo": "assets/photo_minatoyama.jpg"
   },
   {
    "name": "淡路じゃのひれドルフィンファーム",
@@ -2540,7 +2563,8 @@
     "dolphin",
     "kids"
    ],
-   "only": "シロイルカ"
+   "only": "シロイルカ",
+   "photo": "assets/photo_aquas.jpg"
   },
   {
    "name": "渋川マリン水族館",
@@ -2628,7 +2652,8 @@
    "fee": "休館中",
    "child": "-",
    "closed": "リニューアルのため休館中（2027年春再開予定）",
-   "comment": "屋島の山上の水族館。2025年4月から改装休館中、2027年春にリニューアルオープン予定！今から楽しみ🐟"
+   "comment": "屋島の山上の水族館。2025年4月から改装休館中、2027年春にリニューアルオープン予定！今から楽しみ🐟",
+   "photo": "assets/photo_yashima.jpg"
   },
   {
    "name": "日本ドルフィンセンター",
@@ -2775,7 +2800,8 @@
    "fee": "500円",
    "child": "300円",
    "closed": "第2火曜・年末年始",
-   "comment": "道の駅やよいの淡水魚水族館"
+   "comment": "道の駅やよいの淡水魚水族館",
+   "photo": "assets/photo_bansho.jpg"
   },
   {
    "name": "わくわく海中水族館シードーナツ",
@@ -2860,7 +2886,8 @@
    "fee": "500円",
    "child": "300円",
    "closed": "【要確認】",
-   "comment": "奄美の海とウミガメに会える展示館"
+   "comment": "奄美の海とウミガメに会える展示館",
+   "photo": "assets/photo_amami.jpg"
   },
   {
    "name": "黒島研究所",
@@ -2914,7 +2941,8 @@
    "tags": [
     "kids",
     "rain"
-   ]
+   ],
+   "photo": "assets/photo_aquatojo.jpg"
   },
   {
    "name": "市場水族館（新屋島水族館 仮設）",
