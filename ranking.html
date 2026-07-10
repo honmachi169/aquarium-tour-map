@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>かわちゃんの水族館ランキング | 会いに行こう！全国水族館ツアーMAP</title>
+<meta name="description" content="100館以上まわった さかなのおにいさん かわちゃんが選ぶ、カテゴリー別水族館ベスト5！サメ・ショー・深海・家族連れ・デートなどテーマ別に理由付きで紹介🐟">
+<link rel="canonical" href="https://aquarium.yasasea.com/ranking.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="かわちゃんの水族館ランキング">
+<meta property="og:description" content="100館以上まわったかわちゃんが選ぶ、カテゴリー別水族館ベスト5！🏆">
+<meta property="og:image" content="https://aquarium.yasasea.com/assets/kawachan_web.png">
+<meta property="og:url" content="https://aquarium.yasasea.com/ranking.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<style>
+  :root { --sea:#0096c7; --sea-deep:#023e8a; --sky:#caf0f8; --sand:#fff9ec; --coral:#ff6b6b; --sun:#ffd166; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif; background:var(--sand); color:#234; }
+  header { background:linear-gradient(180deg,#48cae4 0%,#0096c7 60%,#0077b6 100%); color:#fff; text-align:center; padding:26px 16px 30px; position:relative; overflow:hidden; }
+  header a.home { color:#fff; text-decoration:none; font-weight:bold; font-size:.88rem; position:absolute; top:14px; left:16px; z-index:5; }
+  header h1 { font-size:clamp(1.4rem,4.5vw,2.1rem); text-shadow:0 2px 6px rgba(2,62,138,.4); margin-top:14px; }
+  header p.sub { font-size:.9rem; color:#e0f7ff; margin-top:8px; line-height:1.6; }
+  .bubbles span { position:absolute; bottom:-40px; border-radius:50%; background:rgba(255,255,255,.18); animation:rise linear infinite; }
+  @keyframes rise { to { transform:translateY(-120vh); } }
+  main { max-width:760px; margin:0 auto; padding:22px 16px 50px; }
+  .controls { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:18px; }
+  .controls button { border:2px solid var(--sea); background:#fff; color:var(--sea); border-radius:999px; padding:6px 16px; cursor:pointer; font-size:.85rem; font-family:inherit; font-weight:bold; }
+  .controls button.active { background:var(--sea); color:#fff; }
+  .rank-list { display:flex; flex-direction:column; gap:10px; }
+  .rank-item { display:flex; gap:12px; align-items:flex-start; background:#fff; border-radius:16px; padding:14px 16px; box-shadow:0 3px 10px rgba(2,62,138,.1); text-decoration:none; color:#234; transition:transform .15s; border:2px solid transparent; }
+  .rank-item:hover { transform:translateY(-3px); border-color:var(--sky); }
+  .rank-item .medal { font-size:1.5rem; flex:none; line-height:1.2; }
+  .rank-item.first { border:2px solid var(--sun); background:linear-gradient(160deg,#fffbea 0%,#fff 55%); }
+  .rank-item .r-name { font-weight:bold; color:var(--sea-deep); font-size:1rem; }
+  .rank-item .r-pref { font-size:.72rem; color:#fff; background:var(--sea); border-radius:999px; padding:1px 9px; margin-left:6px; vertical-align:middle; white-space:nowrap; }
+  .rank-item .r-reason { font-size:.84rem; color:#456; line-height:1.6; margin-top:3px; }
+  .note { text-align:center; font-size:.78rem; color:#89a; margin-top:22px; line-height:1.7; }
+  .back { display:block; text-align:center; margin-top:20px; color:var(--sea); font-weight:bold; text-decoration:none; }
+</style>
+</head>
+<body>
+<header>
+  <div class="bubbles" id="bubbles"></div>
+  <a class="home" href="./">← MAPにもどる</a>
+  <h1>🏆 かわちゃんの水族館ランキング</h1>
+  <p class="sub">100館以上まわった さかなのおにいさんが選ぶ<br>カテゴリー別ベスト5！</p>
+</header>
+<main>
+  <div class="controls" id="rankBtns"></div>
+  <div class="rank-list" id="rankList"></div>
+  <p class="note">※ランキングはかわちゃんの独断と偏見（愛）です🐟<br>どの水族館もそれぞれの魅力があるよ！</p>
+  <a class="back" href="./">← MAPにもどる</a>
+</main>
+<script>
+fetch('data.json').then(r=>r.json()).then(data=>{
+  const ranks = data.rankings || [];
+  const byNo = {};
+  (data.aquariums||[]).forEach(a=>{ if(a.no) byNo[a.no] = a; });
+  const btnWrap = document.getElementById('rankBtns');
+  const list = document.getElementById('rankList');
+  const MEDALS = ['🥇','🥈','🥉','4️⃣','5️⃣'];
+  function show(i){
+    document.querySelectorAll('#rankBtns button').forEach((b,j)=>b.classList.toggle('active', j===i));
+    list.innerHTML = ranks[i].items.map((it,idx)=>{
+      const a = byNo[it.no];
+      if(!a) return '';
+      const slug = String(it.no).padStart(3,'0');
+      return `<a class="rank-item${idx===0?' first':''}" href="spot/${slug}.html">
+        <span class="medal">${MEDALS[idx]||''}</span>
+        <span>
+          <span class="r-name">${a.name}</span><span class="r-pref">${a.pref}</span>
+          <div class="r-reason">${it.reason}</div>
+        </span>
+      </a>`;
+    }).join('');
+  }
+  ranks.forEach((r,i)=>{
+    const b = document.createElement('button');
+    b.textContent = r.title;
+    b.onclick = ()=>show(i);
+    btnWrap.appendChild(b);
+  });
+  if(ranks.length) show(0);
+});
+// あわ演出
+const bw = document.getElementById('bubbles');
+for(let i=0;i<10;i++){
+  const s = document.createElement('span');
+  const size = 8+Math.random()*20;
+  s.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*8}s`;
+  bw.appendChild(s);
+}
+</script>
+</body>
+</html>

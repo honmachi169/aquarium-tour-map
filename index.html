@@ -185,18 +185,7 @@
   .card .ytc .cn { color:var(--sea); font-weight:bold; margin-right:4px; }
   .badge-closed { color:var(--coral); font-size:.75rem; font-weight:bold; }
   /* ===== YouTube登録CTA ===== */
-  /* ===== ランキング ===== */
-  .ranking { max-width:760px; margin:34px auto 40px; padding:0 16px; }
-  .ranking h2 { color:var(--sea-deep); font-size:1.3rem; text-align:center; margin-bottom:4px; }
-  .ranking-sub { text-align:center; font-size:.85rem; color:#567; margin-bottom:14px; }
-  .rank-list { display:flex; flex-direction:column; gap:10px; }
-  .rank-item { display:flex; gap:12px; align-items:flex-start; background:#fff; border-radius:16px; padding:14px 16px; box-shadow:0 3px 10px rgba(2,62,138,.1); text-decoration:none; color:#234; transition:transform .15s; border:2px solid transparent; }
-  .rank-item:hover { transform:translateY(-3px); border-color:var(--sky); }
-  .rank-item .medal { font-size:1.5rem; flex:none; line-height:1.2; }
-  .rank-item.first { border:2px solid var(--sun); background:linear-gradient(160deg,#fffbea 0%,#fff 55%); }
-  .rank-item .r-name { font-weight:bold; color:var(--sea-deep); font-size:1rem; }
-  .rank-item .r-pref { font-size:.72rem; color:#fff; background:var(--sea); border-radius:999px; padding:1px 9px; margin-left:6px; vertical-align:middle; }
-  .rank-item .r-reason { font-size:.84rem; color:#456; line-height:1.6; margin-top:3px; }
+  .rankbtn { border:2px solid #e0a800 !important; background:linear-gradient(90deg,#ffd166,#ffb703) !important; color:#7a4f00 !important; text-decoration:none; display:inline-flex; align-items:center; border-radius:999px; padding:6px 16px; font-size:.85rem; font-weight:bold; font-family:inherit; }
   .yt-cta { background:linear-gradient(135deg,#023e8a,#0096c7); padding:28px 16px; text-align:center; }
   .yt-cta h2 { color:#fff; font-size:1.15rem; margin-bottom:6px; }
   .yt-cta p { color:#caf0f8; font-size:.88rem; margin-bottom:16px; line-height:1.6; }
@@ -288,14 +277,6 @@
 <div class="controls" id="regionBtns"></div>
 <div class="controls" id="tagBtns"></div>
 <div class="grid" id="cards"></div>
-
-<!-- カテゴリー別ランキング -->
-<section class="ranking">
-  <h2>🏆 かわちゃんの水族館ランキング</h2>
-  <p class="ranking-sub">100館以上まわったかわちゃんが選ぶ、カテゴリー別ベスト5！</p>
-  <div class="controls" id="rankBtns" style="justify-content:center"></div>
-  <div class="rank-list" id="rankList"></div>
-</section>
 
 <!-- YouTube登録CTA -->
 <section class="yt-cta">
@@ -464,41 +445,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   setTimeout(()=>{ document.getElementById('barfill').style.width = (visited/data.goal*100)+'%'; }, 300);
   document.getElementById('updated').textContent = '最終更新：'+data.updated;
 
-  // カテゴリー別ランキング
-  (function(){
-    const ranks = data.rankings || [];
-    if(!ranks.length) return;
-    const byNo = {};
-    aqs.forEach(a=>{ if(a.no) byNo[a.no] = a; });
-    const btnWrap = document.getElementById('rankBtns');
-    const list = document.getElementById('rankList');
-    const MEDALS = ['🥇','🥈','🥉','4️⃣','5️⃣'];
-    let cur = 0;
-    function show(i){
-      cur = i;
-      document.querySelectorAll('#rankBtns button').forEach((b,j)=>b.classList.toggle('active', j===i));
-      list.innerHTML = ranks[i].items.map((it,idx)=>{
-        const a = byNo[it.no];
-        if(!a) return '';
-        const slug = String(it.no).padStart(3,'0');
-        return `<a class="rank-item${idx===0?' first':''}" href="spot/${slug}.html">
-          <span class="medal">${MEDALS[idx]||''}</span>
-          <span>
-            <span class="r-name">${a.name}</span><span class="r-pref">${a.pref}</span>
-            <div class="r-reason">${it.reason}</div>
-          </span>
-        </a>`;
-      }).join('');
-    }
-    ranks.forEach((r,i)=>{
-      const b = document.createElement('button');
-      b.textContent = r.title;
-      b.onclick = ()=>show(i);
-      btnWrap.appendChild(b);
-    });
-    show(0);
-  })();
-
   const map = L.map('map', {
     minZoom: 5,
     maxBounds: [[15.0,116.0],[58.0,158.0]],
@@ -661,6 +607,11 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     };
     tagWrap.appendChild(b);
   });
+  const rankLink = document.createElement('a');
+  rankLink.className = 'rankbtn';
+  rankLink.href = 'ranking.html';
+  rankLink.innerHTML = '<span class="pc-only">🏆 かわちゃんのランキング</span><span class="sp-only">🏆 ランキング</span>';
+  tagWrap.appendChild(rankLink);
 
   function applyMapFilter(){
     allMarkers.forEach(({m,tags,name})=>{
