@@ -146,14 +146,16 @@
     "kids",
     "penguin",
     "summer",
-    "baby"
+    "baby",
+    "beluga"
    ],
    "sns": {
     "instagram": "https://www.instagram.com/port_of_nagoya_public_aquarium/"
    },
    "animals": [
     "シャチ",
-    "エンペラーペンギン"
+    "エンペラーペンギン",
+    "ベルーガ"
    ],
    "gift": "シャチのぬいぐるみ",
    "parking": "ガーデンふ頭駐車場（徒歩約5分・有料）",
@@ -237,14 +239,16 @@
     "dolphin",
     "kids",
     "summer",
-    "baby"
+    "baby",
+    "beluga"
    ],
    "sns": {
     "x": "https://x.com/_seaparadise_",
     "instagram": "https://www.instagram.com/seaparadise_official/"
    },
    "animals": [
-    "シロワニ"
+    "シロワニ",
+    "ベルーガ"
    ],
    "summer": "花火ショー（7〜8月開催）＆自由研究に役立つ体験プログラム",
    "stroller": "貸し出しあり・館内持ち込みOK",
@@ -376,7 +380,8 @@
    "tags": [
     "dolphin",
     "kids",
-    "summer"
+    "summer",
+    "beluga"
    ],
    "sns": {
     "x": "https://x.com/kamoseaOfficial",
@@ -384,7 +389,8 @@
    },
    "animals": [
     "シャチ",
-    "マンボウ"
+    "マンボウ",
+    "ベルーガ"
    ],
    "gift": "シャチのぬいぐるみ",
    "summer": "シャチのずぶ濡れフェス＆夜の水族館探検「ナイトアドベンチャー」",
