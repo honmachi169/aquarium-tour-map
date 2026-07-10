@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # data.json から水族館ごとの個別ページ(spot/*.html)とsitemap.xmlを生成する
 # 使い方: python3 build_pages.py  → git add spot sitemap.xml → commit/push
-import json, os, html, re, unicodedata
+import json, os, html, re, unicodedata, urllib.parse
 
 SITE = "https://aquarium.yasasea.com"
 COMMENT_API = "https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV1YlrB_UPx2_c3hMS9fG6YTunOrrOKROeHdHJg2QzXj/exec"
@@ -32,8 +32,11 @@ E = html.escape
 urls = []
 for slug, a, intro in entries:
     v = (a.get("videos") or [None])[0]
-    thumb = f"https://i.ytimg.com/vi/{v['id']}/hqdefault.jpg" if v else ""
-    ogimg = f"https://i.ytimg.com/vi/{v['id']}/maxresdefault.jpg" if v else f"{SITE}/assets/kawachan_web.png"
+    photo = a.get("photo") or ""
+    photo_path = "/".join(urllib.parse.quote(seg) for seg in photo.split("/")) if photo else ""
+    photo_url = photo_path if photo_path.startswith("http") else f"{SITE}/{photo_path}" if photo_path else ""
+    thumb = f"https://i.ytimg.com/vi/{v['id']}/hqdefault.jpg" if v else photo_url
+    ogimg = f"https://i.ytimg.com/vi/{v['id']}/maxresdefault.jpg" if v else (photo_url or f"{SITE}/assets/kawachan_web.png")
     desc_parts = []
     if a.get("highlight"): desc_parts.append(a["highlight"])
     if a.get("comment"): desc_parts.append(a["comment"])
