@@ -58,6 +58,7 @@ for slug, a, intro in entries:
     if a.get("food_bring"): info += f"<tr><th>🧺 飲食物持込</th><td>{E(a['food_bring'])}</td></tr>"
     if a.get("restaurant"): info += f"<tr><th>🍽 フード</th><td>{E(a['restaurant'])}</td></tr>"
     if a.get("gift"): info += f"<tr><th>🎁 おみやげ</th><td>{E(a['gift'])}</td></tr>"
+    if a.get("goshuin"): info += f"<tr><th>🐟 魚朱印</th><td>{E(a['goshuin'])}</td></tr>"
 
     hitokoto = ""
     if a.get("hitokoto"):
