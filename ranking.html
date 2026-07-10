@@ -66,6 +66,11 @@
   #photo-form button { background:var(--sea); color:#fff; border:none; border-radius:999px; padding:10px; font-size:.9rem; font-weight:bold; cursor:pointer; font-family:inherit; }
   #p-status { font-size:.8rem; color:var(--sea); min-height:1.2em; }
   .fanpost-note { font-size:.72rem; color:#9ab; line-height:1.6; }
+  .rules-box { background:#f2f9fd; border:2px solid var(--sky); border-radius:12px; padding:12px 14px; font-size:.78rem; color:#345; }
+  .rules-box b { color:var(--sea-deep); }
+  .rules-box ul { margin:6px 0 0 18px; display:flex; flex-direction:column; gap:4px; line-height:1.55; }
+  .agree-label { display:flex; align-items:center; gap:8px; font-size:.85rem; font-weight:bold; color:var(--sea-deep); cursor:pointer; }
+  .agree-label input { width:18px; height:18px; accent-color:var(--sea); }
 </style>
 </head>
 <body>
@@ -91,9 +96,20 @@
       <textarea id="p-msg" placeholder="おすすめポイント！（80文字以内）" maxlength="80" rows="3" required></textarea>
       <label class="file-label">📷 写真を選ぶ<input type="file" id="p-img" accept="image/*" required></label>
       <img id="p-preview" style="display:none">
+      <div class="rules-box">
+        <b>📋 投稿のおやくそく</b>
+        <ul>
+          <li>写真は<b>自分で撮影したもの</b>だけ送ってね（ネットで拾った画像・他の人の写真はNG）</li>
+          <li><b>人の顔が写っている写真</b>は送らないでね（肖像権のため）</li>
+          <li>水族館で<b>撮影OKの場所</b>で撮ったものだけにしてね</li>
+          <li>情報は自分が実際に見た・体験した<b>本当のこと</b>を書いてね</li>
+          <li>投稿はチームで確認してから掲載します。ルールに合わないものは掲載できません</li>
+          <li>掲載された写真・コメントは、このサイトやかわちゃんのSNS・動画で紹介させてもらうことがあります</li>
+        </ul>
+      </div>
+      <label class="agree-label"><input type="checkbox" id="p-agree" required> おやくそくを読んで同意しました</label>
       <button type="submit">送信する 🐟</button>
       <p id="p-status"></p>
-      <p class="fanpost-note">※投稿された写真・コメントはチームで確認後に掲載されます。水族館で撮影がOKな場所で撮った、自分で撮影した写真だけ送ってね</p>
     </form>
   </section>
 
