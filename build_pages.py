@@ -50,11 +50,14 @@ for slug, a, intro in entries:
     if a.get("fee"): info += f"<tr><th>💰 大人</th><td>{E(a['fee'])}</td></tr>"
     if a.get("child"): info += f"<tr><th>🧒 子ども</th><td>{E(a['child'])}</td></tr>"
     if a.get("closed"): info += f"<tr><th>🗓 休館日</th><td>{E(a['closed'])}</td></tr>"
-    if a.get("gift"): info += f"<tr><th>🎁 おみやげ</th><td>{E(a['gift'])}</td></tr>"
     if a.get("access"): info += f"<tr><th>🚃 アクセス</th><td>{E(a['access'])}</td></tr>"
     if a.get("stroller"): info += f"<tr><th>🛻 ベビーカー</th><td>{E(a['stroller'])}</td></tr>"
     if a.get("nursing"): info += f"<tr><th>🍼 授乳室</th><td>{E(a['nursing'])}</td></tr>"
     if a.get("locker"): info += f"<tr><th>🔒 ロッカー</th><td>{E(a['locker'])}</td></tr>"
+    if a.get("parking"): info += f"<tr><th>🚗 駐車場</th><td>{E(a['parking'])}</td></tr>"
+    if a.get("food_bring"): info += f"<tr><th>🧺 飲食物持込</th><td>{E(a['food_bring'])}</td></tr>"
+    if a.get("restaurant"): info += f"<tr><th>🍽 フード</th><td>{E(a['restaurant'])}</td></tr>"
+    if a.get("gift"): info += f"<tr><th>🎁 おみやげ</th><td>{E(a['gift'])}</td></tr>"
 
     hitokoto = ""
     if a.get("hitokoto"):
