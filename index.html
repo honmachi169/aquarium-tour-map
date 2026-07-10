@@ -154,6 +154,7 @@
   .card .tab { font-size:.78rem; font-weight:bold; text-decoration:none; border-radius:999px; padding:5px 12px; }
   .card .tab.yt { background:var(--coral); color:#fff; }
   .card .tab.hp { background:var(--sky); color:var(--sea-deep); }
+  .card .tab.detail { background:var(--sea-deep); color:#fff; }
   .card.upcoming { opacity:.7; border:3px dashed var(--sea); }
   .card.summer-pick { border:3px solid #ffb703; background:linear-gradient(160deg,#fffbea 0%,#fff 60%); }
   .card.summer-pick:hover { border-color:#fb8500; }
@@ -629,7 +630,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
             ${a.url?`<a class="tab hp" href="${a.url}" target="_blank">公式サイト</a>`:''}
             ${a.sns&&a.sns.x?`<a class="tab hp" href="${a.sns.x}" target="_blank">𝕏</a>`:''}
             ${a.sns&&a.sns.instagram?`<a class="tab hp" href="${a.sns.instagram}" target="_blank">📷 Insta</a>`:''}
-            <a class="tab hp" href="spot/${String(a.no).padStart(3,'0')}.html">📖 くわしく</a>
+            <a class="tab detail" href="spot/${String(a.no).padStart(3,'0')}.html">📖 くわしく</a>
             ${visitBtn(a)}
             ${v?`<button class="cbtn" data-vid="${v.id}">💬 みんなの感想</button>`:''}
           </div>
