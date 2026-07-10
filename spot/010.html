@@ -124,10 +124,17 @@ async function loadYtComments() {
   const el = document.getElementById("ytc-list");
   const NG = ["死ね","殺す","バカ","馬鹿","アホ","キモ","反対","抗議","虐待","動物愛護","愛護団体","保護団体","アニマルライツ","ヴィーガン","監禁","搾取","奴隷","解放しろ","閉鎖しろ","追い込み漁","boycott","ボイコット","署名","http://","https://"];
   try {
-    const url = "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=" + YT_VID + "&maxResults=5&order=relevance&key=" + YT_API_KEY;
+    const url = "https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=" + YT_VID + "&maxResults=30&order=relevance&key=" + YT_API_KEY;
     const res = await fetch(url);
     const d = await res.json();
-    const items = (d.items||[]).map(i=>i.snippet.topLevelComment.snippet).filter(c=>!NG.some(w=>(c.textDisplay+c.authorDisplayName).toLowerCase().includes(w.toLowerCase())));
+    const POS = ['かわいい','可愛い','感動','最高','好き','癒','楽しい','たのしい','きれい','綺麗','面白','おもしろ','行きたい','よかった','良かった','うれしい','嬉しい','素敵','すごい','凄い','ありがとう','大好き','美しい','幸せ','素晴らしい','驚','ワクワク','わくわく'];
+    const posScore = t => POS.reduce((n,w)=> n + (t.includes(w)?1:0), 0);
+    const clean = (d.items||[]).map(i=>i.snippet.topLevelComment.snippet)
+      .filter(c=>!NG.some(w=>(c.textDisplay+c.authorDisplayName).toLowerCase().includes(w.toLowerCase())))
+      .map(c=>({...c, _score: posScore(c.textDisplay) * 10 + (c.likeCount||0)}))
+      .sort((a,b)=> b._score - a._score);
+    const positive = clean.filter(c=>c._score > 0);
+    const items = positive.length ? positive : clean;
     if (!items.length) { el.innerHTML = '<p class="empty">コメントなし</p>'; return; }
     el.innerHTML = items.slice(0,3).map(c=>'<div class="c-item"><span class="c-name">👤 '+c.authorDisplayName+'</span><span class="c-msg">'+c.textDisplay.slice(0,120)+'</span></div>').join('');
   } catch(e) { el.innerHTML = '<p class="empty">読み込みエラー</p>'; }
