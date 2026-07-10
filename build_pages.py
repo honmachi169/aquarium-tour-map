@@ -64,6 +64,16 @@ for slug, a, intro in entries:
     if a.get("hitokoto"):
         hitokoto = f'<div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div>{E(a["hitokoto"])}</div>'
 
+    RATING_LABEL = {"kuse":"🌀 クセつよポイント","suzu":"❄️ 涼しさ","kids":"👶 子ども向け度","hakuryoku":"💥 迫力","cospa":"💰 コスパ"}
+    ratings = a.get("ratings") or {}
+    rating_rows = ""
+    for key, label in RATING_LABEL.items():
+        if key in ratings:
+            n = max(0, min(5, int(ratings[key])))
+            stars = "★"*n + "☆"*(5-n)
+            rating_rows += f'<div class="rate-row"><span class="rate-label">{label}</span><span class="rate-stars">{stars}</span></div>'
+    ratings_box = f'<div class="ratings-box"><div class="hk-label">🐟 かわちゃん的 5段階評価</div>{rating_rows}</div>' if rating_rows else ""
+
     summer = f'<div class="summer">☀️ <b>夏休み情報：</b>{E(a["summer"])}</div>' if a.get("summer") else ""
     videos = "".join(
         f'<div class="video"><iframe loading="lazy" src="https://www.youtube.com/embed/{vv["id"]}" '
@@ -137,6 +147,11 @@ loadYtComments();''' if v else ''
   .chip.tag {{ background:#fdf1e3; color:#c9660a; border-color:#f4a261; }}
   .hitokoto {{ background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; position:relative; }}
   .hitokoto .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:4px; }}
+  .ratings-box {{ background:#fff9ec; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; }}
+  .ratings-box .hk-label {{ font-size:.8rem; font-weight:bold; color:#a15c00; margin-bottom:8px; }}
+  .rate-row {{ display:flex; justify-content:space-between; align-items:center; padding:4px 0; font-size:.88rem; }}
+  .rate-label {{ color:#456; }}
+  .rate-stars {{ color:#ffb703; letter-spacing:1px; font-size:1rem; }}
   .summer {{ font-size:.9rem; color:#a15c00; background:linear-gradient(90deg,#fff3cd,#ffe9b8); border:2px solid var(--sun); border-radius:12px; padding:10px 14px; margin:12px 0; line-height:1.6; }}
   table {{ border-collapse:collapse; width:100%; margin:12px 0; background:#f0f8fc; border-radius:12px; overflow:hidden; }}
   th,td {{ text-align:left; padding:9px 14px; font-size:.9rem; border-bottom:2px solid var(--sand); }}
@@ -183,6 +198,7 @@ loadYtComments();''' if v else ''
   <p class="hl">{E(a.get('highlight') or a.get('comment') or '')}</p>
   <div class="chips">{chips}{tagchips}</div>
   {hitokoto}
+  {ratings_box}
   {summer}
   <table>{info}</table>
   <p class="note">※最新の料金・営業情報は公式サイトでチェックしてね</p>

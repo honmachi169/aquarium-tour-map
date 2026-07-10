@@ -27,7 +27,10 @@
   @keyframes rise { to { transform:translateY(-120vh); } }
   h1 { font-size:clamp(1.7rem,5.5vw,2.7rem); line-height:1.25; text-shadow:0 2px 6px rgba(2,62,138,.4); position:relative; }
   header .sub { opacity:.95; font-size:.9rem; margin-top:6px; position:relative; }
-  .hero { max-width:540px; width:76%; margin:10px auto -6px; display:block; filter:drop-shadow(0 6px 12px rgba(2,62,138,.35)); position:relative; }
+  .hero { max-width:540px; width:76%; margin:10px auto -6px; display:block; filter:drop-shadow(0 6px 12px rgba(2,62,138,.35)); position:relative; cursor:pointer; transition:transform .35s ease; }
+  .hero:hover { transform:scale(1.04); }
+  .hero.spin { animation:heroSpin .8s ease-in-out; }
+  @keyframes heroSpin { 0%{transform:rotate(0deg) scale(1);} 50%{transform:rotate(180deg) scale(1.08);} 100%{transform:rotate(360deg) scale(1);} }
   .counter { max-width:520px; margin:0 auto; padding-bottom:8px; position:relative; }
   .counter .num { font-size:2.1rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 4px rgba(2,62,138,.5); }
   .counter .num small { font-size:1rem; font-weight:normal; color:#fff; }
@@ -98,10 +101,13 @@
     .pc-only { display:none; }
     .sp-only { display:inline; }
     .ticker-label { display:none; }
-    .ticker-post { order:-1; }
-    #tagBtns { flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; padding-bottom:6px; scrollbar-width:none; }
-    #tagBtns::-webkit-scrollbar { display:none; }
-    #tagBtns button, #tagBtns a { flex:none; white-space:nowrap; }
+    .ticker-post { flex:none; padding:0 12px; }
+    .legend { gap:8px; font-size:.72rem; margin:-4px auto 8px; flex-wrap:nowrap; overflow-x:auto; justify-content:center; }
+    .tag-wrap-outer { max-width:1100px; margin:0 auto 8px; padding:0 16px; }
+    #tagBtns { max-height:38px; overflow:hidden; flex-wrap:wrap; margin-bottom:0; transition:max-height .25s ease; }
+    #tagBtns.expanded { max-height:400px; }
+    .tag-toggle { display:block; margin:6px auto 0; background:none; border:none; color:var(--sea); font-size:.78rem; font-weight:bold; font-family:inherit; cursor:pointer; padding:4px; }
+    #fixedRow { margin-top:2px; }
     .controls button { padding:6px 12px; font-size:.8rem; }
     #map { height:480px; margin:14px 10px; }
     .grid { padding:0 10px; gap:12px; }
@@ -139,8 +145,8 @@
   @keyframes sway { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-14px) rotate(4deg)} }
   @media (max-width:640px){
     .deco { display:none; }
-    .deco.p1 { display:block; width:26vw; top:auto; bottom:120px; left:2%; }
-    .deco.p5 { display:block; width:26vw; top:auto; bottom:140px; right:2%; }
+    .deco.p1 { display:block; width:24vw; top:auto; bottom:250px; left:2%; }
+    .deco.p5 { display:block; width:24vw; top:auto; bottom:270px; right:2%; }
   }
   .legend { max-width:1100px; margin:-8px auto 10px; padding:0 20px; font-size:.82rem; color:#567; display:flex; gap:18px; flex-wrap:wrap; }
   footer img.fishline { height:44px; margin:0 8px; vertical-align:middle; }
@@ -229,13 +235,15 @@
   <img class="deco p8" src="assets/punio_gyoran.png" alt="">
   <h1>会いに行こう！<br>全国水族館ツアーMAP</h1>
   <p class="sub">さかなのおにいさん かわちゃんと巡る<br class="sp-only">　目指せ100館！全国水族館ツアー</p>
-  <img class="hero" src="assets/kawachan_web.png" alt="さかなのおにいさん かわちゃん">
+  <a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener" title="タップしてチャンネル登録🐟">
+    <img class="hero" id="heroImg" src="assets/kawachan_web.png" alt="さかなのおにいさん かわちゃん（タップでチャンネル登録）">
+  </a>
   <div class="counter">
     <div class="num"><small class="pc-only">YouTubeで </small><span id="visited">0</span><small> / <span id="goal">100</span>館 制覇中！</small></div>
     <div class="bar"><div id="barfill" style="width:0%"></div></div>
     <div class="mycount">あなたの制覇：<b id="myvisited">0</b> 館 🏆（⬜を押してチェック！）
       <button id="shareBtn" class="sharebtn">🕊 制覇じまんをシェア</button></div>
-    <a class="counter-sub-btn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
+    <a class="counter-sub-btn pc-only" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
   </div>
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,45 350,-5 600,20 C850,45 1050,-5 1200,20 L1200,40 L0,40 Z" fill="#023e8a"/></svg>
 </header>
@@ -243,7 +251,7 @@
 <div class="ticker-wrap">
   <div class="ticker-label">みんなの声</div>
   <div class="ticker"><div class="ticker-inner" id="tickerInner"></div></div>
-  <button class="ticker-post" onclick="document.getElementById('cmodal').classList.add('open')"><span class="pc-only">📮 コメントを送る</span><span class="sp-only">📮 コメント</span></button>
+  <button class="ticker-post" onclick="document.getElementById('cmodal').classList.add('open')"><span class="pc-only">📮 コメントを送る</span><span class="sp-only">📮</span></button>
 </div>
 
 <div class="cmodal" id="cmodal">
@@ -261,19 +269,26 @@
 
 <div id="map"></div>
 <div class="legend">
-  <span>🐟 紹介済み（クリックで動画へ！）</span>
-  <span>📍 動画近日公開</span>
-  <span>⚪ これから紹介したい水族館</span>
+  <span class="pc-only">🐟 紹介済み（クリックで動画へ！）</span>
+  <span class="pc-only">📍 動画近日公開</span>
+  <span class="pc-only">⚪ これから紹介したい水族館</span>
+  <span class="sp-only">🐟紹介済み</span>
+  <span class="sp-only">📍近日公開</span>
+  <span class="sp-only">⚪これから紹介</span>
 </div>
 
 <div class="controls" id="regionBtns"></div>
-<div class="controls" id="tagBtns"></div>
+<div class="tag-wrap-outer">
+  <div class="controls" id="tagBtns"></div>
+  <button class="tag-toggle sp-only" id="tagToggle">すべて表示 ▾</button>
+</div>
+<div class="controls" id="fixedRow"></div>
 <div class="grid" id="cards"></div>
 
 <!-- YouTube登録CTA -->
 <section class="yt-cta">
-  <h2>🐟 このサイトは「さかなのおにいさん かわちゃんねる」が作る水族館MAPです</h2>
-  <p>全国の水族館を実際に訪れて動画で紹介中！新しい動画を見逃さないようにチャンネル登録してね🎬</p>
+  <h2>🐟 さかなのおにいさん かわちゃんねるとは？</h2>
+  <p>全国の水族館にご協力いただいて紹介中！<br>新しい動画を見逃さないように登録してね🎬</p>
   <a class="yt-cta-btn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 17" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 2.7S23.2.9 22.4.2C21.4-.8 20.3-.8 19.8-.7 16.5 0 12 0 12 0S7.5 0 4.2-.7C3.7-.8 2.6-.8 1.6.2.8.9.5 2.7.5 2.7S.2 4.8.2 6.9v1.9C.2 11 .5 13 .5 13s.3 1.8 1.1 2.5c1 1 2.3.97 2.9 1.07C6.4 16.8 12 17 12 17s4.5 0 7.8-.72c.5-.1 1.6-.1 2.6-1.08.8-.7 1.1-2.5 1.1-2.5s.3-2.1.3-4.2V6.9c0-2.1-.3-4.2-.3-4.2zM9.7 11.5V4.8l7 3.4-7 3.3z"/></svg>
     チャンネル登録する
@@ -305,7 +320,7 @@
         <div class="about-book-text">
           <b>📚 著書「全国クセすご水族館図鑑」（中央公論新社）など</b><br>
           全国の水族館の愛すべき魅力をイラストと4コマまんがで紹介！ほかにも絵本や図鑑など著書多数🐟<br>
-          <a href="https://sakana-bro.com/goods/" target="_blank" rel="noopener" style="color:var(--sea);font-weight:bold;">書籍いちらんはこちら →</a>
+          <a href="https://sakana-bro.com/goods/" target="_blank" rel="noopener" style="color:var(--sea);font-weight:bold;">書籍一覧はこちら →</a>
         </div>
       </div>
       <p class="profile">💬 モットー：「子どもがさかなを好きになれば　海は豊かになる」</p>
@@ -314,7 +329,7 @@
         <a href="https://sakana-bro.com/" target="_blank" rel="noopener">🌊 公式サイト</a>
         <a class="line" href="https://lin.ee/qMPcnPq" target="_blank" rel="noopener">💬 公式LINE</a>
         <a href="https://www.instagram.com/kawayanfishing/" target="_blank" rel="noopener">📷 Instagram</a>
-        <a href="https://twitter.com/sakana_bro" target="_blank" rel="noopener">𝕏 X</a>
+        <a href="https://twitter.com/sakana_bro" target="_blank" rel="noopener">𝕏</a>
       </div>
     </div>
   </div>
@@ -398,6 +413,17 @@ async function sendComment(){
 }
 loadComments();
 setInterval(loadComments, 60000);
+
+// かわちゃんイラスト くるっと回転
+const heroImg = document.getElementById('heroImg');
+if(heroImg){
+  heroImg.addEventListener('mouseenter', ()=>{
+    heroImg.classList.remove('spin'); void heroImg.offsetWidth; heroImg.classList.add('spin');
+  });
+  heroImg.addEventListener('touchstart', ()=>{
+    heroImg.classList.remove('spin'); void heroImg.offsetWidth; heroImg.classList.add('spin');
+  }, {passive:true});
+}
 
 // あわ演出
 const bw = document.getElementById('bubbles');
@@ -573,6 +599,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
 
   const btnWrap = document.getElementById('regionBtns');
   const tagWrap = document.getElementById('tagBtns');
+  const fixedRow = document.getElementById('fixedRow');
   const cards = document.getElementById('cards');
   let current = 'すべて';
   let currentTag = null;
@@ -583,31 +610,54 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     b.onclick = ()=>{ current=r; document.querySelectorAll('#regionBtns button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(); };
     btnWrap.appendChild(b);
   });
-  Object.entries({...TAGS, "__visited":["✅ キミが訪れた水族館","✅ 訪れた水族館"]}).forEach(([key,label])=>{
+  function clearTagActive(){
+    document.querySelectorAll('#tagBtns button, #fixedRow button').forEach(x=>x.classList.remove('active'));
+  }
+  Object.entries(TAGS).forEach(([key,label])=>{
     const b = document.createElement('button');
-    if(key==='__visited') b.classList.add('visitedbtn');
     b.innerHTML = `<span class="pc-only">${label[0]}</span><span class="sp-only">${label[1]}</span>`;
     b.onclick = ()=>{
       if(currentTag===key){ currentTag=null; b.classList.remove('active'); }
       else{
         currentTag=key;
-        document.querySelectorAll('#tagBtns button').forEach(x=>x.classList.remove('active'));
+        clearTagActive();
         b.classList.add('active');
       }
       applyMapFilter(); render();
     };
     tagWrap.appendChild(b);
   });
+  const visitedBtn = document.createElement('button');
+  visitedBtn.className = 'visitedbtn';
+  visitedBtn.innerHTML = '<span class="pc-only">✅ キミが訪れた水族館</span><span class="sp-only">✅ 訪れた水族館</span>';
+  visitedBtn.onclick = ()=>{
+    if(currentTag==='__visited'){ currentTag=null; visitedBtn.classList.remove('active'); }
+    else{
+      currentTag='__visited';
+      clearTagActive();
+      visitedBtn.classList.add('active');
+    }
+    applyMapFilter(); render();
+  };
+  fixedRow.appendChild(visitedBtn);
   const rankLink = document.createElement('a');
   rankLink.className = 'rankbtn';
   rankLink.href = 'ranking.html';
   rankLink.innerHTML = '<span class="pc-only">🏆 かわちゃんのランキング</span><span class="sp-only">🏆 ランキング</span>';
-  tagWrap.appendChild(rankLink);
+  fixedRow.appendChild(rankLink);
   const postLink = document.createElement('a');
   postLink.className = 'rankbtn postbtn';
   postLink.href = 'posts.html';
   postLink.innerHTML = '<span class="pc-only">📸 みんなの投稿機能</span><span class="sp-only">📸 みんなの投稿</span>';
-  tagWrap.appendChild(postLink);
+  fixedRow.appendChild(postLink);
+
+  const tagToggle = document.getElementById('tagToggle');
+  if(tagToggle){
+    tagToggle.onclick = ()=>{
+      const open = tagWrap.classList.toggle('expanded');
+      tagToggle.textContent = open ? '閉じる ▴' : 'すべて表示 ▾';
+    };
+  }
 
   function applyMapFilter(){
     allMarkers.forEach(({m,tags,name})=>{
