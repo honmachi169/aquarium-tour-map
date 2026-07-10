@@ -173,7 +173,7 @@ loadYtComments();''' if v else ''
 </style>
 </head>
 <body>
-<header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
+<header><a href="{SITE}/">🐟 みんなの全国水族館ツアーMAP</a></header>
 <main>
   <p class="kicker">{kicker}</p>
   {filming_note}
