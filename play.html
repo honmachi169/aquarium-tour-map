@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あそぶ | さかなクイズ | 会いに行こう！全国水族館ツアーMAP</title>
+<meta name="description" content="水族館の待ち時間や移動中に遊べるさかなクイズ！小さい子・小学生・大人の3段階のむずかしさで、みんなで楽しめる🐟">
+<link rel="canonical" href="https://aquarium.yasasea.com/play.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="あそぶ | さかなクイズ | 全国水族館ツアーMAP">
+<meta property="og:description" content="水族館の待ち時間にぴったり！3段階のさかなクイズで遊ぼう🐟">
+<meta property="og:image" content="https://aquarium.yasasea.com/assets/kawachan_web.png">
+<meta property="og:url" content="https://aquarium.yasasea.com/play.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<style>
+  :root { --sea:#0096c7; --sea-deep:#023e8a; --sky:#caf0f8; --sand:#fff9ec; --coral:#ff6b6b; --sun:#ffd166; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif; background:var(--sand); color:#234; }
+  header { background:linear-gradient(180deg,#48cae4 0%,#0096c7 60%,#0077b6 100%); color:#fff; text-align:center; padding:26px 16px 30px; position:relative; overflow:hidden; }
+  header a.home { color:#fff; text-decoration:none; font-weight:bold; font-size:.88rem; position:absolute; top:14px; left:16px; z-index:5; }
+  header h1 { font-size:clamp(1.4rem,4.5vw,2.1rem); text-shadow:0 2px 6px rgba(2,62,138,.4); margin-top:14px; }
+  header p.sub { font-size:.9rem; color:#e0f7ff; margin-top:8px; line-height:1.7; }
+  .bubbles span { position:absolute; bottom:-40px; border-radius:50%; background:rgba(255,255,255,.18); animation:rise linear infinite; }
+  @keyframes rise { to { transform:translateY(-120vh); } }
+  main { max-width:640px; margin:0 auto; padding:22px 16px 50px; }
+
+  .level-select { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:20px; }
+  .level-btn { flex:1; min-width:100px; border:3px solid var(--sky); background:#fff; border-radius:16px; padding:14px 10px; text-align:center; cursor:pointer; font-family:inherit; transition:transform .15s, border-color .15s; }
+  .level-btn:hover { transform:translateY(-3px); }
+  .level-btn.active { border-color:var(--sea); background:linear-gradient(160deg,#e8f6fb,#fff); }
+  .level-btn .emoji { font-size:1.8rem; display:block; margin-bottom:4px; }
+  .level-btn .label { font-weight:bold; font-size:.85rem; color:var(--sea-deep); }
+  .level-btn .stars { color:var(--sun); font-size:.8rem; letter-spacing:1px; }
+
+  .quiz-box { background:#fff; border-radius:20px; padding:22px 18px; box-shadow:0 3px 12px rgba(2,62,138,.1); text-align:center; }
+  .quiz-progress { font-size:.8rem; color:#89a; margin-bottom:10px; font-weight:bold; }
+  .quiz-q { font-size:1.1rem; font-weight:bold; color:var(--sea-deep); line-height:1.6; margin-bottom:18px; min-height:3.2em; display:flex; align-items:center; justify-content:center; }
+  .quiz-choices { display:flex; flex-direction:column; gap:10px; }
+  .quiz-choice { border:2px solid var(--sky); background:#f6fbfe; border-radius:14px; padding:13px 16px; font-size:.95rem; font-family:inherit; cursor:pointer; text-align:left; transition:background .15s, border-color .15s; }
+  .quiz-choice:hover { border-color:var(--sea); }
+  .quiz-choice.correct { border-color:#2a9d8f; background:#e6f7f2; font-weight:bold; }
+  .quiz-choice.wrong { border-color:var(--coral); background:#ffefef; }
+  .quiz-choice[disabled] { cursor:default; }
+  .quiz-feedback { margin-top:14px; font-size:.9rem; line-height:1.7; color:#456; background:#fff9ec; border-radius:12px; padding:10px 14px; display:none; }
+  .quiz-feedback.show { display:block; }
+  .quiz-next { margin-top:16px; background:var(--sea); color:#fff; border:none; border-radius:999px; padding:10px 28px; font-size:.9rem; font-weight:bold; cursor:pointer; font-family:inherit; display:none; }
+  .quiz-next.show { display:inline-block; }
+
+  .result-box { text-align:center; }
+  .result-box .score { font-size:2.4rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 6px rgba(2,62,138,.2); margin:10px 0; }
+  .result-box .msg { font-size:1rem; color:var(--sea-deep); font-weight:bold; margin-bottom:16px; }
+  .result-box .retry { background:var(--sea); color:#fff; border:none; border-radius:999px; padding:10px 26px; font-size:.9rem; font-weight:bold; cursor:pointer; font-family:inherit; margin:4px; }
+  .result-box .backlv { background:#fff; color:var(--sea); border:2px solid var(--sea); border-radius:999px; padding:10px 26px; font-size:.9rem; font-weight:bold; cursor:pointer; font-family:inherit; margin:4px; }
+
+  .line-box { margin-top:26px; background:linear-gradient(135deg,#06c755,#00b900); border-radius:20px; padding:22px 18px; text-align:center; color:#fff; }
+  .line-box h2 { font-size:1.05rem; margin-bottom:8px; }
+  .line-box p { font-size:.86rem; line-height:1.7; margin-bottom:16px; opacity:.95; }
+  .line-btn { display:inline-flex; align-items:center; gap:8px; background:#fff; color:#06c755; font-weight:bold; font-size:.92rem; text-decoration:none; border-radius:999px; padding:11px 26px; box-shadow:0 4px 12px rgba(0,0,0,.15); }
+
+  .back { display:block; text-align:center; margin-top:26px; color:var(--sea); font-weight:bold; text-decoration:none; }
+</style>
+</head>
+<body>
+<header>
+  <div class="bubbles" id="bubbles"></div>
+  <a class="home" href="./">← MAPにもどる</a>
+  <h1>🎮 あそぶ！さかなクイズ</h1>
+  <p class="sub">水族館の待ち時間や移動中に遊んでね🐟<br>小さい子・小学生・大人の3段階から選べるよ</p>
+</header>
+<main>
+  <div class="level-select" id="levelSelect"></div>
+  <div class="quiz-box" id="quizBox"></div>
+
+  <div class="line-box">
+    <h2>🖍 塗り絵がもらえる公式LINEもあるよ！</h2>
+    <p>お友だち登録すると、さかなの塗り絵がダウンロードできます。<br>水族館の行き帰りにも楽しんでね🐟</p>
+    <a class="line-btn" href="https://lin.ee/qMPcnPq" target="_blank" rel="noopener">💬 公式LINEを友だち追加</a>
+  </div>
+
+  <a class="back" href="./">← MAPにもどる</a>
+</main>
+<script>
+const QUIZ = {
+  easy: {
+    label: "小さい子むけ", emoji: "🐟", stars: "★☆☆",
+    questions: [
+      { q: "水の中にすんでいる、およぐのがじょうずな生きものは？", choices: ["さかな", "ぞう", "とり"], answer: 0, note: "さかなは水の中でおよいで生活しているよ🐟" },
+      { q: "水族館でよく見る、まっしろでかわいい生きものは？", choices: ["ライオン", "しろくま", "しろいるか（ベルーガ）"], answer: 2, note: "シロイルカ（ベルーガ）は真っ白でかわいい海の生きものだよ🐳" },
+      { q: "からをせおって、のんびり歩く海の生きものは？", choices: ["かめ", "とんぼ", "うさぎ"], answer: 0, note: "ウミガメは甲羅を背負ってゆっくり泳ぐよ🐢" },
+      { q: "水族館でジャンプを見せてくれる、かしこい生きものは？", choices: ["いるか", "ねこ", "ひつじ"], answer: 0, note: "イルカはとても賢くて、ジャンプなどの芸を見せてくれるよ🐬" },
+      { q: "はっぱみたいな形で、ゆらゆら泳ぐ生きものは？", choices: ["くらげ", "とかげ", "かえる"], answer: 0, note: "クラゲはふわふわゆらゆら海の中を漂っているよ🪼" }
+    ]
+  },
+  normal: {
+    label: "小学生むけ", emoji: "🦈", stars: "★★☆",
+    questions: [
+      { q: "サメの仲間である「ジンベエザメ」。実は何を食べて生きている？", choices: ["ほかの大きな魚", "プランクトンなどの小さな生きもの", "海藻だけ"], answer: 1, note: "世界最大の魚ジンベエザメは、プランクトンや小魚を海水ごと吸い込んで食べるよ" },
+      { q: "ペンギンは鳥のなかまだけど、空を飛べない代わりに得意なことは？", choices: ["泳ぐこと", "木のぼり", "早く走ること"], answer: 0, note: "ペンギンの翼はヒレのように進化していて、水中を高速で泳げるよ🐧" },
+      { q: "タツノオトシゴのオスとメス、卵を育てるのはどっち？", choices: ["メス", "オス", "両方で半分ずつ"], answer: 1, note: "タツノオトシゴはオスのお腹の袋でメスが産んだ卵を育てるめずらしい生きものだよ" },
+      { q: "ラッコがお腹の上で石を使ってすることは？", choices: ["貝をわって食べる", "おなかをマッサージする", "石を集めてコレクションする"], answer: 0, note: "ラッコはお気に入りの石を使って、貝やウニの殻を割って食べるよ🦦" },
+      { q: "深海にすむ生きものの多くに共通する特徴は？", choices: ["体が大きい", "光る器官を持つものが多い", "みんな赤い色をしている"], answer: 1, note: "深海は真っ暗なので、光を出して仲間を見つけたり獲物をおびき寄せる生きものが多いよ" }
+    ]
+  },
+  hard: {
+    label: "大人もびっくり", emoji: "🐙", stars: "★★★",
+    questions: [
+      { q: "マンボウの卵の数は、一度にどれくらいと言われている？", choices: ["約100個", "約1万個", "約3億個"], answer: 2, note: "マンボウは魚類最多といわれる約3億個もの卵を一度に産むと言われているよ（諸説あり）" },
+      { q: "タコの心臓はいくつある？", choices: ["1つ", "2つ", "3つ"], answer: 2, note: "タコには心臓が3つあり、2つはエラに血液を送り、1つは全身に血液を送っているよ" },
+      { q: "サメの多くに歯が生え変わる仕組みがあるが、一生で生えかわる本数の目安は？", choices: ["数十本", "数百本〜数千本", "10本くらい"], answer: 1, note: "サメの歯はベルトコンベアのように次々生え変わり、一生で数百〜数千本にもなると言われるよ🦈" },
+      { q: "クラゲには脳がない。では、どうやって周りを感じているの？", choices: ["神経の網（散在神経系）で感じる", "何も感じていない", "皮膚呼吸だけで生きている"], answer: 0, note: "クラゲは脳の代わりに体全体に広がる神経のネットワークで、光や刺激を感じ取っているよ" },
+      { q: "ジュゴンとマナティー、見分け方のポイントは主にどこ？", choices: ["尾びれの形", "体の色", "目の大きさ"], answer: 0, note: "ジュゴンの尾びれはイルカのように三日月型、マナティーはうちわのように丸いのが特徴だよ" }
+    ]
+  }
+};
+
+let currentLevel = null;
+let qIndex = 0;
+let score = 0;
+let answered = false;
+
+const levelSelect = document.getElementById('levelSelect');
+const quizBox = document.getElementById('quizBox');
+
+Object.entries(QUIZ).forEach(([key, lv])=>{
+  const b = document.createElement('button');
+  b.className = 'level-btn';
+  b.innerHTML = `<span class="emoji">${lv.emoji}</span><span class="label">${lv.label}</span><br><span class="stars">${lv.stars}</span>`;
+  b.onclick = ()=> startLevel(key);
+  b.dataset.key = key;
+  levelSelect.appendChild(b);
+});
+
+function startLevel(key){
+  currentLevel = key;
+  qIndex = 0; score = 0;
+  document.querySelectorAll('.level-btn').forEach(b=> b.classList.toggle('active', b.dataset.key===key));
+  renderQuestion();
+}
+
+function renderQuestion(){
+  answered = false;
+  const lv = QUIZ[currentLevel];
+  const total = lv.questions.length;
+  if(qIndex >= total){ renderResult(); return; }
+  const q = lv.questions[qIndex];
+  quizBox.innerHTML = `
+    <div class="quiz-progress">もんだい ${qIndex+1} / ${total}</div>
+    <div class="quiz-q">${q.q}</div>
+    <div class="quiz-choices">
+      ${q.choices.map((c,i)=>`<button class="quiz-choice" data-i="${i}">${c}</button>`).join('')}
+    </div>
+    <div class="quiz-feedback" id="qFeedback"></div>
+    <button class="quiz-next" id="qNext">つぎへ →</button>
+  `;
+  quizBox.querySelectorAll('.quiz-choice').forEach(btn=>{
+    btn.onclick = ()=>{
+      if(answered) return;
+      answered = true;
+      const i = Number(btn.dataset.i);
+      const correct = q.answer;
+      quizBox.querySelectorAll('.quiz-choice').forEach(b=>{
+        const bi = Number(b.dataset.i);
+        if(bi===correct) b.classList.add('correct');
+        else if(bi===i) b.classList.add('wrong');
+        b.disabled = true;
+      });
+      if(i===correct) score++;
+      const fb = document.getElementById('qFeedback');
+      fb.textContent = (i===correct ? '🎉 せいかい！ ' : '😉 おしい！ ') + q.note;
+      fb.classList.add('show');
+      document.getElementById('qNext').classList.add('show');
+    };
+  });
+  document.getElementById('qNext').onclick = ()=>{ qIndex++; renderQuestion(); };
+}
+
+function renderResult(){
+  const lv = QUIZ[currentLevel];
+  const total = lv.questions.length;
+  let msg = 'また挑戦してね🐟';
+  if(score===total) msg = 'パーフェクト！さかな博士だね🏆';
+  else if(score >= total*0.6) msg = 'よくできました！🐟';
+  quizBox.innerHTML = `
+    <div class="result-box">
+      <div class="quiz-progress">けっか</div>
+      <div class="score">${score} / ${total} 問正解！</div>
+      <div class="msg">${msg}</div>
+      <button class="retry" onclick="startLevel('${currentLevel}')">🔁 もう一度</button>
+      <button class="backlv" onclick="document.getElementById('levelSelect').scrollIntoView({behavior:'smooth'})">レベルを選びなおす</button>
+    </div>
+  `;
+}
+
+quizBox.innerHTML = '<p style="color:#89a;font-size:.9rem;">↑ むずかしさを選んでスタート！</p>';
+
+// あわ演出
+const bw = document.getElementById('bubbles');
+for(let i=0;i<10;i++){
+  const s = document.createElement('span');
+  const size = 8+Math.random()*20;
+  s.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*8}s`;
+  bw.appendChild(s);
+}
+</script>
+</body>
+</html>
