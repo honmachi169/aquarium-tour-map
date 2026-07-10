@@ -159,12 +159,8 @@
   .card .tab.hp { background:var(--sky); color:var(--sea-deep); }
   .card .tab.detail { background:var(--sea-deep); color:#fff; }
   .card.upcoming { opacity:.7; border:3px dashed var(--sea); }
-  .card.baby-pick { border:3px solid #f9a8d4; background:linear-gradient(160deg,#fdf2f8 0%,#fff 60%); }
-  .card.baby-pick:hover { border-color:#ec4899; }
-  .baby-badge { display:inline-block; background:#ec4899; color:#fff; font-size:.72rem; font-weight:bold; border-radius:999px; padding:2px 10px; margin-bottom:4px; }
   /* 地域カラー（上部ストライプ） */
   .card::before { content:''; display:block; height:4px; border-radius:18px 18px 0 0; background:var(--rc,#cde6f0); }
-  .card.baby-pick::before { display:none; }
   .r-hokkaido { --rc:#48cae4; }
   .r-tohoku   { --rc:#52b788; }
   .r-kanto    { --rc:#f4a261; }
@@ -643,16 +639,14 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       return "";
     }
     filtered.forEach(a=>{
-      const isBaby = (a.tags||[]).includes('baby');
       const v = a.videos[0];
       const thumb = v ? `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg` : '';
       const card = document.createElement('div');
       const rc = getRegionClass(a.pref);
-      card.className = 'card' + (a.upcoming?' upcoming':'') + (myVisits.has(a.name)?' visited':'') + (isBaby?' baby-pick':'') + (rc?' '+rc:'');
+      card.className = 'card' + (a.upcoming?' upcoming':'') + (myVisits.has(a.name)?' visited':'') + (rc?' '+rc:'');
       card.innerHTML = `
         ${v?`<a href="https://www.youtube.com/watch?v=${v.id}" target="_blank"><img loading="lazy" src="${thumb}" alt="${a.name}"></a>`:`<div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:#e0f2fe;font-size:2rem">🔜</div>`}
         <div class="body">
-          ${isBaby?'<span class="baby-badge">🍼 赤ちゃん連れにおすすめ</span>':''}
           <span class="pref">${a.pref}</span>
           <h3>${a.name} ${a.closed_flag?'<span class="badge-closed">閉館</span>':''}</h3>
           <p class="hl">${a.highlight||''}</p>
