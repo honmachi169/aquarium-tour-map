@@ -29,10 +29,9 @@
   header .sub { opacity:.95; font-size:.9rem; margin-top:6px; position:relative; }
   .hero { max-width:540px; width:76%; margin:10px auto -6px; display:block; filter:drop-shadow(0 6px 12px rgba(2,62,138,.35)); position:relative; }
   .counter { max-width:520px; margin:0 auto; padding-bottom:8px; position:relative; }
-  .counter .num-row { display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; }
   .counter .num { font-size:2.1rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 4px rgba(2,62,138,.5); }
   .counter .num small { font-size:1rem; font-weight:normal; color:#fff; }
-  .counter-sub-btn { display:inline-flex; align-items:center; gap:4px; background:#ff0000; color:#fff; font-size:.82rem; font-weight:bold; text-decoration:none; border-radius:999px; padding:6px 16px; box-shadow:0 2px 8px rgba(0,0,0,.25); white-space:nowrap; transition:transform .15s; }
+  .counter-sub-btn { position:absolute; top:12px; right:14px; z-index:5; display:inline-flex; align-items:center; gap:4px; background:#ff0000; color:#fff; font-size:.78rem; font-weight:bold; text-decoration:none; border-radius:999px; padding:6px 14px; box-shadow:0 2px 8px rgba(0,0,0,.25); white-space:nowrap; transition:transform .15s; }
   .counter-sub-btn:hover { transform:translateY(-2px); }
   .bar { background:rgba(255,255,255,.3); border-radius:999px; height:16px; margin-top:8px; overflow:hidden; border:2px solid rgba(255,255,255,.5); }
   .bar>div { background:linear-gradient(90deg,var(--sun),#ffe29a); height:100%; border-radius:999px; transition:width 1.2s ease-out; }
@@ -225,6 +224,7 @@
 </head>
 <body>
 <header>
+  <a class="counter-sub-btn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録</a>
   <div class="bubbles" id="bubbles"></div>
   <img class="deco p1" src="assets/punio_shark.png" alt="">
   <img class="deco p2" src="assets/punio_takopaikapi.png" alt="">
@@ -238,10 +238,7 @@
   <p class="sub">さかなのおにいさん かわちゃんと巡る<br class="sp-only">　目指せ100館！全国水族館ツアー</p>
   <img class="hero" src="assets/kawachan_web.png" alt="さかなのおにいさん かわちゃん">
   <div class="counter">
-    <div class="num-row">
-      <div class="num"><span id="visited">0</span><small> / <span id="goal">100</span>館 制覇中！</small></div>
-      <a class="counter-sub-btn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録</a>
-    </div>
+    <div class="num"><span id="visited">0</span><small> / <span id="goal">100</span>館 制覇中！</small></div>
     <div class="bar"><div id="barfill" style="width:0%"></div></div>
     <div class="mycount">あなたの制覇：<b id="myvisited">0</b> 館 🏆（🐟や⬜を押してチェック！）
       <button id="shareBtn" class="sharebtn">🕊 制覇じまんをシェア</button></div>
