@@ -31,8 +31,9 @@
   .counter { max-width:520px; margin:0 auto; padding-bottom:8px; position:relative; }
   .counter .num { font-size:2.1rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 4px rgba(2,62,138,.5); }
   .counter .num small { font-size:1rem; font-weight:normal; color:#fff; }
-  .counter-sub-btn { position:absolute; top:12px; right:14px; z-index:5; display:inline-flex; align-items:center; gap:4px; background:#ff0000; color:#fff; font-size:.78rem; font-weight:bold; text-decoration:none; border-radius:999px; padding:6px 14px; box-shadow:0 2px 8px rgba(0,0,0,.25); white-space:nowrap; transition:transform .15s; }
-  .counter-sub-btn:hover { transform:translateY(-2px); }
+  .counter-sub-btn { position:fixed; bottom:16px; right:16px; z-index:1200; display:inline-flex; align-items:center; gap:4px; background:rgba(255,0,0,.75); color:#fff; font-size:.78rem; font-weight:bold; text-decoration:none; border-radius:999px; padding:7px 15px; box-shadow:0 3px 10px rgba(0,0,0,.2); white-space:nowrap; transition:opacity .2s, transform .15s, background .2s; opacity:.85; backdrop-filter:blur(2px); }
+  .counter-sub-btn:hover { opacity:1; background:#ff0000; transform:translateY(-2px); }
+  @media (max-width:640px) { .counter-sub-btn { bottom:12px; right:12px; font-size:.72rem; padding:6px 12px; opacity:.8; } }
   .bar { background:rgba(255,255,255,.3); border-radius:999px; height:16px; margin-top:8px; overflow:hidden; border:2px solid rgba(255,255,255,.5); }
   .bar>div { background:linear-gradient(90deg,var(--sun),#ffe29a); height:100%; border-radius:999px; transition:width 1.2s ease-out; }
   .wave { display:block; width:calc(100% + 32px); margin-left:-16px; height:40px; margin-top:14px; }
