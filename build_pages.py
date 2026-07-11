@@ -33,6 +33,7 @@ for i, a in enumerate(d["unvisited"]):
 
 E = html.escape
 urls = []
+entry_meta = []
 for slug, a, intro in entries:
     v = (a.get("videos") or [None])[0]
     photo = a.get("photo") or ""
@@ -131,6 +132,46 @@ loadYtComments();''' if v else ''
     page_url = f"{SITE}/spot/{slug}.html"
     urls.append(page_url)
 
+    ld_attraction = {
+        "@context": "https://schema.org",
+        "@type": "TouristAttraction",
+        "name": a["name"],
+        "url": page_url,
+        "image": ogimg,
+        "address": {"@type": "PostalAddress", "addressRegion": a.get("pref", ""), "addressCountry": "JP"},
+    }
+    if a.get("lat") and a.get("lng"):
+        ld_attraction["geo"] = {"@type": "GeoCoordinates", "latitude": a["lat"], "longitude": a["lng"]}
+    if a.get("url"): ld_attraction["sameAs"] = a["url"]
+    desc_for_ld = a.get("highlight") or a.get("comment")
+    if desc_for_ld: ld_attraction["description"] = desc_for_ld
+
+    faq_items = []
+    if a.get("fee"): faq_items.append(("料金はいくらですか？", f"大人{a['fee']}" + (f"、子ども{a['child']}" if a.get("child") else "")))
+    if a.get("closed"): faq_items.append(("休館日はいつですか？", a["closed"]))
+    if a.get("parking"): faq_items.append(("駐車場はありますか？", a["parking"]))
+    ld_faq = None
+    if faq_items:
+        ld_faq = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": ans}}
+                for q, ans in faq_items
+            ],
+        }
+    ld_scripts = f'<script type="application/ld+json">{json.dumps(ld_attraction, ensure_ascii=False)}</script>'
+    if ld_faq:
+        ld_scripts += f'\n<script type="application/ld+json">{json.dumps(ld_faq, ensure_ascii=False)}</script>'
+
+    entry_meta.append({
+        "slug": slug, "name": a["name"], "pref": a.get("pref", ""), "url": page_url,
+        "thumb": thumb or ogimg, "animals": a.get("animals") or [], "tags": a.get("tags") or [],
+        "comment": a.get("highlight") or a.get("comment") or "", "lat": a.get("lat"), "lng": a.get("lng"),
+        "stroller": a.get("stroller"), "nursing": a.get("nursing"), "locker": a.get("locker"),
+        "ratings": a.get("ratings") if (a.get("visited") and a.get("verified")) else None,
+    })
+
     doc = f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -148,6 +189,7 @@ loadYtComments();''' if v else ''
 <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+{ld_scripts}
 <style>
   :root {{ --sea:#0096c7; --sea-deep:#023e8a; --sky:#caf0f8; --sand:#fff9ec; --coral:#ff6b6b; --sun:#ffd166; }}
   * {{ box-sizing:border-box; margin:0; padding:0; }}
@@ -332,6 +374,254 @@ document.getElementById('comment-form').onsubmit = async (ev) => {{
     with open(f"spot/{slug}.html", "w") as f:
         f.write(doc)
 
+# ============================================================
+# フェーズ3: 検索の入り口ページ（生き物別・エリア別・テーマ別・ランキング・About）
+# トップページのUIには一切リンクしない「裏の入り口」。sitemap.xmlのみに登録
+# ============================================================
+os.makedirs("animals", exist_ok=True)
+os.makedirs("area", exist_ok=True)
+os.makedirs("theme", exist_ok=True)
+
+LIST_STYLE = """
+:root { --sea:#0096c7; --sea-deep:#023e8a; --sky:#caf0f8; --sand:#fff9ec; --coral:#ff6b6b; --sun:#ffd166; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif; background:var(--sand); color:#234; }
+header { background:linear-gradient(180deg,#48cae4,#0096c7); color:#fff; padding:14px 16px; }
+header a { color:#fff; text-decoration:none; font-weight:bold; font-size:.9rem; }
+main { max-width:900px; margin:0 auto; padding:20px 16px 40px; }
+h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
+.lead { color:#456; font-size:.92rem; margin-bottom:14px; line-height:1.6; }
+#map { width:100%; height:280px; border-radius:16px; margin:14px 0; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; margin-top:16px; }
+.card { background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 2px 10px rgba(2,62,138,.1); text-decoration:none; color:#234; display:flex; flex-direction:column; }
+.card img { width:100%; aspect-ratio:16/9; object-fit:cover; background:var(--sky); }
+.card .body { padding:10px 12px; }
+.card .pref { font-size:.72rem; color:var(--sea); font-weight:bold; }
+.card .name { font-size:.95rem; font-weight:bold; margin:2px 0 4px; }
+.card .cmt { font-size:.78rem; color:#678; line-height:1.5; }
+.back { display:inline-block; margin-top:20px; color:var(--sea); font-weight:bold; text-decoration:none; }
+.taglist { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+.taglist a { font-size:.85rem; font-weight:bold; background:#fff; color:var(--sea-deep); border:2px solid var(--sky); border-radius:999px; padding:6px 14px; text-decoration:none; }
+"""
+
+def render_card(m):
+    img = m["thumb"] or f"{SITE}/assets/kawachan_web.png"
+    cmt = (m["comment"] or "")[:60]
+    return (f'<a class="card" href="{m["url"]}">'
+            f'<img src="{img}" loading="lazy" alt="{E(m["name"])}">'
+            f'<div class="body"><div class="pref">{E(m["pref"])}</div>'
+            f'<div class="name">{E(m["name"])}</div><div class="cmt">{E(cmt)}</div></div></a>')
+
+def render_list_page(path, title, desc, lead, members, extra_body=""):
+    pins = [m for m in members if m.get("lat") and m.get("lng")]
+    map_js = ""
+    if pins:
+        pts = ",".join(f'[{p["lat"]},{p["lng"]},"{E(p["name"]).replace(chr(34),"")}","{p["url"]}"]' for p in pins)
+        map_js = f"""
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script>
+const pts = [{pts}];
+const map = L.map('map');
+L.tileLayer('https://{{s}}.tile.openstreetmap.org/{{z}}/{{x}}/{{y}}.png', {{ maxZoom:18, attribution:'&copy; OpenStreetMap' }}).addTo(map);
+const group = L.featureGroup(pts.map(p => L.marker([p[0],p[1]]).bindPopup('<a href="'+p[3]+'">'+p[2]+'</a>')));
+group.addTo(map);
+map.fitBounds(group.getBounds().pad(0.2));
+</script>"""
+    cards = "".join(render_card(m) for m in members)
+    doc = f"""<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{E(title)}</title>
+<meta name="description" content="{E(desc)}">
+<link rel="canonical" href="{SITE}/{path}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{E(title)}">
+<meta property="og:description" content="{E(desc)}">
+<meta property="og:url" content="{SITE}/{path}">
+<link rel="icon" type="image/x-icon" href="{'../' if '/' in path else ''}assets/favicon.ico">
+<style>{LIST_STYLE}</style>
+</head>
+<body>
+<header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
+<main>
+  <h1>{E(title)}</h1>
+  <p class="lead">{E(lead)}</p>
+  {'<div id="map"></div>' if pins else ''}
+  {extra_body}
+  <div class="grid">{cards}</div>
+  <a class="back" href="{SITE}/">← MAPにもどる</a>
+</main>
+{map_js}
+</body>
+</html>"""
+    with open(path, "w") as f:
+        f.write(doc)
+
+new_page_urls = []
+
+# --- 生き物別まとめページ（3館以上いる生き物のみ）---
+from collections import defaultdict
+by_animal = defaultdict(list)
+for m in entry_meta:
+    for x in m["animals"]:
+        by_animal[x].append(m)
+
+animal_index_links = []
+for name, members in sorted(by_animal.items(), key=lambda kv: -len(kv[1])):
+    if len(members) < 3:
+        continue
+    fname = f"animals/{name}.html"
+    icon = ANIMAL_ICONS.get(name, "🐟")
+    render_list_page(
+        fname,
+        f"{icon} {name}に会える水族館 {len(members)}選 | 全国水族館ツアーMAP",
+        f"{name}に会える全国の水族館{len(members)}館をまとめました。地図とあわせてチェックしてね。",
+        f"{name}がいる水族館を{len(members)}館集めました。気になる水族館をタップすると詳しい情報が見られるよ。",
+        members,
+    )
+    url = f"{SITE}/{urllib.parse.quote(fname)}"
+    new_page_urls.append(url)
+    animal_index_links.append((name, len(members), url))
+
+# --- エリア別ページ（8地方に集約。1〜2館だけの県でも近隣とまとめて薄いページを避ける）---
+REGIONS = {
+    "北海道": ["北海道"],
+    "東北": ["青森県","岩手県","宮城県","秋田県","山形県","福島県"],
+    "関東": ["茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県"],
+    "中部": ["新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県"],
+    "近畿": ["三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県"],
+    "中国": ["鳥取県","島根県","岡山県","広島県","山口県"],
+    "四国": ["徳島県","香川県","愛媛県","高知県"],
+    "九州・沖縄": ["福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"],
+}
+pref_to_region = {p: r for r, prefs in REGIONS.items() for p in prefs}
+by_region = defaultdict(list)
+for m in entry_meta:
+    r = pref_to_region.get(m["pref"])
+    if r:
+        by_region[r].append(m)
+
+area_index_links = []
+for region, members in by_region.items():
+    if not members:
+        continue
+    fname = f"area/{region}.html"
+    render_list_page(
+        fname,
+        f"{region}の水族館一覧 | 全国水族館ツアーMAP",
+        f"{region}エリアの水族館{len(members)}館をまとめて紹介。地図で場所をチェックできるよ。",
+        f"{region}エリアの水族館を{len(members)}館集めました。",
+        members,
+    )
+    url = f"{SITE}/{urllib.parse.quote(fname)}"
+    new_page_urls.append(url)
+    area_index_links.append((region, len(members), url))
+
+# --- テーマ別ページ（既存タグを活用。3館以上のタグのみ）---
+by_tag = defaultdict(list)
+for m in entry_meta:
+    for t in m["tags"]:
+        by_tag[t].append(m)
+
+theme_index_links = []
+for tag, members in by_tag.items():
+    if len(members) < 3 or tag not in TAG_LABEL:
+        continue
+    fname = f"theme/{tag}.html"
+    label = TAG_LABEL[tag]
+    extra = ""
+    if tag == "baby":
+        extra = "".join(
+            f'<div class="card" style="padding:10px 14px;"><b>{E(m["name"])}</b>：'
+            + " / ".join(filter(None, [
+                f"🛻ベビーカー {E(m['stroller'])}" if m.get("stroller") else "",
+                f"🍼授乳室 {E(m['nursing'])}" if m.get("nursing") else "",
+                f"🔒ロッカー {E(m['locker'])}" if m.get("locker") else "",
+            ])) + "</div>"
+            for m in members if m.get("stroller") or m.get("nursing") or m.get("locker")
+        )
+        if extra:
+            extra = f'<div style="margin:16px 0;"><h2 style="font-size:1rem;color:var(--sea-deep);margin-bottom:8px;">🍼 設備情報</h2>{extra}</div>'
+    render_list_page(
+        fname,
+        f"{label} {len(members)}選 | 全国水族館ツアーMAP",
+        f"{label}な水族館を{len(members)}館まとめました。",
+        f"「{label}」な水族館を{len(members)}館集めました。",
+        members,
+        extra_body=extra,
+    )
+    url = f"{SITE}/{urllib.parse.quote(fname)}"
+    new_page_urls.append(url)
+    theme_index_links.append((label, len(members), url))
+
+# --- かわちゃん的評価ランキングページ（本人承認済み評価のみ・3館以上そろったカテゴリのみ生成）---
+RATING_LABEL_R = {"rare":"🦈 激レアいきもの","perf":"🐬 パフォーマンス","kids":"👶 子ども向け度","cospa":"💰 コスパ","kuse":"🌀 クセつよポイント"}
+rated = [m for m in entry_meta if m.get("ratings")]
+ranking_generated = False
+if len(rated) >= 3:
+    sections = []
+    for key, label in RATING_LABEL_R.items():
+        pool = [m for m in rated if key in m["ratings"]]
+        if len(pool) < 3:
+            continue
+        top5 = sorted(pool, key=lambda m: -m["ratings"][key])[:5]
+        rows = "".join(
+            f'<a class="card" href="{m["url"]}" style="flex-direction:row;align-items:center;padding:10px 14px;">'
+            f'<div class="body" style="padding:0;"><div class="name">{"★"*m["ratings"][key]}{"☆"*(5-m["ratings"][key])} {E(m["name"])}</div>'
+            f'<div class="cmt">{E(m["pref"])}</div></div></a>'
+            for m in top5
+        )
+        sections.append(f'<h2 style="font-size:1.05rem;color:var(--sea-deep);margin:20px 0 8px;">{label} ベスト{len(top5)}</h2><div class="grid">{rows}</div>')
+    if sections:
+        doc = f"""<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>かわちゃん的 水族館ランキング | 全国水族館ツアーMAP</title>
+<meta name="description" content="かわちゃんが実際に訪れて評価した水族館を、切り口別ランキングで紹介。">
+<link rel="canonical" href="{SITE}/taste-ranking.html">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<style>{LIST_STYLE}</style></head><body>
+<header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
+<main><h1>🐟 かわちゃん的 水族館ランキング</h1>
+<p class="lead">かわちゃんが実際に訪れて評価した水族館だけを集めたランキングだよ。</p>
+{''.join(sections)}
+<a class="back" href="{SITE}/">← MAPにもどる</a></main></body></html>"""
+        with open("taste-ranking.html", "w") as f:
+            f.write(doc)
+        new_page_urls.append(f"{SITE}/taste-ranking.html")
+        ranking_generated = True
+
+# --- このサイトについて ---
+about_doc = f"""<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>このサイトについて | 全国水族館ツアーMAP</title>
+<meta name="description" content="会いに行こう！全国水族館ツアーMAPの紹介。さかなのおにいさんかわちゃんが実際に訪れた水族館だけを紹介する、実訪問ベースの水族館サイトです。">
+<link rel="canonical" href="{SITE}/about.html">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<style>{LIST_STYLE}
+.about-box {{ background:#fff; border-radius:16px; padding:18px 20px; margin:14px 0; line-height:1.8; font-size:.92rem; }}
+.about-box h2 {{ font-size:1rem; color:var(--sea-deep); margin:16px 0 6px; }}
+.about-box h2:first-child {{ margin-top:0; }}
+</style></head><body>
+<header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
+<main>
+<h1>このサイトについて</h1>
+<div class="about-box">
+<h2>🐟 さかなのおにいさん かわちゃんとは</h2>
+<p>「子どもにも海にもやさしい未来を」を理念に活動する、さかなのおにいさん かわちゃん（川田一輝）。YouTubeで全国の水族館を紹介しながら、生き物の魅力を伝えています。</p>
+<h2>🗺 このサイトの特徴</h2>
+<p>このサイトに載っている情報は、かわちゃんが実際に訪れた水族館の紹介動画をベースにした「実訪問プロジェクト」です。行ったことのある水族館には、かわちゃん本人が確認した一言コメントや独自評価を掲載しています。</p>
+<h2>📋 情報収集ポリシー</h2>
+<p>料金・休館日・設備などの事実情報は、各水族館の公式サイトを調査して掲載しています。誤りに気づいた場合は、各施設の公式サイトを優先してご確認ください。かわちゃん本人の一言・評価は、本人が内容を確認したものだけを公開しています。</p>
+</div>
+<a class="back" href="{SITE}/">← MAPにもどる</a>
+</main></body></html>"""
+with open("about.html", "w") as f:
+    f.write(about_doc)
+new_page_urls.append(f"{SITE}/about.html")
+
 with open("sitemap.xml", "w") as f:
     f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
     f.write(f"<url><loc>{SITE}/</loc></url>\n")
@@ -340,6 +630,9 @@ with open("sitemap.xml", "w") as f:
     f.write(f"<url><loc>{SITE}/play.html</loc></url>\n")
     for u in urls:
         f.write(f"<url><loc>{u}</loc></url>\n")
+    for u in new_page_urls:
+        f.write(f"<url><loc>{u}</loc></url>\n")
     f.write("</urlset>\n")
 
-print(f"{len(urls)} pages + sitemap.xml generated")
+print(f"{len(urls)} pages + {len(new_page_urls)} 検索入口ページ + sitemap.xml generated")
+print(f"  生き物別: {len(animal_index_links)}件 / エリア別: {len(area_index_links)}件 / テーマ別: {len(theme_index_links)}件 / ランキング: {'あり' if ranking_generated else 'なし（承認済み評価が3件未満）'}")
