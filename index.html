@@ -68,16 +68,6 @@
   .wishbtn { font-size:.78rem; font-weight:bold; border-radius:999px; padding:5px 12px; cursor:pointer; border:2px solid #f4a460; background:#fff; color:#c47a1e; font-family:inherit; }
   .wishbtn.on { background:#fff3d6; border-color:#f4a460; color:#a15c00; }
   .visitbtn.on { background:#2a9d8f; color:#fff; }
-  .visitbtn.stamping { animation:btnPunch .35s ease; }
-  @keyframes btnPunch { 0%{transform:scale(1);} 35%{transform:scale(.88);} 60%{transform:scale(1.15);} 100%{transform:scale(1);} }
-  .stamp-mark { position:absolute; left:50%; top:50%; pointer-events:none; font-size:2.2rem; z-index:20; transform:translate(-50%,-50%) scale(2.6) rotate(-18deg); opacity:0; }
-  .stamp-mark.go { animation:stampDown .55s cubic-bezier(.2,1.6,.4,1) forwards; }
-  @keyframes stampDown {
-    0%   { transform:translate(-50%,-50%) scale(2.6) rotate(-18deg); opacity:0; }
-    45%  { transform:translate(-50%,-50%) scale(.85) rotate(-8deg); opacity:1; }
-    60%  { transform:translate(-50%,-50%) scale(1.15) rotate(-8deg); opacity:1; }
-    100% { transform:translate(-50%,-50%) scale(1) rotate(-8deg); opacity:0; transition-delay:.3s; }
-  }
   /* 節目お祝い演出 */
   .milestone-pop { position:fixed; left:0; right:0; bottom:-100%; display:flex; flex-direction:column; align-items:center; z-index:3000; pointer-events:none; transition:bottom .55s cubic-bezier(.2,1.4,.4,1); }
   .milestone-pop.show { bottom:0; }
@@ -602,6 +592,21 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       pop.classList.remove('show');
     }, 2600);
   }
+  function burst(el){
+    const emojis = ["🐟","🌟","🐠","✨","🐙"];
+    const rect = el.getBoundingClientRect();
+    for(let i=0;i<8;i++){
+      const s=document.createElement('span');
+      s.textContent=emojis[i%emojis.length];
+      s.style.cssText=`position:fixed;left:${rect.left+rect.width/2}px;top:${rect.top}px;font-size:1.3rem;pointer-events:none;z-index:99;transition:all .9s ease-out;`;
+      document.body.appendChild(s);
+      requestAnimationFrame(()=>{
+        s.style.transform=`translate(${(Math.random()-0.5)*160}px, ${-60-Math.random()*80}px) rotate(${(Math.random()-0.5)*180}deg)`;
+        s.style.opacity='0';
+      });
+      setTimeout(()=>s.remove(),950);
+    }
+  }
   window.toggleVisit = function(name, ev){
     const wasOn = myVisits.has(name);
     if(wasOn) myVisits.delete(name); else myVisits.add(name);
@@ -611,13 +616,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       b.classList.toggle('on', on);
       b.textContent = on ? '✅ 行った！' : '⬜ 行ったらチェック';
       if(on){
-        b.classList.remove('stamping'); void b.offsetWidth; b.classList.add('stamping');
-        const stamp = document.createElement('span');
-        stamp.className = 'stamp-mark';
-        stamp.textContent = '🐟';
-        b.appendChild(stamp);
-        requestAnimationFrame(()=> stamp.classList.add('go'));
-        setTimeout(()=> stamp.remove(), 700);
+        burst(b);
       }
     });
     if(!wasOn) checkMilestone();
