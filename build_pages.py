@@ -72,10 +72,6 @@ for slug, a, intro in entries:
         rows = "".join(f"<li>{E(h)}</li>" for h in a["highlights"])
         highlights_box = f'<div class="highlights-box"><div class="hk-label">🔍 かわちゃん見どころポイント！</div><ul>{rows}</ul></div>'
 
-    best_time_box = ""
-    if a.get("best_time"):
-        best_time_box = f'<div class="besttime-box"><div class="hk-label">⏰ おすすめ時間帯</div>{E(a["best_time"])}</div>'
-
     RATING_LABEL = {"kuse":"🌀 クセつよポイント","suzu":"❄️ 涼しさ","kids":"👶 子ども向け度","hakuryoku":"💥 迫力","cospa":"💰 コスパ"}
     ratings = a.get("ratings") or {}
     rating_rows = ""
@@ -170,8 +166,6 @@ loadYtComments();''' if v else ''
   .highlights-box .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:8px; }}
   .highlights-box ul {{ margin:0 0 0 20px; display:flex; flex-direction:column; gap:6px; }}
   .highlights-box li {{ font-size:.9rem; line-height:1.6; color:#345; }}
-  .besttime-box {{ background:#eefaf7; border:3px solid #2a9d8f; border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }}
-  .besttime-box .hk-label {{ font-size:.8rem; font-weight:bold; color:#1f7a6c; margin-bottom:4px; }}
   .ratings-box {{ background:#fff9ec; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; }}
   .ratings-box .hk-label {{ font-size:.8rem; font-weight:bold; color:#a15c00; margin-bottom:8px; }}
   .rate-row {{ display:flex; justify-content:space-between; align-items:center; padding:4px 0; font-size:.88rem; }}
@@ -224,10 +218,9 @@ loadYtComments();''' if v else ''
   <div class="chips">{chips}{tagchips}</div>
   {hitokoto}
   {highlights_box}
-  {best_time_box}
-  {ratings_box}
   {summer}
   <table>{info}</table>
+  {ratings_box}
   <p class="note">※最新の料金・営業情報は公式サイトでチェックしてね</p>
   <div class="btns">
     {links}
