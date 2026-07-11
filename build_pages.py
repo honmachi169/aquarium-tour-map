@@ -82,17 +82,6 @@ for slug, a, intro in entries:
             rating_rows += f'<div class="rate-row"><span class="rate-label">{label}</span><span class="rate-stars">{stars}</span></div>'
     ratings_box = f'<div class="ratings-box"><div class="hk-label">🐟 かわちゃん的 オススメ度</div>{rating_rows}</div>' if rating_rows else ""
 
-    goods_cards = ""
-    if a.get("gift_photo") or a.get("gift"):
-        img = f'<img src="{a["gift_photo"]}" alt="{E(a["name"])}のおみやげ">' if a.get("gift_photo") else ""
-        cap = f'<div class="goods-cap">🎁 {E(a["gift"])}</div>' if a.get("gift") else ""
-        goods_cards += f'<div class="goods-card">{img}{cap}</div>'
-    if a.get("food_photo") or a.get("food_pick"):
-        img = f'<img src="{a["food_photo"]}" alt="{E(a["name"])}のフード">' if a.get("food_photo") else ""
-        cap = f'<div class="goods-cap">🍽 {E(a["food_pick"])}</div>' if a.get("food_pick") else ""
-        goods_cards += f'<div class="goods-card">{img}{cap}</div>'
-    goods_box = f'<div class="goods-box"><div class="hk-label">🎁 おすすめのお土産＆フード</div><div class="goods-grid">{goods_cards}</div></div>' if goods_cards else ""
-
     summer = f'<div class="summer">☀️ <b>夏休み情報：</b>{E(a["summer"])}</div>' if a.get("summer") else ""
     videos = "".join(
         f'<div class="video"><iframe loading="lazy" src="https://www.youtube.com/embed/{vv["id"]}" '
@@ -177,12 +166,6 @@ loadYtComments();''' if v else ''
   .highlights-box .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:8px; }}
   .highlights-box ul {{ margin:0 0 0 20px; display:flex; flex-direction:column; gap:6px; }}
   .highlights-box li {{ font-size:.9rem; line-height:1.6; color:#345; }}
-  .goods-box {{ background:#fff; border:3px solid var(--coral); border-radius:16px; padding:12px 16px; margin:14px 0; }}
-  .goods-box .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--coral); margin-bottom:10px; }}
-  .goods-grid {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; }}
-  .goods-card {{ border-radius:12px; overflow:hidden; background:#fff5f5; border:2px solid #ffe0e0; }}
-  .goods-card img {{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }}
-  .goods-cap {{ font-size:.78rem; color:#456; padding:6px 8px; line-height:1.4; }}
   .ratings-box {{ background:#fff9ec; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; }}
   .ratings-box .hk-label {{ font-size:.8rem; font-weight:bold; color:#a15c00; margin-bottom:8px; }}
   .rate-row {{ display:flex; justify-content:space-between; align-items:center; padding:4px 0; font-size:.88rem; }}
@@ -238,7 +221,6 @@ loadYtComments();''' if v else ''
   {summer}
   <table>{info}</table>
   {highlights_box}
-  {goods_box}
   <p class="note">※最新の料金・営業情報は公式サイトでチェックしてね</p>
   <div class="btns">
     {links}
