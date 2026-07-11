@@ -2177,7 +2177,7 @@
       "closed": "月曜（祝日は翌日）・年末年始",
       "comment": "淀川の天然記念物イタセンパラをはじめ、大阪の淡水魚や生きものを展示するプチ水族館。屋外にはビオトープ池も",
       "tags": [
-        "kids"
+        "rain"
       ],
       "photo": "assets/photo_yatomi.jpg",
       "visited": false
@@ -2197,7 +2197,10 @@
         "rain"
       ],
       "photo": "assets/photo_motomachi.jpg",
-      "visited": false
+      "visited": false,
+      "restaurant": "あり（カフェ＆ショップ併設）",
+      "parking": "あり（提携駐車場「基町クレドパーキング」、来館スタンプで1時間無料）",
+      "access": "アストラムライン「県庁前」駅から地下直結／広電「紙屋町西・東」から徒歩3分"
     },
     {
       "name": "シン・マリホ水族館",
@@ -2213,7 +2216,9 @@
         "kids",
         "rain"
       ],
-      "visited": false
+      "visited": false,
+      "nursing": "あり（アルパーク東棟3Fグリーンサイドに授乳室）",
+      "food_bring": "蓋付き容器（ペットボトル・水筒等）に限り持込可、館内飲食は不可"
     },
     {
       "name": "小さな水族館 びわこベース",
@@ -2229,7 +2234,9 @@
         "kids"
       ],
       "photo": "assets/photo_biwakobase.jpg",
-      "visited": false
+      "visited": false,
+      "parking": "あり（3台のみ、公共交通機関推奨）",
+      "access": "志賀駅から徒歩約15分"
     },
     {
       "name": "花園教会水族館",
@@ -2239,14 +2246,16 @@
       "url": "https://www.kyotohanasui.com/",
       "fee": "無料",
       "child": "無料",
-      "closed": "平日（ネット予約で平日見学可）",
+      "closed": "平日休館（土・日14:00〜17:00のみ開館）、祝日や臨時休館日あり",
       "comment": "教会の中にある関西随一の淡水魚水族館！ピラルクやピラニアなど180種以上を無料で見られる",
       "tags": [
         "kids",
         "rain"
       ],
       "photo": "assets/photo_hanazono.jpg",
-      "visited": false
+      "visited": false,
+      "parking": "なし",
+      "access": "花園駅から徒歩約6〜7分"
     },
     {
       "name": "大阪海遊館 海洋生物研究所 以布利センター",
@@ -2254,9 +2263,9 @@
       "lat": 32.7302,
       "lng": 132.9648,
       "url": "https://www.kaiyukan.com/connect/laboratory/iburi/",
-      "fee": "無料（要チケット提示）",
-      "child": "無料（要チケット提示）",
-      "closed": "土日祝のみ一部開放（ジンベエザメの以布利第二水槽）",
+      "fee": "無料（特別公開時のみ）",
+      "child": "無料",
+      "closed": "通常は非公開の研究施設。土日祝9:00〜15:00のみ特別公開（要事前確認）",
       "comment": "海遊館のジンベエザメたちのふるさと。研究施設だけど土日祝は特別開放、ジョン万次郎資料館か足摺海洋館のチケットで見学できる",
       "tags": [
         "kids"
@@ -2265,7 +2274,11 @@
       "search_animals": [
         "ジンベエザメ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ジンベエザメ",
+        "マンボウ"
+      ]
     },
     {
       "name": "タツノオトシゴハウス",
@@ -2273,8 +2286,8 @@
       "lat": 31.3811,
       "lng": 130.5228,
       "url": "http://www.seahorseways.com/",
-      "fee": "要確認",
-      "child": "要確認",
+      "fee": "無料",
+      "child": "無料",
       "closed": "要確認",
       "comment": "国内でタツノオトシゴを見られる16施設の一つ。観光養殖場で愛らしい姿をじっくり観察できる",
       "tags": [
@@ -2284,7 +2297,10 @@
       "search_animals": [
         "タツノオトシゴ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "タツノオトシゴ"
+      ]
     },
     {
       "name": "オホーツク流氷館",
@@ -2294,13 +2310,18 @@
       "url": "https://www.ryuhyokan.com/",
       "fee": "750円",
       "child": "540円（小中学生）",
-      "closed": "年中無休（年末年始は時間短縮）",
+      "closed": "定休日なし",
       "comment": "天都山にある流氷とオホーツク海の生き物がテーマの施設。マイナス15度の「流氷体感室」で本物の流氷にさわれる",
       "tags": [
-        "kids"
+        "rain",
+        "summer"
       ],
       "photo": "assets/photo_ryuhyokan.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "クリオネ"
+      ],
+      "restaurant": "あり（レストラン・お土産コーナー併設）"
     },
     {
       "name": "まちなか水族館 ギョギョタウン",
@@ -2316,7 +2337,8 @@
         "kids"
       ],
       "photo": "assets/photo_gyogyotown.jpg",
-      "visited": false
+      "visited": false,
+      "access": "道の駅福良から徒歩8〜9分"
     },
     {
       "name": "うなぎミュージアム＆Cafe 雑魚寝館",
@@ -2327,10 +2349,16 @@
       "fee": "無料",
       "child": "無料",
       "closed": "月1回・第3土曜17:00〜22:00のみ営業",
-      "comment": "世界のうなぎが見られるカフェ併設ミュージアム。月1回だけの激レア営業日を狙って行きたい",
+      "comment": "浅香山駅から歩いてすぐ、うなぎと日本の淡水魚を集めた珍しいミュージアム＆カフェだよ（月1回程度の特別営業日あり、訪問前に要確認）",
       "tags": [],
       "photo": "assets/photo_zacconekan.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ホトケドジョウ",
+        "オヤニラミ"
+      ],
+      "restaurant": "あり（喫茶）",
+      "access": "南海電鉄浅香山駅から徒歩2分"
     },
     {
       "name": "埼玉県立川の博物館 水族館",
@@ -2339,14 +2367,17 @@
       "lng": 139.1102,
       "url": "https://www.river-museum.jp/",
       "fee": "410円",
-      "child": "無料（高校生以下）",
-      "closed": "月曜（祝日は翌日）・年末年始",
+      "child": "200円",
+      "closed": "月曜日（祝日・振替休日・県民の日・夏休み期間は開館）、年末年始",
       "comment": "荒川の源流から河口までを再現した淡水魚中心の水族館。日本一大きい水車も名物",
       "tags": [
         "rain",
         "kids"
       ],
-      "visited": false
+      "visited": false,
+      "parking": "あり（普通車300円／バス1,030円）",
+      "restaurant": "あり（レストランウォーターミル）",
+      "access": "東武東上線「鉢形駅」から徒歩20分、または寄居駅からタクシー7分"
     },
     {
       "name": "ドルフィンファンタジー伊東",
@@ -2359,14 +2390,16 @@
       "closed": "年中無休（天候・イルカの体調により臨時休業あり）",
       "comment": "伊東オレンジビーチに面した屋外型ドルフィン施設。バンドウイルカとのふれあい体験が人気",
       "tags": [
-        "dolphin",
-        "kids"
+        "dolphin"
       ],
       "search_animals": [
         "イルカ",
         "バンドウイルカ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ"
+      ]
     },
     {
       "name": "時之栖水中楽園AQUARIUM",
@@ -2376,7 +2409,7 @@
       "url": "https://www.tokinosumika.com/",
       "fee": "1,200円",
       "child": "600円",
-      "closed": "通年営業（要確認）",
+      "closed": "年中無休",
       "comment": "日本最大級の金魚展示で知られる屋内施設。光の演出による幻想的な空間が魅力",
       "tags": [
         "rain",
@@ -2385,7 +2418,10 @@
       "search_animals": [
         "金魚"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "金魚"
+      ]
     },
     {
       "name": "弥富金魚水族館（YaToMi AQUA）",
@@ -2393,17 +2429,22 @@
       "lat": 35.1275,
       "lng": 136.7147,
       "url": "https://www.city.yatomi.lg.jp/",
-      "fee": "要確認",
-      "child": "要確認",
-      "closed": "要確認",
+      "fee": "無料",
+      "child": "無料",
+      "closed": "月曜（祝日でも休館）",
       "comment": "金魚の産地・弥富ならではの金魚専門展示館。金魚すくい体験も楽しめる",
       "tags": [
+        "rain",
         "kids"
       ],
       "search_animals": [
         "金魚"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "金魚"
+      ],
+      "access": "近鉄弥富駅・JR弥富駅から徒歩約8〜10分"
     },
     {
       "name": "小笠原海洋センター",
@@ -2411,9 +2452,9 @@
       "lat": 27.0761,
       "lng": 142.1969,
       "url": "https://bonin-ocean.net/",
-      "fee": "無料",
+      "fee": "入館無料",
       "child": "無料",
-      "closed": "入出港日は時間短縮あり／2026年8月〜2027年3月末は改修工事のため長期休館予定",
+      "closed": "2026年8月〜2027年3月末まで改修工事のため長期休館予定",
       "comment": "小笠原諸島・父島でアオウミガメの保護・研究を行う施設。ウミガメとのふれあい体験も",
       "tags": [
         "kids"
@@ -2422,7 +2463,11 @@
         "アオウミガメ",
         "ウミガメ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "アオウミガメ",
+        "ザトウクジラ"
+      ]
     },
     {
       "name": "のと海洋ふれあいセンター",
@@ -2430,12 +2475,12 @@
       "lat": 37.3106,
       "lng": 137.0405,
       "url": "http://notomarine.jp/",
-      "fee": "要確認",
-      "child": "要確認",
-      "closed": "月曜・年末年始",
+      "fee": "210円",
+      "child": "中学生以下無料",
+      "closed": "毎週月曜（祝日・繁忙期除く）、年末年始（12/29〜1/3）",
       "comment": "能登半島の海の生き物を紹介する体験型施設。地元近海の磯・岩礁生物が中心",
       "tags": [
-        "kids"
+        "rain"
       ],
       "visited": false
     },
@@ -2445,14 +2490,21 @@
       "lat": 35.4914,
       "lng": 135.7439,
       "url": "https://obama-aquarium.com/",
-      "fee": "700円",
-      "child": "300円",
-      "closed": "月・火・水曜（木〜日・祝のみ営業）",
+      "fee": "700円（小浜市民300円）",
+      "child": "300円（小浜市民200円）、未就学児無料",
+      "closed": "月・火・水休（木金土日祝が開館）",
       "comment": "築123年の町家を活用した小さな水族館。福井県立大学の学生が運営し若狭湾の地魚など約60種を展示",
       "tags": [
         "kids"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "アラレガコ",
+        "フグ",
+        "クロダイ"
+      ],
+      "parking": "あり（小浜公園駐車場・人魚の浜西駐車場、徒歩2分）",
+      "access": "JR小浜駅からタクシー約5分または徒歩約20分"
     },
     {
       "name": "蓼科アミューズメント水族館",
@@ -2461,13 +2513,16 @@
       "lng": 138.2647,
       "url": "https://www.tateshina-aquarium.jp/",
       "fee": "1,500円",
-      "child": "860円",
-      "closed": "通年営業（要確認）",
+      "child": "860円（幼児430円）",
+      "closed": "毎週木曜（祝日は営業）",
       "comment": "標高1,750mに位置する「天空の水族館」。高地ならではの淡水魚展示が特色",
       "tags": [
-        "kids"
+        "rain"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ピラルク"
+      ]
     },
     {
       "name": "北九州市立水環境館",
@@ -2477,13 +2532,15 @@
       "url": "https://mizukankyokan.jp/",
       "fee": "無料",
       "child": "無料",
-      "closed": "火曜（祝日・春夏冬休み除く）・年末年始",
+      "closed": "火曜、年末年始",
       "comment": "紫川沿いの「水」をテーマにした無料の学習施設。水中観察窓から川の生き物をのぞける",
       "tags": [
+        "rain",
         "kids"
       ],
       "photo": "assets/photo_kitakyushu_water.jpg",
-      "visited": false
+      "visited": false,
+      "access": "JR小倉駅・西小倉駅から徒歩10分、モノレール平和通駅から徒歩5分"
     },
     {
       "name": "さんご畑",
@@ -2492,16 +2549,20 @@
       "lng": 127.7669,
       "url": "https://www.tabirai.net/sightseeing/feature/experience163.aspx",
       "fee": "900円",
-      "child": "要確認",
+      "child": "600円",
       "closed": "水曜",
       "comment": "陸上でサンゴ礁の生態系を再現した体験型施設。サンゴの株分け体験もできる",
       "tags": [
-        "kids"
+        "summer"
       ],
       "search_animals": [
         "サンゴ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "サンゴ"
+      ],
+      "parking": "あり"
     },
     {
       "name": "新さっぽろサンピアザ水族館",
@@ -2511,14 +2572,21 @@
       "url": "https://www.sunpiazza-aquarium.com/",
       "fee": "1,200円",
       "child": "400円",
-      "closed": "無休",
+      "closed": "年中無休",
       "comment": "札幌の駅チカ都市型水族館",
       "tags": [
         "rain",
         "kids",
         "penguin"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ゴマフアザラシ",
+        "コツメカワウソ",
+        "ケープペンギン"
+      ],
+      "access": "地下鉄東西線「新さっぽろ」駅から徒歩5分、JR「新札幌」駅から徒歩3分",
+      "parking": "あり"
     },
     {
       "name": "札幌市豊平川さけ科学館",
@@ -2528,12 +2596,21 @@
       "url": "https://salmon-museum.jp/",
       "fee": "無料",
       "child": "無料",
-      "closed": "月曜（祝日は翌日）・年末年始",
+      "closed": "毎週月曜（祝休日の場合は翌平日）、年末年始",
       "comment": "豊平川のサケの遡上を見守る科学館",
       "search_animals": [
         "サケ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "サケ",
+        "サクラマス",
+        "ヤマメ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ]
     },
     {
       "name": "市立室蘭水族館",
@@ -2541,8 +2618,8 @@
       "lat": 42.318,
       "lng": 140.965,
       "url": "",
-      "fee": "400円",
-      "child": "中学生以下ほぼ無料",
+      "fee": "大人400円",
+      "child": "中学生以下は室蘭市民無料・市外100円",
       "closed": "冬期休館（4月下旬〜10月中旬のみ開館）",
       "comment": "北海道最古の歴史ある水族館",
       "visited": false
@@ -2554,11 +2631,21 @@
       "lng": 144.446,
       "url": "https://www.sennosuke.net/pukupuku/",
       "fee": "800円",
-      "child": "400円",
-      "closed": "無休",
+      "child": "400円（幼児200円）",
+      "closed": "年末年始",
       "comment": "魚屋さん「釧之助」の中にあるフウセンウオの水族館",
       "photo": "assets/photo_kushiro.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "フウセンウオ",
+        "チンアナゴ",
+        "レッドピラニア"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "parking": "あり（無料200台）"
     },
     {
       "name": "わっかりうむ ノシャップ寒流水族館",
@@ -2568,9 +2655,18 @@
       "url": "https://www.city.wakkanai.hokkaido.jp/suizokukan/",
       "fee": "500円",
       "child": "100円",
-      "closed": "4月上旬・12〜1月",
+      "closed": "4月1日〜28日、12月1日〜翌年1月31日",
       "comment": "日本最北端の水族館！幻の魚イトウが泳ぐ",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ゴマフアザラシ",
+        "ペンギン"
+      ],
+      "tags": [
+        "rain",
+        "penguin"
+      ],
+      "access": "JR稚内駅からバス約15分「ノシャップ」下車徒歩5分"
     },
     {
       "name": "北の大地の水族館（山の水族館）",
@@ -2580,10 +2676,20 @@
       "url": "https://onneyu-aq.com/",
       "fee": "830円",
       "child": "400円",
-      "closed": "4月上旬・12/26〜1/1",
+      "closed": "4月8日〜14日、12月第2月〜金曜、12/31、1/1",
       "comment": "滝つぼ水槽と冬に凍る川！中嶋誠プロデュースの名水族館",
       "photo": "assets/photo_kitanodaichi.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イトウ",
+        "ピラルク",
+        "オショロコマ"
+      ],
+      "tags": [
+        "rain"
+      ],
+      "parking": "あり・無料",
+      "access": "JR留辺蘂駅からバス約20分、終点下車徒歩2分"
     },
     {
       "name": "美深チョウザメ館",
@@ -2593,12 +2699,18 @@
       "url": "https://www.bifuka-kankou.com/attractions/tyozamekan/",
       "fee": "無料",
       "child": "無料",
-      "closed": "月曜",
+      "closed": "月曜日",
       "comment": "古代魚チョウザメ専門の無料水族館",
       "search_animals": [
         "チョウザメ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "チョウザメ"
+      ],
+      "tags": [
+        "rain"
+      ]
     },
     {
       "name": "オホーツクとっかりセンター",
@@ -2614,7 +2726,14 @@
       "search_animals": [
         "アザラシ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "アザラシ"
+      ],
+      "tags": [
+        "rain"
+      ],
+      "access": "紋別市街地から車で10分、オホーツク紋別空港から車で15分"
     },
     {
       "name": "氷海展望塔オホーツクタワー",
@@ -2622,12 +2741,14 @@
       "lat": 44.339,
       "lng": 143.372,
       "url": "https://o-tower.co.jp/",
-      "fee": "500円",
-      "child": "250円",
+      "fee": "800円（中学生以上）",
+      "child": "400円（小学生）、幼児無料",
       "closed": "12/29〜1/3",
       "comment": "海中からオホーツク海をのぞける展望塔",
       "photo": "assets/photo_okhotsk_tower.jpg",
-      "visited": false
+      "visited": false,
+      "restaurant": "あり（3階カフェ「companio」）",
+      "access": "紋別バスターミナルから車で10分／バスで15分"
     },
     {
       "name": "標津サーモン科学館",
@@ -2637,13 +2758,22 @@
       "url": "https://s-salmon.com/",
       "fee": "650円",
       "child": "200円",
-      "closed": "冬期水曜休・12〜1月休館",
+      "closed": "5〜10月は無休。2・3・4・11月は水曜休館。12〜1月は冬季休館",
       "comment": "サケの仲間の展示種類数は世界トップクラス",
       "photo": "assets/photo_shibetsu.jpg",
       "search_animals": [
         "サケ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イトウ",
+        "チョウザメ"
+      ],
+      "tags": [
+        "rain"
+      ],
+      "stroller": "あり（車椅子・ベビーカー貸出あり）",
+      "access": "標津バスターミナルから徒歩20分、またはサーモンパーク入口下車すぐ"
     },
     {
       "name": "青森県営浅虫水族館",
@@ -2655,7 +2785,16 @@
       "child": "高校生以下無料",
       "closed": "年中無休",
       "comment": "本州最北端の水族館！高校生以下無料は太っ腹",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ"
+      ],
+      "tags": [
+        "rain",
+        "dolphin"
+      ],
+      "restaurant": "あり（軽食コーナー）",
+      "access": "浅虫温泉駅から徒歩10分"
     },
     {
       "name": "八戸市水産科学館マリエント",
@@ -2663,11 +2802,20 @@
       "lat": 40.535,
       "lng": 141.558,
       "url": "https://www.marient.org/",
-      "fee": "300円",
-      "child": "100円",
-      "closed": "月曜（祝日は翌平日）",
+      "fee": "一般300円",
+      "child": "小中学生100円",
+      "closed": "年中無休（臨時休館あり）",
       "comment": "ウミネコの繁殖地・蕪島のそばの科学館",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "アオウミガメ",
+        "イカ"
+      ],
+      "tags": [
+        "rain"
+      ],
+      "parking": "あり・無料",
+      "access": "鮫駅から徒歩15分"
     },
     {
       "name": "もぐらんぴあ",
@@ -2675,11 +2823,16 @@
       "lat": 40.19,
       "lng": 141.78,
       "url": "https://www.moguranpia.com/",
-      "fee": "700円",
-      "child": "300円",
-      "closed": "月曜（祝日は翌日）",
+      "fee": "750円",
+      "child": "300円、幼児無料",
+      "closed": "月曜日（休日の場合は翌日）",
       "comment": "石油備蓄基地の地下にある「まちなか水族館」",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain"
+      ],
+      "parking": "あり",
+      "access": "JR八戸線久慈駅から市民バス侍浜線で約25分、徒歩約10分"
     },
     {
       "name": "岩手県立水産科学館",
@@ -2688,22 +2841,28 @@
       "lng": 141.976,
       "url": "",
       "fee": "300円",
-      "child": "高校生以下無料",
+      "child": "大学生140円、高校生以下無料",
       "closed": "月曜（祝日は翌日）・年末年始",
       "comment": "全国初の水産専門科学館（宮古市）",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain"
+      ],
+      "access": "宮古駅からバス、浄土ヶ浜ビジターセンター下車徒歩5分",
+      "parking": "あり"
     },
     {
       "name": "アクアテラス錦ケ丘",
       "pref": "宮城県",
-      "lat": 38.247,
-      "lng": 140.73,
+      "lat": 38.2573,
+      "lng": 140.7638,
       "url": "https://aquaterrace.co.jp/",
-      "fee": "800円【要確認】",
-      "child": "500円【要確認】",
+      "fee": "1,000円（高校生以上）",
+      "child": "小中学生700円、3歳以上500円",
       "closed": "不定休【要確認】",
       "comment": "仙台の山あいの光のアクアリウム",
-      "visited": false
+      "visited": false,
+      "access": "仙台駅から仙山線で愛子駅下車、徒歩約20分またはバス約4分"
     },
     {
       "name": "男鹿水族館GAO",
@@ -2711,12 +2870,12 @@
       "lat": 39.881,
       "lng": 139.697,
       "url": "https://www.gao-aqua.jp/",
-      "fee": "1,300円",
-      "child": "500円",
+      "fee": "1,300円（高校生以上）",
+      "child": "500円、未就学児無料",
       "closed": "不定休（冬期は木曜休が多い・7〜9月無休）",
       "comment": "ホッキョクグマと県魚ハタハタに会える",
       "tags": [
-        "kids",
+        "rain",
         "penguin"
       ],
       "only": "ホッキョクグマ",
@@ -2724,7 +2883,13 @@
       "search_animals": [
         "ホッキョクグマ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ホッキョクグマ",
+        "ペンギン"
+      ],
+      "restaurant": "あり（レストラン「フルット」）",
+      "access": "JR男鹿駅からバス「男鹿北線」で「男鹿水族館前」下車"
     },
     {
       "name": "アクアマリンいなわしろカワセミ水族館",
@@ -2736,7 +2901,18 @@
       "child": "300円",
       "closed": "基本無休",
       "comment": "猪苗代湖のほとりの淡水専門館",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ユーラシアカワウソ",
+        "カワセミ"
+      ],
+      "tags": [
+        "rain"
+      ],
+      "restaurant": "あり",
+      "nursing": "あり",
+      "parking": "無料駐車場約80台",
+      "access": "猪苗代駅からタクシーで約10分"
     },
     {
       "name": "かすみがうら市水族館",
@@ -2748,7 +2924,16 @@
       "child": "160円",
       "closed": "月曜（祝日は翌日）・年末年始",
       "comment": "霞ヶ浦の生きものに会えるレトロ水族館",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "オオサンショウウオ",
+        "シルバーアロワナ"
+      ],
+      "tags": [
+        "rain"
+      ],
+      "parking": "無料駐車場100台以上",
+      "access": "常磐線神立駅からデマンド型乗合タクシーで約30分"
     },
     {
       "name": "栃木県なかがわ水遊園",
@@ -2766,7 +2951,16 @@
       "search_animals": [
         "ピラルクー"
       ],
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain"
+      ],
+      "stroller": "無料貸出あり",
+      "nursing": "あり（個室1部屋＋おむつ台2台）",
+      "food_bring": "弁当持参可（ホール内で飲食可）",
+      "restaurant": "あり（なかカフェ／味処ゆづかみ／つり池キッチン）",
+      "parking": "無料駐車場700台",
+      "access": "西那須野駅からバス約40分「田宿」下車"
     },
     {
       "name": "さかなと森の観察園",
@@ -2781,7 +2975,8 @@
       "search_animals": [
         "マス"
       ],
-      "visited": false
+      "visited": false,
+      "access": "日光駅からバス約55分「菖蒲ガ浜」下車、徒歩1分"
     },
     {
       "name": "さいたま水族館",
@@ -2797,7 +2992,18 @@
       "search_animals": [
         "ムサシトミヨ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ムサシトミヨ",
+        "チョウザメ",
+        "コツメカワウソ"
+      ],
+      "stroller": "ベビーカーのまま入館可（貸出はなし）",
+      "nursing": "あり（授乳室3室、おむつ台2台、キッズルームあり）",
+      "locker": "あり",
+      "restaurant": "館内飲食不可（売店は閉店済み）。屋根付き休憩舎で持参の飲食可",
+      "parking": "あり（無料1100台）",
+      "access": "羽生駅から車で約20分"
     },
     {
       "name": "板橋区立熱帯環境植物館",
@@ -2809,7 +3015,18 @@
       "child": "130円（土日無料）",
       "closed": "月曜（祝日は翌日）",
       "comment": "植物館なのにミニ水族館も！東南アジアの水辺を再現",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "淡水エイ",
+        "アロワナ"
+      ],
+      "tags": [
+        "rain"
+      ],
+      "restaurant": "あり（喫茶室クレア）",
+      "locker": "あり（100円、返金式）",
+      "parking": "専用駐車場なし",
+      "access": "都営三田線高島平駅から徒歩7分"
     },
     {
       "name": "足立区生物園",
@@ -2824,7 +3041,15 @@
       "search_animals": [
         "金魚"
       ],
-      "visited": false
+      "visited": false,
+      "tags": [
+        "kids"
+      ],
+      "stroller": "預かり・貸出あり",
+      "nursing": "あり（授乳室1室、おむつ台2台）",
+      "food_bring": "飲食スペースあり（持込可）",
+      "parking": "あり（計29台）",
+      "access": "竹の塚駅・六町駅・北千住駅からバス、徒歩5〜10分"
     },
     {
       "name": "井の頭自然文化園 水生物館",
@@ -2836,7 +3061,13 @@
       "child": "小学生無料",
       "closed": "月曜（祝日は翌日）",
       "comment": "井の頭池の水辺の生きものをじっくり観察",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "オオサンショウウオ"
+      ],
+      "nursing": "あり（管理事務所内、定員2組）",
+      "restaurant": "食堂なし（売店で軽食購入可）",
+      "access": "JR中央線吉祥寺駅から徒歩5〜10分、京王井の頭線井の頭公園駅から徒歩1分"
     },
     {
       "name": "横浜開運水族館 フォーチュンアクアリウム",
@@ -2852,7 +3083,10 @@
         "rain",
         "kids"
       ],
-      "visited": false
+      "visited": false,
+      "nursing": "あり（個室授乳室＋ベビールーム）",
+      "parking": "専用駐車場なし",
+      "access": "みなとみらい線元町・中華街駅2番出口から徒歩約4分"
     },
     {
       "name": "観音崎自然博物館",
@@ -2874,20 +3108,24 @@
       "url": "https://kawa-sui.com/",
       "fee": "2,200円",
       "child": "1,400円",
-      "closed": "1/1のみ",
+      "closed": "定休日なし（川崎ルフロンの休館日に準ずる）",
       "comment": "川崎駅前ビルで世界の川を旅する都市型水族館",
       "tags": [
         "rain",
         "kids"
       ],
       "animals": [
-        "ピラルクー"
+        "ピラルクー",
+        "ナマズ"
       ],
       "photo": "assets/photo_kawasui.jpg",
       "search_animals": [
         "ピラルクー"
       ],
-      "visited": false
+      "visited": false,
+      "nursing": "あり（9階「mamaro」）",
+      "locker": "あり（100円）",
+      "access": "JR川崎駅東口から徒歩1分"
     },
     {
       "name": "相模川ふれあい科学館 アクアリウムさがみはら",
@@ -2899,7 +3137,11 @@
       "child": "150円",
       "closed": "月曜（祝日は開館）",
       "comment": "相模川の生きもの専門！エサやり体験も人気",
-      "visited": false
+      "visited": false,
+      "stroller": "無料貸出2台",
+      "nursing": "あり（女性専用授乳室）",
+      "parking": "無料駐車場95台",
+      "access": "JR横浜線相模原駅からバス「ふれあい科学館前」下車すぐ"
     },
     {
       "name": "北里アクアリウムラボ",
@@ -2909,9 +3151,12 @@
       "url": "https://www.kitasato-u.ac.jp/mb/faculty/aquarium/",
       "fee": "無料",
       "child": "無料",
-      "closed": "平日のみ開館",
+      "closed": "土・日曜日、祝日",
       "comment": "北里大学の学生が運営するミニ水族館",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain"
+      ]
     },
     {
       "name": "箱根園水族館",
@@ -2921,10 +3166,21 @@
       "url": "https://www.princehotels.co.jp/amuse/hakone-en/suizokukan/",
       "fee": "1,600円",
       "child": "800円",
-      "closed": "年中無休",
+      "closed": "無休",
       "comment": "標高723m、日本一高い場所の海水水族館",
       "photo": "assets/photo_hakone.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "アザラシ",
+        "ペンギン"
+      ],
+      "tags": [
+        "penguin",
+        "baby"
+      ],
+      "nursing": "おむつ交換シート完備",
+      "restaurant": "あり",
+      "access": "箱根湯本駅から伊豆箱根バスで「箱根園」下車"
     },
     {
       "name": "上越市立水族博物館 うみがたり",
@@ -2932,19 +3188,25 @@
       "lat": 37.178,
       "lng": 138.228,
       "url": "https://www.umigatari.jp/joetsu/",
-      "fee": "2,000円",
-      "child": "1,000円",
-      "closed": "年中無休（メンテナンス休あり）",
+      "fee": "2,000円（18才以上）",
+      "child": "小中学生1,000円、幼児600円、高校生1,200円",
+      "closed": "年中無休",
       "comment": "マゼランペンギン飼育数 日本一！",
       "tags": [
         "dolphin",
-        "kids",
+        "beluga",
         "penguin"
       ],
       "search_animals": [
         "ペンギン"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "シロイルカ",
+        "マゼランペンギン",
+        "イルカ"
+      ],
+      "access": "直江津駅から徒歩約15分"
     },
     {
       "name": "イヨボヤ会館",
@@ -2953,13 +3215,22 @@
       "lng": 139.478,
       "url": "https://www.iyoboya.jp/",
       "fee": "700円",
-      "child": "300円",
-      "closed": "水曜（祝日は翌日）・12/28〜1/4",
+      "child": "小中高生300円",
+      "closed": "水曜日（祝日の場合は翌日）、年末年始",
       "comment": "日本最初のサケの博物館！三面川の観察窓も",
       "search_animals": [
         "サケ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "サケ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "parking": "あり",
+      "access": "村上駅から徒歩約20分"
     },
     {
       "name": "長岡市寺泊水族博物館",
@@ -2968,10 +3239,19 @@
       "lng": 138.767,
       "url": "https://aquarium-teradomari.jp/",
       "fee": "700円",
-      "child": "350円",
+      "child": "中学生450円、小学生350円、幼児200円",
       "closed": "不定休（月数回）",
       "comment": "海に浮かぶような八角形の水族館",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ペンギン"
+      ],
+      "tags": [
+        "rain",
+        "kids",
+        "penguin"
+      ],
+      "access": "JR越後線寺泊駅からバス約10分「寺泊水族館前」下車すぐ"
     },
     {
       "name": "ひみラボ水族館",
@@ -2981,9 +3261,17 @@
       "url": "https://sites.google.com/site/himilab/",
       "fee": "無料",
       "child": "無料",
-      "closed": "開館日は要確認（不定期）",
+      "closed": "月曜日、年末〜3月中旬",
       "comment": "廃校を利用した氷見の淡水魚ラボ",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イタセンパラ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "access": "氷見駅からバスで「大覚口」下車、徒歩5分"
     },
     {
       "name": "森の中の水族館。（富士湧水の里水族館）",
@@ -2992,10 +3280,14 @@
       "lng": 138.842,
       "url": "https://morinonakano-suizokukan.com/",
       "fee": "420円",
-      "child": "200円",
-      "closed": "火曜（祝日は翌日）・7/21〜8/31は無休",
+      "child": "200円（乳幼児無料）",
+      "closed": "火曜日（祝日の場合は翌日）、年末年始",
       "comment": "富士の湧水を使った日本一きれいな淡水水族館",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain",
+        "kids"
+      ]
     },
     {
       "name": "あわしまマリンパーク",
@@ -3004,10 +3296,22 @@
       "lng": 138.888,
       "url": "https://www.marinepark.jp/",
       "fee": "3,000円（乗船料込）",
-      "child": "1,500円",
-      "closed": "年中無休（2月にメンテナンス休あり）",
+      "child": "1,300円",
+      "closed": "年中無休",
       "comment": "船で渡る無人島水族館！日本最大級のカエル館も",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ",
+        "アシカ",
+        "ペンギン"
+      ],
+      "tags": [
+        "dolphin",
+        "penguin",
+        "summer"
+      ],
+      "restaurant": "あり",
+      "access": "沼津駅から東海バス約32分「マリンパーク」下車、連絡船で約3分"
     },
     {
       "name": "沼津港深海水族館",
@@ -3017,7 +3321,7 @@
       "url": "https://www.numazu-deepsea.com/",
       "fee": "1,800円",
       "child": "900円",
-      "closed": "年中無休（1月にメンテナンス休あり）",
+      "closed": "年中無休",
       "comment": "世界唯一のシーラカンス・ミュージアム！",
       "tags": [
         "deep",
@@ -3027,7 +3331,13 @@
       "search_animals": [
         "シーラカンス冷凍標本"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "シーラカンス",
+        "ダイオウグソクムシ",
+        "タカアシガニ"
+      ],
+      "access": "沼津駅南口からバス約15分「沼津港」下車"
     },
     {
       "name": "幼魚水族館",
@@ -3035,8 +3345,8 @@
       "lat": 35.098,
       "lng": 138.905,
       "url": "",
-      "fee": "1,200円【要確認】",
-      "child": "600円【要確認】",
+      "fee": "1,400円",
+      "child": "700円",
       "closed": "サントムーン柿田川に準ずる",
       "comment": "世界初！魚の「こども」専門の水族館",
       "tags": [
@@ -3052,14 +3362,21 @@
       "lng": 138.89,
       "url": "https://www.mitosea.com/",
       "fee": "2,600円",
-      "child": "1,300円",
-      "closed": "無休（冬期メンテナンス休あり）",
+      "child": "1,200円",
+      "closed": "年中無休（冬期にメンテナンス休館あり）",
       "comment": "富士山を望む海のふれあいパーク",
       "tags": [
         "dolphin",
         "kids"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ",
+        "コツメカワウソ",
+        "アシカ"
+      ],
+      "parking": "あり（有料300台）",
+      "access": "伊豆長岡駅から伊豆箱根バスで約25分"
     },
     {
       "name": "下田海中水族館",
@@ -3067,15 +3384,22 @@
       "lat": 34.669,
       "lng": 138.953,
       "url": "https://shimoda-aquarium.com/",
-      "fee": "2,500円",
-      "child": "1,250円",
-      "closed": "ほぼ無休（12月中旬に数日休）",
+      "fee": "2,400円",
+      "child": "1,200円",
+      "closed": "年中無休",
       "comment": "自然の入り江をそのまま使った海上水族館",
       "tags": [
         "dolphin",
-        "kids"
+        "penguin",
+        "summer"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ",
+        "フンボルトペンギン"
+      ],
+      "parking": "あり（無料200台）",
+      "access": "伊豆急下田駅から東海バス約7分"
     },
     {
       "name": "浜名湖体験学習施設ウォット",
@@ -3083,11 +3407,17 @@
       "lat": 34.694,
       "lng": 137.605,
       "url": "https://ulotto.entetsuassist-dms.com/",
-      "fee": "320円",
+      "fee": "400円（高校生以下無料）",
       "child": "高校生以下無料",
       "closed": "月曜（祝日は翌日）・GW夏休みは無休",
       "comment": "浜名湖の生きものにさわれる体験型施設",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "restaurant": "なし（売店のみ）",
+      "parking": "浜松市営渚園駐車場を利用"
     },
     {
       "name": "南知多ビーチランド",
@@ -3096,15 +3426,23 @@
       "lng": 136.883,
       "url": "https://beachland.jp/",
       "fee": "2,200円",
-      "child": "1,100円（2歳以上）",
+      "child": "1,100円",
       "closed": "不定休（冬期休園日あり）",
       "comment": "ふれあい日本一を目指す海のテーマパーク＋おもちゃ王国",
       "tags": [
         "dolphin",
-        "kids"
+        "kids",
+        "summer"
       ],
       "photo": "assets/photo_minamichita.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ",
+        "アシカ",
+        "ペンギン"
+      ],
+      "restaurant": "あり（THE BEACH）",
+      "access": "名鉄知多新線「知多奥田駅」から徒歩15分"
     },
     {
       "name": "碧南海浜水族館",
@@ -3114,9 +3452,14 @@
       "url": "https://www.city.hekinan.lg.jp/site/aquarium/",
       "fee": "500円",
       "child": "200円",
-      "closed": "月曜（祝日は翌平日）・年末年始",
+      "closed": "毎週月曜日、12月29日〜1月1日",
       "comment": "三河湾の生きものをじっくり学べる地域密着館",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "access": "名鉄三河線「碧南駅」から徒歩約15分"
     },
     {
       "name": "ぎょぎょランド（赤塚山公園）",
@@ -3126,22 +3469,38 @@
       "url": "http://www.akatsukayama.jp/",
       "fee": "無料",
       "child": "無料",
-      "closed": "火曜・年末年始",
+      "closed": "毎週火曜日、年末年始",
       "comment": "豊川の生きものに会える無料の淡水魚水族館",
       "photo": "assets/photo_medakakan.jpg",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain",
+        "kids"
+      ]
     },
     {
       "name": "名古屋シーライフ水族館",
       "pref": "愛知県",
-      "lat": 35.088,
-      "lng": 136.884,
+      "lat": 35.0506,
+      "lng": 136.8437,
       "url": "https://www.legoland.jp/",
       "fee": "1,800円〜(変動)",
       "child": "変動制",
-      "closed": "不定休（月による）",
+      "closed": "不定休",
       "comment": "レゴランド隣接！レゴ×お魚の体験型水族館",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "エイ",
+        "サメ",
+        "クマノミ"
+      ],
+      "tags": [
+        "rain",
+        "kids",
+        "same",
+        "baby"
+      ],
+      "access": "あおなみ線「金城ふ頭駅」から徒歩約10分"
     },
     {
       "name": "鳥羽湾めぐりとイルカ島",
@@ -3149,7 +3508,7 @@
       "lat": 34.503,
       "lng": 136.855,
       "url": "https://shima-marineleisure.com/toba/island",
-      "fee": "遊覧船乗船料に込（大人2,800円程度）",
+      "fee": "入園フリー（施設利用は別料金）",
       "child": "子ども半額程度",
       "closed": "1〜2月に定期検査休業",
       "comment": "遊覧船で渡る島でイルカ・アシカショー",
@@ -3157,38 +3516,65 @@
         "アシカ",
         "イルカ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ",
+        "アシカ",
+        "カワウソ"
+      ],
+      "tags": [
+        "dolphin",
+        "kids",
+        "summer"
+      ],
+      "restaurant": "あり"
     },
     {
       "name": "紀宝町ウミガメ公園",
       "pref": "三重県",
       "lat": 33.744,
       "lng": 136.01,
-      "url": "https://umigamekouen.com/",
-      "fee": "無料",
+      "url": "",
+      "fee": "入館無料",
       "child": "無料",
-      "closed": "無休",
+      "closed": "年中無休",
       "comment": "道の駅でウミガメに会える！保護活動の拠点",
       "search_animals": [
         "ウミガメ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ウミガメ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "access": "JR「熊野市駅」からバス30分「井田舞子」下車すぐ"
     },
     {
       "name": "赤目滝水族館",
       "pref": "三重県",
-      "lat": 34.541,
-      "lng": 136.077,
+      "lat": 34.5633,
+      "lng": 136.0856,
       "url": "",
-      "fee": "【要確認】",
-      "child": "【要確認】",
-      "closed": "【要確認】",
+      "fee": "1,000円（渓谷保全料込み）",
+      "child": "500円、未就学児無料",
+      "closed": "1月〜3月第2週までの木曜（祝日の場合は開館）、12月28日〜31日",
       "comment": "赤目四十八滝のオオサンショウウオ水族館",
       "photo": "assets/photo_akame.jpg",
       "search_animals": [
         "オオサンショウウオ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "オオサンショウウオ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "access": "近鉄「赤目口駅」からバス10分「赤目滝」下車徒歩5分"
     },
     {
       "name": "高槻市立自然博物館 あくあぴあ芥川",
@@ -3196,11 +3582,17 @@
       "lat": 34.855,
       "lng": 135.594,
       "url": "https://www.city.takatsuki.osaka.jp/soshiki/54/4905.html",
-      "fee": "無料",
+      "fee": "無料（特別展を除く）",
       "child": "無料",
-      "closed": "月曜（祝日は翌平日）・12/28〜1/4",
+      "closed": "月曜日（祝休日のときは翌平日）、年末年始",
       "comment": "芥川の生きものに会える無料の自然博物館",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "parking": "あり",
+      "access": "JR高槻駅からバス約15分「南平台小学校前」下車すぐ"
     },
     {
       "name": "奈良金魚ミュージアム",
@@ -3208,9 +3600,9 @@
       "lat": 34.678,
       "lng": 135.798,
       "url": "https://kingyomuseum.com/",
-      "fee": "1,200円【要確認】",
-      "child": "800円【要確認】",
-      "closed": "ミ・ナーラに準ずる（ほぼ無休）",
+      "fee": "1,300円",
+      "child": "800円",
+      "closed": "年中無休（施設休館日に準ずる）",
       "comment": "金魚×アートの映えるミュージアム",
       "tags": [
         "rain",
@@ -3219,7 +3611,12 @@
       "search_animals": [
         "金魚"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "金魚"
+      ],
+      "parking": "あり",
+      "access": "JR奈良駅・近鉄奈良駅・新大宮駅から無料シャトルバスあり"
     },
     {
       "name": "和歌山県立自然博物館",
@@ -3229,10 +3626,16 @@
       "url": "https://www.shizenhaku.wakayama-c.ed.jp/",
       "fee": "480円",
       "child": "高校生以下無料",
-      "closed": "月曜（祝日は翌日）",
+      "closed": "月曜（祝日の場合翌平日）、年末年始",
       "comment": "和歌山の海の大水槽がある博物館",
       "photo": "assets/photo_wakayama.jpg",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "parking": "あり",
+      "access": "JR海南駅からバス約10分（琴の浦下車）"
     },
     {
       "name": "串本海中公園",
@@ -3240,12 +3643,23 @@
       "lat": 33.492,
       "lng": 135.728,
       "url": "https://kushimoto.co.jp/",
-      "fee": "1,600円",
-      "child": "800円",
+      "fee": "3,200円（3施設共通券）／2,000円（タワー＋水族館）",
+      "child": "2,000円／1,000円",
       "closed": "年中無休",
       "comment": "本物の海中を見られる海中展望塔がある！",
       "photo": "assets/photo_kushimoto.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ウミガメ",
+        "サンゴ"
+      ],
+      "tags": [
+        "same",
+        "deep",
+        "rain"
+      ],
+      "restaurant": "あり（レストラン「アクロポラ」）",
+      "access": "JR串本駅から無料シャトルバスあり"
     },
     {
       "name": "太地町立くじらの博物館",
@@ -3253,11 +3667,21 @@
       "lat": 33.596,
       "lng": 135.942,
       "url": "https://www.kujirakan.jp/",
-      "fee": "1,500円",
-      "child": "800円",
+      "fee": "1,800円",
+      "child": "900円",
       "closed": "年中無休",
       "comment": "クジラの町・太地でクジラと超接近できる",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "クジラ",
+        "マダライルカ",
+        "バンドウイルカ"
+      ],
+      "tags": [
+        "dolphin",
+        "rain"
+      ],
+      "access": "JR太地駅から太地町営じゅんかんバスで約10分「くじら館前」下車すぐ"
     },
     {
       "name": "京都大学白浜水族館",
@@ -3270,7 +3694,11 @@
       "closed": "年中無休",
       "comment": "大学研究所の水族館！白浜の海の生きもの専門",
       "photo": "assets/photo_kyodai_shirahama.jpg",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain"
+      ],
+      "access": "JR白浜駅からバス約15〜20分「臨海」下車"
     },
     {
       "name": "すさみ町立エビとカニの水族館",
@@ -3279,11 +3707,20 @@
       "lng": 135.492,
       "url": "https://ebikani-aquarium.com/",
       "fee": "800円【要確認】",
-      "child": "500円【要確認】",
+      "child": "500円、幼児300円",
       "closed": "年中無休",
       "comment": "世界で唯一の甲殻類専門水族館！",
       "photo": "assets/photo_susami.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イセエビ",
+        "ヤドカリ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "access": "JRきのくに線「江住駅」から徒歩約20分"
     },
     {
       "name": "城崎マリンワールド",
@@ -3291,16 +3728,25 @@
       "lat": 35.648,
       "lng": 134.819,
       "url": "https://marineworld.hiyoriyama.co.jp/",
-      "fee": "2,600円",
-      "child": "1,300円",
+      "fee": "2,800円",
+      "child": "1,400円（幼児700円）",
       "closed": "年中無休",
       "comment": "「水族館以上、であること」アジ釣り体験も人気",
       "tags": [
         "dolphin",
-        "kids"
+        "penguin",
+        "rain",
+        "summer"
       ],
       "photo": "assets/photo_kinosaki.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ",
+        "アシカ",
+        "ペンギン"
+      ],
+      "access": "JR城崎温泉駅から全但バス約10分「日和山（マリンワールド）」下車",
+      "parking": "あり"
     },
     {
       "name": "みなとやま水族館",
@@ -3308,12 +3754,21 @@
       "lat": 34.669,
       "lng": 135.17,
       "url": "https://minatoyama.jp/",
-      "fee": "1,200円【要確認】",
-      "child": "600円【要確認】",
-      "closed": "年中無休",
+      "fee": "1,200円",
+      "child": "600円",
+      "closed": "不定休（メンテナンスによる休館日あり）",
       "comment": "廃校になった小学校が水族館に！",
       "photo": "assets/photo_minatoyama.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "カワウソ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "parking": "あり",
+      "access": "神戸市バス「石井橋」下車徒歩1分"
     },
     {
       "name": "淡路じゃのひれドルフィンファーム",
@@ -3324,11 +3779,19 @@
       "fee": "見学500円程度",
       "child": "同左",
       "closed": "無休（体験は要予約）",
-      "comment": "淡路島の海でイルカとふれあい・スイムも",
+      "comment": "イルカと直接ふれあえる体験型スポット。2026年4月に「じゃのひれDolphin Arch Awaji」へリニューアルし、料金体系もプログラム制に変更されたよ",
       "search_animals": [
         "イルカ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ"
+      ],
+      "tags": [
+        "dolphin"
+      ],
+      "restaurant": "あり（BBQガーデン等3施設）",
+      "access": "高速バス「福良」下車後タクシーで約10分"
     },
     {
       "name": "とっとり賀露かにっこ館",
@@ -3338,12 +3801,23 @@
       "url": "https://kanikko.jp/",
       "fee": "無料",
       "child": "無料",
-      "closed": "火曜（祝日は翌平日・長期休みは無休）",
+      "closed": "火曜日（祝日の場合は翌平日）",
       "comment": "入館無料！カニ専門のミニ水族館",
       "search_animals": [
         "カニ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "カニ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "stroller": "あり",
+      "nursing": "あり",
+      "parking": "無料駐車場あり",
+      "access": "JR鳥取駅から日ノ丸バス賀露循環線「かにっこ館前」下車"
     },
     {
       "name": "島根県立しまね海洋館アクアス",
@@ -3352,12 +3826,14 @@
       "lng": 132.302,
       "url": "https://aquas.or.jp/",
       "fee": "1,700円",
-      "child": "800円",
-      "closed": "火曜（祝日は翌日）",
+      "child": "500円、未就学児無料",
+      "closed": "毎週火曜日（祝日の場合は翌日）",
       "comment": "幸せのバブルリング！西日本唯一のシロイルカ",
       "tags": [
-        "dolphin",
-        "kids"
+        "beluga",
+        "penguin",
+        "rain",
+        "baby"
       ],
       "only": "シロイルカ",
       "photo": "assets/photo_aquas.jpg",
@@ -3365,7 +3841,14 @@
         "イルカ",
         "シロイルカ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "シロイルカ",
+        "ペンギン",
+        "アシカ"
+      ],
+      "stroller": "無料貸出あり",
+      "nursing": "あり（授乳室・キッズルーム完備）"
     },
     {
       "name": "渋川マリン水族館",
@@ -3373,11 +3856,19 @@
       "lat": 34.503,
       "lng": 133.825,
       "url": "https://www.city.tamano.lg.jp/site/kaihaku/",
-      "fee": "800円",
-      "child": "400円",
-      "closed": "水曜（祝日は翌日）・年末年始",
+      "fee": "800円（15歳以上）",
+      "child": "400円（5歳以上15歳未満）",
+      "closed": "毎週水曜日（祝日の場合は翌日）、12月29日〜31日、1月4日",
       "comment": "瀬戸内海の生きもの中心のレトロな博物館",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ゴマフアザラシ",
+        "ウミガメ"
+      ],
+      "tags": [
+        "rain"
+      ],
+      "access": "JR宇野駅からバス約15分「渋川一丁目」下車徒歩約5分"
     },
     {
       "name": "宮島水族館 みやじマリン",
@@ -3386,11 +3877,18 @@
       "lng": 132.317,
       "url": "https://miyajima-aqua.jp/",
       "fee": "1,420円",
-      "child": "710円",
-      "closed": "※2026/12/1〜2027/3/31は改修のため休館",
+      "child": "710円（幼児400円）",
+      "closed": "2026年12月1日〜2027年3月31日は長期休館予定",
       "comment": "世界遺産・宮島にある和風建築の水族館",
       "photo": "assets/photo_miyajima.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "アシカ",
+        "コツメカワウソ"
+      ],
+      "tags": [
+        "rain"
+      ]
     },
     {
       "name": "福山大学マリンバイオセンター水族館",
@@ -3400,9 +3898,20 @@
       "url": "https://www.fukuyama-u.ac.jp/research/marine-bio-center/",
       "fee": "無料",
       "child": "無料",
-      "closed": "土日祝・年末年始・お盆（平日のみ開館）",
+      "closed": "土曜日・日曜日・祝日、お盆、年末年始",
       "comment": "因島にある大学運営の無料水族館",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "マダイ",
+        "コブダイ",
+        "タツノオトシゴ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "parking": "無料駐車場あり",
+      "access": "因の島バス「久保田橋」から徒歩約4分"
     },
     {
       "name": "なぎさ水族館",
@@ -3410,14 +3919,19 @@
       "lat": 33.914,
       "lng": 132.41,
       "url": "https://nagisapark.jimdofree.com/",
-      "fee": "210円【要確認】",
-      "child": "100円【要確認】",
-      "closed": "水曜・12/29〜1/3",
+      "fee": "210円",
+      "child": "100円",
+      "closed": "毎週水曜日（祝日の場合は翌日または翌々日）、12月29日〜1月3日",
       "comment": "周防大島の小さな水族館。日本最大級のニホンアワサンゴ",
       "search_animals": [
         "サンゴ"
       ],
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "parking": "無料"
     },
     {
       "name": "日和佐うみがめ博物館カレッタ",
@@ -3426,13 +3940,20 @@
       "lng": 134.544,
       "url": "https://caretta.town.minami.lg.jp/",
       "fee": "1,000円",
-      "child": "300円",
-      "closed": "月曜（祝日は翌日）・12/29〜31",
+      "child": "中学生500円、小学生300円、幼児100円",
+      "closed": "毎週月曜（祝日の場合は翌日）、12/29〜31",
       "comment": "世界的にも珍しいウミガメ専門博物館",
       "search_animals": [
         "ウミガメ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ウミガメ"
+      ],
+      "tags": [
+        "rain"
+      ],
+      "access": "JR日和佐駅から徒歩20分"
     },
     {
       "name": "モラスコむぎ",
@@ -3442,9 +3963,14 @@
       "url": "https://www.mollusco-mugi.jp/",
       "fee": "200円",
       "child": "100円",
-      "closed": "【要確認】",
+      "closed": "月曜日（祝日の場合は翌日）",
       "comment": "漁師さんの水族館＋貝の資料館",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain"
+      ],
+      "parking": "あり",
+      "access": "JR牟岐駅より車で5分"
     },
     {
       "name": "海洋自然博物館マリンジャム",
@@ -3454,12 +3980,16 @@
       "url": "https://www.kaiyo-kankou.jp/spots/spots-1234/",
       "fee": "入館無料（海中観光船は大人2,000円）",
       "child": "小学生1,000円",
-      "closed": "火曜（GW・夏休みは営業）",
+      "closed": "毎週火曜（GW・夏休み・年末年始は営業）",
       "comment": "海中観光船ブルーマリンでサンゴの海へ",
       "search_animals": [
         "サンゴ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "クマノミ"
+      ],
+      "access": "宍喰駅からバス10分"
     },
     {
       "name": "新屋島水族館",
@@ -3467,12 +3997,22 @@
       "lat": 34.365,
       "lng": 134.102,
       "url": "https://r.goope.jp/new-yashima-aq/",
-      "fee": "休館中",
-      "child": "-",
-      "closed": "リニューアルのため休館中（2027年春再開予定）",
+      "fee": "700円",
+      "child": "300円",
+      "closed": "2025年4月から約2年間リニューアル休館中（2027年春再開予定）。休館中は高松市中央卸売市場で「市場水族館」として仮営業中",
       "comment": "屋島の山上の水族館。2025年4月から改装休館中、2027年春にリニューアルオープン予定！今から楽しみ🐟",
       "photo": "assets/photo_yashima.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ",
+        "ペンギン",
+        "コツメカワウソ"
+      ],
+      "tags": [
+        "dolphin",
+        "penguin"
+      ],
+      "access": "JR屋島駅または琴電屋島駅からことでんシャトルバス約10分"
     },
     {
       "name": "日本ドルフィンセンター",
@@ -3480,14 +4020,20 @@
       "lat": 34.324,
       "lng": 134.18,
       "url": "https://www.j-dc2.net/",
-      "fee": "500円",
-      "child": "400円",
-      "closed": "無休",
+      "fee": "1,200円",
+      "child": "中学生1,000円、小学生600円、3歳以上400円",
+      "closed": "11月〜翌6月は毎週水曜定休（祝日等除く）、7月〜10月は定休日なし",
       "comment": "さぬき市の海でイルカとふれあえる",
       "search_animals": [
         "イルカ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ"
+      ],
+      "tags": [
+        "dolphin"
+      ]
     },
     {
       "name": "虹の森公園おさかな館",
@@ -3496,13 +4042,18 @@
       "lng": 132.716,
       "url": "https://morinokuni.or.jp/",
       "fee": "900円",
-      "child": "400円",
-      "closed": "水曜（長期休み期間は無休）・元日",
+      "child": "400円（幼児200円）",
+      "closed": "水曜（祝日の場合は開園）、1月1日",
       "comment": "四万十川の生きものとペンギンがいる道の駅水族館",
       "search_animals": [
         "ペンギン"
       ],
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain"
+      ],
+      "parking": "あり（150台無料）",
+      "access": "JR予土線松丸駅から徒歩5分"
     },
     {
       "name": "ドルフィンファームしまなみ",
@@ -3510,14 +4061,21 @@
       "lat": 34.222,
       "lng": 133.078,
       "url": "https://www.df-shimanami.com/",
-      "fee": "見学500円",
-      "child": "見学500円",
+      "fee": "500円",
+      "child": "400円",
       "closed": "無休（体験は要予約）",
       "comment": "しまなみ海道・伯方島の日本最大級イルカふれあい施設",
       "search_animals": [
         "イルカ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ"
+      ],
+      "tags": [
+        "dolphin"
+      ],
+      "parking": "あり（無料）"
     },
     {
       "name": "桂浜水族館",
@@ -3526,13 +4084,24 @@
       "lng": 133.575,
       "url": "https://katurahama-aq.jp/",
       "fee": "1,600円",
-      "child": "400円",
-      "closed": "無休",
+      "child": "600円（幼児400円）",
+      "closed": "1月1日のみ",
       "comment": "SNSで大人気！「ハマスイ」の愛称で愛される老舗",
       "search_animals": [
         "マス"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "カリフォルニアアシカ",
+        "フンボルトペンギン",
+        "カワウソ"
+      ],
+      "tags": [
+        "penguin"
+      ],
+      "nursing": "あり",
+      "restaurant": "あり（ハマスイキッチン）",
+      "access": "とさでん交通バスで桂浜行き終点下車、徒歩5分"
     },
     {
       "name": "四万十川学遊館あきついお",
@@ -3541,10 +4110,19 @@
       "lng": 132.881,
       "url": "https://gakuyukan.com/",
       "fee": "880円",
-      "child": "330円",
-      "closed": "月曜（祝日は翌日・長期休みは無休）",
+      "child": "440円（4歳以上330円）",
+      "closed": "月曜（祝日の場合は翌日、春休み・GW・夏休み・年末年始は無休）",
       "comment": "四万十川の魚とトンボの博物館",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "アカメ",
+        "ピラルク"
+      ],
+      "tags": [
+        "rain"
+      ],
+      "parking": "あり（80台、無料）",
+      "access": "中村駅からタクシー約10分"
     },
     {
       "name": "足摺海洋館 SATOUMI",
@@ -3553,10 +4131,21 @@
       "lng": 132.86,
       "url": "https://kaiyoukan.jp/",
       "fee": "1,200円",
-      "child": "600円",
-      "closed": "年中無休",
+      "child": "600円、未就学児無料",
+      "closed": "休館日なし",
       "comment": "竜串の海と森をまるごと体感できる新しい水族館",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "マンボウ",
+        "アオウミガメ",
+        "ウミウシ"
+      ],
+      "tags": [
+        "rain"
+      ],
+      "stroller": "貸出あり",
+      "nursing": "あり",
+      "restaurant": "あり"
     },
     {
       "name": "むろと廃校水族館",
@@ -3565,17 +4154,25 @@
       "lng": 134.152,
       "url": "https://www.city.muroto.kochi.jp/pages/page0343.php",
       "fee": "600円",
-      "child": "300円",
+      "child": "300円、未就学児無料",
       "closed": "年中無休",
       "comment": "廃校のプールでサメが泳ぐ！大人気の水族館",
       "tags": [
-        "same",
-        "kids"
+        "rain",
+        "baby"
       ],
       "search_animals": [
         "サメ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ウミガメ",
+        "ブリ"
+      ],
+      "stroller": "利用可（1-2階間エレベーターあり）",
+      "nursing": "あり（2階ベビールーム）",
+      "parking": "あり（100台）",
+      "access": "高知東部交通バス「むろと廃校水族館前」下車徒歩1分"
     },
     {
       "name": "筑後川防災施設くるめウス",
@@ -3583,164 +4180,247 @@
       "lat": 33.325,
       "lng": 130.545,
       "url": "http://kurumeus.net/",
-      "fee": "無料",
+      "fee": "入館無料",
       "child": "無料",
-      "closed": "月曜（祝日は火曜）・年末年始",
+      "closed": "月曜（祝日の場合は火曜）、年末年始",
       "comment": "筑後川の魚たちに会える無料施設",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "access": "西鉄天神大牟田線「宮の陣駅」から徒歩15分"
     },
     {
       "name": "やながわ有明海水族館",
       "pref": "福岡県",
-      "lat": 33.159,
-      "lng": 130.4,
+      "lat": 33.1593,
+      "lng": 130.3952,
       "url": "https://kamesukeiyuu.wixsite.com/yanasui",
       "fee": "300円",
       "child": "100円",
-      "closed": "火曜（平日は昼から開館）",
+      "closed": "火曜日",
       "comment": "ムツゴロウやワラスボ！有明海専門の小さな水族館",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ムツゴロウ",
+        "ワラスボ",
+        "トビハゼ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ]
     },
     {
       "name": "鹿島市干潟交流館なな海",
       "pref": "佐賀県",
-      "lat": 33.088,
-      "lng": 130.093,
+      "lat": 33.0755,
+      "lng": 130.1457,
       "url": "https://www.city.saga-kashima.lg.jp/main/21870.html",
       "fee": "無料",
       "child": "無料",
-      "closed": "月曜（祝日は翌平日）・12/29〜1/3",
+      "closed": "毎週月曜日（祝日の場合は火曜日）、12月29日〜1月3日",
       "comment": "有明海の干潟の生きもの＋ガタリンピックの聖地",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain",
+        "kids"
+      ]
     },
     {
       "name": "壱岐イルカパーク＆リゾート",
       "pref": "長崎県",
-      "lat": 33.848,
-      "lng": 129.7,
+      "lat": 33.8567,
+      "lng": 129.6985,
       "url": "https://irukapark.com/",
       "fee": "1,000円",
-      "child": "500円",
-      "closed": "基本無休",
+      "child": "500円、未就学児無料",
+      "closed": "基本無休（12/30〜1/2、期間限定で水曜休あり）",
       "comment": "壱岐島の入り江でイルカとふれあえる",
       "search_animals": [
         "イルカ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ"
+      ],
+      "tags": [
+        "dolphin",
+        "kids",
+        "summer"
+      ],
+      "restaurant": "あり"
     },
     {
       "name": "うみたま体験パーク つくみイルカ島",
       "pref": "大分県",
-      "lat": 33.095,
-      "lng": 131.888,
+      "lat": 33.07,
+      "lng": 131.9551,
       "url": "https://www.tsukumi-irukajima.jp/",
       "fee": "1,300円",
-      "child": "800円",
-      "closed": "冬期休業あり【要確認】",
+      "child": "800円、幼児650円",
+      "closed": "毎週火曜日（祝日・GW・夏休みを除く）、1月中旬〜2月中旬はメンテナンス休館",
       "comment": "津久見の海でイルカと超接近体験",
       "search_animals": [
         "イルカ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ",
+        "ペンギン"
+      ],
+      "tags": [
+        "dolphin",
+        "penguin",
+        "kids",
+        "summer"
+      ],
+      "access": "津久見駅から車で約15分"
     },
     {
       "name": "番匠おさかな館",
       "pref": "大分県",
-      "lat": 32.982,
-      "lng": 131.827,
+      "lat": 32.965,
+      "lng": 131.8387,
       "url": "https://www.michinoeki-yayoi.com/banjou-osakanakan",
       "fee": "500円",
-      "child": "300円",
-      "closed": "第2火曜・年末年始",
+      "child": "300円、3歳以下無料",
+      "closed": "第2火曜日、12月31日、1月1日",
       "comment": "道の駅やよいの淡水魚水族館",
       "photo": "assets/photo_bansho.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "オオウナギ",
+        "アカメ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "restaurant": "あり（お食事処くうちくり）"
     },
     {
       "name": "わくわく海中水族館シードーナツ",
       "pref": "熊本県",
-      "lat": 32.594,
-      "lng": 130.439,
+      "lat": 32.5297,
+      "lng": 130.4284,
       "url": "https://amakusapearl.com/",
       "fee": "1,400円",
       "child": "900円",
-      "closed": "無休",
+      "closed": "年中無休",
       "comment": "海に浮かぶドーナツ型の水族館！イルカと泳げる",
       "tags": [
         "dolphin",
-        "kids"
+        "summer"
       ],
       "search_animals": [
         "イルカ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ"
+      ],
+      "restaurant": "あり"
     },
     {
       "name": "高千穂峡淡水魚水族館",
       "pref": "宮崎県",
-      "lat": 32.702,
-      "lng": 131.301,
+      "lat": 32.7023,
+      "lng": 131.3007,
       "url": "https://takachiho-kanko.info/sightseeing/11/",
       "fee": "600円",
-      "child": "300円",
-      "closed": "12/31・1/1",
+      "child": "300円、未就学児100円",
+      "closed": "第2・第4水曜日、12月31日、1月1日",
       "comment": "高千穂峡のほとりの小さな淡水魚水族館",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ヤマメ",
+        "オヤニラミ",
+        "アカメ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "parking": "あり"
     },
     {
       "name": "すみえファミリー水族館",
       "pref": "宮崎県",
-      "lat": 32.678,
-      "lng": 131.789,
+      "lat": 32.6618,
+      "lng": 131.7681,
       "url": "http://sunbeach-sumie.com/",
       "fee": "300円",
       "child": "200円",
       "closed": "火曜【要確認】",
       "comment": "延岡・須美江海水浴場そばのちいさな水族館",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain",
+        "kids"
+      ]
     },
     {
       "name": "出の山淡水魚水族館",
       "pref": "宮崎県",
-      "lat": 31.984,
-      "lng": 130.982,
+      "lat": 31.9803,
+      "lng": 130.9425,
       "url": "https://idenoyama-aquarium.weebly.com/",
       "fee": "300円",
       "child": "200円",
       "closed": "月曜（祝日は翌日）・年末年始",
       "comment": "名水百選の湧水で育つ淡水魚たち",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "チョウザメ",
+        "オオサンショウウオ",
+        "ピラルクー"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ]
     },
     {
       "name": "大淀川学習館",
       "pref": "宮崎県",
-      "lat": 31.919,
-      "lng": 131.442,
+      "lat": 31.9488,
+      "lng": 131.4066,
       "url": "https://oyodo.miyabunkyo.com/",
       "fee": "無料",
       "child": "無料",
-      "closed": "月曜（祝日は翌日）",
+      "closed": "毎週月曜日（祝日除く）、12月29日〜1月3日",
       "comment": "大淀川の自然を学べる無料施設",
-      "visited": false
+      "visited": false,
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "access": "バス停「大淀川学習館前」下車徒歩1分"
     },
     {
       "name": "志布志湾大黒イルカランド",
       "pref": "宮崎県",
-      "lat": 31.437,
-      "lng": 131.099,
+      "lat": 31.4604,
+      "lng": 131.1608,
       "url": "http://irukaland.com/",
       "fee": "1,500円",
-      "child": "1,000円",
+      "child": "1,000円、幼児700円",
       "closed": "不定休（夏休みは無休）",
       "comment": "串間の海辺でイルカショー＆ふれあい",
       "tags": [
         "dolphin",
-        "kids"
+        "kids",
+        "summer"
       ],
       "search_animals": [
         "イルカ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "イルカ"
+      ]
     },
     {
       "name": "奄美海洋展示館",
@@ -3750,29 +4430,42 @@
       "url": "",
       "fee": "500円",
       "child": "300円",
-      "closed": "【要確認】",
+      "closed": "年末年始（12/31〜1/1）、6月・12月中旬の3日間（メンテナンス休館）",
       "comment": "奄美の海とウミガメに会える展示館",
       "photo": "assets/photo_amami.jpg",
       "search_animals": [
         "ウミガメ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "アオウミガメ",
+        "ウツボ"
+      ],
+      "tags": [
+        "rain",
+        "kids"
+      ]
     },
     {
       "name": "黒島研究所",
       "pref": "沖縄県",
       "lat": 24.24,
-      "lng": 124.011,
+      "lng": 123.9935,
       "url": "http://www.kuroshima.org/",
       "fee": "800円",
-      "child": "500円",
+      "child": "500円、未就学児無料",
       "closed": "年中無休",
       "comment": "ウミガメ研究の島のミニ水族館！サメへのエサやりも",
       "search_animals": [
         "ウミガメ",
         "サメ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "アオウミガメ",
+        "タイマイ"
+      ],
+      "access": "黒島港から徒歩約15分"
     },
     {
       "name": "DMMかりゆし水族館",
@@ -3780,15 +4473,23 @@
       "lat": 26.158,
       "lng": 127.658,
       "url": "https://kariyushi-aquarium.com/",
-      "fee": "2,800円（ピーク期3,200円）",
-      "child": "1,700円",
+      "fee": "2,800円（18歳以上）",
+      "child": "2,200円（13〜17歳）／1,700円（4〜12歳）、3歳以下無料",
       "closed": "年中無休",
       "comment": "映像×空間演出の最新エンタメ水族館",
       "tags": [
         "rain",
-        "kids"
+        "kids",
+        "penguin",
+        "baby"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "コツメカワウソ",
+        "ペンギン",
+        "マイクロブタ"
+      ],
+      "restaurant": "あり"
     },
     {
       "name": "きんたい廃校博物館（きんぱく）",
@@ -3796,14 +4497,20 @@
       "lat": 34.6293,
       "lng": 135.5954,
       "url": "https://kinpaku.jp/",
-      "fee": "無料",
-      "closed": "毎月第3日曜のみ開館（10:00〜15:00）",
+      "fee": "無料（任意の寄付制）",
+      "closed": "毎月第3日曜日のみ開館（それ以外は休館）",
       "comment": "大阪・八尾の廃校をリノベ！絶滅危惧種キンタイ（ニッポンバラタナゴ）を守る月1回だけ開く幻の水族館🐟",
       "tags": [
         "kids"
       ],
       "photo": "assets/gigi_illust.jpg",
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ニッポンバラタナゴ"
+      ],
+      "parking": "あり",
+      "access": "服部川駅から徒歩約17分",
+      "child": "無料"
     },
     {
       "name": "アクア東条",
@@ -3812,10 +4519,9 @@
       "lng": 135.0127,
       "url": "https://www.hyoturi.or.jp/aqua/",
       "fee": "無料",
-      "closed": "木曜・年末年始",
+      "closed": "毎週木曜日・年末年始（12/29〜1/3）",
       "comment": "東条湖のほとりの無料水族館！コイ・ナマズ・ウーパールーパーなど約40種、カメにも触れる穴場スポット🐢",
       "tags": [
-        "kids",
         "rain"
       ],
       "photo": "assets/photo_aquatojo.jpg",
@@ -3823,22 +4529,39 @@
         "カメ",
         "コイ"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "ウーパールーパー"
+      ],
+      "child": "無料"
     },
     {
       "name": "市場水族館（新屋島水族館 仮設）",
       "pref": "香川県",
-      "lat": 34.3565,
-      "lng": 134.0758,
+      "lat": 34.348,
+      "lng": 134.0286,
       "url": "https://r.goope.jp/new-yashima-aq/",
-      "fee": "【要確認】",
-      "closed": "【要確認】",
-      "comment": "新屋島水族館がリニューアル休館中に高松市中央卸売市場の旧青果棟で仮営業中！カワウソ・ペンギン・魚たちが市場で元気に暮らしてる🦦 2027年春の本館再開まで限定公開！",
+      "fee": "700円（中学生以上）",
+      "closed": "毎週火曜日",
+      "comment": "新屋島水族館のリニューアル休館中（〜2027年春予定）に、高松市中央卸売市場で期間限定営業している仮設の水族館だよ",
       "search_animals": [
         "カワウソ",
         "ペンギン"
       ],
-      "visited": false
+      "visited": false,
+      "animals": [
+        "フンボルトペンギン",
+        "コツメカワウソ",
+        "カクレクマノミ",
+        "ウミガメ"
+      ],
+      "tags": [
+        "rain",
+        "penguin"
+      ],
+      "parking": "あり（約600台・無料）",
+      "access": "JR昭和町駅から徒歩約10分",
+      "child": "300円（3歳〜小学生）、2歳以下無料"
     }
   ],
   "rankings": [
