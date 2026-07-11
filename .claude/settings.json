@@ -11,6 +11,8 @@
       "Bash(python3 build_pages.py)",
       "Bash(python3 -c *)",
       "Bash(python3 *build_pages.py*)",
+      "Bash(python3 merge_review.py)",
+      "Bash(python3 -m py_compile *)",
       "Bash(sips *)",
       "Bash(cp *)",
       "Bash(ls *)",

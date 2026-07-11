@@ -58,7 +58,9 @@
       "search_animals": [
         "ジュゴン",
         "ラッコ"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 2,
@@ -111,7 +113,9 @@
       "search_animals": [
         "イルカ",
         "シャチ"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 46,
@@ -143,7 +147,8 @@
       "highlight": "神戸っ子の思い出「スマスイ」。2023年に56年の歴史に幕。閉園前の姿は動画で",
       "search_animals": [
         "マス"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 3,
@@ -206,7 +211,9 @@
         "シャチ",
         "ベルーガ",
         "ペンギン"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 4,
@@ -263,7 +270,9 @@
         "シュモクザメ",
         "シロワニ",
         "マンボウ"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 5,
@@ -316,7 +325,8 @@
         "セイウチ",
         "バンドウイルカ",
         "ベルーガ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 6,
@@ -375,7 +385,9 @@
       ],
       "search_animals": [
         "ジンベエザメ"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 7,
@@ -437,7 +449,9 @@
         "サンゴ",
         "ジンベエザメ",
         "マンタ"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 8,
@@ -494,7 +508,9 @@
         "シャチ",
         "ベルーガ",
         "マンボウ"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 9,
@@ -555,7 +571,9 @@
         "イルカ",
         "エンペラーペンギン",
         "ペンギン"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 10,
@@ -611,7 +629,9 @@
         "クラゲ",
         "サンゴ",
         "ペンギン"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 11,
@@ -658,7 +678,8 @@
         "オオサンショウウオ",
         "クラゲ",
         "ペンギン"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 12,
@@ -707,7 +728,8 @@
       "animals": [
         "イルカ",
         "クラゲ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 13,
@@ -752,7 +774,8 @@
         "サンゴ",
         "シロワニ",
         "ラッコ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 14,
@@ -800,7 +823,8 @@
         "イルカ",
         "イワシ",
         "クラゲ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 15,
@@ -853,7 +877,9 @@
       "animals": [
         "ホワイトタイガー",
         "ミニカバ"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 16,
@@ -904,7 +930,8 @@
       ],
       "animals": [
         "ケープペンギン"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 17,
@@ -947,7 +974,8 @@
         "カワウソ",
         "コツメカワウソ",
         "ピラルクー"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 18,
@@ -990,7 +1018,8 @@
         "フェアリーペンギン",
         "ペンギン",
         "マグロ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 19,
@@ -1035,7 +1064,8 @@
       "animals": [
         "マンボウ",
         "イルカ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 20,
@@ -1082,7 +1112,8 @@
         "イルカ",
         "クラゲ",
         "ジンベエザメ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 21,
@@ -1129,7 +1160,8 @@
       "animals": [
         "セイウチ",
         "イルカ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 22,
@@ -1167,7 +1199,8 @@
       "animals": [
         "イルカ",
         "クラゲ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 23,
@@ -1214,7 +1247,9 @@
       ],
       "search_animals": [
         "コツメカワウソ"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 24,
@@ -1255,7 +1290,8 @@
       "search_animals": [
         "フェアリーペンギン",
         "ペンギン"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 25,
@@ -1297,7 +1333,8 @@
       ],
       "animals": [
         "イルカ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 26,
@@ -1345,7 +1382,8 @@
       "animals": [
         "フグ",
         "シロナガスクジラ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 27,
@@ -1395,7 +1433,9 @@
       "search_animals": [
         "オオグソクムシ",
         "タカアシガニ"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 28,
@@ -1436,7 +1476,8 @@
       ],
       "animals": [
         "オオシマドジョウ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 29,
@@ -1479,7 +1520,8 @@
       ],
       "animals": [
         "バイカルアザラシ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 30,
@@ -1521,7 +1563,8 @@
       "animals": [
         "リュウグウノツカイ",
         "ホタルイカ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 31,
@@ -1563,7 +1606,8 @@
       ],
       "animals": [
         "トド"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 32,
@@ -1599,7 +1643,8 @@
       ],
       "animals": [
         "サケ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 33,
@@ -1646,7 +1691,8 @@
       "animals": [
         "タツノオトシゴ",
         "ゴマフアザラシ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 34,
@@ -1685,7 +1731,8 @@
       ],
       "search_animals": [
         "シラウオ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 35,
@@ -1730,7 +1777,8 @@
       "animals": [
         "ノコギリエイ",
         "クラゲ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 36,
@@ -1776,7 +1824,8 @@
       ],
       "animals": [
         "キングペンギン"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 37,
@@ -1820,7 +1869,8 @@
       "animals": [
         "キタイワトビペンギン",
         "フェアリーペンギン"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 38,
@@ -1869,7 +1919,9 @@
       ],
       "animals": [
         "シュモクザメ"
-      ]
+      ],
+      "visited": true,
+      "verified": false
     },
     {
       "no": 39,
@@ -1886,7 +1938,8 @@
           "title": "【2度と見られない】マリホ水族館 徹底解説ツアー【涙の閉館】"
         }
       ],
-      "highlight": "2021年閉館。「生きている水塊」は動画の中で永遠に生き続けてる"
+      "highlight": "2021年閉館。「生きている水塊」は動画の中で永遠に生き続けてる",
+      "visited": true
     },
     {
       "no": 40,
@@ -1929,7 +1982,8 @@
       "animals": [
         "ハシビロコウ",
         "カピバラ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 41,
@@ -1974,7 +2028,8 @@
       ],
       "animals": [
         "テッポウウオ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 42,
@@ -2007,7 +2062,8 @@
       "animals": [
         "イワシ",
         "バンドウイルカ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 43,
@@ -2039,7 +2095,8 @@
       "search_animals": [
         "イルカ",
         "トド"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 44,
@@ -2072,7 +2129,8 @@
       "search_animals": [
         "チンアナゴ",
         "マンボウ"
-      ]
+      ],
+      "visited": true
     },
     {
       "no": 45,
@@ -2103,7 +2161,8 @@
       "restaurant": "「魚匠ダイニング沖海月」（11:00〜15:00）と軽食売店「波の華」あり",
       "search_animals": [
         "クラゲ"
-      ]
+      ],
+      "visited": true
     }
   ],
   "unvisited": [
@@ -2120,7 +2179,8 @@
       "tags": [
         "kids"
       ],
-      "photo": "assets/photo_yatomi.jpg"
+      "photo": "assets/photo_yatomi.jpg",
+      "visited": false
     },
     {
       "name": "広島もとまち水族館",
@@ -2136,7 +2196,8 @@
         "kids",
         "rain"
       ],
-      "photo": "assets/photo_motomachi.jpg"
+      "photo": "assets/photo_motomachi.jpg",
+      "visited": false
     },
     {
       "name": "シン・マリホ水族館",
@@ -2151,7 +2212,8 @@
       "tags": [
         "kids",
         "rain"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "小さな水族館 びわこベース",
@@ -2166,7 +2228,8 @@
       "tags": [
         "kids"
       ],
-      "photo": "assets/photo_biwakobase.jpg"
+      "photo": "assets/photo_biwakobase.jpg",
+      "visited": false
     },
     {
       "name": "花園教会水族館",
@@ -2182,7 +2245,8 @@
         "kids",
         "rain"
       ],
-      "photo": "assets/photo_hanazono.jpg"
+      "photo": "assets/photo_hanazono.jpg",
+      "visited": false
     },
     {
       "name": "大阪海遊館 海洋生物研究所 以布利センター",
@@ -2200,7 +2264,8 @@
       "photo": "assets/photo_iburi.jpg",
       "search_animals": [
         "ジンベエザメ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "タツノオトシゴハウス",
@@ -2218,7 +2283,8 @@
       "photo": "assets/photo_seahorsehouse.jpg",
       "search_animals": [
         "タツノオトシゴ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "オホーツク流氷館",
@@ -2233,7 +2299,8 @@
       "tags": [
         "kids"
       ],
-      "photo": "assets/photo_ryuhyokan.jpg"
+      "photo": "assets/photo_ryuhyokan.jpg",
+      "visited": false
     },
     {
       "name": "まちなか水族館 ギョギョタウン",
@@ -2248,7 +2315,8 @@
       "tags": [
         "kids"
       ],
-      "photo": "assets/photo_gyogyotown.jpg"
+      "photo": "assets/photo_gyogyotown.jpg",
+      "visited": false
     },
     {
       "name": "うなぎミュージアム＆Cafe 雑魚寝館",
@@ -2261,7 +2329,8 @@
       "closed": "月1回・第3土曜17:00〜22:00のみ営業",
       "comment": "世界のうなぎが見られるカフェ併設ミュージアム。月1回だけの激レア営業日を狙って行きたい",
       "tags": [],
-      "photo": "assets/photo_zacconekan.jpg"
+      "photo": "assets/photo_zacconekan.jpg",
+      "visited": false
     },
     {
       "name": "埼玉県立川の博物館 水族館",
@@ -2276,7 +2345,8 @@
       "tags": [
         "rain",
         "kids"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "ドルフィンファンタジー伊東",
@@ -2295,7 +2365,8 @@
       "search_animals": [
         "イルカ",
         "バンドウイルカ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "時之栖水中楽園AQUARIUM",
@@ -2313,7 +2384,8 @@
       ],
       "search_animals": [
         "金魚"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "弥富金魚水族館（YaToMi AQUA）",
@@ -2330,7 +2402,8 @@
       ],
       "search_animals": [
         "金魚"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "小笠原海洋センター",
@@ -2348,7 +2421,8 @@
       "search_animals": [
         "アオウミガメ",
         "ウミガメ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "のと海洋ふれあいセンター",
@@ -2362,7 +2436,8 @@
       "comment": "能登半島の海の生き物を紹介する体験型施設。地元近海の磯・岩礁生物が中心",
       "tags": [
         "kids"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "おばま水族館",
@@ -2376,7 +2451,8 @@
       "comment": "築123年の町家を活用した小さな水族館。福井県立大学の学生が運営し若狭湾の地魚など約60種を展示",
       "tags": [
         "kids"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "蓼科アミューズメント水族館",
@@ -2390,7 +2466,8 @@
       "comment": "標高1,750mに位置する「天空の水族館」。高地ならではの淡水魚展示が特色",
       "tags": [
         "kids"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "北九州市立水環境館",
@@ -2405,7 +2482,8 @@
       "tags": [
         "kids"
       ],
-      "photo": "assets/photo_kitakyushu_water.jpg"
+      "photo": "assets/photo_kitakyushu_water.jpg",
+      "visited": false
     },
     {
       "name": "さんご畑",
@@ -2422,7 +2500,8 @@
       ],
       "search_animals": [
         "サンゴ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "新さっぽろサンピアザ水族館",
@@ -2438,7 +2517,8 @@
         "rain",
         "kids",
         "penguin"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "札幌市豊平川さけ科学館",
@@ -2452,7 +2532,8 @@
       "comment": "豊平川のサケの遡上を見守る科学館",
       "search_animals": [
         "サケ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "市立室蘭水族館",
@@ -2463,7 +2544,8 @@
       "fee": "400円",
       "child": "中学生以下ほぼ無料",
       "closed": "冬期休館（4月下旬〜10月中旬のみ開館）",
-      "comment": "北海道最古の歴史ある水族館"
+      "comment": "北海道最古の歴史ある水族館",
+      "visited": false
     },
     {
       "name": "くしろ水族館ぷくぷく",
@@ -2475,7 +2557,8 @@
       "child": "400円",
       "closed": "無休",
       "comment": "魚屋さん「釧之助」の中にあるフウセンウオの水族館",
-      "photo": "assets/photo_kushiro.jpg"
+      "photo": "assets/photo_kushiro.jpg",
+      "visited": false
     },
     {
       "name": "わっかりうむ ノシャップ寒流水族館",
@@ -2486,7 +2569,8 @@
       "fee": "500円",
       "child": "100円",
       "closed": "4月上旬・12〜1月",
-      "comment": "日本最北端の水族館！幻の魚イトウが泳ぐ"
+      "comment": "日本最北端の水族館！幻の魚イトウが泳ぐ",
+      "visited": false
     },
     {
       "name": "北の大地の水族館（山の水族館）",
@@ -2498,7 +2582,8 @@
       "child": "400円",
       "closed": "4月上旬・12/26〜1/1",
       "comment": "滝つぼ水槽と冬に凍る川！中嶋誠プロデュースの名水族館",
-      "photo": "assets/photo_kitanodaichi.jpg"
+      "photo": "assets/photo_kitanodaichi.jpg",
+      "visited": false
     },
     {
       "name": "美深チョウザメ館",
@@ -2512,7 +2597,8 @@
       "comment": "古代魚チョウザメ専門の無料水族館",
       "search_animals": [
         "チョウザメ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "オホーツクとっかりセンター",
@@ -2527,7 +2613,8 @@
       "photo": "assets/photo_okhotsk_tokkari2.jpg",
       "search_animals": [
         "アザラシ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "氷海展望塔オホーツクタワー",
@@ -2539,7 +2626,8 @@
       "child": "250円",
       "closed": "12/29〜1/3",
       "comment": "海中からオホーツク海をのぞける展望塔",
-      "photo": "assets/photo_okhotsk_tower.jpg"
+      "photo": "assets/photo_okhotsk_tower.jpg",
+      "visited": false
     },
     {
       "name": "標津サーモン科学館",
@@ -2554,7 +2642,8 @@
       "photo": "assets/photo_shibetsu.jpg",
       "search_animals": [
         "サケ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "青森県営浅虫水族館",
@@ -2565,7 +2654,8 @@
       "fee": "1,030円",
       "child": "高校生以下無料",
       "closed": "年中無休",
-      "comment": "本州最北端の水族館！高校生以下無料は太っ腹"
+      "comment": "本州最北端の水族館！高校生以下無料は太っ腹",
+      "visited": false
     },
     {
       "name": "八戸市水産科学館マリエント",
@@ -2576,7 +2666,8 @@
       "fee": "300円",
       "child": "100円",
       "closed": "月曜（祝日は翌平日）",
-      "comment": "ウミネコの繁殖地・蕪島のそばの科学館"
+      "comment": "ウミネコの繁殖地・蕪島のそばの科学館",
+      "visited": false
     },
     {
       "name": "もぐらんぴあ",
@@ -2587,7 +2678,8 @@
       "fee": "700円",
       "child": "300円",
       "closed": "月曜（祝日は翌日）",
-      "comment": "石油備蓄基地の地下にある「まちなか水族館」"
+      "comment": "石油備蓄基地の地下にある「まちなか水族館」",
+      "visited": false
     },
     {
       "name": "岩手県立水産科学館",
@@ -2598,7 +2690,8 @@
       "fee": "300円",
       "child": "高校生以下無料",
       "closed": "月曜（祝日は翌日）・年末年始",
-      "comment": "全国初の水産専門科学館（宮古市）"
+      "comment": "全国初の水産専門科学館（宮古市）",
+      "visited": false
     },
     {
       "name": "アクアテラス錦ケ丘",
@@ -2609,7 +2702,8 @@
       "fee": "800円【要確認】",
       "child": "500円【要確認】",
       "closed": "不定休【要確認】",
-      "comment": "仙台の山あいの光のアクアリウム"
+      "comment": "仙台の山あいの光のアクアリウム",
+      "visited": false
     },
     {
       "name": "男鹿水族館GAO",
@@ -2629,7 +2723,8 @@
       "photo": "assets/photo_gao.jpg",
       "search_animals": [
         "ホッキョクグマ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "アクアマリンいなわしろカワセミ水族館",
@@ -2640,7 +2735,8 @@
       "fee": "700円",
       "child": "300円",
       "closed": "基本無休",
-      "comment": "猪苗代湖のほとりの淡水専門館"
+      "comment": "猪苗代湖のほとりの淡水専門館",
+      "visited": false
     },
     {
       "name": "かすみがうら市水族館",
@@ -2651,7 +2747,8 @@
       "fee": "330円",
       "child": "160円",
       "closed": "月曜（祝日は翌日）・年末年始",
-      "comment": "霞ヶ浦の生きものに会えるレトロ水族館"
+      "comment": "霞ヶ浦の生きものに会えるレトロ水族館",
+      "visited": false
     },
     {
       "name": "栃木県なかがわ水遊園",
@@ -2668,7 +2765,8 @@
       ],
       "search_animals": [
         "ピラルクー"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "さかなと森の観察園",
@@ -2682,7 +2780,8 @@
       "comment": "日光でマスの仲間を観察できる研究施設",
       "search_animals": [
         "マス"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "さいたま水族館",
@@ -2697,7 +2796,8 @@
       "only": "ムサシトミヨ",
       "search_animals": [
         "ムサシトミヨ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "板橋区立熱帯環境植物館",
@@ -2708,7 +2808,8 @@
       "fee": "260円",
       "child": "130円（土日無料）",
       "closed": "月曜（祝日は翌日）",
-      "comment": "植物館なのにミニ水族館も！東南アジアの水辺を再現"
+      "comment": "植物館なのにミニ水族館も！東南アジアの水辺を再現",
+      "visited": false
     },
     {
       "name": "足立区生物園",
@@ -2722,7 +2823,8 @@
       "comment": "金魚の大水槽にチョウの温室！コスパ最強の生きもの園",
       "search_animals": [
         "金魚"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "井の頭自然文化園 水生物館",
@@ -2733,7 +2835,8 @@
       "fee": "400円（文化園込み）",
       "child": "小学生無料",
       "closed": "月曜（祝日は翌日）",
-      "comment": "井の頭池の水辺の生きものをじっくり観察"
+      "comment": "井の頭池の水辺の生きものをじっくり観察",
+      "visited": false
     },
     {
       "name": "横浜開運水族館 フォーチュンアクアリウム",
@@ -2748,7 +2851,8 @@
       "tags": [
         "rain",
         "kids"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "観音崎自然博物館",
@@ -2759,7 +2863,8 @@
       "fee": "600円",
       "child": "400円",
       "closed": "月曜（7・8月は無休）",
-      "comment": "東京湾の自然をまるごと学べる博物館"
+      "comment": "東京湾の自然をまるごと学べる博物館",
+      "visited": false
     },
     {
       "name": "カワスイ 川崎水族館",
@@ -2781,7 +2886,8 @@
       "photo": "assets/photo_kawasui.jpg",
       "search_animals": [
         "ピラルクー"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "相模川ふれあい科学館 アクアリウムさがみはら",
@@ -2792,7 +2898,8 @@
       "fee": "450円",
       "child": "150円",
       "closed": "月曜（祝日は開館）",
-      "comment": "相模川の生きもの専門！エサやり体験も人気"
+      "comment": "相模川の生きもの専門！エサやり体験も人気",
+      "visited": false
     },
     {
       "name": "北里アクアリウムラボ",
@@ -2803,7 +2910,8 @@
       "fee": "無料",
       "child": "無料",
       "closed": "平日のみ開館",
-      "comment": "北里大学の学生が運営するミニ水族館"
+      "comment": "北里大学の学生が運営するミニ水族館",
+      "visited": false
     },
     {
       "name": "箱根園水族館",
@@ -2815,7 +2923,8 @@
       "child": "800円",
       "closed": "年中無休",
       "comment": "標高723m、日本一高い場所の海水水族館",
-      "photo": "assets/photo_hakone.jpg"
+      "photo": "assets/photo_hakone.jpg",
+      "visited": false
     },
     {
       "name": "上越市立水族博物館 うみがたり",
@@ -2834,7 +2943,8 @@
       ],
       "search_animals": [
         "ペンギン"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "イヨボヤ会館",
@@ -2848,7 +2958,8 @@
       "comment": "日本最初のサケの博物館！三面川の観察窓も",
       "search_animals": [
         "サケ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "長岡市寺泊水族博物館",
@@ -2859,7 +2970,8 @@
       "fee": "700円",
       "child": "350円",
       "closed": "不定休（月数回）",
-      "comment": "海に浮かぶような八角形の水族館"
+      "comment": "海に浮かぶような八角形の水族館",
+      "visited": false
     },
     {
       "name": "ひみラボ水族館",
@@ -2870,7 +2982,8 @@
       "fee": "無料",
       "child": "無料",
       "closed": "開館日は要確認（不定期）",
-      "comment": "廃校を利用した氷見の淡水魚ラボ"
+      "comment": "廃校を利用した氷見の淡水魚ラボ",
+      "visited": false
     },
     {
       "name": "森の中の水族館。（富士湧水の里水族館）",
@@ -2881,7 +2994,8 @@
       "fee": "420円",
       "child": "200円",
       "closed": "火曜（祝日は翌日）・7/21〜8/31は無休",
-      "comment": "富士の湧水を使った日本一きれいな淡水水族館"
+      "comment": "富士の湧水を使った日本一きれいな淡水水族館",
+      "visited": false
     },
     {
       "name": "あわしまマリンパーク",
@@ -2892,7 +3006,8 @@
       "fee": "3,000円（乗船料込）",
       "child": "1,500円",
       "closed": "年中無休（2月にメンテナンス休あり）",
-      "comment": "船で渡る無人島水族館！日本最大級のカエル館も"
+      "comment": "船で渡る無人島水族館！日本最大級のカエル館も",
+      "visited": false
     },
     {
       "name": "沼津港深海水族館",
@@ -2911,7 +3026,8 @@
       "only": "シーラカンス冷凍標本",
       "search_animals": [
         "シーラカンス冷凍標本"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "幼魚水族館",
@@ -2926,7 +3042,8 @@
       "tags": [
         "kids",
         "rain"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "伊豆・三津シーパラダイス",
@@ -2941,7 +3058,8 @@
       "tags": [
         "dolphin",
         "kids"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "下田海中水族館",
@@ -2956,7 +3074,8 @@
       "tags": [
         "dolphin",
         "kids"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "浜名湖体験学習施設ウォット",
@@ -2967,7 +3086,8 @@
       "fee": "320円",
       "child": "高校生以下無料",
       "closed": "月曜（祝日は翌日）・GW夏休みは無休",
-      "comment": "浜名湖の生きものにさわれる体験型施設"
+      "comment": "浜名湖の生きものにさわれる体験型施設",
+      "visited": false
     },
     {
       "name": "南知多ビーチランド",
@@ -2983,7 +3103,8 @@
         "dolphin",
         "kids"
       ],
-      "photo": "assets/photo_minamichita.jpg"
+      "photo": "assets/photo_minamichita.jpg",
+      "visited": false
     },
     {
       "name": "碧南海浜水族館",
@@ -2994,7 +3115,8 @@
       "fee": "500円",
       "child": "200円",
       "closed": "月曜（祝日は翌平日）・年末年始",
-      "comment": "三河湾の生きものをじっくり学べる地域密着館"
+      "comment": "三河湾の生きものをじっくり学べる地域密着館",
+      "visited": false
     },
     {
       "name": "ぎょぎょランド（赤塚山公園）",
@@ -3006,7 +3128,8 @@
       "child": "無料",
       "closed": "火曜・年末年始",
       "comment": "豊川の生きものに会える無料の淡水魚水族館",
-      "photo": "assets/photo_medakakan.jpg"
+      "photo": "assets/photo_medakakan.jpg",
+      "visited": false
     },
     {
       "name": "名古屋シーライフ水族館",
@@ -3017,7 +3140,8 @@
       "fee": "1,800円〜(変動)",
       "child": "変動制",
       "closed": "不定休（月による）",
-      "comment": "レゴランド隣接！レゴ×お魚の体験型水族館"
+      "comment": "レゴランド隣接！レゴ×お魚の体験型水族館",
+      "visited": false
     },
     {
       "name": "鳥羽湾めぐりとイルカ島",
@@ -3032,7 +3156,8 @@
       "search_animals": [
         "アシカ",
         "イルカ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "紀宝町ウミガメ公園",
@@ -3046,7 +3171,8 @@
       "comment": "道の駅でウミガメに会える！保護活動の拠点",
       "search_animals": [
         "ウミガメ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "赤目滝水族館",
@@ -3061,7 +3187,8 @@
       "photo": "assets/photo_akame.jpg",
       "search_animals": [
         "オオサンショウウオ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "高槻市立自然博物館 あくあぴあ芥川",
@@ -3072,7 +3199,8 @@
       "fee": "無料",
       "child": "無料",
       "closed": "月曜（祝日は翌平日）・12/28〜1/4",
-      "comment": "芥川の生きものに会える無料の自然博物館"
+      "comment": "芥川の生きものに会える無料の自然博物館",
+      "visited": false
     },
     {
       "name": "奈良金魚ミュージアム",
@@ -3090,7 +3218,8 @@
       ],
       "search_animals": [
         "金魚"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "和歌山県立自然博物館",
@@ -3102,7 +3231,8 @@
       "child": "高校生以下無料",
       "closed": "月曜（祝日は翌日）",
       "comment": "和歌山の海の大水槽がある博物館",
-      "photo": "assets/photo_wakayama.jpg"
+      "photo": "assets/photo_wakayama.jpg",
+      "visited": false
     },
     {
       "name": "串本海中公園",
@@ -3114,7 +3244,8 @@
       "child": "800円",
       "closed": "年中無休",
       "comment": "本物の海中を見られる海中展望塔がある！",
-      "photo": "assets/photo_kushimoto.jpg"
+      "photo": "assets/photo_kushimoto.jpg",
+      "visited": false
     },
     {
       "name": "太地町立くじらの博物館",
@@ -3125,7 +3256,8 @@
       "fee": "1,500円",
       "child": "800円",
       "closed": "年中無休",
-      "comment": "クジラの町・太地でクジラと超接近できる"
+      "comment": "クジラの町・太地でクジラと超接近できる",
+      "visited": false
     },
     {
       "name": "京都大学白浜水族館",
@@ -3137,7 +3269,8 @@
       "child": "200円",
       "closed": "年中無休",
       "comment": "大学研究所の水族館！白浜の海の生きもの専門",
-      "photo": "assets/photo_kyodai_shirahama.jpg"
+      "photo": "assets/photo_kyodai_shirahama.jpg",
+      "visited": false
     },
     {
       "name": "すさみ町立エビとカニの水族館",
@@ -3149,7 +3282,8 @@
       "child": "500円【要確認】",
       "closed": "年中無休",
       "comment": "世界で唯一の甲殻類専門水族館！",
-      "photo": "assets/photo_susami.jpg"
+      "photo": "assets/photo_susami.jpg",
+      "visited": false
     },
     {
       "name": "城崎マリンワールド",
@@ -3165,7 +3299,8 @@
         "dolphin",
         "kids"
       ],
-      "photo": "assets/photo_kinosaki.jpg"
+      "photo": "assets/photo_kinosaki.jpg",
+      "visited": false
     },
     {
       "name": "みなとやま水族館",
@@ -3177,7 +3312,8 @@
       "child": "600円【要確認】",
       "closed": "年中無休",
       "comment": "廃校になった小学校が水族館に！",
-      "photo": "assets/photo_minatoyama.jpg"
+      "photo": "assets/photo_minatoyama.jpg",
+      "visited": false
     },
     {
       "name": "淡路じゃのひれドルフィンファーム",
@@ -3191,7 +3327,8 @@
       "comment": "淡路島の海でイルカとふれあい・スイムも",
       "search_animals": [
         "イルカ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "とっとり賀露かにっこ館",
@@ -3205,7 +3342,8 @@
       "comment": "入館無料！カニ専門のミニ水族館",
       "search_animals": [
         "カニ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "島根県立しまね海洋館アクアス",
@@ -3226,7 +3364,8 @@
       "search_animals": [
         "イルカ",
         "シロイルカ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "渋川マリン水族館",
@@ -3237,7 +3376,8 @@
       "fee": "800円",
       "child": "400円",
       "closed": "水曜（祝日は翌日）・年末年始",
-      "comment": "瀬戸内海の生きもの中心のレトロな博物館"
+      "comment": "瀬戸内海の生きもの中心のレトロな博物館",
+      "visited": false
     },
     {
       "name": "宮島水族館 みやじマリン",
@@ -3249,7 +3389,8 @@
       "child": "710円",
       "closed": "※2026/12/1〜2027/3/31は改修のため休館",
       "comment": "世界遺産・宮島にある和風建築の水族館",
-      "photo": "assets/photo_miyajima.jpg"
+      "photo": "assets/photo_miyajima.jpg",
+      "visited": false
     },
     {
       "name": "福山大学マリンバイオセンター水族館",
@@ -3260,7 +3401,8 @@
       "fee": "無料",
       "child": "無料",
       "closed": "土日祝・年末年始・お盆（平日のみ開館）",
-      "comment": "因島にある大学運営の無料水族館"
+      "comment": "因島にある大学運営の無料水族館",
+      "visited": false
     },
     {
       "name": "なぎさ水族館",
@@ -3274,7 +3416,8 @@
       "comment": "周防大島の小さな水族館。日本最大級のニホンアワサンゴ",
       "search_animals": [
         "サンゴ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "日和佐うみがめ博物館カレッタ",
@@ -3288,7 +3431,8 @@
       "comment": "世界的にも珍しいウミガメ専門博物館",
       "search_animals": [
         "ウミガメ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "モラスコむぎ",
@@ -3299,7 +3443,8 @@
       "fee": "200円",
       "child": "100円",
       "closed": "【要確認】",
-      "comment": "漁師さんの水族館＋貝の資料館"
+      "comment": "漁師さんの水族館＋貝の資料館",
+      "visited": false
     },
     {
       "name": "海洋自然博物館マリンジャム",
@@ -3313,7 +3458,8 @@
       "comment": "海中観光船ブルーマリンでサンゴの海へ",
       "search_animals": [
         "サンゴ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "新屋島水族館",
@@ -3325,7 +3471,8 @@
       "child": "-",
       "closed": "リニューアルのため休館中（2027年春再開予定）",
       "comment": "屋島の山上の水族館。2025年4月から改装休館中、2027年春にリニューアルオープン予定！今から楽しみ🐟",
-      "photo": "assets/photo_yashima.jpg"
+      "photo": "assets/photo_yashima.jpg",
+      "visited": false
     },
     {
       "name": "日本ドルフィンセンター",
@@ -3339,7 +3486,8 @@
       "comment": "さぬき市の海でイルカとふれあえる",
       "search_animals": [
         "イルカ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "虹の森公園おさかな館",
@@ -3353,7 +3501,8 @@
       "comment": "四万十川の生きものとペンギンがいる道の駅水族館",
       "search_animals": [
         "ペンギン"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "ドルフィンファームしまなみ",
@@ -3367,7 +3516,8 @@
       "comment": "しまなみ海道・伯方島の日本最大級イルカふれあい施設",
       "search_animals": [
         "イルカ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "桂浜水族館",
@@ -3381,7 +3531,8 @@
       "comment": "SNSで大人気！「ハマスイ」の愛称で愛される老舗",
       "search_animals": [
         "マス"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "四万十川学遊館あきついお",
@@ -3392,7 +3543,8 @@
       "fee": "880円",
       "child": "330円",
       "closed": "月曜（祝日は翌日・長期休みは無休）",
-      "comment": "四万十川の魚とトンボの博物館"
+      "comment": "四万十川の魚とトンボの博物館",
+      "visited": false
     },
     {
       "name": "足摺海洋館 SATOUMI",
@@ -3403,7 +3555,8 @@
       "fee": "1,200円",
       "child": "600円",
       "closed": "年中無休",
-      "comment": "竜串の海と森をまるごと体感できる新しい水族館"
+      "comment": "竜串の海と森をまるごと体感できる新しい水族館",
+      "visited": false
     },
     {
       "name": "むろと廃校水族館",
@@ -3421,7 +3574,8 @@
       ],
       "search_animals": [
         "サメ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "筑後川防災施設くるめウス",
@@ -3432,7 +3586,8 @@
       "fee": "無料",
       "child": "無料",
       "closed": "月曜（祝日は火曜）・年末年始",
-      "comment": "筑後川の魚たちに会える無料施設"
+      "comment": "筑後川の魚たちに会える無料施設",
+      "visited": false
     },
     {
       "name": "やながわ有明海水族館",
@@ -3443,7 +3598,8 @@
       "fee": "300円",
       "child": "100円",
       "closed": "火曜（平日は昼から開館）",
-      "comment": "ムツゴロウやワラスボ！有明海専門の小さな水族館"
+      "comment": "ムツゴロウやワラスボ！有明海専門の小さな水族館",
+      "visited": false
     },
     {
       "name": "鹿島市干潟交流館なな海",
@@ -3454,7 +3610,8 @@
       "fee": "無料",
       "child": "無料",
       "closed": "月曜（祝日は翌平日）・12/29〜1/3",
-      "comment": "有明海の干潟の生きもの＋ガタリンピックの聖地"
+      "comment": "有明海の干潟の生きもの＋ガタリンピックの聖地",
+      "visited": false
     },
     {
       "name": "壱岐イルカパーク＆リゾート",
@@ -3468,7 +3625,8 @@
       "comment": "壱岐島の入り江でイルカとふれあえる",
       "search_animals": [
         "イルカ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "うみたま体験パーク つくみイルカ島",
@@ -3482,7 +3640,8 @@
       "comment": "津久見の海でイルカと超接近体験",
       "search_animals": [
         "イルカ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "番匠おさかな館",
@@ -3494,7 +3653,8 @@
       "child": "300円",
       "closed": "第2火曜・年末年始",
       "comment": "道の駅やよいの淡水魚水族館",
-      "photo": "assets/photo_bansho.jpg"
+      "photo": "assets/photo_bansho.jpg",
+      "visited": false
     },
     {
       "name": "わくわく海中水族館シードーナツ",
@@ -3512,7 +3672,8 @@
       ],
       "search_animals": [
         "イルカ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "高千穂峡淡水魚水族館",
@@ -3523,7 +3684,8 @@
       "fee": "600円",
       "child": "300円",
       "closed": "12/31・1/1",
-      "comment": "高千穂峡のほとりの小さな淡水魚水族館"
+      "comment": "高千穂峡のほとりの小さな淡水魚水族館",
+      "visited": false
     },
     {
       "name": "すみえファミリー水族館",
@@ -3534,7 +3696,8 @@
       "fee": "300円",
       "child": "200円",
       "closed": "火曜【要確認】",
-      "comment": "延岡・須美江海水浴場そばのちいさな水族館"
+      "comment": "延岡・須美江海水浴場そばのちいさな水族館",
+      "visited": false
     },
     {
       "name": "出の山淡水魚水族館",
@@ -3545,7 +3708,8 @@
       "fee": "300円",
       "child": "200円",
       "closed": "月曜（祝日は翌日）・年末年始",
-      "comment": "名水百選の湧水で育つ淡水魚たち"
+      "comment": "名水百選の湧水で育つ淡水魚たち",
+      "visited": false
     },
     {
       "name": "大淀川学習館",
@@ -3556,7 +3720,8 @@
       "fee": "無料",
       "child": "無料",
       "closed": "月曜（祝日は翌日）",
-      "comment": "大淀川の自然を学べる無料施設"
+      "comment": "大淀川の自然を学べる無料施設",
+      "visited": false
     },
     {
       "name": "志布志湾大黒イルカランド",
@@ -3574,7 +3739,8 @@
       ],
       "search_animals": [
         "イルカ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "奄美海洋展示館",
@@ -3589,7 +3755,8 @@
       "photo": "assets/photo_amami.jpg",
       "search_animals": [
         "ウミガメ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "黒島研究所",
@@ -3604,7 +3771,8 @@
       "search_animals": [
         "ウミガメ",
         "サメ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "DMMかりゆし水族館",
@@ -3619,7 +3787,8 @@
       "tags": [
         "rain",
         "kids"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "きんたい廃校博物館（きんぱく）",
@@ -3633,7 +3802,8 @@
       "tags": [
         "kids"
       ],
-      "photo": "assets/gigi_illust.jpg"
+      "photo": "assets/gigi_illust.jpg",
+      "visited": false
     },
     {
       "name": "アクア東条",
@@ -3652,7 +3822,8 @@
       "search_animals": [
         "カメ",
         "コイ"
-      ]
+      ],
+      "visited": false
     },
     {
       "name": "市場水族館（新屋島水族館 仮設）",
@@ -3666,7 +3837,8 @@
       "search_animals": [
         "カワウソ",
         "ペンギン"
-      ]
+      ],
+      "visited": false
     }
   ],
   "rankings": [

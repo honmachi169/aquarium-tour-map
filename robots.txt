@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /review.html
+Sitemap: https://aquarium.yasasea.com/sitemap.xml

@@ -22,6 +22,9 @@ def slugify(name, no=None):
     return "u-" + re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-") if s.isascii() else "u-" + str(abs(hash(name)) % 100000)
 
 d = json.load(open("data.json"))
+_updated = d.get("updated", "")
+_m = re.match(r"(\d{4})-(\d{2})", _updated)
+INFO_ASOF = f"{int(_m.group(1))}年{int(_m.group(2))}月" if _m else _updated
 entries = []
 for a in d["aquariums"]:
     entries.append((f"{a['no']:03d}", a, True))
@@ -63,23 +66,26 @@ for slug, a, intro in entries:
     if a.get("gift"): info += f"<tr><th>🎁 おみやげ</th><td>{E(a['gift'])}</td></tr>"
     if a.get("goshuin"): info += f"<tr><th>🐟 魚朱印</th><td>{E(a['goshuin'])}</td></tr>"
 
+    approved = bool(a.get("visited")) and bool(a.get("verified"))
+
     hitokoto = ""
-    if a.get("hitokoto"):
+    if approved and a.get("hitokoto"):
         hitokoto = f'<div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div>{E(a["hitokoto"])}</div>'
 
     highlights_box = ""
-    if a.get("highlights"):
+    if approved and a.get("highlights"):
         rows = "".join(f"<li>{E(h)}</li>" for h in a["highlights"])
         highlights_box = f'<div class="highlights-box"><div class="hk-label">🔍 かわちゃん見どころポイント！</div><ul>{rows}</ul></div>'
 
     RATING_LABEL = {"rare":"🦈 激レアいきもの","perf":"🐬 パフォーマンス","kids":"👶 子ども向け度","cospa":"💰 コスパ","kuse":"🌀 クセつよポイント"}
     ratings = a.get("ratings") or {}
     rating_rows = ""
-    for key, label in RATING_LABEL.items():
-        if key in ratings:
-            n = max(0, min(5, int(ratings[key])))
-            stars = "★"*n + "☆"*(5-n)
-            rating_rows += f'<div class="rate-row"><span class="rate-label">{label}</span><span class="rate-stars">{stars}</span></div>'
+    if approved:
+        for key, label in RATING_LABEL.items():
+            if key in ratings:
+                n = max(0, min(5, int(ratings[key])))
+                stars = "★"*n + "☆"*(5-n)
+                rating_rows += f'<div class="rate-row"><span class="rate-label">{label}</span><span class="rate-stars">{stars}</span></div>'
     ratings_box = f'<div class="ratings-box"><div class="hk-label">🐟 かわちゃん的 オススメ度</div>{rating_rows}</div>' if rating_rows else ""
 
     summer = f'<div class="summer">☀️ <b>夏休み情報：</b>{E(a["summer"])}</div>' if a.get("summer") else ""
@@ -221,7 +227,7 @@ loadYtComments();''' if v else ''
   {summer}
   <table>{info}</table>
   {highlights_box}
-  <p class="note">※最新の料金・営業情報は公式サイトでチェックしてね</p>
+  <p class="note">※{INFO_ASOF}時点の情報です。おでかけ前に{('<a href="' + E(a["url"]) + '" target="_blank" rel="noopener">公式サイト</a>') if a.get("url") else "公式サイト"}をご確認ください</p>
   <div class="btns">
     {links}
     <a class="btn share" href="https://twitter.com/intent/tweet?text={html.escape(share_text)}&url={page_url}" target="_blank" rel="noopener">🕊 シェアする</a>

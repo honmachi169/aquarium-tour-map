@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>かわちゃん専用レビュー</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<style>
+  :root { --sea:#0096c7; --sea-deep:#023e8a; --sky:#caf0f8; --sand:#fff9ec; --coral:#ff6b6b; --sun:#ffd166; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif; background:var(--sand); color:#333; line-height:1.6; padding-bottom:40px; }
+  header { background:linear-gradient(135deg,var(--sea),var(--sea-deep)); color:#fff; padding:14px 16px; text-align:center; font-weight:bold; position:sticky; top:0; z-index:10; }
+  .tabs { display:flex; gap:8px; padding:10px 16px 0; }
+  .tabs button { flex:1; padding:10px; border:none; border-radius:12px; background:#fff; color:var(--sea-deep); font-weight:bold; font-size:.9rem; }
+  .tabs button.active { background:var(--sea); color:#fff; }
+  main { max-width:480px; margin:0 auto; padding:16px; }
+  .progress-wrap { background:#fff; border-radius:999px; height:10px; margin:10px 0; overflow:hidden; }
+  .progress-bar { background:var(--coral); height:100%; transition:width .3s; }
+  .progress-txt { text-align:center; font-size:.85rem; color:#678; margin-bottom:10px; }
+  .card { background:#fff; border-radius:20px; padding:22px 18px; box-shadow:0 4px 16px rgba(0,0,0,.08); text-align:center; }
+  .card .pref { display:inline-block; background:var(--sky); color:var(--sea-deep); font-size:.75rem; border-radius:999px; padding:3px 10px; margin-bottom:8px; }
+  .card h2 { font-size:1.4rem; margin-bottom:16px; }
+  .bigbtns { display:flex; gap:10px; margin-top:10px; }
+  .bigbtns button { flex:1; padding:22px 8px; border:none; border-radius:16px; font-size:1.05rem; font-weight:bold; cursor:pointer; }
+  .btn-yes { background:#d1f7c4; color:#1b5e20; }
+  .btn-no { background:#f1f1f1; color:#777; }
+  .done-msg { text-align:center; padding:60px 20px; color:#678; }
+  .hk-label { font-size:.78rem; font-weight:bold; color:var(--sea); margin:14px 0 6px; text-align:left; }
+  .hitokoto-box { background:var(--sky); border-radius:12px; padding:10px 12px; text-align:left; font-size:.92rem; min-height:2.4em; }
+  .hitokoto-box[contenteditable="true"] { outline:2px dashed var(--coral); background:#fff; }
+  .rate-row { display:flex; justify-content:space-between; align-items:center; padding:6px 2px; text-align:left; font-size:.88rem; }
+  .stars span { font-size:1.15rem; cursor:default; }
+  .stars.editable span { cursor:pointer; }
+  .decision-btns { display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; }
+  .decision-btns button { flex:1; min-width:90px; padding:12px 6px; border:none; border-radius:12px; font-size:.85rem; font-weight:bold; cursor:pointer; }
+  .btn-ok { background:#d1f7c4; color:#1b5e20; }
+  .btn-edit { background:var(--sun); color:#5a3d00; }
+  .btn-discard { background:#eee; color:#888; }
+  .btn-later { background:#eee; color:#888; }
+  .btn-save { background:var(--sea); color:#fff; display:none; }
+  .no-draft { color:#aaa; font-size:.85rem; padding:20px 0; }
+  .status { text-align:center; font-size:.8rem; color:#9ab; margin-top:14px; }
+</style>
+</head>
+<body>
+<header>🐟 かわちゃん専用レビュー</header>
+<div class="tabs">
+  <button id="tabStep1" class="active">① 訪問仕分け</button>
+  <button id="tabStep2">② 一言・評価の承認</button>
+</div>
+<main>
+  <div class="progress-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+  <div class="progress-txt" id="progressTxt">読み込み中…</div>
+  <div id="cardArea"></div>
+</main>
+
+<script>
+const REVIEW_KEY = 'yasasea-kawachan-review-2026';
+const API = 'https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV1YlrB_UPx2_c3hMS9fG6YTunOrrOKROeHdHJg2QzXj/exec';
+const RATING_LABEL = {rare:'🦈 激レアいきもの', perf:'🐬 パフォーマンス', kids:'👶 子ども向け度', cospa:'💰 コスパ', kuse:'🌀 クセつよポイント'};
+
+let data = null;       // data.json
+let reviewState = {};  // GASから取得した判定済み状態 { name: {visited, status, hitokoto, ratings} }
+let step = 1;
+
+async function boot() {
+  const [d, rs] = await Promise.all([
+    fetch('data.json?_=' + Date.now()).then(r => r.json()),
+    fetch(API + '?review=1&key=' + encodeURIComponent(REVIEW_KEY) + '&_=' + Date.now()).then(r => r.json())
+  ]);
+  data = d;
+  reviewState = rs || {};
+  render();
+}
+
+function step1Queue() {
+  // 未紹介113館のうち、まだ仕分けしていないものだけ
+  return data.unvisited.filter(a => {
+    const rs = reviewState[a.name];
+    return !rs || rs.visited === null || rs.visited === undefined;
+  });
+}
+
+function isVisited(a) {
+  if (a.visited) return true;
+  const rs = reviewState[a.name];
+  return !!(rs && rs.visited === true);
+}
+
+function step2Queue() {
+  const all = [...data.aquariums, ...data.unvisited];
+  return all.filter(a => {
+    if (!isVisited(a)) return false;
+    const rs = reviewState[a.name];
+    const st = rs && rs.status;
+    return !st || st === ''; // 未判定のみ（later含めスキップ済みは除外）
+  });
+}
+
+function render() {
+  document.getElementById('tabStep1').classList.toggle('active', step === 1);
+  document.getElementById('tabStep2').classList.toggle('active', step === 2);
+  if (step === 1) renderStep1(); else renderStep2();
+}
+
+function renderStep1() {
+  const q = step1Queue();
+  const total = data.unvisited.length;
+  const done = total - q.length;
+  document.getElementById('progressBar').style.width = (total ? done / total * 100 : 100) + '%';
+  const area = document.getElementById('cardArea');
+  if (!q.length) {
+    document.getElementById('progressTxt').textContent = `${total}館すべて仕分け完了！`;
+    area.innerHTML = '<div class="done-msg">🎉 訪問仕分け、おつかれさま！<br>「② 一言・評価の承認」に進んでね</div>';
+    return;
+  }
+  document.getElementById('progressTxt').textContent = `あと ${q.length} 館（${done}/${total}）`;
+  const a = q[0];
+  area.innerHTML = `
+    <div class="card">
+      <span class="pref">${esc(a.pref || '')}</span>
+      <h2>${esc(a.name)}</h2>
+      <div class="bigbtns">
+        <button class="btn-yes" onclick="answerVisited('${escJs(a.name)}', true)">🎒 行った</button>
+        <button class="btn-no" onclick="answerVisited('${escJs(a.name)}', false)">❌ まだ</button>
+      </div>
+    </div>`;
+}
+
+async function answerVisited(name, visited) {
+  reviewState[name] = Object.assign({}, reviewState[name], { visited });
+  render();
+  try {
+    await fetch(API, { method: 'POST', body: JSON.stringify({ action: 'reviewVisited', key: REVIEW_KEY, name, visited }) });
+  } catch (e) {}
+}
+
+function renderStep2() {
+  const q = step2Queue();
+  const totalVisited = [...data.aquariums, ...data.unvisited].filter(isVisited).length;
+  const done = totalVisited - q.length;
+  document.getElementById('progressBar').style.width = (totalVisited ? done / totalVisited * 100 : 100) + '%';
+  const area = document.getElementById('cardArea');
+  if (!q.length) {
+    document.getElementById('progressTxt').textContent = `行った${totalVisited}館すべて判定完了！`;
+    area.innerHTML = '<div class="done-msg">🎉 一言・評価の承認、おつかれさま！<br>反映され次第サイトに公開されます</div>';
+    return;
+  }
+  document.getElementById('progressTxt').textContent = `あと ${q.length} 館（${done}/${totalVisited}）`;
+  const a = q[0];
+  const hitokoto = a.hitokoto || '';
+  const ratings = a.ratings || {};
+  if (!hitokoto && !Object.keys(ratings).length) {
+    area.innerHTML = `
+      <div class="card">
+        <span class="pref">${esc(a.pref || '')}</span>
+        <h2>${esc(a.name)}</h2>
+        <p class="no-draft">まだAI下書きがありません</p>
+        <div class="decision-btns">
+          <button class="btn-later" onclick="answerApprove('${escJs(a.name)}', 'later')">⏭ あとで書く</button>
+        </div>
+      </div>`;
+    return;
+  }
+  const starsHtml = Object.keys(RATING_LABEL).filter(k => k in ratings).map(k => {
+    const n = ratings[k];
+    let stars = '';
+    for (let i = 1; i <= 5; i++) stars += `<span data-key="${k}" data-n="${i}">${i <= n ? '★' : '☆'}</span>`;
+    return `<div class="rate-row"><span>${RATING_LABEL[k]}</span><span class="stars" data-key="${k}">${stars}</span></div>`;
+  }).join('');
+  area.innerHTML = `
+    <div class="card">
+      <span class="pref">${esc(a.pref || '')}</span>
+      <h2>${esc(a.name)}</h2>
+      <div class="hk-label">🐟 かわちゃんからの一言（AI下書き）</div>
+      <div class="hitokoto-box" id="hkBox">${esc(hitokoto || '（下書きなし）')}</div>
+      <div class="hk-label">🐟 かわちゃん的 オススメ度</div>
+      <div id="ratingArea">${starsHtml}</div>
+      <div class="decision-btns">
+        <button class="btn-ok" onclick="decide('${escJs(a.name)}','ok')">✅ このままでOK</button>
+        <button class="btn-edit" id="editBtn" onclick="startEdit()">✏️ 直す</button>
+        <button class="btn-discard" onclick="decide('${escJs(a.name)}','discard')">🗑 ボツ</button>
+        <button class="btn-save" id="saveBtn" onclick="saveEdit('${escJs(a.name)}')">💾 保存</button>
+      </div>
+    </div>`;
+  currentRatings = Object.assign({}, ratings);
+}
+
+let currentRatings = {};
+
+function startEdit() {
+  const box = document.getElementById('hkBox');
+  box.contentEditable = 'true';
+  box.focus();
+  document.getElementById('ratingArea').querySelectorAll('.stars').forEach(s => s.classList.add('editable'));
+  document.getElementById('ratingArea').querySelectorAll('span[data-key]').forEach(sp => {
+    sp.onclick = () => {
+      const key = sp.dataset.key, n = Number(sp.dataset.n);
+      currentRatings[key] = n;
+      document.querySelectorAll(`span[data-key="${key}"]`).forEach(s2 => {
+        s2.textContent = Number(s2.dataset.n) <= n ? '★' : '☆';
+      });
+    };
+  });
+  document.getElementById('editBtn').style.display = 'none';
+  document.getElementById('saveBtn').style.display = 'block';
+}
+
+async function saveEdit(name) {
+  const hitokoto = document.getElementById('hkBox').innerText.trim();
+  await decide(name, 'edit', hitokoto, currentRatings);
+}
+
+async function decide(name, status, hitokoto, ratings) {
+  reviewState[name] = Object.assign({}, reviewState[name], { status, hitokoto: hitokoto || '', ratings: ratings ? JSON.stringify(ratings) : '' });
+  render();
+  try {
+    const body = { action: 'reviewApprove', key: REVIEW_KEY, name, status };
+    if (typeof hitokoto === 'string') body.hitokoto = hitokoto;
+    if (ratings) body.ratings = ratings;
+    await fetch(API, { method: 'POST', body: JSON.stringify(body) });
+  } catch (e) {}
+}
+async function answerApprove(name, status) { return decide(name, status); }
+
+document.getElementById('tabStep1').onclick = () => { step = 1; render(); };
+document.getElementById('tabStep2').onclick = () => { step = 2; render(); };
+
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function escJs(s) { return String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
+
+boot();
+</script>
+</body>
+</html>
