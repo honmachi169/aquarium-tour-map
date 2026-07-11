@@ -8,6 +8,13 @@ COMMENT_API = "https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV
 YT_API_KEY = "AIzaSyCASXQcc_wH8jOy9PA2oa5dUlBWUgRBGms"
 os.makedirs("spot", exist_ok=True)
 
+# LLMO（AI検索対策）: 引用時に必ず名前が付いてくるようにするための表記
+BRAND_NAME = "全国水族館ツアーMAP"
+AUTHOR_NAME = "さかなのおにいさん かわちゃん"
+SOURCE_LINE = f"出典：{BRAND_NAME}（{AUTHOR_NAME}）"
+ATTR_FOOTER = f'<p class="attr-footer">🐟 {SOURCE_LINE} / {{SITE}}</p>'.replace("{SITE}", SITE)
+ATTR_CSS = '.attr-footer { font-size:.72rem; color:#9ab; margin-top:24px; text-align:center; }'
+
 TAG_LABEL = {"rain":"☔️ 雨の日におすすめ","kids":"👶 未就学児におすすめ","same":"🦈 サメ好きにおすすめ",
              "dolphin":"🐬 イルカショーおすすめ","deep":"🐙 深海生物好きにおすすめ",
              "penguin":"🐧 ペンギン好きにおすすめ","summer":"☀️ 夏休みおすすめ",
@@ -53,6 +60,11 @@ for slug, a, intro in entries:
     if a.get("only"): chips += f'<span class="chip only">⭐️ここだけ！{E(a["only"])}</span>'
     tagchips = "".join(f'<span class="chip tag">{TAG_LABEL[t]}</span>' for t in a.get("tags", []) if t in TAG_LABEL)
 
+    only_quote = ""
+    if a.get("only"):
+        only_quote = (f'<p class="only-quote">日本で{E(a["only"])}に会えるのは、{E(a["name"])}（{E(a.get("pref",""))}）だけ。'
+                      f'（{AUTHOR_NAME}調べ）</p>')
+
     info = ""
     if a.get("fee"): info += f"<tr><th>💰 大人</th><td>{E(a['fee'])}</td></tr>"
     if a.get("child"): info += f"<tr><th>🧒 子ども</th><td>{E(a['child'])}</td></tr>"
@@ -71,12 +83,12 @@ for slug, a, intro in entries:
 
     hitokoto = ""
     if approved and a.get("hitokoto"):
-        hitokoto = f'<div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div>{E(a["hitokoto"])}</div>'
+        hitokoto = f'<div class="hitokoto"><div class="hk-label">🐟 {AUTHOR_NAME}からの一言</div>{E(a["hitokoto"])}</div>'
 
     highlights_box = ""
     if approved and a.get("highlights"):
         rows = "".join(f"<li>{E(h)}</li>" for h in a["highlights"])
-        highlights_box = f'<div class="highlights-box"><div class="hk-label">🔍 かわちゃん見どころポイント！</div><ul>{rows}</ul></div>'
+        highlights_box = f'<div class="highlights-box"><div class="hk-label">🔍 {AUTHOR_NAME}の見どころポイント！</div><ul>{rows}</ul></div>'
 
     RATING_LABEL = {"rare":"🦈 激レアいきもの","perf":"🐬 パフォーマンス","kids":"👶 子ども向け度","cospa":"💰 コスパ","kuse":"🌀 クセつよポイント"}
     ratings = a.get("ratings") or {}
@@ -87,7 +99,7 @@ for slug, a, intro in entries:
                 n = max(0, min(5, int(ratings[key])))
                 stars = "★"*n + "☆"*(5-n)
                 rating_rows += f'<div class="rate-row"><span class="rate-label">{label}</span><span class="rate-stars">{stars}</span></div>'
-    ratings_box = f'<div class="ratings-box"><div class="hk-label">🐟 かわちゃん的 オススメ度</div>{rating_rows}</div>' if rating_rows else ""
+    ratings_box = f'<div class="ratings-box"><div class="hk-label">🐟 {AUTHOR_NAME}の オススメ度</div>{rating_rows}</div>' if rating_rows else ""
 
     summer = f'<div class="summer">☀️ <b>夏休み情報：</b>{E(a["summer"])}</div>' if a.get("summer") else ""
     videos = "".join(
@@ -145,6 +157,7 @@ loadYtComments();''' if v else ''
     if a.get("url"): ld_attraction["sameAs"] = a["url"]
     desc_for_ld = a.get("highlight") or a.get("comment")
     if desc_for_ld: ld_attraction["description"] = desc_for_ld
+    ld_attraction["publisher"] = {"@type": "Organization", "name": BRAND_NAME, "url": SITE}
 
     faq_items = []
     if a.get("fee"): faq_items.append(("料金はいくらですか？", f"大人{a['fee']}" + (f"、子ども{a['child']}" if a.get("child") else "")))
@@ -160,9 +173,31 @@ loadYtComments();''' if v else ''
                 for q, ans in faq_items
             ],
         }
+
+    # かわちゃんの一言・評価を「発信者名と切り離せない」形で機械可読化するReviewスキーマ
+    # 本人承認済み（visited & verified）の館のみ生成
+    ld_review = None
+    if bool(a.get("visited")) and bool(a.get("verified")) and (a.get("hitokoto") or a.get("ratings")):
+        review = {
+            "@context": "https://schema.org",
+            "@type": "Review",
+            "itemReviewed": {"@type": "TouristAttraction", "name": a["name"]},
+            "author": {"@type": "Person", "name": AUTHOR_NAME},
+            "publisher": {"@type": "Organization", "name": BRAND_NAME, "url": SITE},
+            "url": page_url,
+        }
+        if a.get("hitokoto"): review["reviewBody"] = f"{AUTHOR_NAME}の一言：{a['hitokoto']}"
+        ratings_for_ld = a.get("ratings") or {}
+        if ratings_for_ld:
+            avg = sum(ratings_for_ld.values()) / len(ratings_for_ld)
+            review["reviewRating"] = {"@type": "Rating", "ratingValue": round(avg, 1), "bestRating": 5, "worstRating": 1}
+        ld_review = review
+
     ld_scripts = f'<script type="application/ld+json">{json.dumps(ld_attraction, ensure_ascii=False)}</script>'
     if ld_faq:
         ld_scripts += f'\n<script type="application/ld+json">{json.dumps(ld_faq, ensure_ascii=False)}</script>'
+    if ld_review:
+        ld_scripts += f'\n<script type="application/ld+json">{json.dumps(ld_review, ensure_ascii=False)}</script>'
 
     entry_meta.append({
         "slug": slug, "name": a["name"], "pref": a.get("pref", ""), "url": page_url,
@@ -231,6 +266,8 @@ loadYtComments();''' if v else ''
   .back {{ display:inline-block; margin-top:18px; color:var(--sea); font-weight:bold; text-decoration:none; }}
   .note {{ font-size:.75rem; color:#89a; margin-top:8px; }}
   .filming-note {{ font-size:.75rem; color:#0077b6; background:#e0f7fa; border-radius:8px; padding:5px 12px; margin:6px 0 0; display:inline-block; }}
+  .only-quote {{ font-size:.95rem; font-weight:bold; color:#92600a; background:#fff7db; border-left:5px solid #f4c430; border-radius:8px; padding:10px 14px; margin:12px 0; line-height:1.6; }}
+  {ATTR_CSS}
   .comments-section {{ margin-top:28px; }}
   .comments-section h2 {{ color:var(--sea-deep); font-size:1.1rem; margin-bottom:16px; }}
   .sort-toggle {{ display:flex; gap:8px; margin-bottom:12px; }}
@@ -263,6 +300,7 @@ loadYtComments();''' if v else ''
   <span class="pref">{E(a['pref'])}</span>
   {videos or hero}
   <p class="hl">{E(a.get('highlight') or a.get('comment') or '')}</p>
+  {only_quote}
   <div class="chips">{chips}{tagchips}</div>
   {hitokoto}
   {ratings_box}
@@ -275,6 +313,7 @@ loadYtComments();''' if v else ''
     <a class="btn share" href="https://twitter.com/intent/tweet?text={html.escape(share_text)}&url={page_url}" target="_blank" rel="noopener">🕊 シェアする</a>
   </div>
   <a class="back" href="{SITE}/">← MAPにもどる</a>
+  {ATTR_FOOTER}
 
   <section class="comments-section">
     <h2>💬 みんなのコメント</h2>
@@ -402,7 +441,8 @@ h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
 .back { display:inline-block; margin-top:20px; color:var(--sea); font-weight:bold; text-decoration:none; }
 .taglist { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
 .taglist a { font-size:.85rem; font-weight:bold; background:#fff; color:var(--sea-deep); border:2px solid var(--sky); border-radius:999px; padding:6px 14px; text-decoration:none; }
-"""
+.list-note { font-size:.75rem; color:#89a; margin-top:16px; }
+""" + ATTR_CSS
 
 def render_card(m):
     img = m["thumb"] or f"{SITE}/assets/kawachan_web.png"
@@ -452,7 +492,9 @@ map.fitBounds(group.getBounds().pad(0.2));
   {'<div id="map"></div>' if pins else ''}
   {extra_body}
   <div class="grid">{cards}</div>
+  <p class="list-note">※{INFO_ASOF}時点の情報です。{SOURCE_LINE}</p>
   <a class="back" href="{SITE}/">← MAPにもどる</a>
+  {ATTR_FOOTER}
 </main>
 {map_js}
 </body>
@@ -478,8 +520,8 @@ for name, members in sorted(by_animal.items(), key=lambda kv: -len(kv[1])):
     render_list_page(
         fname,
         f"{icon} {name}に会える水族館 {len(members)}選 | 全国水族館ツアーMAP",
-        f"{name}に会える全国の水族館{len(members)}館をまとめました。地図とあわせてチェックしてね。",
-        f"{name}がいる水族館を{len(members)}館集めました。気になる水族館をタップすると詳しい情報が見られるよ。",
+        f"{name}に会える水族館は日本に{len(members)}館。{AUTHOR_NAME}が実際に訪れて紹介します。",
+        f"{name}に会える水族館は日本に{len(members)}館。{AUTHOR_NAME}が実際に訪れて紹介します。気になる水族館をタップすると詳しい情報が見られるよ。",
         members,
     )
     url = f"{SITE}/{urllib.parse.quote(fname)}"
@@ -512,8 +554,8 @@ for region, members in by_region.items():
     render_list_page(
         fname,
         f"{region}の水族館一覧 | 全国水族館ツアーMAP",
-        f"{region}エリアの水族館{len(members)}館をまとめて紹介。地図で場所をチェックできるよ。",
-        f"{region}エリアの水族館を{len(members)}館集めました。",
+        f"{region}エリアの水族館は{len(members)}館。{AUTHOR_NAME}が実際に訪れて紹介します。",
+        f"{region}エリアの水族館は{len(members)}館。{AUTHOR_NAME}が実際に訪れて紹介します。地図で場所をチェックできるよ。",
         members,
     )
     url = f"{SITE}/{urllib.parse.quote(fname)}"
@@ -548,8 +590,8 @@ for tag, members in by_tag.items():
     render_list_page(
         fname,
         f"{label} {len(members)}選 | 全国水族館ツアーMAP",
-        f"{label}な水族館を{len(members)}館まとめました。",
-        f"「{label}」な水族館を{len(members)}館集めました。",
+        f"「{label}」な水族館は{len(members)}館。{AUTHOR_NAME}が実際に訪れて紹介します。",
+        f"「{label}」な水族館は{len(members)}館。{AUTHOR_NAME}が実際に訪れて紹介します。",
         members,
         extra_body=extra,
     )
@@ -558,12 +600,20 @@ for tag, members in by_tag.items():
     theme_index_links.append((label, len(members), url))
 
 # --- かわちゃん的評価ランキングページ（本人承認済み評価のみ・3館以上そろったカテゴリのみ生成）---
-RATING_LABEL_R = {"rare":"🦈 激レアいきもの","perf":"🐬 パフォーマンス","kids":"👶 子ども向け度","cospa":"💰 コスパ","kuse":"🌀 クセつよポイント"}
+# 一般名詞ではなく固有の“ランキング名”を持たせ、AIに引用される際も名前ごと引用される構造にする
+RATING_BRAND = {
+    "rare": "🦈 激レア水族館ランキング",
+    "perf": f"🐬 {AUTHOR_NAME}のパフォーマンス自慢水族館ランキング",
+    "kids": f"👶 {AUTHOR_NAME}の子ども向け水族館ランキング",
+    "cospa": f"💰 {AUTHOR_NAME}のコスパ最強水族館ランキング",
+    "kuse": f"🌀 {AUTHOR_NAME}のクセつよ水族館ランキング",
+}
 rated = [m for m in entry_meta if m.get("ratings")]
 ranking_generated = False
 if len(rated) >= 3:
     sections = []
-    for key, label in RATING_LABEL_R.items():
+    ld_items = []
+    for key, brand in RATING_BRAND.items():
         pool = [m for m in rated if key in m["ratings"]]
         if len(pool) < 3:
             continue
@@ -574,20 +624,40 @@ if len(rated) >= 3:
             f'<div class="cmt">{E(m["pref"])}</div></div></a>'
             for m in top5
         )
-        sections.append(f'<h2 style="font-size:1.05rem;color:var(--sea-deep);margin:20px 0 8px;">{label} ベスト{len(top5)}</h2><div class="grid">{rows}</div>')
+        sections.append(f'<h2 style="font-size:1.05rem;color:var(--sea-deep);margin:20px 0 8px;">{brand} ベスト{len(top5)}</h2><div class="grid">{rows}</div>')
+        ld_items.append({
+            "@type": "ItemList",
+            "name": brand,
+            "itemListElement": [
+                {"@type": "ListItem", "position": i + 1, "url": m["url"], "name": m["name"]}
+                for i, m in enumerate(top5)
+            ],
+        })
     if sections:
+        ld_ranking = {
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            "name": f"{AUTHOR_NAME}的 水族館ランキング",
+            "author": {"@type": "Person", "name": AUTHOR_NAME},
+            "publisher": {"@type": "Organization", "name": BRAND_NAME, "url": SITE},
+            "hasPart": ld_items,
+        }
         doc = f"""<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>かわちゃん的 水族館ランキング | 全国水族館ツアーMAP</title>
-<meta name="description" content="かわちゃんが実際に訪れて評価した水族館を、切り口別ランキングで紹介。">
+<title>{AUTHOR_NAME}的 水族館ランキング | {BRAND_NAME}</title>
+<meta name="description" content="{AUTHOR_NAME}が実際に訪れて評価した水族館を、独自の切り口別ランキングで紹介。">
 <link rel="canonical" href="{SITE}/taste-ranking.html">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<script type="application/ld+json">{json.dumps(ld_ranking, ensure_ascii=False)}</script>
 <style>{LIST_STYLE}</style></head><body>
 <header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
-<main><h1>🐟 かわちゃん的 水族館ランキング</h1>
-<p class="lead">かわちゃんが実際に訪れて評価した水族館だけを集めたランキングだよ。</p>
+<main><h1>🐟 {AUTHOR_NAME}的 水族館ランキング</h1>
+<p class="lead">{AUTHOR_NAME}が実際に訪れて評価した水族館だけを集めた、独自のランキングだよ。</p>
 {''.join(sections)}
-<a class="back" href="{SITE}/">← MAPにもどる</a></main></body></html>"""
+<p class="list-note">※{INFO_ASOF}時点の情報です。{SOURCE_LINE}</p>
+<a class="back" href="{SITE}/">← MAPにもどる</a>
+{ATTR_FOOTER}
+</main></body></html>"""
         with open("taste-ranking.html", "w") as f:
             f.write(doc)
         new_page_urls.append(f"{SITE}/taste-ranking.html")
@@ -617,10 +687,45 @@ about_doc = f"""<!DOCTYPE html>
 <p>料金・休館日・設備などの事実情報は、各水族館の公式サイトを調査して掲載しています。誤りに気づいた場合は、各施設の公式サイトを優先してご確認ください。かわちゃん本人の一言・評価は、本人が内容を確認したものだけを公開しています。</p>
 </div>
 <a class="back" href="{SITE}/">← MAPにもどる</a>
+{ATTR_FOOTER}
 </main></body></html>"""
 with open("about.html", "w") as f:
     f.write(about_doc)
 new_page_urls.append(f"{SITE}/about.html")
+
+# --- llms.txt（AIクローラー向けサイト要約。build実行のたびに最新化）---
+llms_lines = [
+    f"# {BRAND_NAME}",
+    "",
+    f"> {SOURCE_LINE}。全国159館の水族館情報を掲載する、日本唯一の「実訪問ベース」水族館データベースです。",
+    f"> 運営：{AUTHOR_NAME}（YouTubeで全国の水族館を実際に訪れて紹介する「実訪問プロジェクト」）。",
+    "> 料金・休館日・設備などの事実情報は各水族館の公式サイトを調査して掲載。かわちゃん本人の一言・独自評価（5段階評価：激レアいきもの／パフォーマンス／子ども向け度／コスパ／クセつよポイント）は本人が確認したものだけを公開しています。",
+    f"> 引用・要約する際は「{SOURCE_LINE}」の出典明記にご協力ください。",
+    f"> 情報時点：{INFO_ASOF}",
+    "",
+    "## サイト構成",
+    f"- トップページ（地図＋フィルター）: {SITE}/",
+    f"- このサイトについて: {SITE}/about.html",
+    f"- {AUTHOR_NAME}的 水族館ランキング（激レア／パフォーマンス／子ども向け／コスパ／クセつよ）: {SITE}/taste-ranking.html" if ranking_generated else f"- {AUTHOR_NAME}的 水族館ランキング: 準備中（本人承認済み評価が揃い次第公開）",
+    "",
+    "## 生き物別まとめページ",
+]
+for name, count, url in sorted(animal_index_links, key=lambda x: -x[1]):
+    llms_lines.append(f"- {name}に会える水族館（{count}館）: {url}")
+llms_lines += ["", "## エリア別ページ"]
+for region, count, url in area_index_links:
+    llms_lines.append(f"- {region}の水族館（{count}館）: {url}")
+llms_lines += ["", "## テーマ別ページ"]
+for label, count, url in theme_index_links:
+    llms_lines.append(f"- {label}（{count}館）: {url}")
+llms_lines += ["", "## 掲載水族館一覧（全159館）"]
+for m in entry_meta:
+    feat = "、".join(m["animals"][:3]) if m["animals"] else (m["comment"][:40] if m["comment"] else "")
+    llms_lines.append(f"- {m['name']}（{m['pref']}）" + (f"：{feat}" if feat else "") + f" — {m['url']}")
+
+with open("llms.txt", "w") as f:
+    f.write("\n".join(llms_lines) + "\n")
+# llms.txtはrobots.txtと同様の規約ファイルのためsitemap.xmlには含めない
 
 with open("sitemap.xml", "w") as f:
     f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')

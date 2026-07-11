@@ -1,3 +1,56 @@
 User-agent: *
 Disallow: /review.html
+
+# AIクローラー方針：学習用・検索/引用用ともに全面許可。
+# 「引用される時に必ずかわちゃんの名前が付いてくる」構造で対策済み（出典表記・Reviewスキーマ・llms.txt参照）
+# review.html（かわちゃん専用の非公開ページ）だけは全クローラー共通で除外する
+
+User-agent: GPTBot
+Disallow: /review.html
+Allow: /
+
+User-agent: ChatGPT-User
+Disallow: /review.html
+Allow: /
+
+User-agent: OAI-SearchBot
+Disallow: /review.html
+Allow: /
+
+User-agent: ClaudeBot
+Disallow: /review.html
+Allow: /
+
+User-agent: Claude-Web
+Disallow: /review.html
+Allow: /
+
+User-agent: anthropic-ai
+Disallow: /review.html
+Allow: /
+
+User-agent: Google-Extended
+Disallow: /review.html
+Allow: /
+
+User-agent: PerplexityBot
+Disallow: /review.html
+Allow: /
+
+User-agent: Perplexity-User
+Disallow: /review.html
+Allow: /
+
+User-agent: Bingbot
+Disallow: /review.html
+Allow: /
+
+User-agent: CCBot
+Disallow: /review.html
+Allow: /
+
+User-agent: Applebot-Extended
+Disallow: /review.html
+Allow: /
+
 Sitemap: https://aquarium.yasasea.com/sitemap.xml
