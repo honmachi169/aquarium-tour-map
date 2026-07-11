@@ -72,7 +72,7 @@ for slug, a, intro in entries:
         rows = "".join(f"<li>{E(h)}</li>" for h in a["highlights"])
         highlights_box = f'<div class="highlights-box"><div class="hk-label">🔍 かわちゃん見どころポイント！</div><ul>{rows}</ul></div>'
 
-    RATING_LABEL = {"kuse":"🌀 クセつよポイント","suzu":"❄️ 涼しさ","kids":"👶 子ども向け度","hakuryoku":"💥 迫力","cospa":"💰 コスパ"}
+    RATING_LABEL = {"rare":"🦈 激レアいきもの","perf":"🐬 パフォーマンス","kids":"👶 子ども向け度","cospa":"💰 コスパ","kuse":"🌀 クセつよポイント"}
     ratings = a.get("ratings") or {}
     rating_rows = ""
     for key, label in RATING_LABEL.items():

@@ -43,11 +43,11 @@
       "nursing": "あり（多目的室）",
       "locker": "あり（有料）",
       "ratings": {
-        "kuse": 5,
-        "suzu": 3,
+        "rare": 5,
+        "perf": 2,
         "kids": 5,
-        "hakuryoku": 4,
-        "cospa": 3
+        "cospa": 3,
+        "kuse": 5
       },
       "highlights": [
         "「会ってほしい生き物」第1位に選ばれた極地の海エリアは必見。動画でもかわちゃんが一番感動していたゾーン",
@@ -97,11 +97,11 @@
       "nursing": "あり",
       "locker": "あり（有料）",
       "ratings": {
-        "kuse": 3,
-        "suzu": 3,
+        "rare": 4,
+        "perf": 5,
         "kids": 4,
-        "hakuryoku": 5,
-        "cospa": 3
+        "cospa": 3,
+        "kuse": 3
       },
       "highlights": [
         "オルカスタディアムで見るシャチのパフォーマンスは必見！大迫力のジャンプで前方席は水しぶきの洗礼を受けるよ",
@@ -189,11 +189,11 @@
       "nursing": "あり（多目的トイレ内）",
       "locker": "あり（有料）",
       "ratings": {
-        "kuse": 3,
-        "suzu": 4,
+        "rare": 4,
+        "perf": 5,
         "kids": 4,
-        "hakuryoku": 5,
-        "cospa": 4
+        "cospa": 4,
+        "kuse": 3
       },
       "highlights": [
         "北館ではシャチの公開トレーニングと約3,000人収容のスタジアムでのイルカパフォーマンスが同時に楽しめる",
@@ -245,11 +245,11 @@
       "food_bring": "公式に明示なし・要確認",
       "restaurant": "館内フードコート（10店舗）あり。入場不要で利用可、館外に寿司店も併設",
       "ratings": {
-        "kuse": 5,
-        "suzu": 3,
+        "rare": 4,
+        "perf": 2,
         "kids": 3,
-        "hakuryoku": 4,
-        "cospa": 4
+        "cospa": 4,
+        "kuse": 5
       },
       "highlights": [
         "サメの飼育種類数が国内最多！迫力満点のシロワニやシュモクザメなど「悠久の海ゾーン」でじっくり観察できる",
@@ -362,11 +362,11 @@
       "nursing": "あり（複数か所）",
       "locker": "あり（有料）",
       "ratings": {
-        "kuse": 2,
-        "suzu": 4,
+        "rare": 4,
+        "perf": 1,
         "kids": 4,
-        "hakuryoku": 5,
-        "cospa": 3
+        "cospa": 3,
+        "kuse": 2
       },
       "highlights": [
         "日本の森から始まり、アリューシャン列島・モンタレー湾・南極・タスマン海と世界の海を一周する構成が壮大",
@@ -421,11 +421,11 @@
       "nursing": "あり",
       "locker": "あり（有料）",
       "ratings": {
-        "kuse": 3,
-        "suzu": 2,
+        "rare": 5,
+        "perf": 3,
         "kids": 5,
-        "hakuryoku": 5,
-        "cospa": 4
+        "cospa": 4,
+        "kuse": 3
       },
       "highlights": [
         "スペシャルゲスト（イルカ）から始まり、サンゴの海・熱帯魚の海と続くカラフルな展示に目を奪われる",
@@ -477,11 +477,11 @@
       "food_bring": "持込OK（弁当・おやつOK、再入園スタンプで外食も可）",
       "restaurant": "「オーシャン」（シャチを見ながら食事）・フードコート「マウリ」あり",
       "ratings": {
-        "kuse": 2,
-        "suzu": 3,
+        "rare": 4,
+        "perf": 5,
         "kids": 4,
-        "hakuryoku": 5,
-        "cospa": 2
+        "cospa": 2,
+        "kuse": 2
       },
       "highlights": [
         "太平洋を背景にした「オーシャンスタジアム」でのシャチパフォーマンスは豪快なジャンプと水しぶきで大迫力",
@@ -540,11 +540,11 @@
       "nursing": "あり（複数か所）",
       "locker": "あり（有料）",
       "ratings": {
-        "kuse": 4,
-        "suzu": 3,
+        "rare": 3,
+        "perf": 5,
         "kids": 5,
-        "hakuryoku": 5,
-        "cospa": 2
+        "cospa": 2,
+        "kuse": 4
       },
       "highlights": [
         "音楽に合わせてイルカとトレーナーが繰り出す「マリンライブ」は会場が一体となる人気パフォーマンス",
@@ -595,11 +595,11 @@
       "food_bring": "持込可（席での飲食OK・食べ歩き不可）",
       "restaurant": "館内カフェあり（いきものモチーフのスイーツ・ドリンク）",
       "ratings": {
-        "kuse": 2,
-        "suzu": 5,
+        "rare": 2,
+        "perf": 1,
         "kids": 4,
-        "hakuryoku": 2,
-        "cospa": 2
+        "cospa": 2,
+        "kuse": 2
       },
       "highlights": [
         "クラゲゾーンからサンゴ礁、小笠原大水槽と続く構成で、都市型とは思えないボリューム",
@@ -835,11 +835,11 @@
       "food_bring": "持込不可",
       "restaurant": "館内ピクニックカフェ「EAT EAT EAT」あり（サンドイッチ・ホットドッグ中心）",
       "ratings": {
-        "kuse": 4,
-        "suzu": 5,
+        "rare": 5,
+        "perf": 2,
         "kids": 4,
-        "hakuryoku": 3,
-        "cospa": 2
+        "cospa": 2,
+        "kuse": 4
       },
       "highlights": [
         "「いろ・わざ・およぎ・かくれる」など、生き物の個性をテーマ別に見せる構成がユニーク",
@@ -1198,11 +1198,11 @@
       "restaurant": "1階に神戸最大級フードホールあり（神戸牛・洋食・スイーツ等）＋4階「átoa café」",
       "goshuin": "あり（6種類・1枚300円、インフォメーションで購入）",
       "ratings": {
-        "kuse": 4,
-        "suzu": 5,
+        "rare": 3,
+        "perf": 1,
         "kids": 3,
-        "hakuryoku": 3,
-        "cospa": 2
+        "cospa": 2,
+        "kuse": 4
       },
       "highlights": [
         "「はじまりの洞窟」から始まり、テーマごとに空間が変わる劇場型の構成が唯一無二",
@@ -1377,11 +1377,11 @@
       "food_bring": "公式に明示なし・要確認",
       "restaurant": "館内に飲食施設なし。周辺の飲食店を利用",
       "ratings": {
-        "kuse": 5,
-        "suzu": 3,
+        "rare": 5,
+        "perf": 1,
         "kids": 4,
-        "hakuryoku": 3,
-        "cospa": 5
+        "cospa": 5,
+        "kuse": 5
       },
       "highlights": [
         "熱帯淡水魚から日本の川魚、深海生物まで幅広いラインナップが一度に見られる",
@@ -1852,11 +1852,11 @@
       "restaurant": "館内に3店舗（「キッチン瀬戸内」・カフェ「オリーブ」・「PEARL CAFE」）",
       "goshuin": "あり（魚朱印の発祥館。ドルフィンビル1階インフォメーションで購入）",
       "ratings": {
-        "kuse": 3,
-        "suzu": 2,
+        "rare": 3,
+        "perf": 3,
         "kids": 4,
-        "hakuryoku": 4,
-        "cospa": 4
+        "cospa": 4,
+        "kuse": 3
       },
       "highlights": [
         "最大水槽「わたつみの景」は必見！黒潮の海を回遊する魚たちが深さを感じさせない広がりで泳ぐ",
