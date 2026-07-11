@@ -61,6 +61,13 @@
   .line-btn { display:inline-flex; align-items:center; gap:8px; background:#fff; color:#06c755; font-weight:bold; font-size:.92rem; text-decoration:none; border-radius:999px; padding:11px 26px; box-shadow:0 4px 12px rgba(0,0,0,.15); }
 
   .back { display:block; text-align:center; margin-top:26px; color:var(--sea); font-weight:bold; text-decoration:none; }
+
+  .correct-overlay { position:fixed; inset:0; background:rgba(2,62,138,.12); z-index:2999; opacity:0; pointer-events:none; transition:opacity .3s; }
+  .correct-overlay.show { opacity:1; }
+  .correct-pop { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(.3); z-index:3000; opacity:0; pointer-events:none; transition:transform .4s cubic-bezier(.2,1.6,.4,1), opacity .3s; }
+  .correct-pop.show { transform:translate(-50%,-50%) scale(1); opacity:1; }
+  .correct-ring { width:min(280px,72vw); height:min(280px,72vw); border-radius:50%; border:10px solid #ff6b6b; display:flex; align-items:center; justify-content:center; background:#fff; box-shadow:0 10px 30px rgba(0,0,0,.25); }
+  .correct-ring img { width:78%; }
 </style>
 </head>
 <body>
@@ -70,6 +77,13 @@
   <h1>🎮 あそぶ！さかなクイズ</h1>
   <p class="sub">水族館の待ち時間や移動中に遊んでね🐟<br>小さい子・小学生・大人の3段階から選べるよ</p>
 </header>
+<div class="correct-overlay" id="correctOverlay"></div>
+<div class="correct-pop" id="correctPop">
+  <div class="correct-ring">
+    <img src="assets/milestone_illust.png" alt="せいかい！">
+  </div>
+</div>
+
 <main>
   <div class="level-select" id="levelSelect"></div>
   <div class="quiz-box" id="quizBox"></div>
@@ -205,6 +219,17 @@ function startLevel(key){
   renderQuestion();
 }
 
+function showCorrectPop(){
+  const overlay = document.getElementById('correctOverlay');
+  const pop = document.getElementById('correctPop');
+  overlay.classList.add('show');
+  pop.classList.add('show');
+  setTimeout(()=>{
+    overlay.classList.remove('show');
+    pop.classList.remove('show');
+  }, 1200);
+}
+
 function renderQuestion(){
   answered = false;
   const lv = QUIZ[currentLevel];
@@ -232,7 +257,10 @@ function renderQuestion(){
         else if(bi===i) b.classList.add('wrong');
         b.disabled = true;
       });
-      if(i===correct) score++;
+      if(i===correct){
+        score++;
+        showCorrectPop();
+      }
       const fb = document.getElementById('qFeedback');
       fb.textContent = (i===correct ? '🎉 せいかい！ ' : '😉 おしい！ ') + q.note;
       fb.classList.add('show');

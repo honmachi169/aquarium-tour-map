@@ -121,8 +121,10 @@
   .tag-toggle { width:100%; display:flex; align-items:center; justify-content:space-between; background:#fff; border:2px solid var(--sea); border-radius:14px; padding:10px 16px; font-size:.88rem; font-weight:bold; color:var(--sea); font-family:inherit; cursor:pointer; }
   .tag-toggle .arrow { transition:transform .2s; }
   .tag-toggle.open .arrow { transform:rotate(180deg); }
-  #tagBtns, #sortBtns { max-height:0; overflow:hidden; flex-wrap:wrap; margin:0; transition:max-height .3s ease, margin .3s ease; }
-  .tag-wrap-outer.expanded #tagBtns, .tag-wrap-outer.expanded #sortBtns { max-height:400px; margin-top:8px; }
+  .tag-accordion-body { max-height:0; overflow:hidden; transition:max-height .35s ease; }
+  .tag-wrap-outer.expanded .tag-accordion-body { max-height:600px; }
+  .tag-accordion-body .animal-search-wrap { margin:10px 0 8px; padding:0; }
+  .tag-accordion-body #tagBtns, .tag-accordion-body #sortBtns { display:flex; flex-wrap:wrap; margin:0 0 8px; }
 
   /* ===== スマホ表示 ===== */
   .sp-only { display:none; }
@@ -312,15 +314,17 @@
 
 <div class="controls" id="regionBtns"></div>
 <div class="controls" id="fixedRow"></div>
-<div class="animal-search-wrap">
-  <input type="text" id="animalSearch" class="animal-search" placeholder="🔍 会いたい魚・生きものの名前で検索（例：ジンベエザメ）" list="animalList" autocomplete="off">
-  <datalist id="animalList"></datalist>
-  <button class="animal-search-clear" id="animalSearchClear" style="display:none">✕</button>
-</div>
 <div class="tag-wrap-outer">
-  <button class="tag-toggle" id="tagToggle"><span>🐟 カテゴリー・並び替え</span><span class="arrow">▾</span></button>
-  <div class="controls" id="tagBtns"></div>
-  <div class="controls" id="sortBtns"></div>
+  <button class="tag-toggle" id="tagToggle"><span>🐟 カテゴリー・検索・並び替え</span><span class="arrow">▾</span></button>
+  <div class="tag-accordion-body">
+    <div class="animal-search-wrap">
+      <input type="text" id="animalSearch" class="animal-search" placeholder="🔍 会いたい魚・生きものの名前で検索（例：ジンベエザメ）" list="animalList" autocomplete="off">
+      <datalist id="animalList"></datalist>
+      <button class="animal-search-clear" id="animalSearchClear" style="display:none">✕</button>
+    </div>
+    <div class="controls" id="tagBtns"></div>
+    <div class="controls" id="sortBtns"></div>
+  </div>
 </div>
 <div class="grid" id="cards"></div>
 
