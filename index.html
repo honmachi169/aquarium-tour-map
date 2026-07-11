@@ -116,6 +116,14 @@
   .cmodal .cancel { background:#eee; color:#456; }
   .cmodal .msg { font-size:.8rem; color:var(--coral); min-height:1.2em; margin-bottom:6px; }
 
+  /* ===== カテゴリー・並び替えアコーディオン（PC/スマホ共通） ===== */
+  .tag-wrap-outer { max-width:1100px; margin:0 auto 14px; padding:0 16px; }
+  .tag-toggle { width:100%; display:flex; align-items:center; justify-content:space-between; background:#fff; border:2px solid var(--sea); border-radius:14px; padding:10px 16px; font-size:.88rem; font-weight:bold; color:var(--sea); font-family:inherit; cursor:pointer; }
+  .tag-toggle .arrow { transition:transform .2s; }
+  .tag-toggle.open .arrow { transform:rotate(180deg); }
+  #tagBtns, #sortBtns { max-height:0; overflow:hidden; flex-wrap:wrap; margin:0; transition:max-height .3s ease, margin .3s ease; }
+  .tag-wrap-outer.expanded #tagBtns, .tag-wrap-outer.expanded #sortBtns { max-height:400px; margin-top:8px; }
+
   /* ===== スマホ表示 ===== */
   .sp-only { display:none; }
   @media (max-width:640px){
@@ -124,12 +132,6 @@
     .ticker-label { display:none; }
     .ticker-post { flex:none; padding:0 12px; }
     .legend { gap:8px; font-size:.72rem; margin:-4px auto 8px; flex-wrap:nowrap; overflow-x:auto; justify-content:center; }
-    .tag-wrap-outer { max-width:1100px; margin:0 auto 10px; padding:0 16px; }
-    .tag-toggle { width:100%; display:flex; align-items:center; justify-content:space-between; background:#fff; border:2px solid var(--sea); border-radius:14px; padding:10px 16px; font-size:.88rem; font-weight:bold; color:var(--sea); font-family:inherit; cursor:pointer; }
-    .tag-toggle .arrow { transition:transform .2s; }
-    .tag-toggle.open .arrow { transform:rotate(180deg); }
-    #tagBtns { max-height:0; overflow:hidden; flex-wrap:wrap; margin:0; transition:max-height .3s ease, margin .3s ease; }
-    #tagBtns.expanded { max-height:400px; margin-top:8px; }
     #fixedRow { margin-top:8px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; scrollbar-width:none; }
     #fixedRow::-webkit-scrollbar { display:none; }
     #fixedRow button, #fixedRow a { flex:none; white-space:nowrap; }
@@ -309,17 +311,17 @@
 </div>
 
 <div class="controls" id="regionBtns"></div>
-<div class="tag-wrap-outer">
-  <button class="tag-toggle sp-only" id="tagToggle"><span>🐟 カテゴリー別おすすめ</span><span class="arrow">▾</span></button>
-  <div class="controls" id="tagBtns"></div>
-</div>
 <div class="controls" id="fixedRow"></div>
 <div class="animal-search-wrap">
   <input type="text" id="animalSearch" class="animal-search" placeholder="🔍 会いたい魚・生きものの名前で検索（例：ジンベエザメ）" list="animalList" autocomplete="off">
   <datalist id="animalList"></datalist>
   <button class="animal-search-clear" id="animalSearchClear" style="display:none">✕</button>
 </div>
-<div class="controls" id="sortBtns"></div>
+<div class="tag-wrap-outer">
+  <button class="tag-toggle" id="tagToggle"><span>🐟 カテゴリー・並び替え</span><span class="arrow">▾</span></button>
+  <div class="controls" id="tagBtns"></div>
+  <div class="controls" id="sortBtns"></div>
+</div>
 <div class="grid" id="cards"></div>
 
 <!-- YouTube登録CTA -->
@@ -786,9 +788,10 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   fixedRow.appendChild(playLink);
 
   const tagToggle = document.getElementById('tagToggle');
-  if(tagToggle){
+  const tagWrapOuter = document.querySelector('.tag-wrap-outer');
+  if(tagToggle && tagWrapOuter){
     tagToggle.onclick = ()=>{
-      const open = tagWrap.classList.toggle('expanded');
+      const open = tagWrapOuter.classList.toggle('expanded');
       tagToggle.classList.toggle('open', open);
     };
   }
@@ -828,15 +831,20 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   }
   const sortBtnsEl = document.getElementById('sortBtns');
   const SORT_OPTIONS = [
-    {key:'default', label:'🐟 標準順'},
     {key:'new', label:'🆕 新着順'},
     {key:'views', label:'👀 再生回数順'},
   ];
   SORT_OPTIONS.forEach(opt=>{
     const b = document.createElement('button');
     b.textContent = opt.label;
-    if(opt.key==='default') b.classList.add('active');
     b.onclick = async ()=>{
+      if(sortMode === opt.key){
+        // もう一度押したら標準順に戻す
+        sortMode = 'default';
+        b.classList.remove('active');
+        render();
+        return;
+      }
       if(opt.key === 'views'){
         b.textContent = '👀 読み込み中…';
         await fetchViewCounts();
@@ -856,7 +864,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     const clearBtn = document.getElementById('animalSearchClear');
     const datalist = document.getElementById('animalList');
     const allAnimals = new Set();
-    aqs.forEach(a=>{ (a.animals||[]).forEach(an=> allAnimals.add(an)); if(a.only) allAnimals.add(a.only); });
+    aqs.forEach(a=>{ (a.animals||[]).forEach(an=> allAnimals.add(an)); (a.search_animals||[]).forEach(an=> allAnimals.add(an)); if(a.only) allAnimals.add(a.only); });
     [...allAnimals].sort().forEach(an=>{
       const opt = document.createElement('option');
       opt.value = an;
@@ -875,7 +883,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     cards.innerHTML='';
     const q = animalQuery.trim().toLowerCase();
     const filtered = aqs.filter(a=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (currentTag==='__visited' ? myVisits.has(a.name) : currentTag==='__wish' ? myWishlist.has(a.name) : (a.tags||[]).includes(currentTag))))
-      .filter(a=> !q || (a.animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.only||'').toLowerCase().includes(q));
+      .filter(a=> !q || (a.animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.search_animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.only||'').toLowerCase().includes(q));
     const sorted = applySortOrder(filtered);
     filtered.length = 0; filtered.push(...sorted);
     filtered.forEach(a=>{
