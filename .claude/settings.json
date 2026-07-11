@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push origin main)",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git fetch*)",
+      "Bash(python3 build_pages.py)",
+      "Bash(python3 -c *)",
+      "Bash(python3 *build_pages.py*)",
+      "Bash(sips *)",
+      "Bash(cp *)",
+      "Bash(ls *)",
+      "Bash(grep *)",
+      "Bash(mkdir -p *)",
+      "Bash(curl -s *)",
+      "WebSearch",
+      "WebFetch(domain:*)",
+      "Read(//Users/kawata/Documents/AI用作業/水族館マップサイト/**)",
+      "Edit(//Users/kawata/Documents/AI用作業/水族館マップサイト/**)",
+      "Write(//Users/kawata/Documents/AI用作業/水族館マップサイト/**)"
+    ]
+  }
+}

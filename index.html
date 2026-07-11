@@ -65,6 +65,8 @@
   .chip { font-size:.72rem; font-weight:bold; background:#e8f6fb; color:#075985; border:1.5px solid #7dd3fc; border-radius:999px; padding:2px 9px; }
   .chip.only { background:#fff7db; color:#92600a; border-color:#f4c430; }
   .visitbtn { position:relative; font-size:.78rem; font-weight:bold; border-radius:999px; padding:5px 12px; cursor:pointer; border:2px solid #2a9d8f; background:#fff; color:#2a9d8f; font-family:inherit; overflow:visible; }
+  .wishbtn { font-size:.78rem; font-weight:bold; border-radius:999px; padding:5px 12px; cursor:pointer; border:2px solid #f4a460; background:#fff; color:#c47a1e; font-family:inherit; }
+  .wishbtn.on { background:#fff3d6; border-color:#f4a460; color:#a15c00; }
   .visitbtn.on { background:#2a9d8f; color:#fff; }
   .visitbtn.stamping { animation:btnPunch .35s ease; }
   @keyframes btnPunch { 0%{transform:scale(1);} 35%{transform:scale(.88);} 60%{transform:scale(1.15);} 100%{transform:scale(1);} }
@@ -144,14 +146,20 @@
     .pp .chips { margin:0 0 4px; }
     .pp .btn { font-size:.73rem; padding:4px 10px; }
     .pp .btn.sns { display:none; }
-    .pp .visitbtn { font-size:.73rem !important; padding:4px 10px !important; border-width:1.5px !important; }
+    .pp .visitbtn, .pp .wishbtn { font-size:.73rem !important; padding:4px 10px !important; border-width:1.5px !important; }
     .pp img.thumb { max-height:none; }
   }
   #tagBtns button { border-color:#f4a261; color:#c9660a; }
   #tagBtns button.active { background:#f4a261; color:#fff; }
   .visitedbtn { border:2px solid #2a9d8f !important; background:#fff; color:#2a9d8f !important; text-decoration:none; display:inline-flex; align-items:center; border-radius:999px; padding:6px 16px; font-size:.85rem; font-weight:bold; font-family:inherit; cursor:pointer; }
   .visitedbtn.active { background:#2a9d8f !important; color:#fff !important; }
+  .wishlistbtn { border:2px solid #f4a460 !important; background:#fff; color:#c47a1e !important; text-decoration:none; display:inline-flex; align-items:center; border-radius:999px; padding:6px 16px; font-size:.85rem; font-weight:bold; font-family:inherit; cursor:pointer; }
+  .wishlistbtn.active { background:#f4a460 !important; color:#fff !important; }
   #fixedRow { display:flex; gap:8px; flex-wrap:wrap; }
+  .animal-search-wrap { max-width:1100px; margin:14px auto 4px; padding:0 16px; position:relative; display:flex; gap:8px; align-items:center; }
+  .animal-search { flex:1; border:2px solid var(--sea); border-radius:999px; padding:10px 18px; font-size:.9rem; font-family:inherit; outline:none; background:#fff; }
+  .animal-search:focus { border-color:var(--sea-deep); box-shadow:0 0 0 3px rgba(0,150,199,.15); }
+  .animal-search-clear { border:none; background:#eef2f6; color:#456; border-radius:999px; width:34px; height:34px; font-size:.9rem; cursor:pointer; flex:none; }
   .pp .soon { font-size:.8rem; color:var(--sea); font-weight:bold; }
   .pp.wish .inner { padding-top:12px; }
   .pp .wishtag { font-size:.72rem; color:#889; background:#eef2f6; border-radius:999px; padding:2px 10px; }
@@ -306,6 +314,11 @@
   <div class="controls" id="tagBtns"></div>
 </div>
 <div class="controls" id="fixedRow"></div>
+<div class="animal-search-wrap">
+  <input type="text" id="animalSearch" class="animal-search" placeholder="🔍 会いたい魚・生きものの名前で検索（例：ジンベエザメ）" list="animalList" autocomplete="off">
+  <datalist id="animalList"></datalist>
+  <button class="animal-search-clear" id="animalSearchClear" style="display:none">✕</button>
+</div>
 <div class="controls" id="sortBtns"></div>
 <div class="grid" id="cards"></div>
 
@@ -608,6 +621,24 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     return `<button class="visitbtn${on?' on':''}" data-name="${a.name}" onclick="toggleVisit('${a.name.replace(/'/g,"\\'")}')">${on?'✅ 行った！':'⬜ 行ったらチェック'}</button>`;
   }
 
+  // 行ってみたいリスト（このブラウザに保存）
+  let myWishlist = new Set(JSON.parse(localStorage.getItem('myWishlist')||'[]'));
+  function saveWishlist(){ localStorage.setItem('myWishlist', JSON.stringify([...myWishlist])); }
+  window.toggleWish = function(name){
+    if(myWishlist.has(name)) myWishlist.delete(name); else myWishlist.add(name);
+    saveWishlist();
+    document.querySelectorAll(`.wishbtn[data-name="${CSS.escape(name)}"]`).forEach(b=>{
+      const on = myWishlist.has(name);
+      b.classList.toggle('on', on);
+      b.textContent = on ? '💛 行きたい！' : '🤍 行きたいリストに追加';
+    });
+    if(typeof renderWishlist === 'function') renderWishlist();
+  };
+  function wishBtn(a){
+    const on = myWishlist.has(a.name);
+    return `<button class="wishbtn${on?' on':''}" data-name="${a.name}" onclick="toggleWish('${a.name.replace(/'/g,"\\'")}')">${on?'💛 行きたい！':'🤍 行きたいリストに追加'}</button>`;
+  }
+
   const ANIMAL_ICONS = {
     "シャチ":"🐋", "ラッコ":"🦦", "ジンベエザメ":"🦈", "シロワニ":"🦈",
     "マンボウ":"🐟", "ピラルクー":"🐠", "エンペラーペンギン":"🐧", "フェアリーペンギン":"🐧",
@@ -649,6 +680,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + snsBtns(a)
       + `<a class="btn hp" href="spot/${String(a.no).padStart(3,'0')}.html">📖 くわしく</a>`
       + visitBtn(a)
+      + wishBtn(a)
       + (a.upcoming?'<span class="soon">🔜 動画は近日公開！おたのしみに</span>':'')
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:a.upcoming?upIcon:fishIcon}).addTo(map)
@@ -674,6 +706,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + snsBtns(a)
       + `<a class="btn hp" href="spot/${a._slug}.html">📖 くわしく</a>`
       + visitBtn(a)
+      + wishBtn(a)
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:wishIcon}).addTo(map)
       .bindPopup(html,{maxWidth:270, autoPan:false});
@@ -723,6 +756,19 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     applyMapFilter(); render();
   };
   fixedRow.appendChild(visitedBtn);
+  const wishListBtn = document.createElement('button');
+  wishListBtn.className = 'wishlistbtn';
+  wishListBtn.innerHTML = '<span class="pc-only">💛 行ってみたいリスト</span><span class="sp-only">💛 行きたいリスト</span>';
+  wishListBtn.onclick = ()=>{
+    if(currentTag==='__wish'){ currentTag=null; wishListBtn.classList.remove('active'); }
+    else{
+      currentTag='__wish';
+      clearTagActive();
+      wishListBtn.classList.add('active');
+    }
+    applyMapFilter(); render();
+  };
+  fixedRow.appendChild(wishListBtn);
   const rankLink = document.createElement('a');
   rankLink.className = 'rankbtn';
   rankLink.href = 'ranking.html';
@@ -749,7 +795,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
 
   function applyMapFilter(){
     allMarkers.forEach(({m,tags,name})=>{
-      const show = !currentTag || (currentTag==='__visited' ? myVisits.has(name) : tags.includes(currentTag));
+      const show = !currentTag || (currentTag==='__visited' ? myVisits.has(name) : currentTag==='__wish' ? myWishlist.has(name) : tags.includes(currentTag));
       if(show){ if(!map.hasLayer(m)) m.addTo(map); }
       else{ if(map.hasLayer(m)) map.removeLayer(m); }
     });
@@ -804,9 +850,32 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     sortBtnsEl.appendChild(b);
   });
 
+  // 会いたい魚から検索
+  (function(){
+    const input = document.getElementById('animalSearch');
+    const clearBtn = document.getElementById('animalSearchClear');
+    const datalist = document.getElementById('animalList');
+    const allAnimals = new Set();
+    aqs.forEach(a=>{ (a.animals||[]).forEach(an=> allAnimals.add(an)); if(a.only) allAnimals.add(a.only); });
+    [...allAnimals].sort().forEach(an=>{
+      const opt = document.createElement('option');
+      opt.value = an;
+      datalist.appendChild(opt);
+    });
+    input.addEventListener('input', ()=>{
+      animalQuery = input.value;
+      clearBtn.style.display = animalQuery ? 'block' : 'none';
+      render();
+    });
+    clearBtn.onclick = ()=>{ input.value=''; animalQuery=''; clearBtn.style.display='none'; render(); };
+  })();
+
+  let animalQuery = '';
   function render(){
     cards.innerHTML='';
-    const filtered = aqs.filter(a=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (currentTag==='__visited' ? myVisits.has(a.name) : (a.tags||[]).includes(currentTag))));
+    const q = animalQuery.trim().toLowerCase();
+    const filtered = aqs.filter(a=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (currentTag==='__visited' ? myVisits.has(a.name) : currentTag==='__wish' ? myWishlist.has(a.name) : (a.tags||[]).includes(currentTag))))
+      .filter(a=> !q || (a.animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.only||'').toLowerCase().includes(q));
     const sorted = applySortOrder(filtered);
     filtered.length = 0; filtered.push(...sorted);
     filtered.forEach(a=>{
@@ -830,6 +899,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
             ${a.sns&&a.sns.instagram?`<a class="tab hp" href="${a.sns.instagram}" target="_blank">📷 Insta</a>`:''}
             <a class="tab detail" href="spot/${String(a.no).padStart(3,'0')}.html">📖 くわしく</a>
             ${visitBtn(a)}
+            ${wishBtn(a)}
             ${v?`<button class="cbtn" data-vid="${v.id}">💬 みんなの感想</button>`:''}
           </div>
           ${v?`<div class="ytc" data-vid="${v.id}"></div>`:''}
