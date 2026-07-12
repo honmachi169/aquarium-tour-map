@@ -9,7 +9,7 @@
 ## サイト構成
 - トップページ（地図＋フィルター）: https://aquarium.yasasea.com/
 - このサイトについて: https://aquarium.yasasea.com/about.html
-- さかなのおにいさん かわちゃん流・水族館の楽しみ方（行く前の準備・水槽の見方・パフォーマンス・子連れ・おみやげ）: https://aquarium.yasasea.com/guide.html
+- さかなのおにいさん かわちゃん流・水族館の楽しみ方（行く前の準備・水槽の見方・イルカショー/パフォーマンス・子連れ・おみやげ）: https://aquarium.yasasea.com/guide.html
 - さかなのおにいさん かわちゃん的 水族館ランキング（激レア／パフォーマンス／子ども向け／コスパ／クセつよ）: https://aquarium.yasasea.com/taste-ranking.html
 
 ## 生き物別まとめページ

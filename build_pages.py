@@ -723,7 +723,7 @@ ld_guide = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": f"{AUTHOR_NAME}流・水族館の楽しみ方",
-    "description": "行く前の準備から、大水槽の見方、パフォーマンスの楽しみ方、子連れの回り方、おみやげの選び方まで。全国の水族館を実際にまわってきたかわちゃんの楽しみ方ガイド。",
+    "description": "行く前の準備から、大水槽の見方、イルカショー・パフォーマンスの楽しみ方、子連れの回り方、おみやげの選び方まで。全国の水族館を実際にまわってきたかわちゃんの楽しみ方ガイド。",
     "author": {"@type": "Person", "name": AUTHOR_NAME},
     "publisher": {"@type": "Organization", "name": BRAND_NAME, "url": SITE},
     "url": f"{SITE}/guide.html",
@@ -731,11 +731,11 @@ ld_guide = {
 guide_doc = f"""<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>かわちゃん流・水族館の楽しみ方｜行く前の準備からおみやげまで | {BRAND_NAME}</title>
-<meta name="description" content="水族館はコツを知ると100倍楽しい！行く前の準備・大水槽の見方・パフォーマンスの楽しみ方・子連れの回り方・おみやげの選び方を、{AUTHOR_NAME}が実訪問の経験からまとめました。">
+<meta name="description" content="水族館はコツを知ると100倍楽しい！行く前の準備・大水槽の見方・イルカショー（パフォーマンス）の楽しみ方・子連れの回り方・おみやげの選び方を、{AUTHOR_NAME}が実訪問の経験からまとめました。">
 <link rel="canonical" href="{SITE}/guide.html">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <meta property="og:title" content="かわちゃん流・水族館の楽しみ方 | {BRAND_NAME}">
-<meta property="og:description" content="行く前の準備からおみやげ選びまで、水族館が100倍楽しくなるコツを{AUTHOR_NAME}がまとめたよ！">
+<meta property="og:description" content="行く前の準備からイルカショーの楽しみ方、おみやげ選びまで、水族館が100倍楽しくなるコツを{AUTHOR_NAME}がまとめたよ！">
 <meta property="og:image" content="{SITE}/assets/guide_hero.jpg">
 <script type="application/ld+json">{json.dumps(ld_guide, ensure_ascii=False)}</script>
 <style>{LIST_STYLE}
@@ -876,7 +876,7 @@ llms_lines = [
     "## サイト構成",
     f"- トップページ（地図＋フィルター）: {SITE}/",
     f"- このサイトについて: {SITE}/about.html",
-    f"- {AUTHOR_NAME}流・水族館の楽しみ方（行く前の準備・水槽の見方・パフォーマンス・子連れ・おみやげ）: {SITE}/guide.html",
+    f"- {AUTHOR_NAME}流・水族館の楽しみ方（行く前の準備・水槽の見方・イルカショー/パフォーマンス・子連れ・おみやげ）: {SITE}/guide.html",
     f"- {AUTHOR_NAME}的 水族館ランキング（激レア／パフォーマンス／子ども向け／コスパ／クセつよ）: {SITE}/taste-ranking.html" if ranking_generated else f"- {AUTHOR_NAME}的 水族館ランキング: 準備中（本人承認済み評価が揃い次第公開）",
     "",
     "## 生き物別まとめページ",
