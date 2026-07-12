@@ -91,10 +91,7 @@ for slug, a, intro in entries:
         kotsu_box = (f'<div class="kotsu-box"><div class="hk-label">🎯 {AUTHOR_NAME}流・この水族館の楽しみ方</div>{E(a["kotsu"])}'
                      f'<a class="kotsu-more" href="{SITE}/guide.html">▶ どの水族館でも使える「かわちゃん流の楽しみ方」はこちら</a></div>')
 
-    highlights_box = ""
-    if approved and a.get("highlights"):
-        rows = "".join(f"<li>{E(h)}</li>" for h in a["highlights"])
-        highlights_box = f'<div class="highlights-box"><div class="hk-label">🔍 {AUTHOR_NAME}の見どころポイント！</div><ul>{rows}</ul></div>'
+    # 見どころポイント欄は「かわちゃんからの一言」と重複するため廃止（highlightsデータ自体はdata.jsonに保持）
 
     RATING_LABEL = {"rare":"🦈 激レアいきもの","perf":"🐬 パフォーマンス","kids":"👶 子ども向け度","cospa":"💰 コスパ","kuse":"🌀 クセつよポイント"}
     ratings = a.get("ratings") or {}
@@ -314,12 +311,11 @@ loadYtComments();''' if v else ''
   <p class="hl">{E(a.get('highlight') or a.get('comment') or '')}</p>
   {only_quote}
   <div class="chips">{chips}{tagchips}</div>
-  {hitokoto}
   {kotsu_box}
   {ratings_box}
   {summer}
   <table>{info}</table>
-  {highlights_box}
+  {hitokoto}
   <p class="note">※{INFO_ASOF}時点の情報です。おでかけ前に{('<a href="' + E(a["url"]) + '" target="_blank" rel="noopener">公式サイト</a>') if a.get("url") else "公式サイト"}をご確認ください</p>
   <div class="btns">
     {links}
