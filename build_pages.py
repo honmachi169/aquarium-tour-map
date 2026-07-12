@@ -503,6 +503,8 @@ map.fitBounds(group.getBounds().pad(0.2));
 <meta property="og:title" content="{E(title)}">
 <meta property="og:description" content="{E(desc)}">
 <meta property="og:url" content="{SITE}/{path}">
+<meta property="og:image" content="{SITE}/assets/guide_hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/x-icon" href="{'../' if '/' in path else ''}assets/favicon.ico">
 <style>{LIST_STYLE}</style>
 </head>
@@ -670,6 +672,11 @@ if len(rated) >= 3:
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{AUTHOR_NAME}的 水族館ランキング | {BRAND_NAME}</title>
 <meta name="description" content="{AUTHOR_NAME}が実際に訪れて評価した水族館を、独自の切り口別ランキングで紹介。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{AUTHOR_NAME}的 水族館ランキング | {BRAND_NAME}">
+<meta property="og:description" content="{AUTHOR_NAME}が実際に訪れて評価した水族館を、独自の切り口別ランキングで紹介。">
+<meta property="og:image" content="{SITE}/assets/kawachan_odoroki.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{SITE}/taste-ranking.html">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <script type="application/ld+json">{json.dumps(ld_ranking, ensure_ascii=False)}</script>
@@ -694,6 +701,11 @@ about_doc = f"""<!DOCTYPE html>
 <title>このサイトについて | 全国水族館ツアーMAP</title>
 <meta name="description" content="会いに行こう！全国水族館ツアーMAPの紹介。さかなのおにいさんかわちゃんが実際に訪れた水族館だけを紹介する、実訪問ベースの水族館サイトです。">
 <link rel="canonical" href="{SITE}/about.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="このサイトについて | 全国水族館ツアーMAP">
+<meta property="og:description" content="会いに行こう！全国水族館ツアーMAPの紹介。さかなのおにいさんかわちゃんが実際に訪れた水族館だけを紹介する、実訪問ベースの水族館サイトです。">
+<meta property="og:image" content="{SITE}/assets/kawachan_web.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <style>{LIST_STYLE}
 .about-box {{ background:#fff; border-radius:16px; padding:18px 20px; margin:14px 0; line-height:1.8; font-size:.92rem; }}
@@ -737,6 +749,7 @@ guide_doc = f"""<!DOCTYPE html>
 <meta property="og:title" content="かわちゃん流・水族館の楽しみ方 | {BRAND_NAME}">
 <meta property="og:description" content="行く前の準備からイルカショーの楽しみ方、おみやげ選びまで、水族館が100倍楽しくなるコツを{AUTHOR_NAME}がまとめたよ！">
 <meta property="og:image" content="{SITE}/assets/guide_hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{json.dumps(ld_guide, ensure_ascii=False)}</script>
 <style>{LIST_STYLE}
 .g-box {{ background:#fff; border-radius:16px; padding:18px 20px; margin:14px 0; line-height:1.8; font-size:.92rem; }}
@@ -841,6 +854,11 @@ list_doc = f"""<!DOCTYPE html>
 <title>掲載水族館一覧（全{len(entry_meta)}館） | {BRAND_NAME}</title>
 <meta name="description" content="{BRAND_NAME}に掲載中の全{len(entry_meta)}館をエリア別に一覧で。各館の料金・休館日・{AUTHOR_NAME}の一言は個別ページでどうぞ。">
 <link rel="canonical" href="{SITE}/aquarium-list.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="掲載水族館一覧（全{len(entry_meta)}館） | {BRAND_NAME}">
+<meta property="og:description" content="{BRAND_NAME}に掲載中の全{len(entry_meta)}館をエリア別に一覧で。">
+<meta property="og:image" content="{SITE}/assets/kawachan_guide.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <style>{LIST_STYLE}
 .alist {{ list-style:none; margin:0 0 18px; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:6px; }}
