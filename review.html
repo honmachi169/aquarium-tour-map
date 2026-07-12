@@ -40,6 +40,18 @@
   .btn-save { background:var(--sea); color:#fff; display:none; }
   .no-draft { color:#aaa; font-size:.85rem; padding:20px 0; }
   .status { text-align:center; font-size:.8rem; color:#9ab; margin-top:14px; }
+  .toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+  .toolbar button { background:none; border:none; color:var(--sea); font-size:.8rem; font-weight:bold; cursor:pointer; padding:6px; }
+  .done-list { background:#fff; border-radius:16px; padding:14px 16px; margin-top:10px; }
+  .done-list h3 { font-size:.85rem; color:var(--sea-deep); margin-bottom:8px; }
+  .done-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid #eef4f8; font-size:.85rem; }
+  .done-row:last-child { border-bottom:none; }
+  .done-row .badge { font-size:.72rem; font-weight:bold; border-radius:999px; padding:2px 8px; margin-right:6px; }
+  .badge-ok { background:#d1f7c4; color:#1b5e20; }
+  .badge-edit { background:var(--sun); color:#5a3d00; }
+  .badge-discard { background:#eee; color:#888; }
+  .badge-later { background:#eee; color:#888; }
+  .undo-btn { background:none; border:1.5px solid var(--sea); color:var(--sea); border-radius:999px; padding:3px 10px; font-size:.75rem; font-weight:bold; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -135,15 +147,55 @@ async function answerVisited(name, visited) {
   } catch (e) {}
 }
 
+function decidedList() {
+  // 判定済み（later含む）を新しい順で返す
+  return Object.keys(reviewState)
+    .filter(name => reviewState[name] && reviewState[name].status)
+    .map(name => ({ name, ...reviewState[name] }))
+    .reverse();
+}
+
+function renderDoneList() {
+  const list = decidedList();
+  if (!list.length) return '';
+  const badgeLabel = { ok: ['badge-ok', '✅ OK'], edit: ['badge-edit', '✏️ 修正済み'], discard: ['badge-discard', '🗑 ボツ'], later: ['badge-later', '⏭ あとで'] };
+  const rows = list.map(item => {
+    const [cls, label] = badgeLabel[item.status] || ['badge-later', item.status];
+    return `<div class="done-row">
+      <span><span class="badge ${cls}">${label}</span>${esc(item.name)}</span>
+      <button class="undo-btn" onclick="resetOne('${escJs(item.name)}')">やり直す</button>
+    </div>`;
+  }).join('');
+  return `<div class="done-list"><h3>判定済み一覧（${list.length}件）</h3>${rows}</div>`;
+}
+
+async function resetOne(name) {
+  reviewState[name] = Object.assign({}, reviewState[name], { status: '', hitokoto: '', ratings: '' });
+  render();
+  try {
+    await fetch(API, { method: 'POST', body: JSON.stringify({ action: 'reviewApprove', key: REVIEW_KEY, name, status: '' }) });
+  } catch (e) {}
+}
+
+async function resetAllStep2() {
+  const list = decidedList();
+  if (!list.length) return;
+  if (!confirm(`②の判定 ${list.length}件を全部やり直しにする？（元の一言・評価には戻ります）`)) return;
+  for (const item of list) {
+    await resetOne(item.name);
+  }
+}
+
 function renderStep2() {
   const q = step2Queue();
   const totalVisited = [...data.aquariums, ...data.unvisited].filter(isVisited).length;
   const done = totalVisited - q.length;
   document.getElementById('progressBar').style.width = (totalVisited ? done / totalVisited * 100 : 100) + '%';
   const area = document.getElementById('cardArea');
+  const toolbar = `<div class="toolbar"><span></span><button onclick="resetAllStep2()">🔁 ②を全部やり直す</button></div>`;
   if (!q.length) {
     document.getElementById('progressTxt').textContent = `行った${totalVisited}館すべて判定完了！`;
-    area.innerHTML = '<div class="done-msg">🎉 一言・評価の承認、おつかれさま！<br>反映され次第サイトに公開されます</div>';
+    area.innerHTML = toolbar + '<div class="done-msg">🎉 一言・評価の承認、おつかれさま！<br>反映され次第サイトに公開されます</div>' + renderDoneList();
     return;
   }
   document.getElementById('progressTxt').textContent = `あと ${q.length} 館（${done}/${totalVisited}）`;
@@ -151,7 +203,7 @@ function renderStep2() {
   const hitokoto = a.hitokoto || '';
   const ratings = a.ratings || {};
   if (!hitokoto && !Object.keys(ratings).length) {
-    area.innerHTML = `
+    area.innerHTML = toolbar + `
       <div class="card">
         <span class="pref">${esc(a.pref || '')}</span>
         <h2>${esc(a.name)}</h2>
@@ -159,7 +211,7 @@ function renderStep2() {
         <div class="decision-btns">
           <button class="btn-later" onclick="answerApprove('${escJs(a.name)}', 'later')">⏭ あとで書く</button>
         </div>
-      </div>`;
+      </div>` + renderDoneList();
     return;
   }
   const starsHtml = Object.keys(RATING_LABEL).filter(k => k in ratings).map(k => {
@@ -168,7 +220,7 @@ function renderStep2() {
     for (let i = 1; i <= 5; i++) stars += `<span data-key="${k}" data-n="${i}">${i <= n ? '★' : '☆'}</span>`;
     return `<div class="rate-row"><span>${RATING_LABEL[k]}</span><span class="stars" data-key="${k}">${stars}</span></div>`;
   }).join('');
-  area.innerHTML = `
+  area.innerHTML = toolbar + `
     <div class="card">
       <span class="pref">${esc(a.pref || '')}</span>
       <h2>${esc(a.name)}</h2>
@@ -182,7 +234,7 @@ function renderStep2() {
         <button class="btn-discard" onclick="decide('${escJs(a.name)}','discard')">🗑 ボツ</button>
         <button class="btn-save" id="saveBtn" onclick="saveEdit('${escJs(a.name)}')">💾 保存</button>
       </div>
-    </div>`;
+    </div>` + renderDoneList();
   currentRatings = Object.assign({}, ratings);
 }
 
@@ -192,12 +244,15 @@ function startEdit() {
   const box = document.getElementById('hkBox');
   box.contentEditable = 'true';
   box.focus();
-  document.getElementById('ratingArea').querySelectorAll('.stars').forEach(s => s.classList.add('editable'));
-  document.getElementById('ratingArea').querySelectorAll('span[data-key]').forEach(sp => {
+  const ratingArea = document.getElementById('ratingArea');
+  ratingArea.querySelectorAll('.stars').forEach(s => s.classList.add('editable'));
+  // 星本体（data-n持ち）だけを対象にする。親の.starsコンテナも同じdata-keyを持つため
+  // 区別しないとクリック時にコンテナのtextContentごと書き換わって星が消えるバグになる
+  ratingArea.querySelectorAll('span[data-key][data-n]').forEach(sp => {
     sp.onclick = () => {
       const key = sp.dataset.key, n = Number(sp.dataset.n);
       currentRatings[key] = n;
-      document.querySelectorAll(`span[data-key="${key}"]`).forEach(s2 => {
+      ratingArea.querySelectorAll(`span[data-key="${key}"][data-n]`).forEach(s2 => {
         s2.textContent = Number(s2.dataset.n) <= n ? '★' : '☆';
       });
     };
