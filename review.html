@@ -65,6 +65,7 @@
   <div class="progress-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
   <div class="progress-txt" id="progressTxt">読み込み中…</div>
   <div id="cardArea"></div>
+  <p class="status" id="saveStatus"></p>
 </main>
 
 <script>
@@ -140,12 +141,48 @@ function renderStep1() {
     </div>`;
 }
 
-async function answerVisited(name, visited) {
-  reviewState[name] = Object.assign({}, reviewState[name], { visited });
-  render();
+// GASの/execはPOSTのレスポンスが不安定なことがあり、送信自体が失敗しても
+// 気づけないケースがあった（保存できたように見えて実はサーバーに届いていない）。
+// そのため送信後にサーバー側の値を読み直して、本当に反映されたか確認してから進む
+let savingNow = false;
+async function postReview(body, checkFn) {
+  if (savingNow) return false;
+  savingNow = true;
+  const statusEl = document.getElementById('saveStatus');
+  if (statusEl) statusEl.textContent = '保存中…';
   try {
-    await fetch(API, { method: 'POST', body: JSON.stringify({ action: 'reviewVisited', key: REVIEW_KEY, name, visited }) });
-  } catch (e) {}
+    try {
+      await fetch(API, { method: 'POST', body: JSON.stringify(body) });
+    } catch (e) {
+      if (statusEl) statusEl.textContent = '⚠️ 通信エラー。もう一度タップしてね';
+      return false;
+    }
+    for (let i = 0; i < 4; i++) {
+      await new Promise(r => setTimeout(r, 600));
+      try {
+        const res = await fetch(API + '?review=1&key=' + encodeURIComponent(REVIEW_KEY) + '&_=' + Date.now());
+        const fresh = await res.json();
+        const rs = fresh[body.name];
+        if (rs && checkFn(rs)) {
+          reviewState[body.name] = rs;
+          if (statusEl) statusEl.textContent = '';
+          return true;
+        }
+      } catch (e) {}
+    }
+    if (statusEl) statusEl.textContent = '⚠️ 保存を確認できなかったよ。もう一度タップしてね';
+    return false;
+  } finally {
+    savingNow = false;
+  }
+}
+
+async function answerVisited(name, visited) {
+  const ok = await postReview(
+    { action: 'reviewVisited', key: REVIEW_KEY, name, visited },
+    rs => rs.visited === visited
+  );
+  if (ok) render();
 }
 
 function decidedList() {
@@ -171,11 +208,11 @@ function renderDoneList() {
 }
 
 async function resetOne(name) {
-  reviewState[name] = Object.assign({}, reviewState[name], { status: '', hitokoto: '', ratings: '' });
-  render();
-  try {
-    await fetch(API, { method: 'POST', body: JSON.stringify({ action: 'reviewApprove', key: REVIEW_KEY, name, status: '' }) });
-  } catch (e) {}
+  const ok = await postReview(
+    { action: 'reviewApprove', key: REVIEW_KEY, name, status: '' },
+    rs => (rs.status || '') === ''
+  );
+  if (ok) render();
 }
 
 async function resetAllStep2() {
@@ -285,14 +322,11 @@ async function saveEdit(name) {
 }
 
 async function decide(name, status, hitokoto, ratings) {
-  reviewState[name] = Object.assign({}, reviewState[name], { status, hitokoto: hitokoto || '', ratings: ratings ? JSON.stringify(ratings) : '' });
-  render();
-  try {
-    const body = { action: 'reviewApprove', key: REVIEW_KEY, name, status };
-    if (typeof hitokoto === 'string') body.hitokoto = hitokoto;
-    if (ratings) body.ratings = ratings;
-    await fetch(API, { method: 'POST', body: JSON.stringify(body) });
-  } catch (e) {}
+  const body = { action: 'reviewApprove', key: REVIEW_KEY, name, status };
+  if (typeof hitokoto === 'string') body.hitokoto = hitokoto;
+  if (ratings) body.ratings = ratings;
+  const ok = await postReview(body, rs => rs.status === status);
+  if (ok) render();
 }
 async function answerApprove(name, status) { return decide(name, status); }
 
