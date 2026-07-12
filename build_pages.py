@@ -60,6 +60,16 @@ for slug, a, intro in entries:
     if a.get("only"): chips += f'<span class="chip only">⭐️ここだけ！{E(a["only"])}</span>'
     tagchips = "".join(f'<span class="chip tag">{TAG_LABEL[t]}</span>' for t in a.get("tags", []) if t in TAG_LABEL)
 
+    # 交通手段の目安チップ（access/parkingの記載から機械的に判定。誤爆しないよう保守的に）
+    acc = a.get("access") or ""
+    transport = []
+    if "駅" in acc and "徒歩" in acc: transport.append("🚃 駅から徒歩OK")
+    if "バス" in acc: transport.append("🚌 バスあり")
+    park = str(a.get("parking") or "")
+    if park and not park.startswith("なし"): transport.append("🚗 駐車場あり")
+    elif not transport and ("車" in acc or "IC" in acc): transport.append("🚗 車がおすすめ")
+    trchips = "".join(f'<span class="chip tr">{t}</span>' for t in transport)
+
     # 「日本で◯◯に会えるのはここだけ」の文章表示は、⭐️ここだけ！チップや一言と重複するため非表示
     # （onlyの情報自体はチップ・llms.txtで引き続き発信される）
     only_quote = ""
@@ -246,6 +256,7 @@ loadYtComments();''' if v else ''
   .chip {{ font-size:.78rem; font-weight:bold; background:#e8f6fb; color:#075985; border:1.5px solid #7dd3fc; border-radius:999px; padding:3px 10px; }}
   .chip.only {{ background:#fff7db; color:#92600a; border-color:#f4c430; }}
   .chip.tag {{ background:#fdf1e3; color:#c9660a; border-color:#f4a261; }}
+  .chip.tr {{ background:#eefbe7; color:#2f7d32; border-color:#8fd694; }}
   .hitokoto {{ background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; position:relative; display:flex; gap:12px; align-items:flex-start; }}
   .hitokoto .hk-chara {{ width:76px; height:auto; flex:none; margin-top:2px; }}
   .hitokoto .hk-body {{ flex:1; min-width:0; }}
@@ -310,7 +321,7 @@ loadYtComments();''' if v else ''
   {videos or hero}
   <p class="hl">{E(a.get('highlight') or a.get('comment') or '')}</p>
   {only_quote}
-  <div class="chips">{chips}{tagchips}</div>
+  <div class="chips">{chips}{tagchips}{trchips}</div>
   {kotsu_box}
   {ratings_box}
   {summer}
@@ -816,6 +827,41 @@ guide_doc = f"""<!DOCTYPE html>
 with open("guide.html", "w") as f:
     f.write(guide_doc)
 new_page_urls.append(f"{SITE}/guide.html")
+
+# --- 掲載水族館一覧（画像なしの軽量テキストページ。ファン要望）---
+_list_sections = []
+for _region, _prefs in REGIONS.items():
+    _members = [m for m in entry_meta if m["pref"] in _prefs]
+    if not _members:
+        continue
+    _lis = "".join(f'<li><a href="{m["url"]}">{E(m["name"])}</a> <small>（{E(m["pref"])}）</small></li>' for m in _members)
+    _list_sections.append(f'<h2>{_region}（{len(_members)}館）</h2><ul class="alist">{_lis}</ul>')
+list_doc = f"""<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>掲載水族館一覧（全{len(entry_meta)}館） | {BRAND_NAME}</title>
+<meta name="description" content="{BRAND_NAME}に掲載中の全{len(entry_meta)}館をエリア別に一覧で。各館の料金・休館日・{AUTHOR_NAME}の一言は個別ページでどうぞ。">
+<link rel="canonical" href="{SITE}/aquarium-list.html">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<style>{LIST_STYLE}
+.alist {{ list-style:none; margin:0 0 18px; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:6px; }}
+.alist a {{ color:var(--sea-deep); font-weight:bold; text-decoration:none; }}
+.alist a:hover {{ color:var(--sea); }}
+.alist small {{ color:#89a; }}
+main h2 {{ color:var(--sea-deep); font-size:1.05rem; margin:20px 0 8px; }}
+</style></head><body>
+<header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
+<main>
+<img class="head-chara" src="{SITE}/assets/kawachan_guide.png" alt="{AUTHOR_NAME}">
+<h1>📖 掲載水族館一覧（全{len(entry_meta)}館）</h1>
+<p class="lead">{BRAND_NAME}に載っている水族館をぜんぶまとめた一覧だよ。名前をタップすると、料金・休館日・{AUTHOR_NAME}の一言が見られる個別ページへ飛べるよ🐟</p>
+{''.join(_list_sections)}
+<p class="list-note">※{INFO_ASOF}時点の情報です。{SOURCE_LINE}</p>
+<a class="back" href="{SITE}/">← MAPにもどる</a>
+{ATTR_FOOTER}
+</main></body></html>"""
+with open("aquarium-list.html", "w") as f:
+    f.write(list_doc)
+new_page_urls.append(f"{SITE}/aquarium-list.html")
 
 # --- llms.txt（AIクローラー向けサイト要約。build実行のたびに最新化）---
 llms_lines = [
