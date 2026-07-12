@@ -204,6 +204,8 @@
   .card.upcoming { opacity:.7; border:3px dashed var(--sea); }
   .summerinfo { font-size:.75rem; font-weight:bold; color:#a15c00; background:linear-gradient(90deg,#fff3cd,#ffe9b8); border:1.5px solid #ffd166; border-radius:10px; padding:6px 10px; margin:0 0 6px; line-height:1.5; }
   .card .cbtn { font-size:.76rem; font-weight:bold; background:#fff; color:var(--sea); border:2px solid var(--sky); border-radius:999px; padding:4px 12px; cursor:pointer; font-family:inherit; }
+  .card h3 .namelink { color:inherit; text-decoration:none; }
+  .card h3 .namelink:hover { color:var(--sea); text-decoration:underline; }
   .card .ytc { display:none; background:#fffdf5; border:2px solid #ffe8a3; border-radius:12px; padding:8px 10px; font-size:.74rem; line-height:1.55; color:#333; }
   .card .ytc.open { display:block; }
   .card .ytc .c1 { margin:0 0 6px; }
@@ -951,10 +953,10 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       const card = document.createElement('div');
       card.className = 'card' + (a.upcoming?' upcoming':'') + (myVisits.has(a.name)?' visited':'');
       card.innerHTML = `
-        ${v?`<a href="https://www.youtube.com/watch?v=${v.id}" target="_blank"><img loading="lazy" src="${thumb}" alt="${a.name}"></a>`:`<div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:#e0f2fe;font-size:2rem">🔜</div>`}
+        ${v?`<a href="spot/${String(a.no).padStart(3,'0')}.html"><img loading="lazy" src="${thumb}" alt="${a.name}"></a>`:`<div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:#e0f2fe;font-size:2rem">🔜</div>`}
         <div class="body">
           <span class="pref">${a.pref}</span>
-          <h3>${a.name} ${a.closed_flag?'<span class="badge-closed">閉館</span>':''}</h3>
+          <h3><a class="namelink" href="spot/${String(a.no).padStart(3,'0')}.html">${a.name}</a> ${a.closed_flag?'<span class="badge-closed">閉館</span>':''}</h3>
           <p class="hl">${a.highlight||''}</p>
           ${animalChips(a)}
           ${a.summer?`<div class="summerinfo">☀️ 夏休み：${a.summer}</div>`:''}

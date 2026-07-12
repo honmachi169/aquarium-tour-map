@@ -723,7 +723,7 @@ ld_guide = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": f"{AUTHOR_NAME}流・水族館の楽しみ方",
-    "description": "行く前の準備から、大水槽の見方、ショーの楽しみ方、子連れの回り方、おみやげの選び方まで。全国の水族館を実際にまわってきたかわちゃんの楽しみ方ガイド。",
+    "description": "行く前の準備から、大水槽の見方、パフォーマンスの楽しみ方、子連れの回り方、おみやげの選び方まで。全国の水族館を実際にまわってきたかわちゃんの楽しみ方ガイド。",
     "author": {"@type": "Person", "name": AUTHOR_NAME},
     "publisher": {"@type": "Organization", "name": BRAND_NAME, "url": SITE},
     "url": f"{SITE}/guide.html",
@@ -731,7 +731,7 @@ ld_guide = {
 guide_doc = f"""<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>かわちゃん流・水族館の楽しみ方｜行く前の準備からおみやげまで | {BRAND_NAME}</title>
-<meta name="description" content="水族館はコツを知ると100倍楽しい！行く前の準備・大水槽の見方・ショーの楽しみ方・子連れの回り方・おみやげの選び方を、{AUTHOR_NAME}が実訪問の経験からまとめました。">
+<meta name="description" content="水族館はコツを知ると100倍楽しい！行く前の準備・大水槽の見方・パフォーマンスの楽しみ方・子連れの回り方・おみやげの選び方を、{AUTHOR_NAME}が実訪問の経験からまとめました。">
 <link rel="canonical" href="{SITE}/guide.html">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <meta property="og:title" content="かわちゃん流・水族館の楽しみ方 | {BRAND_NAME}">
@@ -757,7 +757,7 @@ guide_doc = f"""<!DOCTYPE html>
 <h2>🎒 1. 行く前の準備</h2>
 <img class="gphoto" src="{SITE}/assets/guide_prep.jpg" alt="ベルーガと対面する{AUTHOR_NAME}" loading="lazy">
 <ul>
-<li>ショーやごはんタイムの時間は、公式サイトで先にチェック。これだけで1日の作戦がぜんぜん変わるよ</li>
+<li>パフォーマンスやごはんタイムの時間は、公式サイトで先にチェック。これだけで1日の作戦がぜんぜん変わるよ</li>
 <li>「今日は◯◯に会いに行く」って、会いたい生き物を1匹だけ決めていこう。水族館が「見る場所」から「会いに行く場所」に変わるよ</li>
 <li>料金・休館日・ベビーカー情報は<a href="{SITE}/">このサイトの各水族館ページ</a>にまとめてあるから、おでかけ前にどうぞ</li>
 <li><a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA" target="_blank" rel="noopener">かわちゃんねる</a>で予習していくと、当日「あ、この子知ってる！」がいっぱいになるよ</li>
@@ -768,7 +768,7 @@ guide_doc = f"""<!DOCTYPE html>
 <h2>🚪 2. 入ってすぐやること</h2>
 <img class="gphoto" src="{SITE}/assets/guide_enter.jpg" alt="トンネル水槽で両手を広げる{AUTHOR_NAME}" loading="lazy">
 <ul>
-<li>まず館内マップをもらって、お目当ての生き物の場所とショーの時間をチェック</li>
+<li>まず館内マップをもらって、お目当ての生き物の場所とパフォーマンスの時間をチェック</li>
 <li>人気の生き物は開館直後がいちばんゆっくり会えるチャンス</li>
 <li>順路は絶対じゃない館も多いよ。混んでたら空いてる水槽から回ってOK！</li>
 </ul>
@@ -785,7 +785,7 @@ guide_doc = f"""<!DOCTYPE html>
 </div>
 
 <div class="g-box">
-<h2>🐬 4. ショー・パフォーマンスの楽しみ方</h2>
+<h2>🐬 4. パフォーマンス・ライブの楽しみ方</h2>
 <img class="gphoto" src="{SITE}/assets/guide_perf.jpg" alt="2頭のシャチに手を振る{AUTHOR_NAME}" loading="lazy">
 <ul>
 <li>前の席は水しぶきゾーン！濡れるのも思い出だけど、タオルやポンチョがあると安心</li>
@@ -796,7 +796,7 @@ guide_doc = f"""<!DOCTYPE html>
 
 <div class="g-box">
 <h2>👶 5. 子ども連れの回り方</h2>
-<img class="gphoto" src="{SITE}/assets/guide_kids.jpg" alt="ジンベエザメの大水槽の前でピースする{AUTHOR_NAME}" loading="lazy">
+<img class="gphoto" src="{SITE}/assets/guide_kids.jpg" alt="赤ちゃんと一緒にイルカを見つめる{AUTHOR_NAME}" loading="lazy">
 <ul>
 <li>ぜんぶ見ようとしなくてOK。子どもが好きになった水槽の前で、ゆっくり過ごすのがいちばん</li>
 <li>ベビーカー・授乳室・ロッカーの情報は、各水族館ページの表にまとめてあるよ</li>
@@ -876,7 +876,7 @@ llms_lines = [
     "## サイト構成",
     f"- トップページ（地図＋フィルター）: {SITE}/",
     f"- このサイトについて: {SITE}/about.html",
-    f"- {AUTHOR_NAME}流・水族館の楽しみ方（行く前の準備・水槽の見方・ショー・子連れ・おみやげ）: {SITE}/guide.html",
+    f"- {AUTHOR_NAME}流・水族館の楽しみ方（行く前の準備・水槽の見方・パフォーマンス・子連れ・おみやげ）: {SITE}/guide.html",
     f"- {AUTHOR_NAME}的 水族館ランキング（激レア／パフォーマンス／子ども向け／コスパ／クセつよ）: {SITE}/taste-ranking.html" if ranking_generated else f"- {AUTHOR_NAME}的 水族館ランキング: 準備中（本人承認済み評価が揃い次第公開）",
     "",
     "## 生き物別まとめページ",
