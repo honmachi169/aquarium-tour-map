@@ -83,7 +83,14 @@ for slug, a, intro in entries:
 
     hitokoto = ""
     if approved and a.get("hitokoto"):
-        hitokoto = f'<div class="hitokoto"><div class="hk-label">🐟 {AUTHOR_NAME}からの一言</div>{E(a["hitokoto"])}</div>'
+        hitokoto = (f'<div class="hitokoto"><img class="hk-chara" src="{SITE}/assets/kawachan_point.png" alt="{AUTHOR_NAME}" loading="lazy">'
+                    f'<div class="hk-body"><div class="hk-label">🐟 {AUTHOR_NAME}からの一言</div>{E(a["hitokoto"])}</div></div>')
+
+    # この館ならではの楽しみ方のコツ（本人承認済みの館のみ表示）
+    kotsu_box = ""
+    if approved and a.get("kotsu"):
+        kotsu_box = (f'<div class="kotsu-box"><div class="hk-label">🎯 {AUTHOR_NAME}流・この水族館の楽しみ方</div>{E(a["kotsu"])}'
+                     f'<a class="kotsu-more" href="{SITE}/guide.html">▶ どの水族館でも使える「かわちゃん流の楽しみ方」はこちら</a></div>')
 
     highlights_box = ""
     if approved and a.get("highlights"):
@@ -243,8 +250,13 @@ loadYtComments();''' if v else ''
   .chip {{ font-size:.78rem; font-weight:bold; background:#e8f6fb; color:#075985; border:1.5px solid #7dd3fc; border-radius:999px; padding:3px 10px; }}
   .chip.only {{ background:#fff7db; color:#92600a; border-color:#f4c430; }}
   .chip.tag {{ background:#fdf1e3; color:#c9660a; border-color:#f4a261; }}
-  .hitokoto {{ background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; position:relative; }}
+  .hitokoto {{ background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; position:relative; display:flex; gap:12px; align-items:flex-start; }}
+  .hitokoto .hk-chara {{ width:76px; height:auto; flex:none; margin-top:2px; }}
+  .hitokoto .hk-body {{ flex:1; min-width:0; }}
   .hitokoto .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:4px; }}
+  .kotsu-box {{ background:#fffbea; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }}
+  .kotsu-box .hk-label {{ font-size:.8rem; font-weight:bold; color:#c78a00; margin-bottom:4px; }}
+  .kotsu-box .kotsu-more {{ display:block; margin-top:8px; font-size:.78rem; color:var(--sea); font-weight:bold; text-decoration:none; }}
   .highlights-box {{ background:#f6fbfe; border:3px solid var(--sky); border-radius:16px; padding:12px 16px; margin:14px 0; }}
   .highlights-box .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:8px; }}
   .highlights-box ul {{ margin:0 0 0 20px; display:flex; flex-direction:column; gap:6px; }}
@@ -264,6 +276,7 @@ loadYtComments();''' if v else ''
   .btn.sns {{ background:#eef2f6; color:#334; }}
   .btn.share {{ background:var(--coral); color:#fff; border:none; font-family:inherit; cursor:pointer; }}
   .back {{ display:inline-block; margin-top:18px; color:var(--sea); font-weight:bold; text-decoration:none; }}
+  .back.guide {{ margin-left:14px; }}
   .note {{ font-size:.75rem; color:#89a; margin-top:8px; }}
   .filming-note {{ font-size:.75rem; color:#0077b6; background:#e0f7fa; border-radius:8px; padding:5px 12px; margin:6px 0 0; display:inline-block; }}
   .only-quote {{ font-size:.95rem; font-weight:bold; color:#92600a; background:#fff7db; border-left:5px solid #f4c430; border-radius:8px; padding:10px 14px; margin:12px 0; line-height:1.6; }}
@@ -303,6 +316,7 @@ loadYtComments();''' if v else ''
   {only_quote}
   <div class="chips">{chips}{tagchips}</div>
   {hitokoto}
+  {kotsu_box}
   {ratings_box}
   {summer}
   <table>{info}</table>
@@ -313,6 +327,7 @@ loadYtComments();''' if v else ''
     <a class="btn share" href="https://twitter.com/intent/tweet?text={html.escape(share_text)}&url={page_url}" target="_blank" rel="noopener">🕊 シェアする</a>
   </div>
   <a class="back" href="{SITE}/">← MAPにもどる</a>
+  <a class="back guide" href="{SITE}/guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>
   {ATTR_FOOTER}
 
   <section class="comments-section">
@@ -442,6 +457,7 @@ h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
 .taglist { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
 .taglist a { font-size:.85rem; font-weight:bold; background:#fff; color:var(--sea-deep); border:2px solid var(--sky); border-radius:999px; padding:6px 14px; text-decoration:none; }
 .list-note { font-size:.75rem; color:#89a; margin-top:16px; }
+.head-chara { float:right; width:92px; height:auto; margin:4px 0 8px 12px; }
 """ + ATTR_CSS
 
 def render_card(m):
@@ -452,7 +468,7 @@ def render_card(m):
             f'<div class="body"><div class="pref">{E(m["pref"])}</div>'
             f'<div class="name">{E(m["name"])}</div><div class="cmt">{E(cmt)}</div></div></a>')
 
-def render_list_page(path, title, desc, lead, members, extra_body=""):
+def render_list_page(path, title, desc, lead, members, extra_body="", chara="kawachan_guide.png"):
     pins = [m for m in members if m.get("lat") and m.get("lng")]
     map_js = ""
     if pins:
@@ -487,6 +503,7 @@ map.fitBounds(group.getBounds().pad(0.2));
 <body>
 <header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
 <main>
+  <img class="head-chara" src="{SITE}/assets/{chara}" alt="{AUTHOR_NAME}">
   <h1>{E(title)}</h1>
   <p class="lead">{E(lead)}</p>
   {'<div id="map"></div>' if pins else ''}
@@ -557,6 +574,7 @@ for region, members in by_region.items():
         f"{region}エリアの水族館は{len(members)}館。{AUTHOR_NAME}が実際に訪れて紹介します。",
         f"{region}エリアの水族館は{len(members)}館。{AUTHOR_NAME}が実際に訪れて紹介します。地図で場所をチェックできるよ。",
         members,
+        chara="kawachan_run.png",
     )
     url = f"{SITE}/{urllib.parse.quote(fname)}"
     new_page_urls.append(url)
@@ -651,7 +669,8 @@ if len(rated) >= 3:
 <script type="application/ld+json">{json.dumps(ld_ranking, ensure_ascii=False)}</script>
 <style>{LIST_STYLE}</style></head><body>
 <header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
-<main><h1>🐟 {AUTHOR_NAME}的 水族館ランキング</h1>
+<main><img class="head-chara" src="{SITE}/assets/kawachan_odoroki.png" alt="{AUTHOR_NAME}">
+<h1>🐟 {AUTHOR_NAME}的 水族館ランキング</h1>
 <p class="lead">{AUTHOR_NAME}が実際に訪れて評価した水族館だけを集めた、独自のランキングだよ。</p>
 {''.join(sections)}
 <p class="list-note">※{INFO_ASOF}時点の情報です。{SOURCE_LINE}</p>

@@ -35,7 +35,9 @@
   .chip { font-size:.78rem; font-weight:bold; background:#e8f6fb; color:#075985; border:1.5px solid #7dd3fc; border-radius:999px; padding:3px 10px; }
   .chip.only { background:#fff7db; color:#92600a; border-color:#f4c430; }
   .chip.tag { background:#fdf1e3; color:#c9660a; border-color:#f4a261; }
-  .hitokoto { background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; position:relative; }
+  .hitokoto { background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; position:relative; display:flex; gap:12px; align-items:flex-start; }
+  .hitokoto .hk-chara { width:76px; height:auto; flex:none; margin-top:2px; }
+  .hitokoto .hk-body { flex:1; min-width:0; }
   .hitokoto .hk-label { font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:4px; }
   .kotsu-box { background:#fffbea; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }
   .kotsu-box .hk-label { font-size:.8rem; font-weight:bold; color:#c78a00; margin-bottom:4px; }
