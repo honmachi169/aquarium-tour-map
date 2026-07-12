@@ -38,6 +38,9 @@
   .chip.tag { background:#fdf1e3; color:#c9660a; border-color:#f4a261; }
   .hitokoto { background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; position:relative; }
   .hitokoto .hk-label { font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:4px; }
+  .kotsu-box { background:#fffbea; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }
+  .kotsu-box .hk-label { font-size:.8rem; font-weight:bold; color:#c78a00; margin-bottom:4px; }
+  .kotsu-box .kotsu-more { display:block; margin-top:8px; font-size:.78rem; color:var(--sea); font-weight:bold; text-decoration:none; }
   .highlights-box { background:#f6fbfe; border:3px solid var(--sky); border-radius:16px; padding:12px 16px; margin:14px 0; }
   .highlights-box .hk-label { font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:8px; }
   .highlights-box ul { margin:0 0 0 20px; display:flex; flex-direction:column; gap:6px; }
@@ -57,6 +60,7 @@
   .btn.sns { background:#eef2f6; color:#334; }
   .btn.share { background:var(--coral); color:#fff; border:none; font-family:inherit; cursor:pointer; }
   .back { display:inline-block; margin-top:18px; color:var(--sea); font-weight:bold; text-decoration:none; }
+  .back.guide { margin-left:14px; }
   .note { font-size:.75rem; color:#89a; margin-top:8px; }
   .filming-note { font-size:.75rem; color:#0077b6; background:#e0f7fa; border-radius:8px; padding:5px 12px; margin:6px 0 0; display:inline-block; }
   .only-quote { font-size:.95rem; font-weight:bold; color:#92600a; background:#fff7db; border-left:5px solid #f4c430; border-radius:8px; padding:10px 14px; margin:12px 0; line-height:1.6; }
@@ -96,16 +100,18 @@
   
   <div class="chips"><span class="chip">🦈 ジンベエザメ</span><span class="chip tag">🦈 サメ好きにおすすめ</span><span class="chip tag">☔️ 雨の日におすすめ</span><span class="chip tag">👶 未就学児におすすめ</span><span class="chip tag">☀️ 夏休みおすすめ</span><span class="chip tag">🍼 赤ちゃん連れにおすすめ</span></div>
   <div class="hitokoto"><div class="hk-label">🐟 さかなのおにいさん かわちゃんからの一言</div>海遊館はまるでジェットコースター！長いエスカレーターに乗っていくと、そこは昔の日本の森。くるくると建物の中を回るように下っていくと、太平洋を中心にいろんな海や自然を味わえる作りになっているよ。ジンベエザメはもちろん、ほかにも珍しい生き物がたくさんいるんだけど、かわちゃんは日本の森エリアにいるサワガニが脱走してるのを発見するのが好き。プリズンブレイクガニって呼んでるよ！</div>
+  
   <div class="ratings-box"><div class="hk-label">🐟 さかなのおにいさん かわちゃんの オススメ度</div><div class="rate-row"><span class="rate-label">🦈 激レアいきもの</span><span class="rate-stars">★★★★★</span></div><div class="rate-row"><span class="rate-label">🐬 パフォーマンス</span><span class="rate-stars">★★☆☆☆</span></div><div class="rate-row"><span class="rate-label">👶 子ども向け度</span><span class="rate-stars">★★☆☆☆</span></div><div class="rate-row"><span class="rate-label">💰 コスパ</span><span class="rate-stars">★★☆☆☆</span></div><div class="rate-row"><span class="rate-label">🌀 クセつよポイント</span><span class="rate-stars">★★★☆☆</span></div></div>
   <div class="summer">☀️ <b>夏休み情報：</b>17時からは照明と音楽が変わる「夜の海遊館」に変身</div>
   <table><tr><th>💰 大人</th><td>2,700円〜(日により変動)</td></tr><tr><th>🧒 子ども</th><td>1,400円〜</td></tr><tr><th>🗓 休館日</th><td>不定休（1月に数日）</td></tr><tr><th>🛻 ベビーカー</th><td>貸し出しあり・館内持ち込みOK</td></tr><tr><th>🍼 授乳室</th><td>あり（複数か所）</td></tr><tr><th>🔒 ロッカー</th><td>あり（有料）</td></tr><tr><th>🚗 駐車場</th><td>天保山駐車場（有料・約1,200台）</td></tr><tr><th>🧺 飲食物持込</th><td>館内不可</td></tr><tr><th>🍽 フード</th><td>隣接「天保山マーケットプレース」のフードコートが充実。海遊館入館者は割引サービスあり</td></tr><tr><th>🎁 おみやげ</th><td>ジンベエザメのぬいぐるみ</td></tr></table>
-  <div class="highlights-box"><div class="hk-label">🔍 さかなのおにいさん かわちゃんの見どころポイント！</div><ul><li>日本の森から始まり、アリューシャン列島・モンタレー湾・南極・タスマン海と世界の海を一周する構成が壮大</li><li>エスカレーターで最上階まで上がり、ぐるぐる下りながら見て回る順路がユニーク</li><li>ラストの太平洋水槽（ジンベエザメ）にたどり着くまでの旅そのものが見どころ</li></ul></div>
+  <div class="highlights-box"><div class="hk-label">🔍 さかなのおにいさん かわちゃんの見どころポイント！</div><ul><li>日本の森から始まり、アリューシャン列島・モンタレー湾・南極・タスマン海と世界の海を一周する構成が壮大</li><li>エスカレーターで最上階まで上がり、ぐるぐる下りながら見て回る順路がユニーク</li><li>ラストの太平洋水槽（ジンベエザメ）にたどり着くまでの旅そのものが見どころ</li><li>海遊館はかわちゃんと同じ1990年生まれ。2023年には初めての水槽大型改修でグレートバリアリーフ水槽が生まれ変わった</li></ul></div>
   <p class="note">※2026年7月時点の情報です。おでかけ前に<a href="https://www.kaiyukan.com/" target="_blank" rel="noopener">公式サイト</a>をご確認ください</p>
   <div class="btns">
     <a class="btn hp" href="https://www.kaiyukan.com/" target="_blank" rel="noopener">公式サイト🔗</a><a class="btn sns" href="https://x.com/osaka_kaiyukan" target="_blank" rel="noopener">𝕏</a><a class="btn sns" href="https://www.instagram.com/kaiyukan_japan/" target="_blank" rel="noopener">📷 Instagram</a>
     <a class="btn share" href="https://twitter.com/intent/tweet?text=海遊館、行ってみたい！🐟 #全国水族館ツアーMAP&url=https://aquarium.yasasea.com/spot/006.html" target="_blank" rel="noopener">🕊 シェアする</a>
   </div>
   <a class="back" href="https://aquarium.yasasea.com/">← MAPにもどる</a>
+  <a class="back guide" href="https://aquarium.yasasea.com/guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>
   <p class="attr-footer">🐟 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん） / https://aquarium.yasasea.com</p>
 
   <section class="comments-section">

@@ -38,6 +38,9 @@
   .chip.tag { background:#fdf1e3; color:#c9660a; border-color:#f4a261; }
   .hitokoto { background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; position:relative; }
   .hitokoto .hk-label { font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:4px; }
+  .kotsu-box { background:#fffbea; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }
+  .kotsu-box .hk-label { font-size:.8rem; font-weight:bold; color:#c78a00; margin-bottom:4px; }
+  .kotsu-box .kotsu-more { display:block; margin-top:8px; font-size:.78rem; color:var(--sea); font-weight:bold; text-decoration:none; }
   .highlights-box { background:#f6fbfe; border:3px solid var(--sky); border-radius:16px; padding:12px 16px; margin:14px 0; }
   .highlights-box .hk-label { font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:8px; }
   .highlights-box ul { margin:0 0 0 20px; display:flex; flex-direction:column; gap:6px; }
@@ -57,6 +60,7 @@
   .btn.sns { background:#eef2f6; color:#334; }
   .btn.share { background:var(--coral); color:#fff; border:none; font-family:inherit; cursor:pointer; }
   .back { display:inline-block; margin-top:18px; color:var(--sea); font-weight:bold; text-decoration:none; }
+  .back.guide { margin-left:14px; }
   .note { font-size:.75rem; color:#89a; margin-top:8px; }
   .filming-note { font-size:.75rem; color:#0077b6; background:#e0f7fa; border-radius:8px; padding:5px 12px; margin:6px 0 0; display:inline-block; }
   .only-quote { font-size:.95rem; font-weight:bold; color:#92600a; background:#fff7db; border-left:5px solid #f4c430; border-radius:8px; padding:10px 14px; margin:12px 0; line-height:1.6; }
@@ -96,16 +100,18 @@
   
   <div class="chips"><span class="chip">🐟 ホワイトタイガー</span><span class="chip">🐟 ミニカバ</span><span class="chip tag">☔️ 雨の日におすすめ</span><span class="chip tag">👶 未就学児におすすめ</span><span class="chip tag">🍼 赤ちゃん連れにおすすめ</span></div>
   <div class="hitokoto"><div class="hk-label">🐟 さかなのおにいさん かわちゃんからの一言</div>ここは水族館を超えて、いろんな感性にふれるミュージアム。だから魚の住んでるエリアで分けるのではなく、「色にふれる」「泳ぎにふれる」というテーマで展示されているよ。最近リニューアルした「どくにふれる」など、子どもたちでも感覚で楽しめるのも魅力の1つ。お隣は太陽の塔がある万博記念公園、そしてエキスポシティというショッピングセンターもある、ファミリーのお出かけの味方だ！</div>
+  
   <div class="ratings-box"><div class="hk-label">🐟 さかなのおにいさん かわちゃんの オススメ度</div><div class="rate-row"><span class="rate-label">🦈 激レアいきもの</span><span class="rate-stars">★★★☆☆</span></div><div class="rate-row"><span class="rate-label">🐬 パフォーマンス</span><span class="rate-stars">★★☆☆☆</span></div><div class="rate-row"><span class="rate-label">👶 子ども向け度</span><span class="rate-stars">★★★★★</span></div><div class="rate-row"><span class="rate-label">💰 コスパ</span><span class="rate-stars">★★★☆☆</span></div><div class="rate-row"><span class="rate-label">🌀 クセつよポイント</span><span class="rate-stars">★★★★☆</span></div></div>
   
   <table><tr><th>💰 大人</th><td>2,200円</td></tr><tr><th>🧒 子ども</th><td>1,100円</td></tr><tr><th>🗓 休館日</th><td>年中無休（臨時休あり）</td></tr><tr><th>🛻 ベビーカー</th><td>館内持ち込みOK</td></tr><tr><th>🍼 授乳室</th><td>あり</td></tr><tr><th>🔒 ロッカー</th><td>あり（有料）</td></tr><tr><th>🚗 駐車場</th><td>EXPOCITY駐車場（ニフレル入館で平日無料・土日祝は購入額に応じ最大5時間無料）</td></tr><tr><th>🧺 飲食物持込</th><td>持込不可</td></tr><tr><th>🍽 フード</th><td>館内ピクニックカフェ「EAT EAT EAT」あり（サンドイッチ・ホットドッグ中心）</td></tr></table>
-  <div class="highlights-box"><div class="hk-label">🔍 さかなのおにいさん かわちゃんの見どころポイント！</div><ul><li>「いろ・わざ・およぎ・かくれる」など、生き物の個性をテーマ別に見せる構成がユニーク</li><li>テッポウウオの実演解説、ミニカバの生態解説など、動画で紹介された生き物の個性がよくわかる</li><li>「ひびきにふれる」ゾーンなど、水族館の枠を超えたアート的な展示体験も魅力</li></ul></div>
+  <div class="highlights-box"><div class="hk-label">🔍 さかなのおにいさん かわちゃんの見どころポイント！</div><ul><li>「いろ・わざ・およぎ・かくれる」など、生き物の個性をテーマ別に見せる構成がユニーク</li><li>テッポウウオの実演解説、ミニカバの生態解説など、動画で紹介された生き物の個性がよくわかる</li><li>「ひびきにふれる」ゾーンなど、水族館の枠を超えたアート的な展示体験も魅力</li><li>世界三大珍獣のひとつミニカバの赤ちゃん「ネムネム」が誕生（眠たそうな顔が名前の由来）。世界一小さいカンガルー、パルマワラビーの赤ちゃんに会えることも</li></ul></div>
   <p class="note">※2026年7月時点の情報です。おでかけ前に<a href="https://www.nifrel.jp/" target="_blank" rel="noopener">公式サイト</a>をご確認ください</p>
   <div class="btns">
     <a class="btn hp" href="https://www.nifrel.jp/" target="_blank" rel="noopener">公式サイト🔗</a><a class="btn sns" href="https://x.com/NIFREL_official" target="_blank" rel="noopener">𝕏</a><a class="btn sns" href="https://www.instagram.com/nifrel_official/" target="_blank" rel="noopener">📷 Instagram</a>
     <a class="btn share" href="https://twitter.com/intent/tweet?text=ニフレル、行ってみたい！🐟 #全国水族館ツアーMAP&url=https://aquarium.yasasea.com/spot/015.html" target="_blank" rel="noopener">🕊 シェアする</a>
   </div>
   <a class="back" href="https://aquarium.yasasea.com/">← MAPにもどる</a>
+  <a class="back guide" href="https://aquarium.yasasea.com/guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>
   <p class="attr-footer">🐟 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん） / https://aquarium.yasasea.com</p>
 
   <section class="comments-section">
