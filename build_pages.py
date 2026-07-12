@@ -712,6 +712,106 @@ with open("about.html", "w") as f:
     f.write(about_doc)
 new_page_urls.append(f"{SITE}/about.html")
 
+# --- かわちゃん流・水族館の楽しみ方（検索の裏の入り口。導線はフッターとspotページのみ）---
+ld_guide = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": f"{AUTHOR_NAME}流・水族館の楽しみ方",
+    "description": "行く前の準備から、大水槽の見方、ショーの楽しみ方、子連れの回り方、おみやげの選び方まで。全国の水族館を実際にまわってきたかわちゃんの楽しみ方ガイド。",
+    "author": {"@type": "Person", "name": AUTHOR_NAME},
+    "publisher": {"@type": "Organization", "name": BRAND_NAME, "url": SITE},
+    "url": f"{SITE}/guide.html",
+}
+guide_doc = f"""<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>かわちゃん流・水族館の楽しみ方｜行く前の準備からおみやげまで | {BRAND_NAME}</title>
+<meta name="description" content="水族館はコツを知ると100倍楽しい！行く前の準備・大水槽の見方・ショーの楽しみ方・子連れの回り方・おみやげの選び方を、{AUTHOR_NAME}が実訪問の経験からまとめました。">
+<link rel="canonical" href="{SITE}/guide.html">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<meta property="og:title" content="かわちゃん流・水族館の楽しみ方 | {BRAND_NAME}">
+<meta property="og:description" content="行く前の準備からおみやげ選びまで、水族館が100倍楽しくなるコツを{AUTHOR_NAME}がまとめたよ！">
+<meta property="og:image" content="{SITE}/assets/kawachan_web.png">
+<script type="application/ld+json">{json.dumps(ld_guide, ensure_ascii=False)}</script>
+<style>{LIST_STYLE}
+.g-box {{ background:#fff; border-radius:16px; padding:18px 20px; margin:14px 0; line-height:1.8; font-size:.92rem; }}
+.g-box h2 {{ font-size:1.05rem; color:var(--sea-deep); margin:0 0 8px; }}
+.g-box ul {{ margin:0 0 0 20px; display:flex; flex-direction:column; gap:8px; }}
+.g-box li {{ line-height:1.7; }}
+.g-box a {{ color:var(--sea); font-weight:bold; }}
+</style></head><body>
+<header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
+<main>
+<h1>🐬 かわちゃん流・水族館の楽しみ方</h1>
+<p class="lead">水族館は、予習ゼロでも楽しい。でもちょっとしたコツを知ってると100倍楽しくなる場所！全国の水族館を実際にまわってきた{AUTHOR_NAME}が、行く前からおみやげまでの楽しみ方をまとめたよ🐟</p>
+
+<div class="g-box">
+<h2>🎒 1. 行く前の準備</h2>
+<ul>
+<li>ショーやごはんタイムの時間は、公式サイトで先にチェック。これだけで1日の作戦がぜんぜん変わるよ</li>
+<li>「今日は◯◯に会いに行く」って、会いたい生き物を1匹だけ決めていこう。水族館が「見る場所」から「会いに行く場所」に変わるよ</li>
+<li>料金・休館日・ベビーカー情報は<a href="{SITE}/">このサイトの各水族館ページ</a>にまとめてあるから、おでかけ前にどうぞ</li>
+<li><a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA" target="_blank" rel="noopener">かわちゃんねる</a>で予習していくと、当日「あ、この子知ってる！」がいっぱいになるよ</li>
+</ul>
+</div>
+
+<div class="g-box">
+<h2>🚪 2. 入ってすぐやること</h2>
+<ul>
+<li>まず館内マップをもらって、お目当ての生き物の場所とショーの時間をチェック</li>
+<li>人気の生き物は開館直後がいちばんゆっくり会えるチャンス</li>
+<li>順路は絶対じゃない館も多いよ。混んでたら空いてる水槽から回ってOK！</li>
+</ul>
+</div>
+
+<div class="g-box">
+<h2>🐠 3. 大水槽・水槽の見方</h2>
+<ul>
+<li>かわちゃん流はズバリ「ツッコミながら見る」こと。「どんだけ口が長いねん！」「動かへんのかーい！」って、1匹ずつツッコミポイントを探すと、同じ水槽でもぜんぜん飽きないよ</li>
+<li>下から、横から、しゃがんで子どもの目線で。見る高さを変えると生き物の表情も変わる</li>
+<li>「この子たちの仲間は、本物の海のどこに住んでるのかな？」って想像してみて。水槽の向こうに、本物の海が見えてくるよ</li>
+</ul>
+</div>
+
+<div class="g-box">
+<h2>🐬 4. ショー・パフォーマンスの楽しみ方</h2>
+<ul>
+<li>前の席は水しぶきゾーン！濡れるのも思い出だけど、タオルやポンチョがあると安心</li>
+<li>ジャンプの技だけじゃなくて、生き物とトレーナーさんのサインのやりとりにも注目。信頼関係が見えてくると感動が倍になるよ</li>
+<li>気になったことは飼育員さんに聞いてみよう。生き物のことをいちばん知ってるのは飼育員さん。質問すると水族館はもっと楽しくなる！</li>
+</ul>
+</div>
+
+<div class="g-box">
+<h2>👶 5. 子ども連れの回り方</h2>
+<ul>
+<li>ぜんぶ見ようとしなくてOK。子どもが好きになった水槽の前で、ゆっくり過ごすのがいちばん</li>
+<li>ベビーカー・授乳室・ロッカーの情報は、各水族館ページの表にまとめてあるよ</li>
+<li>行き先選びはテーマ別ページからどうぞ：<a href="{SITE}/theme/baby.html">🍼 赤ちゃん連れにおすすめ</a>／<a href="{SITE}/theme/kids.html">👶 未就学児におすすめ</a>／<a href="{SITE}/theme/rain.html">☔️ 雨の日におすすめ</a></li>
+</ul>
+</div>
+
+<div class="g-box">
+<h2>🎁 6. おみやげの選び方</h2>
+<ul>
+<li>かわちゃん流は「その水族館でしか会えない生き物」のグッズを選ぶこと。おうちに帰ってからも「あの子に会ったね」って思い出せるよ</li>
+<li>各水族館ページの🎁おみやげ欄もチェックしてね。超グソクムシ煎餅みたいな、クセすごおみやげに出会えることもあるよ</li>
+</ul>
+</div>
+
+<div class="g-box">
+<h2>🌊 さいごに</h2>
+<p>水族館は、生の命に触れられる大切な場所。楽しく遊びに行くこと、それ自体が生き物と水族館の応援になるんだ。次の週末、どこの水族館に行く？</p>
+<p style="margin-top:8px"><a href="{SITE}/">→ MAPで行きたい水族館を探す</a></p>
+</div>
+
+<p class="list-note">※{SOURCE_LINE}</p>
+<a class="back" href="{SITE}/">← MAPにもどる</a>
+{ATTR_FOOTER}
+</main></body></html>"""
+with open("guide.html", "w") as f:
+    f.write(guide_doc)
+new_page_urls.append(f"{SITE}/guide.html")
+
 # --- llms.txt（AIクローラー向けサイト要約。build実行のたびに最新化）---
 llms_lines = [
     f"# {BRAND_NAME}",
@@ -725,6 +825,7 @@ llms_lines = [
     "## サイト構成",
     f"- トップページ（地図＋フィルター）: {SITE}/",
     f"- このサイトについて: {SITE}/about.html",
+    f"- {AUTHOR_NAME}流・水族館の楽しみ方（行く前の準備・水槽の見方・ショー・子連れ・おみやげ）: {SITE}/guide.html",
     f"- {AUTHOR_NAME}的 水族館ランキング（激レア／パフォーマンス／子ども向け／コスパ／クセつよ）: {SITE}/taste-ranking.html" if ranking_generated else f"- {AUTHOR_NAME}的 水族館ランキング: 準備中（本人承認済み評価が揃い次第公開）",
     "",
     "## 生き物別まとめページ",
