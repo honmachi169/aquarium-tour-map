@@ -15,6 +15,10 @@ SOURCE_LINE = f"出典：{BRAND_NAME}（{AUTHOR_NAME}）"
 ATTR_FOOTER = f'<p class="attr-footer">🐟 {SOURCE_LINE} / {{SITE}}</p>'.replace("{SITE}", SITE)
 ATTR_CSS = '.attr-footer { font-size:.72rem; color:#9ab; margin-top:24px; text-align:center; }'
 
+GA_ID = "G-J4C3DJNZQN"
+GA_SNIPPET = f'''<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{GA_ID}');</script>'''
+
 TAG_LABEL = {"rain":"☔️ 雨の日におすすめ","kids":"👶 未就学児におすすめ","same":"🦈 サメ好きにおすすめ",
              "dolphin":"🐬 イルカショーおすすめ","deep":"🐙 深海生物好きにおすすめ",
              "penguin":"🐧 ペンギン好きにおすすめ","summer":"☀️ 夏休みおすすめ",
@@ -225,6 +229,7 @@ loadYtComments();''' if v else ''
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{GA_SNIPPET}
 <title>{E(title)}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{page_url}">
@@ -496,6 +501,7 @@ map.fitBounds(group.getBounds().pad(0.2));
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{GA_SNIPPET}
 <title>{E(title)}</title>
 <meta name="description" content="{E(desc)}">
 <link rel="canonical" href="{SITE}/{path}">
@@ -670,6 +676,7 @@ if len(rated) >= 3:
         }
         doc = f"""<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+{GA_SNIPPET}
 <title>{AUTHOR_NAME}的 水族館ランキング | {BRAND_NAME}</title>
 <meta name="description" content="{AUTHOR_NAME}が実際に訪れて評価した水族館を、独自の切り口別ランキングで紹介。">
 <meta property="og:type" content="website">
@@ -698,6 +705,7 @@ if len(rated) >= 3:
 # --- このサイトについて ---
 about_doc = f"""<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+{GA_SNIPPET}
 <title>このサイトについて | 全国水族館ツアーMAP</title>
 <meta name="description" content="会いに行こう！全国水族館ツアーMAPの紹介。さかなのおにいさんかわちゃんが実際に訪れた水族館だけを紹介する、実訪問ベースの水族館サイトです。">
 <link rel="canonical" href="{SITE}/about.html">
@@ -742,6 +750,7 @@ ld_guide = {
 }
 guide_doc = f"""<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+{GA_SNIPPET}
 <title>かわちゃん流・水族館の楽しみ方｜行く前の準備からおみやげまで | {BRAND_NAME}</title>
 <meta name="description" content="水族館はコツを知ると100倍楽しい！行く前の準備・大水槽の見方・イルカショー（パフォーマンス）の楽しみ方・子連れの回り方・おみやげの選び方を、{AUTHOR_NAME}が実訪問の経験からまとめました。">
 <link rel="canonical" href="{SITE}/guide.html">
@@ -851,6 +860,7 @@ for _region, _prefs in REGIONS.items():
     _list_sections.append(f'<h2>{_region}（{len(_members)}館）</h2><ul class="alist">{_lis}</ul>')
 list_doc = f"""<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+{GA_SNIPPET}
 <title>掲載水族館一覧（全{len(entry_meta)}館） | {BRAND_NAME}</title>
 <meta name="description" content="{BRAND_NAME}に掲載中の全{len(entry_meta)}館をエリア別に一覧で。各館の料金・休館日・{AUTHOR_NAME}の一言は個別ページでどうぞ。">
 <link rel="canonical" href="{SITE}/aquarium-list.html">
