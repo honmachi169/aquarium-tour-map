@@ -45,9 +45,9 @@
       "ratings": {
         "rare": 5,
         "perf": 2,
-        "kids": 5,
-        "cospa": 3,
-        "kuse": 5
+        "kids": 4,
+        "cospa": 4,
+        "kuse": 4
       },
       "highlights": [
         "「会ってほしい生き物」第1位に選ばれた極地の海エリアは必見。動画でもかわちゃんが一番感動していたゾーン",
@@ -60,7 +60,8 @@
         "ラッコ"
       ],
       "visited": true,
-      "verified": false
+      "verified": true,
+      "hitokoto": "日本最多の飼育種類数！入った瞬間から、右に行っても左に行ってもどこから回ってもいい、自由に回れる自由度の高さも最高。ジュゴンのセレナちゃんは、フィリピンから日本との友好の証として飛行機に乗ってやってきたんだよ。日本唯一のジュゴンの展示だけでなく、ジュゴンとマナティーを同時に見られる水族館は世界でもここだけ！？ラッコが人気だけど、隣にいる子にも注目してほしいなぁ！"
     },
     {
       "no": 2,
@@ -101,8 +102,8 @@
       "ratings": {
         "rare": 4,
         "perf": 5,
-        "kids": 4,
-        "cospa": 3,
+        "kids": 3,
+        "cospa": 1,
         "kuse": 3
       },
       "highlights": [
@@ -115,7 +116,8 @@
         "シャチ"
       ],
       "visited": true,
-      "verified": false
+      "verified": true,
+      "hitokoto": "地域に愛された須磨海浜水族園から、外からもお客さんを呼び込む神戸須磨シーワールドへ！シャチの圧倒的な迫力のジャンプは必見！だって、2トントラックが跳ねてるのと同じくらいの重さがあるんだからね。かわちゃん的には、スマスイコレクションにいる世界最高齢のロングノーズガー「ガーじぃ」や、スマスイ時代から会える巨大淡水魚たちにも会えるのがうれしいポイント。"
     },
     {
       "no": 46,
@@ -195,10 +197,10 @@
       "locker": "あり（有料）",
       "ratings": {
         "rare": 4,
-        "perf": 5,
-        "kids": 4,
+        "perf": 4,
+        "kids": 3,
         "cospa": 4,
-        "kuse": 3
+        "kuse": 4
       },
       "highlights": [
         "北館ではシャチの公開トレーニングと約3,000人収容のスタジアムでのイルカパフォーマンスが同時に楽しめる",
@@ -213,7 +215,8 @@
         "ペンギン"
       ],
       "visited": true,
-      "verified": false
+      "verified": true,
+      "hitokoto": "日本の水族館で敷地面積ナンバーワン！入った瞬間にシャチがお出迎えしてくれるよ。世界でもここでしか見られないナンキョクオキアミの展示や、遠足の子どもたちを震え上がらせる昔の潜水服の展示は必見。今やお土産屋さんで人形のキーホルダーになるほど人気なんだよ！"
     },
     {
       "no": 4,
@@ -253,10 +256,10 @@
       "restaurant": "館内フードコート（10店舗）あり。入場不要で利用可、館外に寿司店も併設",
       "ratings": {
         "rare": 4,
-        "perf": 2,
+        "perf": 3,
         "kids": 3,
-        "cospa": 4,
-        "kuse": 5
+        "cospa": 3,
+        "kuse": 3
       },
       "highlights": [
         "サメの飼育種類数が国内最多！迫力満点のシロワニやシュモクザメなど「悠久の海ゾーン」でじっくり観察できる",
@@ -272,7 +275,8 @@
         "マンボウ"
       ],
       "visited": true,
-      "verified": false
+      "verified": true,
+      "hitokoto": "サメ好きなら人生で絶対に行ったほうがいい水族館。これでもかこれでもかとサメだらけで、逆に「サメ以外どこにいるの？」と思うほど（実際は他の生き物もたくさんいるよ！）見たことのないサメに出会えるはず。特にエスカレーターを上っていくとシロワニがお出迎えしてくれるのは大迫力。サメを見た後はサメカレーを食べよう！"
     },
     {
       "no": 5,
@@ -372,11 +376,11 @@
       "nursing": "あり（複数か所）",
       "locker": "あり（有料）",
       "ratings": {
-        "rare": 4,
-        "perf": 1,
-        "kids": 4,
-        "cospa": 3,
-        "kuse": 2
+        "rare": 5,
+        "perf": 2,
+        "kids": 2,
+        "cospa": 2,
+        "kuse": 3
       },
       "highlights": [
         "日本の森から始まり、アリューシャン列島・モンタレー湾・南極・タスマン海と世界の海を一周する構成が壮大",
@@ -387,7 +391,8 @@
         "ジンベエザメ"
       ],
       "visited": true,
-      "verified": false
+      "verified": true,
+      "hitokoto": "海遊館はまるでジェットコースター！長いエスカレーターに乗っていくと、そこは昔の日本の森。くるくると建物の中を回るように下っていくと、太平洋を中心にいろんな海や自然を味わえる作りになっているよ。ジンベエザメはもちろん、ほかにも珍しい生き物がたくさんいるんだけど、かわちゃんは日本の森エリアにいるサワガニが脱走してるのを発見するのが好き。プリズンブレイクガニって呼んでるよ！"
     },
     {
       "no": 7,
@@ -435,9 +440,9 @@
       "ratings": {
         "rare": 5,
         "perf": 3,
-        "kids": 5,
+        "kids": 4,
         "cospa": 4,
-        "kuse": 3
+        "kuse": 4
       },
       "highlights": [
         "スペシャルゲスト（イルカ）から始まり、サンゴの海・熱帯魚の海と続くカラフルな展示に目を奪われる",
@@ -451,7 +456,8 @@
         "マンタ"
       ],
       "visited": true,
-      "verified": false
+      "verified": true,
+      "hitokoto": "日本最高峰の水族館の1つ。入り口からコバルトブルーの沖縄の海と離島の風景が広がるよ。そこに潜っていくように、サンゴ礁や黒潮の恵みがダイナミックに表現された大水槽に出会える。大水槽の隣にはエレベーターがあって、上がっていくといつでもバックヤードツアーのように上から大水槽を眺めることができるよ。あと大水槽の隣のカフェに行くと、柱と柱の間でおいしいアイスが食べられる。まるで特別な個室みたいな空間だからオススメ。"
     },
     {
       "no": 8,
@@ -495,7 +501,7 @@
         "perf": 5,
         "kids": 4,
         "cospa": 2,
-        "kuse": 2
+        "kuse": 3
       },
       "highlights": [
         "太平洋を背景にした「オーシャンスタジアム」でのシャチパフォーマンスは豪快なジャンプと水しぶきで大迫力",
@@ -510,7 +516,8 @@
         "マンボウ"
       ],
       "visited": true,
-      "verified": false
+      "verified": true,
+      "hitokoto": "シャチ3頭が大迫力で泳ぐ姿を間近で見られる、日本で唯一の水族館。パフォーマンスが素晴らしいのはもちろん、各建物の中に入っていくと洞窟の中や海の底など、まるで世界を旅するようにワクワクしながら楽しめる。ホテルも併設されてるので、1泊して行きたい場所。なぜなら、帰りのアクアラインがめちゃめちゃ混むから！！"
     },
     {
       "no": 9,
@@ -613,11 +620,11 @@
       "food_bring": "持込可（席での飲食OK・食べ歩き不可）",
       "restaurant": "館内カフェあり（いきものモチーフのスイーツ・ドリンク）",
       "ratings": {
-        "rare": 2,
+        "rare": 4,
         "perf": 1,
-        "kids": 4,
-        "cospa": 2,
-        "kuse": 2
+        "kids": 3,
+        "cospa": 3,
+        "kuse": 3
       },
       "highlights": [
         "クラゲゾーンからサンゴ礁、小笠原大水槽と続く構成で、都市型とは思えないボリューム",
@@ -631,7 +638,8 @@
         "ペンギン"
       ],
       "visited": true,
-      "verified": false
+      "verified": true,
+      "hitokoto": "スカイツリーのお膝元。昔はスカイツリーの高さにちなんで634匹のチンアナゴが水槽にいたんだよ。大水槽のシロワニは、日本の水族館でも珍しい小笠原の海からやってきた子。小笠原の学校とウミガメの保護活動をしていたり、都市型水族館というイメージを超えて環境へのアクションを実は行っているんだ！ちなみに「エクレアナマコ」というめっちゃ美味しそうな名前のナマコもいるよ。"
     },
     {
       "no": 11,
@@ -859,10 +867,10 @@
       "food_bring": "持込不可",
       "restaurant": "館内ピクニックカフェ「EAT EAT EAT」あり（サンドイッチ・ホットドッグ中心）",
       "ratings": {
-        "rare": 5,
+        "rare": 3,
         "perf": 2,
-        "kids": 4,
-        "cospa": 2,
+        "kids": 5,
+        "cospa": 3,
         "kuse": 4
       },
       "highlights": [
@@ -879,7 +887,8 @@
         "ミニカバ"
       ],
       "visited": true,
-      "verified": false
+      "verified": true,
+      "hitokoto": "ここは水族館を超えて、いろんな感性にふれるミュージアム。だから魚の住んでるエリアで分けるのではなく、「色にふれる」「泳ぎにふれる」というテーマで展示されているよ。最近リニューアルした「どくにふれる」など、子どもたちでも感覚で楽しめるのも魅力の1つ。お隣は太陽の塔がある万博記念公園、そしてエキスポシティというショッピングセンターもある、ファミリーのお出かけの味方だ！"
     },
     {
       "no": 16,
@@ -1416,7 +1425,7 @@
       "restaurant": "館内に飲食施設なし。周辺の飲食店を利用",
       "ratings": {
         "rare": 5,
-        "perf": 1,
+        "perf": 2,
         "kids": 4,
         "cospa": 5,
         "kuse": 5
@@ -1435,7 +1444,8 @@
         "タカアシガニ"
       ],
       "visited": true,
-      "verified": false
+      "verified": true,
+      "hitokoto": "走ってみたら3分、じっくり見たら1日でも足りない。究極のクセスゴ水族館。水槽の隣におすすめの調理方法が書かれていたり、魚が入社したかのように「魚歴書」を書いていたり、ユーモアが溢れてて関西人としても大好き！リニューアルして深海の大水槽ができて、鯨の骨に集まる生き物たちや珍しい深海の生き物たちを眺められるように。ここは深海生物の展示種類数も日本でトップクラスなんだ。"
     },
     {
       "no": 28,
@@ -1903,9 +1913,9 @@
       "goshuin": "あり（魚朱印の発祥館。ドルフィンビル1階インフォメーションで購入）",
       "ratings": {
         "rare": 3,
-        "perf": 3,
-        "kids": 4,
-        "cospa": 4,
+        "perf": 4,
+        "kids": 3,
+        "cospa": 3,
         "kuse": 3
       },
       "highlights": [
@@ -1921,7 +1931,8 @@
         "シュモクザメ"
       ],
       "visited": true,
-      "verified": false
+      "verified": true,
+      "hitokoto": "ここは絶対に夕方に行ってほしい。マダライルカという全国的にも珍しい小型のイルカが泳ぐプールは、アクリル板がないため、後ろに広がる瀬戸内海とまるで一体化したよう！西向きにある水族館だから、夕方になると夕日の道が瀬戸内海からプールにまで伸びてきて、オレンジに染まる絶景が見られる。飼育員さんが黒板に書いた絵がうますぎるから、説明板も要チェック。"
     },
     {
       "no": 39,
@@ -2180,7 +2191,7 @@
         "rain"
       ],
       "photo": "assets/photo_yatomi.jpg",
-      "visited": false
+      "visited": true
     },
     {
       "name": "広島もとまち水族館",
@@ -2197,7 +2208,7 @@
         "rain"
       ],
       "photo": "assets/photo_motomachi.jpg",
-      "visited": false,
+      "visited": true,
       "restaurant": "あり（カフェ＆ショップ併設）",
       "parking": "あり（提携駐車場「基町クレドパーキング」、来館スタンプで1時間無料）",
       "access": "アストラムライン「県庁前」駅から地下直結／広電「紙屋町西・東」から徒歩3分"
@@ -2234,7 +2245,7 @@
         "kids"
       ],
       "photo": "assets/photo_biwakobase.jpg",
-      "visited": false,
+      "visited": true,
       "parking": "あり（3台のみ、公共交通機関推奨）",
       "access": "志賀駅から徒歩約15分"
     },
@@ -2253,7 +2264,7 @@
         "rain"
       ],
       "photo": "assets/photo_hanazono.jpg",
-      "visited": false,
+      "visited": true,
       "parking": "なし",
       "access": "花園駅から徒歩約6〜7分"
     },
@@ -2274,7 +2285,7 @@
       "search_animals": [
         "ジンベエザメ"
       ],
-      "visited": false,
+      "visited": true,
       "animals": [
         "ジンベエザメ",
         "マンボウ"
@@ -2297,7 +2308,7 @@
       "search_animals": [
         "タツノオトシゴ"
       ],
-      "visited": false,
+      "visited": true,
       "animals": [
         "タツノオトシゴ"
       ]
@@ -2317,7 +2328,7 @@
         "summer"
       ],
       "photo": "assets/photo_ryuhyokan.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "クリオネ"
       ],
@@ -2337,7 +2348,7 @@
         "kids"
       ],
       "photo": "assets/photo_gyogyotown.jpg",
-      "visited": false,
+      "visited": true,
       "access": "道の駅福良から徒歩8〜9分"
     },
     {
@@ -2352,7 +2363,7 @@
       "comment": "浅香山駅から歩いてすぐ、うなぎと日本の淡水魚を集めた珍しいミュージアム＆カフェだよ（月1回程度の特別営業日あり、訪問前に要確認）",
       "tags": [],
       "photo": "assets/photo_zacconekan.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "ホトケドジョウ",
         "オヤニラミ"
@@ -2539,7 +2550,7 @@
         "kids"
       ],
       "photo": "assets/photo_kitakyushu_water.jpg",
-      "visited": false,
+      "visited": true,
       "access": "JR小倉駅・西小倉駅から徒歩10分、モノレール平和通駅から徒歩5分"
     },
     {
@@ -2635,7 +2646,7 @@
       "closed": "年末年始",
       "comment": "魚屋さん「釧之助」の中にあるフウセンウオの水族館",
       "photo": "assets/photo_kushiro.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "フウセンウオ",
         "チンアナゴ",
@@ -2679,7 +2690,7 @@
       "closed": "4月8日〜14日、12月第2月〜金曜、12/31、1/1",
       "comment": "滝つぼ水槽と冬に凍る川！中嶋誠プロデュースの名水族館",
       "photo": "assets/photo_kitanodaichi.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "イトウ",
         "ピラルク",
@@ -2726,7 +2737,7 @@
       "search_animals": [
         "アザラシ"
       ],
-      "visited": false,
+      "visited": true,
       "animals": [
         "アザラシ"
       ],
@@ -2746,7 +2757,7 @@
       "closed": "12/29〜1/3",
       "comment": "海中からオホーツク海をのぞける展望塔",
       "photo": "assets/photo_okhotsk_tower.jpg",
-      "visited": false,
+      "visited": true,
       "restaurant": "あり（3階カフェ「companio」）",
       "access": "紋別バスターミナルから車で10分／バスで15分"
     },
@@ -2764,7 +2775,7 @@
       "search_animals": [
         "サケ"
       ],
-      "visited": false,
+      "visited": true,
       "animals": [
         "イトウ",
         "チョウザメ"
@@ -2883,7 +2894,7 @@
       "search_animals": [
         "ホッキョクグマ"
       ],
-      "visited": false,
+      "visited": true,
       "animals": [
         "ホッキョクグマ",
         "ペンギン"
@@ -3061,7 +3072,7 @@
       "child": "小学生無料",
       "closed": "月曜（祝日は翌日）",
       "comment": "井の頭池の水辺の生きものをじっくり観察",
-      "visited": false,
+      "visited": true,
       "animals": [
         "オオサンショウウオ"
       ],
@@ -3129,7 +3140,7 @@
       "search_animals": [
         "ピラルクー"
       ],
-      "visited": false,
+      "visited": true,
       "nursing": "あり（9階「mamaro」）",
       "locker": "あり（100円）",
       "access": "JR川崎駅東口から徒歩1分"
@@ -3176,7 +3187,7 @@
       "closed": "無休",
       "comment": "標高723m、日本一高い場所の海水水族館",
       "photo": "assets/photo_hakone.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "アザラシ",
         "ペンギン"
@@ -3442,7 +3453,7 @@
         "summer"
       ],
       "photo": "assets/photo_minamichita.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "イルカ",
         "アシカ",
@@ -3461,7 +3472,7 @@
       "child": "200円",
       "closed": "毎週月曜日、12月29日〜1月1日",
       "comment": "三河湾の生きものをじっくり学べる地域密着館",
-      "visited": false,
+      "visited": true,
       "tags": [
         "rain",
         "kids"
@@ -3573,7 +3584,7 @@
       "search_animals": [
         "オオサンショウウオ"
       ],
-      "visited": false,
+      "visited": true,
       "animals": [
         "オオサンショウウオ"
       ],
@@ -3636,7 +3647,7 @@
       "closed": "月曜（祝日の場合翌平日）、年末年始",
       "comment": "和歌山の海の大水槽がある博物館",
       "photo": "assets/photo_wakayama.jpg",
-      "visited": false,
+      "visited": true,
       "tags": [
         "rain",
         "kids"
@@ -3655,7 +3666,7 @@
       "closed": "年中無休",
       "comment": "本物の海中を見られる海中展望塔がある！",
       "photo": "assets/photo_kushimoto.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "ウミガメ",
         "サンゴ"
@@ -3678,7 +3689,7 @@
       "child": "900円",
       "closed": "年中無休",
       "comment": "クジラの町・太地でクジラと超接近できる",
-      "visited": false,
+      "visited": true,
       "animals": [
         "クジラ",
         "マダライルカ",
@@ -3701,7 +3712,7 @@
       "closed": "年中無休",
       "comment": "大学研究所の水族館！白浜の海の生きもの専門",
       "photo": "assets/photo_kyodai_shirahama.jpg",
-      "visited": false,
+      "visited": true,
       "tags": [
         "rain"
       ],
@@ -3718,7 +3729,7 @@
       "closed": "年中無休",
       "comment": "世界で唯一の甲殻類専門水族館！",
       "photo": "assets/photo_susami.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "イセエビ",
         "ヤドカリ"
@@ -3746,7 +3757,7 @@
         "summer"
       ],
       "photo": "assets/photo_kinosaki.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "イルカ",
         "アシカ",
@@ -3766,7 +3777,7 @@
       "closed": "不定休（メンテナンスによる休館日あり）",
       "comment": "廃校になった小学校が水族館に！",
       "photo": "assets/photo_minatoyama.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "カワウソ"
       ],
@@ -3790,7 +3801,7 @@
       "search_animals": [
         "イルカ"
       ],
-      "visited": false,
+      "visited": true,
       "animals": [
         "イルカ"
       ],
@@ -3848,7 +3859,7 @@
         "イルカ",
         "シロイルカ"
       ],
-      "visited": false,
+      "visited": true,
       "animals": [
         "シロイルカ",
         "ペンギン",
@@ -3888,7 +3899,7 @@
       "closed": "2026年12月1日〜2027年3月31日は長期休館予定",
       "comment": "世界遺産・宮島にある和風建築の水族館",
       "photo": "assets/photo_miyajima.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "アシカ",
         "コツメカワウソ"
@@ -4009,7 +4020,7 @@
       "closed": "2025年4月から約2年間リニューアル休館中（2027年春再開予定）。休館中は高松市中央卸売市場で「市場水族館」として仮営業中",
       "comment": "屋島の山上の水族館。2025年4月から改装休館中、2027年春にリニューアルオープン予定！今から楽しみ🐟",
       "photo": "assets/photo_yashima.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "イルカ",
         "ペンギン",
@@ -4097,7 +4108,7 @@
       "search_animals": [
         "マス"
       ],
-      "visited": false,
+      "visited": true,
       "animals": [
         "カリフォルニアアシカ",
         "フンボルトペンギン",
@@ -4296,7 +4307,7 @@
       "closed": "第2火曜日、12月31日、1月1日",
       "comment": "道の駅やよいの淡水魚水族館",
       "photo": "assets/photo_bansho.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "オオウナギ",
         "アカメ"
@@ -4443,7 +4454,7 @@
       "search_animals": [
         "ウミガメ"
       ],
-      "visited": false,
+      "visited": true,
       "animals": [
         "アオウミガメ",
         "ウツボ"
@@ -4511,7 +4522,7 @@
         "kids"
       ],
       "photo": "assets/gigi_illust.jpg",
-      "visited": false,
+      "visited": true,
       "animals": [
         "ニッポンバラタナゴ"
       ],
@@ -4536,7 +4547,7 @@
         "カメ",
         "コイ"
       ],
-      "visited": false,
+      "visited": true,
       "animals": [
         "ウーパールーパー"
       ],

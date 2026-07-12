@@ -9,7 +9,7 @@
 ## サイト構成
 - トップページ（地図＋フィルター）: https://aquarium.yasasea.com/
 - このサイトについて: https://aquarium.yasasea.com/about.html
-- さかなのおにいさん かわちゃん的 水族館ランキング: 準備中（本人承認済み評価が揃い次第公開）
+- さかなのおにいさん かわちゃん的 水族館ランキング（激レア／パフォーマンス／子ども向け／コスパ／クセつよ）: https://aquarium.yasasea.com/taste-ranking.html
 
 ## 生き物別まとめページ
 - イルカに会える水族館（23館）: https://aquarium.yasasea.com/animals/%E3%82%A4%E3%83%AB%E3%82%AB.html
