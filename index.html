@@ -37,10 +37,8 @@
   .counter-sub-btn { position:fixed; bottom:18px; right:18px; z-index:1200; display:inline-flex; align-items:center; gap:4px; background:rgba(255,0,0,.75); color:#fff; font-size:.95rem; font-weight:bold; text-decoration:none; border-radius:999px; padding:11px 20px; box-shadow:0 3px 12px rgba(0,0,0,.25); white-space:nowrap; transition:opacity .2s, transform .15s, background .2s; opacity:.85; backdrop-filter:blur(2px); }
   .counter-sub-btn:hover { opacity:1; background:#ff0000; transform:translateY(-2px); }
   @media (max-width:640px) { .counter-sub-btn { position:static; display:inline-flex; margin-top:12px; opacity:1; font-size:.85rem; padding:9px 18px; } }
-  .bar { background:rgba(255,255,255,.3); border-radius:999px; height:16px; margin-top:8px; overflow:hidden; border:2px solid rgba(255,255,255,.5); cursor:pointer; }
-  .bar>div { background:linear-gradient(90deg,var(--sun),#ffe29a); height:100%; border-radius:999px; transition:width 1.2s ease-out, background .6s; }
-  .bar>div.mine { background:linear-gradient(90deg,#2a9d8f,#8fdcd2); }
-  .counter .num { transition:opacity .25s; cursor:pointer; }
+  .bar { background:rgba(255,255,255,.3); border-radius:999px; height:16px; margin-top:8px; overflow:hidden; border:2px solid rgba(255,255,255,.5); }
+  .bar>div { background:linear-gradient(90deg,var(--sun),#ffe29a); height:100%; border-radius:999px; transition:width 1.2s ease-out; }
   .wave { display:block; width:calc(100% + 32px); margin-left:-16px; height:40px; margin-top:14px; }
 
   /* ===== 地図 ===== */
@@ -267,14 +265,9 @@
     <img class="hero" id="heroImg" src="assets/kawachan_web.png" alt="さかなのおにいさん かわちゃん（タップでチャンネル登録）">
   </a>
   <div class="counter">
-    <div class="num" id="barLabel" title="タップで かわちゃん⇄あなた を切替">
-      <span class="bl-kawachan">🐟 かわちゃんねるは <span id="visited">0</span><small> / <span id="goal">100</span>館 <span class="pc-only">YouTubeで</span>紹介中！</small></span>
-      <span class="bl-mine" style="display:none">🏆 あなたは <span id="mineNum">0</span><small> / <span id="mineTotal">159</span>館 制覇中！</small></span>
-    </div>
-    <div class="bar" id="barBox"><div id="barfill" style="width:0%"></div></div>
-    <div class="mycount">
-      <span class="mc-mine">🏆 あなたは <b id="myvisited">0</b>/<span id="mineTotal2">159</span>館 制覇中！（⬜を押してチェック！）</span>
-      <span class="mc-kawachan" style="display:none">🐟 かわちゃんねるは <b id="kawaCount">0</b>/<span id="kawaGoal">100</span>館 YouTubeで紹介中！</span>
+    <div class="num"><small class="pc-only">YouTubeで </small><span id="visited">0</span><small> / <span id="goal">100</span>館 制覇中！</small></div>
+    <div class="bar"><div id="barfill" style="width:0%"></div></div>
+    <div class="mycount">あなたの制覇：<b id="myvisited">0</b> 館 🏆（⬜を押してチェック！）
       <button id="shareBtn" class="sharebtn">🕊 制覇じまんをシェア</button></div>
     <a class="counter-sub-btn pc-only" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
   </div>
@@ -517,8 +510,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   document.getElementById('visited').textContent = visited;
   document.getElementById('yt-visited').textContent = visited;
   document.getElementById('goal').textContent = data.goal;
-  document.getElementById('kawaCount').textContent = visited;
-  document.getElementById('kawaGoal').textContent = data.goal;
   setTimeout(()=>{ document.getElementById('barfill').style.width = (visited/data.goal*100)+'%'; }, 300);
   document.getElementById('updated').textContent = '最終更新：'+data.updated;
 
@@ -555,43 +546,9 @@ fetch('data.json').then(r=>r.json()).then(data=>{
 
   // 行った！チェック（このブラウザに保存）
   let myVisits = new Set(JSON.parse(localStorage.getItem('myVisits')||'[]'));
-
-  // バーのリレー表示：最初はかわちゃんの42/100 → 数秒後に「あなたの制覇」へ（タップで切替）
-  let barMode = 'kawachan';
-  const totalAll = (data.aquariums||[]).length + (data.unvisited||[]).length;
-  document.getElementById('mineTotal').textContent = totalAll;
-  document.getElementById('mineTotal2').textContent = totalAll;
-  function applyBar(mode){
-    barMode = mode;
-    const mine = mode === 'mine';
-    const fill = document.getElementById('barfill');
-    document.querySelector('.bl-kawachan').style.display = mine ? 'none' : '';
-    document.querySelector('.bl-mine').style.display = mine ? '' : 'none';
-    document.querySelector('.mc-mine').style.display = mine ? 'none' : '';
-    document.querySelector('.mc-kawachan').style.display = mine ? '' : 'none';
-    fill.classList.toggle('mine', mine);
-    if(mine){
-      document.getElementById('mineNum').textContent = myVisits.size;
-      fill.style.width = (myVisits.size/totalAll*100)+'%';
-    } else {
-      fill.style.width = (visited/data.goal*100)+'%';
-    }
-  }
-  function switchBar(mode){
-    const label = document.getElementById('barLabel');
-    label.style.opacity = 0;
-    setTimeout(()=>{ applyBar(mode); label.style.opacity = 1; }, 250);
-  }
-  const flipBar = ()=>switchBar(barMode==='mine' ? 'kawachan' : 'mine');
-  document.getElementById('barLabel').onclick = flipBar;
-  document.getElementById('barBox').onclick = flipBar;
-  // 1館以上チェック済みの人だけ自動リレー。0館の人はかわちゃんバーのまま（0%は寂しいので）
-  if(myVisits.size > 0){ setTimeout(()=>switchBar('mine'), 3800); }
-
   function updateMyCount(){
     document.getElementById('myvisited').textContent = myVisits.size;
     localStorage.setItem('myVisits', JSON.stringify([...myVisits]));
-    if(barMode === 'mine') applyBar('mine');
   }
   document.getElementById('shareBtn').onclick = async ()=>{
     const n = myVisits.size;
@@ -663,8 +620,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       }
     });
     if(!wasOn) checkMilestone();
-    // 初めてのチェックで、バーが「あなたの制覇」にリレーする（burstの後に）
-    if(!wasOn && myVisits.size === 1 && barMode !== 'mine'){ setTimeout(()=>switchBar('mine'), 700); }
   };
   function visitBtn(a){
     const on = myVisits.has(a.name);
