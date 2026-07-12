@@ -28,6 +28,7 @@
   .hk-label { font-size:.78rem; font-weight:bold; color:var(--sea); margin:14px 0 6px; text-align:left; }
   .hitokoto-box { background:var(--sky); border-radius:12px; padding:10px 12px; text-align:left; font-size:.92rem; min-height:2.4em; }
   .hitokoto-box[contenteditable="true"] { outline:2px dashed var(--coral); background:#fff; }
+  .hitokoto-box:empty:before { content:attr(data-placeholder); color:#aab; }
   .rate-row { display:flex; justify-content:space-between; align-items:center; padding:6px 2px; text-align:left; font-size:.88rem; }
   .stars span { font-size:1.15rem; cursor:default; }
   .stars.editable span { cursor:pointer; }
@@ -203,15 +204,28 @@ function renderStep2() {
   const hitokoto = a.hitokoto || '';
   const ratings = a.ratings || {};
   if (!hitokoto && !Object.keys(ratings).length) {
+    // AI下書きが無い館（行ったけどまだ動画未紹介の館など）は、その場で新規に書けるようにする
+    const blankStars = Object.entries(RATING_LABEL).map(([k, label]) => {
+      let stars = '';
+      for (let i = 1; i <= 5; i++) stars += `<span data-key="${k}" data-n="${i}">☆</span>`;
+      return `<div class="rate-row"><span>${label}</span><span class="stars editable" data-key="${k}">${stars}</span></div>`;
+    }).join('');
     area.innerHTML = toolbar + `
       <div class="card">
         <span class="pref">${esc(a.pref || '')}</span>
         <h2>${esc(a.name)}</h2>
-        <p class="no-draft">まだAI下書きがありません</p>
+        <p class="no-draft">まだAI下書きがないよ。ここから新しく書けます</p>
+        <div class="hk-label">🐟 かわちゃんからの一言</div>
+        <div class="hitokoto-box" id="hkBox" contenteditable="true" data-placeholder="ここに一言を書いてね"></div>
+        <div class="hk-label">🐟 かわちゃん的 オススメ度</div>
+        <div id="ratingArea">${blankStars}</div>
         <div class="decision-btns">
+          <button class="btn-save" style="display:block;" onclick="saveEdit('${escJs(a.name)}')">💾 保存</button>
           <button class="btn-later" onclick="answerApprove('${escJs(a.name)}', 'later')">⏭ あとで書く</button>
         </div>
       </div>` + renderDoneList();
+    currentRatings = {};
+    bindStarEditing();
     return;
   }
   const starsHtml = Object.keys(RATING_LABEL).filter(k => k in ratings).map(k => {
@@ -240,10 +254,7 @@ function renderStep2() {
 
 let currentRatings = {};
 
-function startEdit() {
-  const box = document.getElementById('hkBox');
-  box.contentEditable = 'true';
-  box.focus();
+function bindStarEditing() {
   const ratingArea = document.getElementById('ratingArea');
   ratingArea.querySelectorAll('.stars').forEach(s => s.classList.add('editable'));
   // 星本体（data-n持ち）だけを対象にする。親の.starsコンテナも同じdata-keyを持つため
@@ -257,6 +268,13 @@ function startEdit() {
       });
     };
   });
+}
+
+function startEdit() {
+  const box = document.getElementById('hkBox');
+  box.contentEditable = 'true';
+  box.focus();
+  bindStarEditing();
   document.getElementById('editBtn').style.display = 'none';
   document.getElementById('saveBtn').style.display = 'block';
 }
