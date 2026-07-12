@@ -101,6 +101,7 @@
 </main>
 <script>
 const COMMENT_API = "https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV1YlrB_UPx2_c3hMS9fG6YTunOrrOKROeHdHJg2QzXj/exec";
+const esc = s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 async function loadPhotos(){
   const grid = document.getElementById('photoGrid');
   try{
@@ -109,11 +110,11 @@ async function loadPhotos(){
     if(!items.length){ grid.innerHTML = '<p class="empty">まだ投稿がないよ！最初のおすすめを送ってみて🐟</p>'; return; }
     grid.innerHTML = items.map(p=>`
       <div class="photo-card">
-        <img loading="lazy" src="${p.img}" alt="${p.aquarium}">
+        <img loading="lazy" src="${esc(p.img)}" alt="${esc(p.aquarium)}">
         <div class="pc-body">
-          <div class="pc-aq">📍 ${p.aquarium}</div>
-          <div class="pc-msg">${p.msg}</div>
-          <div class="pc-name">by ${p.name}</div>
+          <div class="pc-aq">📍 ${esc(p.aquarium)}</div>
+          <div class="pc-msg">${esc(p.msg)}</div>
+          <div class="pc-name">by ${esc(p.name)}</div>
         </div>
       </div>`).join('');
   }catch(e){ grid.innerHTML = '<p class="empty">読み込みエラー</p>'; }
