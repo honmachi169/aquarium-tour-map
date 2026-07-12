@@ -272,6 +272,7 @@ loadYtComments();''' if v else ''
   .btn.sns {{ background:#eef2f6; color:#334; }}
   .btn.share {{ background:var(--coral); color:#fff; border:none; font-family:inherit; cursor:pointer; }}
   .back {{ display:inline-block; margin-top:18px; color:var(--sea); font-weight:bold; text-decoration:none; }}
+  .backbtn {{ display:inline-block; margin-top:18px; margin-right:10px; background:var(--sea); color:#fff; font-weight:bold; font-size:.9rem; text-decoration:none; border-radius:999px; padding:10px 22px; box-shadow:0 2px 8px rgba(2,62,138,.25); }}
   .back.guide {{ margin-left:14px; }}
   .note {{ font-size:.75rem; color:#89a; margin-top:8px; }}
   .filming-note {{ font-size:.75rem; color:#0077b6; background:#e0f7fa; border-radius:8px; padding:5px 12px; margin:6px 0 0; display:inline-block; }}
@@ -304,7 +305,6 @@ loadYtComments();''' if v else ''
 <header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
 <main>
   <p class="kicker">{kicker}</p>
-  {filming_note}
   <h1>{E(a['name'])}</h1>
   <span class="pref">{E(a['pref'])}</span>
   {videos or hero}
@@ -316,14 +316,13 @@ loadYtComments();''' if v else ''
   {summer}
   <table>{info}</table>
   {hitokoto}
+  {filming_note}
   <p class="note">※{INFO_ASOF}時点の情報です。おでかけ前に{('<a href="' + E(a["url"]) + '" target="_blank" rel="noopener">公式サイト</a>') if a.get("url") else "公式サイト"}をご確認ください</p>
   <div class="btns">
     {links}
-    <a class="btn share" href="https://twitter.com/intent/tweet?text={html.escape(share_text)}&url={page_url}" target="_blank" rel="noopener">🕊 シェアする</a>
   </div>
-  <a class="back" href="{SITE}/">← MAPにもどる</a>
+  <a class="backbtn" href="{SITE}/">🗾 MAPにもどる</a>
   <a class="back guide" href="{SITE}/guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>
-  {ATTR_FOOTER}
 
   <section class="comments-section">
     <h2>💬 みんなのコメント</h2>
@@ -343,6 +342,7 @@ loadYtComments();''' if v else ''
       </form>
     </div>
   </section>
+  {ATTR_FOOTER}
 </main>
 <script>
 const COMMENT_API = "{COMMENT_API}";
@@ -725,7 +725,7 @@ guide_doc = f"""<!DOCTYPE html>
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <meta property="og:title" content="かわちゃん流・水族館の楽しみ方 | {BRAND_NAME}">
 <meta property="og:description" content="行く前の準備からおみやげ選びまで、水族館が100倍楽しくなるコツを{AUTHOR_NAME}がまとめたよ！">
-<meta property="og:image" content="{SITE}/assets/kawachan_web.png">
+<meta property="og:image" content="{SITE}/assets/guide_hero.jpg">
 <script type="application/ld+json">{json.dumps(ld_guide, ensure_ascii=False)}</script>
 <style>{LIST_STYLE}
 .g-box {{ background:#fff; border-radius:16px; padding:18px 20px; margin:14px 0; line-height:1.8; font-size:.92rem; }}
@@ -733,14 +733,18 @@ guide_doc = f"""<!DOCTYPE html>
 .g-box ul {{ margin:0 0 0 20px; display:flex; flex-direction:column; gap:8px; }}
 .g-box li {{ line-height:1.7; }}
 .g-box a {{ color:var(--sea); font-weight:bold; }}
+.guide-hero {{ display:block; width:100%; border-radius:16px; margin:12px 0 4px; }}
+.g-box .gphoto {{ display:block; width:100%; border-radius:12px; margin:4px 0 12px; }}
 </style></head><body>
 <header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
 <main>
 <h1>🐬 かわちゃん流・水族館の楽しみ方</h1>
 <p class="lead">水族館は、予習ゼロでも楽しい。でもちょっとしたコツを知ってると100倍楽しくなる場所！全国の水族館を実際にまわってきた{AUTHOR_NAME}が、行く前からおみやげまでの楽しみ方をまとめたよ🐟</p>
+<img class="guide-hero" src="{SITE}/assets/guide_hero.jpg" alt="シャチに手を振る{AUTHOR_NAME}">
 
 <div class="g-box">
 <h2>🎒 1. 行く前の準備</h2>
+<img class="gphoto" src="{SITE}/assets/guide_prep.jpg" alt="ベルーガと対面する{AUTHOR_NAME}" loading="lazy">
 <ul>
 <li>ショーやごはんタイムの時間は、公式サイトで先にチェック。これだけで1日の作戦がぜんぜん変わるよ</li>
 <li>「今日は◯◯に会いに行く」って、会いたい生き物を1匹だけ決めていこう。水族館が「見る場所」から「会いに行く場所」に変わるよ</li>
@@ -751,6 +755,7 @@ guide_doc = f"""<!DOCTYPE html>
 
 <div class="g-box">
 <h2>🚪 2. 入ってすぐやること</h2>
+<img class="gphoto" src="{SITE}/assets/guide_enter.jpg" alt="トンネル水槽で両手を広げる{AUTHOR_NAME}" loading="lazy">
 <ul>
 <li>まず館内マップをもらって、お目当ての生き物の場所とショーの時間をチェック</li>
 <li>人気の生き物は開館直後がいちばんゆっくり会えるチャンス</li>
@@ -760,6 +765,7 @@ guide_doc = f"""<!DOCTYPE html>
 
 <div class="g-box">
 <h2>🐠 3. 大水槽・水槽の見方</h2>
+<img class="gphoto" src="{SITE}/assets/guide_tank.jpg" alt="サンゴ礁の大水槽をながめる{AUTHOR_NAME}" loading="lazy">
 <ul>
 <li>かわちゃん流はズバリ「ツッコミながら見る」こと。「どんだけ口が長いねん！」「動かへんのかーい！」って、1匹ずつツッコミポイントを探すと、同じ水槽でもぜんぜん飽きないよ</li>
 <li>下から、横から、しゃがんで子どもの目線で。見る高さを変えると生き物の表情も変わる</li>
@@ -769,6 +775,7 @@ guide_doc = f"""<!DOCTYPE html>
 
 <div class="g-box">
 <h2>🐬 4. ショー・パフォーマンスの楽しみ方</h2>
+<img class="gphoto" src="{SITE}/assets/guide_perf.jpg" alt="2頭のシャチに手を振る{AUTHOR_NAME}" loading="lazy">
 <ul>
 <li>前の席は水しぶきゾーン！濡れるのも思い出だけど、タオルやポンチョがあると安心</li>
 <li>ジャンプの技だけじゃなくて、生き物とトレーナーさんのサインのやりとりにも注目。信頼関係が見えてくると感動が倍になるよ</li>
@@ -778,6 +785,7 @@ guide_doc = f"""<!DOCTYPE html>
 
 <div class="g-box">
 <h2>👶 5. 子ども連れの回り方</h2>
+<img class="gphoto" src="{SITE}/assets/guide_kids.jpg" alt="ジンベエザメの大水槽の前でピースする{AUTHOR_NAME}" loading="lazy">
 <ul>
 <li>ぜんぶ見ようとしなくてOK。子どもが好きになった水槽の前で、ゆっくり過ごすのがいちばん</li>
 <li>ベビーカー・授乳室・ロッカーの情報は、各水族館ページの表にまとめてあるよ</li>
@@ -787,6 +795,7 @@ guide_doc = f"""<!DOCTYPE html>
 
 <div class="g-box">
 <h2>🎁 6. おみやげの選び方</h2>
+<img class="gphoto" src="{SITE}/assets/guide_gift.jpg" alt="ジンベエザメを指差す{AUTHOR_NAME}" loading="lazy">
 <ul>
 <li>かわちゃん流は「その水族館でしか会えない生き物」のグッズを選ぶこと。おうちに帰ってからも「あの子に会ったね」って思い出せるよ</li>
 <li>各水族館ページの🎁おみやげ欄もチェックしてね。超グソクムシ煎餅みたいな、クセすごおみやげに出会えることもあるよ</li>
@@ -795,11 +804,12 @@ guide_doc = f"""<!DOCTYPE html>
 
 <div class="g-box">
 <h2>🌊 さいごに</h2>
+<img class="gphoto" src="{SITE}/assets/guide_last.jpg" alt="ジュゴンを撮影する{AUTHOR_NAME}チーム" loading="lazy">
 <p>水族館は、生の命に触れられる大切な場所。楽しく遊びに行くこと、それ自体が生き物と水族館の応援になるんだ。次の週末、どこの水族館に行く？</p>
 <p style="margin-top:8px"><a href="{SITE}/">→ MAPで行きたい水族館を探す</a></p>
 </div>
 
-<p class="list-note">※{SOURCE_LINE}</p>
+<p class="list-note">📷 写真は水族館の特別な許可を得て撮影しています ※{SOURCE_LINE}</p>
 <a class="back" href="{SITE}/">← MAPにもどる</a>
 {ATTR_FOOTER}
 </main></body></html>"""
