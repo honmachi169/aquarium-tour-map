@@ -60,10 +60,9 @@ for slug, a, intro in entries:
     if a.get("only"): chips += f'<span class="chip only">⭐️ここだけ！{E(a["only"])}</span>'
     tagchips = "".join(f'<span class="chip tag">{TAG_LABEL[t]}</span>' for t in a.get("tags", []) if t in TAG_LABEL)
 
+    # 「日本で◯◯に会えるのはここだけ」の文章表示は、⭐️ここだけ！チップや一言と重複するため非表示
+    # （onlyの情報自体はチップ・llms.txtで引き続き発信される）
     only_quote = ""
-    if a.get("only"):
-        only_quote = (f'<p class="only-quote">日本で{E(a["only"])}に会えるのは、{E(a["name"])}（{E(a.get("pref",""))}）だけ。'
-                      f'（{AUTHOR_NAME}調べ）</p>')
 
     info = ""
     if a.get("fee"): info += f"<tr><th>💰 大人</th><td>{E(a['fee'])}</td></tr>"
