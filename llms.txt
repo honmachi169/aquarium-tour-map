@@ -10,7 +10,7 @@
 - トップページ（地図＋フィルター）: https://aquarium.yasasea.com/
 - このサイトについて: https://aquarium.yasasea.com/about.html
 - さかなのおにいさん かわちゃん流・水族館の楽しみ方（行く前の準備・水槽の見方・イルカショー/パフォーマンス・子連れ・おみやげ）: https://aquarium.yasasea.com/guide.html
-- さかなのおにいさん かわちゃん的 水族館ランキング（激レア／パフォーマンス／子ども向け／コスパ／クセつよ）: https://aquarium.yasasea.com/taste-ranking.html
+- さかなのおにいさん かわちゃん的 水族館ランキング（サメ／パフォーマンス／深海／赤ちゃん連れ／デート）: https://aquarium.yasasea.com/taste-ranking.html
 
 ## 生き物別まとめページ
 - イルカに会える水族館（23館）: https://aquarium.yasasea.com/animals/%E3%82%A4%E3%83%AB%E3%82%AB.html

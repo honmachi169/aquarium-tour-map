@@ -601,8 +601,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   const flipBar = ()=>switchBar(barMode==='mine' ? 'kawachan' : 'mine');
   document.getElementById('barLabel').onclick = flipBar;
   document.getElementById('barBox').onclick = flipBar;
-  // 1館以上チェック済みの人だけ自動リレー。0館の人はかわちゃんバーのまま（0%は寂しいので）
-  if(myVisits.size > 0){ setTimeout(()=>switchBar('mine'), 3800); }
+  // 常に約4秒後に「あなたの制覇」バーへ自動リレー（タップでいつでも戻せる）
+  setTimeout(()=>switchBar('mine'), 3800);
 
   function updateMyCount(){
     document.getElementById('myvisited').textContent = myVisits.size;
@@ -837,9 +837,14 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   fixedRow.appendChild(wishListBtn);
   const rankLink = document.createElement('a');
   rankLink.className = 'rankbtn';
-  rankLink.href = 'ranking.html';
+  rankLink.href = 'taste-ranking.html';
   rankLink.innerHTML = '<span class="pc-only">🏆 かわちゃんのランキング</span><span class="sp-only">🏆 ランキング</span>';
   fixedRow.appendChild(rankLink);
+  const guideLink = document.createElement('a');
+  guideLink.className = 'rankbtn guidebtn';
+  guideLink.href = 'guide.html';
+  guideLink.innerHTML = '<span class="pc-only">🐬 かわちゃん流・水族館の楽しみ方</span><span class="sp-only">🐬 楽しみ方</span>';
+  fixedRow.appendChild(guideLink);
   const postLink = document.createElement('a');
   postLink.className = 'rankbtn postbtn';
   postLink.href = 'posts.html';

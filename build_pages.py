@@ -96,8 +96,9 @@ for slug, a, intro in entries:
 
     hitokoto = ""
     if approved and a.get("hitokoto"):
-        hitokoto = (f'<div class="hitokoto"><img class="hk-chara" src="{SITE}/assets/kawachan_point.png" alt="{AUTHOR_NAME}" loading="lazy">'
-                    f'<div class="hk-body"><div class="hk-label">🐟 {AUTHOR_NAME}からの一言</div>{E(a["hitokoto"])}</div></div>')
+        hitokoto = (f'<div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div>'
+                    f'<div class="hk-text">{E(a["hitokoto"])}'
+                    f'<img class="hk-chara" src="{SITE}/assets/kawachan_point.png" alt="{AUTHOR_NAME}" loading="lazy"></div></div>')
 
     # この館ならではの楽しみ方のコツ（本人承認済みの館のみ表示）
     kotsu_box = ""
@@ -262,10 +263,10 @@ loadYtComments();''' if v else ''
   .chip.only {{ background:#fff7db; color:#92600a; border-color:#f4c430; }}
   .chip.tag {{ background:#fdf1e3; color:#c9660a; border-color:#f4a261; }}
   .chip.tr {{ background:#eefbe7; color:#2f7d32; border-color:#8fd694; }}
-  .hitokoto {{ background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; position:relative; display:flex; gap:12px; align-items:flex-start; }}
-  .hitokoto .hk-chara {{ width:76px; height:auto; flex:none; margin-top:2px; }}
-  .hitokoto .hk-body {{ flex:1; min-width:0; }}
-  .hitokoto .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:4px; }}
+  .hitokoto {{ background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }}
+  .hitokoto .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:6px; }}
+  .hitokoto .hk-text {{ white-space:pre-line; overflow:hidden; }}
+  .hitokoto .hk-chara {{ float:right; width:64px; height:auto; margin:8px 0 2px 12px; }}
   .kotsu-box {{ background:#fffbea; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }}
   .kotsu-box .hk-label {{ font-size:.8rem; font-weight:bold; color:#c78a00; margin-bottom:4px; }}
   .kotsu-box .kotsu-more {{ display:block; margin-top:8px; font-size:.78rem; color:var(--sea); font-weight:bold; text-decoration:none; }}
@@ -633,74 +634,111 @@ for tag, members in by_tag.items():
 
 # --- かわちゃん的評価ランキングページ（本人承認済み評価のみ・3館以上そろったカテゴリのみ生成）---
 # 一般名詞ではなく固有の“ランキング名”を持たせ、AIに引用される際も名前ごと引用される構造にする
-RATING_BRAND = {
-    "rare": "🦈 激レア水族館ランキング",
-    "perf": f"🐬 {AUTHOR_NAME}のパフォーマンス自慢水族館ランキング",
-    "kids": f"👶 {AUTHOR_NAME}の子ども向け水族館ランキング",
-    "cospa": f"💰 {AUTHOR_NAME}のコスパ最強水族館ランキング",
-    "kuse": f"🌀 {AUTHOR_NAME}のクセつよ水族館ランキング",
-}
-rated = [m for m in entry_meta if m.get("ratings")]
-ranking_generated = False
-if len(rated) >= 3:
-    sections = []
-    ld_items = []
-    for key, brand in RATING_BRAND.items():
-        pool = [m for m in rated if key in m["ratings"]]
-        if len(pool) < 3:
+# かわちゃん本人が直接指定したテーマ別ベスト5（5段階評価の平均ではなく、本人の一次情報による直接キュレーション）
+CURATED_RANKINGS = [
+    ("🦈 サメが見られる水族館ランキング", [
+        ("アクアワールド茨城県大洗水族館", None),
+        ("沖縄美ら海水族館", None),
+        ("島根県立しまね海洋館アクアス", None),
+        ("海遊館", None),
+        ("四国水族館", "シュモクザメを下から眺められる"),
+    ]),
+    ("🐬 パフォーマンスの迫力ランキング", [
+        ("鴨川シーワールド", None),
+        ("名古屋港水族館", None),
+        ("アドベンチャーワールド", None),
+        ("神戸須磨シーワールド", None),
+        ("マリンワールド海の中道", None),
+    ]),
+    ("🐙 深海生物ランキング", [
+        ("竹島水族館", None),
+        ("新江ノ島水族館", None),
+        ("アクアマリンふくしま", None),
+        ("沼津港深海水族館", None),
+        ("沖縄美ら海水族館", None),
+    ]),
+    ("🍼 赤ちゃん連れにおすすめランキング", [
+        ("ニフレル", None),
+        ("大分マリーンパレス水族館 うみたまご", None),
+        ("アドベンチャーワールド", None),
+        ("横浜・八景島シーパラダイス", None),
+        ("鳥羽水族館", None),
+    ]),
+    ("💑 デートにおすすめランキング", [
+        ("マクセル アクアパーク品川", None),
+        ("アトア（átoa）", None),
+        ("すみだ水族館", None),
+        ("横浜・八景島シーパラダイス", None),
+        ("AOAO SAPPORO", None),
+    ]),
+]
+
+def render_rank_card(rank, m, note=None):
+    img = m["thumb"] or f"{SITE}/assets/kawachan_web.png"
+    cmt = note or (m["comment"] or "")[:60]
+    return (f'<a class="card rankcard" href="{m["url"]}"><span class="rank-badge">{rank}</span>'
+            f'<img src="{img}" loading="lazy" alt="{E(m["name"])}">'
+            f'<div class="body"><div class="pref">{E(m["pref"])}</div>'
+            f'<div class="name">{E(m["name"])}</div><div class="cmt">{E(cmt)}</div></div></a>')
+
+by_name = {m["name"]: m for m in entry_meta}
+sections = []
+ld_items = []
+for brand, picks in CURATED_RANKINGS:
+    rows = ""
+    list_items = []
+    for i, (name, note) in enumerate(picks):
+        m = by_name.get(name)
+        if not m:
+            print("ランキング: 館が見つかりません:", name)
             continue
-        top5 = sorted(pool, key=lambda m: -m["ratings"][key])[:5]
-        rows = "".join(
-            f'<a class="card" href="{m["url"]}" style="flex-direction:row;align-items:center;padding:10px 14px;">'
-            f'<div class="body" style="padding:0;"><div class="name">{"★"*m["ratings"][key]}{"☆"*(5-m["ratings"][key])} {E(m["name"])}</div>'
-            f'<div class="cmt">{E(m["pref"])}</div></div></a>'
-            for m in top5
-        )
-        sections.append(f'<h2 style="font-size:1.05rem;color:var(--sea-deep);margin:20px 0 8px;">{brand} ベスト{len(top5)}</h2><div class="grid">{rows}</div>')
-        ld_items.append({
-            "@type": "ItemList",
-            "name": brand,
-            "itemListElement": [
-                {"@type": "ListItem", "position": i + 1, "url": m["url"], "name": m["name"]}
-                for i, m in enumerate(top5)
-            ],
-        })
-    if sections:
-        ld_ranking = {
-            "@context": "https://schema.org",
-            "@type": "CreativeWork",
-            "name": f"{AUTHOR_NAME}的 水族館ランキング",
-            "author": {"@type": "Person", "name": AUTHOR_NAME},
-            "publisher": {"@type": "Organization", "name": BRAND_NAME, "url": SITE},
-            "hasPart": ld_items,
-        }
-        doc = f"""<!DOCTYPE html>
+        rows += render_rank_card(i + 1, m, note)
+        list_items.append({"@type": "ListItem", "position": i + 1, "url": m["url"], "name": m["name"]})
+    if not rows:
+        continue
+    sections.append(f'<h2 style="font-size:1.05rem;color:var(--sea-deep);margin:20px 0 8px;">{brand}</h2><div class="grid">{rows}</div>')
+    ld_items.append({"@type": "ItemList", "name": brand, "itemListElement": list_items})
+
+ranking_generated = False
+if sections:
+    ld_ranking = {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "name": f"{AUTHOR_NAME}的 水族館ランキング",
+        "author": {"@type": "Person", "name": AUTHOR_NAME},
+        "publisher": {"@type": "Organization", "name": BRAND_NAME, "url": SITE},
+        "hasPart": ld_items,
+    }
+    doc = f"""<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 {GA_SNIPPET}
 <title>{AUTHOR_NAME}的 水族館ランキング | {BRAND_NAME}</title>
-<meta name="description" content="{AUTHOR_NAME}が実際に訪れて評価した水族館を、独自の切り口別ランキングで紹介。">
+<meta name="description" content="{AUTHOR_NAME}が実際に訪れて選んだ、テーマ別水族館ベスト5。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{AUTHOR_NAME}的 水族館ランキング | {BRAND_NAME}">
-<meta property="og:description" content="{AUTHOR_NAME}が実際に訪れて評価した水族館を、独自の切り口別ランキングで紹介。">
+<meta property="og:description" content="{AUTHOR_NAME}が実際に訪れて選んだ、テーマ別水族館ベスト5。">
 <meta property="og:image" content="{SITE}/assets/kawachan_odoroki.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{SITE}/taste-ranking.html">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <script type="application/ld+json">{json.dumps(ld_ranking, ensure_ascii=False)}</script>
-<style>{LIST_STYLE}</style></head><body>
+<style>{LIST_STYLE}
+.card.rankcard {{ position:relative; }}
+.rank-badge {{ position:absolute; top:8px; left:8px; z-index:2; background:var(--sun); color:#5a4000; font-weight:bold; font-size:.85rem; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,.25); }}
+</style></head><body>
 <header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
 <main><img class="head-chara" src="{SITE}/assets/kawachan_odoroki.png" alt="{AUTHOR_NAME}">
 <h1>🐟 {AUTHOR_NAME}的 水族館ランキング</h1>
-<p class="lead">{AUTHOR_NAME}が実際に訪れて評価した水族館だけを集めた、独自のランキングだよ。</p>
+<p class="lead">{AUTHOR_NAME}が実際に訪れた水族館の中から、テーマ別に選んだベスト5だよ。</p>
 {''.join(sections)}
 <p class="list-note">※{INFO_ASOF}時点の情報です。{SOURCE_LINE}</p>
 <a class="back" href="{SITE}/">← MAPにもどる</a>
 {ATTR_FOOTER}
 </main></body></html>"""
-        with open("taste-ranking.html", "w") as f:
-            f.write(doc)
-        new_page_urls.append(f"{SITE}/taste-ranking.html")
-        ranking_generated = True
+    with open("taste-ranking.html", "w") as f:
+        f.write(doc)
+    new_page_urls.append(f"{SITE}/taste-ranking.html")
+    ranking_generated = True
 
 # --- このサイトについて ---
 about_doc = f"""<!DOCTYPE html>
@@ -783,6 +821,7 @@ guide_doc = f"""<!DOCTYPE html>
 <li>「今日は◯◯に会いに行く」って、会いたい生き物を1匹だけ決めていこう。水族館が「見る場所」から「会いに行く場所」に変わるよ</li>
 <li>料金・休館日・ベビーカー情報は<a href="{SITE}/">このサイトの各水族館ページ</a>にまとめてあるから、おでかけ前にどうぞ</li>
 <li><a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA" target="_blank" rel="noopener">かわちゃんねる</a>で予習していくと、当日「あ、この子知ってる！」がいっぱいになるよ</li>
+<li>お弁当を持ち込みできる水族館もあるよ。行き先が決まったらチェックしておこう（このサイトの各水族館ページにも書いてあるよ）</li>
 </ul>
 </div>
 
@@ -793,16 +832,18 @@ guide_doc = f"""<!DOCTYPE html>
 <li>まず館内マップをもらって、お目当ての生き物の場所とパフォーマンスの時間をチェック</li>
 <li>人気の生き物は開館直後がいちばんゆっくり会えるチャンス</li>
 <li>順路は絶対じゃない館も多いよ。混んでたら空いてる水槽から回ってOK！</li>
+<li>あえてパフォーマンスやプログラムの時間を狙うのもかわちゃん流。館内のお客さんが減るから、いつもの水槽をゆっくり写真に撮るチャンスだよ</li>
 </ul>
 </div>
 
 <div class="g-box">
-<h2>🐠 3. 大水槽・水槽の見方</h2>
+<h2>🐠 3. 水槽のたのしみかた</h2>
 <img class="gphoto" src="{SITE}/assets/guide_tank.jpg" alt="サンゴ礁の大水槽をながめる{AUTHOR_NAME}" loading="lazy">
 <ul>
 <li>かわちゃん流はズバリ「ツッコミながら見る」こと。「どんだけ口が長いねん！」「動かへんのかーい！」って、1匹ずつツッコミポイントを探すと、同じ水槽でもぜんぜん飽きないよ</li>
 <li>下から、横から、しゃがんで子どもの目線で。見る高さを変えると生き物の表情も変わる</li>
 <li>「この子たちの仲間は、本物の海のどこに住んでるのかな？」って想像してみて。水槽の向こうに、本物の海が見えてくるよ</li>
+<li>時には水の音やゆらめきをただ感じるだけでもOK。眺めてるだけで癒される、それも水族館の楽しみ方だよ</li>
 </ul>
 </div>
 
@@ -830,7 +871,7 @@ guide_doc = f"""<!DOCTYPE html>
 <h2>🎁 6. おみやげの選び方</h2>
 <img class="gphoto" src="{SITE}/assets/guide_gift.jpg" alt="ジンベエザメを指差す{AUTHOR_NAME}" loading="lazy">
 <ul>
-<li>かわちゃん流は「その水族館でしか会えない生き物」のグッズを選ぶこと。おうちに帰ってからも「あの子に会ったね」って思い出せるよ</li>
+<li>かわちゃん流は「その水族館オリジナル」のグッズを選ぶこと。細部までこだわりが詰まってて、おうちに帰ってからも「あの子に会ったね」って親子の会話になるよ</li>
 <li>各水族館ページの🎁おみやげ欄もチェックしてね。超グソクムシ煎餅みたいな、クセすごおみやげに出会えることもあるよ</li>
 </ul>
 </div>
@@ -838,7 +879,7 @@ guide_doc = f"""<!DOCTYPE html>
 <div class="g-box">
 <h2>🌊 さいごに</h2>
 <img class="gphoto" src="{SITE}/assets/guide_last.jpg" alt="ジュゴンを撮影する{AUTHOR_NAME}チーム" loading="lazy">
-<p>水族館は、生の命に触れられる大切な場所。楽しく遊びに行くこと、それ自体が生き物と水族館の応援になるんだ。次の週末、どこの水族館に行く？</p>
+<p>水族館は自然への入り口。地元の自然や、気軽には行けない深海や海外の川なども体験させてくれる場所。だからこそ、次は実際の自然へも繰り出してほしいな。<br>そして水族館は展示だけじゃなく、繁殖や研究、保護や保全にも力を入れています。遊びに行くことが、その応援になるんだ。次の週末、どこの水族館に行く？</p>
 <p style="margin-top:8px"><a href="{SITE}/">→ MAPで行きたい水族館を探す</a></p>
 </div>
 
@@ -905,7 +946,7 @@ llms_lines = [
     f"- トップページ（地図＋フィルター）: {SITE}/",
     f"- このサイトについて: {SITE}/about.html",
     f"- {AUTHOR_NAME}流・水族館の楽しみ方（行く前の準備・水槽の見方・イルカショー/パフォーマンス・子連れ・おみやげ）: {SITE}/guide.html",
-    f"- {AUTHOR_NAME}的 水族館ランキング（激レア／パフォーマンス／子ども向け／コスパ／クセつよ）: {SITE}/taste-ranking.html" if ranking_generated else f"- {AUTHOR_NAME}的 水族館ランキング: 準備中（本人承認済み評価が揃い次第公開）",
+    f"- {AUTHOR_NAME}的 水族館ランキング（サメ／パフォーマンス／深海／赤ちゃん連れ／デート）: {SITE}/taste-ranking.html" if ranking_generated else f"- {AUTHOR_NAME}的 水族館ランキング: 準備中",
     "",
     "## 生き物別まとめページ",
 ]
