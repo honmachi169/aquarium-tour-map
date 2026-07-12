@@ -268,12 +268,12 @@
   </a>
   <div class="counter">
     <div class="num" id="barLabel" title="タップで かわちゃん⇄あなた を切替">
-      <span class="bl-kawachan"><small class="pc-only">YouTubeで </small><span id="visited">0</span><small> / <span id="goal">100</span>館 制覇中！</small></span>
-      <span class="bl-mine" style="display:none">🏆 あなたの制覇 <span id="mineNum">0</span><small> / <span id="mineTotal">159</span>館</small></span>
+      <span class="bl-kawachan">🐟 かわちゃんは<small class="pc-only">YouTubeで </small><span id="visited">0</span><small> / <span id="goal">100</span>館 制覇中！</small></span>
+      <span class="bl-mine" style="display:none">🏆 あなたは <span id="mineNum">0</span><small> / <span id="mineTotal">159</span>館 制覇中！</small></span>
     </div>
     <div class="bar" id="barBox"><div id="barfill" style="width:0%"></div></div>
     <div class="mycount">
-      <span class="mc-mine">あなたの制覇：<b id="myvisited">0</b> 館 🏆（⬜を押してチェック！）</span>
+      <span class="mc-mine">🏆 あなたは <b id="myvisited">0</b>/<span id="mineTotal2">159</span>館 制覇中！（⬜を押してチェック！）</span>
       <span class="mc-kawachan" style="display:none">🐟 かわちゃんはYouTubeで <b id="kawaCount">0</b>/<span id="kawaGoal">100</span>館 制覇中！</span>
       <button id="shareBtn" class="sharebtn">🕊 制覇じまんをシェア</button></div>
     <a class="counter-sub-btn pc-only" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
@@ -560,6 +560,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   let barMode = 'kawachan';
   const totalAll = (data.aquariums||[]).length + (data.unvisited||[]).length;
   document.getElementById('mineTotal').textContent = totalAll;
+  document.getElementById('mineTotal2').textContent = totalAll;
   function applyBar(mode){
     barMode = mode;
     const mine = mode === 'mine';
