@@ -115,7 +115,6 @@ for slug, a, intro in entries:
     ratings_box = f'<div class="ratings-box"><div class="hk-label">🐟 {AUTHOR_NAME}の オススメ度</div>{rating_rows}</div>' if rating_rows else ""
 
     summer = f'<div class="summer">☀️ <b>2026年 夏休み情報：</b>{E(a["summer"])}</div>' if a.get("summer") else ""
-    latest = f'<div class="latest-box">🆕 <b>公式サイトからの最新情報：</b>{E(a["latest"])}<span class="latest-asof">（{INFO_ASOF}確認）</span></div>' if a.get("latest") else ""
     videos = "".join(
         f'<div class="video"><iframe loading="lazy" src="https://www.youtube.com/embed/{vv["id"]}" '
         f'title="{E(a["name"])} 紹介動画" allowfullscreen></iframe></div>'
@@ -275,8 +274,6 @@ loadYtComments();''' if v else ''
   .rate-label {{ color:#456; }}
   .rate-stars {{ color:#ffb703; letter-spacing:1px; font-size:1rem; }}
   .summer {{ font-size:.9rem; color:#a15c00; background:linear-gradient(90deg,#fff3cd,#ffe9b8); border:2px solid var(--sun); border-radius:12px; padding:10px 14px; margin:12px 0; line-height:1.6; }}
-  .latest-box {{ font-size:.88rem; color:#075985; background:#eef8fc; border:2px solid var(--sky); border-radius:12px; padding:10px 14px; margin:12px 0; line-height:1.6; }}
-  .latest-box .latest-asof {{ display:block; font-size:.72rem; color:#7a9; margin-top:4px; }}
   table {{ border-collapse:collapse; width:100%; margin:12px 0; background:#f0f8fc; border-radius:12px; overflow:hidden; }}
   th,td {{ text-align:left; padding:9px 14px; font-size:.9rem; border-bottom:2px solid var(--sand); }}
   th {{ white-space:nowrap; color:var(--sea-deep); }}
@@ -328,7 +325,6 @@ loadYtComments();''' if v else ''
   {kotsu_box}
   {ratings_box}
   {summer}
-  {latest}
   <table>{info}</table>
   {hitokoto}
   {filming_note}
