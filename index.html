@@ -427,7 +427,10 @@ const SAMPLE_COMMENTS = [
 const GREETING = {name:"かわちゃん", msg:"目指せ100館！みんなの好きな水族館、📮からコメントしてみてね🐟"};
 function renderTicker(list){
   const inner = document.getElementById('tickerInner');
-  const rest = (list||[]).filter(c=>c.msg!==GREETING.msg);
+  // 先頭は挨拶固定、以降は新しい順（idの先頭がタイムスタンプ）。旧・目指せ100館コメントは挨拶と重複するので除外
+  const rest = (list||[])
+    .filter(c=>!String(c.msg).startsWith('目指せ100館'))
+    .sort((a,b)=> String(b.id||'').localeCompare(String(a.id||'')));
   const all = [GREETING, ...rest];
   inner.innerHTML = all.map(c=>`<span><b>${esc(c.name)}</b>${esc(c.msg)}</span>`).join('');
   inner.style.animationDuration = Math.max(25, all.length * 7) + 's';
@@ -438,7 +441,7 @@ async function loadComments(){
   try{
     const r = await fetch(COMMENT_API);
     const list = await r.json();
-    renderTicker(list.reverse());
+    renderTicker(list);
   }catch(e){ renderTicker(null); }
 }
 async function sendComment(){
