@@ -1015,11 +1015,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     if(!japanOutline){
       japanOutline = await fetch('assets/japan_light.json').then(r=>r.json());
     }
-    await Promise.all([
-      loadImg('kawachan','assets/kawachan_guide.png'),
-      loadImg('punio1','assets/punio_shark.png'),
-      loadImg('punio2','assets/punio_hanabi.png'),
-    ]);
+    await loadImg('kawachan','assets/kawachan_guide.png');
     const cv = document.getElementById('shareCanvas');
     const W = cv.width = 1080, H = cv.height = 1080;
     const ctx = cv.getContext('2d');
@@ -1063,18 +1059,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     ctx.strokeRect(okiBox.x,okiBox.y,okiBox.w,okiBox.h);
     ctx.fillStyle='rgba(255,255,255,.9)'; ctx.font='bold 22px '+FONT; ctx.textAlign='left';
     ctx.fillText('沖縄', okiBox.x+10, okiBox.y+26);
-
-    // ぷにうお（海のあいてるところに）
-    function putDeco(img, x, y, size, deg){
-      if(!img) return;
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(deg*Math.PI/180);
-      ctx.drawImage(img, -size/2, -size/2, size, size);
-      ctx.restore();
-    }
-    putDeco(shareImgs.punio1, 230, 570, 300, 8);
-    putDeco(shareImgs.punio2, 870, 600, 280, -7);
 
     // スポット（掲載館→行った館の順で重ね描き）
     ALL_SPOTS.forEach(a=>{
@@ -1124,7 +1108,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
 
     // かわちゃん（右下）
     if(shareImgs.kawachan){
-      ctx.drawImage(shareImgs.kawachan, W-320, H-330, 290, 290);
+      ctx.drawImage(shareImgs.kawachan, W-400, H-410, 380, 380);
     }
   }
   function canvasBlob(){
