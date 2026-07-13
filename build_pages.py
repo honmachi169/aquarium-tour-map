@@ -127,6 +127,11 @@ for slug, a, intro in entries:
                     continue
                 stars = "★"*n + "☆"*(5-n)
                 rating_rows += f'<div class="rate-row"><span class="rate-label">{label}</span><span class="rate-stars">{stars}</span></div>'
+        # 標準5軸で弱い軸のかわりに「その館らしい強み」を独自軸で表示（data.jsonのratings_plus）
+        for label, val in (a.get("ratings_plus") or {}).items():
+            n = max(0, min(5, int(val)))
+            stars = "★"*n + "☆"*(5-n)
+            rating_rows += f'<div class="rate-row"><span class="rate-label">{E(label)}</span><span class="rate-stars">{stars}</span></div>'
     ratings_box = f'<div class="ratings-box"><div class="hk-label">🐟 {AUTHOR_NAME}のイチオシポイント</div>{rating_rows}</div>' if rating_rows else ""
 
     summer = f'<div class="summer">☀️ <b>2026年 夏休み情報：</b>{E(a["summer"])}</div>' if a.get("summer") else ""
@@ -814,7 +819,7 @@ about_doc = f"""<!DOCTYPE html>
 <h1>このサイトについて</h1>
 <div class="about-box">
 <h2>🐟 さかなのおにいさん かわちゃんとは</h2>
-<p>「子どもにも海にもやさしい未来を」を理念に活動する、さかなのおにいさん かわちゃん（川田一輝）。YouTubeで全国の水族館を紹介しながら、生き物の魅力を伝えています。テレビ東京「シナぷしゅ」出演、著書「全国クセすご水族館図鑑」ほか、歌・イラスト・クイズで魚の魅力を伝えるイベントを全国で開催しています。</p>
+<p>「子どもがさかなを好きになれば海は豊かになる」をモットーに活動する、さかなのおにいさん かわちゃん。YouTubeで全国の水族館を紹介しながら、生き物の魅力を伝えています。テレビ東京「シナぷしゅ」出演、著書「全国クセすご水族館図鑑」ほか、歌・イラスト・クイズで魚の魅力を伝えるイベントを全国で開催しています。</p>
 <h2>🗺 このサイトの特徴</h2>
 <p>このサイトに載っている情報は、かわちゃんが実際に訪れた水族館の紹介動画をベースにした「実訪問プロジェクト」です。行ったことのある水族館には、かわちゃん本人が確認した一言コメントや独自評価を掲載しています。</p>
 <h2>📖 掲載基準</h2>
@@ -827,22 +832,19 @@ about_doc = f"""<!DOCTYPE html>
 
 <div class="about-box" id="work">
 <h2>💼 お仕事のご依頼</h2>
-<p>イベント出演・トークショー・タイアップ・取材・監修などのご依頼を受け付けています。水族館・商業施設・自治体・企業さまとのお仕事の実績多数。お気軽にご相談ください。</p>
+<p>イベント出演・トークショー・タイアップ・取材・監修などのご依頼を受け付けています。水族館・商業施設・自治体・企業さまとのお仕事の実績多数。お問い合わせフォームからお気軽にご相談ください。</p>
 <table>
-<tr><th>📧 ご依頼・お問い合わせ</th><td><a class="mail" href="mailto:info@yasasea.com">info@yasasea.com</a></td></tr>
+<tr><th>💬 お問い合わせ</th><td><a class="mail" href="https://sakana-bro.com/contact/" target="_blank" rel="noopener">お問い合わせフォーム</a></td></tr>
 <tr><th>🌊 プロフィール・実績</th><td><a href="https://sakana-bro.com/" target="_blank" rel="noopener">公式サイト（sakana-bro.com）</a></td></tr>
 </table>
-<a class="work-cta" href="mailto:info@yasasea.com">📧 メールで相談する</a>
 </div>
 
 <div class="about-box" id="company">
 <h2>🏢 運営者情報</h2>
 <table>
 <tr><th>運営</th><td>株式会社やさしいうみ</td></tr>
-<tr><th>代表</th><td>川田一輝（さかなのおにいさん かわちゃん）</td></tr>
 <tr><th>理念</th><td>子どもにも海にも やさしい未来を</td></tr>
-<tr><th>所在地</th><td>〒550-0005 大阪府大阪市西区西本町1丁目6-9</td></tr>
-<tr><th>連絡先</th><td><a class="mail" href="mailto:info@yasasea.com">info@yasasea.com</a></td></tr>
+<tr><th>連絡先</th><td><a class="mail" href="https://sakana-bro.com/contact/" target="_blank" rel="noopener">お問い合わせフォーム</a></td></tr>
 <tr><th>公式サイト</th><td><a href="https://sakana-bro.com/" target="_blank" rel="noopener">https://sakana-bro.com/</a></td></tr>
 </table>
 </div>

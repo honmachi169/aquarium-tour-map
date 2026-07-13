@@ -183,7 +183,10 @@
   }
   .legend { max-width:1100px; margin:-8px auto 10px; padding:0 20px; font-size:.82rem; color:#567; display:flex; gap:18px; flex-wrap:wrap; }
   footer img.fishline { height:44px; margin:0 8px; vertical-align:middle; }
-  footer img.kawachan-illust { height:120px; vertical-align:bottom; margin:0 8px; }
+  footer img.kawachan-illust { height:200px; vertical-align:bottom; margin:0 8px; transition:transform .2s; }
+  footer .contact-link { display:inline-flex; flex-direction:column; align-items:center; gap:10px; text-decoration:none; }
+  footer .contact-link:hover img.kawachan-illust { transform:scale(1.06); }
+  footer .contact-btn { display:inline-block; background:var(--sea); color:#fff; font-weight:bold; font-size:.95rem; border-radius:999px; padding:10px 26px; box-shadow:0 3px 10px rgba(2,62,138,.25); }
 
   /* ===== フィルター＆カード ===== */
   .controls { max-width:1100px; margin:0 auto 14px; padding:0 16px; display:flex; gap:8px; flex-wrap:wrap; }
@@ -282,8 +285,7 @@
     <div class="mycount">
       <span class="mc-mine">あなたの制覇：<b id="myvisited">0</b> 館 🏆（⬜を押してチェック！）</span>
       <span class="mc-kawachan" style="display:none">🐟 かわちゃんねるは <b id="kawaCount">0</b>/<span id="kawaGoal">100</span>館 YouTubeで紹介中！</span>
-      <button id="shareBtn" class="sharebtn">🕊 制覇じまんをシェア</button>
-      <button id="mapImgBtn" class="sharebtn">🗾 制覇マップ画像</button></div>
+      <button id="mapImgBtn" class="sharebtn">🗾 制覇マップをシェア</button></div>
     <a class="counter-sub-btn pc-only" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
   </div>
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,45 350,-5 600,20 C850,45 1050,-5 1200,20 L1200,40 L0,40 Z" fill="#023e8a"/></svg>
@@ -403,8 +405,11 @@
 </div>
 
 <footer>
-  <p><img class="kawachan-illust" src="assets/about_1.png" alt="かわちゃん"></p>
-  <p><a href="guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>　<a href="aquarium-list.html">📖 掲載水族館一覧</a></p>
+  <a class="contact-link" href="https://sakana-bro.com/contact/" target="_blank" rel="noopener">
+    <img class="kawachan-illust" src="assets/about_1.png" alt="かわちゃんにお問い合わせ">
+    <span class="contact-btn">💬 お問い合わせはこちら</span>
+  </a>
+  <p style="margin-top:14px"><a href="aquarium-list.html">📖 掲載水族館一覧</a></p>
   <p style="margin-top:8px"><a href="about.html">🐟 このサイトについて</a>　<a href="about.html#work">💼 お仕事のご依頼</a>　<a href="about.html#facility">🏛 掲載施設の方へ</a>　<a href="about.html#privacy">🔒 プライバシーポリシー</a></p>
   <p style="margin-top:8px">© 株式会社やさしいうみ ／ <a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA">さかなのおにいさん かわちゃんねる</a></p>
   <p id="updated"></p>
@@ -627,18 +632,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     localStorage.setItem('myVisits', JSON.stringify([...myVisits]));
     if(barMode === 'mine') applyBar('mine');
   }
-  document.getElementById('shareBtn').onclick = async ()=>{
-    const n = myVisits.size;
-    const total = (data.aquariums||[]).length + (data.unvisited||[]).length;
-    const text = n>0
-      ? `わたしは全国の水族館 ${n}/${total}館 制覇！🐟🏆\nキミはいくつ行ったことある？`
-      : `全国の水族館めぐり、はじめよう！🐟`;
-    const url = 'https://aquarium.yasasea.com/';
-    if(navigator.share){
-      try{ await navigator.share({text: text+'\n#全国水族館ツアーMAP', url}); return; }catch(e){ if(e.name==='AbortError') return; }
-    }
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text+'\n#全国水族館ツアーMAP')}&url=${encodeURIComponent(url)}`,'_blank');
-  };
   const MILESTONES = [5,10,15,20,30,40,50,60,80,100];
   const SMALL_MILESTONES = [5]; // このあたりまでは控えめな演出
   function showToast(msg){
@@ -1008,10 +1001,27 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   const ALL_SPOTS = [...aqs, ...(data.unvisited||[])];
   const FONT = '"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif';
   let japanOutline = null;
+  const shareImgs = {};
+  function loadImg(key, src){
+    if(shareImgs[key]) return Promise.resolve(shareImgs[key]);
+    return new Promise(res=>{
+      const i = new Image();
+      i.onload = ()=>{ shareImgs[key] = i; res(i); };
+      i.onerror = ()=>res(null);
+      i.src = src;
+    });
+  }
   async function drawShareMap(){
     if(!japanOutline){
       japanOutline = await fetch('assets/japan_light.json').then(r=>r.json());
     }
+    await Promise.all([
+      loadImg('kawachan','assets/milestone_illust.png'),
+      loadImg('punio1','assets/punio_shark.png'),
+      loadImg('punio2','assets/punio_takopaikapi.png'),
+      loadImg('punio3','assets/punio_hanabi.png'),
+      loadImg('punio4','assets/punio_kopemaru.png'),
+    ]);
     const cv = document.getElementById('shareCanvas');
     const W = cv.width = 1080, H = cv.height = 1080;
     const ctx = cv.getContext('2d');
@@ -1056,6 +1066,20 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     ctx.fillStyle='rgba(255,255,255,.9)'; ctx.font='bold 22px '+FONT; ctx.textAlign='left';
     ctx.fillText('沖縄', okiBox.x+10, okiBox.y+26);
 
+    // ぷにうお（海のあいてるところに）
+    function putDeco(img, x, y, size, deg){
+      if(!img) return;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(deg*Math.PI/180);
+      ctx.drawImage(img, -size/2, -size/2, size, size);
+      ctx.restore();
+    }
+    putDeco(shareImgs.punio2, 400, 330, 105, -8);
+    putDeco(shareImgs.punio1, 170, 590, 125, 8);
+    putDeco(shareImgs.punio4, 200, 880, 110, -6);
+    putDeco(shareImgs.punio3, 870, 640, 120, 7);
+
     // スポット（掲載館→行った館の順で重ね描き）
     ALL_SPOTS.forEach(a=>{
       if(!a.lat||!a.lng) return;
@@ -1076,8 +1100,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     // タイトル・カウント
     const n = myVisits.size, total = ALL_SPOTS.length;
     ctx.textAlign='center'; ctx.fillStyle='#fff';
-    ctx.font='bold 42px '+FONT;
-    ctx.fillText('🐟 全国水族館ツアーMAP', W/2, 80);
+    ctx.font='bold 46px '+FONT;
+    ctx.fillText('🐟 わたしの水族館ツアー制覇MAP', W/2, 84);
     const numTxt = String(n), restTxt = ` / ${total}館 制覇！`;
     ctx.font='bold 104px '+FONT;
     const wNum = ctx.measureText(numTxt).width;
@@ -1093,16 +1117,19 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     ctx.fillText(restTxt, sx+wNum, 198);
 
     // 凡例＋フッター
-    const ly = 982;
+    const ly = 995;
     ctx.beginPath(); ctx.arc(W/2-130, ly-9, 9, 0, Math.PI*2);
     ctx.fillStyle='#ff6b6b'; ctx.fill(); ctx.lineWidth=3; ctx.strokeStyle='#fff'; ctx.stroke();
     ctx.fillStyle='rgba(255,255,255,.95)'; ctx.font='bold 28px '+FONT; ctx.textAlign='left';
     ctx.fillText('＝ 行った水族館', W/2-110, ly);
     ctx.textAlign='center';
-    ctx.font='20px '+FONT; ctx.fillStyle='rgba(255,255,255,.65)';
-    ctx.fillText('※小笠原・奄美・八重山の離島の館は地図外だよ', W/2, ly+30);
-    ctx.font='bold 32px '+FONT; ctx.fillStyle='rgba(255,255,255,.95)';
-    ctx.fillText('aquarium.yasasea.com', W/2, H-28);
+    ctx.font='bold 30px '+FONT; ctx.fillStyle='rgba(255,255,255,.95)';
+    ctx.fillText('©さかなのおにいさん かわちゃん', W/2, H-28);
+
+    // かわちゃん（右下）
+    if(shareImgs.kawachan){
+      ctx.drawImage(shareImgs.kawachan, W-320, H-330, 290, 290);
+    }
   }
   function canvasBlob(){
     return new Promise(res=>document.getElementById('shareCanvas').toBlob(res,'image/png'));
