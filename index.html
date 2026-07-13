@@ -1016,11 +1016,9 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       japanOutline = await fetch('assets/japan_light.json').then(r=>r.json());
     }
     await Promise.all([
-      loadImg('kawachan','assets/milestone_illust.png'),
+      loadImg('kawachan','assets/kawachan_guide.png'),
       loadImg('punio1','assets/punio_shark.png'),
-      loadImg('punio2','assets/punio_takopaikapi.png'),
-      loadImg('punio3','assets/punio_hanabi.png'),
-      loadImg('punio4','assets/punio_kopemaru.png'),
+      loadImg('punio2','assets/punio_hanabi.png'),
     ]);
     const cv = document.getElementById('shareCanvas');
     const W = cv.width = 1080, H = cv.height = 1080;
@@ -1075,10 +1073,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       ctx.drawImage(img, -size/2, -size/2, size, size);
       ctx.restore();
     }
-    putDeco(shareImgs.punio2, 400, 330, 105, -8);
-    putDeco(shareImgs.punio1, 170, 590, 125, 8);
-    putDeco(shareImgs.punio4, 200, 880, 110, -6);
-    putDeco(shareImgs.punio3, 870, 640, 120, 7);
+    putDeco(shareImgs.punio1, 230, 570, 300, 8);
+    putDeco(shareImgs.punio2, 870, 600, 280, -7);
 
     // スポット（掲載館→行った館の順で重ね描き）
     ALL_SPOTS.forEach(a=>{
@@ -1118,10 +1114,10 @@ fetch('data.json').then(r=>r.json()).then(data=>{
 
     // 凡例＋フッター
     const ly = 995;
-    ctx.beginPath(); ctx.arc(W/2-130, ly-9, 9, 0, Math.PI*2);
-    ctx.fillStyle='#ff6b6b'; ctx.fill(); ctx.lineWidth=3; ctx.strokeStyle='#fff'; ctx.stroke();
-    ctx.fillStyle='rgba(255,255,255,.95)'; ctx.font='bold 28px '+FONT; ctx.textAlign='left';
-    ctx.fillText('＝ 行った水族館', W/2-110, ly);
+    ctx.beginPath(); ctx.arc(W/2-170, ly-14, 14, 0, Math.PI*2);
+    ctx.fillStyle='#ff6b6b'; ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle='#fff'; ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 42px '+FONT; ctx.textAlign='left';
+    ctx.fillText('＝ 行った水族館', W/2-142, ly);
     ctx.textAlign='center';
     ctx.font='bold 30px '+FONT; ctx.fillStyle='rgba(255,255,255,.95)';
     ctx.fillText('©さかなのおにいさん かわちゃん', W/2, H-28);
