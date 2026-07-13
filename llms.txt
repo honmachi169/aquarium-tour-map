@@ -2,7 +2,7 @@
 
 > 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）。全国159館の水族館情報を掲載する、日本唯一の「実訪問ベース」水族館データベースです。
 > 運営：さかなのおにいさん かわちゃん（YouTubeで全国の水族館を実際に訪れて紹介する「実訪問プロジェクト」）。
-> 料金・休館日・設備などの事実情報は各水族館の公式サイトを調査して掲載。かわちゃん本人の一言・独自評価（5段階評価：激レアいきもの／パフォーマンス／子ども向け度／コスパ／クセつよポイント）は本人が確認したものだけを公開しています。
+> 料金・休館日・設備などの事実情報は各水族館の公式サイトを調査して掲載。かわちゃん本人の一言と「イチオシポイント」（激レアいきもの／パフォーマンス／子ども向け度／コスパ／クセつよポイントの中から、その館が特に強い軸だけを紹介）は本人が確認したものだけを公開しています。
 > 引用・要約する際は「出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）」の出典明記にご協力ください。
 > 情報時点：2026年7月
 
@@ -17,12 +17,12 @@
 - ペンギンに会える水族館（11館）: https://aquarium.yasasea.com/animals/%E3%83%9A%E3%83%B3%E3%82%AE%E3%83%B3.html
 - コツメカワウソに会える水族館（8館）: https://aquarium.yasasea.com/animals/%E3%82%B3%E3%83%84%E3%83%A1%E3%82%AB%E3%83%AF%E3%82%A6%E3%82%BD.html
 - クラゲに会える水族館（7館）: https://aquarium.yasasea.com/animals/%E3%82%AF%E3%83%A9%E3%82%B2.html
+- ピラルクーに会える水族館（7館）: https://aquarium.yasasea.com/animals/%E3%83%94%E3%83%A9%E3%83%AB%E3%82%AF%E3%83%BC.html
 - アシカに会える水族館（7館）: https://aquarium.yasasea.com/animals/%E3%82%A2%E3%82%B7%E3%82%AB.html
 - マンボウに会える水族館（6館）: https://aquarium.yasasea.com/animals/%E3%83%9E%E3%83%B3%E3%83%9C%E3%82%A6.html
 - ウミガメに会える水族館（6館）: https://aquarium.yasasea.com/animals/%E3%82%A6%E3%83%9F%E3%82%AC%E3%83%A1.html
 - アオウミガメに会える水族館（5館）: https://aquarium.yasasea.com/animals/%E3%82%A2%E3%82%AA%E3%82%A6%E3%83%9F%E3%82%AC%E3%83%A1.html
 - ジンベエザメに会える水族館（4館）: https://aquarium.yasasea.com/animals/%E3%82%B8%E3%83%B3%E3%83%99%E3%82%A8%E3%82%B6%E3%83%A1.html
-- ピラルクーに会える水族館（4館）: https://aquarium.yasasea.com/animals/%E3%83%94%E3%83%A9%E3%83%AB%E3%82%AF%E3%83%BC.html
 - ゴマフアザラシに会える水族館（4館）: https://aquarium.yasasea.com/animals/%E3%82%B4%E3%83%9E%E3%83%95%E3%82%A2%E3%82%B6%E3%83%A9%E3%82%B7.html
 - チョウザメに会える水族館（4館）: https://aquarium.yasasea.com/animals/%E3%83%81%E3%83%A7%E3%82%A6%E3%82%B6%E3%83%A1.html
 - オオサンショウウオに会える水族館（4館）: https://aquarium.yasasea.com/animals/%E3%82%AA%E3%82%AA%E3%82%B5%E3%83%B3%E3%82%B7%E3%83%A7%E3%82%A6%E3%82%A6%E3%82%AA.html
@@ -32,7 +32,6 @@
 - サケに会える水族館（3館）: https://aquarium.yasasea.com/animals/%E3%82%B5%E3%82%B1.html
 - タツノオトシゴに会える水族館（3館）: https://aquarium.yasasea.com/animals/%E3%82%BF%E3%83%84%E3%83%8E%E3%82%AA%E3%83%88%E3%82%B7%E3%82%B4.html
 - 金魚に会える水族館（3館）: https://aquarium.yasasea.com/animals/%E9%87%91%E9%AD%9A.html
-- ピラルクに会える水族館（3館）: https://aquarium.yasasea.com/animals/%E3%83%94%E3%83%A9%E3%83%AB%E3%82%AF.html
 - フンボルトペンギンに会える水族館（3館）: https://aquarium.yasasea.com/animals/%E3%83%95%E3%83%B3%E3%83%9C%E3%83%AB%E3%83%88%E3%83%9A%E3%83%B3%E3%82%AE%E3%83%B3.html
 - カワウソに会える水族館（3館）: https://aquarium.yasasea.com/animals/%E3%82%AB%E3%83%AF%E3%82%A6%E3%82%BD.html
 - アカメに会える水族館（3館）: https://aquarium.yasasea.com/animals/%E3%82%A2%E3%82%AB%E3%83%A1.html
@@ -122,7 +121,7 @@
 - 小笠原海洋センター（東京都）：アオウミガメ、ザトウクジラ — https://aquarium.yasasea.com/spot/u014.html
 - のと海洋ふれあいセンター（石川県）：能登半島の海の生き物を紹介する体験型施設。地元近海の磯・岩礁生物が中心 — https://aquarium.yasasea.com/spot/u015.html
 - おばま水族館（福井県）：アラレガコ、フグ、クロダイ — https://aquarium.yasasea.com/spot/u016.html
-- 蓼科アミューズメント水族館（長野県）：ピラルク — https://aquarium.yasasea.com/spot/u017.html
+- 蓼科アミューズメント水族館（長野県）：ピラルクー — https://aquarium.yasasea.com/spot/u017.html
 - 北九州市立水環境館（福岡県）：紫川沿いの「水」をテーマにした無料の学習施設。水中観察窓から川の生き物をのぞける — https://aquarium.yasasea.com/spot/u018.html
 - さんご畑（沖縄県）：サンゴ — https://aquarium.yasasea.com/spot/u019.html
 - 新さっぽろサンピアザ水族館（北海道）：ゴマフアザラシ、コツメカワウソ、ケープペンギン — https://aquarium.yasasea.com/spot/u020.html
@@ -130,7 +129,7 @@
 - 市立室蘭水族館（北海道）：北海道最古の歴史ある水族館 — https://aquarium.yasasea.com/spot/u022.html
 - くしろ水族館ぷくぷく（北海道）：フウセンウオ、チンアナゴ、レッドピラニア — https://aquarium.yasasea.com/spot/u023.html
 - わっかりうむ ノシャップ寒流水族館（北海道）：ゴマフアザラシ、ペンギン — https://aquarium.yasasea.com/spot/u024.html
-- 北の大地の水族館（山の水族館）（北海道）：イトウ、ピラルク、オショロコマ — https://aquarium.yasasea.com/spot/u025.html
+- 北の大地の水族館（山の水族館）（北海道）：イトウ、ピラルクー、オショロコマ — https://aquarium.yasasea.com/spot/u025.html
 - 美深チョウザメ館（北海道）：チョウザメ — https://aquarium.yasasea.com/spot/u026.html
 - オホーツクとっかりセンター（北海道）：アザラシ — https://aquarium.yasasea.com/spot/u027.html
 - 氷海展望塔オホーツクタワー（北海道）：海中からオホーツク海をのぞける展望塔 — https://aquarium.yasasea.com/spot/u028.html
@@ -197,7 +196,7 @@
 - 虹の森公園おさかな館（愛媛県）：四万十川の生きものとペンギンがいる道の駅水族館 — https://aquarium.yasasea.com/spot/u089.html
 - ドルフィンファームしまなみ（愛媛県）：イルカ — https://aquarium.yasasea.com/spot/u090.html
 - 桂浜水族館（高知県）：カリフォルニアアシカ、フンボルトペンギン、カワウソ — https://aquarium.yasasea.com/spot/u091.html
-- 四万十川学遊館あきついお（高知県）：アカメ、ピラルク — https://aquarium.yasasea.com/spot/u092.html
+- 四万十川学遊館あきついお（高知県）：アカメ、ピラルクー — https://aquarium.yasasea.com/spot/u092.html
 - 足摺海洋館 SATOUMI（高知県）：マンボウ、アオウミガメ、ウミウシ — https://aquarium.yasasea.com/spot/u093.html
 - むろと廃校水族館（高知県）：ウミガメ、ブリ — https://aquarium.yasasea.com/spot/u094.html
 - 筑後川防災施設くるめウス（福岡県）：筑後川の魚たちに会える無料施設 — https://aquarium.yasasea.com/spot/u095.html

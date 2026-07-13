@@ -12,8 +12,11 @@ os.makedirs("spot", exist_ok=True)
 BRAND_NAME = "全国水族館ツアーMAP"
 AUTHOR_NAME = "さかなのおにいさん かわちゃん"
 SOURCE_LINE = f"出典：{BRAND_NAME}（{AUTHOR_NAME}）"
-ATTR_FOOTER = f'<p class="attr-footer">🐟 {SOURCE_LINE} / {{SITE}}</p>'.replace("{SITE}", SITE)
-ATTR_CSS = '.attr-footer { font-size:.72rem; color:#9ab; margin-top:24px; text-align:center; }'
+ATTR_FOOTER = (f'<p class="attr-footer">🐟 {SOURCE_LINE} / {{SITE}}<br>'
+               f'運営：<a href="{{SITE}}/about.html#company">株式会社やさしいうみ</a>　'
+               f'<a href="{{SITE}}/about.html#work">💼 お仕事のご依頼</a>　'
+               f'<a href="{{SITE}}/about.html#privacy">プライバシーポリシー</a></p>').replace("{SITE}", SITE)
+ATTR_CSS = '.attr-footer { font-size:.72rem; color:#9ab; margin-top:24px; text-align:center; line-height:2; } .attr-footer a { color:#89a; }'
 
 GA_ID = "G-J4C3DJNZQN"
 GA_SNIPPET = f'''<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
@@ -81,6 +84,8 @@ for slug, a, intro in entries:
     info = ""
     if a.get("fee"): info += f"<tr><th>💰 大人</th><td>{E(a['fee'])}</td></tr>"
     if a.get("child"): info += f"<tr><th>🧒 子ども</th><td>{E(a['child'])}</td></tr>"
+    if a.get("infant"): info += f"<tr><th>👶 幼児（未就学）</th><td>{E(a['infant'])}</td></tr>"
+    if a.get("duration"): info += f"<tr><th>⏱ 所要時間の目安</th><td>{E(a['duration'])}</td></tr>"
     if a.get("closed"): info += f"<tr><th>🗓 休館日</th><td>{E(a['closed'])}</td></tr>"
     if a.get("access"): info += f"<tr><th>🚃 アクセス</th><td>{E(a['access'])}</td></tr>"
     if a.get("stroller"): info += f"<tr><th>🛻 ベビーカー</th><td>{E(a['stroller'])}</td></tr>"
@@ -108,6 +113,9 @@ for slug, a, intro in entries:
 
     # 見どころポイント欄は「かわちゃんからの一言」と重複するため廃止（highlightsデータ自体はdata.jsonに保持）
 
+    # 星は「強い軸（★4以上）」だけを表示するイチオシ形式。
+    # 低評価の星を並べると施設側に「採点された」と映るため、弱い軸はページに出さない
+    # （ratingsデータ自体はdata.jsonに全軸保持し、ランキング等の内部判断に使う）
     RATING_LABEL = {"rare":"🦈 激レアいきもの","perf":"🐬 パフォーマンス","kids":"👶 子ども向け度","cospa":"💰 コスパ","kuse":"🌀 クセつよポイント"}
     ratings = a.get("ratings") or {}
     rating_rows = ""
@@ -115,9 +123,11 @@ for slug, a, intro in entries:
         for key, label in RATING_LABEL.items():
             if key in ratings:
                 n = max(0, min(5, int(ratings[key])))
+                if n < 4:
+                    continue
                 stars = "★"*n + "☆"*(5-n)
                 rating_rows += f'<div class="rate-row"><span class="rate-label">{label}</span><span class="rate-stars">{stars}</span></div>'
-    ratings_box = f'<div class="ratings-box"><div class="hk-label">🐟 {AUTHOR_NAME}の オススメ度</div>{rating_rows}</div>' if rating_rows else ""
+    ratings_box = f'<div class="ratings-box"><div class="hk-label">🐟 {AUTHOR_NAME}のイチオシポイント</div>{rating_rows}</div>' if rating_rows else ""
 
     summer = f'<div class="summer">☀️ <b>2026年 夏休み情報：</b>{E(a["summer"])}</div>' if a.get("summer") else ""
     notice = f'<div class="notice-box">⚠️ <b>ご注意：</b>{E(a["notice"])}</div>' if a.get("notice") else ""
@@ -179,7 +189,7 @@ loadYtComments();''' if v else ''
     ld_attraction["publisher"] = {"@type": "Organization", "name": BRAND_NAME, "url": SITE}
 
     faq_items = []
-    if a.get("fee"): faq_items.append(("料金はいくらですか？", f"大人{a['fee']}" + (f"、子ども{a['child']}" if a.get("child") else "")))
+    if a.get("fee"): faq_items.append(("料金はいくらですか？", f"大人{a['fee']}" + (f"、子ども{a['child']}" if a.get("child") else "") + (f"、幼児{a['infant']}" if a.get("infant") else "")))
     if a.get("closed"): faq_items.append(("休館日はいつですか？", a["closed"]))
     if a.get("parking"): faq_items.append(("駐車場はありますか？", a["parking"]))
     ld_faq = None
@@ -206,10 +216,7 @@ loadYtComments();''' if v else ''
             "url": page_url,
         }
         if a.get("hitokoto"): review["reviewBody"] = f"{AUTHOR_NAME}の一言：{a['hitokoto']}"
-        ratings_for_ld = a.get("ratings") or {}
-        if ratings_for_ld:
-            avg = sum(ratings_for_ld.values()) / len(ratings_for_ld)
-            review["reviewRating"] = {"@type": "Rating", "ratingValue": round(avg, 1), "bestRating": 5, "worstRating": 1}
+        # reviewRating（5段階平均）は検索結果に「点数」として表示され施設側の心証を損ねるため出力しない
         ld_review = review
 
     ld_scripts = f'<script type="application/ld+json">{json.dumps(ld_attraction, ensure_ascii=False)}</script>'
@@ -335,7 +342,7 @@ loadYtComments();''' if v else ''
   {ratings_box}
   {summer}
   <table>{info}</table>
-  <p class="note">※{INFO_ASOF}時点の情報です。おでかけ前に{('<a href="' + E(a["url"]) + '" target="_blank" rel="noopener">公式サイト</a>') if a.get("url") else "公式サイト"}をご確認ください</p>
+  <p class="note">※{INFO_ASOF}時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に{('<a href="' + E(a["url"]) + '" target="_blank" rel="noopener">公式サイト</a>') if a.get("url") else "公式サイト"}をご確認ください</p>
   {hitokoto}
   {(f'<div class="chips tagchips-block">{tagchips}</div>') if tagchips else ''}
   {filming_note}
@@ -779,16 +786,16 @@ if(RANKS.length) show(0);
     new_page_urls.append(f"{SITE}/taste-ranking.html")
     ranking_generated = True
 
-# --- このサイトについて ---
+# --- このサイトについて（運営者情報・お仕事のご依頼・プライバシーポリシー込み）---
 about_doc = f"""<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 {GA_SNIPPET}
-<title>このサイトについて | 全国水族館ツアーMAP</title>
-<meta name="description" content="会いに行こう！全国水族館ツアーMAPの紹介。さかなのおにいさんかわちゃんが実際に訪れた水族館だけを紹介する、実訪問ベースの水族館サイトです。">
+<title>このサイトについて・運営者情報 | 全国水族館ツアーMAP</title>
+<meta name="description" content="会いに行こう！全国水族館ツアーMAPの紹介と運営者情報。さかなのおにいさんかわちゃんが実際に訪れた水族館を紹介する、実訪問ベースの水族館サイトです。出演・タイアップのご依頼窓口もこちら。">
 <link rel="canonical" href="{SITE}/about.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="このサイトについて | 全国水族館ツアーMAP">
-<meta property="og:description" content="会いに行こう！全国水族館ツアーMAPの紹介。さかなのおにいさんかわちゃんが実際に訪れた水族館だけを紹介する、実訪問ベースの水族館サイトです。">
+<meta property="og:title" content="このサイトについて・運営者情報 | 全国水族館ツアーMAP">
+<meta property="og:description" content="会いに行こう！全国水族館ツアーMAPの紹介と運営者情報。さかなのおにいさんかわちゃんが実際に訪れた水族館を紹介する、実訪問ベースの水族館サイトです。">
 <meta property="og:image" content="{SITE}/assets/kawachan_web.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -796,18 +803,58 @@ about_doc = f"""<!DOCTYPE html>
 .about-box {{ background:#fff; border-radius:16px; padding:18px 20px; margin:14px 0; line-height:1.8; font-size:.92rem; }}
 .about-box h2 {{ font-size:1rem; color:var(--sea-deep); margin:16px 0 6px; }}
 .about-box h2:first-child {{ margin-top:0; }}
+.about-box table {{ border-collapse:collapse; width:100%; margin:6px 0; }}
+.about-box th {{ text-align:left; white-space:nowrap; color:var(--sea-deep); font-size:.85rem; padding:6px 14px 6px 0; vertical-align:top; }}
+.about-box td {{ font-size:.88rem; padding:6px 0; }}
+.about-box .mail {{ font-weight:bold; color:var(--sea); text-decoration:none; }}
+.work-cta {{ display:inline-block; background:var(--sea); color:#fff; font-weight:bold; text-decoration:none; border-radius:999px; padding:10px 22px; margin-top:8px; }}
 </style></head><body>
 <header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
 <main>
 <h1>このサイトについて</h1>
 <div class="about-box">
 <h2>🐟 さかなのおにいさん かわちゃんとは</h2>
-<p>「子どもにも海にもやさしい未来を」を理念に活動する、さかなのおにいさん かわちゃん（川田一輝）。YouTubeで全国の水族館を紹介しながら、生き物の魅力を伝えています。</p>
+<p>「子どもにも海にもやさしい未来を」を理念に活動する、さかなのおにいさん かわちゃん（川田一輝）。YouTubeで全国の水族館を紹介しながら、生き物の魅力を伝えています。テレビ東京「シナぷしゅ」出演、著書「全国クセすご水族館図鑑」ほか、歌・イラスト・クイズで魚の魅力を伝えるイベントを全国で開催しています。</p>
 <h2>🗺 このサイトの特徴</h2>
 <p>このサイトに載っている情報は、かわちゃんが実際に訪れた水族館の紹介動画をベースにした「実訪問プロジェクト」です。行ったことのある水族館には、かわちゃん本人が確認した一言コメントや独自評価を掲載しています。</p>
+<h2>📖 掲載基準</h2>
+<p>日本全国の水族館をできるだけ幅広く掲載し、かわちゃんが実際に訪れた館から順番に「紹介済み」として動画・一言コメントを追加しています。「この水族館も載せてほしい！」というリクエストは、トップページの📮コメントやSNSで教えてもらえるとうれしいです。</p>
 <h2>📋 情報収集ポリシー</h2>
 <p>料金・休館日・設備などの事実情報は、各水族館の公式サイトを調査して掲載しています。誤りに気づいた場合は、各施設の公式サイトを優先してご確認ください。かわちゃん本人の一言・評価は、本人が内容を確認したものだけを公開しています。</p>
+<h2 id="facility">🏛 掲載水族館・施設の方へ</h2>
+<p>掲載内容の修正（料金改定・休館情報など）や掲載に関するご要望は、下記の運営窓口までお気軽にご連絡ください。確認のうえ、すみやかに対応いたします。このサイトは全国の水族館を応援する目的で運営しています。</p>
 </div>
+
+<div class="about-box" id="work">
+<h2>💼 お仕事のご依頼</h2>
+<p>イベント出演・トークショー・タイアップ・取材・監修などのご依頼を受け付けています。水族館・商業施設・自治体・企業さまとのお仕事の実績多数。お気軽にご相談ください。</p>
+<table>
+<tr><th>📧 ご依頼・お問い合わせ</th><td><a class="mail" href="mailto:info@yasasea.com">info@yasasea.com</a></td></tr>
+<tr><th>🌊 プロフィール・実績</th><td><a href="https://sakana-bro.com/" target="_blank" rel="noopener">公式サイト（sakana-bro.com）</a></td></tr>
+</table>
+<a class="work-cta" href="mailto:info@yasasea.com">📧 メールで相談する</a>
+</div>
+
+<div class="about-box" id="company">
+<h2>🏢 運営者情報</h2>
+<table>
+<tr><th>運営</th><td>株式会社やさしいうみ</td></tr>
+<tr><th>代表</th><td>川田一輝（さかなのおにいさん かわちゃん）</td></tr>
+<tr><th>理念</th><td>子どもにも海にも やさしい未来を</td></tr>
+<tr><th>所在地</th><td>〒550-0005 大阪府大阪市西区西本町1丁目6-9</td></tr>
+<tr><th>連絡先</th><td><a class="mail" href="mailto:info@yasasea.com">info@yasasea.com</a></td></tr>
+<tr><th>公式サイト</th><td><a href="https://sakana-bro.com/" target="_blank" rel="noopener">https://sakana-bro.com/</a></td></tr>
+</table>
+</div>
+
+<div class="about-box" id="privacy">
+<h2>🔒 プライバシーポリシー</h2>
+<p><b>アクセス解析：</b>当サイトはGoogle アナリティクス（GA4）を利用しています。データは匿名で収集され、個人を特定するものではありません。Cookieの利用はブラウザ設定で無効にできます。</p>
+<p><b>コメント機能：</b>コメント投稿はニックネームのみで利用でき、メールアドレス等の個人情報は収集していません。不適切な投稿は運営の判断で非表示・削除する場合があります。</p>
+<p><b>「行った！」チェック：</b>訪問チェックの記録はお使いのブラウザ内（localStorage）にのみ保存され、運営者には送信されません。</p>
+<p><b>外部サービス：</b>YouTube（動画埋め込み・コメント表示）、OpenStreetMap（地図表示）を利用しています。各サービスのプライバシーポリシーもあわせてご確認ください。</p>
+</div>
+
 <a class="back" href="{SITE}/">← MAPにもどる</a>
 {ATTR_FOOTER}
 </main></body></html>"""
@@ -975,9 +1022,9 @@ new_page_urls.append(f"{SITE}/aquarium-list.html")
 llms_lines = [
     f"# {BRAND_NAME}",
     "",
-    f"> {SOURCE_LINE}。全国159館の水族館情報を掲載する、日本唯一の「実訪問ベース」水族館データベースです。",
+    f"> {SOURCE_LINE}。全国{len(entry_meta)}館の水族館情報を掲載する、日本唯一の「実訪問ベース」水族館データベースです。",
     f"> 運営：{AUTHOR_NAME}（YouTubeで全国の水族館を実際に訪れて紹介する「実訪問プロジェクト」）。",
-    "> 料金・休館日・設備などの事実情報は各水族館の公式サイトを調査して掲載。かわちゃん本人の一言・独自評価（5段階評価：激レアいきもの／パフォーマンス／子ども向け度／コスパ／クセつよポイント）は本人が確認したものだけを公開しています。",
+    "> 料金・休館日・設備などの事実情報は各水族館の公式サイトを調査して掲載。かわちゃん本人の一言と「イチオシポイント」（激レアいきもの／パフォーマンス／子ども向け度／コスパ／クセつよポイントの中から、その館が特に強い軸だけを紹介）は本人が確認したものだけを公開しています。",
     f"> 引用・要約する際は「{SOURCE_LINE}」の出典明記にご協力ください。",
     f"> 情報時点：{INFO_ASOF}",
     "",
@@ -997,7 +1044,7 @@ for region, count, url in area_index_links:
 llms_lines += ["", "## テーマ別ページ"]
 for label, count, url in theme_index_links:
     llms_lines.append(f"- {label}（{count}館）: {url}")
-llms_lines += ["", "## 掲載水族館一覧（全159館）"]
+llms_lines += ["", f"## 掲載水族館一覧（全{len(entry_meta)}館）"]
 for m in entry_meta:
     feat = "、".join(m["animals"][:3]) if m["animals"] else (m["comment"][:40] if m["comment"] else "")
     llms_lines.append(f"- {m['name']}（{m['pref']}）" + (f"：{feat}" if feat else "") + f" — {m['url']}")

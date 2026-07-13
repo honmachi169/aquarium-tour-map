@@ -6,10 +6,10 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C3DJNZQN"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-J4C3DJNZQN");</script>
 <title>会いに行こう！全国水族館ツアーMAP | さかなのおにいさん かわちゃんねる</title>
-<meta name="description" content="さかなのおにいさん かわちゃんと巡る全国136館の水族館MAP。料金・休館日・みどころ・夏休みイベントがひと目でわかる！行った水族館をチェックして目指せ100館制覇🐟">
+<meta name="description" content="さかなのおにいさん かわちゃんと巡る全国150館以上の水族館MAP。料金・休館日・みどころ・夏休みイベントがひと目でわかる！行った水族館をチェックして目指せ100館制覇🐟">
 <meta property="og:type" content="website">
 <meta property="og:title" content="会いに行こう！全国水族館ツアーMAP">
-<meta property="og:description" content="さかなのおにいさん かわちゃんと巡る全国136館の水族館MAP。キミはいくつ行ったことある？🐟">
+<meta property="og:description" content="さかなのおにいさん かわちゃんと巡る全国150館以上の水族館MAP。キミはいくつ行ったことある？🐟">
 <meta property="og:image" content="https://aquarium.yasasea.com/assets/kawachan_web.png">
 <meta property="og:url" content="https://aquarium.yasasea.com/">
 <meta name="twitter:card" content="summary_large_image">
@@ -282,7 +282,8 @@
     <div class="mycount">
       <span class="mc-mine">あなたの制覇：<b id="myvisited">0</b> 館 🏆（⬜を押してチェック！）</span>
       <span class="mc-kawachan" style="display:none">🐟 かわちゃんねるは <b id="kawaCount">0</b>/<span id="kawaGoal">100</span>館 YouTubeで紹介中！</span>
-      <button id="shareBtn" class="sharebtn">🕊 制覇じまんをシェア</button></div>
+      <button id="shareBtn" class="sharebtn">🕊 制覇じまんをシェア</button>
+      <button id="mapImgBtn" class="sharebtn">🗾 制覇マップ画像</button></div>
     <a class="counter-sub-btn pc-only" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
   </div>
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,45 350,-5 600,20 C850,45 1050,-5 1200,20 L1200,40 L0,40 Z" fill="#023e8a"/></svg>
@@ -302,6 +303,19 @@
     <div class="row">
       <button class="cancel" onclick="document.getElementById('cmodal').classList.remove('open')">やめる</button>
       <button class="send" id="csend" onclick="sendComment()">送る🐟</button>
+    </div>
+  </div>
+</div>
+
+<div class="cmodal" id="mapImgModal">
+  <div class="box" style="width:min(92vw,420px)">
+    <h3>🗾 わたしの制覇マップ</h3>
+    <canvas id="shareCanvas" style="width:100%;border-radius:12px;border:2px solid var(--sky);background:#0096c7"></canvas>
+    <p style="font-size:.75rem;color:#678;margin:8px 0 4px">画像を保存して、SNSでみんなに自慢しよう🐟</p>
+    <div class="row" style="margin-top:6px">
+      <button class="cancel" onclick="document.getElementById('mapImgModal').classList.remove('open')">とじる</button>
+      <button class="send" id="mapImgSave">💾 保存</button>
+      <button class="send" id="mapImgShare">📤 シェア</button>
     </div>
   </div>
 </div>
@@ -342,7 +356,7 @@
   </a>
   <div class="yt-stats">
     <div class="yt-stat"><span class="num"><span id="yt-visited">46</span><small>館</small></span><span class="label">YouTubeで紹介した水族館</span></div>
-    <div class="yt-stat"><span class="num">136<small>館</small></span><span class="label">このサイトの掲載館数</span></div>
+    <div class="yt-stat"><span class="num"><span id="yt-total">150+</span><small>館</small></span><span class="label">このサイトの掲載館数</span></div>
     <div class="yt-stat"><span class="num">毎月</span><span class="label">新しい動画を公開中</span></div>
   </div>
 </section>
@@ -391,7 +405,8 @@
 <footer>
   <p><img class="kawachan-illust" src="assets/about_1.png" alt="かわちゃん"></p>
   <p><a href="guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>　<a href="aquarium-list.html">📖 掲載水族館一覧</a></p>
-  <p>© 株式会社やさしいうみ ／ <a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA">さかなのおにいさん かわちゃんねる</a></p>
+  <p style="margin-top:8px"><a href="about.html">🐟 このサイトについて</a>　<a href="about.html#work">💼 お仕事のご依頼</a>　<a href="about.html#facility">🏛 掲載施設の方へ</a>　<a href="about.html#privacy">🔒 プライバシーポリシー</a></p>
+  <p style="margin-top:8px">© 株式会社やさしいうみ ／ <a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA">さかなのおにいさん かわちゃんねる</a></p>
   <p id="updated"></p>
 </footer>
 
@@ -533,6 +548,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   const visited = aqs.filter(a=>!a.upcoming).length;
   document.getElementById('visited').textContent = visited;
   document.getElementById('yt-visited').textContent = visited;
+  document.getElementById('yt-total').textContent = aqs.length + (data.unvisited||[]).length;
   document.getElementById('goal').textContent = data.goal;
   document.getElementById('kawaCount').textContent = visited;
   document.getElementById('kawaGoal').textContent = data.goal;
@@ -551,6 +567,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     return `<div class="info">`
       + (a.fee?`💰 大人 ${a.fee}`:'')
       + (a.child?`<br>🧒 子ども ${a.child}`:'')
+      + (a.infant?`<br>👶 幼児 ${a.infant}`:'')
+      + (a.duration?`<br>⏱ 目安 ${a.duration}`:'')
       + (a.closed?`<br>🗓 休み：${a.closed}`:'')
       + `<span class="note">※最新は公式サイトで</span>`
       + `</div>`;
@@ -968,7 +986,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
           <p class="hl">${a.highlight||''}</p>
           ${animalChips(a)}
           ${a.summer?`<div class="summerinfo">☀️ 夏休み：${a.summer}</div>`:''}
-          ${(a.fee||a.closed)&&!a.closed_flag?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}`:''}${a.child?`<br>🧒 子ども ${a.child}`:''}${a.closed?`<br>🗓 休み：${a.closed}`:''}${a.gift?`<br>🎁 おみやげ：${a.gift}`:''}</div>`:''}
+          ${(a.fee||a.closed)&&!a.closed_flag?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}`:''}${a.child?`<br>🧒 子ども ${a.child}`:''}${a.infant?`<br>👶 幼児 ${a.infant}`:''}${a.duration?`<br>⏱ 所要時間 ${a.duration}`:''}${a.closed?`<br>🗓 休み：${a.closed}`:''}${a.gift?`<br>🎁 おみやげ：${a.gift}`:''}</div>`:''}
           <div class="links">
             ${a.videos.map((vv,i)=>`<a class="tab yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):''}</a>`).join('')}
             ${a.url?`<a class="tab hp" href="${a.url}" target="_blank">公式サイト</a>`:''}
@@ -986,6 +1004,135 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       if(cb) cb.onclick = ()=> loadYtComments(cb.dataset.vid, card.querySelector('.ytc'), cb);
     });
   }
+  // ===== 制覇マップ画像シェア =====
+  const ALL_SPOTS = [...aqs, ...(data.unvisited||[])];
+  const FONT = '"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif';
+  let japanOutline = null;
+  async function drawShareMap(){
+    if(!japanOutline){
+      japanOutline = await fetch('assets/japan_light.json').then(r=>r.json());
+    }
+    const cv = document.getElementById('shareCanvas');
+    const W = cv.width = 1080, H = cv.height = 1080;
+    const ctx = cv.getContext('2d');
+    const bg = ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#48cae4'); bg.addColorStop(.55,'#0096c7'); bg.addColorStop(1,'#023e8a');
+    ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+
+    // 投影：本土＋沖縄インセット（左上）
+    const COS = Math.cos(38*Math.PI/180);
+    function makeProj(b, r){
+      const k = Math.min(r.w/((b.lng1-b.lng0)*COS), r.h/(b.lat1-b.lat0));
+      const ox = r.x + (r.w-(b.lng1-b.lng0)*COS*k)/2;
+      const oy = r.y + (r.h-(b.lat1-b.lat0)*k)/2;
+      return (lat,lng)=>[ox+(lng-b.lng0)*COS*k, oy+(b.lat1-lat)*k];
+    }
+    const main = makeProj({lng0:128.6,lng1:146.4,lat0:30.0,lat1:45.9},{x:110,y:250,w:880,h:700});
+    const okiBox = {x:96,y:262,w:210,h:140};
+    const oki = makeProj({lng0:126.4,lng1:128.6,lat0:25.8,lat1:27.1},{x:okiBox.x+14,y:okiBox.y+34,w:okiBox.w-28,h:okiBox.h-46});
+    // 沖縄本島周辺だけインセットに描く（奄美・先島・小笠原などは枠からはみ出すため描かない）
+    const inOki = (lat,lng)=> lat>=25.8 && lat<=27.5 && lng>=126.4 && lng<=128.6;
+    const inMain = (lat,lng)=> lat>=30 && lat<=45.9 && lng>=128.6 && lng<=146.4;
+    const projFor = (lat,lng)=> inOki(lat,lng) ? oki(lat,lng) : inMain(lat,lng) ? main(lat,lng) : null;
+
+    // 陸地シルエット
+    ctx.fillStyle = 'rgba(255,255,255,.92)';
+    ctx.strokeStyle = 'rgba(2,62,138,.25)';
+    ctx.lineWidth = 2;
+    japanOutline.forEach(ring=>{
+      const [clng,clat] = ring[0];
+      const isOki = inOki(clat,clng);
+      if(!isOki && !inMain(clat,clng)) return;
+      ctx.beginPath();
+      ring.forEach(([lng,lat],i)=>{
+        const [x,y] = isOki ? oki(lat,lng) : main(lat,lng);
+        i ? ctx.lineTo(x,y) : ctx.moveTo(x,y);
+      });
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+    });
+    // 沖縄インセット枠
+    ctx.strokeStyle='rgba(255,255,255,.7)'; ctx.lineWidth=2.5;
+    ctx.strokeRect(okiBox.x,okiBox.y,okiBox.w,okiBox.h);
+    ctx.fillStyle='rgba(255,255,255,.9)'; ctx.font='bold 22px '+FONT; ctx.textAlign='left';
+    ctx.fillText('沖縄', okiBox.x+10, okiBox.y+26);
+
+    // スポット（掲載館→行った館の順で重ね描き）
+    ALL_SPOTS.forEach(a=>{
+      if(!a.lat||!a.lng) return;
+      const p = projFor(a.lat,a.lng);
+      if(!p) return;
+      ctx.beginPath(); ctx.arc(p[0],p[1],5,0,Math.PI*2);
+      ctx.fillStyle='rgba(2,62,138,.3)'; ctx.fill();
+    });
+    ALL_SPOTS.filter(a=>myVisits.has(a.name)).forEach(a=>{
+      if(!a.lat||!a.lng) return;
+      const p = projFor(a.lat,a.lng);
+      if(!p) return;
+      ctx.beginPath(); ctx.arc(p[0],p[1],9,0,Math.PI*2);
+      ctx.fillStyle='#ff6b6b'; ctx.fill();
+      ctx.lineWidth=3; ctx.strokeStyle='#fff'; ctx.stroke();
+    });
+
+    // タイトル・カウント
+    const n = myVisits.size, total = ALL_SPOTS.length;
+    ctx.textAlign='center'; ctx.fillStyle='#fff';
+    ctx.font='bold 42px '+FONT;
+    ctx.fillText('🐟 全国水族館ツアーMAP', W/2, 80);
+    const numTxt = String(n), restTxt = ` / ${total}館 制覇！`;
+    ctx.font='bold 104px '+FONT;
+    const wNum = ctx.measureText(numTxt).width;
+    ctx.font='bold 50px '+FONT;
+    const wRest = ctx.measureText(restTxt).width;
+    const sx = (W-wNum-wRest)/2;
+    ctx.textAlign='left';
+    ctx.shadowColor='rgba(2,62,138,.5)'; ctx.shadowBlur=8; ctx.shadowOffsetY=4;
+    ctx.fillStyle='#ffd166'; ctx.font='bold 104px '+FONT;
+    ctx.fillText(numTxt, sx, 198);
+    ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+    ctx.fillStyle='#fff'; ctx.font='bold 50px '+FONT;
+    ctx.fillText(restTxt, sx+wNum, 198);
+
+    // 凡例＋フッター
+    const ly = 982;
+    ctx.beginPath(); ctx.arc(W/2-130, ly-9, 9, 0, Math.PI*2);
+    ctx.fillStyle='#ff6b6b'; ctx.fill(); ctx.lineWidth=3; ctx.strokeStyle='#fff'; ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.95)'; ctx.font='bold 28px '+FONT; ctx.textAlign='left';
+    ctx.fillText('＝ 行った水族館', W/2-110, ly);
+    ctx.textAlign='center';
+    ctx.font='20px '+FONT; ctx.fillStyle='rgba(255,255,255,.65)';
+    ctx.fillText('※小笠原・奄美・八重山の離島の館は地図外だよ', W/2, ly+30);
+    ctx.font='bold 32px '+FONT; ctx.fillStyle='rgba(255,255,255,.95)';
+    ctx.fillText('aquarium.yasasea.com', W/2, H-28);
+  }
+  function canvasBlob(){
+    return new Promise(res=>document.getElementById('shareCanvas').toBlob(res,'image/png'));
+  }
+  document.getElementById('mapImgBtn').onclick = async ()=>{
+    document.getElementById('mapImgModal').classList.add('open');
+    try{ await drawShareMap(); }catch(e){ console.error(e); }
+  };
+  document.getElementById('mapImgSave').onclick = async ()=>{
+    const b = await canvasBlob();
+    if(!b) return;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(b);
+    a.download = 'suizokukan-seiha-map.png';
+    a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 3000);
+  };
+  document.getElementById('mapImgShare').onclick = async ()=>{
+    const b = await canvasBlob();
+    if(!b) return;
+    const file = new File([b], 'suizokukan-seiha-map.png', {type:'image/png'});
+    const text = `わたしは全国の水族館 ${myVisits.size}/${ALL_SPOTS.length}館 制覇！🐟🏆\n#全国水族館ツアーMAP\nhttps://aquarium.yasasea.com/`;
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      try{ await navigator.share({files:[file], text}); return; }catch(e){ if(e.name==='AbortError') return; }
+    }
+    // シェア非対応（PCなど）：画像を保存してXの投稿画面を開く
+    document.getElementById('mapImgSave').click();
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`わたしは全国の水族館 ${myVisits.size}/${ALL_SPOTS.length}館 制覇！🐟🏆\n#全国水族館ツアーMAP`)}&url=${encodeURIComponent('https://aquarium.yasasea.com/')}`,'_blank');
+  };
+
   render();
   updateMyCount();
 });
