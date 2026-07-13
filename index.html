@@ -1031,7 +1031,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       const oy = r.y + (r.h-(b.lat1-b.lat0)*k)/2;
       return (lat,lng)=>[ox+(lng-b.lng0)*COS*k, oy+(b.lat1-lat)*k];
     }
-    const main = makeProj({lng0:128.6,lng1:146.4,lat0:30.0,lat1:45.9},{x:110,y:250,w:880,h:700});
+    const main = makeProj({lng0:128.6,lng1:146.4,lat0:30.0,lat1:45.9},{x:40,y:220,w:1000,h:790});
     const okiBox = {x:96,y:262,w:210,h:140};
     const oki = makeProj({lng0:126.4,lng1:128.6,lat0:25.8,lat1:27.1},{x:okiBox.x+14,y:okiBox.y+34,w:okiBox.w-28,h:okiBox.h-46});
     // 沖縄本島周辺だけインセットに描く（奄美・先島・小笠原などは枠からはみ出すため描かない）
@@ -1096,19 +1096,19 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     ctx.fillStyle='#fff'; ctx.font='bold 50px '+FONT;
     ctx.fillText(restTxt, sx+wNum, 198);
 
-    // 凡例＋フッター
-    const ly = 995;
-    ctx.beginPath(); ctx.arc(W/2-170, ly-14, 14, 0, Math.PI*2);
+    // 凡例（左側の海に）＋フッター
+    const ly = 498;
+    ctx.beginPath(); ctx.arc(124, ly-14, 14, 0, Math.PI*2);
     ctx.fillStyle='#ff6b6b'; ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle='#fff'; ctx.stroke();
     ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 42px '+FONT; ctx.textAlign='left';
-    ctx.fillText('＝ 行った水族館', W/2-142, ly);
+    ctx.fillText('＝ 行った水族館', 152, ly);
     ctx.textAlign='center';
     ctx.font='bold 30px '+FONT; ctx.fillStyle='rgba(255,255,255,.95)';
-    ctx.fillText('©さかなのおにいさん かわちゃん', W/2, H-28);
+    ctx.fillText('©さかなのおにいさん かわちゃん', W/2, H-24);
 
-    // かわちゃん（右下）
+    // かわちゃん（右下・下端に寄せる）
     if(shareImgs.kawachan){
-      ctx.drawImage(shareImgs.kawachan, W-400, H-410, 380, 380);
+      ctx.drawImage(shareImgs.kawachan, W-395, H-390, 380, 380);
     }
   }
   function canvasBlob(){
