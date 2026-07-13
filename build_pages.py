@@ -120,6 +120,7 @@ for slug, a, intro in entries:
     ratings_box = f'<div class="ratings-box"><div class="hk-label">🐟 {AUTHOR_NAME}の オススメ度</div>{rating_rows}</div>' if rating_rows else ""
 
     summer = f'<div class="summer">☀️ <b>2026年 夏休み情報：</b>{E(a["summer"])}</div>' if a.get("summer") else ""
+    notice = f'<div class="notice-box">⚠️ <b>ご注意：</b>{E(a["notice"])}</div>' if a.get("notice") else ""
     videos = "".join(
         f'<div class="video"><iframe loading="lazy" src="https://www.youtube.com/embed/{vv["id"]}" '
         f'title="{E(a["name"])} 紹介動画" allowfullscreen></iframe></div>'
@@ -280,6 +281,7 @@ loadYtComments();''' if v else ''
   .rate-label {{ color:#456; }}
   .rate-stars {{ color:#ffb703; letter-spacing:1px; font-size:1rem; }}
   .summer {{ font-size:.9rem; color:#a15c00; background:linear-gradient(90deg,#fff3cd,#ffe9b8); border:2px solid var(--sun); border-radius:12px; padding:10px 14px; margin:12px 0; line-height:1.6; }}
+  .notice-box {{ font-size:.9rem; color:#8a1f11; background:#fff0ee; border:2px solid var(--coral); border-radius:12px; padding:10px 14px; margin:12px 0; line-height:1.6; }}
   table {{ border-collapse:collapse; width:100%; margin:12px 0; background:#f0f8fc; border-radius:12px; overflow:hidden; }}
   th,td {{ text-align:left; padding:9px 14px; font-size:.9rem; border-bottom:2px solid var(--sand); }}
   th {{ white-space:nowrap; color:var(--sea-deep); }}
@@ -325,6 +327,7 @@ loadYtComments();''' if v else ''
   <h1>{E(a['name'])}</h1>
   <span class="pref">{E(a['pref'])}</span>
   {videos or hero}
+  {notice}
   <p class="hl">{E(a.get('highlight') or a.get('comment') or '')}</p>
   {only_quote}
   <div class="chips">{chips}{trchips}</div>
