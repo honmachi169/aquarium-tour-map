@@ -327,14 +327,15 @@ loadYtComments();''' if v else ''
   {videos or hero}
   <p class="hl">{E(a.get('highlight') or a.get('comment') or '')}</p>
   {only_quote}
-  <div class="chips">{chips}{tagchips}{trchips}</div>
+  <div class="chips">{chips}{trchips}</div>
   {kotsu_box}
   {ratings_box}
   {summer}
   <table>{info}</table>
-  {hitokoto}
-  {filming_note}
   <p class="note">※{INFO_ASOF}時点の情報です。おでかけ前に{('<a href="' + E(a["url"]) + '" target="_blank" rel="noopener">公式サイト</a>') if a.get("url") else "公式サイト"}をご確認ください</p>
+  {hitokoto}
+  {(f'<div class="chips tagchips-block">{tagchips}</div>') if tagchips else ''}
+  {filming_note}
   <div class="btns">
     {links}
   </div>
@@ -673,34 +674,30 @@ CURATED_RANKINGS = [
     ]),
 ]
 
-def render_rank_card(rank, m, note=None):
-    img = m["thumb"] or f"{SITE}/assets/kawachan_web.png"
-    cmt = note or (m["comment"] or "")[:60]
-    return (f'<a class="card rankcard" href="{m["url"]}"><span class="rank-badge">{rank}</span>'
-            f'<img src="{img}" loading="lazy" alt="{E(m["name"])}">'
-            f'<div class="body"><div class="pref">{E(m["pref"])}</div>'
-            f'<div class="name">{E(m["name"])}</div><div class="cmt">{E(cmt)}</div></div></a>')
-
 by_name = {m["name"]: m for m in entry_meta}
-sections = []
+tabs_data = []
 ld_items = []
 for brand, picks in CURATED_RANKINGS:
-    rows = ""
+    items = []
     list_items = []
     for i, (name, note) in enumerate(picks):
         m = by_name.get(name)
         if not m:
             print("ランキング: 館が見つかりません:", name)
             continue
-        rows += render_rank_card(i + 1, m, note)
+        items.append({
+            "name": m["name"], "pref": m["pref"], "url": m["url"],
+            "thumb": m["thumb"] or f"{SITE}/assets/kawachan_web.png",
+            "reason": note or (m["comment"] or ""),
+        })
         list_items.append({"@type": "ListItem", "position": i + 1, "url": m["url"], "name": m["name"]})
-    if not rows:
+    if not items:
         continue
-    sections.append(f'<h2 style="font-size:1.05rem;color:var(--sea-deep);margin:20px 0 8px;">{brand}</h2><div class="grid">{rows}</div>')
+    tabs_data.append({"title": brand, "items": items})
     ld_items.append({"@type": "ItemList", "name": brand, "itemListElement": list_items})
 
 ranking_generated = False
-if sections:
+if tabs_data:
     ld_ranking = {
         "@context": "https://schema.org",
         "@type": "CreativeWork",
@@ -723,17 +720,56 @@ if sections:
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <script type="application/ld+json">{json.dumps(ld_ranking, ensure_ascii=False)}</script>
 <style>{LIST_STYLE}
-.card.rankcard {{ position:relative; }}
-.rank-badge {{ position:absolute; top:8px; left:8px; z-index:2; background:var(--sun); color:#5a4000; font-weight:bold; font-size:.85rem; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,.25); }}
+.controls {{ display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 18px; }}
+.controls button {{ border:2px solid var(--sea); background:#fff; color:var(--sea); border-radius:999px; padding:6px 16px; cursor:pointer; font-size:.85rem; font-family:inherit; font-weight:bold; }}
+.controls button.active {{ background:var(--sea); color:#fff; }}
+.rank-list {{ display:flex; flex-direction:column; gap:12px; }}
+.rank-item {{ display:grid; grid-template-columns:170px 1fr; grid-template-areas:"thumb head" "thumb reason"; column-gap:14px; row-gap:4px; align-items:start; background:#fff; border-radius:16px; padding:14px 16px; box-shadow:0 3px 10px rgba(2,62,138,.1); text-decoration:none; color:#234; transition:transform .15s; border:2px solid transparent; }}
+.rank-item:hover {{ transform:translateY(-3px); border-color:var(--sky); }}
+.rank-item.first {{ border:2px solid var(--sun); background:linear-gradient(160deg,#fffbea 0%,#fff 55%); }}
+.rank-item .r-thumb {{ grid-area:thumb; width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:10px; background:#dbeefb; }}
+.rank-item .r-head {{ grid-area:head; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }}
+.rank-item .medal {{ font-size:1.4rem; line-height:1.2; }}
+.rank-item .r-name {{ font-weight:bold; color:var(--sea-deep); font-size:1rem; }}
+.rank-item .r-pref {{ font-size:.72rem; color:#fff; background:var(--sea); border-radius:999px; padding:1px 9px; white-space:nowrap; }}
+.rank-item .r-reason {{ grid-area:reason; font-size:.84rem; color:#456; line-height:1.65; }}
+@media (max-width:560px) {{ .rank-item {{ grid-template-columns:1fr; grid-template-areas:"head" "thumb" "reason"; }} }}
 </style></head><body>
 <header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
 <main><img class="head-chara" src="{SITE}/assets/kawachan_odoroki.png" alt="{AUTHOR_NAME}">
 <h1>🐟 {AUTHOR_NAME}的 水族館ランキング</h1>
 <p class="lead">{AUTHOR_NAME}が実際に訪れた水族館の中から、テーマ別に選んだベスト5だよ。</p>
-{''.join(sections)}
+<div class="controls" id="rankBtns"></div>
+<div class="rank-list" id="rankList"></div>
 <p class="list-note">※{INFO_ASOF}時点の情報です。{SOURCE_LINE}</p>
 <a class="back" href="{SITE}/">← MAPにもどる</a>
 {ATTR_FOOTER}
+<script>
+const RANKS = {json.dumps(tabs_data, ensure_ascii=False)};
+const btnWrap = document.getElementById('rankBtns');
+const list = document.getElementById('rankList');
+const MEDALS = ['🥇','🥈','🥉','4️⃣','5️⃣'];
+function esc(s){{ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }}
+function show(i){{
+  document.querySelectorAll('#rankBtns button').forEach((b,j)=>b.classList.toggle('active', j===i));
+  list.innerHTML = RANKS[i].items.map((it,idx)=>`
+    <a class="rank-item${{idx===0?' first':''}}" href="${{it.url}}">
+      <img class="r-thumb" loading="lazy" src="${{it.thumb}}" alt="${{esc(it.name)}}">
+      <span class="r-head">
+        <span class="medal">${{MEDALS[idx]||''}}</span>
+        <span class="r-name">${{esc(it.name)}}</span><span class="r-pref">${{esc(it.pref)}}</span>
+      </span>
+      <div class="r-reason">${{esc(it.reason)}}</div>
+    </a>`).join('');
+}}
+RANKS.forEach((r,i)=>{{
+  const b = document.createElement('button');
+  b.textContent = r.title;
+  b.onclick = ()=>show(i);
+  btnWrap.appendChild(b);
+}});
+if(RANKS.length) show(0);
+</script>
 </main></body></html>"""
     with open("taste-ranking.html", "w") as f:
         f.write(doc)
