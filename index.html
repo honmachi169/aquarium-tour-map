@@ -1031,7 +1031,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       const oy = r.y + (r.h-(b.lat1-b.lat0)*k)/2;
       return (lat,lng)=>[ox+(lng-b.lng0)*COS*k, oy+(b.lat1-lat)*k];
     }
-    const main = makeProj({lng0:128.6,lng1:146.4,lat0:30.0,lat1:45.9},{x:40,y:220,w:1000,h:790});
+    const main = makeProj({lng0:128.6,lng1:146.4,lat0:30.0,lat1:45.9},{x:40,y:110,w:1000,h:970});
     const okiBox = {x:96,y:262,w:210,h:140};
     const oki = makeProj({lng0:126.4,lng1:128.6,lat0:25.8,lat1:27.1},{x:okiBox.x+14,y:okiBox.y+34,w:okiBox.w-28,h:okiBox.h-46});
     // 沖縄本島周辺だけインセットに描く（奄美・先島・小笠原などは枠からはみ出すため描かない）
@@ -1077,24 +1077,20 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       ctx.lineWidth=3; ctx.strokeStyle='#fff'; ctx.stroke();
     });
 
-    // タイトル・カウント
+    // タイトル（上）・カウント（左上の空いた海に。日本地図は右上が北海道なので左上が空く）
     const n = myVisits.size, total = ALL_SPOTS.length;
     ctx.textAlign='center'; ctx.fillStyle='#fff';
     ctx.font='bold 46px '+FONT;
-    ctx.fillText('🐟 わたしの水族館ツアー制覇MAP', W/2, 84);
+    ctx.fillText('🐟 わたしの水族館ツアー制覇MAP', W/2, 66);
     const numTxt = String(n), restTxt = ` / ${total}館 制覇！`;
-    ctx.font='bold 104px '+FONT;
-    const wNum = ctx.measureText(numTxt).width;
-    ctx.font='bold 50px '+FONT;
-    const wRest = ctx.measureText(restTxt).width;
-    const sx = (W-wNum-wRest)/2;
     ctx.textAlign='left';
     ctx.shadowColor='rgba(2,62,138,.5)'; ctx.shadowBlur=8; ctx.shadowOffsetY=4;
     ctx.fillStyle='#ffd166'; ctx.font='bold 104px '+FONT;
-    ctx.fillText(numTxt, sx, 198);
+    const wNum = ctx.measureText(numTxt).width;
+    ctx.fillText(numTxt, 80, 208);
     ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
     ctx.fillStyle='#fff'; ctx.font='bold 50px '+FONT;
-    ctx.fillText(restTxt, sx+wNum, 198);
+    ctx.fillText(restTxt, 80+wNum, 208);
 
     // 凡例（左側の海に）＋フッター
     const ly = 498;
