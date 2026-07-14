@@ -116,7 +116,7 @@ for slug, a, intro in entries:
     # 星は「強い軸（★4以上）」だけを表示するイチオシ形式。
     # 低評価の星を並べると施設側に「採点された」と映るため、弱い軸はページに出さない
     # （ratingsデータ自体はdata.jsonに全軸保持し、ランキング等の内部判断に使う）
-    RATING_LABEL = {"rare":"🦈 激レアいきもの","perf":"🐬 パフォーマンス","kids":"👶 子ども向け度","cospa":"💰 コスパ","kuse":"🌀 クセつよポイント"}
+    RATING_LABEL = {"rare":"🦈 激レアいきもの","kyodai":"🐋 巨大生物","perf":"🐬 パフォーマンス","kids":"👶 子ども向け度","cospa":"💰 コスパ","kuse":"🌀 クセつよポイント"}
     ratings = a.get("ratings") or {}
     rating_rows = ""
     if approved:
@@ -326,7 +326,7 @@ loadYtComments();''' if v else ''
   .like-btn.liked {{ border-color:#ec4899; font-weight:bold; }}
   .empty, .loading {{ font-size:.82rem; color:#89a; }}
   #comment-form {{ margin-top:12px; display:flex; flex-direction:column; gap:8px; }}
-  #comment-form input, #comment-form textarea {{ border:2px solid var(--sky); border-radius:10px; padding:8px 12px; font-size:.88rem; font-family:inherit; outline:none; width:100%; }}
+  #comment-form input, #comment-form textarea {{ border:2px solid var(--sky); border-radius:10px; padding:8px 12px; font-size:16px; font-family:inherit; outline:none; width:100%; }}
   #comment-form input:focus, #comment-form textarea:focus {{ border-color:var(--sea); }}
   #comment-form button {{ background:var(--sea); color:#fff; border:none; border-radius:999px; padding:10px; font-size:.9rem; font-weight:bold; cursor:pointer; font-family:inherit; }}
   #c-status {{ font-size:.8rem; color:var(--sea); min-height:1.2em; }}
