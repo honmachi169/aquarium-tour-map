@@ -1061,6 +1061,7 @@ with open("sitemap.xml", "w") as f:
     f.write(f"<url><loc>{SITE}/ranking.html</loc></url>\n")
     f.write(f"<url><loc>{SITE}/posts.html</loc></url>\n")
     f.write(f"<url><loc>{SITE}/play.html</loc></url>\n")
+    f.write(f"<url><loc>{SITE}/nurie.html</loc></url>\n")
     for u in urls:
         f.write(f"<url><loc>{u}</loc></url>\n")
     for u in new_page_urls:
