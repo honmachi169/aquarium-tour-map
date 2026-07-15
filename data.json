@@ -395,8 +395,7 @@
       "ratings_plus": {
         "🎢 テーマパーク": 5
       },
-      "verified": true,
-      "rakko_past": true
+      "verified": true
     },
     {
       "no": 6,
@@ -469,9 +468,7 @@
       "ratings_plus": {
         "🏛 建物のワクワク構造": 5,
         "🌊 大水槽のスケール": 5
-      },
-      "rakko_past": true,
-      "rakko_past_note": "2017年にパタが亡くなり展示終了"
+      }
     },
     {
       "no": 7,
@@ -676,8 +673,6 @@
       ],
       "visited": true,
       "verified": true,
-      "rakko_past": true,
-      "rakko_past_note": "2021年にキラが鳥羽へ移り展示終了",
       "hitokoto_photo": "assets/photo_adventure_hitokoto.jpg"
     },
     {
@@ -1012,7 +1007,6 @@
         "🦑 深海生物": 5
       },
       "verified": true,
-      "rakko_past": true,
       "mendako_history": true,
       "mendako_note": "「メンダコチャレンジ」で過去に複数回展示（2021年は51日間飼育）。展示は不定期"
     },
@@ -1153,8 +1147,6 @@
         "🌿 都会のオアシス": 5
       },
       "verified": true,
-      "rakko_past": true,
-      "rakko_past_note": "2016年に30年間のラッコ展示が終了（ルーチ・ミール）",
       "mendako_history": true
     },
     {
@@ -1476,8 +1468,7 @@
       "ratings_plus": {
         "💡 コンセプト": 5
       },
-      "verified": true,
-      "rakko_past": true
+      "verified": true
     },
     {
       "no": 22,
@@ -1710,8 +1701,7 @@
         "🌊 海の青さ": 5,
         "📣 ずっと応援したい": 5
       },
-      "verified": true,
-      "rakko_past": true
+      "verified": true
     },
     {
       "no": 26,
@@ -2067,8 +2057,7 @@
         "❄️ 季節の楽しさ": 5,
         "🦭 海獣の多さ": 5,
         "🌲 自然の近さ": 5
-      },
-      "rakko_past": true
+      }
     },
     {
       "no": 32,
@@ -2357,8 +2346,7 @@
         "kids": 3,
         "kuse": 5,
         "cospa": 3
-      },
-      "rakko_past": true
+      }
     },
     {
       "no": 37,
@@ -2727,8 +2715,7 @@
       "ratings_plus": {
         "🍽 レストランの美味しさ": 5,
         "🌱 庭の広さ": 5
-      },
-      "rakko_past": true
+      }
     },
     {
       "no": 44,
@@ -3276,8 +3263,7 @@
       ],
       "access": "地下鉄東西線「新さっぽろ」駅から徒歩5分、JR「新札幌」駅から徒歩3分",
       "parking": "あり",
-      "summer": "夏休み特別企画「水底のサメ・エイ展」＆まっくらナイトウオッチング2026",
-      "rakko_past": true
+      "summer": "夏休み特別企画「水底のサメ・エイ展」＆まっくらナイトウオッチング2026"
     },
     {
       "name": "札幌市豊平川さけ科学館",
@@ -4088,9 +4074,7 @@
       "access": "伊豆長岡駅から伊豆箱根バスで約25分",
       "summer": "夏の風物詩「ドルフィンざぶーん」や釣り体験など夏季限定イベント",
       "goshuin": "あり（詳細は公式サイト・館内でご確認ください）",
-      "notice": "7/17(金)まで改修工事のため、イルカの海ショースタンド横の階段など一部エリアが通行止め",
-      "rakko_past": true,
-      "rakko_past_note": "1982年 日本で初めてラッコを飼育した施設"
+      "notice": "7/17(金)まで改修工事のため、イルカの海ショースタンド横の階段など一部エリアが通行止め"
     },
     {
       "name": "下田海中水族館",
@@ -4113,8 +4097,7 @@
         "フンボルトペンギン"
       ],
       "parking": "あり（無料200台）",
-      "access": "伊豆急下田駅から東海バス約7分",
-      "rakko_past": true
+      "access": "伊豆急下田駅から東海バス約7分"
     },
     {
       "name": "浜名湖体験学習施設ウォット",
