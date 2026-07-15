@@ -116,10 +116,27 @@
   .cat-section { max-width:1100px; margin:0 auto 14px; padding:0 16px; }
   .cat-card { background:linear-gradient(160deg,#eaf7fc,#f6fcfe); border:1.5px solid #cdeaf5; border-radius:16px; padding:11px 14px 13px; }
   .cat-head { display:flex; align-items:center; justify-content:space-between; gap:8px; font-weight:bold; color:var(--sea-deep); font-size:.9rem; margin-bottom:9px; }
+  .cat-pills-wrap { position:relative; }
   .cat-pills { display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:4px; scroll-snap-type:x proximity; }
   .cat-pills::-webkit-scrollbar { display:none; }
   .cat-pills button { scroll-snap-align:start; white-space:nowrap; flex:none; border:2px solid var(--sea); background:#fff; color:var(--sea); border-radius:999px; padding:6px 14px; cursor:pointer; font-size:.85rem; font-family:inherit; font-weight:bold; }
   .cat-pills button.active { background:var(--sea); color:#fff; }
+  .cat-scroll-btn { display:none; }
+  @media (hover:hover) and (pointer:fine) {
+    /* マウス操作のPCだけ：矢印ボタン＋端のフェードで「横スクロールできる」ことを可視化 */
+    .cat-pills-wrap::before, .cat-pills-wrap::after { content:""; position:absolute; top:0; bottom:4px; width:28px; pointer-events:none; z-index:1; opacity:0; transition:opacity .2s; }
+    .cat-pills-wrap::before { left:0; background:linear-gradient(90deg,#eaf7fc,rgba(234,247,252,0)); }
+    .cat-pills-wrap::after { right:0; background:linear-gradient(270deg,#eaf7fc,rgba(234,247,252,0)); }
+    .cat-pills-wrap.at-start::before { opacity:0; }
+    .cat-pills-wrap:not(.at-start)::before { opacity:1; }
+    .cat-pills-wrap.at-end::after { opacity:0; }
+    .cat-pills-wrap:not(.at-end)::after { opacity:1; }
+    .cat-scroll-btn { display:flex; align-items:center; justify-content:center; position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:24px; height:24px; border-radius:50%; border:1.5px solid var(--sea); background:#fff; color:var(--sea); font-size:1rem; line-height:1; cursor:pointer; box-shadow:0 2px 6px rgba(2,62,138,.18); transition:opacity .2s; }
+    .cat-scroll-left { left:-4px; }
+    .cat-scroll-right { right:-4px; }
+    .cat-pills-wrap.at-start .cat-scroll-left,
+    .cat-pills-wrap.at-end .cat-scroll-right { opacity:0; pointer-events:none; }
+  }
   .cat-sorts { display:flex; gap:6px; flex:none; }
   .cat-sorts button { border:1.5px solid #b8d8e6; background:#fff; color:#4a7c93; border-radius:999px; padding:3px 10px; font-size:.72rem; font-family:inherit; font-weight:bold; cursor:pointer; }
   .cat-sorts button.active { background:#4a7c93; color:#fff; border-color:#4a7c93; }
@@ -344,7 +361,11 @@
 <div class="cat-section">
   <div class="cat-card">
     <div class="cat-head"><span>🐟 どんな気分で行く？</span><span class="cat-sorts" id="sortBtns"></span></div>
-    <div class="cat-pills" id="tagBtns"></div>
+    <div class="cat-pills-wrap" id="catPillsWrap">
+      <button class="cat-scroll-btn cat-scroll-left" id="catScrollLeft" aria-label="左へスクロール" type="button">‹</button>
+      <div class="cat-pills" id="tagBtns"></div>
+      <button class="cat-scroll-btn cat-scroll-right" id="catScrollRight" aria-label="右へスクロール" type="button">›</button>
+    </div>
     <div class="animal-search-wrap">
       <input type="text" id="animalSearch" class="animal-search" placeholder="🔍 会いたい魚・生きものの名前で検索（例：ジンベエザメ）" list="animalList" autocomplete="off">
       <datalist id="animalList"></datalist>
@@ -829,6 +850,29 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     };
     tagWrap.appendChild(b);
   });
+
+  // PC（マウス操作）だけ：カテゴリー行が横スクロールできることを矢印・フェード・自動ピークで知らせる
+  const catWrap = document.getElementById('catPillsWrap');
+  const catScrollLeft = document.getElementById('catScrollLeft');
+  const catScrollRight = document.getElementById('catScrollRight');
+  function updateCatScrollState(){
+    const max = tagWrap.scrollWidth - tagWrap.clientWidth;
+    catWrap.classList.toggle('at-start', tagWrap.scrollLeft <= 2);
+    catWrap.classList.toggle('at-end', tagWrap.scrollLeft >= max - 2);
+  }
+  catScrollLeft.onclick = ()=> tagWrap.scrollBy({left:-160, behavior:'smooth'});
+  catScrollRight.onclick = ()=> tagWrap.scrollBy({left:160, behavior:'smooth'});
+  tagWrap.addEventListener('scroll', updateCatScrollState);
+  window.addEventListener('resize', updateCatScrollState);
+  updateCatScrollState();
+  const isPcPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(isPcPointer && !noMotion && (tagWrap.scrollWidth - tagWrap.clientWidth) > 20){
+    setTimeout(()=>{
+      tagWrap.scrollTo({left:70, behavior:'smooth'});
+      setTimeout(()=> tagWrap.scrollTo({left:0, behavior:'smooth'}), 650);
+    }, 500);
+  }
   const visitedBtn = document.createElement('button');
   visitedBtn.className = 'visitedbtn';
   visitedBtn.innerHTML = '<span class="pc-only">✅ キミが訪れた水族館</span><span class="sp-only">✅ 訪れた水族館</span>';
