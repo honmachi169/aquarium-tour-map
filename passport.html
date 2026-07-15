@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C3DJNZQN"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-J4C3DJNZQN');</script>
+<title>すいぞくかんパスポート | 全国水族館ツアーMAP</title>
+<meta name="description" content="行った水族館のスタンプを集めて、メダルをゲットしよう！さかなのおにいさん かわちゃんと一緒に目指せ全国制覇🐟">
+<link rel="canonical" href="https://aquarium.yasasea.com/passport.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="すいぞくかんパスポート | 全国水族館ツアーMAP">
+<meta property="og:description" content="行った水族館のスタンプを集めて、メダルをゲットしよう！">
+<meta property="og:url" content="https://aquarium.yasasea.com/passport.html">
+<meta property="og:image" content="https://aquarium.yasasea.com/assets/kawachan_web.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<style>
+:root { --sea:#0096c7; --sea-deep:#023e8a; --sky:#caf0f8; --sand:#fff9ec; --coral:#ff6b6b; --sun:#ffd166; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif; background:var(--sand); color:#234; }
+header { background:linear-gradient(180deg,#48cae4,#0096c7); color:#fff; padding:14px 16px; }
+header a { color:#fff; text-decoration:none; font-weight:bold; font-size:.9rem; }
+main { max-width:900px; margin:0 auto; padding:20px 16px 40px; }
+.cover { background:linear-gradient(160deg,#023e8a,#0077b6); color:#fff; border-radius:20px; padding:26px 20px 22px; text-align:center; box-shadow:0 6px 18px rgba(2,62,138,.3); position:relative; overflow:hidden; }
+.cover::before { content:"🐟"; position:absolute; font-size:7rem; opacity:.08; right:-14px; bottom:-24px; transform:rotate(-12deg); }
+.cover .sub { font-size:.72rem; letter-spacing:.28em; color:var(--sun); font-weight:bold; }
+.cover h1 { font-size:1.35rem; margin:6px 0 2px; }
+.cover .owner { font-size:.85rem; opacity:.92; cursor:pointer; }
+.cover .owner .pen { font-size:.75rem; opacity:.75; }
+.cover .big { font-size:2.6rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 4px rgba(0,0,0,.3); margin-top:10px; line-height:1; }
+.cover .big small { font-size:1rem; color:#fff; font-weight:normal; }
+.pbar { background:rgba(255,255,255,.25); border-radius:999px; height:10px; margin:12px auto 6px; max-width:340px; overflow:hidden; }
+.pbar div { background:var(--sun); height:100%; border-radius:999px; width:0%; transition:width .8s ease; }
+.cover .note { font-size:.7rem; opacity:.75; margin-top:8px; }
+h2 { color:var(--sea-deep); font-size:1.1rem; margin:26px 0 4px; }
+.sec-note { font-size:.76rem; color:#789; margin-bottom:12px; }
+.medals { display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:12px; }
+.medal { background:#fff; border-radius:16px; padding:10px 6px 8px; text-align:center; cursor:pointer; box-shadow:0 2px 8px rgba(2,62,138,.08); border:2px solid transparent; transition:transform .12s; }
+.medal:hover { transform:translateY(-3px); }
+.medal .disc { width:58px; height:58px; border-radius:50%; margin:0 auto 6px; display:flex; align-items:center; justify-content:center; font-size:1.7rem; background:#eef2f5; filter:grayscale(1); opacity:.55; }
+.medal img.disc { object-fit:cover; padding:0; }
+.medal.earned { border-color:var(--sun); }
+.medal.earned .disc { background:radial-gradient(circle at 32% 30%,#ffe9a8,#ffd166 60%,#e2a93b); filter:none; opacity:1; box-shadow:0 2px 6px rgba(226,169,59,.5); }
+.medal .mn { font-size:.66rem; font-weight:bold; color:var(--sea-deep); line-height:1.25; }
+.medal .mp { font-size:.6rem; color:#89a; margin-top:2px; }
+.medal.earned .mp { color:#c98f1b; }
+.region-h { display:flex; align-items:baseline; gap:8px; margin:22px 0 10px; }
+.region-h h3 { color:var(--sea-deep); font-size:.98rem; }
+.region-h .rc { font-size:.74rem; color:#789; font-weight:bold; }
+.stamps { display:grid; grid-template-columns:repeat(auto-fill,minmax(88px,1fr)); gap:10px; }
+.stamp { aspect-ratio:1; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; cursor:pointer; padding:6px; transition:transform .12s; }
+.stamp:hover { transform:scale(1.06); }
+.stamp .e { font-size:1.45rem; line-height:1.1; }
+.stamp .n { font-size:.55rem; font-weight:bold; line-height:1.25; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; }
+.stamp.off { border:2px dashed #c3d3dd; color:#a9bcc8; background:rgba(255,255,255,.55); }
+.stamp.on { border:3px double var(--sc,#0096c7); color:var(--sc,#0096c7); background:#fff; transform:rotate(var(--rot,0deg)); box-shadow:0 2px 6px rgba(2,62,138,.14); }
+.stamp.on:hover { transform:rotate(var(--rot,0deg)) scale(1.06); }
+.stamp.on.hasimg { border:none; padding:0; background:none; box-shadow:none; }
+.stamp.on img { width:100%; height:100%; object-fit:contain; }
+.pmodal { position:fixed; inset:0; background:rgba(2,30,60,.55); display:none; align-items:center; justify-content:center; z-index:50; padding:16px; }
+.pmodal.open { display:flex; }
+.pmodal .box { background:#fff; border-radius:20px; padding:22px 20px 18px; width:min(92vw,400px); max-height:82vh; overflow-y:auto; text-align:center; }
+.pmodal .bige { font-size:3rem; }
+.pmodal img.bigimg { width:120px; height:120px; object-fit:contain; }
+.pmodal h3 { color:var(--sea-deep); font-size:1.1rem; margin:6px 0 2px; }
+.pmodal .pref { font-size:.72rem; color:#fff; background:var(--sea); border-radius:999px; padding:2px 10px; display:inline-block; }
+.pmodal .desc { font-size:.82rem; color:#567; margin:10px 0; line-height:1.6; }
+.pmodal .vdate { font-size:.74rem; color:#2a9d8f; font-weight:bold; }
+.pmodal .mlist { text-align:left; margin:10px 0; max-height:38vh; overflow-y:auto; }
+.pmodal .mlist a { display:flex; gap:8px; align-items:center; padding:7px 8px; border-radius:10px; text-decoration:none; color:#234; font-size:.84rem; font-weight:bold; }
+.pmodal .mlist a:hover { background:var(--sky); }
+.pmodal .mlist .todo { color:#9ab; }
+.pmodal .past-h { font-size:.82rem; font-weight:bold; color:#8a6d3b; margin:14px 0 2px; border-top:1px dashed #d8c3a5; padding-top:12px; }
+.pmodal .past-h span { font-weight:normal; font-size:.72rem; opacity:.75; }
+.rowbtns { display:flex; gap:10px; justify-content:center; margin-top:12px; flex-wrap:wrap; }
+.rowbtns a, .rowbtns button { font-family:inherit; font-size:.85rem; font-weight:bold; border-radius:999px; padding:9px 18px; cursor:pointer; text-decoration:none; border:none; }
+.btn-close { background:#eef2f5; color:#567; }
+.btn-visit { background:#fff; color:#2a9d8f; border:2px solid #2a9d8f !important; }
+.btn-visit.on { background:#2a9d8f; color:#fff; }
+.btn-spot { background:var(--coral); color:#fff; }
+.back { display:inline-block; margin-top:24px; color:var(--sea); font-weight:bold; text-decoration:none; }
+.attr-footer { font-size:.72rem; color:#9ab; margin-top:24px; text-align:center; line-height:2; } .attr-footer a { color:#89a; }
+</style>
+</head>
+<body>
+<header><a href="https://aquarium.yasasea.com/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
+<main>
+  <div class="cover">
+    <div class="sub">AQUARIUM PASSPORT</div>
+    <h1>📖 すいぞくかんパスポート</h1>
+    <div class="owner" id="ownerName" title="タップでなまえを変えられるよ"></div>
+    <div class="big"><span id="pCount">0</span><small> / 159館</small></div>
+    <div class="pbar"><div id="pBar"></div></div>
+    <div class="note">MAPの「⬜行ったらチェック」と連動してるよ。スタンプをタップしても押せる🐟</div>
+  </div>
+
+  <h2>🏅 メダルコレクション</h2>
+  <p class="sec-note">条件をクリアするとメダルがもらえるよ。タップすると「あと何館か」が見られる！</p>
+  <div class="medals" id="medalGrid"></div>
+
+  <h2>📖 スタンプ帳</h2>
+  <p class="sec-note">行った水族館のスタンプが押されていくよ。空いている枠は「これから行ける楽しみ」🐟</p>
+  <div id="stampBook"></div>
+
+  <a class="back" href="https://aquarium.yasasea.com/">← MAPにもどる</a>
+  <p class="attr-footer">🐟 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん） / https://aquarium.yasasea.com<br>運営：<a href="https://aquarium.yasasea.com/about.html#company">株式会社やさしいうみ</a>　<a href="https://aquarium.yasasea.com/about.html#work">💼 お仕事のご依頼</a>　<a href="https://aquarium.yasasea.com/about.html#privacy">プライバシーポリシー</a></p>
+</main>
+
+<div class="pmodal" id="pModal"><div class="box" id="pModalBox"></div></div>
+
+<script>
+const STAMPS = [{"n": "鳥羽水族館", "p": "三重県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/001.html", "e": "🦦"}, {"n": "神戸須磨シーワールド", "p": "兵庫県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/002.html", "e": "🐋"}, {"n": "須磨海浜水族園（スマスイ・閉園）", "p": "兵庫県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/046.html", "e": "🐟"}, {"n": "名古屋港水族館", "p": "愛知県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/003.html", "e": "🐋"}, {"n": "アクアワールド茨城県大洗水族館", "p": "茨城県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/004.html", "e": "🦈"}, {"n": "横浜・八景島シーパラダイス", "p": "神奈川県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/005.html", "e": "🦈"}, {"n": "海遊館", "p": "大阪府", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/006.html", "e": "🦈"}, {"n": "沖縄美ら海水族館", "p": "沖縄県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/007.html", "e": "🦈"}, {"n": "鴨川シーワールド", "p": "千葉県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/008.html", "e": "🐋"}, {"n": "アドベンチャーワールド", "p": "和歌山県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/009.html", "e": "🐧"}, {"n": "すみだ水族館", "p": "東京都", "r": "関東", "u": "https://aquarium.yasasea.com/spot/010.html", "e": "🪼"}, {"n": "京都水族館", "p": "京都府", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/011.html", "e": "🪼"}, {"n": "マクセル アクアパーク品川", "p": "東京都", "r": "関東", "u": "https://aquarium.yasasea.com/spot/012.html", "e": "🐬"}, {"n": "マリンワールド海の中道", "p": "福岡県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/013.html", "e": "🐬"}, {"n": "新江ノ島水族館", "p": "神奈川県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/014.html", "e": "🪼"}, {"n": "ニフレル", "p": "大阪府", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/015.html", "e": "🐯"}, {"n": "サンシャイン水族館", "p": "東京都", "r": "関東", "u": "https://aquarium.yasasea.com/spot/016.html", "e": "🐧"}, {"n": "世界淡水魚園水族館 アクア・トトぎふ", "p": "岐阜県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/017.html", "e": "🐠"}, {"n": "葛西臨海水族園", "p": "東京都", "r": "関東", "u": "https://aquarium.yasasea.com/spot/018.html", "e": "🐧"}, {"n": "越前松島水族館", "p": "福井県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/019.html", "e": "🐡"}, {"n": "いおワールドかごしま水族館", "p": "鹿児島県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/020.html", "e": "🦈"}, {"n": "大分マリーンパレス水族館 うみたまご", "p": "大分県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/021.html", "e": "🦭"}, {"n": "九十九島水族館 海きらら", "p": "長崎県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/022.html", "e": "🐬"}, {"n": "アトア（átoa）", "p": "兵庫県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/023.html", "e": "🦦"}, {"n": "長崎ペンギン水族館", "p": "長崎県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/024.html", "e": "🐧"}, {"n": "のとじま水族館", "p": "石川県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/025.html", "e": "🐬"}, {"n": "下関市立しものせき水族館 海響館", "p": "山口県", "r": "中国", "u": "https://aquarium.yasasea.com/spot/026.html", "e": "🐡"}, {"n": "竹島水族館", "p": "愛知県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/027.html", "e": "🦀"}, {"n": "姫路市立水族館", "p": "兵庫県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/028.html", "e": "🐟"}, {"n": "滋賀県立琵琶湖博物館", "p": "滋賀県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/029.html", "e": "🦭"}, {"n": "魚津水族館", "p": "富山県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/030.html", "e": "🦑"}, {"n": "おたる水族館", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/031.html", "e": "🦭"}, {"n": "サケのふるさと 千歳水族館", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/032.html", "e": "🐟"}, {"n": "伊勢シーパラダイス", "p": "三重県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/033.html", "e": "🦭"}, {"n": "島根県立宍道湖自然館ゴビウス", "p": "島根県", "r": "中国", "u": "https://aquarium.yasasea.com/spot/034.html", "e": "🐟"}, {"n": "しながわ水族館", "p": "東京都", "r": "関東", "u": "https://aquarium.yasasea.com/spot/035.html", "e": "🪼"}, {"n": "登別マリンパークニクス", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/036.html", "e": "🐧"}, {"n": "AOAO SAPPORO", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/037.html", "e": "🐧"}, {"n": "四国水族館", "p": "香川県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/038.html", "e": "🐬"}, {"n": "マリホ水族館（閉館）", "p": "広島県", "r": "中国", "u": "https://aquarium.yasasea.com/spot/039.html", "e": "🐟"}, {"n": "神戸どうぶつ王国", "p": "兵庫県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/040.html", "e": "🦫"}, {"n": "スマートアクアリウム静岡", "p": "静岡県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/041.html", "e": "🐟"}, {"n": "仙台うみの杜水族館", "p": "宮城県", "r": "東北", "u": "https://aquarium.yasasea.com/spot/042.html", "e": "🐬"}, {"n": "マリンピア日本海", "p": "新潟県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/043.html", "e": "🦭"}, {"n": "アクアマリンふくしま", "p": "福島県", "r": "東北", "u": "https://aquarium.yasasea.com/spot/044.html", "e": "🐡"}, {"n": "鶴岡市立加茂水族館（東北エプソンアクアリウムかもすい）", "p": "山形県", "r": "東北", "u": "https://aquarium.yasasea.com/spot/045.html", "e": "🪼"}, {"n": "生物多様性センター", "p": "大阪府", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u000.html", "e": "🐟"}, {"n": "広島もとまち水族館", "p": "広島県", "r": "中国", "u": "https://aquarium.yasasea.com/spot/u001.html", "e": "🐟"}, {"n": "シン・マリホ水族館", "p": "広島県", "r": "中国", "u": "https://aquarium.yasasea.com/spot/u002.html", "e": "🐟"}, {"n": "小さな水族館 びわこベース", "p": "滋賀県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u003.html", "e": "🐟"}, {"n": "花園教会水族館", "p": "京都府", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u004.html", "e": "🐟"}, {"n": "大阪海遊館 海洋生物研究所 以布利センター", "p": "高知県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u005.html", "e": "🦈"}, {"n": "タツノオトシゴハウス", "p": "鹿児島県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u006.html", "e": "🐟"}, {"n": "オホーツク流氷館", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/u007.html", "e": "🐟"}, {"n": "まちなか水族館 ギョギョタウン", "p": "兵庫県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u008.html", "e": "🐟"}, {"n": "うなぎミュージアム＆Cafe 雑魚寝館", "p": "大阪府", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u009.html", "e": "🐟"}, {"n": "埼玉県立川の博物館 水族館", "p": "埼玉県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u010.html", "e": "🐟"}, {"n": "ドルフィンファンタジー伊東", "p": "静岡県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u011.html", "e": "🐬"}, {"n": "時之栖水中楽園AQUARIUM", "p": "静岡県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u012.html", "e": "🐠"}, {"n": "弥富金魚水族館（YaToMi AQUA）", "p": "愛知県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u013.html", "e": "🐠"}, {"n": "小笠原海洋センター", "p": "東京都", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u014.html", "e": "🐢"}, {"n": "のと海洋ふれあいセンター", "p": "石川県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u015.html", "e": "🐟"}, {"n": "おばま水族館", "p": "福井県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u016.html", "e": "🐡"}, {"n": "蓼科アミューズメント水族館", "p": "長野県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u017.html", "e": "🐠"}, {"n": "北九州市立水環境館", "p": "福岡県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u018.html", "e": "🐟"}, {"n": "さんご畑", "p": "沖縄県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u019.html", "e": "🪸"}, {"n": "新さっぽろサンピアザ水族館", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/u020.html", "e": "🦭"}, {"n": "札幌市豊平川さけ科学館", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/u021.html", "e": "🐟"}, {"n": "市立室蘭水族館", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/u022.html", "e": "🐟"}, {"n": "くしろ水族館ぷくぷく", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/u023.html", "e": "🐟"}, {"n": "わっかりうむ ノシャップ寒流水族館", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/u024.html", "e": "🦭"}, {"n": "北の大地の水族館（山の水族館）", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/u025.html", "e": "🐠"}, {"n": "美深チョウザメ館", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/u026.html", "e": "🐟"}, {"n": "オホーツクとっかりセンター", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/u027.html", "e": "🦭"}, {"n": "氷海展望塔オホーツクタワー", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/u028.html", "e": "🐟"}, {"n": "標津サーモン科学館", "p": "北海道", "r": "北海道", "u": "https://aquarium.yasasea.com/spot/u029.html", "e": "🐟"}, {"n": "青森県営浅虫水族館", "p": "青森県", "r": "東北", "u": "https://aquarium.yasasea.com/spot/u030.html", "e": "🐬"}, {"n": "八戸市水産科学館マリエント", "p": "青森県", "r": "東北", "u": "https://aquarium.yasasea.com/spot/u031.html", "e": "🐢"}, {"n": "もぐらんぴあ", "p": "岩手県", "r": "東北", "u": "https://aquarium.yasasea.com/spot/u032.html", "e": "🐟"}, {"n": "岩手県立水産科学館", "p": "岩手県", "r": "東北", "u": "https://aquarium.yasasea.com/spot/u033.html", "e": "🐟"}, {"n": "アクアテラス錦ケ丘", "p": "宮城県", "r": "東北", "u": "https://aquarium.yasasea.com/spot/u034.html", "e": "🐟"}, {"n": "男鹿水族館GAO", "p": "秋田県", "r": "東北", "u": "https://aquarium.yasasea.com/spot/u035.html", "e": "🐻‍❄️"}, {"n": "アクアマリンいなわしろカワセミ水族館", "p": "福島県", "r": "東北", "u": "https://aquarium.yasasea.com/spot/u036.html", "e": "🦦"}, {"n": "かすみがうら市水族館", "p": "茨城県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u037.html", "e": "🐟"}, {"n": "栃木県なかがわ水遊園", "p": "栃木県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u038.html", "e": "🐠"}, {"n": "さかなと森の観察園", "p": "栃木県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u039.html", "e": "🐟"}, {"n": "さいたま水族館", "p": "埼玉県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u040.html", "e": "🦦"}, {"n": "板橋区立熱帯環境植物館", "p": "東京都", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u041.html", "e": "🐟"}, {"n": "足立区生物園", "p": "東京都", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u042.html", "e": "🐟"}, {"n": "井の頭自然文化園 水生物館", "p": "東京都", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u043.html", "e": "🐟"}, {"n": "横浜開運水族館 フォーチュンアクアリウム", "p": "神奈川県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u044.html", "e": "🐟"}, {"n": "観音崎自然博物館", "p": "神奈川県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u045.html", "e": "🐟"}, {"n": "カワスイ 川崎水族館", "p": "神奈川県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u046.html", "e": "🐠"}, {"n": "相模川ふれあい科学館 アクアリウムさがみはら", "p": "神奈川県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u047.html", "e": "🐟"}, {"n": "北里アクアリウムラボ", "p": "神奈川県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u048.html", "e": "🐟"}, {"n": "箱根園水族館", "p": "神奈川県", "r": "関東", "u": "https://aquarium.yasasea.com/spot/u049.html", "e": "🦭"}, {"n": "上越市立水族博物館 うみがたり", "p": "新潟県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u050.html", "e": "🐳"}, {"n": "イヨボヤ会館", "p": "新潟県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u051.html", "e": "🐟"}, {"n": "長岡市寺泊水族博物館", "p": "新潟県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u052.html", "e": "🐧"}, {"n": "ひみラボ水族館", "p": "富山県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u053.html", "e": "🐟"}, {"n": "森の中の水族館。（富士湧水の里水族館）", "p": "山梨県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u054.html", "e": "🐟"}, {"n": "あわしまマリンパーク", "p": "静岡県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u055.html", "e": "🐬"}, {"n": "沼津港深海水族館", "p": "静岡県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u056.html", "e": "🦀"}, {"n": "幼魚水族館", "p": "静岡県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u057.html", "e": "🐟"}, {"n": "伊豆・三津シーパラダイス", "p": "静岡県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u058.html", "e": "🐬"}, {"n": "下田海中水族館", "p": "静岡県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u059.html", "e": "🐬"}, {"n": "浜名湖体験学習施設ウォット", "p": "静岡県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u060.html", "e": "🐟"}, {"n": "南知多ビーチランド", "p": "愛知県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u061.html", "e": "🐬"}, {"n": "碧南海浜水族館", "p": "愛知県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u062.html", "e": "🐟"}, {"n": "ぎょぎょランド（赤塚山公園）", "p": "愛知県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u063.html", "e": "🐟"}, {"n": "名古屋シーライフ水族館", "p": "愛知県", "r": "中部", "u": "https://aquarium.yasasea.com/spot/u064.html", "e": "🐠"}, {"n": "鳥羽湾めぐりとイルカ島", "p": "三重県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u065.html", "e": "🐬"}, {"n": "紀宝町ウミガメ公園", "p": "三重県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u066.html", "e": "🐢"}, {"n": "赤目滝水族館", "p": "三重県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u067.html", "e": "🐟"}, {"n": "高槻市立自然博物館 あくあぴあ芥川", "p": "大阪府", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u068.html", "e": "🐟"}, {"n": "奈良金魚ミュージアム", "p": "奈良県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u069.html", "e": "🐠"}, {"n": "和歌山県立自然博物館", "p": "和歌山県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u070.html", "e": "🐟"}, {"n": "串本海中公園", "p": "和歌山県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u071.html", "e": "🐢"}, {"n": "太地町立くじらの博物館", "p": "和歌山県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u072.html", "e": "🐋"}, {"n": "京都大学白浜水族館", "p": "和歌山県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u073.html", "e": "🐟"}, {"n": "すさみ町立エビとカニの水族館", "p": "和歌山県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u074.html", "e": "🦞"}, {"n": "城崎マリンワールド", "p": "兵庫県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u075.html", "e": "🐬"}, {"n": "みなとやま水族館", "p": "兵庫県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u076.html", "e": "🦦"}, {"n": "淡路じゃのひれドルフィンファーム", "p": "兵庫県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u077.html", "e": "🐬"}, {"n": "とっとり賀露かにっこ館", "p": "鳥取県", "r": "中国", "u": "https://aquarium.yasasea.com/spot/u078.html", "e": "🦀"}, {"n": "島根県立しまね海洋館アクアス", "p": "島根県", "r": "中国", "u": "https://aquarium.yasasea.com/spot/u079.html", "e": "🐳"}, {"n": "渋川マリン水族館", "p": "岡山県", "r": "中国", "u": "https://aquarium.yasasea.com/spot/u080.html", "e": "🦭"}, {"n": "宮島水族館 みやじマリン", "p": "広島県", "r": "中国", "u": "https://aquarium.yasasea.com/spot/u081.html", "e": "🦭"}, {"n": "福山大学マリンバイオセンター水族館", "p": "広島県", "r": "中国", "u": "https://aquarium.yasasea.com/spot/u082.html", "e": "🐟"}, {"n": "なぎさ水族館", "p": "山口県", "r": "中国", "u": "https://aquarium.yasasea.com/spot/u083.html", "e": "🐟"}, {"n": "日和佐うみがめ博物館カレッタ", "p": "徳島県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u084.html", "e": "🐢"}, {"n": "モラスコむぎ", "p": "徳島県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u085.html", "e": "🐟"}, {"n": "海洋自然博物館マリンジャム", "p": "徳島県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u086.html", "e": "🐠"}, {"n": "新屋島水族館", "p": "香川県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u087.html", "e": "🐬"}, {"n": "日本ドルフィンセンター", "p": "香川県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u088.html", "e": "🐬"}, {"n": "虹の森公園おさかな館", "p": "愛媛県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u089.html", "e": "🐟"}, {"n": "ドルフィンファームしまなみ", "p": "愛媛県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u090.html", "e": "🐬"}, {"n": "桂浜水族館", "p": "高知県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u091.html", "e": "🦭"}, {"n": "四万十川学遊館あきついお", "p": "高知県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u092.html", "e": "🐠"}, {"n": "足摺海洋館 SATOUMI", "p": "高知県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u093.html", "e": "🐡"}, {"n": "むろと廃校水族館", "p": "高知県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u094.html", "e": "🐢"}, {"n": "筑後川防災施設くるめウス", "p": "福岡県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u095.html", "e": "🐟"}, {"n": "やながわ有明海水族館", "p": "福岡県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u096.html", "e": "🐟"}, {"n": "鹿島市干潟交流館なな海", "p": "佐賀県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u097.html", "e": "🐟"}, {"n": "壱岐イルカパーク＆リゾート", "p": "長崎県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u098.html", "e": "🐬"}, {"n": "うみたま体験パーク つくみイルカ島", "p": "大分県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u099.html", "e": "🐬"}, {"n": "番匠おさかな館", "p": "大分県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u100.html", "e": "🐟"}, {"n": "わくわく海中水族館シードーナツ", "p": "熊本県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u101.html", "e": "🐬"}, {"n": "高千穂峡淡水魚水族館", "p": "宮崎県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u102.html", "e": "🐟"}, {"n": "すみえファミリー水族館", "p": "宮崎県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u103.html", "e": "🐟"}, {"n": "出の山淡水魚水族館", "p": "宮崎県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u104.html", "e": "🐠"}, {"n": "大淀川学習館", "p": "宮崎県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u105.html", "e": "🐟"}, {"n": "志布志湾大黒イルカランド", "p": "宮崎県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u106.html", "e": "🐬"}, {"n": "奄美海洋展示館", "p": "鹿児島県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u107.html", "e": "🐢"}, {"n": "黒島研究所", "p": "沖縄県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u108.html", "e": "🐢"}, {"n": "DMMかりゆし水族館", "p": "沖縄県", "r": "九州・沖縄", "u": "https://aquarium.yasasea.com/spot/u109.html", "e": "🦦"}, {"n": "きんたい廃校博物館（きんぱく）", "p": "大阪府", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u110.html", "e": "🐟"}, {"n": "アクア東条", "p": "兵庫県", "r": "近畿", "u": "https://aquarium.yasasea.com/spot/u111.html", "e": "🐟"}, {"n": "市場水族館（新屋島水族館 仮設）", "p": "香川県", "r": "四国", "u": "https://aquarium.yasasea.com/spot/u112.html", "e": "🐧"}];
+const MEDALS = [{"id": "m1", "icon": "🐟", "name": "はじめの一歩", "desc": "はじめてのスタンプをゲット！", "target": 1}, {"id": "m10", "icon": "🐠", "name": "10館たんけん隊", "desc": "10館スタンプを集めた！", "target": 10}, {"id": "m30", "icon": "🐬", "name": "30館マスター", "desc": "30館スタンプを集めた！", "target": 30}, {"id": "m50", "icon": "🦈", "name": "50館つわもの", "desc": "50館スタンプを集めた！", "target": 50}, {"id": "m100", "icon": "🐋", "name": "100館レジェンド", "desc": "100館スタンプを集めた！すごすぎる！", "target": 100}, {"id": "mall", "icon": "👑", "name": "全159館 完全制覇", "desc": "日本中の水族館をぜんぶ回った伝説の人！", "target": 159}, {"id": "shachi", "icon": "🐋", "name": "シャチマスター", "desc": "シャチに会える水族館をぜんぶ制覇！", "members": ["神戸須磨シーワールド", "名古屋港水族館", "鴨川シーワールド"]}, {"id": "jinbei", "icon": "🦈", "name": "ジンベエマスター", "desc": "ジンベエザメに会える水族館をぜんぶ制覇！", "members": ["海遊館", "沖縄美ら海水族館", "いおワールドかごしま水族館", "大阪海遊館 海洋生物研究所 以布利センター"]}, {"id": "rakko", "icon": "🦦", "name": "ラッコメダル", "desc": "今ラッコに会えるのは鳥羽水族館だけ。でも、かつてラッコに会えた水族館の思い出も集めよう🦦", "members": ["鳥羽水族館"], "past": ["須磨海浜水族園（スマスイ・閉園）", "横浜・八景島シーパラダイス", "海遊館", "アドベンチャーワールド", "マリンワールド海の中道", "新江ノ島水族館", "サンシャイン水族館", "大分マリーンパレス水族館 うみたまご", "のとじま水族館", "おたる水族館", "登別マリンパークニクス", "マリンピア日本海", "新さっぽろサンピアザ水族館", "伊豆・三津シーパラダイス", "下田海中水族館"]}, {"id": "kurage", "icon": "🪼", "name": "クラゲマスター", "desc": "クラゲにうっとりできる水族館をぜんぶ制覇！", "members": ["すみだ水族館", "京都水族館", "マクセル アクアパーク品川", "新江ノ島水族館", "九十九島水族館 海きらら", "しながわ水族館", "鶴岡市立加茂水族館（東北エプソンアクアリウムかもすい）"]}, {"id": "shinkai", "icon": "🐙", "name": "深海マスター", "desc": "深海生物じまんの水族館をぜんぶ制覇！", "members": ["沖縄美ら海水族館", "新江ノ島水族館", "竹島水族館", "魚津水族館", "アクアマリンふくしま", "沼津港深海水族館", "串本海中公園"]}, {"id": "penguin", "icon": "🐧", "name": "ペンギンマスター", "desc": "ペンギン好きにおすすめの水族館をぜんぶ制覇！", "members": ["名古屋港水族館", "アドベンチャーワールド", "すみだ水族館", "サンシャイン水族館", "葛西臨海水族園", "越前松島水族館", "長崎ペンギン水族館", "下関市立しものせき水族館 海響館", "おたる水族館", "登別マリンパークニクス", "AOAO SAPPORO", "新さっぽろサンピアザ水族館", "わっかりうむ ノシャップ寒流水族館", "男鹿水族館GAO", "箱根園水族館", "上越市立水族博物館 うみがたり", "長岡市寺泊水族博物館", "あわしまマリンパーク", "下田海中水族館", "城崎マリンワールド", "島根県立しまね海洋館アクアス", "新屋島水族館", "桂浜水族館", "うみたま体験パーク つくみイルカ島", "DMMかりゆし水族館", "市場水族館（新屋島水族館 仮設）"]}, {"id": "area_hokkaido", "icon": "🗾", "name": "北海道マスター", "desc": "北海道エリアの水族館をぜんぶ制覇！", "members": ["おたる水族館", "サケのふるさと 千歳水族館", "登別マリンパークニクス", "AOAO SAPPORO", "オホーツク流氷館", "新さっぽろサンピアザ水族館", "札幌市豊平川さけ科学館", "市立室蘭水族館", "くしろ水族館ぷくぷく", "わっかりうむ ノシャップ寒流水族館", "北の大地の水族館（山の水族館）", "美深チョウザメ館", "オホーツクとっかりセンター", "氷海展望塔オホーツクタワー", "標津サーモン科学館"]}, {"id": "area_tohoku", "icon": "🗾", "name": "東北マスター", "desc": "東北エリアの水族館をぜんぶ制覇！", "members": ["仙台うみの杜水族館", "アクアマリンふくしま", "鶴岡市立加茂水族館（東北エプソンアクアリウムかもすい）", "青森県営浅虫水族館", "八戸市水産科学館マリエント", "もぐらんぴあ", "岩手県立水産科学館", "アクアテラス錦ケ丘", "男鹿水族館GAO", "アクアマリンいなわしろカワセミ水族館"]}, {"id": "area_kanto", "icon": "🗾", "name": "関東マスター", "desc": "関東エリアの水族館をぜんぶ制覇！", "members": ["アクアワールド茨城県大洗水族館", "横浜・八景島シーパラダイス", "鴨川シーワールド", "すみだ水族館", "マクセル アクアパーク品川", "新江ノ島水族館", "サンシャイン水族館", "葛西臨海水族園", "しながわ水族館", "埼玉県立川の博物館 水族館", "小笠原海洋センター", "かすみがうら市水族館", "栃木県なかがわ水遊園", "さかなと森の観察園", "さいたま水族館", "板橋区立熱帯環境植物館", "足立区生物園", "井の頭自然文化園 水生物館", "横浜開運水族館 フォーチュンアクアリウム", "観音崎自然博物館", "カワスイ 川崎水族館", "相模川ふれあい科学館 アクアリウムさがみはら", "北里アクアリウムラボ", "箱根園水族館"]}, {"id": "area_chubu", "icon": "🗾", "name": "中部マスター", "desc": "中部エリアの水族館をぜんぶ制覇！", "members": ["名古屋港水族館", "世界淡水魚園水族館 アクア・トトぎふ", "越前松島水族館", "のとじま水族館", "竹島水族館", "魚津水族館", "スマートアクアリウム静岡", "マリンピア日本海", "ドルフィンファンタジー伊東", "時之栖水中楽園AQUARIUM", "弥富金魚水族館（YaToMi AQUA）", "のと海洋ふれあいセンター", "おばま水族館", "蓼科アミューズメント水族館", "上越市立水族博物館 うみがたり", "イヨボヤ会館", "長岡市寺泊水族博物館", "ひみラボ水族館", "森の中の水族館。（富士湧水の里水族館）", "あわしまマリンパーク", "沼津港深海水族館", "幼魚水族館", "伊豆・三津シーパラダイス", "下田海中水族館", "浜名湖体験学習施設ウォット", "南知多ビーチランド", "碧南海浜水族館", "ぎょぎょランド（赤塚山公園）", "名古屋シーライフ水族館"]}, {"id": "area_kinki", "icon": "🗾", "name": "近畿マスター", "desc": "近畿エリアの水族館をぜんぶ制覇！", "members": ["鳥羽水族館", "神戸須磨シーワールド", "須磨海浜水族園（スマスイ・閉園）", "海遊館", "アドベンチャーワールド", "京都水族館", "ニフレル", "アトア（átoa）", "姫路市立水族館", "滋賀県立琵琶湖博物館", "伊勢シーパラダイス", "神戸どうぶつ王国", "生物多様性センター", "小さな水族館 びわこベース", "花園教会水族館", "まちなか水族館 ギョギョタウン", "うなぎミュージアム＆Cafe 雑魚寝館", "鳥羽湾めぐりとイルカ島", "紀宝町ウミガメ公園", "赤目滝水族館", "高槻市立自然博物館 あくあぴあ芥川", "奈良金魚ミュージアム", "和歌山県立自然博物館", "串本海中公園", "太地町立くじらの博物館", "京都大学白浜水族館", "すさみ町立エビとカニの水族館", "城崎マリンワールド", "みなとやま水族館", "淡路じゃのひれドルフィンファーム", "きんたい廃校博物館（きんぱく）", "アクア東条"]}, {"id": "area_chugoku", "icon": "🗾", "name": "中国マスター", "desc": "中国エリアの水族館をぜんぶ制覇！", "members": ["下関市立しものせき水族館 海響館", "島根県立宍道湖自然館ゴビウス", "マリホ水族館（閉館）", "広島もとまち水族館", "シン・マリホ水族館", "とっとり賀露かにっこ館", "島根県立しまね海洋館アクアス", "渋川マリン水族館", "宮島水族館 みやじマリン", "福山大学マリンバイオセンター水族館", "なぎさ水族館"]}, {"id": "area_shikoku", "icon": "🗾", "name": "四国マスター", "desc": "四国エリアの水族館をぜんぶ制覇！", "members": ["四国水族館", "大阪海遊館 海洋生物研究所 以布利センター", "日和佐うみがめ博物館カレッタ", "モラスコむぎ", "海洋自然博物館マリンジャム", "新屋島水族館", "日本ドルフィンセンター", "虹の森公園おさかな館", "ドルフィンファームしまなみ", "桂浜水族館", "四万十川学遊館あきついお", "足摺海洋館 SATOUMI", "むろと廃校水族館", "市場水族館（新屋島水族館 仮設）"]}, {"id": "area_kyushu", "icon": "🗾", "name": "九州・沖縄マスター", "desc": "九州・沖縄エリアの水族館をぜんぶ制覇！", "members": ["沖縄美ら海水族館", "マリンワールド海の中道", "いおワールドかごしま水族館", "大分マリーンパレス水族館 うみたまご", "九十九島水族館 海きらら", "長崎ペンギン水族館", "タツノオトシゴハウス", "北九州市立水環境館", "さんご畑", "筑後川防災施設くるめウス", "やながわ有明海水族館", "鹿島市干潟交流館なな海", "壱岐イルカパーク＆リゾート", "うみたま体験パーク つくみイルカ島", "番匠おさかな館", "わくわく海中水族館シードーナツ", "高千穂峡淡水魚水族館", "すみえファミリー水族館", "出の山淡水魚水族館", "大淀川学習館", "志布志湾大黒イルカランド", "奄美海洋展示館", "黒島研究所", "DMMかりゆし水族館"]}];
+const REGIONS = ["北海道", "東北", "関東", "中部", "近畿", "中国", "四国", "九州・沖縄", "その他"];
+const TOTAL = STAMPS.length;
+let myVisits = new Set(JSON.parse(localStorage.getItem('myVisits')||'[]'));
+let myDates = JSON.parse(localStorage.getItem('myVisitDates')||'{}');
+
+// なまえ（このブラウザに保存）
+function ownerLabel(){
+  const n = localStorage.getItem('passportName') || '';
+  document.getElementById('ownerName').innerHTML =
+    (n ? n + ' の パスポート' : 'なまえを入れる') + ' <span class="pen">✏️</span>';
+}
+document.getElementById('ownerName').onclick = ()=>{
+  const cur = localStorage.getItem('passportName') || '';
+  const n = prompt('パスポートに入れるなまえ（10文字まで）', cur);
+  if(n === null) return;
+  localStorage.setItem('passportName', n.trim().slice(0,10));
+  ownerLabel();
+};
+
+const REGION_COLOR = {'北海道':'#0077b6','東北':'#2a9d8f','関東':'#e76f51','中部':'#7b5ea7',
+  '近畿':'#0096c7','中国':'#e9a20a','四国':'#43aa8b','九州・沖縄':'#ef6079','その他':'#0096c7'};
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+
+function medalState(m){
+  if(m.members){
+    const done = m.members.filter(n=>myVisits.has(n)).length;
+    return { done, goal: m.members.length, earned: done === m.members.length };
+  }
+  const done = Math.min(myVisits.size, m.target);
+  return { done, goal: m.target, earned: myVisits.size >= m.target };
+}
+
+function render(){
+  const c = myVisits.size;
+  document.getElementById('pCount').textContent = c;
+  document.getElementById('pBar').style.width = (c/TOTAL*100) + '%';
+
+  document.getElementById('medalGrid').innerHTML = MEDALS.map((m,i)=>{
+    const s = medalState(m);
+    const disc = m.img ? '<img class="disc" src="'+m.img+'" alt="">' : '<div class="disc">'+m.icon+'</div>';
+    const prog = s.earned ? 'ゲット！' : s.done + '/' + s.goal;
+    return '<div class="medal'+(s.earned?' earned':'')+'" onclick="openMedal('+i+')">'+disc+
+      '<div class="mn">'+esc(m.name)+'</div><div class="mp">'+prog+'</div></div>';
+  }).join('');
+
+  document.getElementById('stampBook').innerHTML = REGIONS.map(r=>{
+    const members = STAMPS.map((s,i)=>[s,i]).filter(([s])=>s.r===r);
+    if(!members.length) return '';
+    const done = members.filter(([s])=>myVisits.has(s.n)).length;
+    const cells = members.map(([s,i])=>{
+      const on = myVisits.has(s.n);
+      const rot = ((i % 5) - 2) * 2.5;
+      if(on && s.img){
+        return '<div class="stamp on hasimg" onclick="openStamp('+i+')"><img src="'+s.img+'" alt="'+esc(s.n)+'"></div>';
+      }
+      return '<div class="stamp '+(on?'on':'off')+'" style="--sc:'+(REGION_COLOR[r]||'#0096c7')+';--rot:'+rot+'deg" '+
+        'onclick="openStamp('+i+')"><span class="e">'+(on?s.e:'')+'</span><span class="n">'+esc(s.n)+'</span></div>';
+    }).join('');
+    return '<div class="region-h"><h3>'+r+'</h3><span class="rc">'+done+' / '+members.length+'館</span></div>'+
+      '<div class="stamps">'+cells+'</div>';
+  }).join('');
+}
+
+const modal = document.getElementById('pModal');
+const box = document.getElementById('pModalBox');
+modal.onclick = e => { if(e.target === modal) modal.classList.remove('open'); };
+
+window.openStamp = function(i){
+  const s = STAMPS[i];
+  const on = myVisits.has(s.n);
+  const d = myDates[s.n];
+  const dateStr = on ? (d ? '✅ ' + new Date(d).toLocaleDateString('ja-JP') + ' にチェック' : '✅ 行った！') : '';
+  const visual = (on && s.img) ? '<img class="bigimg" src="'+s.img+'" alt="">' : '<div class="bige">'+(on?s.e:'⬜')+'</div>';
+  box.innerHTML = visual +
+    '<h3>'+esc(s.n)+'</h3><span class="pref">'+esc(s.p)+'</span>'+
+    (dateStr ? '<div class="desc vdate">'+dateStr+'</div>' : '<div class="desc">まだスタンプが押されてないよ。行ったらチェックしてね🐟</div>')+
+    '<div class="rowbtns">'+
+      '<button class="btn-close" onclick="pModal.classList.remove(\'open\')">とじる</button>'+
+      '<button class="btn-visit'+(on?' on':'')+'" onclick="toggleVisit('+i+')">'+(on?'✅ 行った！':'⬜ 行った！を押す')+'</button>'+
+      '<a class="btn-spot" href="'+s.u+'">くわしく🐟</a>'+
+    '</div>';
+  modal.classList.add('open');
+};
+
+window.toggleVisit = function(i){
+  const s = STAMPS[i];
+  if(myVisits.has(s.n)){ myVisits.delete(s.n); delete myDates[s.n]; }
+  else { myVisits.add(s.n); myDates[s.n] = Date.now(); }
+  localStorage.setItem('myVisits', JSON.stringify([...myVisits]));
+  localStorage.setItem('myVisitDates', JSON.stringify(myDates));
+  render();
+  openStamp(i);
+};
+
+window.openMedal = function(i){
+  const m = MEDALS[i];
+  const s = medalState(m);
+  const visual = m.img ? '<img class="bigimg" src="'+m.img+'" alt="">' : '<div class="bige">'+m.icon+'</div>';
+  let body = '<div class="desc">'+esc(m.desc)+'</div>';
+  const memberLink = n => {
+    const idx = STAMPS.findIndex(s=>s.n===n);
+    const on = myVisits.has(n);
+    const u = idx>=0 ? STAMPS[idx].u : '#';
+    return '<a href="'+u+'" class="'+(on?'':'todo')+'">'+(on?'✅':'⬜')+' '+esc(n)+'</a>';
+  };
+  if(m.members){
+    body += '<div class="mlist">'+m.members.map(memberLink).join('')+'</div>';
+  }
+  const left = s.goal - s.done;
+  body += s.earned
+    ? '<div class="desc vdate">🏅 メダルゲット！おめでとう！</div>'
+    : '<div class="desc">あと <b>'+left+'館</b> でゲット！</div>';
+  // ラッコの思い出：かつてラッコに会えた水族館（今はいません）
+  if(m.past && m.past.length){
+    const memN = m.past.filter(n=>myVisits.has(n)).length;
+    body += '<div class="past-h">🦦 かつてラッコに会えた水族館<span>（今はいません）</span></div>'+
+      '<div class="desc" style="margin:2px 0 8px">ラッコに会えた思い出：<b>'+(memN + s.done)+'</b> 館</div>'+
+      '<div class="mlist">'+m.past.map(memberLink).join('')+'</div>';
+  }
+  box.innerHTML = visual + '<h3>'+esc(m.name)+'</h3>' + body +
+    '<div class="rowbtns"><button class="btn-close" onclick="pModal.classList.remove(\'open\')">とじる</button></div>';
+  modal.classList.add('open');
+};
+
+ownerLabel();
+render();
+</script>
+</body>
+</html>

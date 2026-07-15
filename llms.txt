@@ -10,6 +10,7 @@
 - トップページ（地図＋フィルター）: https://aquarium.yasasea.com/
 - このサイトについて: https://aquarium.yasasea.com/about.html
 - さかなのおにいさん かわちゃん流・水族館の楽しみ方（行く前の準備・水槽の見方・イルカショー/パフォーマンス・子連れ・おみやげ）: https://aquarium.yasasea.com/guide.html
+- すいぞくかんパスポート（行った水族館のスタンプ帳＋メダル）: https://aquarium.yasasea.com/passport.html
 - さかなのおにいさん かわちゃん的 水族館ランキング（サメ／パフォーマンス／深海／赤ちゃん連れ／デート）: https://aquarium.yasasea.com/taste-ranking.html
 
 ## 生き物別まとめページ
@@ -72,7 +73,7 @@
 - すみだ水族館（東京都）：クラゲ — https://aquarium.yasasea.com/spot/010.html
 - 京都水族館（京都府）：クラゲ — https://aquarium.yasasea.com/spot/011.html
 - マクセル アクアパーク品川（東京都）：イルカ、クラゲ — https://aquarium.yasasea.com/spot/012.html
-- マリンワールド海の中道（福岡県）：ラッコ — https://aquarium.yasasea.com/spot/013.html
+- マリンワールド海の中道（福岡県）：博多湾を背景にジャンプするイルカショーのロケーションは日本屈指！ — https://aquarium.yasasea.com/spot/013.html
 - 新江ノ島水族館（神奈川県）：クラゲ — https://aquarium.yasasea.com/spot/014.html
 - ニフレル（大阪府）：ホワイトタイガー、ミニカバ — https://aquarium.yasasea.com/spot/015.html
 - サンシャイン水族館（東京都）：ケープペンギン — https://aquarium.yasasea.com/spot/016.html

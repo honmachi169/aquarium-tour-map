@@ -68,6 +68,8 @@
   .chips { display:flex; flex-wrap:wrap; gap:5px; margin:2px 0 6px; }
   .chip { font-size:.72rem; font-weight:bold; background:#e8f6fb; color:#075985; border:1.5px solid #7dd3fc; border-radius:999px; padding:2px 9px; }
   .chip.only { background:#fff7db; color:#92600a; border-color:#f4c430; }
+  .chip.rakko-past { background:#f3eee7; color:#8a6d3b; border-color:#d8c3a5; border-style:dashed; }
+  .chip.rakko-past small { font-weight:normal; opacity:.75; }
   .visitbtn { position:relative; font-size:.78rem; font-weight:bold; border-radius:999px; padding:5px 12px; cursor:pointer; border:2px solid #2a9d8f; background:#fff; color:#2a9d8f; font-family:inherit; overflow:visible; }
   .wishbtn { font-size:.78rem; font-weight:bold; border-radius:999px; padding:5px 12px; cursor:pointer; border:2px solid #f4a460; background:#fff; color:#c47a1e; font-family:inherit; }
   .wishbtn.on { background:#fff3d6; border-color:#f4a460; color:#a15c00; }
@@ -284,7 +286,8 @@
     <div class="mycount">
       <span class="mc-mine">あなたの制覇：<b id="myvisited">0</b> 館 🏆（⬜を押してチェック！）</span>
       <span class="mc-kawachan" style="display:none">🐟 かわちゃんねるは <b id="kawaCount">0</b>/<span id="kawaGoal">100</span>館 YouTubeで紹介中！</span>
-      <button id="mapImgBtn" class="sharebtn">🗾 制覇マップをシェア</button></div>
+      <button id="mapImgBtn" class="sharebtn">🗾 制覇マップをシェア</button>
+      <a class="sharebtn" href="passport.html" style="text-decoration:none;display:inline-block">📖 パスポート</a></div>
     <a class="counter-sub-btn pc-only" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
   </div>
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,45 350,-5 600,20 C850,45 1050,-5 1200,20 L1200,40 L0,40 Z" fill="#023e8a"/></svg>
@@ -593,6 +596,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
 
   // 行った！チェック（このブラウザに保存）
   let myVisits = new Set(JSON.parse(localStorage.getItem('myVisits')||'[]'));
+  let myVisitDates = JSON.parse(localStorage.getItem('myVisitDates')||'{}'); // パスポートのスタンプ日付用
 
   // バーのリレー表示：最初はかわちゃんの42/100 → 数秒後に「あなたの制覇」へ（タップで切替）
   let barMode = 'kawachan';
@@ -677,7 +681,9 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   }
   window.toggleVisit = function(name, ev){
     const wasOn = myVisits.has(name);
-    if(wasOn) myVisits.delete(name); else myVisits.add(name);
+    if(wasOn){ myVisits.delete(name); delete myVisitDates[name]; }
+    else { myVisits.add(name); myVisitDates[name] = Date.now(); }
+    localStorage.setItem('myVisitDates', JSON.stringify(myVisitDates));
     updateMyCount(); render();
     document.querySelectorAll(`.visitbtn[data-name="${CSS.escape(name)}"]`).forEach(b=>{
       const on = myVisits.has(name);
@@ -725,6 +731,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       chips.push(`<span class="chip">${ANIMAL_ICONS[name]||'🐟'} ${name}</span>`);
     });
     if(a.only) chips.push(`<span class="chip only">⭐ ${a.only}</span>`);
+    if(a.rakko_past) chips.push(`<span class="chip rakko-past" title="かつてラッコを飼育していた水族館です">🦦 かつてラッコに会えた<small>（今はいません）</small></span>`);
     return chips.length ? `<div class="chips">${chips.join('')}</div>` : '';
   }
 

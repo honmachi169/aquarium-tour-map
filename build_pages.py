@@ -66,6 +66,9 @@ for slug, a, intro in entries:
 
     chips = "".join(f'<span class="chip">{ANIMAL_ICONS.get(x,"🐟")} {E(x)}</span>' for x in a.get("animals", []))
     if a.get("only"): chips += f'<span class="chip only">⭐️ここだけ！{E(a["only"])}</span>'
+    if a.get("rakko_past"):
+        rp_tip = E(a["rakko_past_note"]) if a.get("rakko_past_note") else "かつてラッコを飼育していた水族館です"
+        chips += f'<span class="chip rakko-past" title="{rp_tip}">🦦 かつてラッコに会えた水族館<small>（今はいません）</small></span>'
     tagchips = "".join(f'<span class="chip tag">{TAG_LABEL[t]}</span>' for t in a.get("tags", []) if t in TAG_LABEL)
 
     # 交通手段の目安チップ（access/parkingの記載から機械的に判定。誤爆しないよう保守的に）
@@ -234,6 +237,7 @@ loadYtComments();''' if v else ''
     entry_meta.append({
         "slug": slug, "name": a["name"], "pref": a.get("pref", ""), "url": page_url,
         "thumb": thumb or ogimg, "animals": a.get("animals") or [], "tags": a.get("tags") or [],
+        "rakko_past": bool(a.get("rakko_past")), "rakko_past_note": a.get("rakko_past_note") or "",
         "comment": a.get("highlight") or a.get("comment") or "", "lat": a.get("lat"), "lng": a.get("lng"),
         "stroller": a.get("stroller"), "nursing": a.get("nursing"), "locker": a.get("locker"),
         "ratings": a.get("ratings") if (a.get("visited") and a.get("verified")) else None,
@@ -277,6 +281,8 @@ loadYtComments();''' if v else ''
   .chip.only {{ background:#fff7db; color:#92600a; border-color:#f4c430; }}
   .chip.tag {{ background:#fdf1e3; color:#c9660a; border-color:#f4a261; }}
   .chip.tr {{ background:#eefbe7; color:#2f7d32; border-color:#8fd694; }}
+  .chip.rakko-past {{ background:#f3eee7; color:#8a6d3b; border-color:#d8c3a5; border-style:dashed; }}
+  .chip.rakko-past small {{ font-weight:normal; opacity:.75; }}
   .hitokoto {{ background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }}
   .hitokoto .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:6px; }}
   .hitokoto .hk-text {{ white-space:pre-line; overflow:hidden; }}
@@ -1027,6 +1033,346 @@ with open("aquarium-list.html", "w") as f:
     f.write(list_doc)
 new_page_urls.append(f"{SITE}/aquarium-list.html")
 
+# --- すいぞくかんパスポート（スタンプ帳＋メダル。index.htmlの「行った！」チェック(localStorage myVisits)と連動）---
+# スタンプ・メダルの絵柄は assets/stamps/{slug}.png / assets/medals/{id}.png を置いてbuildし直すと
+# CSS判子からかわちゃんイラストに自動で切り替わる
+STAMP_EMOJI = dict(ANIMAL_ICONS)
+STAMP_EMOJI.update({
+    "イルカ": "🐬", "バンドウイルカ": "🐬", "マダライルカ": "🐬", "シロイルカ": "🐳",
+    "クジラ": "🐋", "シロナガスクジラ": "🐋", "ザトウクジラ": "🐋",
+    "ペンギン": "🐧", "キングペンギン": "🐧", "ケープペンギン": "🐧", "フンボルトペンギン": "🐧",
+    "マゼランペンギン": "🐧", "キタイワトビペンギン": "🐧",
+    "ウミガメ": "🐢", "アオウミガメ": "🐢", "タイマイ": "🐢",
+    "アザラシ": "🦭", "ゴマフアザラシ": "🦭", "バイカルアザラシ": "🦭",
+    "トド": "🦭", "セイウチ": "🦭", "アシカ": "🦭", "カリフォルニアアシカ": "🦭",
+    "カワウソ": "🦦", "コツメカワウソ": "🦦", "ユーラシアカワウソ": "🦦",
+    "フグ": "🐡", "マンボウ": "🐡", "金魚": "🐠", "クマノミ": "🐠", "カクレクマノミ": "🐠",
+    "サンゴ": "🪸", "カニ": "🦀", "タカアシガニ": "🦀", "イセエビ": "🦞",
+    "イカ": "🦑", "ホタルイカ": "🦑", "ホッキョクグマ": "🐻‍❄️", "ミニカバ": "🦛",
+    "ホワイトタイガー": "🐯", "カピバラ": "🦫", "マイクロブタ": "🐷",
+})
+def _stamp_emoji(m):
+    for x in m["animals"]:
+        if x in STAMP_EMOJI:
+            return STAMP_EMOJI[x]
+    for t, e in (("deep", "🐙"), ("penguin", "🐧"), ("dolphin", "🐬"), ("same", "🦈")):
+        if t in m["tags"]:
+            return e
+    return "🐟"
+
+stamps_data = []
+for m in entry_meta:
+    st = {"n": m["name"], "p": m["pref"], "r": pref_to_region.get(m["pref"], "その他"),
+          "u": m["url"], "e": _stamp_emoji(m)}
+    simg = f"assets/stamps/{m['slug']}.png"
+    if os.path.exists(simg):
+        st["img"] = simg
+    stamps_data.append(st)
+
+def _members_animal(*names):
+    return [m["name"] for m in entry_meta if any(x in m["animals"] for x in names)]
+def _members_tag(tag):
+    return [m["name"] for m in entry_meta if tag in m["tags"]]
+
+_total = len(entry_meta)
+REGION_ID = {"北海道": "hokkaido", "東北": "tohoku", "関東": "kanto", "中部": "chubu",
+             "近畿": "kinki", "中国": "chugoku", "四国": "shikoku", "九州・沖縄": "kyushu"}
+medals_data = []
+for mid, icon, name, desc, target in [
+    ("m1", "🐟", "はじめの一歩", "はじめてのスタンプをゲット！", 1),
+    ("m10", "🐠", "10館たんけん隊", "10館スタンプを集めた！", 10),
+    ("m30", "🐬", "30館マスター", "30館スタンプを集めた！", 30),
+    ("m50", "🦈", "50館つわもの", "50館スタンプを集めた！", 50),
+    ("m100", "🐋", "100館レジェンド", "100館スタンプを集めた！すごすぎる！", 100),
+    ("mall", "👑", f"全{_total}館 完全制覇", "日本中の水族館をぜんぶ回った伝説の人！", _total),
+]:
+    medals_data.append({"id": mid, "icon": icon, "name": name, "desc": desc, "target": target})
+for mid, icon, name, desc, members in [
+    ("shachi", "🐋", "シャチマスター", "シャチに会える水族館をぜんぶ制覇！", _members_animal("シャチ")),
+    ("jinbei", "🦈", "ジンベエマスター", "ジンベエザメに会える水族館をぜんぶ制覇！", _members_animal("ジンベエザメ")),
+    ("rakko", "🦦", "ラッコメダル", "日本でラッコに会えるのは鳥羽水族館だけ！", _members_animal("ラッコ")),
+    ("kurage", "🪼", "クラゲマスター", "クラゲにうっとりできる水族館をぜんぶ制覇！", _members_animal("クラゲ")),
+    ("shinkai", "🐙", "深海マスター", "深海生物じまんの水族館をぜんぶ制覇！", _members_tag("deep")),
+    ("penguin", "🐧", "ペンギンマスター", "ペンギン好きにおすすめの水族館をぜんぶ制覇！", _members_tag("penguin")),
+]:
+    if members:
+        medals_data.append({"id": mid, "icon": icon, "name": name, "desc": desc, "members": members})
+for region in REGIONS:
+    members = [m["name"] for m in entry_meta if pref_to_region.get(m["pref"]) == region]
+    if members:
+        medals_data.append({"id": f"area_{REGION_ID[region]}", "icon": "🗾", "name": f"{region}マスター",
+                            "desc": f"{region}エリアの水族館をぜんぶ制覇！", "members": members})
+
+# ラッコメダルは「思い出」対応：今は鳥羽だけだが、かつてラッコに会えた館を訪れたファンも記録できる
+# （最盛期1994年は全国28施設・122頭。今は鳥羽水族館の2頭のみ）
+rakko_past_members = [m["name"] for m in entry_meta if m.get("rakko_past")]
+for md in medals_data:
+    if md["id"] == "rakko":
+        md["desc"] = "今ラッコに会えるのは鳥羽水族館だけ。でも、かつてラッコに会えた水族館の思い出も集めよう🦦"
+        md["past"] = rakko_past_members
+for md in medals_data:
+    mimg = f"assets/medals/{md['id']}.png"
+    if os.path.exists(mimg):
+        md["img"] = mimg
+
+PASSPORT_TEMPLATE = r"""<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+__GA__
+<title>すいぞくかんパスポート | __BRAND__</title>
+<meta name="description" content="行った水族館のスタンプを集めて、メダルをゲットしよう！__AUTHOR__と一緒に目指せ全国制覇🐟">
+<link rel="canonical" href="__SITE__/passport.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="すいぞくかんパスポート | __BRAND__">
+<meta property="og:description" content="行った水族館のスタンプを集めて、メダルをゲットしよう！">
+<meta property="og:url" content="__SITE__/passport.html">
+<meta property="og:image" content="__SITE__/assets/kawachan_web.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<style>
+:root { --sea:#0096c7; --sea-deep:#023e8a; --sky:#caf0f8; --sand:#fff9ec; --coral:#ff6b6b; --sun:#ffd166; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif; background:var(--sand); color:#234; }
+header { background:linear-gradient(180deg,#48cae4,#0096c7); color:#fff; padding:14px 16px; }
+header a { color:#fff; text-decoration:none; font-weight:bold; font-size:.9rem; }
+main { max-width:900px; margin:0 auto; padding:20px 16px 40px; }
+.cover { background:linear-gradient(160deg,#023e8a,#0077b6); color:#fff; border-radius:20px; padding:26px 20px 22px; text-align:center; box-shadow:0 6px 18px rgba(2,62,138,.3); position:relative; overflow:hidden; }
+.cover::before { content:"🐟"; position:absolute; font-size:7rem; opacity:.08; right:-14px; bottom:-24px; transform:rotate(-12deg); }
+.cover .sub { font-size:.72rem; letter-spacing:.28em; color:var(--sun); font-weight:bold; }
+.cover h1 { font-size:1.35rem; margin:6px 0 2px; }
+.cover .owner { font-size:.85rem; opacity:.92; cursor:pointer; }
+.cover .owner .pen { font-size:.75rem; opacity:.75; }
+.cover .big { font-size:2.6rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 4px rgba(0,0,0,.3); margin-top:10px; line-height:1; }
+.cover .big small { font-size:1rem; color:#fff; font-weight:normal; }
+.pbar { background:rgba(255,255,255,.25); border-radius:999px; height:10px; margin:12px auto 6px; max-width:340px; overflow:hidden; }
+.pbar div { background:var(--sun); height:100%; border-radius:999px; width:0%; transition:width .8s ease; }
+.cover .note { font-size:.7rem; opacity:.75; margin-top:8px; }
+h2 { color:var(--sea-deep); font-size:1.1rem; margin:26px 0 4px; }
+.sec-note { font-size:.76rem; color:#789; margin-bottom:12px; }
+.medals { display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:12px; }
+.medal { background:#fff; border-radius:16px; padding:10px 6px 8px; text-align:center; cursor:pointer; box-shadow:0 2px 8px rgba(2,62,138,.08); border:2px solid transparent; transition:transform .12s; }
+.medal:hover { transform:translateY(-3px); }
+.medal .disc { width:58px; height:58px; border-radius:50%; margin:0 auto 6px; display:flex; align-items:center; justify-content:center; font-size:1.7rem; background:#eef2f5; filter:grayscale(1); opacity:.55; }
+.medal img.disc { object-fit:cover; padding:0; }
+.medal.earned { border-color:var(--sun); }
+.medal.earned .disc { background:radial-gradient(circle at 32% 30%,#ffe9a8,#ffd166 60%,#e2a93b); filter:none; opacity:1; box-shadow:0 2px 6px rgba(226,169,59,.5); }
+.medal .mn { font-size:.66rem; font-weight:bold; color:var(--sea-deep); line-height:1.25; }
+.medal .mp { font-size:.6rem; color:#89a; margin-top:2px; }
+.medal.earned .mp { color:#c98f1b; }
+.region-h { display:flex; align-items:baseline; gap:8px; margin:22px 0 10px; }
+.region-h h3 { color:var(--sea-deep); font-size:.98rem; }
+.region-h .rc { font-size:.74rem; color:#789; font-weight:bold; }
+.stamps { display:grid; grid-template-columns:repeat(auto-fill,minmax(88px,1fr)); gap:10px; }
+.stamp { aspect-ratio:1; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; cursor:pointer; padding:6px; transition:transform .12s; }
+.stamp:hover { transform:scale(1.06); }
+.stamp .e { font-size:1.45rem; line-height:1.1; }
+.stamp .n { font-size:.55rem; font-weight:bold; line-height:1.25; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; }
+.stamp.off { border:2px dashed #c3d3dd; color:#a9bcc8; background:rgba(255,255,255,.55); }
+.stamp.on { border:3px double var(--sc,#0096c7); color:var(--sc,#0096c7); background:#fff; transform:rotate(var(--rot,0deg)); box-shadow:0 2px 6px rgba(2,62,138,.14); }
+.stamp.on:hover { transform:rotate(var(--rot,0deg)) scale(1.06); }
+.stamp.on.hasimg { border:none; padding:0; background:none; box-shadow:none; }
+.stamp.on img { width:100%; height:100%; object-fit:contain; }
+.pmodal { position:fixed; inset:0; background:rgba(2,30,60,.55); display:none; align-items:center; justify-content:center; z-index:50; padding:16px; }
+.pmodal.open { display:flex; }
+.pmodal .box { background:#fff; border-radius:20px; padding:22px 20px 18px; width:min(92vw,400px); max-height:82vh; overflow-y:auto; text-align:center; }
+.pmodal .bige { font-size:3rem; }
+.pmodal img.bigimg { width:120px; height:120px; object-fit:contain; }
+.pmodal h3 { color:var(--sea-deep); font-size:1.1rem; margin:6px 0 2px; }
+.pmodal .pref { font-size:.72rem; color:#fff; background:var(--sea); border-radius:999px; padding:2px 10px; display:inline-block; }
+.pmodal .desc { font-size:.82rem; color:#567; margin:10px 0; line-height:1.6; }
+.pmodal .vdate { font-size:.74rem; color:#2a9d8f; font-weight:bold; }
+.pmodal .mlist { text-align:left; margin:10px 0; max-height:38vh; overflow-y:auto; }
+.pmodal .mlist a { display:flex; gap:8px; align-items:center; padding:7px 8px; border-radius:10px; text-decoration:none; color:#234; font-size:.84rem; font-weight:bold; }
+.pmodal .mlist a:hover { background:var(--sky); }
+.pmodal .mlist .todo { color:#9ab; }
+.pmodal .past-h { font-size:.82rem; font-weight:bold; color:#8a6d3b; margin:14px 0 2px; border-top:1px dashed #d8c3a5; padding-top:12px; }
+.pmodal .past-h span { font-weight:normal; font-size:.72rem; opacity:.75; }
+.rowbtns { display:flex; gap:10px; justify-content:center; margin-top:12px; flex-wrap:wrap; }
+.rowbtns a, .rowbtns button { font-family:inherit; font-size:.85rem; font-weight:bold; border-radius:999px; padding:9px 18px; cursor:pointer; text-decoration:none; border:none; }
+.btn-close { background:#eef2f5; color:#567; }
+.btn-visit { background:#fff; color:#2a9d8f; border:2px solid #2a9d8f !important; }
+.btn-visit.on { background:#2a9d8f; color:#fff; }
+.btn-spot { background:var(--coral); color:#fff; }
+.back { display:inline-block; margin-top:24px; color:var(--sea); font-weight:bold; text-decoration:none; }
+__ATTR_CSS__
+</style>
+</head>
+<body>
+<header><a href="__SITE__/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
+<main>
+  <div class="cover">
+    <div class="sub">AQUARIUM PASSPORT</div>
+    <h1>📖 すいぞくかんパスポート</h1>
+    <div class="owner" id="ownerName" title="タップでなまえを変えられるよ"></div>
+    <div class="big"><span id="pCount">0</span><small> / __TOTAL__館</small></div>
+    <div class="pbar"><div id="pBar"></div></div>
+    <div class="note">MAPの「⬜行ったらチェック」と連動してるよ。スタンプをタップしても押せる🐟</div>
+  </div>
+
+  <h2>🏅 メダルコレクション</h2>
+  <p class="sec-note">条件をクリアするとメダルがもらえるよ。タップすると「あと何館か」が見られる！</p>
+  <div class="medals" id="medalGrid"></div>
+
+  <h2>📖 スタンプ帳</h2>
+  <p class="sec-note">行った水族館のスタンプが押されていくよ。空いている枠は「これから行ける楽しみ」🐟</p>
+  <div id="stampBook"></div>
+
+  <a class="back" href="__SITE__/">← MAPにもどる</a>
+  __FOOTER__
+</main>
+
+<div class="pmodal" id="pModal"><div class="box" id="pModalBox"></div></div>
+
+<script>
+const STAMPS = __STAMPS__;
+const MEDALS = __MEDALS__;
+const REGIONS = __REGION_NAMES__;
+const TOTAL = STAMPS.length;
+let myVisits = new Set(JSON.parse(localStorage.getItem('myVisits')||'[]'));
+let myDates = JSON.parse(localStorage.getItem('myVisitDates')||'{}');
+
+// なまえ（このブラウザに保存）
+function ownerLabel(){
+  const n = localStorage.getItem('passportName') || '';
+  document.getElementById('ownerName').innerHTML =
+    (n ? n + ' の パスポート' : 'なまえを入れる') + ' <span class="pen">✏️</span>';
+}
+document.getElementById('ownerName').onclick = ()=>{
+  const cur = localStorage.getItem('passportName') || '';
+  const n = prompt('パスポートに入れるなまえ（10文字まで）', cur);
+  if(n === null) return;
+  localStorage.setItem('passportName', n.trim().slice(0,10));
+  ownerLabel();
+};
+
+const REGION_COLOR = {'北海道':'#0077b6','東北':'#2a9d8f','関東':'#e76f51','中部':'#7b5ea7',
+  '近畿':'#0096c7','中国':'#e9a20a','四国':'#43aa8b','九州・沖縄':'#ef6079','その他':'#0096c7'};
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+
+function medalState(m){
+  if(m.members){
+    const done = m.members.filter(n=>myVisits.has(n)).length;
+    return { done, goal: m.members.length, earned: done === m.members.length };
+  }
+  const done = Math.min(myVisits.size, m.target);
+  return { done, goal: m.target, earned: myVisits.size >= m.target };
+}
+
+function render(){
+  const c = myVisits.size;
+  document.getElementById('pCount').textContent = c;
+  document.getElementById('pBar').style.width = (c/TOTAL*100) + '%';
+
+  document.getElementById('medalGrid').innerHTML = MEDALS.map((m,i)=>{
+    const s = medalState(m);
+    const disc = m.img ? '<img class="disc" src="'+m.img+'" alt="">' : '<div class="disc">'+m.icon+'</div>';
+    const prog = s.earned ? 'ゲット！' : s.done + '/' + s.goal;
+    return '<div class="medal'+(s.earned?' earned':'')+'" onclick="openMedal('+i+')">'+disc+
+      '<div class="mn">'+esc(m.name)+'</div><div class="mp">'+prog+'</div></div>';
+  }).join('');
+
+  document.getElementById('stampBook').innerHTML = REGIONS.map(r=>{
+    const members = STAMPS.map((s,i)=>[s,i]).filter(([s])=>s.r===r);
+    if(!members.length) return '';
+    const done = members.filter(([s])=>myVisits.has(s.n)).length;
+    const cells = members.map(([s,i])=>{
+      const on = myVisits.has(s.n);
+      const rot = ((i % 5) - 2) * 2.5;
+      if(on && s.img){
+        return '<div class="stamp on hasimg" onclick="openStamp('+i+')"><img src="'+s.img+'" alt="'+esc(s.n)+'"></div>';
+      }
+      return '<div class="stamp '+(on?'on':'off')+'" style="--sc:'+(REGION_COLOR[r]||'#0096c7')+';--rot:'+rot+'deg" '+
+        'onclick="openStamp('+i+')"><span class="e">'+(on?s.e:'')+'</span><span class="n">'+esc(s.n)+'</span></div>';
+    }).join('');
+    return '<div class="region-h"><h3>'+r+'</h3><span class="rc">'+done+' / '+members.length+'館</span></div>'+
+      '<div class="stamps">'+cells+'</div>';
+  }).join('');
+}
+
+const modal = document.getElementById('pModal');
+const box = document.getElementById('pModalBox');
+modal.onclick = e => { if(e.target === modal) modal.classList.remove('open'); };
+
+window.openStamp = function(i){
+  const s = STAMPS[i];
+  const on = myVisits.has(s.n);
+  const d = myDates[s.n];
+  const dateStr = on ? (d ? '✅ ' + new Date(d).toLocaleDateString('ja-JP') + ' にチェック' : '✅ 行った！') : '';
+  const visual = (on && s.img) ? '<img class="bigimg" src="'+s.img+'" alt="">' : '<div class="bige">'+(on?s.e:'⬜')+'</div>';
+  box.innerHTML = visual +
+    '<h3>'+esc(s.n)+'</h3><span class="pref">'+esc(s.p)+'</span>'+
+    (dateStr ? '<div class="desc vdate">'+dateStr+'</div>' : '<div class="desc">まだスタンプが押されてないよ。行ったらチェックしてね🐟</div>')+
+    '<div class="rowbtns">'+
+      '<button class="btn-close" onclick="pModal.classList.remove(\'open\')">とじる</button>'+
+      '<button class="btn-visit'+(on?' on':'')+'" onclick="toggleVisit('+i+')">'+(on?'✅ 行った！':'⬜ 行った！を押す')+'</button>'+
+      '<a class="btn-spot" href="'+s.u+'">くわしく🐟</a>'+
+    '</div>';
+  modal.classList.add('open');
+};
+
+window.toggleVisit = function(i){
+  const s = STAMPS[i];
+  if(myVisits.has(s.n)){ myVisits.delete(s.n); delete myDates[s.n]; }
+  else { myVisits.add(s.n); myDates[s.n] = Date.now(); }
+  localStorage.setItem('myVisits', JSON.stringify([...myVisits]));
+  localStorage.setItem('myVisitDates', JSON.stringify(myDates));
+  render();
+  openStamp(i);
+};
+
+window.openMedal = function(i){
+  const m = MEDALS[i];
+  const s = medalState(m);
+  const visual = m.img ? '<img class="bigimg" src="'+m.img+'" alt="">' : '<div class="bige">'+m.icon+'</div>';
+  let body = '<div class="desc">'+esc(m.desc)+'</div>';
+  const memberLink = n => {
+    const idx = STAMPS.findIndex(s=>s.n===n);
+    const on = myVisits.has(n);
+    const u = idx>=0 ? STAMPS[idx].u : '#';
+    return '<a href="'+u+'" class="'+(on?'':'todo')+'">'+(on?'✅':'⬜')+' '+esc(n)+'</a>';
+  };
+  if(m.members){
+    body += '<div class="mlist">'+m.members.map(memberLink).join('')+'</div>';
+  }
+  const left = s.goal - s.done;
+  body += s.earned
+    ? '<div class="desc vdate">🏅 メダルゲット！おめでとう！</div>'
+    : '<div class="desc">あと <b>'+left+'館</b> でゲット！</div>';
+  // ラッコの思い出：かつてラッコに会えた水族館（今はいません）
+  if(m.past && m.past.length){
+    const memN = m.past.filter(n=>myVisits.has(n)).length;
+    body += '<div class="past-h">🦦 かつてラッコに会えた水族館<span>（今はいません）</span></div>'+
+      '<div class="desc" style="margin:2px 0 8px">ラッコに会えた思い出：<b>'+(memN + s.done)+'</b> 館</div>'+
+      '<div class="mlist">'+m.past.map(memberLink).join('')+'</div>';
+  }
+  box.innerHTML = visual + '<h3>'+esc(m.name)+'</h3>' + body +
+    '<div class="rowbtns"><button class="btn-close" onclick="pModal.classList.remove(\'open\')">とじる</button></div>';
+  modal.classList.add('open');
+};
+
+ownerLabel();
+render();
+</script>
+</body>
+</html>
+"""
+passport_doc = (PASSPORT_TEMPLATE
+    .replace("__GA__", GA_SNIPPET)
+    .replace("__SITE__", SITE)
+    .replace("__BRAND__", BRAND_NAME)
+    .replace("__AUTHOR__", AUTHOR_NAME)
+    .replace("__TOTAL__", str(_total))
+    .replace("__ATTR_CSS__", ATTR_CSS)
+    .replace("__FOOTER__", ATTR_FOOTER)
+    .replace("__STAMPS__", json.dumps(stamps_data, ensure_ascii=False))
+    .replace("__MEDALS__", json.dumps(medals_data, ensure_ascii=False))
+    .replace("__REGION_NAMES__", json.dumps(list(REGIONS.keys()) + ["その他"], ensure_ascii=False)))
+with open("passport.html", "w") as f:
+    f.write(passport_doc)
+new_page_urls.append(f"{SITE}/passport.html")
+
 # --- llms.txt（AIクローラー向けサイト要約。build実行のたびに最新化）---
 llms_lines = [
     f"# {BRAND_NAME}",
@@ -1041,6 +1387,7 @@ llms_lines = [
     f"- トップページ（地図＋フィルター）: {SITE}/",
     f"- このサイトについて: {SITE}/about.html",
     f"- {AUTHOR_NAME}流・水族館の楽しみ方（行く前の準備・水槽の見方・イルカショー/パフォーマンス・子連れ・おみやげ）: {SITE}/guide.html",
+    f"- すいぞくかんパスポート（行った水族館のスタンプ帳＋メダル）: {SITE}/passport.html",
     f"- {AUTHOR_NAME}的 水族館ランキング（サメ／パフォーマンス／深海／赤ちゃん連れ／デート）: {SITE}/taste-ranking.html" if ranking_generated else f"- {AUTHOR_NAME}的 水族館ランキング: 準備中",
     "",
     "## 生き物別まとめページ",
