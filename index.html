@@ -133,9 +133,12 @@
     .ticker-label { display:none; }
     .ticker-post { flex:none; padding:0 12px; }
     .legend { gap:8px; font-size:.72rem; margin:-4px auto 8px; flex-wrap:nowrap; overflow-x:auto; justify-content:center; }
-    #fixedRow { margin-top:8px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; scrollbar-width:none; }
+    #fixedRow { margin-top:8px; flex-wrap:nowrap !important; overflow-x:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; scrollbar-width:none; }
     #fixedRow::-webkit-scrollbar { display:none; }
     #fixedRow button, #fixedRow a { flex:none; white-space:nowrap; }
+    #navRow { margin-top:8px; flex-wrap:nowrap !important; overflow-x:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; scrollbar-width:none; }
+    #navRow::-webkit-scrollbar { display:none; }
+    #navRow a { flex:none; white-space:nowrap; }
     .controls button { padding:6px 12px; font-size:.8rem; }
     #map { height:480px; margin:14px 10px; }
     .grid { padding:0 10px; gap:12px; }
@@ -337,6 +340,7 @@
 
 <div class="controls" id="regionBtns"></div>
 <div class="controls" id="fixedRow"></div>
+<div class="controls" id="navRow"></div>
 <div class="cat-section">
   <div class="cat-card">
     <div class="cat-head"><span>🐟 どんな気分で行く？</span><span class="cat-sorts" id="sortBtns"></span></div>
@@ -525,13 +529,14 @@ for(let i=0;i<14;i++){
 
 const TAGS = {
   "rain": ["☔️ 雨の日におすすめ", "☔️ 雨の日に"],
+  "summer": ["☀️ 夏休みおすすめ", "☀️ 夏休み"],
   "kids": ["👶 未就学児におすすめ", "👶 未就学児に"],
   "baby": ["🍼 赤ちゃん連れにおすすめ", "🍼 赤ちゃん連れに"],
   "same": ["🦈 サメ好きにおすすめ", "🦈 サメ好きに"],
   "dolphin": ["🐬 イルカショーおすすめ", "🐬 イルカショー"],
   "deep": ["🐙 深海生物好きにおすすめ", "🐙 深海好きに"],
   "penguin": ["🐧 ペンギン好きにおすすめ", "🐧 ペンギン好きに"],
-  "summer": ["☀️ 夏休みおすすめ", "☀️ 夏休み"],
+  "shachi": ["🐋 シャチに会える", "🐋 シャチ"],
   "beluga": ["🐳 シロイルカに会える", "🐳 シロイルカ"]
 };
 const REGIONS = {
@@ -850,21 +855,22 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     applyMapFilter(); render();
   };
   fixedRow.appendChild(wishListBtn);
+  const navRow = document.getElementById('navRow');
   const rankLink = document.createElement('a');
   rankLink.className = 'rankbtn';
   rankLink.href = 'taste-ranking.html';
   rankLink.innerHTML = '<span class="pc-only">🏆 かわちゃんのランキング</span><span class="sp-only">🏆 ランキング</span>';
-  fixedRow.appendChild(rankLink);
+  navRow.appendChild(rankLink);
   const postLink = document.createElement('a');
   postLink.className = 'rankbtn postbtn';
   postLink.href = 'posts.html';
-  postLink.innerHTML = '<span class="pc-only">📸 みんなの投稿機能</span><span class="sp-only">📸 みんなの投稿</span>';
-  fixedRow.appendChild(postLink);
+  postLink.innerHTML = '<span class="pc-only">📸 みんなの投稿機能</span><span class="sp-only">📸 投稿</span>';
+  navRow.appendChild(postLink);
   const playLink = document.createElement('a');
   playLink.className = 'rankbtn playbtn';
   playLink.href = 'play.html';
   playLink.innerHTML = '<span class="pc-only">🎮 あそぶ（さかなクイズ）</span><span class="sp-only">🎮 あそぶ</span>';
-  fixedRow.appendChild(playLink);
+  navRow.appendChild(playLink);
 
   function applyMapFilter(){
     allMarkers.forEach(({m,tags,name})=>{

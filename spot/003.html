@@ -46,7 +46,10 @@
   .hitokoto .hk-label { font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:6px; }
   .hitokoto .hk-text { white-space:pre-line; overflow:hidden; }
   .hitokoto .hk-photo { display:block; width:100%; max-width:440px; border-radius:12px; margin:12px auto; box-shadow:0 2px 8px rgba(2,62,138,.15); }
-  .hitokoto .hk-chara { float:right; width:64px; height:auto; margin:8px 0 2px 12px; }
+  .hitokoto .hk-chara-link { float:right; margin:8px 0 2px 12px; text-align:center; text-decoration:none; }
+  .hitokoto .hk-chara { display:block; width:64px; height:auto; transition:transform .15s; }
+  .hitokoto .hk-chara-link:hover .hk-chara { transform:scale(1.06); }
+  .hitokoto .hk-chara-cap { display:block; font-size:.62rem; color:var(--sea); font-weight:bold; margin-top:2px; }
   .kotsu-box { background:#fffbea; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }
   .kotsu-box .hk-label { font-size:.8rem; font-weight:bold; color:#c78a00; margin-bottom:4px; }
   .kotsu-box .kotsu-more { display:block; margin-top:8px; font-size:.78rem; color:var(--sea); font-weight:bold; text-decoration:none; }
@@ -113,10 +116,10 @@
   
   <div class="ratings-box"><div class="hk-label">🐟 さかなのおにいさん かわちゃんのイチオシポイント</div><div class="rate-row"><span class="rate-label">🦈 激レアいきもの</span><span class="rate-stars">★★★★☆</span></div><div class="rate-row"><span class="rate-label">🐋 巨大生物</span><span class="rate-stars">★★★★★</span></div><div class="rate-row"><span class="rate-label">🐬 パフォーマンス</span><span class="rate-stars">★★★★☆</span></div><div class="rate-row"><span class="rate-label">💰 コスパ</span><span class="rate-stars">★★★★☆</span></div><div class="rate-row"><span class="rate-label">🌀 クセつよポイント</span><span class="rate-stars">★★★★☆</span></div></div>
   <div class="summer">☀️ <b>2026年 夏休み情報：</b>サマーナイトアクアリウム（夏休み期間は夜まで延長営業）</div>
-  <table><tr><th>💰 大人</th><td>2,030円</td></tr><tr><th>🧒 子ども</th><td>1,010円</td></tr><tr><th>👶 幼児（未就学）</th><td>500円（4歳以上）</td></tr><tr><th>🗓 休館日</th><td>月曜（祝日は翌平日）※夏休み期間などは無休</td></tr><tr><th>🛻 ベビーカー</th><td>館内持ち込みOK</td></tr><tr><th>🍼 授乳室</th><td>あり（多目的トイレ内）</td></tr><tr><th>🔒 ロッカー</th><td>あり（有料）</td></tr><tr><th>🚗 駐車場</th><td>ガーデンふ頭駐車場（徒歩約5分・有料）</td></tr><tr><th>🧺 飲食物持込</th><td>屋外エリアOK・館内不可</td></tr><tr><th>🍽 フード</th><td>フードテラス「トータス」／隣接の複合施設JETTYも利用可</td></tr><tr><th>🎁 おみやげ</th><td>シャチのぬいぐるみ</td></tr><tr><th>🐟 魚朱印</th><td>あり（北館2階インフォメーションで購入・その場で日付記入）</td></tr></table>
+  <table><tr><th>💰 大人</th><td>2,030円</td></tr><tr><th>🧒 子ども</th><td>1,010円</td></tr><tr><th>👶 幼児（未就学）</th><td>500円（4歳以上）</td></tr><tr><th>🗓 休館日</th><td>月曜（祝日は翌平日）※夏休み期間などは無休</td></tr><tr><th>🛻 ベビーカー</th><td>館内持ち込みOK</td></tr><tr><th>🍼 授乳室</th><td>あり（多目的トイレ内）</td></tr><tr><th>🔒 ロッカー</th><td>あり（有料）</td></tr><tr><th>🚗 駐車場</th><td>ガーデンふ頭駐車場（徒歩約5分・有料）</td></tr><tr><th>🧺 飲食物持込</th><td>屋外エリアOK・館内不可</td></tr><tr><th>🍽 フード</th><td>フードテラス「トータス」／隣接の複合施設JETTYも利用可</td></tr><tr><th>🎁 おみやげ</th><td>シャチ「アース」「リン」リアルぬいぐるみ、名古屋港水族館限定クッピーラムネ</td></tr><tr><th>🐟 魚朱印</th><td>あり（北館2階インフォメーションで購入・その場で日付記入）</td></tr></table>
   <p class="note">※2026年7月時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に<a href="https://nagoyaaqua.jp/" target="_blank" rel="noopener">公式サイト</a>をご確認ください</p>
-  <div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div><div class="hk-text">日本の水族館で敷地面積ナンバーワン！入った瞬間にシャチがお出迎えしてくれるよ。世界でもここでしか見られないナンキョクオキアミの展示や、遠足の子どもたちを震え上がらせる昔の潜水服の展示は必見。今やお土産屋さんで人形のキーホルダーになるほど人気なんだよ！<img class="hk-chara" src="https://aquarium.yasasea.com/assets/kawachan_point.png" alt="さかなのおにいさん かわちゃん" loading="lazy"></div></div>
-  <div class="chips tagchips-block"><span class="chip tag">🐬 イルカショーおすすめ</span><span class="chip tag">☔️ 雨の日におすすめ</span><span class="chip tag">👶 未就学児におすすめ</span><span class="chip tag">🐧 ペンギン好きにおすすめ</span><span class="chip tag">☀️ 夏休みおすすめ</span><span class="chip tag">🍼 赤ちゃん連れにおすすめ</span><span class="chip tag">🐳 シロイルカに会える</span></div>
+  <div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div><div class="hk-text">日本の水族館で敷地面積ナンバーワン！入った瞬間にシャチがお出迎えしてくれるよ。世界でもここでしか見られないナンキョクオキアミの展示や、遠足の子どもたちを震え上がらせる昔の潜水服の展示は必見。今やお土産屋さんで人形のキーホルダーになるほど人気なんだよ！<a href="https://aquarium.yasasea.com/about.html#profile" class="hk-chara-link" title="かわちゃんについてもっと知る"><img class="hk-chara" src="https://aquarium.yasasea.com/assets/kawachan_point.png" alt="さかなのおにいさん かわちゃんについて詳しく" loading="lazy"><span class="hk-chara-cap">かわちゃんって？</span></a></div></div>
+  <div class="chips tagchips-block"><span class="chip tag">🐋 シャチに会える</span><span class="chip tag">🐬 イルカショーおすすめ</span><span class="chip tag">☔️ 雨の日におすすめ</span><span class="chip tag">👶 未就学児におすすめ</span><span class="chip tag">🐧 ペンギン好きにおすすめ</span><span class="chip tag">☀️ 夏休みおすすめ</span><span class="chip tag">🍼 赤ちゃん連れにおすすめ</span><span class="chip tag">🐳 シロイルカに会える</span></div>
   <p class="filming-note">📷 動画・写真は水族館の特別な許可を得て撮影しています</p>
   <div class="btns">
     <a class="btn hp" href="https://nagoyaaqua.jp/" target="_blank" rel="noopener">公式サイト🔗</a><a class="btn sns" href="https://www.instagram.com/port_of_nagoya_public_aquarium/" target="_blank" rel="noopener">📷 Instagram</a>

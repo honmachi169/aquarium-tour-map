@@ -51,6 +51,7 @@
 - ☔️ 雨の日におすすめ（99館）: https://aquarium.yasasea.com/theme/rain.html
 - 👶 未就学児におすすめ（97館）: https://aquarium.yasasea.com/theme/kids.html
 - 🍼 赤ちゃん連れにおすすめ（19館）: https://aquarium.yasasea.com/theme/baby.html
+- 🐋 シャチに会える（3館）: https://aquarium.yasasea.com/theme/shachi.html
 - 🐬 イルカショーおすすめ（38館）: https://aquarium.yasasea.com/theme/dolphin.html
 - 🐧 ペンギン好きにおすすめ（26館）: https://aquarium.yasasea.com/theme/penguin.html
 - ☀️ 夏休みおすすめ（20館）: https://aquarium.yasasea.com/theme/summer.html

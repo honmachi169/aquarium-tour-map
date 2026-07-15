@@ -46,7 +46,10 @@
   .hitokoto .hk-label { font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:6px; }
   .hitokoto .hk-text { white-space:pre-line; overflow:hidden; }
   .hitokoto .hk-photo { display:block; width:100%; max-width:440px; border-radius:12px; margin:12px auto; box-shadow:0 2px 8px rgba(2,62,138,.15); }
-  .hitokoto .hk-chara { float:right; width:64px; height:auto; margin:8px 0 2px 12px; }
+  .hitokoto .hk-chara-link { float:right; margin:8px 0 2px 12px; text-align:center; text-decoration:none; }
+  .hitokoto .hk-chara { display:block; width:64px; height:auto; transition:transform .15s; }
+  .hitokoto .hk-chara-link:hover .hk-chara { transform:scale(1.06); }
+  .hitokoto .hk-chara-cap { display:block; font-size:.62rem; color:var(--sea); font-weight:bold; margin-top:2px; }
   .kotsu-box { background:#fffbea; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }
   .kotsu-box .hk-label { font-size:.8rem; font-weight:bold; color:#c78a00; margin-bottom:4px; }
   .kotsu-box .kotsu-more { display:block; margin-top:8px; font-size:.78rem; color:var(--sea); font-weight:bold; text-decoration:none; }
@@ -115,7 +118,7 @@
   
   <table><tr><th>💰 大人</th><td>1,400円</td></tr><tr><th>🧒 子ども</th><td>800円</td></tr><tr><th>🗓 休館日</th><td>1/1・1/2（松坂屋静岡店に準ずる）</td></tr><tr><th>🚗 駐車場</th><td>専用駐車場なし（松坂屋静岡店本館7階入居・周辺駐車場を利用）</td></tr><tr><th>🧺 飲食物持込</th><td>持込禁止</td></tr><tr><th>🍽 フード</th><td>館内に専用カフェなし。松坂屋静岡店内の飲食店を利用</td></tr></table>
   <p class="note">※2026年7月時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に<a href="https://smartaqua-sz.jp/" target="_blank" rel="noopener">公式サイト</a>をご確認ください</p>
-  <div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div><div class="hk-text">新幹線の静岡駅の目の前、松坂屋の上にある都市型水族館。釣り大好きなかわちゃんとしては、入り口でシロギスが迎えてくれるのでテンションがあがる！各エリアごとにムードがガラッと変わり、ゆっくりドリンクを飲みながら本を読めるスペースもあるので、図書館代わりにしてる人もいそう。<img class="hk-chara" src="https://aquarium.yasasea.com/assets/kawachan_point.png" alt="さかなのおにいさん かわちゃん" loading="lazy"></div></div>
+  <div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div><div class="hk-text">新幹線の静岡駅の目の前、松坂屋の上にある都市型水族館。釣り大好きなかわちゃんとしては、入り口でシロギスが迎えてくれるのでテンションがあがる！各エリアごとにムードがガラッと変わり、ゆっくりドリンクを飲みながら本を読めるスペースもあるので、図書館代わりにしてる人もいそう。<a href="https://aquarium.yasasea.com/about.html#profile" class="hk-chara-link" title="かわちゃんについてもっと知る"><img class="hk-chara" src="https://aquarium.yasasea.com/assets/kawachan_point.png" alt="さかなのおにいさん かわちゃんについて詳しく" loading="lazy"><span class="hk-chara-cap">かわちゃんって？</span></a></div></div>
   <div class="chips tagchips-block"><span class="chip tag">☔️ 雨の日におすすめ</span><span class="chip tag">👶 未就学児におすすめ</span></div>
   <p class="filming-note">📷 動画・写真は水族館の特別な許可を得て撮影しています</p>
   <div class="btns">

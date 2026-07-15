@@ -25,7 +25,7 @@ GA_SNIPPET = f'''<script async src="https://www.googletagmanager.com/gtag/js?id=
 TAG_LABEL = {"rain":"☔️ 雨の日におすすめ","kids":"👶 未就学児におすすめ","same":"🦈 サメ好きにおすすめ",
              "dolphin":"🐬 イルカショーおすすめ","deep":"🐙 深海生物好きにおすすめ",
              "penguin":"🐧 ペンギン好きにおすすめ","summer":"☀️ 夏休みおすすめ",
-             "baby":"🍼 赤ちゃん連れにおすすめ","beluga":"🐳 シロイルカに会える",
+             "baby":"🍼 赤ちゃん連れにおすすめ","shachi":"🐋 シャチに会える","beluga":"🐳 シロイルカに会える",
              "fishing":"🎣 釣りができる水族館"}
 ANIMAL_ICONS = {"シャチ":"🐋","ラッコ":"🦦","ジンベエザメ":"🦈","シロワニ":"🦈","マンボウ":"🐟",
                 "ピラルクー":"🐠","エンペラーペンギン":"🐧","フェアリーペンギン":"🐧","クラゲ":"🪼","ベルーガ":"🐳"}
@@ -118,7 +118,9 @@ for slug, a, intro in entries:
             hk_inner = E(a["hitokoto"])
         hitokoto = (f'<div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div>'
                     f'<div class="hk-text">{hk_inner}'
-                    f'<img class="hk-chara" src="{SITE}/assets/kawachan_point.png" alt="{AUTHOR_NAME}" loading="lazy"></div></div>')
+                    f'<a href="{SITE}/about.html#profile" class="hk-chara-link" title="かわちゃんについてもっと知る">'
+                    f'<img class="hk-chara" src="{SITE}/assets/kawachan_point.png" alt="{AUTHOR_NAME}について詳しく" loading="lazy">'
+                    f'<span class="hk-chara-cap">かわちゃんって？</span></a></div></div>')
 
     # この館ならではの楽しみ方のコツ（本人承認済みの館のみ表示）
     kotsu_box = ""
@@ -300,7 +302,10 @@ loadYtComments();''' if v else ''
   .hitokoto .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:6px; }}
   .hitokoto .hk-text {{ white-space:pre-line; overflow:hidden; }}
   .hitokoto .hk-photo {{ display:block; width:100%; max-width:440px; border-radius:12px; margin:12px auto; box-shadow:0 2px 8px rgba(2,62,138,.15); }}
-  .hitokoto .hk-chara {{ float:right; width:64px; height:auto; margin:8px 0 2px 12px; }}
+  .hitokoto .hk-chara-link {{ float:right; margin:8px 0 2px 12px; text-align:center; text-decoration:none; }}
+  .hitokoto .hk-chara {{ display:block; width:64px; height:auto; transition:transform .15s; }}
+  .hitokoto .hk-chara-link:hover .hk-chara {{ transform:scale(1.06); }}
+  .hitokoto .hk-chara-cap {{ display:block; font-size:.62rem; color:var(--sea); font-weight:bold; margin-top:2px; }}
   .kotsu-box {{ background:#fffbea; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }}
   .kotsu-box .hk-label {{ font-size:.8rem; font-weight:bold; color:#c78a00; margin-bottom:4px; }}
   .kotsu-box .kotsu-more {{ display:block; margin-top:8px; font-size:.78rem; color:var(--sea); font-weight:bold; text-decoration:none; }}
@@ -844,9 +849,10 @@ about_doc = f"""<!DOCTYPE html>
 <header><a href="{SITE}/">🐟 会いに行こう！全国水族館ツアーMAP</a></header>
 <main>
 <h1>このサイトについて</h1>
-<div class="about-box">
+<div class="about-box" id="profile">
 <h2>🐟 さかなのおにいさん かわちゃんとは</h2>
 <p>「子どもがさかなを好きになれば海は豊かになる」をモットーに活動する、さかなのおにいさん かわちゃん。YouTubeで全国の水族館を紹介しながら、生き物の魅力を伝えています。テレビ東京「シナぷしゅ」出演、著書「全国クセすご水族館図鑑」ほか、歌・イラスト・クイズで魚の魅力を伝えるイベントを全国で開催しています。</p>
+<p style="margin-top:10px;font-size:.88rem;color:#567;">水族館巡りがもっと楽しくなる本やグッズも、よかったらのぞいてみてね。<a href="https://sakana-bro.com/goods/" target="_blank" rel="noopener" style="color:var(--sea);font-weight:bold;">かわちゃんの本・グッズ一覧 →</a></p>
 <h2>🗺 このサイトの特徴</h2>
 <p>このサイトに載っている情報は、かわちゃんが実際に訪れた水族館の紹介動画をベースにした「実訪問プロジェクト」です。行ったことのある水族館には、かわちゃん本人が確認した一言コメントや独自評価を掲載しています。</p>
 <h2>📖 掲載基準</h2>

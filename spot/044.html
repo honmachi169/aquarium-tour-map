@@ -46,7 +46,10 @@
   .hitokoto .hk-label { font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:6px; }
   .hitokoto .hk-text { white-space:pre-line; overflow:hidden; }
   .hitokoto .hk-photo { display:block; width:100%; max-width:440px; border-radius:12px; margin:12px auto; box-shadow:0 2px 8px rgba(2,62,138,.15); }
-  .hitokoto .hk-chara { float:right; width:64px; height:auto; margin:8px 0 2px 12px; }
+  .hitokoto .hk-chara-link { float:right; margin:8px 0 2px 12px; text-align:center; text-decoration:none; }
+  .hitokoto .hk-chara { display:block; width:64px; height:auto; transition:transform .15s; }
+  .hitokoto .hk-chara-link:hover .hk-chara { transform:scale(1.06); }
+  .hitokoto .hk-chara-cap { display:block; font-size:.62rem; color:var(--sea); font-weight:bold; margin-top:2px; }
   .kotsu-box { background:#fffbea; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }
   .kotsu-box .hk-label { font-size:.8rem; font-weight:bold; color:#c78a00; margin-bottom:4px; }
   .kotsu-box .kotsu-more { display:block; margin-top:8px; font-size:.78rem; color:var(--sea); font-weight:bold; text-decoration:none; }
@@ -115,7 +118,7 @@
   <div class="summer">☀️ <b>2026年 夏休み情報：</b>「アクアマリンの七夕まつり」（〜8/2）＆企画展「サンマの学校」（7/15〜）</div>
   <table><tr><th>💰 大人</th><td>1,850円</td></tr><tr><th>🧒 子ども</th><td>900円</td></tr><tr><th>🗓 休館日</th><td>年中無休</td></tr><tr><th>🚗 駐車場</th><td>無料駐車場1,500台（正面）</td></tr><tr><th>🧺 飲食物持込</th><td>指定屋外エリアでの飲食可（1F南テラス・野外広場・ビーチ等）</td></tr><tr><th>🍽 フード</th><td>館内に「アクアクロス」（小名浜湾眺望）と「潮目の海」（回転寿司）の2店舗</td></tr></table>
   <p class="note">※2026年7月時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に<a href="https://www.aquamarine.or.jp/" target="_blank" rel="noopener">公式サイト</a>をご確認ください</p>
-  <div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div><div class="hk-text">かわちゃんの好きな水族館を聞かれたら、トップ5に必ず入る水族館。広大な敷地の中には、森の小道を歩けたり、海の中にじゃぶじゃぶ浸かって遊べる場所や、釣ってその場で食べられる場所、そして「潮目の海」大水槽の前ではお寿司が食べられる！環境水族館という名前の通り、環境の事はもちろん生き物たちの飼育環境も考えられている。命をいただくことを体で感じる、水族館好きには必ず訪れて欲しい水族館だ！<img class="hk-chara" src="https://aquarium.yasasea.com/assets/kawachan_point.png" alt="さかなのおにいさん かわちゃん" loading="lazy"></div></div>
+  <div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div><div class="hk-text">かわちゃんの好きな水族館を聞かれたら、トップ5に必ず入る水族館。広大な敷地の中には、森の小道を歩けたり、海の中にじゃぶじゃぶ浸かって遊べる場所や、釣ってその場で食べられる場所、そして「潮目の海」大水槽の前ではお寿司が食べられる！環境水族館という名前の通り、環境の事はもちろん生き物たちの飼育環境も考えられている。命をいただくことを体で感じる、水族館好きには必ず訪れて欲しい水族館だ！<a href="https://aquarium.yasasea.com/about.html#profile" class="hk-chara-link" title="かわちゃんについてもっと知る"><img class="hk-chara" src="https://aquarium.yasasea.com/assets/kawachan_point.png" alt="さかなのおにいさん かわちゃんについて詳しく" loading="lazy"><span class="hk-chara-cap">かわちゃんって？</span></a></div></div>
   <div class="chips tagchips-block"><span class="chip tag">👶 未就学児におすすめ</span><span class="chip tag">🐙 深海生物好きにおすすめ</span><span class="chip tag">🎣 釣りができる水族館</span></div>
   <p class="filming-note">📷 動画・写真は水族館の特別な許可を得て撮影しています</p>
   <div class="btns">

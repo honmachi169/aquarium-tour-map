@@ -46,7 +46,10 @@
   .hitokoto .hk-label { font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:6px; }
   .hitokoto .hk-text { white-space:pre-line; overflow:hidden; }
   .hitokoto .hk-photo { display:block; width:100%; max-width:440px; border-radius:12px; margin:12px auto; box-shadow:0 2px 8px rgba(2,62,138,.15); }
-  .hitokoto .hk-chara { float:right; width:64px; height:auto; margin:8px 0 2px 12px; }
+  .hitokoto .hk-chara-link { float:right; margin:8px 0 2px 12px; text-align:center; text-decoration:none; }
+  .hitokoto .hk-chara { display:block; width:64px; height:auto; transition:transform .15s; }
+  .hitokoto .hk-chara-link:hover .hk-chara { transform:scale(1.06); }
+  .hitokoto .hk-chara-cap { display:block; font-size:.62rem; color:var(--sea); font-weight:bold; margin-top:2px; }
   .kotsu-box { background:#fffbea; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }
   .kotsu-box .hk-label { font-size:.8rem; font-weight:bold; color:#c78a00; margin-bottom:4px; }
   .kotsu-box .kotsu-more { display:block; margin-top:8px; font-size:.78rem; color:var(--sea); font-weight:bold; text-decoration:none; }
@@ -113,9 +116,9 @@
   
   <div class="ratings-box"><div class="hk-label">🐟 さかなのおにいさん かわちゃんのイチオシポイント</div><div class="rate-row"><span class="rate-label">🦈 激レアいきもの</span><span class="rate-stars">★★★★★</span></div><div class="rate-row"><span class="rate-label">🐋 巨大生物</span><span class="rate-stars">★★★★☆</span></div><div class="rate-row"><span class="rate-label">🐬 パフォーマンス</span><span class="rate-stars">★★★★★</span></div><div class="rate-row"><span class="rate-label">👶 子ども向け度</span><span class="rate-stars">★★★★☆</span></div><div class="rate-row"><span class="rate-label">🌀 クセつよポイント</span><span class="rate-stars">★★★★☆</span></div><div class="rate-row"><span class="rate-label">🐡 フグ</span><span class="rate-stars">★★★★★</span></div><div class="rate-row"><span class="rate-label">🐧 ペンギン</span><span class="rate-stars">★★★★★</span></div></div>
   <div class="summer">☀️ <b>2026年 夏休み情報：</b>「夜の水族館」開催＆開館25周年特別企画展「ニコニコ(2525)歯歯歯(ははは)展」</div>
-  <table><tr><th>💰 大人</th><td>2,500円</td></tr><tr><th>🧒 子ども</th><td>1,200円</td></tr><tr><th>🗓 休館日</th><td>年中無休</td></tr><tr><th>🚗 駐車場</th><td>専用駐車場なし（近隣の有料駐車場を利用）</td></tr><tr><th>🧺 飲食物持込</th><td>館内不可・3階屋上広場や館外ボードウォークでは持込飲食可</td></tr><tr><th>🍽 フード</th><td>1階無料ゾーンに「レストラン」あり（イルカを眺めながら食事・11:00〜17:00）</td></tr><tr><th>🎁 おみやげ</th><td>ふく（フグ）グッズ</td></tr></table>
+  <table><tr><th>💰 大人</th><td>2,500円</td></tr><tr><th>🧒 子ども</th><td>1,200円</td></tr><tr><th>🗓 休館日</th><td>年中無休</td></tr><tr><th>🚗 駐車場</th><td>専用駐車場なし（近隣の有料駐車場を利用）</td></tr><tr><th>🧺 飲食物持込</th><td>館内不可・3階屋上広場や館外ボードウォークでは持込飲食可</td></tr><tr><th>🍽 フード</th><td>1階無料ゾーンに「レストラン」あり（イルカを眺めながら食事・11:00〜17:00）</td></tr><tr><th>🎁 おみやげ</th><td>海響館オリジナルフグぬいぐるみ、フグ図鑑クッキー</td></tr></table>
   <p class="note">※2026年7月時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に<a href="https://www.kaikyokan.com/" target="_blank" rel="noopener">公式サイト</a>をご確認ください</p>
-  <div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div><div class="hk-text">ここは世界一のフグの展示数（100種）と、日本一深いペンギン水槽を泳ぐペンギンの大編隊が同時に見られる、世界一と日本一を持つ水族館！かわちゃん的推しフグはドッグフェイスパファーことコクテンフグ、アザラシが茶柱みたいに浮かぶ姿も必見だよ。<img class="hk-chara" src="https://aquarium.yasasea.com/assets/kawachan_point.png" alt="さかなのおにいさん かわちゃん" loading="lazy"></div></div>
+  <div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div><div class="hk-text">ここは世界一のフグの展示数（100種）と、日本一深いペンギン水槽を泳ぐペンギンの大編隊が同時に見られる、世界一と日本一を持つ水族館！かわちゃん的推しフグはドッグフェイスパファーことコクテンフグ、アザラシが茶柱みたいに浮かぶ姿も必見だよ。<a href="https://aquarium.yasasea.com/about.html#profile" class="hk-chara-link" title="かわちゃんについてもっと知る"><img class="hk-chara" src="https://aquarium.yasasea.com/assets/kawachan_point.png" alt="さかなのおにいさん かわちゃんについて詳しく" loading="lazy"><span class="hk-chara-cap">かわちゃんって？</span></a></div></div>
   <div class="chips tagchips-block"><span class="chip tag">🐬 イルカショーおすすめ</span><span class="chip tag">☔️ 雨の日におすすめ</span><span class="chip tag">👶 未就学児におすすめ</span><span class="chip tag">🐧 ペンギン好きにおすすめ</span></div>
   <p class="filming-note">📷 動画・写真は水族館の特別な許可を得て撮影しています</p>
   <div class="btns">
