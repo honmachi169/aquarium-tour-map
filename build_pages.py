@@ -67,8 +67,11 @@ for slug, a, intro in entries:
     chips = "".join(f'<span class="chip">{ANIMAL_ICONS.get(x,"🐟")} {E(x)}</span>' for x in a.get("animals", []))
     if a.get("only"): chips += f'<span class="chip only">⭐️ここだけ！{E(a["only"])}</span>'
     if a.get("rakko_past"):
-        rp_tip = E(a["rakko_past_note"]) if a.get("rakko_past_note") else "かつてラッコを飼育していた水族館です"
-        chips += f'<span class="chip rakko-past" title="{rp_tip}">🦦 かつてラッコに会えた水族館<small>（今はいません）</small></span>'
+        rp_tip = E(a["rakko_past_note"]) if a.get("rakko_past_note") else "かつてラッコを飼育していた水族館です（今はいません）"
+        chips += f'<span class="chip rakko-past" title="{rp_tip}">🦦 ラッコ（かつていた）</span>'
+    if a.get("mendako_history"):
+        md_tip = E(a["mendako_note"]) if a.get("mendako_note") else "メンダコを展示した実績があります（展示は不定期）"
+        chips += f'<span class="chip mendako-hist" title="{md_tip}">🐙 メンダコ（展示実績あり）</span>'
     tagchips = "".join(f'<span class="chip tag">{TAG_LABEL[t]}</span>' for t in a.get("tags", []) if t in TAG_LABEL)
 
     # 交通手段の目安チップ（access/parkingの記載から機械的に判定。誤爆しないよう保守的に）
@@ -105,8 +108,16 @@ for slug, a, intro in entries:
 
     hitokoto = ""
     if approved and a.get("hitokoto"):
+        hk_photo = a.get("hitokoto_photo")
+        if hk_photo:
+            hp = "/".join(urllib.parse.quote(seg) for seg in hk_photo.split("/"))
+            img_html = f'<img class="hk-photo" src="{SITE}/{hp}" alt="{E(a["name"])}でのかわちゃん" loading="lazy">'
+            parts = a["hitokoto"].split("\n\n", 1)
+            hk_inner = E(parts[0]) + img_html + (E(parts[1]) if len(parts) > 1 else "")
+        else:
+            hk_inner = E(a["hitokoto"])
         hitokoto = (f'<div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div>'
-                    f'<div class="hk-text">{E(a["hitokoto"])}'
+                    f'<div class="hk-text">{hk_inner}'
                     f'<img class="hk-chara" src="{SITE}/assets/kawachan_point.png" alt="{AUTHOR_NAME}" loading="lazy"></div></div>')
 
     # この館ならではの楽しみ方のコツ（本人承認済みの館のみ表示）
@@ -238,6 +249,7 @@ loadYtComments();''' if v else ''
         "slug": slug, "name": a["name"], "pref": a.get("pref", ""), "url": page_url,
         "thumb": thumb or ogimg, "animals": a.get("animals") or [], "tags": a.get("tags") or [],
         "rakko_past": bool(a.get("rakko_past")), "rakko_past_note": a.get("rakko_past_note") or "",
+        "mendako_history": bool(a.get("mendako_history")),
         "comment": a.get("highlight") or a.get("comment") or "", "lat": a.get("lat"), "lng": a.get("lng"),
         "stroller": a.get("stroller"), "nursing": a.get("nursing"), "locker": a.get("locker"),
         "ratings": a.get("ratings") if (a.get("visited") and a.get("verified")) else None,
@@ -283,9 +295,11 @@ loadYtComments();''' if v else ''
   .chip.tr {{ background:#eefbe7; color:#2f7d32; border-color:#8fd694; }}
   .chip.rakko-past {{ background:#f3eee7; color:#8a6d3b; border-color:#d8c3a5; border-style:dashed; }}
   .chip.rakko-past small {{ font-weight:normal; opacity:.75; }}
+  .chip.mendako-hist {{ background:#efeaf6; color:#6b4f9e; border-color:#c9b8e8; border-style:dashed; }}
   .hitokoto {{ background:#fff; border:3px solid var(--sea); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }}
   .hitokoto .hk-label {{ font-size:.8rem; font-weight:bold; color:var(--sea); margin-bottom:6px; }}
   .hitokoto .hk-text {{ white-space:pre-line; overflow:hidden; }}
+  .hitokoto .hk-photo {{ display:block; width:100%; max-width:440px; border-radius:12px; margin:12px auto; box-shadow:0 2px 8px rgba(2,62,138,.15); }}
   .hitokoto .hk-chara {{ float:right; width:64px; height:auto; margin:8px 0 2px 12px; }}
   .kotsu-box {{ background:#fffbea; border:3px solid var(--sun); border-radius:16px; padding:12px 16px; margin:14px 0; line-height:1.7; }}
   .kotsu-box .hk-label {{ font-size:.8rem; font-weight:bold; color:#c78a00; margin-bottom:4px; }}

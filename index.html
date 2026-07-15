@@ -113,15 +113,17 @@
   .cmodal .msg { font-size:.8rem; color:var(--coral); min-height:1.2em; margin-bottom:6px; }
 
   /* ===== カテゴリー・並び替えアコーディオン（PC/スマホ共通） ===== */
-  .tag-wrap-outer { max-width:1100px; margin:0 auto 14px; padding:0 16px; }
-  .tag-toggle { width:100%; display:flex; align-items:center; justify-content:space-between; background:#fff; border:2px solid var(--sea); border-radius:14px; padding:10px 16px; font-size:.88rem; font-weight:bold; color:var(--sea); font-family:inherit; cursor:pointer; }
-  .tag-toggle .arrow { transition:transform .2s; }
-  .tag-toggle.open .arrow { transform:rotate(180deg); }
-  .tag-accordion-body { max-height:0; overflow:hidden; transition:max-height .35s ease; }
-  .tag-wrap-outer.expanded .tag-accordion-body { max-height:600px; }
-  .tag-accordion-body .animal-search-wrap { margin:10px 0 8px; padding:0; }
-  .tag-accordion-body #tagBtns { display:flex; flex-wrap:wrap; margin:14px 0 8px; }
-  .tag-accordion-body #sortBtns { display:flex; flex-wrap:wrap; margin:0 0 8px; }
+  .cat-section { max-width:1100px; margin:0 auto 14px; padding:0 16px; }
+  .cat-card { background:linear-gradient(160deg,#eaf7fc,#f6fcfe); border:1.5px solid #cdeaf5; border-radius:16px; padding:11px 14px 13px; }
+  .cat-head { display:flex; align-items:center; justify-content:space-between; gap:8px; font-weight:bold; color:var(--sea-deep); font-size:.9rem; margin-bottom:9px; }
+  .cat-pills { display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:4px; scroll-snap-type:x proximity; }
+  .cat-pills::-webkit-scrollbar { display:none; }
+  .cat-pills button { scroll-snap-align:start; white-space:nowrap; flex:none; border:2px solid var(--sea); background:#fff; color:var(--sea); border-radius:999px; padding:6px 14px; cursor:pointer; font-size:.85rem; font-family:inherit; font-weight:bold; }
+  .cat-pills button.active { background:var(--sea); color:#fff; }
+  .cat-sorts { display:flex; gap:6px; flex:none; }
+  .cat-sorts button { border:1.5px solid #b8d8e6; background:#fff; color:#4a7c93; border-radius:999px; padding:3px 10px; font-size:.72rem; font-family:inherit; font-weight:bold; cursor:pointer; }
+  .cat-sorts button.active { background:#4a7c93; color:#fff; border-color:#4a7c93; }
+  .cat-card .animal-search-wrap { margin:11px 0 0; padding:0; max-width:none; }
 
   /* ===== スマホ表示 ===== */
   .sp-only { display:none; }
@@ -286,8 +288,7 @@
     <div class="mycount">
       <span class="mc-mine">あなたの制覇：<b id="myvisited">0</b> 館 🏆（⬜を押してチェック！）</span>
       <span class="mc-kawachan" style="display:none">🐟 かわちゃんねるは <b id="kawaCount">0</b>/<span id="kawaGoal">100</span>館 YouTubeで紹介中！</span>
-      <button id="mapImgBtn" class="sharebtn">🗾 制覇マップをシェア</button>
-      <a class="sharebtn" href="passport.html" style="text-decoration:none;display:inline-block">📖 パスポート</a></div>
+      <button id="mapImgBtn" class="sharebtn">🗾 制覇マップをシェア</button></div>
     <a class="counter-sub-btn pc-only" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
   </div>
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,45 350,-5 600,20 C850,45 1050,-5 1200,20 L1200,40 L0,40 Z" fill="#023e8a"/></svg>
@@ -336,11 +337,10 @@
 
 <div class="controls" id="regionBtns"></div>
 <div class="controls" id="fixedRow"></div>
-<div class="tag-wrap-outer">
-  <button class="tag-toggle" id="tagToggle"><span>🐟 カテゴリー・検索・並び替え</span><span class="arrow">▾</span></button>
-  <div class="tag-accordion-body">
-    <div class="controls" id="tagBtns"></div>
-    <div class="controls" id="sortBtns"></div>
+<div class="cat-section">
+  <div class="cat-card">
+    <div class="cat-head"><span>🐟 どんな気分で行く？</span><span class="cat-sorts" id="sortBtns"></span></div>
+    <div class="cat-pills" id="tagBtns"></div>
     <div class="animal-search-wrap">
       <input type="text" id="animalSearch" class="animal-search" placeholder="🔍 会いたい魚・生きものの名前で検索（例：ジンベエザメ）" list="animalList" autocomplete="off">
       <datalist id="animalList"></datalist>
@@ -410,7 +410,7 @@
   <a class="contact-link" href="https://sakana-bro.com/contact/" target="_blank" rel="noopener" title="お問い合わせ">
     <img class="kawachan-illust" src="assets/about_1_trim.png" alt="かわちゃんにお問い合わせ">
   </a>
-  <p style="margin-top:10px"><a href="aquarium-list.html">📖 掲載水族館一覧</a></p>
+  <p style="margin-top:10px"><a href="aquarium-list.html">📖 掲載水族館一覧</a>　<a href="guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>　<a href="passport.html">📖 すいぞくかんパスポート</a></p>
   <p style="margin-top:8px"><a href="about.html">🐟 このサイトについて</a>　<a href="about.html#work">💼 お仕事のご依頼</a>　<a href="about.html#facility">🏛 掲載施設の方へ</a>　<a href="about.html#privacy">🔒 プライバシーポリシー</a></p>
   <p style="margin-top:8px">© 株式会社やさしいうみ ／ <a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA">さかなのおにいさん かわちゃんねる</a></p>
   <p id="updated"></p>
@@ -731,7 +731,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       chips.push(`<span class="chip">${ANIMAL_ICONS[name]||'🐟'} ${name}</span>`);
     });
     if(a.only) chips.push(`<span class="chip only">⭐ ${a.only}</span>`);
-    if(a.rakko_past) chips.push(`<span class="chip rakko-past" title="かつてラッコを飼育していた水族館です">🦦 かつてラッコに会えた<small>（今はいません）</small></span>`);
     return chips.length ? `<div class="chips">${chips.join('')}</div>` : '';
   }
 
@@ -856,11 +855,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   rankLink.href = 'taste-ranking.html';
   rankLink.innerHTML = '<span class="pc-only">🏆 かわちゃんのランキング</span><span class="sp-only">🏆 ランキング</span>';
   fixedRow.appendChild(rankLink);
-  const guideLink = document.createElement('a');
-  guideLink.className = 'rankbtn guidebtn';
-  guideLink.href = 'guide.html';
-  guideLink.innerHTML = '<span class="pc-only">🐬 かわちゃん流・水族館の楽しみ方</span><span class="sp-only">🐬 楽しみ方</span>';
-  fixedRow.appendChild(guideLink);
   const postLink = document.createElement('a');
   postLink.className = 'rankbtn postbtn';
   postLink.href = 'posts.html';
@@ -871,15 +865,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   playLink.href = 'play.html';
   playLink.innerHTML = '<span class="pc-only">🎮 あそぶ（さかなクイズ）</span><span class="sp-only">🎮 あそぶ</span>';
   fixedRow.appendChild(playLink);
-
-  const tagToggle = document.getElementById('tagToggle');
-  const tagWrapOuter = document.querySelector('.tag-wrap-outer');
-  if(tagToggle && tagWrapOuter){
-    tagToggle.onclick = ()=>{
-      const open = tagWrapOuter.classList.toggle('expanded');
-      tagToggle.classList.toggle('open', open);
-    };
-  }
 
   function applyMapFilter(){
     allMarkers.forEach(({m,tags,name})=>{
