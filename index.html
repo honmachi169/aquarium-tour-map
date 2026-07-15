@@ -27,7 +27,6 @@
   header { background:linear-gradient(180deg,#48cae4 0%,#0096c7 60%,#0077b6 100%); color:#fff; text-align:center; padding:26px 16px 0; position:relative; overflow:hidden; }
   .about-jump { position:absolute; top:12px; right:14px; z-index:5; display:inline-flex; align-items:center; gap:3px; background:rgba(255,255,255,.92); color:var(--sea-deep); font-weight:bold; font-size:.78rem; text-decoration:none; padding:7px 14px; border-radius:999px; box-shadow:0 3px 10px rgba(2,62,138,.3); transition:transform .15s, box-shadow .15s; }
   .about-jump:hover { transform:translateY(-2px); box-shadow:0 5px 16px rgba(2,62,138,.4); }
-  @media (max-width:640px){ .about-jump { top:8px; right:8px; font-size:.68rem; padding:5px 11px; } }
   header .bubbles { position:absolute; inset:0; pointer-events:none; }
   header .bubbles span { position:absolute; bottom:-30px; border-radius:50%; background:rgba(255,255,255,.18); animation:rise linear infinite; }
   @keyframes rise { to { transform:translateY(-120vh); } }
@@ -290,7 +289,7 @@
 <body>
 <header>
   <div class="bubbles" id="bubbles"></div>
-  <a href="#about-profile" class="about-jump">🐟 かわちゃんとは？</a>
+  <a href="#about-profile" class="about-jump pc-only">🐟 さかなのおにいさん かわちゃんとは？</a>
   <img loading="lazy" decoding="async" class="deco p1" src="assets/punio_shark.png" alt="">
   <img loading="lazy" decoding="async" class="deco p2" src="assets/punio_takopaikapi.png" alt="">
   <img loading="lazy" decoding="async" class="deco p3" src="assets/punio_kusamochi.png" alt="">
@@ -301,8 +300,8 @@
   <img loading="lazy" decoding="async" class="deco p8" src="assets/punio_gyoran.png" alt="">
   <h1>会いに行こう！<br>全国水族館ツアーMAP</h1>
   <p class="sub">さかなのおにいさん かわちゃんと巡る<br class="sp-only">　目指せ100館！全国水族館ツアー</p>
-  <a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener" title="タップしてチャンネル登録🐟">
-    <img class="hero" id="heroImg" src="assets/kawachan_web.png" alt="さかなのおにいさん かわちゃん（タップでチャンネル登録）">
+  <a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener" title="タップしてチャンネル登録🐟" id="heroLink">
+    <img class="hero" id="heroImg" src="assets/kawachan_web.png" alt="さかなのおにいさん かわちゃん（タップでチャンネル登録、スマホはかわちゃん紹介へ）">
   </a>
   <div class="counter">
     <div class="num" id="barLabel" title="タップで かわちゃん⇄あなた を切替">
@@ -542,6 +541,16 @@ if(heroImg){
   };
   heroImg.addEventListener('mouseenter', triggerSpin);
   heroImg.addEventListener('touchstart', triggerSpin, {passive:true});
+}
+// スマホではヒーロー画像タップでチャンネル登録の代わりに「かわちゃんとは？」へ移動
+const heroLink = document.getElementById('heroLink');
+if(heroLink){
+  heroLink.addEventListener('click', (e)=>{
+    if(window.matchMedia('(max-width:640px)').matches){
+      e.preventDefault();
+      document.getElementById('about-profile').scrollIntoView({behavior:'smooth'});
+    }
+  });
 }
 
 // あわ演出
@@ -931,6 +940,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
 
   let sortMode = 'default';
   let viewCounts = null; // {videoId: count} キャッシュ
+  let publishDates = null; // {videoId: publishedAt(ISO文字列)} キャッシュ
   async function fetchViewCounts(){
     if(viewCounts) return viewCounts;
     viewCounts = {};
@@ -945,8 +955,27 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     }
     return viewCounts;
   }
+  async function fetchPublishDates(){
+    if(publishDates) return publishDates;
+    publishDates = {};
+    const ids = aqs.map(a=> (a.videos[0]||{}).id).filter(Boolean);
+    for(let i=0;i<ids.length;i+=50){
+      const chunk = ids.slice(i,i+50);
+      try{
+        const r = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${chunk.join(',')}&key=${YT_API_KEY}`);
+        const d = await r.json();
+        (d.items||[]).forEach(it=>{ publishDates[it.id] = it.snippet.publishedAt; });
+      }catch(e){}
+    }
+    return publishDates;
+  }
   function applySortOrder(list){
-    if(sortMode === 'new') return [...list].sort((a,b)=> (b.no||0) - (a.no||0));
+    if(sortMode === 'new' && publishDates) return [...list].sort((a,b)=>{
+      const da = publishDates[(a.videos[0]||{}).id] || '';
+      const db = publishDates[(b.videos[0]||{}).id] || '';
+      if(da !== db) return da > db ? -1 : 1;
+      return (b.no||0) - (a.no||0);
+    });
     if(sortMode === 'views' && viewCounts) return [...list].sort((a,b)=>{
       const va = viewCounts[(a.videos[0]||{}).id] || 0;
       const vb = viewCounts[(b.videos[0]||{}).id] || 0;
@@ -973,6 +1002,11 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       if(opt.key === 'views'){
         b.textContent = '👀 読み込み中…';
         await fetchViewCounts();
+        b.textContent = opt.label;
+      }
+      if(opt.key === 'new'){
+        b.textContent = '🆕 読み込み中…';
+        await fetchPublishDates();
         b.textContent = opt.label;
       }
       sortMode = opt.key;
