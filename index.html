@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="会いに行こう！全国水族館ツアーMAP">
 <meta property="og:description" content="さかなのおにいさん かわちゃんと巡る全国150館以上の水族館MAP。キミはいくつ行ったことある？🐟">
-<meta property="og:image" content="https://aquarium.yasasea.com/assets/kawachan_web.png">
+<meta property="og:image" content="https://aquarium.yasasea.com/assets/kawachan_web_ogp.png">
 <meta property="og:url" content="https://aquarium.yasasea.com/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -20,10 +20,14 @@
 <style>
   :root { --sea:#0096c7; --sea-deep:#023e8a; --sky:#caf0f8; --sand:#fff9ec; --coral:#ff6b6b; --sun:#ffd166; }
   * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
   body { font-family:"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif; background:var(--sand); color:#234; }
 
   /* ===== ヘッダー ===== */
   header { background:linear-gradient(180deg,#48cae4 0%,#0096c7 60%,#0077b6 100%); color:#fff; text-align:center; padding:26px 16px 0; position:relative; overflow:hidden; }
+  .about-jump { position:absolute; top:12px; right:14px; z-index:5; display:inline-flex; align-items:center; gap:3px; background:rgba(255,255,255,.92); color:var(--sea-deep); font-weight:bold; font-size:.78rem; text-decoration:none; padding:7px 14px; border-radius:999px; box-shadow:0 3px 10px rgba(2,62,138,.3); transition:transform .15s, box-shadow .15s; }
+  .about-jump:hover { transform:translateY(-2px); box-shadow:0 5px 16px rgba(2,62,138,.4); }
+  @media (max-width:640px){ .about-jump { top:8px; right:8px; font-size:.68rem; padding:5px 11px; } }
   header .bubbles { position:absolute; inset:0; pointer-events:none; }
   header .bubbles span { position:absolute; bottom:-30px; border-radius:50%; background:rgba(255,255,255,.18); animation:rise linear infinite; }
   @keyframes rise { to { transform:translateY(-120vh); } }
@@ -286,6 +290,7 @@
 <body>
 <header>
   <div class="bubbles" id="bubbles"></div>
+  <a href="#about-profile" class="about-jump">🐟 かわちゃんとは？</a>
   <img loading="lazy" decoding="async" class="deco p1" src="assets/punio_shark.png" alt="">
   <img loading="lazy" decoding="async" class="deco p2" src="assets/punio_takopaikapi.png" alt="">
   <img loading="lazy" decoding="async" class="deco p3" src="assets/punio_kusamochi.png" alt="">
@@ -391,7 +396,7 @@
 </section>
 
 <!-- プロフィール -->
-<section class="about">
+<section class="about" id="about-profile">
   <div class="about-inner">
     <img loading="lazy" decoding="async" src="assets/kawachan_photo.png" alt="さかなのおにいさん かわちゃん" class="about-img">
     <div class="about-text">
