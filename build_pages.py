@@ -862,7 +862,9 @@ about_doc = f"""<!DOCTYPE html>
 <h2>📋 情報収集ポリシー</h2>
 <p>料金・休館日・設備などの事実情報は、各水族館の公式サイトを調査して掲載しています。誤りに気づいた場合は、各施設の公式サイトを優先してご確認ください。かわちゃん本人の一言・評価は、本人が内容を確認したものだけを公開しています。</p>
 <h2 id="facility">🏛 掲載水族館・施設の方へ</h2>
-<p>掲載内容の修正（料金改定・休館情報など）や掲載に関するご要望は、下記の運営窓口までお気軽にご連絡ください。確認のうえ、すみやかに対応いたします。このサイトは全国の水族館を応援する目的で運営しています。</p>
+<p>掲載内容の修正（料金改定・休館情報など）や掲載に関するご要望は、下記のメールボタンからお気軽にご連絡ください。確認のうえ、すみやかに対応いたします。このサイトは全国の水族館を応援する目的で運営しています。</p>
+<p style="margin-top:10px;"><a href="mailto:info@yasasea.com?subject=%E3%80%90%E6%B0%B4%E6%97%8F%E9%A4%A8MAP%E3%82%B5%E3%82%A4%E3%83%88%E3%80%91%E6%8E%B2%E8%BC%89%E6%83%85%E5%A0%B1%E3%81%AE%E4%BF%AE%E6%AD%A3%E3%83%BB%E3%81%94%E8%A6%81%E6%9C%9B&amp;body=%E6%B0%B4%E6%97%8F%E9%A4%A8%E5%90%8D%EF%BC%9A%0A%E8%A9%B2%E5%BD%93%E3%83%9A%E3%83%BC%E3%82%B8URL%EF%BC%9A%0A%E4%BF%AE%E6%AD%A3%E3%83%BB%E3%81%94%E8%A6%81%E6%9C%9B%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%9A%0A" style="display:inline-block;background:var(--sea);color:#fff;font-weight:bold;text-decoration:none;border-radius:999px;padding:10px 22px;">✉️ 掲載修正・ご要望を送る</a></p>
+<p style="font-size:.78rem;color:#89a;">※イベント出演などお仕事のご依頼は、下の「お仕事のご依頼」のフォームからお願いします</p>
 </div>
 
 <div class="about-box" id="work">
@@ -879,7 +881,7 @@ about_doc = f"""<!DOCTYPE html>
 <table>
 <tr><th>運営</th><td>株式会社やさしいうみ</td></tr>
 <tr><th>理念</th><td>子どもにも海にも やさしい未来を</td></tr>
-<tr><th>連絡先</th><td><a class="mail" href="https://sakana-bro.com/contact/" target="_blank" rel="noopener">お問い合わせフォーム</a></td></tr>
+<tr><th>連絡先</th><td><a class="mail" href="mailto:info@yasasea.com?subject=%E3%80%90%E6%B0%B4%E6%97%8F%E9%A4%A8MAP%E3%82%B5%E3%82%A4%E3%83%88%E3%80%91%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">info@yasasea.com（サイトに関するお問い合わせ）</a></td></tr>
 <tr><th>公式サイト</th><td><a href="https://sakana-bro.com/" target="_blank" rel="noopener">https://sakana-bro.com/</a></td></tr>
 </table>
 </div>
