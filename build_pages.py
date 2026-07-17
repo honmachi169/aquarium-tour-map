@@ -763,7 +763,7 @@ if tabs_data:
 <meta property="og:type" content="website">
 <meta property="og:title" content="{AUTHOR_NAME}的 水族館ランキング | {BRAND_NAME}">
 <meta property="og:description" content="{AUTHOR_NAME}が実際に訪れて選んだ、テーマ別水族館ベスト5。">
-<meta property="og:image" content="{SITE}/assets/kawachan_odoroki.png">
+<meta property="og:image" content="{SITE}/assets/kawachan_odoroki_ogp.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{SITE}/taste-ranking.html">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -835,7 +835,7 @@ about_doc = f"""<!DOCTYPE html>
 <meta property="og:type" content="website">
 <meta property="og:title" content="このサイトについて・運営者情報 | 全国水族館ツアーMAP">
 <meta property="og:description" content="会いに行こう！全国水族館ツアーMAPの紹介と運営者情報。さかなのおにいさんかわちゃんが実際に訪れた水族館を紹介する、実訪問ベースの水族館サイトです。">
-<meta property="og:image" content="{SITE}/assets/kawachan_web.png">
+<meta property="og:image" content="{SITE}/assets/kawachan_web_ogp.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <style>{LIST_STYLE}
@@ -1048,7 +1048,7 @@ list_doc = f"""<!DOCTYPE html>
 <meta property="og:type" content="website">
 <meta property="og:title" content="掲載水族館一覧（全{len(entry_meta)}館） | {BRAND_NAME}">
 <meta property="og:description" content="{BRAND_NAME}に掲載中の全{len(entry_meta)}館をエリア別に一覧で。">
-<meta property="og:image" content="{SITE}/assets/kawachan_guide.png">
+<meta property="og:image" content="{SITE}/assets/kawachan_guide_ogp.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <style>{LIST_STYLE}
@@ -1167,7 +1167,7 @@ __GA__
 <meta property="og:title" content="すいぞくかんパスポート | __BRAND__">
 <meta property="og:description" content="行った水族館のスタンプを集めて、メダルをゲットしよう！">
 <meta property="og:url" content="__SITE__/passport.html">
-<meta property="og:image" content="__SITE__/assets/kawachan_web.png">
+<meta property="og:image" content="__SITE__/assets/kawachan_web_ogp.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <style>
