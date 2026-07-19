@@ -101,12 +101,19 @@
   .c-item { display:flex; flex-direction:column; gap:4px; padding:10px 0; border-bottom:1px solid #e8f4fb; }
   .c-item:last-child { border-bottom:none; }
   .c-name { font-size:.75rem; font-weight:bold; color:var(--sea); }
+  .c-stars { font-size:.78rem; color:var(--sun); letter-spacing:1px; }
   .c-msg { font-size:.85rem; color:#234; line-height:1.6; }
   .c-foot { display:flex; align-items:center; gap:8px; }
   .like-btn { background:none; border:1.5px solid #fbb6ce; border-radius:999px; padding:2px 10px; font-size:.75rem; color:#be185d; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:3px; transition:background .15s; }
   .like-btn:hover, .like-btn.liked { background:#fce7f3; }
   .like-btn.liked { border-color:#ec4899; font-weight:bold; }
   .empty, .loading { font-size:.82rem; color:#89a; }
+  .avg-rating { font-size:.88rem; color:#c98f1b; font-weight:bold; margin-bottom:10px; }
+  .avg-rating .n { color:#89a; font-weight:normal; font-size:.78rem; }
+  .star-input { display:flex; align-items:center; gap:6px; font-size:.78rem; color:#567; }
+  .stars { display:inline-flex; }
+  .star { background:none; border:none; font-size:1.35rem; color:#d8e2e8; cursor:pointer; padding:0 1px; line-height:1; font-family:inherit; }
+  .star.on { color:var(--sun); }
   #comment-form { margin-top:12px; display:flex; flex-direction:column; gap:8px; }
   #comment-form input, #comment-form textarea { border:2px solid var(--sky); border-radius:10px; padding:8px 12px; font-size:16px; font-family:inherit; outline:none; width:100%; }
   #comment-form input:focus, #comment-form textarea:focus { border-color:var(--sea); }
@@ -151,12 +158,17 @@
     
     <div class="user-comments-box">
       <h3>🐟 行った感想を書いてね！</h3>
+      <div id="avgRating" class="avg-rating"></div>
       <div class="sort-toggle">
         <button id="sort-new" class="active" onclick="setSort('new')">新着順</button>
         <button id="sort-like" onclick="setSort('like')">❤️ いいね順</button>
       </div>
       <div id="user-list"><p class="loading">読み込み中…</p></div>
       <form id="comment-form">
+        <div class="star-input" id="c-rating">
+          <span class="star-label">評価（あれば）：</span>
+          <span class="stars" id="c-stars"><button type="button" class="star" data-v="1">★</button><button type="button" class="star" data-v="2">★</button><button type="button" class="star" data-v="3">★</button><button type="button" class="star" data-v="4">★</button><button type="button" class="star" data-v="5">★</button></span>
+        </div>
         <input type="text" id="c-name" placeholder="なまえ（省略OK）" maxlength="15">
         <textarea id="c-msg" placeholder="青森県営浅虫水族館の感想を書いてね！（80文字以内）" maxlength="80" rows="3" required></textarea>
         <button type="submit">送信する 🐟</button>
@@ -216,13 +228,25 @@ function setSort(mode) {
 }
 function renderComments() {
   const el = document.getElementById('user-list');
-  if (!allComments.length) { el.innerHTML = '<p class="empty">まだコメントがないよ！最初の感想を書いてみて🐟</p>'; return; }
+  const avgEl = document.getElementById('avgRating');
+  if (!allComments.length) {
+    el.innerHTML = '<p class="empty">まだコメントがないよ！最初の感想を書いてみて🐟</p>';
+    avgEl.innerHTML = '';
+    return;
+  }
+  const rated = allComments.filter(c => c.rating > 0);
+  if (rated.length) {
+    const avg = rated.reduce((s,c)=>s+c.rating,0) / rated.length;
+    avgEl.innerHTML = `⭐ ${avg.toFixed(1)} <span class="n">（${rated.length}件の評価）</span>`;
+  } else { avgEl.innerHTML = ''; }
   const liked = getLiked();
   const sorted = [...allComments].sort((a,b) => sortMode==='like' ? (b.likes||0)-(a.likes||0) : 0);
   el.innerHTML = sorted.map(c => {
     const isLiked = liked.has(c.id);
+    const starsHtml = c.rating > 0 ? `<span class="c-stars">${'★'.repeat(c.rating)}${'☆'.repeat(5-c.rating)}</span>` : '';
     return `<div class="c-item">
       <span class="c-name">🐟 ${c.name}</span>
+      ${starsHtml}
       <span class="c-msg">${c.msg}</span>
       <div class="c-foot">
         <button class="like-btn${isLiked?' liked':''}" data-id="${c.id}" onclick="doLike(this,'${c.id}')">❤️ ${c.likes||0}</button>
@@ -255,6 +279,14 @@ async function doLike(btn, id) {
   } catch(e) {}
 }
 loadUserComments();
+let selectedRating = 0;
+document.querySelectorAll('#c-stars .star').forEach(btn => {
+  btn.onclick = () => {
+    const v = Number(btn.dataset.v);
+    selectedRating = (selectedRating === v) ? 0 : v;
+    document.querySelectorAll('#c-stars .star').forEach(b => b.classList.toggle('on', Number(b.dataset.v) <= selectedRating));
+  };
+});
 document.getElementById('comment-form').onsubmit = async (ev) => {
   ev.preventDefault();
   const name = document.getElementById('c-name').value.trim() || 'ななしのさかな';
@@ -263,11 +295,13 @@ document.getElementById('comment-form').onsubmit = async (ev) => {
   if (!msg) return;
   status.textContent = '送信中…';
   try {
-    const res = await fetch(COMMENT_API, { method: 'POST', body: JSON.stringify({ name, msg, aquarium: AQ_NAME }) });
+    const res = await fetch(COMMENT_API, { method: 'POST', body: JSON.stringify({ name, msg, aquarium: AQ_NAME, rating: selectedRating }) });
     const d = await res.json();
     if (d.ok) {
       status.textContent = '送信できたよ！ありがとう🐟';
       document.getElementById('c-msg').value = '';
+      selectedRating = 0;
+      document.querySelectorAll('#c-stars .star').forEach(b => b.classList.remove('on'));
       setTimeout(loadUserComments, 800);
     } else { status.textContent = d.error || '送信エラー'; }
   } catch(e) { status.textContent = '送信エラー'; }
