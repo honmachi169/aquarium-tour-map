@@ -3616,6 +3616,9 @@
         "ヒトデ",
         "ナマコ",
         "ウニ"
+      ],
+      "tags": [
+        "kaichu"
       ]
     },
     {
@@ -4618,7 +4621,8 @@
       "tags": [
         "same",
         "deep",
-        "rain"
+        "rain",
+        "kaichu"
       ],
       "restaurant": "あり（レストラン「アクロポラ」）",
       "access": "JR串本駅から無料シャトルバスあり",
@@ -5536,6 +5540,101 @@
       "parking": "あり（約600台・無料）",
       "access": "JR昭和町駅から徒歩約10分",
       "child": "300円（3歳〜小学生）、2歳以下無料"
+    },
+    {
+      "name": "玄海海中展望塔",
+      "pref": "佐賀県",
+      "lat": 33.556,
+      "lng": 129.846,
+      "url": "https://hadomisaki.jp/",
+      "fee": "1,000円",
+      "child": "500円（小・中学生）、未就学児無料",
+      "closed": "年中無休（荒天時は休館あり）",
+      "comment": "日本海で唯一の海中展望塔！波戸岬から86mの桟橋を渡ると、水深7mの窓に天然の魚たちが集まってくる「海の中の水族館」",
+      "photo": "assets/photo_genkai.jpg",
+      "visited": true,
+      "tags": [
+        "kaichu"
+      ]
+    },
+    {
+      "name": "伊万里湾カブトガニの館",
+      "pref": "佐賀県",
+      "lat": 33.291,
+      "lng": 129.863,
+      "url": "https://kabutogani-imari.com/",
+      "fee": "無料",
+      "child": "無料",
+      "closed": "月曜（祝日の場合は翌火曜。7・8月は無休）、12〜3月は平日休館",
+      "comment": "「生きている化石」カブトガニに間近で会える無料スポット！夏の大潮のころには産卵も観察できる",
+      "photo": "assets/photo_kabutogani.jpg",
+      "visited": true,
+      "animals": [
+        "カブトガニ"
+      ],
+      "search_animals": [
+        "カブトガニ"
+      ]
+    },
+    {
+      "name": "足摺海底館",
+      "pref": "高知県",
+      "lat": 32.786,
+      "lng": 132.86,
+      "url": "https://kaiteikan.jp/",
+      "fee": "900円",
+      "child": "450円（小学生〜高校生）、未就学児無料",
+      "closed": "連絡橋の老朽化のため2026年5月から休館中（再開時期未定）",
+      "comment": "竜串の見残し湾に立つ海中展望塔。水深7mの丸窓から天然のサンゴや魚たちをのぞける",
+      "visited": false,
+      "tags": [
+        "kaichu"
+      ]
+    },
+    {
+      "name": "ブセナ海中公園 海中展望塔",
+      "pref": "沖縄県",
+      "lat": 26.5398,
+      "lng": 127.9359,
+      "url": "https://www.busena-marinepark.com/",
+      "fee": "1,050円",
+      "child": "530円（4歳〜中学生）、3歳以下無料",
+      "closed": "年中無休（荒天時は休館あり）",
+      "comment": "沖縄本島唯一の海中展望塔！服のまま沖縄の海の中へ。クジラ型グラスボートとのセット券もあるよ",
+      "visited": false,
+      "tags": [
+        "kaichu"
+      ]
+    },
+    {
+      "name": "かつうら海中公園 海中展望塔",
+      "pref": "千葉県",
+      "lat": 35.1341,
+      "lng": 140.284,
+      "url": "http://www.katsuura.org/",
+      "fee": "980円",
+      "child": "480円（小・中学生）、220円（4歳以上）",
+      "closed": "年中無休（荒天時は休館あり）",
+      "comment": "沖合60mの海上に立つ関東の海中展望塔。寒流と暖流が出会う海で、年間約90種の生き物に会える",
+      "visited": false,
+      "tags": [
+        "kaichu"
+      ]
+    },
+    {
+      "name": "白浜海中展望塔（コーラルプリンセス）",
+      "pref": "和歌山県",
+      "lat": 33.6761,
+      "lng": 135.3358,
+      "url": "https://www.keyterrace.co.jp/facility/",
+      "fee": "800円",
+      "child": "500円（3歳〜）",
+      "closed": "年中無休（荒天時・視界不良時は変更あり）",
+      "comment": "ホテルシーモア沖合100mに立つ全天候型の海中展望塔。360度・12ヶ所の丸窓から約30種の魚を観賞できる",
+      "visited": false,
+      "tags": [
+        "kaichu"
+      ]
     }
   ],
   "rankings": [
