@@ -80,6 +80,18 @@
   .filming-note { font-size:.75rem; color:#0077b6; background:#e0f7fa; border-radius:8px; padding:5px 12px; margin:6px 0 0; display:inline-block; }
   .only-quote { font-size:.95rem; font-weight:bold; color:#92600a; background:#fff7db; border-left:5px solid #f4c430; border-radius:8px; padding:10px 14px; margin:12px 0; line-height:1.6; }
   .attr-footer { font-size:.72rem; color:#9ab; margin-top:24px; text-align:center; line-height:2; } .attr-footer a { color:#89a; }
+  .photos-section { margin-top:28px; }
+  .photos-section h2 { color:var(--sea-deep); font-size:1.1rem; margin-bottom:12px; }
+  .photo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px; margin-bottom:12px; }
+  .photo-card { background:#fff; border-radius:12px; overflow:hidden; border:2px solid #e3f2fb; box-shadow:0 2px 6px rgba(2,62,138,.08); }
+  .photo-card img { width:100%; aspect-ratio:1/1; object-fit:cover; display:block; background:#dbeefb; }
+  .photo-card .pc-body { padding:6px 8px 8px; }
+  .photo-card .pc-aq { display:none; }
+  .photo-card .pc-msg { font-size:.72rem; color:#456; line-height:1.4; }
+  .photo-card .pc-name { font-size:.65rem; color:#8aa; margin-top:3px; }
+  .more-btn { grid-column:1/-1; background:#fff; border:2px solid var(--sky); color:var(--sea-deep); font-weight:bold; font-size:.8rem; border-radius:999px; padding:9px; cursor:pointer; font-family:inherit; }
+  .more-btn:hover { border-color:var(--sea); }
+  .photo-post-link { display:inline-block; font-size:.82rem; font-weight:bold; color:var(--sea); text-decoration:none; }
   .comments-section { margin-top:28px; }
   .comments-section h2 { color:var(--sea-deep); font-size:1.1rem; margin-bottom:16px; }
   .sort-toggle { display:flex; gap:8px; margin-bottom:12px; }
@@ -129,6 +141,12 @@
   <a class="ytbtn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録する</a>
   <a class="guidebtn" href="https://aquarium.yasasea.com/guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>
 
+  <section class="photos-section">
+    <h2>📸 みんなの投稿写真</h2>
+    <div class="photo-grid" id="photoGrid"><p class="loading">読み込み中…</p></div>
+    <a class="photo-post-link" href="https://aquarium.yasasea.com/posts.html?aq=%E3%81%99%E3%81%BF%E3%81%A0%E6%B0%B4%E6%97%8F%E9%A4%A8#photo-form">📷 この水族館の写真を投稿する</a>
+  </section>
+
   <section class="comments-section">
     <h2>💬 みんなのコメント</h2>
     <div class="ytc-box"><h3>▶ YouTubeのコメント</h3><div id="ytc-list"><p class="loading">読み込み中…</p></div></div>
@@ -174,6 +192,39 @@ async function loadYtComments() {
   } catch(e) { el.innerHTML = '<p class="empty">読み込みエラー</p>'; }
 }
 loadYtComments();
+const escPhoto = s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const PHOTO_PAGE_SIZE = 6;
+let allPhotos = [];
+let shownPhotos = 0;
+function photoCardHtml(p) {
+  return `<div class="photo-card">
+        <img loading="lazy" src="${escPhoto(p.img)}" alt="${escPhoto(AQ_NAME)}">
+        <div class="pc-body">
+          <div class="pc-msg">${escPhoto(p.msg)}</div>
+          <div class="pc-name">by ${escPhoto(p.name)}</div>
+        </div>
+      </div>`;
+}
+function renderPhotoBatch() {
+  const grid = document.getElementById('photoGrid');
+  shownPhotos = Math.min(shownPhotos + PHOTO_PAGE_SIZE, allPhotos.length);
+  const rest = allPhotos.length - shownPhotos;
+  grid.innerHTML = allPhotos.slice(0, shownPhotos).map(photoCardHtml).join('')
+    + (rest > 0 ? `<button class="more-btn" id="morePhotosBtn">もっと見る（あと${rest}件）</button>` : '');
+  const btn = document.getElementById('morePhotosBtn');
+  if (btn) btn.onclick = renderPhotoBatch;
+}
+async function loadSpotPhotos() {
+  const grid = document.getElementById('photoGrid');
+  try {
+    const res = await fetch(COMMENT_API + '?photos=1&aquarium=' + encodeURIComponent(AQ_NAME));
+    allPhotos = await res.json();
+    if (!allPhotos.length) { grid.innerHTML = '<p class="empty">まだ投稿がないよ！最初の写真を送ってみて🐟</p>'; return; }
+    shownPhotos = 0;
+    renderPhotoBatch();
+  } catch (e) { grid.innerHTML = '<p class="empty">読み込みエラー</p>'; }
+}
+loadSpotPhotos();
 let allComments = [];
 let sortMode = 'new';
 const likedKey = 'liked_' + AQ_NAME;
