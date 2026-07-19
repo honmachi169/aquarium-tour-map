@@ -1076,6 +1076,40 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       const cb = card.querySelector('.cbtn');
       if(cb) cb.onclick = ()=> loadYtComments(cb.dataset.vid, card.querySelector('.ytc'), cb);
     });
+    // 🔜 まだ動画で紹介していない水族館も、絞り込み・検索中は一覧に出す（行った！チェックできるように）
+    const filterActive = current!=='すべて' || currentTag || q;
+    if(filterActive){
+      const unv = (data.unvisited||[]).map((a,ui)=>({a, slug:'u'+String(ui).padStart(3,'0')}))
+        .filter(({a})=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (currentTag==='__visited' ? myVisits.has(a.name) : currentTag==='__wish' ? myWishlist.has(a.name) : (a.tags||[]).includes(currentTag))))
+        .filter(({a})=> !q || (a.animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.search_animals||[]).some(an=> an.toLowerCase().includes(q)));
+      if(unv.length){
+        const div = document.createElement('div');
+        div.style.cssText = 'grid-column:1/-1;font-weight:bold;color:var(--sea-deep);opacity:.8;padding:6px 4px 0;';
+        div.textContent = '🔜 これから紹介したい水族館（行った！チェックもできるよ）';
+        cards.appendChild(div);
+      }
+      unv.forEach(({a, slug})=>{
+        const card = document.createElement('div');
+        card.className = 'card upcoming' + (myVisits.has(a.name)?' visited':'');
+        card.innerHTML = `
+          ${a.photo?`<a href="spot/${slug}.html"><img loading="lazy" src="${a.photo}" alt="${a.name}"></a>`:`<div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:#eef4f8;font-size:2rem">🔜</div>`}
+          <div class="body">
+            <span class="pref">${a.pref}</span>
+            <h3><a class="namelink" href="spot/${slug}.html">${a.name}</a></h3>
+            <p class="hl">${a.comment||''}</p>
+            ${animalChips(a)}
+            ${a.summer?`<div class="summerinfo">☀️ 夏休み：${a.summer}</div>`:''}
+            ${(a.fee||a.closed)?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}`:''}${a.child?`<br>🧒 子ども ${a.child}`:''}${a.closed?`<br>🗓 休み：${a.closed}`:''}</div>`:''}
+            <div class="links">
+              ${a.url?`<a class="tab hp" href="${a.url}" target="_blank">公式サイト</a>`:''}
+              <a class="tab detail" href="spot/${slug}.html">📖 くわしく</a>
+              ${visitBtn(a)}
+              ${wishBtn(a)}
+            </div>
+          </div>`;
+        cards.appendChild(card);
+      });
+    }
   }
   // ===== 制覇マップ画像シェア =====
   const ALL_SPOTS = [...aqs, ...(data.unvisited||[])];
