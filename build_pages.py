@@ -15,6 +15,7 @@ SOURCE_LINE = f"出典：{BRAND_NAME}（{AUTHOR_NAME}）"
 ATTR_FOOTER = (f'<p class="attr-footer">🐟 {SOURCE_LINE} / {{SITE}}<br>'
                f'運営：<a href="{{SITE}}/about.html#company">株式会社やさしいうみ</a>　'
                f'<a href="{{SITE}}/about.html#work">💼 お仕事のご依頼</a>　'
+               f'<a href="{{SITE}}/posts.html#iken">📮 ご意見箱</a>　'
                f'<a href="{{SITE}}/about.html#privacy">プライバシーポリシー</a></p>').replace("{SITE}", SITE)
 ATTR_CSS = '.attr-footer { font-size:.72rem; color:#9ab; margin-top:24px; text-align:center; line-height:2; } .attr-footer a { color:#89a; }'
 

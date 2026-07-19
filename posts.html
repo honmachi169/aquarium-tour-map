@@ -99,6 +99,16 @@
       <p id="p-status"></p>
     </form>
   </div>
+  <div class="form-box" id="iken">
+    <form id="iken-form">
+      <h3>📮 ご意見箱</h3>
+      <p style="font-size:.85rem; color:#456; margin:4px 0 10px; line-height:1.7;">サイトの改善リクエスト・不具合報告・「こんな機能ほしい！」はここから送ってね。<br>サイトには表示されず、かわちゃんチームだけが読むよ。ぜんぶ目を通してます🐟</p>
+      <input type="text" id="i-name" placeholder="なまえ（省略OK）" maxlength="15">
+      <textarea id="i-msg" placeholder="ご意見・ご要望・不具合の内容（500文字以内）" maxlength="500" rows="5" required></textarea>
+      <button type="submit">送信する 📮</button>
+      <p id="i-status"></p>
+    </form>
+  </div>
   <a class="back" href="./">← MAPにもどる</a>
 </main>
 <script>
@@ -192,6 +202,30 @@ document.getElementById('photo-form').onsubmit = async (ev)=>{
       document.getElementById('photo-form').reset();
       document.getElementById('p-preview').style.display = 'none';
       imgData = null;
+    } else { status.textContent = d.error || '送信エラー'; }
+  }catch(e){ status.textContent = '送信エラー…もう一度試してね'; }
+};
+
+// ご意見箱の送信（サイト非表示・feedbackシートに保存）
+document.getElementById('iken-form').onsubmit = async (ev)=>{
+  ev.preventDefault();
+  const status = document.getElementById('i-status');
+  const recent = getRecentPostTimes();
+  if(recent.length >= RATE_LIMIT){
+    status.textContent = '投稿は1時間に3件までだよ🙏 また後で送ってね';
+    return;
+  }
+  const name = document.getElementById('i-name').value.trim();
+  const msg = document.getElementById('i-msg').value.trim();
+  if(!msg) return;
+  status.textContent = '送信中…';
+  try{
+    const res = await fetch(COMMENT_API, { method:'POST', body: JSON.stringify({ action:'feedback', name, msg, page: location.pathname }) });
+    const d = await res.json();
+    if(d.ok){
+      status.textContent = '届いたよ！貴重なご意見ありがとう🐟 チームで読んで改善に活かすね';
+      recordPostTime();
+      document.getElementById('iken-form').reset();
     } else { status.textContent = d.error || '送信エラー'; }
   }catch(e){ status.textContent = '送信エラー…もう一度試してね'; }
 };
