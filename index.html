@@ -89,7 +89,7 @@
   .mini-toast.show { opacity:1; transform:translate(-50%,0); }
   .mycount { font-size:.85rem; margin-top:6px; color:#fff; opacity:.95; }
   .mycount b { color:var(--sun); font-size:1.1rem; }
-  .sharebtn { margin-left:8px; font-family:inherit; font-size:.78rem; font-weight:bold; background:var(--sun); color:#5a4000; border:none; border-radius:999px; padding:5px 14px; cursor:pointer; box-shadow:0 2px 6px rgba(2,62,138,.25); }
+  .sharebtn { display:inline-block; text-decoration:none; margin-left:8px; font-family:inherit; font-size:.78rem; font-weight:bold; background:var(--sun); color:#5a4000; border:none; border-radius:999px; padding:5px 14px; cursor:pointer; box-shadow:0 2px 6px rgba(2,62,138,.25); }
   .sharebtn:active { transform:scale(.96); }
   .card.visited { border-color:#2a9d8f; }
   .card.visited::after { content:"行った！"; position:absolute; top:8px; right:8px; background:#2a9d8f; color:#fff; font-size:.7rem; font-weight:bold; border-radius:999px; padding:3px 10px; transform:rotate(6deg); box-shadow:0 2px 5px rgba(0,0,0,.25); }
@@ -313,7 +313,8 @@
     <div class="mycount">
       <span class="mc-mine">あなたの制覇：<b id="myvisited">0</b> 館 🏆（⬜を押してチェック！）</span>
       <span class="mc-kawachan" style="display:none">🐟 かわちゃんねるは <b id="kawaCount">0</b>/<span id="kawaGoal">100</span>館 YouTubeで紹介中！</span>
-      <button id="mapImgBtn" class="sharebtn">🗾 制覇マップをシェア</button></div>
+      <button id="mapImgBtn" class="sharebtn">🗾 制覇マップをシェア</button>
+      <a href="passport.html" class="sharebtn">📖 すいぞくかんパスポート</a></div>
     <a class="counter-sub-btn pc-only" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
   </div>
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,45 350,-5 600,20 C850,45 1050,-5 1200,20 L1200,40 L0,40 Z" fill="#023e8a"/></svg>
