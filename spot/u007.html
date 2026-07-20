@@ -79,39 +79,38 @@
   .filming-note { font-size:.75rem; color:#0077b6; background:#e0f7fa; border-radius:8px; padding:5px 12px; margin:6px 0 0; display:inline-block; }
   .only-quote { font-size:.95rem; font-weight:bold; color:#92600a; background:#fff7db; border-left:5px solid #f4c430; border-radius:8px; padding:10px 14px; margin:12px 0; line-height:1.6; }
   .attr-footer { font-size:.72rem; color:#9ab; margin-top:24px; text-align:center; line-height:2; } .attr-footer a { color:#89a; }
-  .photos-section { margin-top:28px; }
-  .photos-section h2 { color:var(--sea-deep); font-size:1.1rem; margin-bottom:12px; }
-  .photo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px; margin-bottom:12px; }
-  .photo-card { background:#fff; border-radius:12px; overflow:hidden; border:2px solid #e3f2fb; box-shadow:0 2px 6px rgba(2,62,138,.08); }
-  .photo-card img { width:100%; aspect-ratio:1/1; object-fit:cover; display:block; background:#dbeefb; }
-  .photo-card .pc-body { padding:6px 8px 8px; }
-  .photo-card .pc-aq { display:none; }
-  .photo-card .pc-msg { font-size:.72rem; color:#456; line-height:1.4; }
-  .photo-card .pc-name { font-size:.65rem; color:#8aa; margin-top:3px; }
-  .more-btn { grid-column:1/-1; background:#fff; border:2px solid var(--sky); color:var(--sea-deep); font-weight:bold; font-size:.8rem; border-radius:999px; padding:9px; cursor:pointer; font-family:inherit; }
-  .more-btn:hover { border-color:var(--sea); }
-  .photo-post-link { display:inline-block; font-size:.82rem; font-weight:bold; color:var(--sea); text-decoration:none; }
-  .comments-section { margin-top:28px; }
-  .comments-section h2 { color:var(--sea-deep); font-size:1.1rem; margin-bottom:16px; }
-  .sort-toggle { display:flex; gap:8px; margin-bottom:12px; }
-  .sort-toggle button { font-size:.78rem; font-weight:bold; border:2px solid var(--sea); background:#fff; color:var(--sea); border-radius:999px; padding:4px 14px; cursor:pointer; font-family:inherit; }
-  .sort-toggle button.active { background:var(--sea); color:#fff; }
+  .posts-section { margin-top:28px; }
+  .posts-section h2 { color:var(--sea-deep); font-size:1.1rem; margin-bottom:16px; }
   .ytc-box, .user-comments-box { background:#fff; border-radius:16px; padding:16px; margin-bottom:16px; box-shadow:0 2px 8px rgba(2,62,138,.1); }
   .ytc-box h3, .user-comments-box h3 { font-size:.9rem; color:var(--sea); margin-bottom:10px; }
-  .c-item { display:flex; flex-direction:column; gap:4px; padding:10px 0; border-bottom:1px solid #e8f4fb; }
-  .c-item:last-child { border-bottom:none; }
-  .c-name { font-size:.75rem; font-weight:bold; color:var(--sea); }
-  .c-msg { font-size:.85rem; color:#234; line-height:1.6; }
-  .c-foot { display:flex; align-items:center; gap:8px; }
+  .post-item { display:flex; flex-direction:column; gap:6px; padding:12px 0; border-bottom:1px solid #e8f4fb; }
+  .post-item:last-child { border-bottom:none; }
+  .post-item img { width:100%; max-width:280px; border-radius:12px; display:block; background:#dbeefb; }
+  .post-name { font-size:.75rem; font-weight:bold; color:var(--sea); }
+  .post-msg { font-size:.85rem; color:#234; line-height:1.6; }
+  .post-foot { display:flex; align-items:center; gap:8px; }
   .like-btn { background:none; border:1.5px solid #fbb6ce; border-radius:999px; padding:2px 10px; font-size:.75rem; color:#be185d; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:3px; transition:background .15s; }
   .like-btn:hover, .like-btn.liked { background:#fce7f3; }
   .like-btn.liked { border-color:#ec4899; font-weight:bold; }
   .empty, .loading { font-size:.82rem; color:#89a; }
-  #comment-form { margin-top:12px; display:flex; flex-direction:column; gap:8px; }
-  #comment-form input, #comment-form textarea { border:2px solid var(--sky); border-radius:10px; padding:8px 12px; font-size:16px; font-family:inherit; outline:none; width:100%; }
-  #comment-form input:focus, #comment-form textarea:focus { border-color:var(--sea); }
-  #comment-form button { background:var(--sea); color:#fff; border:none; border-radius:999px; padding:10px; font-size:.9rem; font-weight:bold; cursor:pointer; font-family:inherit; }
-  #c-status { font-size:.8rem; color:var(--sea); min-height:1.2em; }
+  .more-btn { display:block; width:100%; background:#fff; border:2px solid var(--sky); color:var(--sea-deep); font-weight:bold; font-size:.8rem; border-radius:999px; padding:9px; cursor:pointer; font-family:inherit; margin-top:8px; }
+  .more-btn:hover { border-color:var(--sea); }
+  #post-form { margin-top:12px; display:flex; flex-direction:column; gap:8px; }
+  #post-form input[type=text], #post-form textarea { border:2px solid var(--sky); border-radius:10px; padding:8px 12px; font-size:16px; font-family:inherit; outline:none; width:100%; }
+  #post-form input:focus, #post-form textarea:focus { border-color:var(--sea); }
+  #post-form button[type=submit] { background:var(--sea); color:#fff; border:none; border-radius:999px; padding:10px; font-size:.9rem; font-weight:bold; cursor:pointer; font-family:inherit; }
+  #p-status { font-size:.8rem; color:var(--sea); min-height:1.2em; }
+  .file-label { display:inline-flex; align-items:center; gap:6px; background:var(--sky); color:var(--sea-deep); font-size:.85rem; font-weight:bold; border-radius:999px; padding:8px 18px; cursor:pointer; align-self:flex-start; }
+  .file-label input { display:none; }
+  #p-preview { max-width:200px; border-radius:12px; margin-top:2px; }
+  .rules-box { background:#f2f9fd; border:2px solid var(--sky); border-radius:12px; padding:12px 14px; font-size:.78rem; color:#345; }
+  .rules-box b { color:var(--sea-deep); }
+  .rules-box ul { margin:6px 0 0 18px; display:flex; flex-direction:column; gap:4px; line-height:1.55; }
+  .agree-label { display:flex; align-items:center; gap:8px; font-size:.85rem; font-weight:bold; color:var(--sea-deep); cursor:pointer; margin-top:10px; }
+  .agree-label input { width:18px; height:18px; accent-color:var(--sea); }
+  .quiz-box { background:#fff7db; border:2px solid var(--sun); border-radius:12px; padding:10px 14px; display:flex; flex-direction:column; gap:6px; margin-top:8px; }
+  .quiz-box label { font-size:.82rem; font-weight:bold; color:#8a6800; }
+  .quiz-box select { border:2px solid var(--sun); border-radius:8px; padding:6px 10px; font-size:.88rem; font-family:inherit; background:#fff; }
 </style>
 </head>
 <body>
@@ -140,27 +139,38 @@
   <a class="ytbtn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録する</a>
   <a class="guidebtn" href="https://aquarium.yasasea.com/guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>
 
-  <section class="photos-section">
-    <h2>📸 みんなの投稿写真</h2>
-    <div class="photo-grid" id="photoGrid"><p class="loading">読み込み中…</p></div>
-    <a class="photo-post-link" href="https://aquarium.yasasea.com/posts.html?aq=%E3%82%AA%E3%83%9B%E3%83%BC%E3%83%84%E3%82%AF%E6%B5%81%E6%B0%B7%E9%A4%A8#photo-form">📷 この水族館の写真を投稿する</a>
-  </section>
-
-  <section class="comments-section">
-    <h2>💬 みんなのコメント</h2>
+  <section class="posts-section">
+    <h2>📸💬 みんなの投稿</h2>
     
     <div class="user-comments-box">
-      <h3>🐟 行った感想を書いてね！</h3>
-      <div class="sort-toggle">
-        <button id="sort-new" class="active" onclick="setSort('new')">新着順</button>
-        <button id="sort-like" onclick="setSort('like')">❤️ いいね順</button>
-      </div>
-      <div id="user-list"><p class="loading">読み込み中…</p></div>
-      <form id="comment-form">
-        <input type="text" id="c-name" placeholder="なまえ（省略OK）" maxlength="15">
-        <textarea id="c-msg" placeholder="オホーツク流氷館の感想を書いてね！（80文字以内）" maxlength="80" rows="3" required></textarea>
+      <h3>🐟 行った感想を書いてね！写真もOK</h3>
+      <div id="post-list"><p class="loading">読み込み中…</p></div>
+      <form id="post-form">
+        <input type="text" id="p-name" placeholder="なまえ（省略OK）" maxlength="15">
+        <textarea id="p-msg" placeholder="オホーツク流氷館の感想を書いてね！（80文字以内）" maxlength="80" rows="3"></textarea>
+        <label class="file-label">📷 写真を追加する（任意）<input type="file" id="p-img" accept="image/*"></label>
+        <img id="p-preview" style="display:none">
+        <div class="rules-box" id="rulesBox" style="display:none">
+          <b>📋 写真投稿のおやくそく</b>
+          <ul>
+            <li>写真は<b>自分で撮影したもの</b>だけ送ってね</li>
+            <li><b>人の顔が写っている写真</b>は送らないでね（肖像権のため）</li>
+            <li>撮影OKの場所で撮ったものだけにしてね</li>
+            <li>写真つきの投稿はチームで確認してから掲載します</li>
+          </ul>
+          <label class="agree-label"><input type="checkbox" id="p-agree"> おやくそくを読んで同意しました</label>
+          <div class="quiz-box">
+            <label for="p-quiz">🐟 かんたんクイズ：海にすむ生きものはどっち？</label>
+            <select id="p-quiz">
+              <option value="">選んでね</option>
+              <option value="ng">ライオン</option>
+              <option value="ok">ジンベエザメ</option>
+              <option value="ng">パンダ</option>
+            </select>
+          </div>
+        </div>
         <button type="submit">送信する 🐟</button>
-        <p id="c-status"></p>
+        <p id="p-status"></p>
       </form>
     </div>
   </section>
@@ -170,74 +180,49 @@
 const COMMENT_API = "https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV1YlrB_UPx2_c3hMS9fG6YTunOrrOKROeHdHJg2QzXj/exec";
 const AQ_NAME = "オホーツク流氷館";
 
-const escPhoto = s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const PHOTO_PAGE_SIZE = 6;
-let allPhotos = [];
-let shownPhotos = 0;
-function photoCardHtml(p) {
-  return `<div class="photo-card">
-        <img loading="lazy" src="${escPhoto(p.img)}" alt="${escPhoto(AQ_NAME)}">
-        <div class="pc-body">
-          <div class="pc-msg">${escPhoto(p.msg)}</div>
-          <div class="pc-name">by ${escPhoto(p.name)}</div>
-        </div>
-      </div>`;
-}
-function renderPhotoBatch() {
-  const grid = document.getElementById('photoGrid');
-  shownPhotos = Math.min(shownPhotos + PHOTO_PAGE_SIZE, allPhotos.length);
-  const rest = allPhotos.length - shownPhotos;
-  grid.innerHTML = allPhotos.slice(0, shownPhotos).map(photoCardHtml).join('')
-    + (rest > 0 ? `<button class="more-btn" id="morePhotosBtn">もっと見る（あと${rest}件）</button>` : '');
-  const btn = document.getElementById('morePhotosBtn');
-  if (btn) btn.onclick = renderPhotoBatch;
-}
-async function loadSpotPhotos() {
-  const grid = document.getElementById('photoGrid');
-  try {
-    const res = await fetch(COMMENT_API + '?photos=1&aquarium=' + encodeURIComponent(AQ_NAME));
-    allPhotos = await res.json();
-    if (!allPhotos.length) { grid.innerHTML = '<p class="empty">まだ投稿がないよ！最初の写真を送ってみて🐟</p>'; return; }
-    shownPhotos = 0;
-    renderPhotoBatch();
-  } catch (e) { grid.innerHTML = '<p class="empty">読み込みエラー</p>'; }
-}
-loadSpotPhotos();
-let allComments = [];
-let sortMode = 'new';
+const escP = s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const POST_PAGE_SIZE = 8;
+let allPosts = [];
+let shownPosts = 0;
 const likedKey = 'liked_' + AQ_NAME;
 function getLiked() { try { return new Set(JSON.parse(localStorage.getItem(likedKey)||'[]')); } catch(e) { return new Set(); } }
 function saveLiked(s) { localStorage.setItem(likedKey, JSON.stringify([...s])); }
-function setSort(mode) {
-  sortMode = mode;
-  document.getElementById('sort-new').classList.toggle('active', mode==='new');
-  document.getElementById('sort-like').classList.toggle('active', mode==='like');
-  renderComments();
-}
-function renderComments() {
-  const el = document.getElementById('user-list');
-  if (!allComments.length) { el.innerHTML = '<p class="empty">まだコメントがないよ！最初の感想を書いてみて🐟</p>'; return; }
-  const liked = getLiked();
-  const sorted = [...allComments].sort((a,b) => sortMode==='like' ? (b.likes||0)-(a.likes||0) : 0);
-  el.innerHTML = sorted.map(c => {
-    const isLiked = liked.has(c.id);
-    return `<div class="c-item">
-      <span class="c-name">🐟 ${c.name}</span>
-      <span class="c-msg">${c.msg}</span>
-      <div class="c-foot">
-        <button class="like-btn${isLiked?' liked':''}" data-id="${c.id}" onclick="doLike(this,'${c.id}')">❤️ ${c.likes||0}</button>
-      </div>
+function postCardHtml(p) {
+  const liked = p.id && getLiked().has(p.id);
+  const img = p.img ? `<img loading="lazy" src="${escP(p.img)}" alt="${escP(AQ_NAME)}">` : '';
+  const likeBtn = p.id ? `<div class="post-foot"><button class="like-btn${liked?' liked':''}" data-id="${p.id}" onclick="doLike(this,'${p.id}')">❤️ ${p.likes||0}</button></div>` : '';
+  return `<div class="post-item">
+      <span class="post-name">🐟 ${escP(p.name)}</span>
+      ${img}
+      ${p.msg ? `<span class="post-msg">${escP(p.msg)}</span>` : ''}
+      ${likeBtn}
     </div>`;
-  }).join('');
 }
-async function loadUserComments() {
-  const el = document.getElementById('user-list');
+function renderPostBatch() {
+  const el = document.getElementById('post-list');
+  shownPosts = Math.min(shownPosts + POST_PAGE_SIZE, allPosts.length);
+  const rest = allPosts.length - shownPosts;
+  el.innerHTML = allPosts.slice(0, shownPosts).map(postCardHtml).join('')
+    + (rest > 0 ? `<button class="more-btn" id="morePostsBtn">もっと見る（あと${rest}件）</button>` : '');
+  const btn = document.getElementById('morePostsBtn');
+  if (btn) btn.onclick = renderPostBatch;
+}
+async function loadPosts() {
+  const el = document.getElementById('post-list');
   try {
-    const res = await fetch(COMMENT_API + '?aquarium=' + encodeURIComponent(AQ_NAME));
-    allComments = await res.json();
-    renderComments();
-  } catch(e) { el.innerHTML = '<p class="empty">読み込みエラー</p>'; }
+    const [cRes, pRes] = await Promise.all([
+      fetch(COMMENT_API + '?aquarium=' + encodeURIComponent(AQ_NAME)),
+      fetch(COMMENT_API + '?photos=1&aquarium=' + encodeURIComponent(AQ_NAME))
+    ]);
+    const comments = await cRes.json();
+    const photos = await pRes.json();
+    allPosts = [...comments, ...photos].sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
+    if (!allPosts.length) { el.innerHTML = '<p class="empty">まだ投稿がないよ！最初の感想を書いてみて🐟</p>'; return; }
+    shownPosts = 0;
+    renderPostBatch();
+  } catch (e) { el.innerHTML = '<p class="empty">読み込みエラー</p>'; }
 }
+loadPosts();
 async function doLike(btn, id) {
   const liked = getLiked();
   if (liked.has(id)) return;
@@ -248,27 +233,90 @@ async function doLike(btn, id) {
     const res = await fetch(COMMENT_API, { method:'POST', body:JSON.stringify({ action:'like', id }) });
     const d = await res.json();
     if (d.ok) {
-      const c = allComments.find(x=>x.id===id);
+      const c = allPosts.find(x=>x.id===id);
       if(c) c.likes = d.likes;
       btn.textContent = '❤️ ' + (d.likes||0);
     }
   } catch(e) {}
 }
-loadUserComments();
-document.getElementById('comment-form').onsubmit = async (ev) => {
+
+let imgData = null;
+const rulesBox = document.getElementById('rulesBox');
+document.getElementById('p-img').onchange = (ev) => {
+  const file = ev.target.files[0];
+  if (!file) { imgData = null; rulesBox.style.display = 'none'; document.getElementById('p-preview').style.display = 'none'; return; }
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const MAX = 900;
+      const scale = Math.min(1, MAX / Math.max(img.width, img.height));
+      const cv = document.createElement('canvas');
+      cv.width = Math.round(img.width * scale);
+      cv.height = Math.round(img.height * scale);
+      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+      imgData = cv.toDataURL('image/jpeg', .82);
+      const pv = document.getElementById('p-preview');
+      pv.src = imgData; pv.style.display = 'block';
+      rulesBox.style.display = 'block';
+    };
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+};
+
+const RATE_KEY = 'post_times';
+const RATE_LIMIT = 3;
+const RATE_WINDOW = 60 * 60 * 1000;
+function getRecentPostTimes() {
+  try {
+    const arr = JSON.parse(localStorage.getItem(RATE_KEY) || '[]');
+    const now = Date.now();
+    return arr.filter(t => now - t < RATE_WINDOW);
+  } catch(e) { return []; }
+}
+function recordPostTime() {
+  const arr = getRecentPostTimes();
+  arr.push(Date.now());
+  localStorage.setItem(RATE_KEY, JSON.stringify(arr));
+}
+
+document.getElementById('post-form').onsubmit = async (ev) => {
   ev.preventDefault();
-  const name = document.getElementById('c-name').value.trim() || 'ななしのさかな';
-  const msg = document.getElementById('c-msg').value.trim();
-  const status = document.getElementById('c-status');
-  if (!msg) return;
+  const status = document.getElementById('p-status');
+  const name = document.getElementById('p-name').value.trim() || 'ななしのさかな';
+  const msg = document.getElementById('p-msg').value.trim();
+
+  if (imgData) {
+    const recent = getRecentPostTimes();
+    if (recent.length >= RATE_LIMIT) { status.textContent = '投稿は1時間に3件までだよ🙏 また後で送ってね'; return; }
+    if (!document.getElementById('p-agree').checked) { status.textContent = 'おやくそくへの同意にチェックしてね'; return; }
+    if (document.getElementById('p-quiz').value !== 'ok') { status.textContent = 'クイズの答えが違うみたい🐟 もう一度選んでね'; return; }
+    status.textContent = '送信中…（写真があるので少し時間がかかるよ）';
+    try {
+      const res = await fetch(COMMENT_API, { method: 'POST', body: JSON.stringify({ action:'photo', name, aquarium: AQ_NAME, msg, image: imgData }) });
+      const d = await res.json();
+      if (d.ok) {
+        status.textContent = '送信できたよ！チームが確認したら掲載されるので待っててね🐟';
+        recordPostTime();
+        document.getElementById('post-form').reset();
+        document.getElementById('p-preview').style.display = 'none';
+        rulesBox.style.display = 'none';
+        imgData = null;
+      } else { status.textContent = d.error || '送信エラー'; }
+    } catch(e) { status.textContent = '送信エラー…もう一度試してね'; }
+    return;
+  }
+
+  if (!msg) { status.textContent = '感想を書いてね🐟'; return; }
   status.textContent = '送信中…';
   try {
     const res = await fetch(COMMENT_API, { method: 'POST', body: JSON.stringify({ name, msg, aquarium: AQ_NAME }) });
     const d = await res.json();
     if (d.ok) {
       status.textContent = '送信できたよ！ありがとう🐟';
-      document.getElementById('c-msg').value = '';
-      setTimeout(loadUserComments, 800);
+      document.getElementById('post-form').reset();
+      setTimeout(loadPosts, 800);
     } else { status.textContent = d.error || '送信エラー'; }
   } catch(e) { status.textContent = '送信エラー'; }
 };
