@@ -792,7 +792,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   aqs.forEach(a=>{
     const v = a.videos[0];
     const thumb = v ? `https://i.ytimg.com/vi/${v.id}/mqdefault.jpg` : '';
-    const html = `<div class="pp">`
+    // 「行った！」「行きたい」ボタンは開くたびに最新状態で作り直す（静的HTMLだと再オープン時にチェックが古い状態のまま出てしまうため関数化）
+    const buildHtml = () => `<div class="pp">`
       + (v ? `<a href="https://www.youtube.com/watch?v=${v.id}" target="_blank"><img class="thumb" src="${thumb}" alt="${a.name}"></a>` : '')
       + `<div class="inner">`
       + `<span class="pref">${a.pref}</span>`
@@ -811,7 +812,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + (a.upcoming?'<span class="soon">🔜 動画は近日公開！おたのしみに</span>':'')
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:a.upcoming?upIcon:fishIcon}).addTo(map)
-      .bindPopup(html,{maxWidth:270, closeButton:true, autoPan:false});
+      .bindPopup(buildHtml,{maxWidth:270, closeButton:true, autoPan:false});
     allMarkers.push({m, tags:a.tags||[], name:a.name});
   });
 
@@ -819,7 +820,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   const wishIcon = L.divIcon({className:'', html:'<div style="width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid #9fb6c9;opacity:.85;box-shadow:0 1px 3px rgba(0,0,0,.3)"></div>', iconSize:[14,14], iconAnchor:[7,7], popupAnchor:[0,-8]});
   (data.unvisited||[]).forEach((a,ui)=>{
     a._slug = 'u'+String(ui).padStart(3,'0');
-    const html = `<div class="pp wish">`
+    const buildHtml = () => `<div class="pp wish">`
       + (a.photo?`<img class="thumb" src="${a.photo}" alt="${a.name}">`:'')
       + `<div class="inner">`
       + `<span class="wishtag">🔜 これから紹介したい水族館</span>`
@@ -836,7 +837,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + wishBtn(a)
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:wishIcon}).addTo(map)
-      .bindPopup(html,{maxWidth:270, autoPan:false});
+      .bindPopup(buildHtml,{maxWidth:270, autoPan:false});
     allMarkers.push({m, tags:a.tags||[], name:a.name});
   });
 

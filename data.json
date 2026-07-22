@@ -2338,8 +2338,8 @@
       "no": 36,
       "name": "登別マリンパークニクス",
       "pref": "北海道",
-      "lat": 42.418,
-      "lng": 141.107,
+      "lat": 42.4552,
+      "lng": 141.1825,
       "url": "https://www.nixe-aqua.com/",
       "fee": "3,200円",
       "child": "1,600円",
@@ -4568,7 +4568,6 @@
       "child": "無料",
       "closed": "毎週火曜日、年末年始",
       "comment": "豊川の生きものに会える無料の淡水魚水族館",
-      "photo": "assets/photo_medakakan.jpg",
       "visited": false,
       "tags": [
         "rain",
@@ -5946,6 +5945,26 @@
         "ホホジロザメ",
         "リュウグウノツカイ",
         "ラブカ"
+      ]
+    },
+    {
+      "name": "世界のメダカ館（東山動植物園）",
+      "pref": "愛知県",
+      "lat": 35.1544,
+      "lng": 136.981,
+      "url": "https://www.higashiyama.city.nagoya.jp/",
+      "fee": "500円（東山動植物園入園料に含む）",
+      "child": "中学生以下無料",
+      "closed": "毎週月曜日（祝日の場合は直後の平日）、年末年始（12/29〜1/1）",
+      "comment": "アジア各地に生息するメダカ約28種を展示する、世界でも珍しいメダカ専門館",
+      "photo": "assets/photo_medakakan.jpg",
+      "visited": false,
+      "tags": [
+        "rain",
+        "kids"
+      ],
+      "search_animals": [
+        "メダカ"
       ]
     }
   ],
