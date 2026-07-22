@@ -29,13 +29,13 @@ def thumb(fid, size=800):
 def dl(fid):
     return f"https://drive.google.com/uc?export=download&id={fid}"
 
-# ぬりえ→そのぬりえを描いたライブ配信のYouTube動画ID（新作が出たらここに1行足す）
-VIDEOS = {
-    "1ltNcE11_JdRtdEGm7JduTnPyUuR9HpAM": "pOk-vpzOFBc",  # カメ大特集 → カメ大集合ライブ
-}
-
-# 次回の週末おさかな部ライブのYouTube動画ID（毎回更新）
-NEXT_LIVE = "0Y7WIrtv9sY"
+# 動画設定（nurie_src/videos.json）… update_nurie.py が書き換える
+#   map:  ぬりえID → そのぬりえを描いたライブ配信のYouTube動画ID
+#   next_live: 次回の週末おさかな部ライブの動画ID
+_VID = json.loads((Path(__file__).parent / "nurie_src" / "videos.json").read_text(encoding="utf-8")) \
+    if (Path(__file__).parent / "nurie_src" / "videos.json").exists() else {"next_live": "", "map": {}}
+VIDEOS = _VID.get("map", {})
+NEXT_LIVE = _VID.get("next_live", "")
 
 JUNK = re.compile(r"(IMG_\d+|Scannable|文書\b)", re.I)
 EXT = re.compile(r"\.(png|jpg|jpeg)$", re.I)
