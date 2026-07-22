@@ -56,7 +56,7 @@ h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script>
-const pts = [[35.026,138.888,"あわしまマリンパーク","https://aquarium.yasasea.com/spot/u055.html"],[35.021,138.89,"伊豆・三津シーパラダイス","https://aquarium.yasasea.com/spot/u058.html"],[34.777,136.883,"南知多ビーチランド","https://aquarium.yasasea.com/spot/u061.html"],[34.503,136.855,"鳥羽湾めぐりとイルカ島","https://aquarium.yasasea.com/spot/u065.html"],[35.648,134.819,"城崎マリンワールド","https://aquarium.yasasea.com/spot/u075.html"],[34.954,132.302,"島根県立しまね海洋館アクアス","https://aquarium.yasasea.com/spot/u079.html"],[34.295,132.317,"宮島水族館 みやじマリン","https://aquarium.yasasea.com/spot/u081.html"]];
+const pts = [[35.026,138.888,"あわしまマリンパーク","https://aquarium.yasasea.com/spot/u055.html"],[35.021,138.89,"伊豆・三津シーパラダイス","https://aquarium.yasasea.com/spot/u058.html"],[34.777,136.883,"南知多ビーチランド","https://aquarium.yasasea.com/spot/u061.html"],[34.503,136.855,"鳥羽湾めぐりとイルカ島","https://aquarium.yasasea.com/spot/u065.html"],[35.648,134.819,"城崎マリンワールド","https://aquarium.yasasea.com/spot/u075.html"],[34.9595,132.1446,"島根県立しまね海洋館アクアス","https://aquarium.yasasea.com/spot/u079.html"],[34.295,132.317,"宮島水族館 みやじマリン","https://aquarium.yasasea.com/spot/u081.html"]];
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; OpenStreetMap' }).addTo(map);
 const group = L.featureGroup(pts.map(p => L.marker([p[0],p[1]]).bindPopup('<a href="'+p[3]+'">'+p[2]+'</a>')));
