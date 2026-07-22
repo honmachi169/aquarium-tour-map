@@ -1572,7 +1572,7 @@ with open("sitemap.xml", "w") as f:
     f.write(f"<url><loc>{SITE}/ranking.html</loc></url>\n")
     f.write(f"<url><loc>{SITE}/posts.html</loc></url>\n")
     f.write(f"<url><loc>{SITE}/play.html</loc></url>\n")
-    f.write(f"<url><loc>{SITE}/nurie.html</loc></url>\n")
+    # nurie.html は公式LINE専用の受け取りページ。検索非掲載（noindex）のため sitemap には含めない
     for u in urls:
         f.write(f"<url><loc>{u}</loc></url>\n")
     for u in new_page_urls:
