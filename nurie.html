@@ -6,7 +6,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C3DJNZQN"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-J4C3DJNZQN");</script>
 <title>かわちゃんの さかなぬりえ｜さかなのおにいさん かわちゃん公式</title>
-<meta name="description" content="さかなのおにいさん かわちゃんが描いた、さかなのぬりえを無料ダウンロード！YouTubeお絵描き教室のぬりえや、週末おさかな部のぬりえがいっぱい。ぬって楽しくさかなに詳しくなろう！">
+<meta name="description" content="さかなのおにいさん かわちゃんが描いた、さかなのぬりえを無料ダウンロード！YouTubeお絵描き教室のぬりえや、週末おさかな部のぬりえがいっぱい。さかなの名前や日づけで検索もできるよ。ぬって楽しくさかなに詳しくなろう！">
 <link rel="canonical" href="https://aquarium.yasasea.com/nurie.html">
 <link rel="icon" href="assets/favicon.ico">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -313,6 +313,33 @@ section.block { margin-bottom: 3.2rem; }
 .card.done .btn-check, .featured.done .btn-check { background: var(--sun); border-color: var(--sun); color: var(--sea-deep); }
 .featured.done .badge-done { display: inline-block; position: static; margin-left: .5rem; }
 
+/* ---------- ぜんぶ検索 ---------- */
+.search-input-wrap { max-width: 560px; margin: 0 auto 1rem; }
+.search-input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1.05rem;
+  padding: .85rem 1.2rem;
+  border-radius: 999px;
+  border: 3px solid var(--sea);
+  outline: none;
+  box-shadow: 0 3px 10px rgba(2,62,138,.12);
+  background: #fff;
+}
+.search-input:focus { border-color: var(--coral); }
+.search-result-count { text-align: center; font-size: .85rem; color: #777; margin-bottom: 1.2rem; }
+.search-empty { text-align: center; color: #777; font-size: .95rem; padding: 2rem 0; }
+.card-source {
+  display: inline-block;
+  font-size: .74rem;
+  font-weight: bold;
+  border-radius: 999px;
+  padding: .1rem .7rem;
+  margin-bottom: .4rem;
+}
+.card-source.weekly { background: var(--sky); color: var(--sea-deep); }
+.card-source.youtube { background: #ffe1e1; color: #d64545; }
+
 /* ---------- YouTube ---------- */
 .yt-main {
   background: #fff;
@@ -574,6 +601,7 @@ footer small { opacity: .75; font-size: .75rem; }
       <span class="num" id="doneCount">0</span> まい ぬったよ！
     </div>
     <nav class="jump-nav">
+      <a href="#search">🔍 さがす</a>
       <a href="#osusume">⭐ おすすめ</a>
       <a href="#youtube">🎨 YouTubeぬりえ</a>
       <a href="#osakanabu">🐟 週末おさかな部</a>
@@ -586,6 +614,22 @@ footer small { opacity: .75; font-size: .75rem; }
 </header>
 
 <main>
+
+  <!-- 検索：ぜんぶのぬりえ -->
+  <section class="block" id="search">
+    <div class="section-head">
+      <img class="mascot" src="assets/punio_tenten.png" alt="">
+      <h2 class="section-title">🔍 ぜんぶの ぬりえから さがす</h2>
+      <img class="mascot" src="assets/punio_kopemaru.png" alt="">
+    </div>
+    <p class="section-sub">さかなの名前や 日づけで けんさくできるよ！ぜんぶで <span id="totalCount">0</span>まい あるよ</p>
+    <div class="search-input-wrap">
+      <input type="search" id="nurieSearch" class="search-input" placeholder="🔎 さかなの名前・日づけで さがす（例：サメ、びわこ、2026）" autocomplete="off">
+    </div>
+    <p class="search-result-count" id="searchResultCount"></p>
+    <div class="grid" id="searchGrid"></div>
+    <p class="search-empty" id="searchEmpty" style="display:none;">😢 みつからなかったよ。べつの ことばで さがしてみてね</p>
+  </section>
 
   <!-- ①おすすめぬりえ -->
   <section class="block" id="osusume">
@@ -825,22 +869,49 @@ const NURIE = [
   }
 ];
 
+// ===== YouTubeお絵描き教室ぬりえ（週末おさかな部とは別枠でも検索対象に含める） =====
+const YOUTUBE_NURIE = [
+  {
+    id: "1Nb0kY6eoZ5zeEQXJY3PWmqtS0WH82MzK",
+    title: "ホホジロザメ",
+    date: "YouTube配信",
+    desc: "「サメとシャチのお絵描き教室」動画で いっしょに かいた ぬりえ",
+    fish: ["ホホジロザメ"],
+    source: "youtube"
+  },
+  {
+    id: "1bvn2wRdqTaaxV8vMF6Ap2oa8VuRoHQHn",
+    title: "シャチ",
+    date: "YouTube配信",
+    desc: "「サメとシャチのお絵描き教室」動画で いっしょに かいた ぬりえ",
+    fish: ["シャチ"],
+    source: "youtube"
+  }
+];
+
+// ===== 検索・全件表示用に統合 =====
+const ALL_NURIE = [
+  ...NURIE.map(n => ({ ...n, source: "weekly" })),
+  ...YOUTUBE_NURIE
+];
+
 // ===== カード生成 =====
 const grid = document.getElementById("nurieGrid");
 const doneSet = new Set(JSON.parse(localStorage.getItem("nurieDone") || "[]"));
 
-NURIE.forEach(n => {
-  const card = document.createElement("article");
-  card.className = "card";
-  card.dataset.id = n.id;
-  card.innerHTML = `
+function cardHTML(n) {
+  const sourceLabel = n.source === "youtube"
+    ? `<span class="card-source youtube">🎨 YouTubeぬりえ</span>`
+    : `<span class="card-source weekly">🐟 週末おさかな部</span>`;
+  return `
     <span class="badge-done">🌟 ぬった！</span>
     <div class="thumb-wrap">
       <img src="https://drive.google.com/thumbnail?id=${n.id}&sz=w800" alt="${n.title}のぬりえ" loading="lazy" referrerpolicy="no-referrer">
     </div>
     <div class="card-body">
+      ${sourceLabel}
       <h3 class="card-title">${n.title}</h3>
-      <p class="card-date">${n.date} こうかい</p>
+      <p class="card-date">${n.date}${n.date === "YouTube配信" ? "" : " こうかい"}</p>
       <p class="card-desc">${n.desc}</p>
       <div class="chips">${n.fish.map(f => `<span class="chip">${f}</span>`).join("")}</div>
       <div class="btn-row">
@@ -848,8 +919,52 @@ NURIE.forEach(n => {
         <button class="btn-check" data-id="${n.id}">ぬった！</button>
       </div>
     </div>`;
+}
+
+NURIE.forEach(n => {
+  const card = document.createElement("article");
+  card.className = "card";
+  card.dataset.id = n.id;
+  card.innerHTML = cardHTML({ ...n, source: "weekly" });
   grid.appendChild(card);
 });
+
+// ===== ぜんぶ検索 =====
+const searchGrid = document.getElementById("searchGrid");
+const searchInput = document.getElementById("nurieSearch");
+const searchResultCount = document.getElementById("searchResultCount");
+const searchEmpty = document.getElementById("searchEmpty");
+document.getElementById("totalCount").textContent = ALL_NURIE.length;
+
+function normalize(str) {
+  // ひらがな→カタカナに寄せて、全角/半角の違いをゆるく吸収した簡易検索用の正規化
+  return str.toLowerCase().replace(/[ぁ-ゖ]/g, m => String.fromCharCode(m.charCodeAt(0) + 0x60));
+}
+
+function matchesQuery(n, q) {
+  if (!q) return true;
+  const haystack = normalize([n.title, n.date, n.desc, ...n.fish].join(" "));
+  return haystack.includes(normalize(q));
+}
+
+function renderSearch() {
+  const q = searchInput.value.trim();
+  const results = ALL_NURIE.filter(n => matchesQuery(n, q));
+  searchGrid.innerHTML = "";
+  results.forEach(n => {
+    const card = document.createElement("article");
+    card.className = "card";
+    card.dataset.id = n.id;
+    card.innerHTML = cardHTML(n);
+    searchGrid.appendChild(card);
+  });
+  searchResultCount.textContent = q ? `「${q}」の けんさくけっか：${results.length}まい` : `ぜんぶ ${results.length}まい ひょうじちゅう`;
+  searchEmpty.style.display = results.length === 0 ? "block" : "none";
+  refreshDone();
+}
+
+searchInput.addEventListener("input", renderSearch);
+renderSearch();
 
 // ===== ぬった！チェック（localStorage保存） =====
 function refreshDone() {
