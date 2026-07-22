@@ -3,8 +3,10 @@
 
 使い方:
   1. Claude（Drive MCP）で「ぬりえ倉庫」の各フォルダを一覧化し、
-     scratchpad/weekly_p1.tsv と scratchpad/extra.tsv（id<TAB>title<TAB>category）を用意する
+     nurie_src/weekly_p1.tsv と nurie_src/extra.tsv（id<TAB>title<TAB>category）を更新する
+     （新しいぬりえは extra.tsv に「id<TAB>タイトル<TAB>weekly」の行を足すだけでもOK）
   2. python3 build_nurie.py  → nurie_data.json を出力
+  3. git commit & push → aquarium.yasasea.com/nurie.html に反映
 
 カテゴリ:
   weekly   = 週末おさかな部（毎週のぬりえ）
@@ -18,7 +20,7 @@ import json, re, sys
 from pathlib import Path
 
 HERE = Path(__file__).parent
-SCRATCH = Path("/private/tmp/claude-501/-Users-kawata-Documents-AI---/a9ae8719-b54b-4c10-a489-e069089c2d8a/scratchpad")
+SRC = HERE / "nurie_src"   # id<TAB>title<TAB>category の元データ（Drive一覧のスナップショット）
 OUT = HERE / "nurie_data.json"
 
 # サムネ・ダウンロードのURLパターン（Driveの共有ファイル前提）
@@ -83,7 +85,7 @@ def load_tsv(path, default_cat=None):
     return rows
 
 def main():
-    raw = load_tsv(SCRATCH / "weekly_p1.tsv", "weekly") + load_tsv(SCRATCH / "extra.tsv")
+    raw = load_tsv(SRC / "weekly_p1.tsv", "weekly") + load_tsv(SRC / "extra.tsv")
     seen, items = set(), []
     for fid, title, cat in raw:
         if fid in seen or JUNK.search(title):
