@@ -314,7 +314,7 @@ section.block { margin-bottom: 3.2rem; }
 .featured.done .badge-done { display: inline-block; position: static; margin-left: .5rem; }
 
 /* ---------- ぜんぶ検索 ---------- */
-.search-input-wrap { max-width: 560px; margin: 0 auto 1rem; }
+.search-input-wrap { max-width: 560px; margin: 0 auto 1rem; position: relative; }
 .search-input {
   width: 100%;
   font-family: inherit;
@@ -327,18 +327,83 @@ section.block { margin-bottom: 3.2rem; }
   background: #fff;
 }
 .search-input:focus { border-color: var(--coral); }
-.search-result-count { text-align: center; font-size: .85rem; color: #777; margin-bottom: 1.2rem; }
+
+/* カテゴリのしぼりこみチップ */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+  margin: 0 auto 1.1rem;
+  max-width: 720px;
+}
+.filter-chip {
+  font-family: inherit;
+  font-size: .88rem;
+  font-weight: bold;
+  border: 2px solid var(--sea);
+  color: var(--sea);
+  background: #fff;
+  border-radius: 999px;
+  padding: .4rem 1rem;
+  cursor: pointer;
+  transition: transform .1s, background .15s, color .15s;
+}
+.filter-chip:hover { transform: translateY(-2px); }
+.filter-chip.active { background: var(--sea); color: #fff; box-shadow: 0 3px 8px rgba(2,62,138,.25); }
+.filter-chip:focus-visible { outline: 3px solid var(--sun); outline-offset: 2px; }
+
+.search-result-count { text-align: center; font-size: .88rem; color: #666; margin-bottom: 1.2rem; }
 .search-empty { text-align: center; color: #777; font-size: .95rem; padding: 2rem 0; }
+.lib-loading { text-align: center; color: var(--sea-deep); font-weight: bold; padding: 2.5rem 0; }
+
 .card-source {
   display: inline-block;
+  align-self: flex-start;
   font-size: .74rem;
   font-weight: bold;
   border-radius: 999px;
   padding: .1rem .7rem;
   margin-bottom: .4rem;
 }
-.card-source.weekly { background: var(--sky); color: var(--sea-deep); }
-.card-source.youtube { background: #ffe1e1; color: #d64545; }
+.card-source.weekly   { background: var(--sky);   color: var(--sea-deep); }
+.card-source.calendar { background: #fff0d6;      color: #b5730a; }
+.card-source.osusume  { background: #fffbea;      color: #b58a00; border: 1px solid var(--sun); }
+.card-source.youtube  { background: #ffe1e1;      color: #d64545; }
+
+/* もっと見る */
+.load-more-wrap { text-align: center; margin-top: 1.8rem; }
+.btn-more {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background: var(--sea);
+  border: none;
+  border-radius: 999px;
+  padding: .7rem 2rem;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #026f94;
+}
+.btn-more:active { transform: translateY(3px); box-shadow: none; }
+
+/* ダウンロード＋いんさつ の2ボタン */
+.btn-print {
+  background: #fff;
+  border: 2px solid var(--sea-deep);
+  color: var(--sea-deep);
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: .95rem;
+  padding: .6rem .5rem;
+  cursor: pointer;
+  transition: transform .1s;
+  flex: 1;
+}
+.btn-print:active { transform: translateY(3px); }
+.card .btn-row { flex-wrap: wrap; }
+.card .btn-dl { flex: 1 1 100%; }
 
 /* ---------- YouTube ---------- */
 .yt-main {
@@ -615,90 +680,69 @@ footer small { opacity: .75; font-size: .75rem; }
 
 <main>
 
-  <!-- 検索：ぜんぶのぬりえ -->
-  <section class="block" id="search">
-    <div class="section-head">
-      <img class="mascot" src="assets/punio_tenten.png" alt="">
-      <h2 class="section-title">🔍 ぜんぶの ぬりえから さがす</h2>
-      <img class="mascot" src="assets/punio_kopemaru.png" alt="">
-    </div>
-    <p class="section-sub">さかなの名前や 日づけで けんさくできるよ！ぜんぶで <span id="totalCount">0</span>まい あるよ</p>
-    <div class="search-input-wrap">
-      <input type="search" id="nurieSearch" class="search-input" placeholder="🔎 さかなの名前・日づけで さがす（例：サメ、びわこ、2026）" autocomplete="off">
-    </div>
-    <p class="search-result-count" id="searchResultCount"></p>
-    <div class="grid" id="searchGrid"></div>
-    <p class="search-empty" id="searchEmpty" style="display:none;">😢 みつからなかったよ。べつの ことばで さがしてみてね</p>
-  </section>
-
-  <!-- ①おすすめぬりえ -->
+  <!-- いちばん新しいぬりえ（featured：JSで自動セット） -->
   <section class="block" id="osusume">
     <div class="section-head">
       <img class="mascot" src="assets/punio_kopemaru.png" alt="">
-      <h2 class="section-title">⭐ いまの おすすめぬりえ</h2>
+      <h2 class="section-title">⭐ いちばん あたらしい ぬりえ</h2>
       <img class="mascot" src="assets/punio_hanabi.png" alt="">
     </div>
-    <p class="section-sub">いちばん あたらしい ぬりえは これ！</p>
-
-    <article class="featured" data-id="1r7LqVr6sJBFXQKpUxccEdnxCiENdzhm6">
-      <span class="badge-new">NEW!</span>
-      <div class="thumb">
-        <img src="https://drive.google.com/thumbnail?id=1r7LqVr6sJBFXQKpUxccEdnxCiENdzhm6&sz=w800" alt="びわこのさかなのぬりえ" referrerpolicy="no-referrer">
-      </div>
-      <div class="info">
-        <h3>びわこのさかな<span class="badge-done">🌟 ぬった！</span></h3>
-        <p class="card-date">2026.7.5 こうかい</p>
-        <p class="card-desc">びわこにしか いない さかなが いっぱい！1メートルをこえる ビワコオオナマズも いるよ🐟 なつやすみの じゆうけんきゅうにも ぴったり！</p>
-        <div class="chips"><span class="chip">ビワコオオナマズ</span><span class="chip">ニゴロブナ</span><span class="chip">ヨシノボリ</span><span class="chip">ワタカ</span><span class="chip">スジシマドジョウ</span></div>
-        <div class="btn-row">
-          <a class="btn-dl" href="https://drive.google.com/uc?export=download&id=1r7LqVr6sJBFXQKpUxccEdnxCiENdzhm6" target="_blank" rel="noopener">📥 ダウンロード</a>
-          <button class="btn-check" data-id="1r7LqVr6sJBFXQKpUxccEdnxCiENdzhm6">ぬった！</button>
-        </div>
-      </div>
-    </article>
+    <p class="section-sub">できたての ぬりえは これ！</p>
+    <div id="featuredWrap"></div>
   </section>
 
-  <!-- ②YouTubeぬりえ -->
+  <!-- ぬりえライブラリ（検索＋カテゴリ） -->
+  <section class="block" id="library">
+    <div class="section-head">
+      <img class="mascot" src="assets/punio_tenten.png" alt="">
+      <h2 class="section-title">🎨 ぬりえライブラリ</h2>
+      <img class="mascot" src="assets/punio_shark.png" alt="">
+    </div>
+    <p class="section-sub">ぜんぶで <span id="totalCount">176</span>まい！さかなの名前や 日づけで さがして、ダウンロードして、A4で いんさつしてね🖍</p>
+
+    <div class="search-input-wrap">
+      <input type="search" id="nurieSearch" class="search-input" placeholder="🔎 さがす（例：サメ、びわこ、ペンギン、2026、カレンダー）" autocomplete="off">
+    </div>
+
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-chip active" data-cat="all">ぜんぶ</button>
+      <button class="filter-chip" data-cat="weekly">🐟 週末おさかな部</button>
+      <button class="filter-chip" data-cat="calendar">🗓 カレンダー</button>
+      <button class="filter-chip" data-cat="osusume">⭐ 定番おすすめ</button>
+      <button class="filter-chip" data-cat="youtube">🎬 YouTube・水族館</button>
+    </div>
+
+    <p class="search-result-count" id="searchResultCount"></p>
+    <div class="lib-loading" id="libLoading">🐟 ぬりえを よみこみちゅう…</div>
+    <div class="grid" id="nurieGrid"></div>
+    <p class="search-empty" id="searchEmpty" style="display:none;">😢 みつからなかったよ。べつの ことばで さがしてみてね</p>
+    <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
+      <button class="btn-more" id="loadMoreBtn">もっと みる ▼</button>
+    </div>
+
+    <!-- LINE CTA -->
+    <div class="line-cta">
+      <img class="cta-chara" src="assets/punio_tacchu.png" alt="">
+      <h3>🎁 あたらしい ぬりえは 公式LINEで いちばん早く！</h3>
+      <p>毎週の 週末おさかな部ライブや、できたての ぬりえの おしらせが とどくよ。おうちのひとと いっしょに とうろくしてね！</p>
+      <a class="btn-line" href="https://lin.ee/qMPcnPq" target="_blank" rel="noopener">💬 公式LINEに とうろくする</a>
+    </div>
+  </section>
+
+  <!-- おえかき教室（YouTube） -->
   <section class="block" id="youtube">
     <div class="section-head">
-      <img class="mascot" src="assets/punio_shark.png" alt="">
-      <h2 class="section-title">🎨 YouTubeぬりえ</h2>
-      <img class="mascot" src="assets/deco_a.png" alt="">
+      <img class="mascot" src="assets/punio_gyoran.png" alt="">
+      <h2 class="section-title">✍️ かわちゃんの おえかき教室</h2>
+      <img class="mascot" src="assets/punio_kusamochi.png" alt="">
     </div>
-    <p class="section-sub">かわちゃんの おえかき教室を みながら、いっしょに かいて・ぬってみよう！</p>
-
-    <div class="yt-main">
-      <div class="yt-main-inner">
-        <div class="yt-video">
-          <a class="yt-thumb" href="https://youtu.be/rgg8gKNna40" target="_blank" rel="noopener">
-            <img src="https://i.ytimg.com/vi/rgg8gKNna40/hqdefault.jpg" alt="サメとシャチのお絵描き教室" loading="lazy">
-            <span class="play">▶</span>
-          </a>
-          <h3>🦈 サメとシャチの お絵描き教室</h3>
-          <p>うみの さいきょう生物の かきかたを レッスン！なぜ 水族館に ホホジロザメが いないのかも わかっちゃう☝️ 動画に でてきた ぬりえは ここから ダウンロードできるよ→</p>
-        </div>
-        <div class="yt-nurie-pair">
-          <div class="mini-card" data-id="1Nb0kY6eoZ5zeEQXJY3PWmqtS0WH82MzK">
-            <span class="badge-done">🌟 ぬった！</span>
-            <img class="nurie-img" src="https://drive.google.com/thumbnail?id=1Nb0kY6eoZ5zeEQXJY3PWmqtS0WH82MzK&sz=w400" alt="ホホジロザメのぬりえ" loading="lazy" referrerpolicy="no-referrer">
-            <h4>ホホジロザメ</h4>
-            <a class="btn-dl" href="https://drive.google.com/uc?export=download&id=1Nb0kY6eoZ5zeEQXJY3PWmqtS0WH82MzK" target="_blank" rel="noopener">📥 ダウンロード</a>
-            <button class="btn-check" data-id="1Nb0kY6eoZ5zeEQXJY3PWmqtS0WH82MzK">ぬった！</button>
-          </div>
-          <div class="mini-card" data-id="1bvn2wRdqTaaxV8vMF6Ap2oa8VuRoHQHn">
-            <span class="badge-done">🌟 ぬった！</span>
-            <img class="nurie-img" src="https://drive.google.com/thumbnail?id=1bvn2wRdqTaaxV8vMF6Ap2oa8VuRoHQHn&sz=w400" alt="シャチのぬりえ" loading="lazy" referrerpolicy="no-referrer">
-            <h4>シャチ</h4>
-            <a class="btn-dl" href="https://drive.google.com/uc?export=download&id=1bvn2wRdqTaaxV8vMF6Ap2oa8VuRoHQHn" target="_blank" rel="noopener">📥 ダウンロード</a>
-            <button class="btn-check" data-id="1bvn2wRdqTaaxV8vMF6Ap2oa8VuRoHQHn">ぬった！</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <p class="section-sub">かきかたを みながら、いっしょに かいて・ぬってみよう！</p>
     <div class="yt-more">
-      <h3 class="yt-more-title">✍️ ほかにも おえかき教室 いっぱい！</h3>
       <div class="yt-grid">
+        <a class="yt-card" href="https://youtu.be/rgg8gKNna40" target="_blank" rel="noopener">
+          <span class="yt-thumb"><img src="https://i.ytimg.com/vi/rgg8gKNna40/hqdefault.jpg" alt="" loading="lazy"><span class="play">▶</span></span>
+          <p>🦈 サメとシャチの お絵描き教室</p>
+        </a>
         <a class="yt-card" href="https://youtu.be/Eo5HEUrl5_8" target="_blank" rel="noopener">
           <span class="yt-thumb"><img src="https://i.ytimg.com/vi/Eo5HEUrl5_8/hqdefault.jpg" alt="" loading="lazy"><span class="play">▶</span></span>
           <p>🦈 サメのイラストが うまくなる！解説つきレッスン</p>
@@ -719,26 +763,6 @@ footer small { opacity: .75; font-size: .75rem; }
       <p style="text-align:center; margin-top:1rem;">
         <a href="https://youtube.com/playlist?list=PLwIrAkVy515pm-ApzRVaW-t2Q795UTeeq" target="_blank" rel="noopener" style="font-weight:bold;">▶ おえかき教室の さいせいリストは こちら</a>
       </p>
-    </div>
-  </section>
-
-  <!-- ③週末おさかな部 -->
-  <section class="block" id="osakanabu">
-    <div class="section-head">
-      <img class="mascot" src="assets/punio_gyoran.png" alt="">
-      <h2 class="section-title">🐟 週末おさかな部の ぬりえ</h2>
-      <img class="mascot" src="assets/punio_kusamochi.png" alt="">
-    </div>
-    <p class="section-sub">公式LINEの おえかきライブ「週末おさかな部」で かわちゃんが かいた ぬりえだよ！</p>
-
-    <div class="grid" id="nurieGrid"></div>
-
-    <!-- LINE CTA -->
-    <div class="line-cta">
-      <img class="cta-chara" src="assets/punio_tacchu.png" alt="">
-      <h3>🎁 あたらしい ぬりえは 公式LINEで！</h3>
-      <p>週末おさかな部の ライブはいしんや、できたての ぬりえの おしらせが とどくよ。おうちのひとと いっしょに とうろくしてね！</p>
-      <a class="btn-line" href="https://lin.ee/qMPcnPq" target="_blank" rel="noopener">💬 公式LINEに とうろくする</a>
     </div>
   </section>
 
@@ -841,132 +865,128 @@ footer small { opacity: .75; font-size: .75rem; }
 </footer>
 
 <script>
-// ===== 週末おさかな部のぬりえデータ（新しいぬりえは ここに追加するだけ） =====
-const NURIE = [
-  {
-    id: "1r7LqVr6sJBFXQKpUxccEdnxCiENdzhm6",
-    title: "びわこのさかな",
-    date: "2026.7.5",
-    isNew: true,
-    desc: "びわこにしか いない さかなが いっぱい！1メートルをこえる ビワコオオナマズも いるよ🐟",
-    fish: ["ビワコオオナマズ", "ニゴロブナ", "ヨシノボリ", "ワタカ", "スジシマドジョウ"]
-  },
-  {
-    id: "1JLbNV0UJ4zEJxwH5ok9fehRidB5UmCiU",
-    title: "東北のさかな",
-    date: "2026.5.23",
-    isNew: false,
-    desc: "アクアマリンふくしまや マリンピア日本海の なかまたち！せかいさいだいの ミズダコも いるよ🐙",
-    fish: ["ヨシキリザメ", "ハタハタ", "サンマ", "ミズダコ", "タナカゲンゲ"]
-  },
-  {
-    id: "1_pdPuAO1hPRwCGTKaggPNqCo5yZwS8Nd",
-    title: "フナと金魚",
-    date: "2026.2.7",
-    isNew: false,
-    desc: "きんぎょの ごせんぞさまは フナって しってた？みんなは なにいろに ぬる？🧡",
-    fish: ["フナ", "キンギョ", "ニゴロブナ"]
-  }
-];
+// ===== ぬりえデータは nurie_data.json（build_nurie.py が Drive一覧から生成）=====
+const CAT_LABEL = {
+  weekly:   "🐟 週末おさかな部",
+  calendar: "🗓 カレンダー",
+  osusume:  "⭐ 定番おすすめ",
+  youtube:  "🎬 YouTube・水族館",
+};
+const PAGE_SIZE = 24;
 
-// ===== YouTubeお絵描き教室ぬりえ（週末おさかな部とは別枠でも検索対象に含める） =====
-const YOUTUBE_NURIE = [
-  {
-    id: "1Nb0kY6eoZ5zeEQXJY3PWmqtS0WH82MzK",
-    title: "ホホジロザメ",
-    date: "YouTube配信",
-    desc: "「サメとシャチのお絵描き教室」動画で いっしょに かいた ぬりえ",
-    fish: ["ホホジロザメ"],
-    source: "youtube"
-  },
-  {
-    id: "1bvn2wRdqTaaxV8vMF6Ap2oa8VuRoHQHn",
-    title: "シャチ",
-    date: "YouTube配信",
-    desc: "「サメとシャチのお絵描き教室」動画で いっしょに かいた ぬりえ",
-    fish: ["シャチ"],
-    source: "youtube"
-  }
-];
-
-// ===== 検索・全件表示用に統合 =====
-const ALL_NURIE = [
-  ...NURIE.map(n => ({ ...n, source: "weekly" })),
-  ...YOUTUBE_NURIE
-];
-
-// ===== カード生成 =====
 const grid = document.getElementById("nurieGrid");
+const searchInput = document.getElementById("nurieSearch");
+const searchResultCount = document.getElementById("searchResultCount");
+const searchEmpty = document.getElementById("searchEmpty");
+const libLoading = document.getElementById("libLoading");
+const loadMoreWrap = document.getElementById("loadMoreWrap");
+const loadMoreBtn = document.getElementById("loadMoreBtn");
+const filterBar = document.getElementById("filterBar");
+const featuredWrap = document.getElementById("featuredWrap");
+
 const doneSet = new Set(JSON.parse(localStorage.getItem("nurieDone") || "[]"));
+let ALL = [], filtered = [], shown = 0, activeCat = "all";
+
+function esc(s) { return String(s).replace(/[&<>"]/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[m])); }
+
+function normalize(str) {
+  // ひらがな→カタカナに寄せて 検索をゆるくする
+  return String(str).toLowerCase().replace(/[ぁ-ゖ]/g, m => String.fromCharCode(m.charCodeAt(0) + 0x60));
+}
 
 function cardHTML(n) {
-  const sourceLabel = n.source === "youtube"
-    ? `<span class="card-source youtube">🎨 YouTubeぬりえ</span>`
-    : `<span class="card-source weekly">🐟 週末おさかな部</span>`;
+  const t = esc(n.title);
+  const dateLine = n.date ? `<p class="card-date">${esc(n.date)} こうかい</p>` : "";
   return `
     <span class="badge-done">🌟 ぬった！</span>
     <div class="thumb-wrap">
-      <img src="https://drive.google.com/thumbnail?id=${n.id}&sz=w800" alt="${n.title}のぬりえ" loading="lazy" referrerpolicy="no-referrer">
+      <img src="${n.thumb}" alt="${t}のぬりえ" loading="lazy" referrerpolicy="no-referrer">
     </div>
     <div class="card-body">
-      ${sourceLabel}
-      <h3 class="card-title">${n.title}</h3>
-      <p class="card-date">${n.date}${n.date === "YouTube配信" ? "" : " こうかい"}</p>
-      <p class="card-desc">${n.desc}</p>
-      <div class="chips">${n.fish.map(f => `<span class="chip">${f}</span>`).join("")}</div>
+      <span class="card-source ${n.cat}">${CAT_LABEL[n.cat] || ""}</span>
+      <h3 class="card-title">${t}</h3>
+      ${dateLine}
       <div class="btn-row">
-        <a class="btn-dl" href="https://drive.google.com/uc?export=download&id=${n.id}" target="_blank" rel="noopener">📥 ダウンロード</a>
+        <a class="btn-dl" href="${n.dl}" target="_blank" rel="noopener">📥 ダウンロード</a>
+        <button class="btn-print" data-print-id="${n.id}" data-print-title="${t}">🖨 いんさつ</button>
         <button class="btn-check" data-id="${n.id}">ぬった！</button>
       </div>
     </div>`;
 }
 
-NURIE.forEach(n => {
+function makeCard(n) {
   const card = document.createElement("article");
   card.className = "card";
   card.dataset.id = n.id;
-  card.innerHTML = cardHTML({ ...n, source: "weekly" });
-  grid.appendChild(card);
-});
-
-// ===== ぜんぶ検索 =====
-const searchGrid = document.getElementById("searchGrid");
-const searchInput = document.getElementById("nurieSearch");
-const searchResultCount = document.getElementById("searchResultCount");
-const searchEmpty = document.getElementById("searchEmpty");
-document.getElementById("totalCount").textContent = ALL_NURIE.length;
-
-function normalize(str) {
-  // ひらがな→カタカナに寄せて、全角/半角の違いをゆるく吸収した簡易検索用の正規化
-  return str.toLowerCase().replace(/[ぁ-ゖ]/g, m => String.fromCharCode(m.charCodeAt(0) + 0x60));
+  card.innerHTML = cardHTML(n);
+  return card;
 }
 
-function matchesQuery(n, q) {
-  if (!q) return true;
-  const haystack = normalize([n.title, n.date, n.desc, ...n.fish].join(" "));
-  return haystack.includes(normalize(q));
-}
-
-function renderSearch() {
+function applyFilter() {
   const q = searchInput.value.trim();
-  const results = ALL_NURIE.filter(n => matchesQuery(n, q));
-  searchGrid.innerHTML = "";
-  results.forEach(n => {
-    const card = document.createElement("article");
-    card.className = "card";
-    card.dataset.id = n.id;
-    card.innerHTML = cardHTML(n);
-    searchGrid.appendChild(card);
+  const nq = normalize(q);
+  filtered = ALL.filter(n => {
+    if (activeCat !== "all" && n.cat !== activeCat) return false;
+    if (!nq) return true;
+    return normalize(`${n.title} ${n.date} ${CAT_LABEL[n.cat]}`).includes(nq);
   });
-  searchResultCount.textContent = q ? `「${q}」の けんさくけっか：${results.length}まい` : `ぜんぶ ${results.length}まい ひょうじちゅう`;
-  searchEmpty.style.display = results.length === 0 ? "block" : "none";
+  shown = 0;
+  grid.innerHTML = "";
+  renderMore();
+  searchResultCount.textContent = q
+    ? `「${q}」の けんさくけっか：${filtered.length}まい`
+    : `${activeCat === "all" ? "ぜんぶ" : CAT_LABEL[activeCat]}：${filtered.length}まい`;
+  searchEmpty.style.display = filtered.length === 0 ? "block" : "none";
+}
+
+function renderMore() {
+  const next = filtered.slice(shown, shown + PAGE_SIZE);
+  const frag = document.createDocumentFragment();
+  next.forEach(n => frag.appendChild(makeCard(n)));
+  grid.appendChild(frag);
+  shown += next.length;
+  loadMoreWrap.style.display = shown < filtered.length ? "block" : "none";
   refreshDone();
 }
 
-searchInput.addEventListener("input", renderSearch);
-renderSearch();
+function renderFeatured(n) {
+  if (!n) return;
+  const t = esc(n.title);
+  const art = document.createElement("article");
+  art.className = "featured";
+  art.dataset.id = n.id;
+  art.innerHTML = `
+    <span class="badge-new">NEW!</span>
+    <div class="thumb">
+      <img src="${n.thumb}" alt="${t}のぬりえ" referrerpolicy="no-referrer">
+    </div>
+    <div class="info">
+      <h3>${t}<span class="badge-done">🌟 ぬった！</span></h3>
+      ${n.date ? `<p class="card-date">${esc(n.date)} こうかい</p>` : ""}
+      <p class="card-desc">できたての ぬりえだよ！ダウンロードして A4で いんさつしたら、じゆうに ぬってみてね🖍</p>
+      <div class="btn-row">
+        <a class="btn-dl" href="${n.dl}" target="_blank" rel="noopener">📥 ダウンロード</a>
+        <button class="btn-print" data-print-id="${n.id}" data-print-title="${t}">🖨 いんさつ</button>
+        <button class="btn-check" data-id="${n.id}">ぬった！</button>
+      </div>
+    </div>`;
+  featuredWrap.appendChild(art);
+}
 
-// ===== ぬった！チェック（localStorage保存） =====
+// ===== かんたん印刷（A4に合わせて画像だけ表示→印刷） =====
+function printNurie(id, title) {
+  const url = `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
+  const w = window.open("", "_blank");
+  if (!w) { alert("ポップアップが ブロックされたよ。ダウンロードしてから いんさつしてね"); return; }
+  w.document.write(`<!doctype html><html lang="ja"><head><meta charset="utf-8"><title>${esc(title)}</title>
+    <style>@page{margin:8mm;} html,body{margin:0;padding:0;background:#fff;text-align:center;}
+    img{max-width:100%;max-height:100vh;object-fit:contain;}</style></head>
+    <body><img src="${url}" alt="${esc(title)}"
+      onload="setTimeout(function(){window.focus();window.print();},400)"></body></html>`);
+  w.document.close();
+}
+
+// ===== ぬった！チェック =====
 function refreshDone() {
   document.querySelectorAll("[data-id]").forEach(el => {
     if (el.classList.contains("btn-check")) return;
@@ -974,21 +994,44 @@ function refreshDone() {
   });
   document.getElementById("doneCount").textContent = doneSet.size;
 }
-refreshDone();
 
+// ===== クリック処理（印刷・ぬった） =====
 document.body.addEventListener("click", e => {
+  const printBtn = e.target.closest(".btn-print");
+  if (printBtn) { printNurie(printBtn.dataset.printId, printBtn.dataset.printTitle); return; }
   const btn = e.target.closest(".btn-check");
   if (!btn) return;
   const id = btn.dataset.id;
-  if (doneSet.has(id)) {
-    doneSet.delete(id);
-  } else {
-    doneSet.add(id);
-    burst(btn);
-  }
+  if (doneSet.has(id)) { doneSet.delete(id); }
+  else { doneSet.add(id); burst(btn); }
   localStorage.setItem("nurieDone", JSON.stringify([...doneSet]));
   refreshDone();
 });
+
+// ===== カテゴリしぼりこみ =====
+filterBar.addEventListener("click", e => {
+  const chip = e.target.closest(".filter-chip");
+  if (!chip) return;
+  activeCat = chip.dataset.cat;
+  filterBar.querySelectorAll(".filter-chip").forEach(c => c.classList.toggle("active", c === chip));
+  applyFilter();
+});
+searchInput.addEventListener("input", applyFilter);
+loadMoreBtn.addEventListener("click", renderMore);
+
+// ===== データ読み込み =====
+fetch("nurie_data.json")
+  .then(r => r.json())
+  .then(data => {
+    ALL = data.items || [];
+    document.getElementById("totalCount").textContent = ALL.length;
+    libLoading.style.display = "none";
+    renderFeatured(ALL.find(n => n.cat === "weekly" && n.date) || ALL[0]);
+    applyFilter();
+  })
+  .catch(() => {
+    libLoading.textContent = "😢 ぬりえの よみこみに しっぱいしたよ。じかんを おいて ためしてね";
+  });
 
 // ぬった！の おいわいエフェクト
 function burst(el) {
