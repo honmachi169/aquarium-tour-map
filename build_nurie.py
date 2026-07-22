@@ -34,6 +34,9 @@ VIDEOS = {
     "1ltNcE11_JdRtdEGm7JduTnPyUuR9HpAM": "pOk-vpzOFBc",  # カメ大特集 → カメ大集合ライブ
 }
 
+# 次回の週末おさかな部ライブのYouTube動画ID（毎回更新）
+NEXT_LIVE = "0Y7WIrtv9sY"
+
 JUNK = re.compile(r"(IMG_\d+|Scannable|文書\b)", re.I)
 EXT = re.compile(r"\.(png|jpg|jpeg)$", re.I)
 DATE_FULL = re.compile(r"(20\d{2})[ _\-/](\d{1,2})[ _\-/](\d{1,2})")
@@ -106,7 +109,7 @@ def main():
     for it in items:
         counts[it["cat"]] = counts.get(it["cat"], 0) + 1
 
-    OUT.write_text(json.dumps({"count": len(items), "items": items},
+    OUT.write_text(json.dumps({"count": len(items), "nextLive": NEXT_LIVE, "items": items},
                               ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"生成: {OUT.name}  合計 {len(items)} 枚")
     for c, n in counts.items():

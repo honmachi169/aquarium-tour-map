@@ -740,6 +740,30 @@ footer small { opacity: .75; font-size: .75rem; }
   .fn-body { grid-template-columns: 1fr; }
 }
 
+/* ---------- 次回のライブ予告 ---------- */
+.next-live {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  margin-top: 1.1rem;
+  background: #fff;
+  border: 3px dashed var(--coral);
+  border-radius: 16px;
+  padding: .8rem .9rem;
+  text-decoration: none;
+  color: var(--sea-deep);
+  box-shadow: 0 3px 10px rgba(2,62,138,.1);
+  transition: transform .12s;
+}
+.next-live:hover { transform: translateY(-3px); }
+.next-live .nl-thumb { width: 128px; aspect-ratio: 16/9; object-fit: cover; border-radius: 9px; flex: none; }
+.next-live .nl-text { font-weight: bold; font-size: .98rem; line-height: 1.5; word-break: keep-all; }
+.next-live .nl-text small { display: block; color: #e05a5a; font-size: .82rem; margin-bottom: .1rem; }
+@media (max-width: 480px) {
+  .next-live .nl-thumb { width: 96px; }
+  .next-live .nl-text { font-size: .88rem; }
+}
+
 /* ---------- セクションを囲う白い箱 ---------- */
 .panel {
   background: #fff;
@@ -810,6 +834,7 @@ footer small { opacity: .75; font-size: .75rem; }
     </div>
     <p class="section-sub">できたての ぬりえは これ！ライブ配信を みながら ぬってみよう🎨</p>
     <div id="featuredWrap"></div>
+    <div id="nextLiveWrap"></div>
   </section>
 
   <!-- あそびかた（ファーストビューにも表示） -->
@@ -1004,6 +1029,7 @@ const loadMoreWrap = document.getElementById("loadMoreWrap");
 const loadMoreBtn = document.getElementById("loadMoreBtn");
 const filterBar = document.getElementById("filterBar");
 const featuredWrap = document.getElementById("featuredWrap");
+const nextLiveWrap = document.getElementById("nextLiveWrap");
 
 const doneSet = new Set(JSON.parse(localStorage.getItem("nurieDone") || "[]"));
 let ALL = [], filtered = [], shown = 0, activeCat = "weekly";
@@ -1098,6 +1124,15 @@ function renderFeatured(n) {
   featuredWrap.appendChild(art);
 }
 
+function renderNextLive(id) {
+  if (!id) return;
+  nextLiveWrap.innerHTML =
+    `<a class="next-live" href="https://youtu.be/${id}" target="_blank" rel="noopener">
+       <img class="nl-thumb" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="次回の週末おさかな部ライブ" loading="lazy">
+       <span class="nl-text"><small>🔴 次回の 週末おさかな部ライブ</small>▶ よやくして、いっしょに かこう！</span>
+     </a>`;
+}
+
 // ===== かんたん印刷（A4に合わせて画像だけ表示→印刷） =====
 function printNurie(id, title) {
   const url = `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
@@ -1166,6 +1201,7 @@ fetch("nurie_data.json")
     document.getElementById("totalCount").textContent = ALL.length;
     libLoading.style.display = "none";
     renderFeatured(ALL.find(n => n.cat === "weekly" && n.date) || ALL[0]);
+    renderNextLive(data.nextLive);
     applyFilter();
   })
   .catch(() => {
