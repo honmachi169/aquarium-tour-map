@@ -57,6 +57,18 @@ def fetch_title(fid):
     t = m.group(1)
     return re.sub(r"\s*-\s*Google\s*(ドライブ|Drive)\s*$", "", t).strip()
 
+def fetch_scheduled(vid):
+    """YouTubeの予定開始時刻（ISO・UTC）を取得。ライブ予約/プレミア公開のみ取れる。"""
+    url = f"https://www.youtube.com/watch?v={vid}"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept-Language": "ja"})
+    try:
+        html = urllib.request.urlopen(req, timeout=20).read().decode("utf-8", "ignore")
+    except Exception:
+        return ""
+    m = re.search(r'itemprop="startDate"\s+content="([^"]+)"', html) or \
+        re.search(r'"startTimestamp":"([^"]+)"', html)
+    return m.group(1) if m else ""
+
 def check_public(fid):
     url = f"https://drive.google.com/thumbnail?id={fid}&sz=w400"
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
@@ -113,6 +125,12 @@ def main(argv):
     vid = json.loads(VIDEOS_JSON.read_text(encoding="utf-8"))
     vid["map"][coloring_id] = live_id
     vid["next_live"] = next_id
+    sched = fetch_scheduled(next_id)          # 次回ライブの予定開始（あれば）
+    vid["next_live_date"] = sched
+    if sched:
+        print(f"🗓  次回予定    : {sched}（自動取得）")
+    else:
+        print("🗓  次回予定    : 取得できず（配信予約がまだ／終了済みかも）")
     VIDEOS_JSON.write_text(json.dumps(vid, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print("✅ videos.json を更新しました。")
 
