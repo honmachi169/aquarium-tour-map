@@ -25,5 +25,15 @@
       "Edit(//Users/kawata/Documents/AI用作業/水族館マップサイト/**)",
       "Write(//Users/kawata/Documents/AI用作業/水族館マップサイト/**)"
     ]
+  },
+  "sandbox": {
+    "network": {
+      "allowedDomains": [
+        "script.google.com",
+        "script.googleusercontent.com",
+        "www.youtube.com",
+        "youtube.com"
+      ]
+    }
   }
 }
