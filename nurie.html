@@ -82,9 +82,16 @@ header {
   margin-bottom: 1rem;
 }
 .kawachan-float {
-  width: clamp(120px, 30vw, 180px);
-  animation: floaty 3s ease-in-out infinite;
+  display: block;
+  width: 74%;
+  max-width: 360px;
+  margin: .4rem auto .3rem;
+  animation: bob 3.2s ease-in-out infinite;
   filter: drop-shadow(0 6px 12px rgba(2,62,138,.35));
+}
+@keyframes bob {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-10px); }
 }
 @keyframes floaty {
   0%,100% { transform: translateY(0) rotate(-2deg); }
@@ -640,27 +647,25 @@ footer img.footer-kawachan { width: 130px; margin-bottom: .6rem; }
 footer a { color: #fff; }
 footer small { opacity: .75; font-size: .75rem; }
 
-/* ---------- 週末おさかな部ロゴ（ヘッダー） ---------- */
-.shumatsu-logo {
-  width: clamp(200px, 55vw, 320px);
-  margin: .6rem auto .2rem;
-  filter: drop-shadow(0 4px 10px rgba(2,62,138,.3));
-}
 .catch b { color: var(--sun); }
 
 /* ---------- 最新ぬりえ：ライブ動画＋クリックでDLするイラスト ---------- */
 .featured-new {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 1.2rem;
-  align-items: center;
   background: linear-gradient(160deg, #fffbea 0%, #fff 60%);
   border: 3px solid var(--sun);
   border-radius: 18px;
   box-shadow: 0 3px 10px rgba(2,62,138,.12);
-  padding: 1.2rem;
+  padding: 1.3rem 1.2rem 1.4rem;
   position: relative;
 }
+.fn-head { text-align: center; margin-bottom: 1rem; }
+.fn-body {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.2rem;
+  align-items: center;
+}
+.fn-body.no-video { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
 .featured-new .badge-new {
   position: absolute;
   top: -14px; left: 16px;
@@ -700,10 +705,18 @@ footer small { opacity: .75; font-size: .75rem; }
   white-space:nowrap; pointer-events:none;
 }
 .fn-illust:active .fn-dl-badge { box-shadow:none; transform:translateX(-50%) translateY(3px); }
-.fn-title { text-align:center; color:var(--sea-deep); font-size:1.3rem; margin:.2rem 0 .1rem; }
-.fn-hint { text-align:center; font-size:.85rem; color:#777; margin-bottom:1rem; }
+.fn-title { color:var(--sea-deep); font-size:1.4rem; margin:0 0 .15rem; }
+.fn-hint { font-size:.85rem; color:#777; margin:0; }
 @media (max-width: 620px) {
-  .featured-new { grid-template-columns: 1fr; }
+  .fn-body { grid-template-columns: 1fr; }
+}
+
+/* ---------- セクションを囲う白い箱 ---------- */
+.panel {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 3px 10px rgba(2,62,138,.12);
+  padding: 1.5rem 1.1rem 1.6rem;
 }
 
 /* ---------- シェア＋公式LINE 合体CTA ---------- */
@@ -744,12 +757,10 @@ footer small { opacity: .75; font-size: .75rem; }
     <div><img class="kawachan-float" src="assets/kawachan_draw.png" alt="絵を描いている さかなのおにいさん かわちゃん"></div>
     <h1>かわちゃんの さかなぬりえ</h1>
     <p class="catch">さかなのおにいさん かわちゃんが、<br><b>YouTubeで まいしゅう ライブ配信</b>しながら 新作を かいてるよ！<br>ぜんぶ むりょうで ダウンロード＆いんさつ できる🖍</p>
-    <img class="shumatsu-logo" src="assets/logo_shumatsu.png" alt="週末おさかな部">
     <div class="counter-box">
       <span class="num" id="doneCount">0</span> まい ぬったよ！
     </div>
     <nav class="jump-nav">
-      <a href="#osusume">⭐ あたらしいぬりえ</a>
       <a href="#howto">🖍 あそびかた</a>
       <a href="#library">📚 ぜんぶのぬりえ</a>
     </nav>
@@ -808,36 +819,36 @@ footer small { opacity: .75; font-size: .75rem; }
       <h2 class="section-title">🎨 ぬりえライブラリ</h2>
       <img class="mascot" src="assets/punio_shark.png" alt="">
     </div>
-    <p class="section-sub">ぜんぶで <span id="totalCount">176</span>まい！さかなの名前や 日づけで さがして、ダウンロードして、A4で いんさつしてね🖍</p>
+    <p class="section-sub">ぜんぶで <span id="totalCount">171</span>まい！さかなの名前や 日づけで さがして、ダウンロードして、A4で いんさつしてね🖍</p>
 
-    <div class="search-input-wrap">
-      <input type="search" id="nurieSearch" class="search-input" placeholder="🔎 さがす（例：サメ、びわこ、ペンギン、2026、カレンダー）" autocomplete="off">
-    </div>
+    <div class="panel">
+      <div class="search-input-wrap">
+        <input type="search" id="nurieSearch" class="search-input" placeholder="🔎 さがす（例：サメ、びわこ、ペンギン、2026、カレンダー）" autocomplete="off">
+      </div>
 
-    <div class="filter-bar" id="filterBar">
-      <button class="filter-chip active" data-cat="all">ぜんぶ</button>
-      <button class="filter-chip" data-cat="weekly">🐟 週末おさかな部</button>
-      <button class="filter-chip" data-cat="calendar">🗓 カレンダー</button>
-      <button class="filter-chip" data-cat="osusume">⭐ 定番おすすめ</button>
-      <button class="filter-chip" data-cat="youtube">🎬 YouTube・水族館</button>
-    </div>
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-chip active" data-cat="weekly">🐟 週末おさかな部</button>
+        <button class="filter-chip" data-cat="calendar">🗓 カレンダー</button>
+        <button class="filter-chip" data-cat="osusume">⭐ 定番おすすめ</button>
+      </div>
 
-    <p class="search-result-count" id="searchResultCount"></p>
-    <div class="lib-loading" id="libLoading">🐟 ぬりえを よみこみちゅう…</div>
-    <div class="grid" id="nurieGrid"></div>
-    <p class="search-empty" id="searchEmpty" style="display:none;">😢 みつからなかったよ。べつの ことばで さがしてみてね</p>
-    <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
-      <button class="btn-more" id="loadMoreBtn">もっと みる ▼</button>
+      <p class="search-result-count" id="searchResultCount"></p>
+      <div class="lib-loading" id="libLoading">🐟 ぬりえを よみこみちゅう…</div>
+      <div class="grid" id="nurieGrid"></div>
+      <p class="search-empty" id="searchEmpty" style="display:none;">😢 みつからなかったよ。べつの ことばで さがしてみてね</p>
+      <div class="load-more-wrap" id="loadMoreWrap" style="display:none;">
+        <button class="btn-more" id="loadMoreBtn">もっと みる ▼</button>
+      </div>
     </div>
 
     <!-- シェア＋公式LINE（お友達に教える＋登録をひとつに） -->
     <div class="share-line-cta">
       <img class="cta-chara" src="assets/punio_tacchu.png" alt="">
-      <h3>🎁 お友だちにも おしえてね！</h3>
-      <p>あたらしい ぬりえは <b>公式LINE</b>で いちばん早く とどくよ。毎週の 週末おさかな部ライブの おしらせも！おうちのひとと いっしょに とうろくして、お友だちにも シェアしてね💬</p>
+      <h3>🎁 あたらしい ぬりえは 公式LINEで！</h3>
+      <p>あたらしい ぬりえは <b>公式LINE</b>で いちばん早く とどくよ。毎週の 週末おさかな部ライブの おしらせも！おうちのひとと いっしょに とうろくしてね💬</p>
       <div class="share-line-btns">
         <a class="btn-line" href="https://lin.ee/qMPcnPq" target="_blank" rel="noopener">💬 公式LINEに とうろくする</a>
-        <button class="btn-share" id="shareBtn">📣 お友だちに おしえる</button>
+        <button class="btn-share" id="shareBtn">📣 公式LINEを おしえる</button>
       </div>
     </div>
   </section>
@@ -965,7 +976,7 @@ const filterBar = document.getElementById("filterBar");
 const featuredWrap = document.getElementById("featuredWrap");
 
 const doneSet = new Set(JSON.parse(localStorage.getItem("nurieDone") || "[]"));
-let ALL = [], filtered = [], shown = 0, activeCat = "all";
+let ALL = [], filtered = [], shown = 0, activeCat = "weekly";
 
 function esc(s) { return String(s).replace(/[&<>"]/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[m])); }
 
@@ -1005,17 +1016,17 @@ function makeCard(n) {
 function applyFilter() {
   const q = searchInput.value.trim();
   const nq = normalize(q);
+  // 検索中はカテゴリを横断して探す。検索していないときは選んだカテゴリだけ表示。
   filtered = ALL.filter(n => {
-    if (activeCat !== "all" && n.cat !== activeCat) return false;
-    if (!nq) return true;
-    return normalize(`${n.title} ${n.date} ${CAT_LABEL[n.cat]}`).includes(nq);
+    if (nq) return normalize(`${n.title} ${n.date} ${CAT_LABEL[n.cat]}`).includes(nq);
+    return n.cat === activeCat;
   });
   shown = 0;
   grid.innerHTML = "";
   renderMore();
   searchResultCount.textContent = q
     ? `「${q}」の けんさくけっか：${filtered.length}まい`
-    : `${activeCat === "all" ? "ぜんぶ" : CAT_LABEL[activeCat]}：${filtered.length}まい`;
+    : `${CAT_LABEL[activeCat]}：${filtered.length}まい`;
   searchEmpty.style.display = filtered.length === 0 ? "block" : "none";
 }
 
@@ -1032,26 +1043,28 @@ function renderMore() {
 function renderFeatured(n) {
   if (!n) return;
   const t = esc(n.title);
-  featuredWrap.innerHTML =
-    `<h3 class="fn-title">${t}${n.date ? `<span style="font-size:.66em;color:#999;font-weight:normal;"> （${esc(n.date)}）</span>` : ""}</h3>` +
-    `<p class="fn-hint">🎬 ライブ配信を みながら、ぬりえは タップで ダウンロード！</p>`;
   const art = document.createElement("article");
   art.className = "featured-new";
   art.innerHTML = `
     <span class="badge-new">NEW!</span>
-    ${n.video ? `
-    <div class="fn-video">
-      <div class="yt-thumb" data-yt="${n.video}" role="button" tabindex="0" aria-label="ライブ配信を みる">
-        <img src="https://i.ytimg.com/vi/${n.video}/hqdefault.jpg" alt="${t}を かいた ライブ配信" loading="lazy">
-        <span class="play">▶</span>
-      </div>
-      <p class="yt-cap">▶ おすと ライブ配信が みれるよ</p>
-    </div>` : ""}
-    <a class="fn-illust" href="${n.dl}" target="_blank" rel="noopener" aria-label="${t}のぬりえを ダウンロード">
-      <img src="${n.thumb}" alt="${t}のぬりえ" referrerpolicy="no-referrer">
-      <span class="fn-dl-badge">📥 ダウンロード</span>
-    </a>`;
-  if (!n.video) { art.style.gridTemplateColumns = "1fr"; art.style.maxWidth = "460px"; art.style.margin = "0 auto"; }
+    <div class="fn-head">
+      <h3 class="fn-title">${t}${n.date ? `<span style="font-size:.66em;color:#999;font-weight:normal;"> （${esc(n.date)}）</span>` : ""}</h3>
+      <p class="fn-hint">🎬 ライブ配信を みながら、ぬりえは タップで ダウンロード！</p>
+    </div>
+    <div class="fn-body${n.video ? "" : " no-video"}">
+      ${n.video ? `
+      <div class="fn-video">
+        <div class="yt-thumb" data-yt="${n.video}" role="button" tabindex="0" aria-label="ライブ配信を みる">
+          <img src="https://i.ytimg.com/vi/${n.video}/hqdefault.jpg" alt="${t}を かいた ライブ配信" loading="lazy">
+          <span class="play">▶</span>
+        </div>
+        <p class="yt-cap">▶ おすと ライブ配信が みれるよ</p>
+      </div>` : ""}
+      <a class="fn-illust" href="${n.dl}" target="_blank" rel="noopener" aria-label="${t}のぬりえを ダウンロード">
+        <img src="${n.thumb}" alt="${t}のぬりえ" referrerpolicy="no-referrer">
+        <span class="fn-dl-badge">📥 ダウンロード</span>
+      </a>
+    </div>`;
   featuredWrap.appendChild(art);
 }
 
@@ -1118,7 +1131,8 @@ loadMoreBtn.addEventListener("click", renderMore);
 fetch("nurie_data.json")
   .then(r => r.json())
   .then(data => {
-    ALL = data.items || [];
+    // YouTube・水族館コラボのぬりえはコラボ限定なのでこのページには出さない
+    ALL = (data.items || []).filter(n => n.cat !== "youtube");
     document.getElementById("totalCount").textContent = ALL.length;
     libLoading.style.display = "none";
     renderFeatured(ALL.find(n => n.cat === "weekly" && n.date) || ALL[0]);
@@ -1154,17 +1168,23 @@ for (let i = 0; i < 14; i++) {
   bubbles.appendChild(b);
 }
 
-// ===== シェア =====
+// ===== シェア：公式LINEを おしえる（このサイトではなく公式LINEのURLを共有） =====
 document.getElementById("shareBtn").addEventListener("click", async () => {
+  const lineUrl = "https://lin.ee/qMPcnPq";
   const shareData = {
-    title: "かわちゃんの さかなぬりえ",
-    text: "さかなのおにいさん かわちゃんの さかなぬりえ、無料でダウンロードできるよ！🐟🖍",
-    url: "https://aquarium.yasasea.com/nurie.html"
+    title: "さかなのおにいさん かわちゃん 公式LINE",
+    text: "さかなのおにいさん かわちゃんの 公式LINE！毎週の 週末おさかな部ライブや、無料のさかなぬりえが とどくよ🐟🖍",
+    url: lineUrl
   };
   if (navigator.share) {
     try { await navigator.share(shareData); } catch (e) {}
   } else {
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(shareData.url)}`, "_blank");
+    try {
+      await navigator.clipboard.writeText(`${shareData.text}\n${lineUrl}`);
+      alert("公式LINEの リンクを コピーしたよ！お友だちに おくってね💬\n" + lineUrl);
+    } catch (e) {
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(lineUrl)}`, "_blank");
+    }
   }
 });
 </script>
