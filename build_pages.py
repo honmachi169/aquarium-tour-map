@@ -168,7 +168,7 @@ for slug, a, intro in entries:
     if sns.get("x"): links += f'<a class="btn sns" href="{E(sns["x"])}" target="_blank" rel="noopener">𝕏</a>'
     if sns.get("instagram"): links += f'<a class="btn sns" href="{E(sns["instagram"])}" target="_blank" rel="noopener">📷 Instagram</a>'
 
-    ytc_box = '<div class="ytc-box"><h3>▶ YouTubeのコメント</h3><div id="ytc-list"><p class="loading">読み込み中…</p></div></div>' if v else ''
+    ytc_box = '<details class="ytc-box"><summary>YouTubeのコメント</summary><div id="ytc-list"><p class="loading">読み込み中…</p></div></details>' if v else ''
     ng_list = '["死ね","殺す","バカ","馬鹿","アホ","キモ","反対","抗議","虐待","動物愛護","愛護団体","保護団体","アニマルライツ","ヴィーガン","監禁","搾取","奴隷","解放しろ","閉鎖しろ","追い込み漁","boycott","ボイコット","署名","http://","https://"]'
     yt_js = f'''const YT_API_KEY = "{YT_API_KEY}";
 const YT_VID = "{v['id']}";
@@ -341,6 +341,11 @@ loadYtComments();''' if v else ''
   .posts-section h2 {{ color:var(--sea-deep); font-size:1.1rem; margin-bottom:16px; }}
   .ytc-box, .user-comments-box {{ background:#fff; border-radius:16px; padding:16px; margin-bottom:16px; box-shadow:0 2px 8px rgba(2,62,138,.1); }}
   .ytc-box h3, .user-comments-box h3 {{ font-size:.9rem; color:var(--sea); margin-bottom:10px; }}
+  .ytc-box summary {{ font-size:.9rem; font-weight:bold; color:var(--sea); cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; }}
+  .ytc-box summary::-webkit-details-marker {{ display:none; }}
+  .ytc-box summary::after {{ content:'▾'; font-size:.8rem; color:#89a; transition:transform .15s; }}
+  .ytc-box[open] summary::after {{ transform:rotate(180deg); }}
+  .ytc-box #ytc-list {{ margin-top:10px; }}
   .post-item {{ display:flex; flex-direction:column; gap:6px; padding:12px 0; border-bottom:1px solid #e8f4fb; }}
   .post-item:last-child {{ border-bottom:none; }}
   .post-item img {{ width:100%; max-width:280px; border-radius:12px; display:block; background:#dbeefb; }}
