@@ -29,6 +29,11 @@ def thumb(fid, size=800):
 def dl(fid):
     return f"https://drive.google.com/uc?export=download&id={fid}"
 
+# ぬりえ→そのぬりえを描いたライブ配信のYouTube動画ID（新作が出たらここに1行足す）
+VIDEOS = {
+    "1ltNcE11_JdRtdEGm7JduTnPyUuR9HpAM": "pOk-vpzOFBc",  # カメ大特集 → カメ大集合ライブ
+}
+
 JUNK = re.compile(r"(IMG_\d+|Scannable|文書\b)", re.I)
 EXT = re.compile(r"\.(png|jpg|jpeg)$", re.I)
 DATE_FULL = re.compile(r"(20\d{2})[ _\-/](\d{1,2})[ _\-/](\d{1,2})")
@@ -71,6 +76,7 @@ def parse(fid, raw_title, category):
         "cat": category,
         "thumb": thumb(fid),
         "dl": dl(fid),
+        "video": VIDEOS.get(fid, ""),
     }
 
 def load_tsv(path, default_cat=None):
