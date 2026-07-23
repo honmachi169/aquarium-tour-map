@@ -28,7 +28,8 @@
   .bubbles span { position:absolute; bottom:-40px; border-radius:50%; background:rgba(255,255,255,.18); animation:rise linear infinite; }
   @keyframes rise { to { transform:translateY(-120vh); } }
   main { max-width:760px; margin:0 auto; padding:22px 16px 50px; }
-  .photo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-bottom:24px; }
+  .photo-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+  @media (min-width:520px){ .photo-grid { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); } }
   .photo-card { background:#fff; border-radius:14px; overflow:hidden; border:2px solid #e3f2fb; box-shadow:0 2px 8px rgba(2,62,138,.08); }
   .photo-card img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:#dbeefb; }
   .photo-card .pc-body { padding:8px 10px 10px; }
