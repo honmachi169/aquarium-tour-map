@@ -23,6 +23,12 @@ GA_ID = "G-J4C3DJNZQN"
 GA_SNIPPET = f'''<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{GA_ID}');</script>'''
 
+# お弁当・飲食物を「持ち込める」と確認できた館だけ True。
+# 未確認（記載なし・要公式確認）や持込不可はテーブルに出さない（かわちゃん方針：確認取れない項目は行ごと消す）。
+def _food_ok(v):
+    v = str(v or "")
+    return any(tok in v for tok in ("持込OK", "持込可", "持ち込み可", "持参可", "飲食可能", "飲食可", "飲食スペースあり", "OK"))
+
 TAG_LABEL = {"rain":"☔️ 雨の日におすすめ","kids":"👶 未就学児におすすめ","same":"🦈 サメ好きにおすすめ",
              "dolphin":"🐬 イルカショーおすすめ","deep":"🐙 深海生物好きにおすすめ",
              "penguin":"🐧 ペンギン好きにおすすめ","summer":"☀️ 夏休みおすすめ",
@@ -100,7 +106,7 @@ for slug, a, intro in entries:
     if a.get("nursing"): info += f"<tr><th>🍼 授乳室</th><td>{E(a['nursing'])}</td></tr>"
     if a.get("locker"): info += f"<tr><th>🔒 ロッカー</th><td>{E(a['locker'])}</td></tr>"
     if a.get("parking"): info += f"<tr><th>🚗 駐車場</th><td>{E(a['parking'])}</td></tr>"
-    if a.get("food_bring"): info += f"<tr><th>🧺 飲食物持込</th><td>{E(a['food_bring'])}</td></tr>"
+    if _food_ok(a.get("food_bring")): info += f"<tr><th>🍱 お弁当・飲食物の持込</th><td>{E(a['food_bring'])}</td></tr>"
     if a.get("restaurant"): info += f"<tr><th>🍽 フード</th><td>{E(a['restaurant'])}</td></tr>"
     if a.get("gift"): info += f"<tr><th>🎁 おみやげ</th><td>{E(a['gift'])}</td></tr>"
     if a.get("goshuin"): info += f"<tr><th>🐟 魚朱印</th><td>{E(a['goshuin'])}</td></tr>"
@@ -256,6 +262,7 @@ loadYtComments();''' if v else ''
         "comment": a.get("highlight") or a.get("comment") or "", "lat": a.get("lat"), "lng": a.get("lng"),
         "stroller": a.get("stroller"), "nursing": a.get("nursing"), "locker": a.get("locker"),
         "ratings": a.get("ratings") if (a.get("visited") and a.get("verified")) else None,
+        "access": a.get("access") or "", "restaurant": a.get("restaurant") or "", "food_bring": a.get("food_bring") or "",
     })
 
     doc = f"""<!DOCTYPE html>
@@ -334,6 +341,10 @@ loadYtComments();''' if v else ''
   .ytbtn {{ display:inline-block; margin-top:18px; margin-right:10px; background:#ff0000; color:#fff; font-weight:bold; font-size:.9rem; text-decoration:none; border-radius:999px; padding:10px 22px; box-shadow:0 2px 8px rgba(2,62,138,.25); }}
   .guidebtn {{ display:inline-block; margin-top:18px; margin-right:10px; background:var(--sea-deep); color:#fff; font-weight:bold; font-size:.9rem; text-decoration:none; border-radius:999px; padding:10px 22px; box-shadow:0 2px 8px rgba(2,62,138,.25); }}
   .note {{ font-size:.75rem; color:#89a; margin-top:8px; }}
+  .note a {{ color:var(--sea); font-weight:bold; text-decoration:none; }}
+  .playbtn {{ display:inline-block; margin-top:18px; margin-right:10px; background:var(--sun); color:#7a5000; font-weight:bold; font-size:.9rem; text-decoration:none; border-radius:999px; padding:10px 22px; box-shadow:0 2px 8px rgba(2,62,138,.18); }}
+  .nav-cluster {{ margin-top:28px; padding-top:14px; border-top:1px dashed #cfe4ee; }}
+  .nav-cluster a {{ margin-top:8px; }}
   .filming-note {{ font-size:.75rem; color:#0077b6; background:#e0f7fa; border-radius:8px; padding:5px 12px; margin:6px 0 0; display:inline-block; }}
   .only-quote {{ font-size:.95rem; font-weight:bold; color:#92600a; background:#fff7db; border-left:5px solid #f4c430; border-radius:8px; padding:10px 14px; margin:12px 0; line-height:1.6; }}
   {ATTR_CSS}
@@ -346,9 +357,10 @@ loadYtComments();''' if v else ''
   .ytc-box summary::after {{ content:'▾'; font-size:.8rem; color:#89a; transition:transform .15s; }}
   .ytc-box[open] summary::after {{ transform:rotate(180deg); }}
   .ytc-box #ytc-list {{ margin-top:10px; }}
-  .post-item {{ display:flex; flex-direction:column; gap:6px; padding:12px 0; border-bottom:1px solid #e8f4fb; }}
-  .post-item:last-child {{ border-bottom:none; }}
-  .post-item img {{ width:100%; max-width:280px; border-radius:12px; display:block; background:#dbeefb; }}
+  #post-list {{ display:flex; flex-wrap:wrap; gap:12px; }}
+  #post-list > .empty, #post-list > .loading, #post-list > .more-btn {{ flex:1 1 100%; }}
+  .post-item {{ display:flex; flex-direction:column; gap:6px; flex:1 1 200px; max-width:300px; background:#f6fbfe; border:1.5px solid #e3f2fb; border-radius:14px; padding:12px; }}
+  .post-item img {{ width:100%; border-radius:10px; display:block; background:#dbeefb; }}
   .post-name {{ font-size:.75rem; font-weight:bold; color:var(--sea); }}
   .post-msg {{ font-size:.85rem; color:#234; line-height:1.6; }}
   .post-foot {{ display:flex; align-items:center; gap:8px; }}
@@ -391,16 +403,13 @@ loadYtComments();''' if v else ''
   {ratings_box}
   {summer}
   <table>{info}</table>
-  <p class="note">※{INFO_ASOF}時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に{('<a href="' + E(a["url"]) + '" target="_blank" rel="noopener">公式サイト</a>') if a.get("url") else "公式サイト"}をご確認ください</p>
+  <p class="note">※{INFO_ASOF}時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に{('<a href="' + E(a["url"]) + '" target="_blank" rel="noopener">公式サイト</a>') if a.get("url") else "公式サイト"}をご確認ください。情報は各館の公式サイトをもとに<a href="{SITE}/about.html">株式会社やさしいうみ</a>が掲載しています。</p>
   {hitokoto}
   {(f'<div class="chips tagchips-block">{tagchips}</div>') if tagchips else ''}
   {filming_note}
   <div class="btns">
     {links}
   </div>
-  <a class="backbtn" href="{SITE}/">🗾 MAPにもどる</a>
-  <a class="ytbtn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録する</a>
-  <a class="guidebtn" href="{SITE}/guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>
 
   <section class="posts-section">
     <h2>📸💬 みんなの投稿</h2>
@@ -437,6 +446,12 @@ loadYtComments();''' if v else ''
       </form>
     </div>
   </section>
+  <div class="nav-cluster">
+    <a class="backbtn" href="{SITE}/">🗾 MAPにもどる</a>
+    <a class="ytbtn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録する</a>
+    <a class="guidebtn" href="{SITE}/guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>
+    <a class="playbtn" href="{SITE}/play.html">🎮 さかなクイズであそぶ</a>
+  </div>
   {ATTR_FOOTER}
 </main>
 <script>
@@ -781,6 +796,32 @@ for tag, members in by_tag.items():
     new_page_urls.append(url)
     theme_index_links.append((label, len(members), url))
 
+# --- 「魚に興味がなくても行く理由になる」事実ベースの軸（アクセス・お弁当）---
+# かわちゃんの主観ではなく、各館の公式情報から機械的に判定できる事実だけで束ねる（創作なし）
+def _axis_bento(m):
+    # テーブルの🍱行と同じ判定に統一（お弁当を持ち込めると確認できた館だけ）
+    return _food_ok(m.get("food_bring"))
+
+FACT_AXES = [
+    ("bento", "🍱 お弁当を持ち込める", _axis_bento,
+     "お弁当やおやつを持ち込める水族館。小さな子連れでも、お財布にやさしく一日ゆっくり過ごせるよ。"),
+]
+for tag, label, pred, lead in FACT_AXES:
+    members = [m for m in entry_meta if pred(m)]
+    if len(members) < 3:
+        continue
+    fname = f"theme/{tag}.html"
+    render_list_page(
+        fname,
+        f"{label} 水族館{len(members)}選 | 全国水族館ツアーMAP",
+        f"{label}水族館は{len(members)}館。{lead}",
+        f"{label}水族館は全国{len(members)}館。{lead}",
+        members,
+    )
+    url = f"{SITE}/{urllib.parse.quote(fname)}"
+    new_page_urls.append(url)
+    theme_index_links.append((label, len(members), url))
+
 # --- かわちゃん的評価ランキングページ（本人承認済み評価のみ・3館以上そろったカテゴリのみ生成）---
 # 一般名詞ではなく固有の“ランキング名”を持たせ、AIに引用される際も名前ごと引用される構造にする
 # かわちゃん本人が直接指定したテーマ別ベスト5（5段階評価の平均ではなく、本人の一次情報による直接キュレーション）
@@ -1106,6 +1147,7 @@ guide_doc = f"""<!DOCTYPE html>
 <li>ベビーカー・授乳室・ロッカーの情報は、各水族館ページの「くわしく」にまとめてあるよ</li>
 <li>平日の水族館は、子育ての楽しい避難場所にもなる。保護者のみなさんもぜひ息抜きに行ってみてね！このサイトが参考になったら嬉しいな</li>
 <li>行き先選びはテーマ別ページからどうぞ：<a href="{SITE}/theme/baby.html">🍼 赤ちゃん連れにおすすめ</a>／<a href="{SITE}/theme/kids.html">👶 未就学児におすすめ</a>／<a href="{SITE}/theme/rain.html">☔️ 雨の日におすすめ</a></li>
+<li>お弁当やおやつを持ち込みたいなら<a href="{SITE}/theme/bento.html">🍱 お弁当を持ち込める水族館</a>のページもどうぞ。お財布にやさしく一日ゆっくり過ごせるよ</li>
 </ul>
 </div>
 

@@ -76,6 +76,10 @@
   .ytbtn { display:inline-block; margin-top:18px; margin-right:10px; background:#ff0000; color:#fff; font-weight:bold; font-size:.9rem; text-decoration:none; border-radius:999px; padding:10px 22px; box-shadow:0 2px 8px rgba(2,62,138,.25); }
   .guidebtn { display:inline-block; margin-top:18px; margin-right:10px; background:var(--sea-deep); color:#fff; font-weight:bold; font-size:.9rem; text-decoration:none; border-radius:999px; padding:10px 22px; box-shadow:0 2px 8px rgba(2,62,138,.25); }
   .note { font-size:.75rem; color:#89a; margin-top:8px; }
+  .note a { color:var(--sea); font-weight:bold; text-decoration:none; }
+  .playbtn { display:inline-block; margin-top:18px; margin-right:10px; background:var(--sun); color:#7a5000; font-weight:bold; font-size:.9rem; text-decoration:none; border-radius:999px; padding:10px 22px; box-shadow:0 2px 8px rgba(2,62,138,.18); }
+  .nav-cluster { margin-top:28px; padding-top:14px; border-top:1px dashed #cfe4ee; }
+  .nav-cluster a { margin-top:8px; }
   .filming-note { font-size:.75rem; color:#0077b6; background:#e0f7fa; border-radius:8px; padding:5px 12px; margin:6px 0 0; display:inline-block; }
   .only-quote { font-size:.95rem; font-weight:bold; color:#92600a; background:#fff7db; border-left:5px solid #f4c430; border-radius:8px; padding:10px 14px; margin:12px 0; line-height:1.6; }
   .attr-footer { font-size:.72rem; color:#9ab; margin-top:24px; text-align:center; line-height:2; } .attr-footer a { color:#89a; }
@@ -88,9 +92,10 @@
   .ytc-box summary::after { content:'▾'; font-size:.8rem; color:#89a; transition:transform .15s; }
   .ytc-box[open] summary::after { transform:rotate(180deg); }
   .ytc-box #ytc-list { margin-top:10px; }
-  .post-item { display:flex; flex-direction:column; gap:6px; padding:12px 0; border-bottom:1px solid #e8f4fb; }
-  .post-item:last-child { border-bottom:none; }
-  .post-item img { width:100%; max-width:280px; border-radius:12px; display:block; background:#dbeefb; }
+  #post-list { display:flex; flex-wrap:wrap; gap:12px; }
+  #post-list > .empty, #post-list > .loading, #post-list > .more-btn { flex:1 1 100%; }
+  .post-item { display:flex; flex-direction:column; gap:6px; flex:1 1 200px; max-width:300px; background:#f6fbfe; border:1.5px solid #e3f2fb; border-radius:14px; padding:12px; }
+  .post-item img { width:100%; border-radius:10px; display:block; background:#dbeefb; }
   .post-name { font-size:.75rem; font-weight:bold; color:var(--sea); }
   .post-msg { font-size:.85rem; color:#234; line-height:1.6; }
   .post-foot { display:flex; align-items:center; gap:8px; }
@@ -133,16 +138,13 @@
   
   
   <table><tr><th>💰 大人</th><td>見学コース605円（ふれあい・スイム等の体験プログラムは別料金／二次情報のため要最終確認）</td></tr><tr><th>🧒 子ども</th><td>3歳以下無料</td></tr><tr><th>🗓 休館日</th><td>年中無休（天候・イルカの体調により臨時休業あり）</td></tr></table>
-  <p class="note">※2026年7月時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に<a href="https://dolphin-fantasy.com/" target="_blank" rel="noopener">公式サイト</a>をご確認ください</p>
+  <p class="note">※2026年7月時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に<a href="https://dolphin-fantasy.com/" target="_blank" rel="noopener">公式サイト</a>をご確認ください。情報は各館の公式サイトをもとに<a href="https://aquarium.yasasea.com/about.html">株式会社やさしいうみ</a>が掲載しています。</p>
   
   <div class="chips tagchips-block"><span class="chip tag">🐬 イルカショーおすすめ</span></div>
   
   <div class="btns">
     <a class="btn hp" href="https://dolphin-fantasy.com/" target="_blank" rel="noopener">公式サイト🔗</a>
   </div>
-  <a class="backbtn" href="https://aquarium.yasasea.com/">🗾 MAPにもどる</a>
-  <a class="ytbtn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録する</a>
-  <a class="guidebtn" href="https://aquarium.yasasea.com/guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>
 
   <section class="posts-section">
     <h2>📸💬 みんなの投稿</h2>
@@ -179,6 +181,12 @@
       </form>
     </div>
   </section>
+  <div class="nav-cluster">
+    <a class="backbtn" href="https://aquarium.yasasea.com/">🗾 MAPにもどる</a>
+    <a class="ytbtn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録する</a>
+    <a class="guidebtn" href="https://aquarium.yasasea.com/guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>
+    <a class="playbtn" href="https://aquarium.yasasea.com/play.html">🎮 さかなクイズであそぶ</a>
+  </div>
   <p class="attr-footer">🐟 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん） / https://aquarium.yasasea.com<br>運営：<a href="https://aquarium.yasasea.com/about.html#company">株式会社やさしいうみ</a>　<a href="https://aquarium.yasasea.com/about.html#work">💼 お仕事のご依頼</a>　<a href="https://aquarium.yasasea.com/posts.html#iken">📮 ご意見箱</a>　<a href="https://aquarium.yasasea.com/about.html#privacy">プライバシーポリシー</a></p>
 </main>
 <script>

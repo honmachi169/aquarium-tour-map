@@ -578,7 +578,8 @@ const TAGS = {
   "penguin": ["🐧 ペンギン好きにおすすめ", "🐧 ペンギン好きに"],
   "shachi": ["🐋 シャチに会える", "🐋 シャチ"],
   "beluga": ["🐳 シロイルカに会える", "🐳 シロイルカ"],
-  "kaichu": ["🗼 海中展望台", "🗼 海中展望台"]
+  "kaichu": ["🗼 海中展望台", "🗼 海中展望台"],
+  "bento": ["🍱 お弁当を持ち込める", "🍱 お弁当OK"]
 };
 const REGIONS = {
   "北海道・東北": ["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県"],
@@ -597,6 +598,14 @@ document.querySelectorAll('.deco').forEach(d=>{
 
 fetch('data.json').then(r=>r.json()).then(data=>{
   const aqs = data.aquariums;
+  // ④「魚に興味がなくても行く理由」になる事実ベースの軸を、既存フィールドから動的に付与（データは書き換えない）
+  const addFactTags = a => {
+    const tags = a.tags = (a.tags || []).slice();
+    const fb = a.food_bring || '';
+    if (/持込OK|持込可|持ち込み可|持参可|飲食可能|飲食可|飲食スペースあり|OK/.test(fb) && !tags.includes('bento')) tags.push('bento');
+  };
+  aqs.forEach(addFactTags);
+  (data.unvisited||[]).forEach(addFactTags);
   const visited = aqs.filter(a=>!a.upcoming).length;
   document.getElementById('visited').textContent = visited;
   document.getElementById('yt-visited').textContent = visited;

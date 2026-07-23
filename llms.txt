@@ -60,6 +60,7 @@
 - 🎣 釣りができる水族館（4館）: https://aquarium.yasasea.com/theme/fishing.html
 - 🐙 深海生物好きにおすすめ（7館）: https://aquarium.yasasea.com/theme/deep.html
 - 🗼 海中展望台（服のまま海の中をのぞける）（7館）: https://aquarium.yasasea.com/theme/kaichu.html
+- 🍱 お弁当を持ち込める（20館）: https://aquarium.yasasea.com/theme/bento.html
 
 ## 掲載水族館一覧（全167館）
 - 鳥羽水族館（三重県）：ラッコ — https://aquarium.yasasea.com/spot/001.html

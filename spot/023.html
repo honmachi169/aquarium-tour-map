@@ -77,6 +77,10 @@
   .ytbtn { display:inline-block; margin-top:18px; margin-right:10px; background:#ff0000; color:#fff; font-weight:bold; font-size:.9rem; text-decoration:none; border-radius:999px; padding:10px 22px; box-shadow:0 2px 8px rgba(2,62,138,.25); }
   .guidebtn { display:inline-block; margin-top:18px; margin-right:10px; background:var(--sea-deep); color:#fff; font-weight:bold; font-size:.9rem; text-decoration:none; border-radius:999px; padding:10px 22px; box-shadow:0 2px 8px rgba(2,62,138,.25); }
   .note { font-size:.75rem; color:#89a; margin-top:8px; }
+  .note a { color:var(--sea); font-weight:bold; text-decoration:none; }
+  .playbtn { display:inline-block; margin-top:18px; margin-right:10px; background:var(--sun); color:#7a5000; font-weight:bold; font-size:.9rem; text-decoration:none; border-radius:999px; padding:10px 22px; box-shadow:0 2px 8px rgba(2,62,138,.18); }
+  .nav-cluster { margin-top:28px; padding-top:14px; border-top:1px dashed #cfe4ee; }
+  .nav-cluster a { margin-top:8px; }
   .filming-note { font-size:.75rem; color:#0077b6; background:#e0f7fa; border-radius:8px; padding:5px 12px; margin:6px 0 0; display:inline-block; }
   .only-quote { font-size:.95rem; font-weight:bold; color:#92600a; background:#fff7db; border-left:5px solid #f4c430; border-radius:8px; padding:10px 14px; margin:12px 0; line-height:1.6; }
   .attr-footer { font-size:.72rem; color:#9ab; margin-top:24px; text-align:center; line-height:2; } .attr-footer a { color:#89a; }
@@ -89,9 +93,10 @@
   .ytc-box summary::after { content:'▾'; font-size:.8rem; color:#89a; transition:transform .15s; }
   .ytc-box[open] summary::after { transform:rotate(180deg); }
   .ytc-box #ytc-list { margin-top:10px; }
-  .post-item { display:flex; flex-direction:column; gap:6px; padding:12px 0; border-bottom:1px solid #e8f4fb; }
-  .post-item:last-child { border-bottom:none; }
-  .post-item img { width:100%; max-width:280px; border-radius:12px; display:block; background:#dbeefb; }
+  #post-list { display:flex; flex-wrap:wrap; gap:12px; }
+  #post-list > .empty, #post-list > .loading, #post-list > .more-btn { flex:1 1 100%; }
+  .post-item { display:flex; flex-direction:column; gap:6px; flex:1 1 200px; max-width:300px; background:#f6fbfe; border:1.5px solid #e3f2fb; border-radius:14px; padding:12px; }
+  .post-item img { width:100%; border-radius:10px; display:block; background:#dbeefb; }
   .post-name { font-size:.75rem; font-weight:bold; color:var(--sea); }
   .post-msg { font-size:.85rem; color:#234; line-height:1.6; }
   .post-foot { display:flex; align-items:center; gap:8px; }
@@ -133,8 +138,8 @@
   
   <div class="ratings-box"><div class="hk-label">🐟 さかなのおにいさん かわちゃんのイチオシポイント</div><div class="rate-row"><span class="rate-label">🌀 クセつよポイント</span><span class="rate-stars">★★★★☆</span></div><div class="rate-row"><span class="rate-label">🎨 アート演出</span><span class="rate-stars">★★★★★</span></div><div class="rate-row"><span class="rate-label">🌃 夜景とセットで楽しめる</span><span class="rate-stars">★★★★☆</span></div></div>
   
-  <table><tr><th>💰 大人</th><td>2,600円</td></tr><tr><th>🧒 子ども</th><td>1,500円</td></tr><tr><th>🗓 休館日</th><td>年中無休</td></tr><tr><th>🚗 駐車場</th><td>専用駐車場なし（徒歩3分の有料立体駐車場400台を推奨）</td></tr><tr><th>🧺 飲食物持込</th><td>弁当等の持込不可（蓋付きペットボトルのみ可）</td></tr><tr><th>🍽 フード</th><td>1階に神戸最大級フードホールあり（神戸牛・洋食・スイーツ等）＋4階「átoa café」</td></tr><tr><th>🐟 魚朱印</th><td>あり（6種類・1枚300円、インフォメーションで購入）</td></tr></table>
-  <p class="note">※2026年7月時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に<a href="https://atoa-kobe.jp/" target="_blank" rel="noopener">公式サイト</a>をご確認ください</p>
+  <table><tr><th>💰 大人</th><td>2,600円</td></tr><tr><th>🧒 子ども</th><td>1,500円</td></tr><tr><th>🗓 休館日</th><td>年中無休</td></tr><tr><th>🚗 駐車場</th><td>専用駐車場なし（徒歩3分の有料立体駐車場400台を推奨）</td></tr><tr><th>🍽 フード</th><td>1階に神戸最大級フードホールあり（神戸牛・洋食・スイーツ等）＋4階「átoa café」</td></tr><tr><th>🐟 魚朱印</th><td>あり（6種類・1枚300円、インフォメーションで購入）</td></tr></table>
+  <p class="note">※2026年7月時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に<a href="https://atoa-kobe.jp/" target="_blank" rel="noopener">公式サイト</a>をご確認ください。情報は各館の公式サイトをもとに<a href="https://aquarium.yasasea.com/about.html">株式会社やさしいうみ</a>が掲載しています。</p>
   <div class="hitokoto"><div class="hk-label">🐟 かわちゃんからの一言</div><div class="hk-text">まるで宇宙から見たプラネットのような巨大な球体水槽。中にはサクラダイが泳ぎ、絶妙に魚たちに光が当たらないように、生き物にも配慮されている演出がある。一見「映え水族館」のように思うかもしれないけれど、見せる展示と生態とのバランスも考えられた都市型水族館。
 お勧めはぜひ夕方以降に行ってほしい。暗くなって屋上に上がると、ポートタワーをはじめとした神戸の夜景が一望できる。冬の寒い日はここで温かいココアなども飲むことができるので、デートにぴったり（妻と行ったことはないけど）。<a href="https://aquarium.yasasea.com/about.html#profile" class="hk-chara-link" title="かわちゃんについてもっと知る"><img class="hk-chara" src="https://aquarium.yasasea.com/assets/kawachan_point.png" alt="さかなのおにいさん かわちゃんについて詳しく" loading="lazy"><span class="hk-chara-cap">かわちゃんって？</span></a></div></div>
   <div class="chips tagchips-block"><span class="chip tag">☔️ 雨の日におすすめ</span></div>
@@ -142,9 +147,6 @@
   <div class="btns">
     <a class="btn hp" href="https://atoa-kobe.jp/" target="_blank" rel="noopener">公式サイト🔗</a><a class="btn sns" href="https://x.com/atoa_kobe" target="_blank" rel="noopener">𝕏</a><a class="btn sns" href="https://www.instagram.com/atoa_kobe/" target="_blank" rel="noopener">📷 Instagram</a>
   </div>
-  <a class="backbtn" href="https://aquarium.yasasea.com/">🗾 MAPにもどる</a>
-  <a class="ytbtn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録する</a>
-  <a class="guidebtn" href="https://aquarium.yasasea.com/guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>
 
   <section class="posts-section">
     <h2>📸💬 みんなの投稿</h2>
@@ -181,6 +183,12 @@
       </form>
     </div>
   </section>
+  <div class="nav-cluster">
+    <a class="backbtn" href="https://aquarium.yasasea.com/">🗾 MAPにもどる</a>
+    <a class="ytbtn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録する</a>
+    <a class="guidebtn" href="https://aquarium.yasasea.com/guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>
+    <a class="playbtn" href="https://aquarium.yasasea.com/play.html">🎮 さかなクイズであそぶ</a>
+  </div>
   <p class="attr-footer">🐟 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん） / https://aquarium.yasasea.com<br>運営：<a href="https://aquarium.yasasea.com/about.html#company">株式会社やさしいうみ</a>　<a href="https://aquarium.yasasea.com/about.html#work">💼 お仕事のご依頼</a>　<a href="https://aquarium.yasasea.com/posts.html#iken">📮 ご意見箱</a>　<a href="https://aquarium.yasasea.com/about.html#privacy">プライバシーポリシー</a></p>
 </main>
 <script>
