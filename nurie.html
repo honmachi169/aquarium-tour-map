@@ -9,8 +9,12 @@
 <meta name="description" content="さかなのおにいさん かわちゃんが描いた、さかなのぬりえを無料ダウンロード！YouTubeお絵描き教室のぬりえや、週末おさかな部のぬりえがいっぱい。さかなの名前や日づけで検索もできるよ。ぬって楽しくさかなに詳しくなろう！">
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://aquarium.yasasea.com/nurie.html">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/nurie_icon_192.png">
 <link rel="icon" href="assets/favicon.ico">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="assets/nurie_icon_180.png">
+<meta name="theme-color" content="#48cae4">
+<meta name="apple-mobile-web-app-title" content="さかなぬりえ">
+<link rel="manifest" href="nurie.webmanifest">
 <meta property="og:title" content="かわちゃんの さかなぬりえ｜無料ダウンロード">
 <meta property="og:description" content="さかなのおにいさん かわちゃんが描いた、さかなのぬりえを無料ダウンロード！ぬって楽しくさかなに詳しくなろう！">
 <meta property="og:type" content="website">
@@ -755,15 +759,15 @@ footer small { opacity: .75; font-size: .75rem; }
   box-shadow: 0 3px 10px rgba(2,62,138,.1);
   transition: transform .12s;
 }
-.next-live:hover { transform: translateY(-3px); }
+.nl-main { display: flex; align-items: center; gap: .9rem; flex: 1; min-width: 0; text-decoration: none; color: var(--sea-deep); transition: transform .12s; }
+.nl-main:hover { transform: translateY(-2px); }
 .next-live .nl-thumb { width: 128px; aspect-ratio: 16/9; object-fit: cover; border-radius: 9px; flex: none; }
 .next-live .nl-text { font-weight: bold; font-size: .95rem; line-height: 1.45; word-break: keep-all; display: flex; flex-direction: column; gap: .12rem; }
 .next-live .nl-text small { color: #e05a5a; font-size: .8rem; }
 .next-live .nl-date { color: var(--sea-deep); font-size: 1.05rem; }
 .next-live .nl-go { color: #777; font-size: .82rem; font-weight: normal; }
 .nl-cal {
-  display: block;
-  margin-top: .6rem;
+  flex: none;
   text-align: center;
   background: var(--sea);
   color: #fff;
@@ -771,10 +775,15 @@ footer small { opacity: .75; font-size: .75rem; }
   font-weight: bold;
   font-size: .92rem;
   border-radius: 999px;
-  padding: .6rem 1rem;
+  padding: .7rem 1.2rem;
   box-shadow: 0 3px 0 #026f94;
+  white-space: nowrap;
 }
 .nl-cal:active { transform: translateY(3px); box-shadow: none; }
+@media (max-width: 600px) {
+  .next-live { flex-direction: column; align-items: stretch; gap: .7rem; }
+  .nl-cal { display: block; }
+}
 @media (max-width: 480px) {
   .next-live .nl-thumb { width: 92px; }
   .next-live .nl-text { font-size: .86rem; }
@@ -1170,10 +1179,12 @@ function renderNextLive(id, dateIso) {
   const dateLine = dateIso ? `<b class="nl-date">🗓 ${jstParts(dateIso).label}</b>` : "";
   const calBtn = dateIso ? `<a class="nl-cal" href="${calUrl(dateIso)}" target="_blank" rel="noopener">📅 カレンダーに登録して リマインド</a>` : "";
   nextLiveWrap.innerHTML =
-    `<a class="next-live" href="https://youtu.be/${id}" target="_blank" rel="noopener">
-       <img class="nl-thumb" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="次回の週末おさかな部ライブ" loading="lazy">
-       <span class="nl-text"><small>🔴 次回の 週末おさかな部ライブ</small>${dateLine}<span class="nl-go">▶ よやくして、いっしょに かこう！</span></span>
-     </a>${calBtn}`;
+    `<div class="next-live">
+       <a class="nl-main" href="https://youtu.be/${id}" target="_blank" rel="noopener">
+         <img class="nl-thumb" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="次回の週末おさかな部ライブ" loading="lazy">
+         <span class="nl-text"><small>🔴 次回の 週末おさかな部ライブ</small>${dateLine}<span class="nl-go">▶ よやくして、いっしょに かこう！</span></span>
+       </a>${calBtn}
+     </div>`;
 }
 
 // ===== かんたん印刷（A4に合わせて画像だけ表示→印刷） =====
