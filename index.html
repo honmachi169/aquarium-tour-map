@@ -1054,6 +1054,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   })();
 
   let animalQuery = '';
+  const CARD_INIT = 8, CARD_MORE = 12;
+  let shownCount = CARD_INIT, lastSig = null;
   function render(){
     cards.innerHTML='';
     const q = animalQuery.trim().toLowerCase();
@@ -1061,7 +1063,11 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       .filter(a=> !q || (a.animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.search_animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.only||'').toLowerCase().includes(q));
     const sorted = applySortOrder(filtered);
     filtered.length = 0; filtered.push(...sorted);
-    filtered.forEach(a=>{
+    const filterActive = current!=='すべて' || currentTag || q;
+    const sig = current+'|'+currentTag+'|'+q;
+    if(sig!==lastSig){ shownCount = CARD_INIT; lastSig = sig; }
+    const visList = filterActive ? filtered : filtered.slice(0, shownCount);
+    visList.forEach(a=>{
       const v = a.videos[0];
       const thumb = v ? `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg` : '';
       const card = document.createElement('div');
@@ -1091,8 +1097,15 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       const cb = card.querySelector('.cbtn');
       if(cb) cb.onclick = ()=> loadYtComments(cb.dataset.vid, card.querySelector('.ytc'), cb);
     });
+    // デフォルト（絞り込みなし）は初期数だけ表示して「もっと見る」で追加＝スマホでコンパクトに
+    if(!filterActive && filtered.length > shownCount){
+      const more = document.createElement('button');
+      more.textContent = `もっと見る（あと${filtered.length - shownCount}館）`;
+      more.style.cssText = 'grid-column:1/-1;margin:8px auto 4px;background:#fff;border:2px solid var(--sky);color:var(--sea-deep);font-weight:bold;font-size:.92rem;border-radius:999px;padding:13px 30px;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(2,62,138,.12);';
+      more.onclick = ()=>{ shownCount += CARD_MORE; render(); };
+      cards.appendChild(more);
+    }
     // 🔜 まだ動画で紹介していない水族館も、絞り込み・検索中は一覧に出す（行った！チェックできるように）
-    const filterActive = current!=='すべて' || currentTag || q;
     if(filterActive){
       const unv = (data.unvisited||[]).map((a,ui)=>({a, slug:'u'+String(ui).padStart(3,'0')}))
         .filter(({a})=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (currentTag==='__visited' ? myVisits.has(a.name) : currentTag==='__wish' ? myWishlist.has(a.name) : (a.tags||[]).includes(currentTag))))
