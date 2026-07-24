@@ -19,8 +19,12 @@
 <meta property="og:description" content="さかなのおにいさん かわちゃんが描いた、さかなのぬりえを無料ダウンロード！ぬって楽しくさかなに詳しくなろう！">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aquarium.yasasea.com/nurie.html">
-<meta property="og:image" content="https://drive.google.com/thumbnail?id=1r7LqVr6sJBFXQKpUxccEdnxCiENdzhm6&sz=w1200">
+<meta property="og:image" content="https://aquarium.yasasea.com/assets/nurie_ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="かわちゃんの さかなぬりえ ぜんぶ無料">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://aquarium.yasasea.com/assets/nurie_ogp.png">
 <style>
 :root {
   --sea:     #0096c7;
@@ -112,6 +116,8 @@ h1 {
   word-break: keep-all;      /* 語の途中で改行しない（スペース位置で折り返す） */
   line-break: strict;
 }
+/* キャッチコピーは「まとまり」単位で折り返す（スマホで語がバラけないように） */
+.catch .ph { display: inline-block; white-space: nowrap; }
 .section-sub { word-break: keep-all; }
 .counter-box {
   display: inline-block;
@@ -582,8 +588,8 @@ section.block { margin-bottom: 3.2rem; }
 .step p { font-size: .85rem; }
 /* スマホでは3ステップを小さく横並びに */
 @media (max-width: 560px) {
-  .steps { grid-template-columns: repeat(3, 1fr); gap: .5rem; margin-top: 1rem; }
-  .step { padding: .7rem .35rem; border-radius: 12px; }
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; margin-top: 1rem; }
+  .step { padding: .7rem .3rem; border-radius: 12px; }
   .step .emoji { font-size: 1.5rem; }
   .step .step-num { font-size: .62rem; padding: .05rem .5rem; margin: .25rem 0 .2rem; }
   .step h3 { font-size: .82rem; }
@@ -813,6 +819,79 @@ footer small { opacity: .75; font-size: .75rem; }
 .share-line-cta h3 { color:#05934a; font-size:1.2rem; margin:.3rem 0; }
 .share-line-cta p { font-size:.9rem; margin-bottom:1rem; }
 .share-line-btns { display:flex; gap:.7rem; justify-content:center; flex-wrap:wrap; }
+
+/* ================================================================
+   スマホ最適化（スクロールを短く・改行ずれ対策）
+   ================================================================ */
+@media (max-width: 560px) {
+  /* ヘッダーを少しコンパクトに */
+  header { padding: 1.5rem 1rem 3.6rem; }
+  .kawachan-float { width: 64%; margin: .2rem auto .2rem; }
+  .counter-box { margin-top: .8rem; padding: .4rem 1.3rem; }
+  .counter-box .num { font-size: 1.8rem; }
+  .jump-nav { margin-top: .9rem; }
+  main { padding: 1.6rem .8rem 2.4rem; }
+  section.block { margin-bottom: 2.2rem; }
+
+  /* TOPコピー：スマホでは短く1行（毎週 YouTubeライブで 新作を おえかき！） */
+  .catch .d-only { display: none; }
+  .catch { font-size: .96rem; line-height: 1.5; }
+
+  /* 「いちばん あたらしい ぬりえ」の見出し・説明はスマホでは省略（NEWバッジで伝わる） */
+  #osusume .section-head,
+  #osusume .section-sub { display: none; }
+  #osusume { margin-top: .4rem; }
+
+  /* セクション見出し：ぷに魚＋タイトルを必ず1行に（改行ずれ対策） */
+  .section-head { display: flex; align-items: center; justify-content: center; gap: .3rem; flex-wrap: nowrap; }
+  .section-head .mascot { width: 38px; flex: none; }
+  .section-title { white-space: nowrap; }
+
+  /* あそびかたは幅を2/3に（軽く見せる） */
+  .howto { max-width: 66%; margin-left: auto; margin-right: auto; padding: 1.1rem .6rem 1.2rem; }
+  .howto .section-title { white-space: normal; font-size: 1.15rem; }
+  /* 幅が狭いので3ステップは折り返し可＆小さめに（見切れ防止） */
+  .howto .steps { gap: .35rem; }
+  .howto .step { padding: .6rem .25rem; }
+  .howto .step .emoji { font-size: 1.2rem; }
+  .howto .step .step-num { font-size: .56rem; padding: .05rem .4rem; }
+  .howto .step h3 { font-size: .68rem; word-break: normal; line-height: 1.25; }
+  .howto .step p { font-size: .6rem; line-height: 1.4; }
+  .howto .tip { font-size: .7rem; padding: .6rem .7rem; }
+
+  /* ★ライブラリを2列に → 縦スクロールがほぼ半分に */
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
+  .panel { padding: 1.1rem .7rem 1.2rem; }
+  .thumb-wrap { padding: .5rem; }
+  .card-body { padding: .7rem .6rem .8rem; }
+  .card-source { font-size: .62rem; padding: .1rem .55rem; margin-bottom: .3rem; }
+  .card-title { font-size: .98rem; line-height: 1.35; }
+  .card-date { font-size: .68rem; margin-bottom: .35rem; }
+  .btn-row { gap: .35rem; }
+  .card .btn-dl { font-size: .84rem; padding: .5rem .3rem; }
+  /* 2列カードでも「いんさつ」「ぬった！」を1行に収める（印刷はアイコンを省いて文字だけ） */
+  .card .btn-print,
+  .card .btn-check { font-size: .74rem; padding: .45rem .2rem; white-space: nowrap; flex: 1 1 0; min-width: 0; }
+  .card .btn-print .btn-ico { display: none; }
+
+  /* おすすめ(featured-new)のタイトルを詰める */
+  .fn-title { font-size: 1.15rem; }
+  .fn-head { margin-bottom: .7rem; }
+
+  /* おえかき教室の見出しまわり */
+  .section-title { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+
+  /* プロフィールを少しコンパクトに */
+  .about { padding: 26px 14px; margin-top: 2rem; }
+  .about-text p { font-size: .84rem; line-height: 1.7; }
+  .cheer-row { margin-top: 2rem; }
+}
+
+/* さらに小さい端末でボタンが窮屈にならないように */
+@media (max-width: 360px) {
+  .card .btn-dl { font-size: .8rem; }
+  .btn-print, .btn-check { font-size: .7rem; padding: .42rem .25rem; }
+}
 </style>
 </head>
 <body>
@@ -836,7 +915,7 @@ footer small { opacity: .75; font-size: .75rem; }
     <a class="site-link" href="index.html">🐟 全国水族館ツアーMAPは こちら</a>
     <div><img class="kawachan-float" src="assets/kawachan_draw.png" alt="絵を描いている さかなのおにいさん かわちゃん"></div>
     <h1>かわちゃんの さかなぬりえ</h1>
-    <p class="catch">さかなのおにいさん かわちゃんが、<br><b>YouTubeで まいしゅう ライブ配信</b>しながら 新作を かいてるよ！<br><b>おさかな部げんてい</b>で ぜんぶ プレゼントするよ🎁</p>
+    <p class="catch"><span class="ph d-only">さかなのおにいさん かわちゃんが</span> <span class="ph"><b>毎週 YouTubeライブ</b>で</span> <span class="ph">新作を おえかき！</span> <span class="ph d-only"><b>おさかな部げんてい</b>で ぜんぶ 無料プレゼント🎁</span></p>
     <div class="counter-box">
       <span class="num" id="doneCount">0</span> まい ぬったよ！
     </div>
@@ -1045,7 +1124,8 @@ const CAT_LABEL = {
   osusume:  "⭐ 定番おすすめ",
   youtube:  "🎬 YouTube・水族館",
 };
-const PAGE_SIZE = 9;
+// スマホは初期5枚・以降「もっと見る」でコンパクトに。PCは9枚。
+const PAGE_SIZE = window.matchMedia("(max-width: 560px)").matches ? 5 : 9;
 
 const grid = document.getElementById("nurieGrid");
 const searchInput = document.getElementById("nurieSearch");
@@ -1082,7 +1162,7 @@ function cardHTML(n) {
       ${dateLine}
       <div class="btn-row">
         <a class="btn-dl" href="${n.dl}" target="_blank" rel="noopener">📥 ダウンロード</a>
-        <button class="btn-print" data-print-id="${n.id}" data-print-title="${t}">🖨 いんさつ</button>
+        <button class="btn-print" data-print-id="${n.id}" data-print-title="${t}"><span class="btn-ico">🖨</span> いんさつ</button>
         <button class="btn-check" data-id="${n.id}">ぬった！</button>
       </div>
     </div>`;
