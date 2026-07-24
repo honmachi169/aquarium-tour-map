@@ -51,6 +51,8 @@
 
   /* ===== 地図 ===== */
   #map { height:540px; max-width:1100px; margin:22px auto; border-radius:20px; box-shadow:0 6px 20px rgba(2,62,138,.18); border:4px solid #fff; }
+  /* パン/ズーム中のタイル境界の明滅を抑える（GPU合成ヒント・ジオメトリは変えない） */
+  .leaflet-tile { backface-visibility:hidden; -webkit-backface-visibility:hidden; }
 
   /* ===== 吹き出しポップアップ ===== */
   .leaflet-popup-content-wrapper { border-radius:18px; box-shadow:0 6px 20px rgba(2,62,138,.3); padding:0; overflow:hidden; border:3px solid var(--sea); }
