@@ -776,7 +776,8 @@ footer small { opacity: .75; font-size: .75rem; }
 .next-live .nl-thumb { width: 128px; aspect-ratio: 16/9; object-fit: cover; border-radius: 9px; flex: none; }
 .next-live .nl-text { font-weight: bold; font-size: .95rem; line-height: 1.45; word-break: keep-all; display: flex; flex-direction: column; gap: .12rem; }
 .next-live .nl-text small { color: #e05a5a; font-size: .8rem; }
-.next-live .nl-date { color: var(--sea-deep); font-size: 1.05rem; }
+.next-live .nl-theme { color: var(--coral); font-size: 1.05rem; }
+.next-live .nl-date { color: var(--sea-deep); font-size: .98rem; }
 .next-live .nl-go { color: #777; font-size: .82rem; font-weight: normal; }
 .nl-cal {
   flex: none;
@@ -1247,7 +1248,8 @@ function calUrl(startIso) {
   const url = currentNextId ? "https://youtu.be/" + currentNextId : "";
   const p = new URLSearchParams({
     action: "TEMPLATE",
-    text: "🐟 週末おさかな部ライブ（さかなのおにいさん かわちゃん）",
+    // 括弧の中は「その週のテーマ」（例：クラゲ大集合）。無ければ従来の名前にフォールバック。
+    text: "🐟 週末おさかな部ライブ（" + (currentNextTitle || "さかなのおにいさん かわちゃん") + "）",
     dates: `${fmt(s)}/${fmt(e)}`,
     // 説明＝タップできるライブURL＋ひとこと。場所(location)にもURLを入れてスマホで見つけやすく。
     details: url
@@ -1257,17 +1259,19 @@ function calUrl(startIso) {
   });
   return "https://calendar.google.com/calendar/render?" + p.toString();
 }
-let currentNextId = "";
-function renderNextLive(id, dateIso) {
+let currentNextId = "", currentNextTitle = "";
+function renderNextLive(id, dateIso, title) {
   if (!id) return;
   currentNextId = id;
+  currentNextTitle = (title || "").trim();
+  const themeLine = currentNextTitle ? `<b class="nl-theme">🌟 ${esc(currentNextTitle)}</b>` : "";
   const dateLine = dateIso ? `<b class="nl-date">🗓 ${jstParts(dateIso).label}</b>` : "";
   const calBtn = dateIso ? `<a class="nl-cal" href="${calUrl(dateIso)}" target="_blank" rel="noopener">📅 カレンダーに登録して リマインド</a>` : "";
   nextLiveWrap.innerHTML =
     `<div class="next-live">
        <a class="nl-main" href="https://youtu.be/${id}" target="_blank" rel="noopener">
          <img class="nl-thumb" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="次回の週末おさかな部ライブ" loading="lazy">
-         <span class="nl-text"><small>🔴 次回の 週末おさかな部ライブ</small>${dateLine}<span class="nl-go">▶ よやくして、いっしょに かこう！</span></span>
+         <span class="nl-text"><small>🔴 次回の 週末おさかな部ライブ</small>${themeLine}${dateLine}<span class="nl-go">▶ よやくして、いっしょに かこう！</span></span>
        </a>${calBtn}
      </div>`;
 }
@@ -1340,7 +1344,7 @@ fetch("nurie_data.json")
     document.getElementById("totalCount").textContent = ALL.length;
     libLoading.style.display = "none";
     renderFeatured(ALL.find(n => n.cat === "weekly" && n.date) || ALL[0]);
-    renderNextLive(data.nextLive, data.nextLiveDate);
+    renderNextLive(data.nextLive, data.nextLiveDate, data.nextLiveTitle);
     applyFilter();
   })
   .catch(() => {

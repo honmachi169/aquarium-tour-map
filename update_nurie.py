@@ -15,8 +15,11 @@
 やること：
   - 3つのURLからID抽出（YouTube2本＝配信＋次回、Drive1本＝ぬりえ）
   - Driveの公開ページから ぬりえの名前を自動取得（共有=リンクを知る全員 前提）
+  - 次回ライブのテーマを自動抽出（YouTubeタイトルから。例：クラゲ大集合）
+      → カレンダー予定タイトルの括弧＆サイトの次回バナーに表示
+      → 手動で決めたいときは  --theme=クラゲ大集合  を付ける（自動抽出より優先）
   - nurie_src/extra.tsv に新ぬりえを追記（週末おさかな部）
-  - nurie_src/videos.json を更新（ぬりえ→配信 の対応・次回ライブ）
+  - nurie_src/videos.json を更新（ぬりえ→配信 の対応・次回ライブ・テーマ）
   - build_nurie.py で nurie_data.json を再生成
   - git add/commit/push（--no-push で止められる）
 
@@ -68,6 +71,39 @@ def fetch_scheduled(vid):
     m = re.search(r'itemprop="startDate"\s+content="([^"]+)"', html) or \
         re.search(r'"startTimestamp":"([^"]+)"', html)
     return m.group(1) if m else ""
+
+def fetch_yt_title(vid):
+    """次回ライブのYouTubeタイトルを取得（テーマの候補）。"""
+    url = f"https://www.youtube.com/watch?v={vid}"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept-Language": "ja"})
+    try:
+        html = urllib.request.urlopen(req, timeout=20).read().decode("utf-8", "ignore")
+    except Exception:
+        return ""
+    m = re.search(r'<meta name="title" content="([^"]+)"', html) or \
+        re.search(r'og:title"\s+content="([^"]+)"', html) or \
+        re.search(r"<title>(.*?)</title>", html, re.S)
+    return (m.group(1).strip() if m else "")
+
+def clean_theme(title):
+    """YouTubeタイトルから『その週のテーマ』らしい部分をざっくり抽出。
+    例）『【週末おさかな部】クラゲ大集合🪼 かわちゃん生配信』→『クラゲ大集合🪼』
+    抽出が怪しい（空・長すぎ）ときは空文字を返し、従来の名前にフォールバックさせる。"""
+    if not title:
+        return ""
+    # タイトル内に「…」『…』で括られたテーマがあれば最優先で採用（かわちゃんの定番パターン）
+    q = re.search(r"[「『]([^」』]{1,20})[」』]", title)
+    if q:
+        return q.group(1).strip()
+    t = re.sub(r"\s*-\s*YouTube\s*$", "", title)
+    t = re.sub(r"[【\[（(][^】\]）)]*[】\]）)]", " ", t)          # 【…】などのタグを除去
+    t = re.sub(r"[Vv]ol\.?\s*\d+", " ", t)                     # vol.180 などを除去
+    for kw in ["週末おさかな部", "さかなのおにいさん", "かわちゃん",
+               "生配信", "ライブ配信", "ライブ", "LIVE", "Live"]:
+        t = t.replace(kw, " ")
+    t = re.sub(r"[|｜/･・#＃]+", " ", t)
+    t = re.sub(r"\s+", " ", t).strip(" 　-—–、,！!。.🎨")
+    return t if 0 < len(t) <= 24 else ""      # 長すぎ＝抽出失敗とみなして空に（安全側）
 
 def check_public(fid):
     url = f"https://drive.google.com/thumbnail?id={fid}&sz=w400"
@@ -131,6 +167,20 @@ def main(argv):
         print(f"🗓  次回予定    : {sched}（自動取得）")
     else:
         print("🗓  次回予定    : 取得できず（配信予約がまだ／終了済みかも）")
+
+    # 次回ライブのテーマ（カレンダー予定タイトルの括弧に入る／次回バナーにも表示）
+    theme = ""
+    for a in argv:
+        if a.startswith("--theme="):
+            theme = a.split("=", 1)[1].strip()
+    if not theme:
+        theme = clean_theme(fetch_yt_title(next_id))   # 自動抽出（怪しければ空）
+    vid["next_live_title"] = theme
+    if theme:
+        print(f"🎯 テーマ     : {theme}（カレンダー予定の括弧＆次回バナーに表示）")
+    else:
+        print("🎯 テーマ     : なし（従来の『さかなのおにいさん かわちゃん』表示）"
+              "  ※手動指定は --theme=クラゲ大集合")
     VIDEOS_JSON.write_text(json.dumps(vid, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print("✅ videos.json を更新しました。")
 

@@ -37,6 +37,7 @@ _VID = json.loads((Path(__file__).parent / "nurie_src" / "videos.json").read_tex
 VIDEOS = _VID.get("map", {})
 NEXT_LIVE = _VID.get("next_live", "")
 NEXT_LIVE_DATE = _VID.get("next_live_date", "")  # 次回ライブの予定開始（ISO・UTC）
+NEXT_LIVE_TITLE = _VID.get("next_live_title", "")  # 次回ライブのテーマ（例：クラゲ大集合）
 
 JUNK = re.compile(r"(IMG_\d+|Scannable|文書\b)", re.I)
 EXT = re.compile(r"\.(png|jpg|jpeg)$", re.I)
@@ -111,7 +112,8 @@ def main():
         counts[it["cat"]] = counts.get(it["cat"], 0) + 1
 
     OUT.write_text(json.dumps({"count": len(items), "nextLive": NEXT_LIVE,
-                               "nextLiveDate": NEXT_LIVE_DATE, "items": items},
+                               "nextLiveDate": NEXT_LIVE_DATE, "nextLiveTitle": NEXT_LIVE_TITLE,
+                               "items": items},
                               ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"生成: {OUT.name}  合計 {len(items)} 枚")
     for c, n in counts.items():
