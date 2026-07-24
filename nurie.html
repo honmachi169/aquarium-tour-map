@@ -655,7 +655,12 @@ section.block { margin-bottom: 3.2rem; }
 }
 
 /* ---------- プロフィール ---------- */
-.about { background:linear-gradient(180deg,#e8f6fb,#caf0f8); padding:36px 16px; margin-top:3rem; }
+.about { position:relative; overflow:hidden; background:linear-gradient(180deg,#e8f6fb,#caf0f8); padding:56px 16px; margin-top:3rem; }
+/* プロフィール上下のさかい目を、ヘッダーと同じ波でやわらかく */
+.about-inner { position:relative; z-index:2; }
+.about-wave { position:absolute; left:0; width:100%; height:44px; line-height:0; z-index:1; pointer-events:none; display:block; }
+.about-wave.top { top:-1px; }
+.about-wave.bottom { bottom:-1px; }
 .about-inner { max-width:940px; margin:0 auto; display:flex; gap:32px; align-items:flex-start; }
 .about-img { width:300px; flex:none; border-radius:20px; filter:drop-shadow(0 6px 16px rgba(2,62,138,.25)); }
 .about-text h2 { color:var(--sea-deep); font-size:1.2rem; margin-bottom:4px; }
@@ -833,9 +838,9 @@ footer small { opacity: .75; font-size: .75rem; }
   main { padding: 1.6rem .8rem 2.4rem; }
   section.block { margin-bottom: 2.2rem; }
 
-  /* TOPコピー：スマホでは短く1行（毎週 YouTubeライブで 新作を おえかき！） */
-  .catch .d-only { display: none; }
-  .catch { font-size: .96rem; line-height: 1.5; }
+  /* TOPコピー：スマホでは3行に（語のまとまりごとに改行） */
+  .catch .cl { display: block; }
+  .catch { font-size: .95rem; line-height: 1.55; }
 
   /* 「いちばん あたらしい ぬりえ」の見出し・説明はスマホでは省略（NEWバッジで伝わる） */
   #osusume .section-head,
@@ -847,17 +852,8 @@ footer small { opacity: .75; font-size: .75rem; }
   .section-head .mascot { width: 38px; flex: none; }
   .section-title { white-space: nowrap; }
 
-  /* あそびかたは幅を2/3に（軽く見せる） */
-  .howto { max-width: 66%; margin-left: auto; margin-right: auto; padding: 1.1rem .6rem 1.2rem; }
-  .howto .section-title { white-space: normal; font-size: 1.15rem; }
-  /* 幅が狭いので3ステップは折り返し可＆小さめに（見切れ防止） */
-  .howto .steps { gap: .35rem; }
-  .howto .step { padding: .6rem .25rem; }
-  .howto .step .emoji { font-size: 1.2rem; }
-  .howto .step .step-num { font-size: .56rem; padding: .05rem .4rem; }
-  .howto .step h3 { font-size: .68rem; word-break: normal; line-height: 1.25; }
-  .howto .step p { font-size: .6rem; line-height: 1.4; }
-  .howto .tip { font-size: .7rem; padding: .6rem .7rem; }
+  /* あそびかたは横幅そのまま（3ステップを全幅で表示） */
+  .howto .section-title { white-space: normal; }
 
   /* ★ライブラリを2列に → 縦スクロールがほぼ半分に */
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
@@ -882,9 +878,12 @@ footer small { opacity: .75; font-size: .75rem; }
   .section-title { font-size: clamp(1.2rem, 5vw, 1.6rem); }
 
   /* プロフィールを少しコンパクトに */
-  .about { padding: 26px 14px; margin-top: 2rem; }
+  .about { padding: 48px 14px; margin-top: 2rem; }
+  .about-wave { height: 34px; }
   .about-text p { font-size: .84rem; line-height: 1.7; }
-  .cheer-row { margin-top: 2rem; }
+  /* おうえんたいのぷに魚は1行に収める（改行させない） */
+  .cheer-row { margin-top: 2rem; flex-wrap: nowrap; gap: .2rem; }
+  .cheer-row img { width: clamp(34px, 11.5vw, 48px); }
 }
 
 /* さらに小さい端末でボタンが窮屈にならないように */
@@ -915,7 +914,7 @@ footer small { opacity: .75; font-size: .75rem; }
     <a class="site-link" href="index.html">🐟 全国水族館ツアーMAPは こちら</a>
     <div><img class="kawachan-float" src="assets/kawachan_draw.png" alt="絵を描いている さかなのおにいさん かわちゃん"></div>
     <h1>かわちゃんの さかなぬりえ</h1>
-    <p class="catch"><span class="ph d-only">さかなのおにいさん かわちゃんが</span> <span class="ph"><b>毎週 YouTubeライブ</b>で</span> <span class="ph">新作を おえかき！</span> <span class="ph d-only"><b>おさかな部げんてい</b>で ぜんぶ 無料プレゼント🎁</span></p>
+    <p class="catch"><span class="cl"><span class="ph">さかなのおにいさん かわちゃんが</span></span> <span class="cl"><span class="ph"><b>毎週 YouTubeライブ</b>で</span> <span class="ph">新作を おえかき！</span></span> <span class="cl"><span class="ph"><b>おさかな部げんてい</b>で</span> <span class="ph">ぜんぶ 無料プレゼント🎁</span></span></p>
     <div class="counter-box">
       <span class="num" id="doneCount">0</span> まい ぬったよ！
     </div>
@@ -1064,12 +1063,10 @@ footer small { opacity: .75; font-size: .75rem; }
   <!-- おうえんたい -->
   <div class="cheer-row" aria-hidden="true">
     <img src="assets/punio_gyoran.png" alt="">
-    <img src="assets/punio_hanabi.png" alt="">
     <img src="assets/punio_kopemaru.png" alt="">
     <img src="assets/punio_kusamochi.png" alt="">
     <img src="assets/punio_shark.png" alt="">
     <img src="assets/punio_tacchu.png" alt="">
-    <img src="assets/punio_takopaikapi.png" alt="">
     <img src="assets/punio_tenten.png" alt="">
     <img src="assets/punio_toppy.png" alt="">
   </div>
@@ -1077,6 +1074,7 @@ footer small { opacity: .75; font-size: .75rem; }
 
 <!-- プロフィール -->
 <section class="about">
+  <svg class="about-wave top" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path fill="#fff9ec" d="M0,0 L1440,0 L1440,26 C1200,54 960,4 720,28 C480,52 240,6 0,30 Z"></path></svg>
   <div class="about-inner">
     <img src="assets/kawachan_photo.png" alt="さかなのおにいさん かわちゃん" class="about-img">
     <div class="about-text">
@@ -1091,11 +1089,11 @@ footer small { opacity: .75; font-size: .75rem; }
         <span>🐼 アドベンチャーワールド公式アンバサダー</span>
       </div>
       <div class="about-book">
-        <img src="assets/book_kusesugo.jpg" alt="全国クセすご水族館図鑑 書影">
+        <img src="assets/kawachan_point.png" alt="かわちゃん">
         <div class="about-book-text">
-          <b>📚 著書「全国クセすご水族館図鑑」（中央公論新社）など</b><br>
-          全国の水族館の愛すべき魅力をイラストと4コマまんがで紹介！ほかにも絵本や図鑑など著書多数🐟<br>
-          <a href="https://sakana-bro.com/goods/" target="_blank" rel="noopener" style="color:var(--sea);font-weight:bold;">書籍一覧はこちら →</a>
+          <b>🛍 かわちゃんの グッズ・絵本</b><br>
+          さかなグッズや 絵本・図鑑が いろいろ！おうちで もっと さかなと なかよくなろう🐟<br>
+          <a href="https://sakana-bro.com/goods/" target="_blank" rel="noopener" style="color:var(--sea);font-weight:bold;">グッズを みる →</a>
         </div>
       </div>
       <p class="profile">💬 モットー：「子どもがさかなを好きになれば　海は豊かになる」</p>
@@ -1108,6 +1106,7 @@ footer small { opacity: .75; font-size: .75rem; }
       </div>
     </div>
   </div>
+  <svg class="about-wave bottom" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path fill="#0077b6" d="M0,60 L1440,60 L1440,34 C1200,6 960,56 720,32 C480,8 240,54 0,30 Z"></path></svg>
 </section>
 
 <footer>
@@ -1124,8 +1123,8 @@ const CAT_LABEL = {
   osusume:  "⭐ 定番おすすめ",
   youtube:  "🎬 YouTube・水族館",
 };
-// スマホは初期5枚・以降「もっと見る」でコンパクトに。PCは9枚。
-const PAGE_SIZE = window.matchMedia("(max-width: 560px)").matches ? 5 : 9;
+// スマホは2列で初期8枚・以降「もっと見る」。PCは9枚。
+const PAGE_SIZE = window.matchMedia("(max-width: 560px)").matches ? 8 : 9;
 
 const grid = document.getElementById("nurieGrid");
 const searchInput = document.getElementById("nurieSearch");
