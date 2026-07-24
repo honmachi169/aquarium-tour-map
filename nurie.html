@@ -1244,11 +1244,16 @@ function calUrl(startIso) {
   // Googleカレンダー「予定を追加」リンク（開始〜+1時間）
   const s = new Date(startIso), e = new Date(s.getTime() + 60 * 60 * 1000);
   const fmt = x => x.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const url = currentNextId ? "https://youtu.be/" + currentNextId : "";
   const p = new URLSearchParams({
     action: "TEMPLATE",
-    text: "週末おさかな部ライブ（さかなのおにいさん かわちゃん）",
+    text: "🐟 週末おさかな部ライブ（さかなのおにいさん かわちゃん）",
     dates: `${fmt(s)}/${fmt(e)}`,
-    details: "YouTubeライブ：https://youtu.be/" + (currentNextId || ""),
+    // 説明＝タップできるライブURL＋ひとこと。場所(location)にもURLを入れてスマホで見つけやすく。
+    details: url
+      ? `▼ライブ配信はこちら\n${url}\n\nじかんになったら このリンクから いっしょに おえかき＆ぬりえしよう！🎨`
+      : "じかんになったら YouTubeで 週末おさかな部ライブ！",
+    location: url,
   });
   return "https://calendar.google.com/calendar/render?" + p.toString();
 }
