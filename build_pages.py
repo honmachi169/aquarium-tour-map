@@ -1342,7 +1342,10 @@ main { max-width:900px; margin:0 auto; padding:20px 16px 40px; }
 .cover { background:linear-gradient(160deg,#023e8a,#0077b6); color:#fff; border-radius:20px; padding:26px 20px 22px; text-align:center; box-shadow:0 6px 18px rgba(2,62,138,.3); position:relative; overflow:hidden; }
 .cover::before { content:"🐟"; position:absolute; font-size:7rem; opacity:.08; right:-14px; bottom:-24px; transform:rotate(-12deg); }
 .cover .sub { font-size:.72rem; letter-spacing:.28em; color:var(--sun); font-weight:bold; }
-.cover h1 { font-size:1.35rem; margin:6px 0 2px; }
+.cover-chara { width:132px; height:auto; display:block; margin:6px auto -4px; filter:drop-shadow(0 4px 7px rgba(0,0,0,.28)); }
+.cover h1 { font-size:1.5rem; margin:2px 0 4px; line-height:1.24; }
+.cover h1 .t1, .cover h1 .t2 { display:block; }
+@media (max-width:360px){ .cover-chara { width:112px; } .cover h1 { font-size:1.34rem; } }
 .cover .owner { font-size:.85rem; opacity:.92; cursor:pointer; }
 .cover .owner .pen { font-size:.75rem; opacity:.75; }
 .cover .big { font-size:2.6rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 4px rgba(0,0,0,.3); margin-top:10px; line-height:1; }
@@ -1405,7 +1408,8 @@ __ATTR_CSS__
 <main>
   <div class="cover">
     <div class="sub">AQUARIUM PASSPORT</div>
-    <h1>📖 すいぞくかんパスポート</h1>
+    <img class="cover-chara" src="assets/passport_chara.png" alt="図鑑を読むさかなの子" width="132" height="123">
+    <h1><span class="t1">すいぞくかん</span><span class="t2">パスポート</span></h1>
     <div class="owner" id="ownerName" title="タップでなまえを変えられるよ"></div>
     <div class="big"><span id="pCount">0</span><small> / __TOTAL__館</small></div>
     <div class="pbar"><div id="pBar"></div></div>
