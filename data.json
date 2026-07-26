@@ -1,6 +1,6 @@
 {
   "goal": 100,
-  "updated": "2026-07-09",
+  "updated": "2026-07-26",
   "channel_id": "UCNpTW5hGX4mKr3hxFu_nReA",
   "playlist_id": "PLwIrAkVy515qoChunTYoWg5JPzCoy2HdP",
   "note": "fee=大人料金、child=子ども(小中学生中心)料金、infant=幼児料金（年齢区分を括弧書き）、duration=所要時間の目安、closed=休館日。2026年7月に各公式サイト・観光サイトを調査した値。photoフィールドにURLか assets/内のパスを入れるとカード・吹き出しに表示される",
@@ -2735,9 +2735,13 @@
       "fee": "1,500円",
       "child": "600円",
       "closed": "12/29〜1/1・3月第1木曜とその翌日",
-      "videos": [],
-      "upcoming": true,
-      "highlight": "日本海側屈指の規模、約600種3万点！動画は近日公開",
+      "videos": [
+        {
+          "id": "Dn4YrHFZDdQ",
+          "title": "日本海側最大級の水族館！マリンピア日本海を徹底解説ツアー【夏休み・イルカショー】"
+        }
+      ],
+      "highlight": "日本海側屈指の規模、約600種3万点！イルカショーも必見",
       "tags": [
         "dolphin",
         "kids"

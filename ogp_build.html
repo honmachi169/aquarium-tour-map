@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1200px; height:630px; overflow:hidden; }
+  .stage {
+    position:relative; width:1200px; height:630px;
+    background: linear-gradient(160deg, #7ad7ec 0%, #48cae4 30%, #0096c7 70%, #0077b6 100%);
+    font-family:"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif;
+    overflow:hidden;
+  }
+  /* 泡 */
+  .bub { position:absolute; border-radius:50%; background:rgba(255,255,255,.22); }
+  /* 波（下） */
+  .wave { position:absolute; left:0; bottom:-2px; width:100%; }
+  /* 左：テキスト */
+  .txt { position:absolute; left:70px; top:120px; z-index:5; width:640px; }
+  .pre { display:inline-block; background:rgba(255,255,255,.9); color:#0077b6;
+         font-weight:bold; font-size:34px; border-radius:999px; padding:6px 26px;
+         box-shadow:0 4px 10px rgba(2,62,138,.25); }
+  .big { color:#fff; font-size:118px; font-weight:bold; line-height:1.05;
+         margin:14px 0 6px; text-shadow:0 5px 0 rgba(2,62,138,.45), 0 8px 18px rgba(2,62,138,.35); letter-spacing:2px; }
+  .badge { display:inline-block; background:#ff6b6b; color:#fff; font-weight:bold;
+           font-size:44px; border-radius:999px; padding:12px 40px; margin-top:18px;
+           box-shadow:0 6px 0 #d94f4f, 0 10px 20px rgba(0,0,0,.18); transform:rotate(-2deg); }
+  .badge .y { color:#ffe27a; }
+  .sub { color:#eaffff; font-size:30px; font-weight:bold; margin-top:26px; text-shadow:0 2px 6px rgba(2,62,138,.4); }
+  /* 右：かわちゃん */
+  .kawachan { position:absolute; right:-40px; bottom:-30px; width:560px; z-index:4;
+              filter:drop-shadow(0 10px 20px rgba(2,62,138,.35)); }
+  /* ぷにお・さかな */
+  .mascot { position:absolute; z-index:3; filter:drop-shadow(0 4px 8px rgba(2,62,138,.25)); }
+  .m1 { width:120px; top:40px; right:520px; transform:rotate(-8deg); }
+  .m2 { width:108px; bottom:60px; left:80px; transform:rotate(6deg); }
+  .m3 { width:96px;  top:60px;  left:600px; transform:rotate(10deg); }
+  .fish { position:absolute; z-index:3; opacity:.95; }
+  .f1 { width:140px; bottom:120px; right:470px; transform:scaleX(-1) rotate(6deg); }
+</style></head>
+<body>
+  <div class="stage">
+    <div class="bub" style="width:70px;height:70px;left:40px;top:420px;"></div>
+    <div class="bub" style="width:40px;height:40px;left:150px;top:520px;"></div>
+    <div class="bub" style="width:26px;height:26px;left:250px;top:470px;"></div>
+    <div class="bub" style="width:54px;height:54px;left:560px;top:520px;"></div>
+    <div class="bub" style="width:30px;height:30px;left:700px;top:80px;"></div>
+    <div class="bub" style="width:46px;height:46px;left:1080px;top:70px;"></div>
+    <div class="bub" style="width:34px;height:34px;left:1130px;top:300px;"></div>
+
+    <div class="txt">
+      <span class="pre">🐟 さかなのおにいさん かわちゃんの</span>
+      <div class="big">さかな<br>ぬりえ</div>
+      <span class="badge">🎨 ぜんぶ <span class="y">むりょう</span>！</span>
+      <div class="sub">スマホで ダウンロード → おうちで いんさつ🖍</div>
+    </div>
+
+    <img class="mascot m1" src="assets/punio_kopemaru.png" alt="">
+    <img class="mascot m2" src="assets/punio_tacchu.png" alt="">
+    <img class="mascot m3" src="assets/punio_tenten.png" alt="">
+    <img class="fish f1" src="assets/fish_1z-Hbl.png" alt="">
+    <img class="kawachan" src="assets/kawachan_draw.png" alt="">
+
+    <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="rgba(255,255,255,.18)" d="M0,60 C240,110 480,10 720,50 C960,90 1200,20 1440,60 L1440,120 L0,120 Z"></path>
+      <path fill="rgba(255,255,255,.28)" d="M0,80 C240,120 480,40 720,72 C960,104 1200,44 1440,80 L1440,120 L0,120 Z"></path>
+    </svg>
+  </div>
+</body></html>
