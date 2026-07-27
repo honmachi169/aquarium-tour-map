@@ -36,8 +36,13 @@ for name, rs in review.items():
                 touched = True
             if rs.get("ratings"):
                 try:
-                    a["ratings"] = json.loads(rs["ratings"])
-                    touched = True
+                    new_ratings = json.loads(rs["ratings"])
+                    # 空({})のratingsで既存の評価を上書き＝消失させない（空欄送信バグ対策）
+                    if new_ratings:
+                        a["ratings"] = new_ratings
+                        touched = True
+                    elif a.get("ratings"):
+                        print(f"[keep] {name}: レビュー側が空のため既存評価を維持")
                 except json.JSONDecodeError:
                     pass
     elif status == "discard":
