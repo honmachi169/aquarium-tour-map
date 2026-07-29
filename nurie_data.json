@@ -1,9 +1,19 @@
 {
- "count": 176,
- "nextLive": "0Y7WIrtv9sY",
- "nextLiveDate": "2026-07-29T11:00:00+00:00",
- "nextLiveTitle": "クラゲ大集合",
+ "count": 177,
+ "nextLive": "_Z1xlFgwa8E",
+ "nextLiveDate": "2026-08-09T00:00:00+00:00",
+ "nextLiveTitle": "おかなしりとりサマー",
  "items": [
+  {
+   "id": "1jaet5H2KjqiK_gZ3fxaeLJ2nCWCGFQyX",
+   "title": "カレンダー クラゲ大集合",
+   "date": "2026年8月",
+   "iso": "2026-08-01",
+   "cat": "weekly",
+   "thumb": "https://drive.google.com/thumbnail?id=1jaet5H2KjqiK_gZ3fxaeLJ2nCWCGFQyX&sz=w800",
+   "dl": "https://drive.google.com/uc?export=download&id=1jaet5H2KjqiK_gZ3fxaeLJ2nCWCGFQyX",
+   "video": "0Y7WIrtv9sY"
+  },
   {
    "id": "1ltNcE11_JdRtdEGm7JduTnPyUuR9HpAM",
    "title": "カメ大特集",
