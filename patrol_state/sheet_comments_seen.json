@@ -1,7 +1,7 @@
 {
   "note": "HP水族館MAPコメントシート（コメント/ご意見箱タブ）で確認済みの投稿を日時+名前で記録。次回以降の重複スキャン防止用。",
-  "last_checked": "2026-07-27",
-  "note2": "COMMENT_API (script.google.com) は前回(2026-07-25)に続き今回もこの実行環境のネットワークポリシーでブロック（プロキシのrecentRelayFailuresでconnect_rejected/403を確認）。今回はscript.google.comだけでなくyoutube.com・一般の公式サイトドメイン（WebFetch含む）も軒並み403で、外部HTTPS全般が遮断されていた。WebSearchのみ利用可能。write-back（ご意見箱既読化・写真承認・新着動画取得）はAPI/YouTube直叩きが必要なため今回も実施不可。Google Driveコネクタで裏のスプレッドシート（コメント/ご意見箱/写真投稿タブ含む）を直接読み取り、写真投稿は画像ファイルもGoogle Drive経由でダウンロードして目視確認できた（download_file_contentのbase64を復号）。公式サイト裏取りはWebSearchの結果で代替。",
+  "last_checked": "2026-07-29",
+  "note2": "COMMENT_API (script.google.com) は前回(2026-07-27)に続き今回もこの実行環境のネットワークポリシーでブロック（プロキシのrecentRelayFailuresでconnect_rejected/403を確認、script.google.com/google.com/youtube.comすべて403）。WebFetchも同様に403でブロック。WebSearchのみ利用可能。write-back（ご意見箱既読化・写真承認・新着動画取得）はAPI/YouTube直叩きが必要なため今回も実施不可（③のsandbox.network.allowedDomains撤去後も改善せず、ハイブリッド運用継続が引き続き妥当と確認）。Google Driveコネクタで裏のスプレッドシート（ID 1XYuIe15S9odf57c1qfvBp3ldttfY974Mm23cIwgrrzw、コメント/ご意見箱/写真投稿/hitokoto管理タブすべて含む単一の master sheet）を直接読み取り。写真投稿は画像ファイルもGoogle Drive経由でダウンロードして目視確認（download_file_contentのbase64を復号）。公式サイト裏取りはWebSearchの結果で代替（WebFetchは使えず）。※アンケート・コメントシート（⑤で指定のID）も同一spreadsheetであることを確認済み（前回までと同じ）。",
   "seen": [
     "2026/07/09 13:16:07|かわちゃん",
     "2026/07/11 0:21:45|深海博士の母",
@@ -42,14 +42,18 @@
     "2026/07/24 17:23:54|みちゃん",
     "2026/07/24 17:29:05|みちゃん",
     "2026/07/27 22:03:31|みちゃん",
-    "2026/07/27 22:18:16|みちゃん"
+    "2026/07/27 22:18:16|みちゃん",
+    "2026/07/24 21:29:05|ななしのさかな",
+    "2026/07/27 22:18:18|みちゃん",
+    "2026/07/28 9:02:44|ひな"
   ],
   "feedback_box_checked": [
     "2026/07/19 21:37:59|さめーとNAMIKO|鳥取の海とくらしの史料館 掲載リクエスト|対応メモ欄に報告済み2026-07-21のためスキップ",
     "2026/07/22 22:57:33|YT|動画一覧の表示改善要望|過去コミット(みんなの投稿をスマホで2カラム表示に)で対応済みと判断",
     "2026/07/24 18:03:31|メンダコのりゅうちゃん|水族館ごとの思い出アルバム機能要望|機能追加は対象外のため要約報告のみ",
     "2026/07/25 23:19:26|あきら|道の駅みなかみ水紀行館 水産学習館 掲載リクエスト|WebSearchで裏取りしunvisitedに新規追加",
-    "2026/07/26 9:47:35|メンダコのりゅうちゃん&母|岐阜県多治見市 土岐川観察館 掲載リクエスト|対応メモ欄に報告済み2026-07-27（本パトロール実行前にdata.json追加済み、コミットa455339）"
+    "2026/07/26 9:47:35|メンダコのりゅうちゃん&母|岐阜県多治見市 土岐川観察館 掲載リクエスト|対応メモ欄に報告済み2026-07-27（本パトロール実行前にdata.json追加済み、コミットa455339）",
+    "2026-07-29時点：ご意見箱タブは上記5件のみで新規行なし（0件）"
   ],
   "listing_requests_pending": [
     "長浜高校水族館（にゃー 2026/07/24）",
@@ -58,5 +62,6 @@
     "富山の「培養漁業センター」（名称要確認、レンダコ 2026/07/24）",
     "ほたるいかミュージアム・富山（レンダコ 2026/07/24）",
     "越前がにミュージアム・福井（レンダコ 2026/07/24、本人も「ミュージアム系は対象外か」とコメントしており要方針確認）"
-  ]
+  ],
+  "photos_note_2026-07-29": "写真投稿タブの未承認行のうち fileId 1NqQX6NtbVgpuPRUsoYa1Z3T6OmuMSzgt/1Gw1GQL4SGqG1duWiXwwoUrFoEHdm5QCu/1sF8k5Ey5fcOX5x90-m5W59MvyF3skxTj/1dSKlQb8SK28fmCX5VN0Xf_A2yDLOdbQu/1KzbhK_jNRbDc8sSDRlVD6ettLcpaJhuW（すべて はると・千歳水族館）はGoogle Driveでダウンロードしmd5一致を確認、既承認済みfileId 1_XImadD82_D6LE3lCFf_sdagbn7neqkpと完全に同一画像（再送信による重複）。fileId 1iL_acsuA2-2ooUBqhZA0ROhLef4FEtvhも既承認済み1QBEtFE4qkfGP7ZRzqHsFIYJryiNbGroi（かわちゃん・伊勢シーパラダイス）と完全同一画像。いずれも重複のため承認不要、未承認のまま放置でOK（次回以降ダウンロード確認は省略可）。新規2件（ちなな:いおワールドかごしま水族館 fileId 10MswKQAjfXcZL0ZjntJ2z0L9e632Lnd0、すみれ:アクアトト岐阜 fileId 1AG5TMw2y-_JmlDfFSjFX1G_XXLQAqnk1）は目視確認OK、承認相当と判断したがCOMMENT_API POSTがネットワーク遮断で実行不可のため実際の承認（approvePhotos）は未実施。write-back可能になり次第この2件を承認すること。"
 }
