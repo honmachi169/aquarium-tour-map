@@ -55,7 +55,7 @@
 - 🐬 イルカショーおすすめ（38館）: https://aquarium.yasasea.com/theme/dolphin.html
 - 🐧 ペンギン好きにおすすめ（26館）: https://aquarium.yasasea.com/theme/penguin.html
 - ☀️ 夏休みおすすめ（20館）: https://aquarium.yasasea.com/theme/summer.html
-- 🐳 シロイルカに会える（5館）: https://aquarium.yasasea.com/theme/beluga.html
+- 🐳 シロイルカに会える（4館）: https://aquarium.yasasea.com/theme/beluga.html
 - 🦈 サメ好きにおすすめ（8館）: https://aquarium.yasasea.com/theme/same.html
 - 🎣 釣りができる水族館（4館）: https://aquarium.yasasea.com/theme/fishing.html
 - 🐙 深海生物好きにおすすめ（7館）: https://aquarium.yasasea.com/theme/deep.html
@@ -159,7 +159,7 @@
 - 相模川ふれあい科学館 アクアリウムさがみはら（神奈川県）：相模川の生きもの専門！エサやり体験も人気 — https://aquarium.yasasea.com/spot/u047.html
 - 北里アクアリウムラボ（神奈川県）：北里大学の学生が運営するミニ水族館 — https://aquarium.yasasea.com/spot/u048.html
 - 箱根園水族館（神奈川県）：アザラシ、ペンギン — https://aquarium.yasasea.com/spot/u049.html
-- 上越市立水族博物館 うみがたり（新潟県）：シロイルカ、マゼランペンギン、イルカ — https://aquarium.yasasea.com/spot/u050.html
+- 上越市立水族博物館 うみがたり（新潟県）：マゼランペンギン、イルカ — https://aquarium.yasasea.com/spot/u050.html
 - イヨボヤ会館（新潟県）：サケ — https://aquarium.yasasea.com/spot/u051.html
 - 長岡市寺泊水族博物館（新潟県）：ペンギン — https://aquarium.yasasea.com/spot/u052.html
 - ひみラボ水族館（富山県）：イタセンパラ — https://aquarium.yasasea.com/spot/u053.html
