@@ -239,7 +239,13 @@ loadYtComments();''' if v else ''
         review = {
             "@context": "https://schema.org",
             "@type": "Review",
-            "itemReviewed": {"@type": "TouristAttraction", "name": a["name"]},
+            # itemReviewedはGoogleレビュースニペットが対象として認める型に限る（TouristAttractionは非対応）
+            "itemReviewed": {
+                "@type": "LocalBusiness",
+                "name": a["name"],
+                "image": ogimg,
+                "address": {"@type": "PostalAddress", "addressRegion": a.get("pref", ""), "addressCountry": "JP"},
+            },
             "author": {"@type": "Person", "name": AUTHOR_NAME},
             "publisher": {"@type": "Organization", "name": BRAND_NAME, "url": SITE},
             "url": page_url,
