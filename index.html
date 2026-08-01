@@ -319,7 +319,9 @@
       <div class="mycount-btns">
         <button id="mapImgBtn" class="sharebtn">🗾 制覇マップをシェア</button>
         <a href="passport.html" class="sharebtn">📖 すいぞくかんパスポート</a>
-      </div></div>
+      </div>
+      <div class="mc-memorial" id="mcMemorial" style="display:none;font-size:.82em;opacity:.85;margin-top:6px">🕊 思い出の水族館 <b id="memVisited">0</b>/<span id="memTotal">0</span>館 <small>（閉館した館。制覇数には入らないけど、行った記録は残せるよ）</small></div>
+    </div>
     <a class="counter-sub-btn pc-only" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
   </div>
   <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,45 350,-5 600,20 C850,45 1050,-5 1200,20 L1200,40 L0,40 Z" fill="#023e8a"/></svg>
@@ -654,11 +656,17 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   // 行った！チェック（このブラウザに保存）
   let myVisits = new Set(JSON.parse(localStorage.getItem('myVisits')||'[]'));
   let myVisitDates = JSON.parse(localStorage.getItem('myVisitDates')||'{}'); // パスポートのスタンプ日付用
+  // 閉館した館（gone）は「思い出の水族館」として別枠。制覇の分母・分子とシェア画像からは除外する
+  const GONE_NAMES = new Set([...(data.aquariums||[]), ...(data.unvisited||[])].filter(a=>a.gone).map(a=>a.name));
+  const goneCount = GONE_NAMES.size;
+  const myVisitableCount = ()=> [...myVisits].filter(n=>!GONE_NAMES.has(n)).length; // 今行ける館の制覇数
+  const myMemorialCount = ()=> [...myVisits].filter(n=>GONE_NAMES.has(n)).length;   // 思い出（閉館館）の記録数
 
   // バーのリレー表示：最初はかわちゃんの42/100 → 数秒後に「あなたの制覇」へ（タップで切替）
   let barMode = 'kawachan';
-  const totalAll = (data.aquariums||[]).length + (data.unvisited||[]).length;
+  const totalAll = (data.aquariums||[]).length + (data.unvisited||[]).length - goneCount; // 今行ける館数（制覇の分母）
   document.getElementById('mineTotal').textContent = totalAll;
+  if(goneCount>0) document.getElementById('memTotal').textContent = goneCount;
   function applyBar(mode){
     barMode = mode;
     const mine = mode === 'mine';
@@ -669,8 +677,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     document.querySelector('.mc-kawachan').style.display = mine ? '' : 'none';
     fill.classList.toggle('mine', mine);
     if(mine){
-      document.getElementById('mineNum').textContent = myVisits.size;
-      fill.style.width = (myVisits.size/totalAll*100)+'%';
+      document.getElementById('mineNum').textContent = myVisitableCount();
+      fill.style.width = (myVisitableCount()/totalAll*100)+'%';
     } else {
       fill.style.width = (visited/data.goal*100)+'%';
     }
@@ -687,7 +695,9 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   setTimeout(()=>switchBar('mine'), 3800);
 
   function updateMyCount(){
-    document.getElementById('myvisited').textContent = myVisits.size;
+    document.getElementById('myvisited').textContent = myVisitableCount();
+    const mem = myMemorialCount(), memEl = document.getElementById('mcMemorial');
+    if(memEl){ document.getElementById('memVisited').textContent = mem; memEl.style.display = mem>0 ? '' : 'none'; }
     localStorage.setItem('myVisits', JSON.stringify([...myVisits]));
     if(barMode === 'mine') applyBar('mine');
   }
@@ -702,8 +712,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=> t.remove(), 400); }, 1800);
   }
   function checkMilestone(){
-    const n = myVisits.size;
-    const total = (data.aquariums||[]).length + (data.unvisited||[]).length;
+    const n = myVisitableCount();
+    const total = totalAll;
     const isAll = n>0 && n===total;
     if(!isAll && !MILESTONES.includes(n)) return;
     if(!isAll && SMALL_MILESTONES.includes(n)){
@@ -1143,6 +1153,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   }
   // ===== 制覇マップ画像シェア =====
   const ALL_SPOTS = [...aqs, ...(data.unvisited||[])];
+  const VISITABLE = ALL_SPOTS.filter(a=>!a.gone); // 今行ける館（制覇の母数）。閉館館は思い出枠として別扱い
   const FONT = '"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif';
   let japanOutline = null;
   const shareImgs = {};
@@ -1205,14 +1216,23 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     ctx.fillText('沖縄', okiBox.x+10, okiBox.y+26);
 
     // スポット（掲載館→行った館の順で重ね描き）
-    ALL_SPOTS.forEach(a=>{
+    VISITABLE.forEach(a=>{
       if(!a.lat||!a.lng) return;
       const p = projFor(a.lat,a.lng);
       if(!p) return;
       ctx.beginPath(); ctx.arc(p[0],p[1],5,0,Math.PI*2);
       ctx.fillStyle='rgba(2,62,138,.3)'; ctx.fill();
     });
-    ALL_SPOTS.filter(a=>myVisits.has(a.name)).forEach(a=>{
+    // 思い出（閉館館で行ったところ）：母数外・淡い紫で控えめに。回っていなければ0個で何も出ない
+    ALL_SPOTS.filter(a=>a.gone && myVisits.has(a.name)).forEach(a=>{
+      if(!a.lat||!a.lng) return;
+      const p = projFor(a.lat,a.lng);
+      if(!p) return;
+      ctx.beginPath(); ctx.arc(p[0],p[1],8,0,Math.PI*2);
+      ctx.fillStyle='#c8b6ff'; ctx.fill();
+      ctx.lineWidth=3; ctx.strokeStyle='#fff'; ctx.stroke();
+    });
+    VISITABLE.filter(a=>myVisits.has(a.name)).forEach(a=>{
       if(!a.lat||!a.lng) return;
       const p = projFor(a.lat,a.lng);
       if(!p) return;
@@ -1222,7 +1242,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     });
 
     // タイトル（上）・カウント（左上の空いた海に。日本地図は右上が北海道なので左上が空く）
-    const n = myVisits.size, total = ALL_SPOTS.length;
+    const n = VISITABLE.filter(a=>myVisits.has(a.name)).length, total = VISITABLE.length;
     ctx.textAlign='center'; ctx.fillStyle='#fff';
     ctx.font='bold 46px '+FONT;
     ctx.fillText('🐟 わたしの水族館ツアー制覇MAP', W/2, 66);
@@ -1242,6 +1262,15 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     ctx.fillStyle='#ff6b6b'; ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle='#fff'; ctx.stroke();
     ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 42px '+FONT; ctx.textAlign='left';
     ctx.fillText('＝ 行った水族館', 152, ly);
+    // 思い出の水族館（閉館館を回った人だけ・母数には入れない）
+    const memN = ALL_SPOTS.filter(a=>a.gone && myVisits.has(a.name)).length;
+    if(memN>0){
+      const my = ly+54;
+      ctx.beginPath(); ctx.arc(124, my-14, 14, 0, Math.PI*2);
+      ctx.fillStyle='#c8b6ff'; ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle='#fff'; ctx.stroke();
+      ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 38px '+FONT; ctx.textAlign='left';
+      ctx.fillText(`🕊 思い出の水族館 ${memN}館`, 152, my);
+    }
     ctx.textAlign='center';
     ctx.font='bold 30px '+FONT; ctx.fillStyle='rgba(255,255,255,.95)';
     ctx.fillText('©さかなのおにいさん かわちゃん', W/2, H-24);
