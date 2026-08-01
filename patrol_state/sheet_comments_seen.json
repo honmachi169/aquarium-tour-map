@@ -1,7 +1,7 @@
 {
   "note": "HP水族館MAPコメントシート（コメント/ご意見箱タブ）で確認済みの投稿を日時+名前で記録。次回以降の重複スキャン防止用。",
-  "last_checked": "2026-07-31",
-  "note2": "COMMENT_API (script.google.com) は前回(2026-07-29)に続き今回もこの実行環境のネットワークポリシーでブロック（プロキシのrecentRelayFailuresでconnect_rejected/403を確認。script.google.com/google.com/www.google.com/example.com/youtube.comすべて403で、CONNECTトンネル自体が拒否される組織ポリシー）。WebFetchも同様に403でブロック。WebSearchとGitHub/Google Drive等の認証済みMCPコネクタのみ利用可能、という状況が3回連続（07-27, 07-29, 07-31）で継続。write-back（ご意見箱既読化・写真承認・新着動画取得update_videos.py）はAPI/YouTube直叩きが必要なため今回も実施不可。継続的なインフラ課題としてユーザーに報告済み。Google Driveコネクタで裏のスプレッドシート（ID 1XYuIe15S9odf57c1qfvBp3ldttfY974Mm23cIwgrrzw、シート1/feedback/errors/photos/館名管理/コメントタブすべて含む単一master sheet）を直接読み取り。写真投稿はdownload_file_contentのbase64を復号し実ファイルとして目視確認（read_file_content/get_file_metadataは大きいファイルで内容が末尾切り詰められるため、コメント欄タブの最新数件は取得しきれない場合がある。今回は2026/07/31 20:01頃までは確認、スプレッドシートmodifiedTimeが2026-07-31T22:47Z=ほぼ8/1 07:47 JSTでそれ以降の新規行はなしと推定）。公式サイト裏取りはWebSearchの結果で代替（WebFetchは使えず）。",
+  "last_checked": "2026-08-01",
+  "note2": "COMMENT_API (script.google.com) は前回(07-27,07-29,07-31)に続き今回(08-01)もこの実行環境のネットワークポリシーでブロック（プロキシのrecentRelayFailuresでconnect_rejected/403、script.google.com/google.com/youtube.comすべて403）。WebFetchも同様に403でブロック（www.google.comへのWebFetchで確認）。4回連続で同じ状況が継続。WebSearchとGitHub/Google Drive等の認証済みMCPコネクタのみ利用可能。write-back（ご意見箱既読化・写真承認）およびupdate_videos.py(youtube.com直叩き)は今回も実施不可。Google Driveコネクタで裏のスプレッドシート（ID 1XYuIe15S9odf57c1qfvBp3ldttfY974Mm23cIwgrrzw、feedback/errors/photos/館名管理/コメントタブ含む単一master sheet）を直接読み取り。写真はdownload_file_contentのbase64を復号し実ファイルとして目視確認。公式サイト裏取りはWebSearchの結果で代替（WebFetchは使えず、緯度経度など地図座標の裏取りは不可のため新規館追加は今回見送り）。コメントタブは2026/07/31 20:01(ヨシ)以降新規投稿なし（0件）。",
   "seen": [
     "2026/07/09 13:16:07|かわちゃん",
     "2026/07/11 0:21:45|深海博士の母",
@@ -76,12 +76,27 @@
     "2026/07/31 20:32:32|まるく|笠岡市立カブトガニ博物館 掲載リクエスト|コミット0170c36で対応済み",
     "2026/08/01 0:44:58|エボシゼーゲ|「神戸どうぶつ王国は水族館ではない」という指摘|事実誤りではなく編集方針への意見のため保留。神戸どうぶつ王国のhitokotoは既に『番外編！』と明記しており、意図的な番外枠として収録済み。かわちゃんチームの方針判断待ち"
   ],
-  "listing_requests_pending": [
-    "長浜高校水族館（にゃー 2026/07/24、ご意見箱ではなく公開コメント欄への投稿のため様子見）",
-    "うみとさかなの科学館・石川（レンダコ 2026/07/24、公開コメント欄）",
-    "富山の「培養漁業センター」（名称要確認、レンダコ 2026/07/24、公開コメント欄）",
-    "ほたるいかミュージアム・富山（レンダコ 2026/07/24、公開コメント欄）",
-    "越前がにミュージアム・福井（レンダコ 2026/07/24、本人も「ミュージアム系は対象外か」とコメントしており要方針確認、公開コメント欄）"
+  "feedback_box_checked_2026-08-01": [
+    "2026/08/01 11:56:25,27|まるく|丹後魚っ知館(京都)・東海大学海洋科学博物館(静岡)いずれも閉館施設の掲載リクエスト（重複投稿2件）|listing_requests_pendingに記録、緯度経度未確認のため今回は追加見送り",
+    "2026/08/02 7:45:06|塩ら〜めん|多数の掲載リクエスト(八王子市北野環境学習センター他、閉館施設含む計11件)|listing_requests_pendingに記録。ららぽーと沼津・佐世保魚市場の水槽1基のみの展示は単体施設ではないため対象外と判断、それ以外は緯度経度未確認のため今回は追加見送り"
   ],
-  "photos_pending_approval_2026-07-31": "COMMENT_APIへのPOSTがネットワーク遮断で実行不可のため、以下4件は目視確認OK（承認相当）と判断したが実際のapprovePhotos未実施。write-back可能になり次第この4件（および前回から持ち越しの2件）を承認すること：新規4件＝まるも:伊勢シーパラダイス fileId 158o-vErUtH71Ub4wmENsY-lz2faaQq1s、ななしのさかな:神戸須磨シーワールド fileId 1abCY7sYukZCXY_L5bMXDr3kXnx4N_eTA、（前回持ち越し）ちなな:いおワールドかごしま水族館 fileId 10MswKQAjfXcZL0ZjntJ2z0L9e632Lnd0、すみれ:アクアトト岐阜 fileId 1AG5TMw2y-_JmlDfFSjFX1G_XXLQAqnk1。重複のため承認不要（未承認のまま放置でOK）：はると・千歳水族館の複数重複投稿（fileId 1NqQX6NtbVgpuPRUsoYa1Z3T6OmuMSzgt/1Gw1GQL4SGqG1duWiXwwoUrFoEHdm5QCu/1sF8k5Ey5fcOX5x90-m5W59MvyF3skxTj/1dSKlQb8SK28fmCX5VN0Xf_A2yDLOdbQu/1KzbhK_jNRbDc8sSDRlVD6ettLcpaJhuW）、かわちゃん・伊勢シーパラダイスの重複（1iL_acsuA2-2ooUBqhZA0ROhLef4FEtvh）、みるく・すみだ水族館の重複（1ti49vlmA3UJ5WeshSCQJppU1ltvx3P8S、md5がfileId 1lSR-mKEG0Ht7N6q9xTPpp2fw4WlJ3FpHと完全一致で確認済み）"
+  "listing_requests_pending": [
+    "長浜高校水族館（にゃー 2026/07/24、学校部活動の可能性が高く一般公開施設か要確認のため様子見）",
+    "うみとさかなの科学館・石川（レンダコ 2026/07/24、名称要確認）",
+    "富山の「培養漁業センター」（名称要確認、レンダコ 2026/07/24）",
+    "ほたるいかミュージアム・富山県滑川市（レンダコ 2026/07/24、塩ら〜めん 2026/08/02再要望。住所〒936-0021富山県滑川市中川原410・大人620〜820円(季節変動)・休館6-3月毎週火曜まで確認済み。緯度経度が未確認のため追加見送り）",
+    "越前がにミュージアム・福井県丹生郡越前町厨71-324-1（レンダコ 2026/07/24、塩ら〜めん 2026/08/02再要望。大人500円・小人300円、休館は時期により変動まで確認済み。緯度経度が未確認のため追加見送り）",
+    "丹後魚っ知館（京都・閉館施設、まるく 2026/08/01要望）",
+    "東海大学海洋科学博物館（静岡・閉館施設、まるく 2026/08/01要望）",
+    "八王子市北野環境学習センターあったかホール生きもの展示室（塩ら〜めん 2026/08/02要望）",
+    "静岡県水産技術研究所うみしる（塩ら〜めん 2026/08/02要望）",
+    "深層水ミュージアム（塩ら〜めん 2026/08/02要望、所在地要確認＝富山県入善町の可能性）",
+    "えきまちテラス長浜 小さなびわ湖水族館（滋賀、塩ら〜めん 2026/08/02要望）",
+    "北九州市ほたる館（塩ら〜めん 2026/08/02要望）",
+    "山方淡水魚館（茨城・閉館施設、塩ら〜めん 2026/08/02要望）",
+    "志摩マリンランド（三重・閉館施設、塩ら〜めん 2026/08/02要望）",
+    "（対象外と判断・追加不要）ららぽーと沼津の大水槽1基のみ／佐世保魚市場の観賞用円柱水槽1基のみ：単体施設ではなく他施設内の水槽展示のため見送り"
+  ],
+  "listing_requests_note": "上記はいずれも WebFetch/地図APIがネットワークポリシーでブロックされており緯度経度の裏取りができないため、data.jsonへの新規追加は今回すべて見送り。住所・料金等テキスト情報はWebSearchで一部確認済み（詳細は各項目に記載）。WebFetchが復旧し次第、次回パトロールで座標を確定のうえ追加を検討。",
+  "photos_pending_approval_2026-08-01": "COMMENT_APIへのPOSTがネットワーク遮断で実行不可のため、目視確認OK（承認相当）と判断したが実際のapprovePhotos未実施の一覧。write-back可能になり次第承認すること。持ち越し2件＝まるも:伊勢シーパラダイス fileId 158o-vErUtH71Ub4wmENsY-lz2faaQq1s、ななしのさかな:神戸須磨シーワールド fileId 1abCY7sYukZCXY_L5bMXDr3kXnx4N_eTA（いずれも07-31から未承認のまま）。新規5件＝(絵文字名):マリンワールド海の中道 fileId 13VbRu4ZKMzTkmyRXaHNTyBy4WPq4SVwC、魚:アトア fileId 1bCHzrCSqvyHOIExtIkSEuLcKSLLLZY5s、えぼしぜーげ:奄美海洋展示館 fileId 12JGJ8CC9m-zVj8nI4hnLs07r_r90GDXH、かめ３きょうだい:沼津港深海水族館 fileId 123iCJxMWbjzGgjRoYa7nDDHa9NfKHFoe、かめ３きょうだい:沼津港深海水族館(2枚目) fileId 19dKOSrhOhnj-DYhIvvxqRZ1PI77zIDlk。重複のため承認不要（未承認のまま放置でOK、承認済み原本と内容同一を確認済み）：はると・千歳水族館の重複投稿5件（fileId 1NqQX6NtbVgpuPRUsoYa1Z3T6OmuMSzgt/1Gw1GQL4SGqG1duWiXwwoUrFoEHdm5QCu/1sF8k5Ey5fcOX5x90-m5W59MvyF3skxTj/1dSKlQb8SK28fmCX5VN0Xf_A2yDLOdbQu/1KzbhK_jNRbDc8sSDRlVD6ettLcpaJhuW、md5全て同一df19b98256b53d0a7649ca9fdf1dadab）、かわちゃん・伊勢シーパラダイスの重複（1iL_acsuA2-2ooUBqhZA0ROhLef4FEtvh）、みるく・すみだ水族館の重複（1ti49vlmA3UJ5WeshSCQJppU1ltvx3P8S）。なお前回持ち越し分のうちちなな:いおワールドかごしま水族館とすみれ:アクアトト岐阜の2件は今回確認したところ承認済み(○)になっていた（かわちゃんチームが別途手動承認したと思われる）"
 }
