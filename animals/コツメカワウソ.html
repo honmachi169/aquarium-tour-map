@@ -56,7 +56,7 @@ h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script>
-const pts = [[34.6838,135.1912,"アトア（átoa）","https://aquarium.yasasea.com/spot/023.html"],[43.039,141.472,"新さっぽろサンピアザ水族館","https://aquarium.yasasea.com/spot/u020.html"],[36.108,139.548,"さいたま水族館","https://aquarium.yasasea.com/spot/u040.html"],[35.021,138.89,"伊豆・三津シーパラダイス","https://aquarium.yasasea.com/spot/u058.html"],[34.295,132.317,"宮島水族館 みやじマリン","https://aquarium.yasasea.com/spot/u081.html"],[34.365,134.102,"新屋島水族館","https://aquarium.yasasea.com/spot/u087.html"],[26.158,127.658,"DMMかりゆし水族館","https://aquarium.yasasea.com/spot/u109.html"],[34.348,134.0286,"市場水族館（新屋島水族館 仮設）","https://aquarium.yasasea.com/spot/u112.html"]];
+const pts = [[34.6838,135.1912,"アトア（átoa）","https://aquarium.yasasea.com/spot/023.html"],[43.039,141.472,"新さっぽろサンピアザ水族館","https://aquarium.yasasea.com/spot/u020.html"],[36.1731,139.5979,"さいたま水族館","https://aquarium.yasasea.com/spot/u040.html"],[35.021,138.89,"伊豆・三津シーパラダイス","https://aquarium.yasasea.com/spot/u058.html"],[34.295,132.317,"宮島水族館 みやじマリン","https://aquarium.yasasea.com/spot/u081.html"],[34.365,134.102,"新屋島水族館","https://aquarium.yasasea.com/spot/u087.html"],[26.158,127.658,"DMMかりゆし水族館","https://aquarium.yasasea.com/spot/u109.html"],[34.348,134.0286,"市場水族館（新屋島水族館 仮設）","https://aquarium.yasasea.com/spot/u112.html"]];
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; OpenStreetMap' }).addTo(map);
 const group = L.featureGroup(pts.map(p => L.marker([p[0],p[1]]).bindPopup('<a href="'+p[3]+'">'+p[2]+'</a>')));

@@ -56,7 +56,7 @@ h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script>
-const pts = [[36.089,140.352,"かすみがうら市水族館","https://aquarium.yasasea.com/spot/u037.html"],[35.699,139.573,"井の頭自然文化園 水生物館","https://aquarium.yasasea.com/spot/u043.html"],[34.5633,136.0856,"赤目滝水族館","https://aquarium.yasasea.com/spot/u067.html"],[31.9803,130.9425,"出の山淡水魚水族館","https://aquarium.yasasea.com/spot/u104.html"]];
+const pts = [[36.0717,140.376,"かすみがうら市水族館","https://aquarium.yasasea.com/spot/u037.html"],[35.699,139.573,"井の頭自然文化園 水生物館","https://aquarium.yasasea.com/spot/u043.html"],[34.5633,136.0856,"赤目滝水族館","https://aquarium.yasasea.com/spot/u067.html"],[31.9803,130.9425,"出の山淡水魚水族館","https://aquarium.yasasea.com/spot/u104.html"]];
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; OpenStreetMap' }).addTo(map);
 const group = L.featureGroup(pts.map(p => L.marker([p[0],p[1]]).bindPopup('<a href="'+p[3]+'">'+p[2]+'</a>')));

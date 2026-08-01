@@ -56,7 +56,7 @@ h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script>
-const pts = [[36.3225,140.5883,"アクアワールド茨城県大洗水族館","https://aquarium.yasasea.com/spot/004.html"],[35.115,140.1135,"鴨川シーワールド","https://aquarium.yasasea.com/spot/008.html"],[36.2392,136.1263,"越前松島水族館","https://aquarium.yasasea.com/spot/019.html"],[36.942,140.904,"アクアマリンふくしま","https://aquarium.yasasea.com/spot/044.html"],[32.7302,132.9648,"大阪海遊館 海洋生物研究所 以布利センター","https://aquarium.yasasea.com/spot/u005.html"],[32.755,132.86,"足摺海洋館 SATOUMI","https://aquarium.yasasea.com/spot/u093.html"]];
+const pts = [[36.3225,140.5883,"アクアワールド茨城県大洗水族館","https://aquarium.yasasea.com/spot/004.html"],[35.115,140.1135,"鴨川シーワールド","https://aquarium.yasasea.com/spot/008.html"],[36.2392,136.1263,"越前松島水族館","https://aquarium.yasasea.com/spot/019.html"],[36.942,140.904,"アクアマリンふくしま","https://aquarium.yasasea.com/spot/044.html"],[32.8012,132.9631,"大阪海遊館 海洋生物研究所 以布利センター","https://aquarium.yasasea.com/spot/u005.html"],[32.7914,132.8629,"足摺海洋館 SATOUMI","https://aquarium.yasasea.com/spot/u093.html"]];
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; OpenStreetMap' }).addTo(map);
 const group = L.featureGroup(pts.map(p => L.marker([p[0],p[1]]).bindPopup('<a href="'+p[3]+'">'+p[2]+'</a>')));

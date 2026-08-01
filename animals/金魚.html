@@ -56,7 +56,7 @@ h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script>
-const pts = [[35.3011,138.9312,"時之栖水中楽園AQUARIUM","https://aquarium.yasasea.com/spot/u012.html"],[35.1275,136.7147,"弥富金魚水族館（YaToMi AQUA）","https://aquarium.yasasea.com/spot/u013.html"],[34.678,135.798,"奈良金魚ミュージアム","https://aquarium.yasasea.com/spot/u069.html"]];
+const pts = [[35.2362,138.9274,"時之栖水中楽園AQUARIUM","https://aquarium.yasasea.com/spot/u012.html"],[35.1095,136.7246,"弥富金魚水族館（YaToMi AQUA）","https://aquarium.yasasea.com/spot/u013.html"],[34.678,135.798,"奈良金魚ミュージアム","https://aquarium.yasasea.com/spot/u069.html"]];
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; OpenStreetMap' }).addTo(map);
 const group = L.featureGroup(pts.map(p => L.marker([p[0],p[1]]).bindPopup('<a href="'+p[3]+'">'+p[2]+'</a>')));

@@ -56,7 +56,7 @@ h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script>
-const pts = [[35.4212,136.685,"世界淡水魚園水族館 アクア・トトぎふ","https://aquarium.yasasea.com/spot/017.html"],[36.0716,138.2647,"蓼科アミューズメント水族館","https://aquarium.yasasea.com/spot/u017.html"],[43.749,143.475,"北の大地の水族館（山の水族館）","https://aquarium.yasasea.com/spot/u025.html"],[36.728,140.13,"栃木県なかがわ水遊園","https://aquarium.yasasea.com/spot/u038.html"],[35.531,139.697,"カワスイ 川崎水族館","https://aquarium.yasasea.com/spot/u046.html"],[33.012,132.881,"四万十川学遊館あきついお","https://aquarium.yasasea.com/spot/u092.html"],[31.9803,130.9425,"出の山淡水魚水族館","https://aquarium.yasasea.com/spot/u104.html"]];
+const pts = [[35.4212,136.685,"世界淡水魚園水族館 アクア・トトぎふ","https://aquarium.yasasea.com/spot/017.html"],[36.0663,138.3029,"蓼科アミューズメント水族館","https://aquarium.yasasea.com/spot/u017.html"],[43.7536,143.5015,"北の大地の水族館（山の水族館）","https://aquarium.yasasea.com/spot/u025.html"],[36.7894,140.1287,"栃木県なかがわ水遊園","https://aquarium.yasasea.com/spot/u038.html"],[35.531,139.697,"カワスイ 川崎水族館","https://aquarium.yasasea.com/spot/u046.html"],[32.9893,132.9154,"四万十川学遊館あきついお","https://aquarium.yasasea.com/spot/u092.html"],[31.9803,130.9425,"出の山淡水魚水族館","https://aquarium.yasasea.com/spot/u104.html"]];
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; OpenStreetMap' }).addTo(map);
 const group = L.featureGroup(pts.map(p => L.marker([p[0],p[1]]).bindPopup('<a href="'+p[3]+'">'+p[2]+'</a>')));

@@ -56,7 +56,7 @@ h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script>
-const pts = [[27.0761,142.1969,"小笠原海洋センター","https://aquarium.yasasea.com/spot/u014.html"],[40.535,141.558,"八戸市水産科学館マリエント","https://aquarium.yasasea.com/spot/u031.html"],[32.755,132.86,"足摺海洋館 SATOUMI","https://aquarium.yasasea.com/spot/u093.html"],[28.363,129.501,"奄美海洋展示館","https://aquarium.yasasea.com/spot/u107.html"],[24.24,123.9935,"黒島研究所","https://aquarium.yasasea.com/spot/u108.html"]];
+const pts = [[27.094,142.2038,"小笠原海洋センター","https://aquarium.yasasea.com/spot/u014.html"],[40.535,141.558,"八戸市水産科学館マリエント","https://aquarium.yasasea.com/spot/u031.html"],[32.7914,132.8629,"足摺海洋館 SATOUMI","https://aquarium.yasasea.com/spot/u093.html"],[28.4038,129.4555,"奄美海洋展示館","https://aquarium.yasasea.com/spot/u107.html"],[24.2371,124.0119,"黒島研究所","https://aquarium.yasasea.com/spot/u108.html"]];
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; OpenStreetMap' }).addTo(map);
 const group = L.featureGroup(pts.map(p => L.marker([p[0],p[1]]).bindPopup('<a href="'+p[3]+'">'+p[2]+'</a>')));

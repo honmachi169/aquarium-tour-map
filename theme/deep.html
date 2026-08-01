@@ -56,7 +56,7 @@ h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script>
-const pts = [[26.694,127.8779,"沖縄美ら海水族館","https://aquarium.yasasea.com/spot/007.html"],[35.31,139.4783,"新江ノ島水族館","https://aquarium.yasasea.com/spot/014.html"],[34.8069,137.2237,"竹島水族館","https://aquarium.yasasea.com/spot/027.html"],[36.804,137.435,"魚津水族館","https://aquarium.yasasea.com/spot/030.html"],[36.942,140.904,"アクアマリンふくしま","https://aquarium.yasasea.com/spot/044.html"],[35.094,138.854,"沼津港深海水族館","https://aquarium.yasasea.com/spot/u056.html"],[33.492,135.728,"串本海中公園","https://aquarium.yasasea.com/spot/u071.html"]];
+const pts = [[26.694,127.8779,"沖縄美ら海水族館","https://aquarium.yasasea.com/spot/007.html"],[35.31,139.4783,"新江ノ島水族館","https://aquarium.yasasea.com/spot/014.html"],[34.8069,137.2237,"竹島水族館","https://aquarium.yasasea.com/spot/027.html"],[36.7984,137.3881,"魚津水族館","https://aquarium.yasasea.com/spot/030.html"],[36.942,140.904,"アクアマリンふくしま","https://aquarium.yasasea.com/spot/044.html"],[35.094,138.854,"沼津港深海水族館","https://aquarium.yasasea.com/spot/u056.html"],[33.492,135.728,"串本海中公園","https://aquarium.yasasea.com/spot/u071.html"]];
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; OpenStreetMap' }).addTo(map);
 const group = L.featureGroup(pts.map(p => L.marker([p[0],p[1]]).bindPopup('<a href="'+p[3]+'">'+p[2]+'</a>')));

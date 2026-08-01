@@ -56,7 +56,7 @@ h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script>
-const pts = [[44.483,142.325,"美深チョウザメ館","https://aquarium.yasasea.com/spot/u026.html"],[43.658,145.13,"標津サーモン科学館","https://aquarium.yasasea.com/spot/u029.html"],[36.108,139.548,"さいたま水族館","https://aquarium.yasasea.com/spot/u040.html"],[31.9803,130.9425,"出の山淡水魚水族館","https://aquarium.yasasea.com/spot/u104.html"]];
+const pts = [[44.5589,142.325,"美深チョウザメ館","https://aquarium.yasasea.com/spot/u026.html"],[43.658,145.13,"標津サーモン科学館","https://aquarium.yasasea.com/spot/u029.html"],[36.1731,139.5979,"さいたま水族館","https://aquarium.yasasea.com/spot/u040.html"],[31.9803,130.9425,"出の山淡水魚水族館","https://aquarium.yasasea.com/spot/u104.html"]];
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; OpenStreetMap' }).addTo(map);
 const group = L.featureGroup(pts.map(p => L.marker([p[0],p[1]]).bindPopup('<a href="'+p[3]+'">'+p[2]+'</a>')));

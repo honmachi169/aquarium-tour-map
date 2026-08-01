@@ -56,7 +56,7 @@ h1 { color:var(--sea-deep); font-size:1.4rem; margin:6px 0 4px; }
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script>
-const pts = [[33.744,136.01,"紀宝町ウミガメ公園","https://aquarium.yasasea.com/spot/u066.html"],[33.492,135.728,"串本海中公園","https://aquarium.yasasea.com/spot/u071.html"],[34.503,133.825,"渋川マリン水族館","https://aquarium.yasasea.com/spot/u080.html"],[33.728,134.544,"日和佐うみがめ博物館カレッタ","https://aquarium.yasasea.com/spot/u084.html"],[33.29,134.152,"むろと廃校水族館","https://aquarium.yasasea.com/spot/u094.html"],[34.348,134.0286,"市場水族館（新屋島水族館 仮設）","https://aquarium.yasasea.com/spot/u112.html"]];
+const pts = [[33.744,136.01,"紀宝町ウミガメ公園","https://aquarium.yasasea.com/spot/u066.html"],[33.492,135.728,"串本海中公園","https://aquarium.yasasea.com/spot/u071.html"],[34.4549,133.9053,"渋川マリン水族館","https://aquarium.yasasea.com/spot/u080.html"],[33.728,134.544,"日和佐うみがめ博物館カレッタ","https://aquarium.yasasea.com/spot/u084.html"],[33.29,134.152,"むろと廃校水族館","https://aquarium.yasasea.com/spot/u094.html"],[34.348,134.0286,"市場水族館（新屋島水族館 仮設）","https://aquarium.yasasea.com/spot/u112.html"]];
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:18, attribution:'&copy; OpenStreetMap' }).addTo(map);
 const group = L.featureGroup(pts.map(p => L.marker([p[0],p[1]]).bindPopup('<a href="'+p[3]+'">'+p[2]+'</a>')));
