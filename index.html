@@ -320,7 +320,6 @@
         <button id="mapImgBtn" class="sharebtn">🗾 制覇マップをシェア</button>
         <a href="passport.html" class="sharebtn">📖 すいぞくかんパスポート</a>
       </div>
-      <div class="mc-memorial" id="mcMemorial" style="display:none;font-size:.82em;opacity:.85;margin-top:6px">🕊 思い出の水族館 <b id="memVisited">0</b>/<span id="memTotal">0</span>館 <small>（閉館した館。制覇数には入らないけど、行った記録は残せるよ）</small></div>
     </div>
     <a class="counter-sub-btn pc-only" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
   </div>
@@ -666,7 +665,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   let barMode = 'kawachan';
   const totalAll = (data.aquariums||[]).length + (data.unvisited||[]).length - goneCount; // 今行ける館数（制覇の分母）
   document.getElementById('mineTotal').textContent = totalAll;
-  if(goneCount>0) document.getElementById('memTotal').textContent = goneCount;
   function applyBar(mode){
     barMode = mode;
     const mine = mode === 'mine';
@@ -696,8 +694,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
 
   function updateMyCount(){
     document.getElementById('myvisited').textContent = myVisitableCount();
-    const mem = myMemorialCount(), memEl = document.getElementById('mcMemorial');
-    if(memEl){ document.getElementById('memVisited').textContent = mem; memEl.style.display = mem>0 ? '' : 'none'; }
     localStorage.setItem('myVisits', JSON.stringify([...myVisits]));
     if(barMode === 'mine') applyBar('mine');
   }
@@ -1269,7 +1265,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       ctx.beginPath(); ctx.arc(124, my-14, 14, 0, Math.PI*2);
       ctx.fillStyle='#c8b6ff'; ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle='#fff'; ctx.stroke();
       ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 38px '+FONT; ctx.textAlign='left';
-      ctx.fillText(`🕊 思い出の水族館 ${memN}館`, 152, my);
+      ctx.fillText(`＝ 思い出の水族館 ${memN}館`, 152, my);
     }
     ctx.textAlign='center';
     ctx.font='bold 30px '+FONT; ctx.fillStyle='rgba(255,255,255,.95)';
