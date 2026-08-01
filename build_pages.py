@@ -264,6 +264,7 @@ loadYtComments();''' if v else ''
         "slug": slug, "name": a["name"], "pref": a.get("pref", ""), "url": page_url,
         "thumb": thumb or ogimg, "animals": a.get("animals") or [], "tags": a.get("tags") or [],
         "rakko_past": bool(a.get("rakko_past")), "rakko_past_note": a.get("rakko_past_note") or "",
+        "gone": bool(a.get("gone")),
         "mendako_history": bool(a.get("mendako_history")),
         "comment": a.get("highlight") or a.get("comment") or "", "lat": a.get("lat"), "lng": a.get("lng"),
         "stroller": a.get("stroller"), "nursing": a.get("nursing"), "locker": a.get("locker"),
@@ -1278,7 +1279,8 @@ def _members_animal(*names):
 def _members_tag(tag):
     return [m["name"] for m in entry_meta if tag in m["tags"]]
 
-_total = len(entry_meta)
+gone_names = {m["name"] for m in entry_meta if m.get("gone")}  # 閉館館＝思い出枠
+_total = len([m for m in entry_meta if not m.get("gone")])  # 制覇の母数は「今行ける館」（閉館館は除外）
 REGION_ID = {"北海道": "hokkaido", "東北": "tohoku", "関東": "kanto", "中部": "chubu",
              "近畿": "kinki", "中国": "chugoku", "四国": "shikoku", "九州・沖縄": "kyushu"}
 medals_data = []
@@ -1305,10 +1307,15 @@ for mid, icon, name, desc, members in [
     if members:
         medals_data.append({"id": mid, "icon": icon, "name": name, "desc": desc, "members": members})
 for region in REGIONS:
-    members = [m["name"] for m in entry_meta if pref_to_region.get(m["pref"]) == region]
+    r_all = [m["name"] for m in entry_meta if pref_to_region.get(m["pref"]) == region]
+    members = [n for n in r_all if n not in gone_names]      # 今行ける館だけで完全制覇できる
+    r_past = [n for n in r_all if n in gone_names]            # 閉館館は思い出（past）へ
     if members:
-        medals_data.append({"id": f"area_{REGION_ID[region]}", "icon": "🗾", "name": f"{region}マスター",
-                            "desc": f"{region}エリアの水族館をぜんぶ制覇！", "members": members})
+        md = {"id": f"area_{REGION_ID[region]}", "icon": "🗾", "name": f"{region}マスター",
+              "desc": f"{region}エリアの水族館をぜんぶ制覇！", "members": members}
+        if r_past:
+            md["past"] = r_past
+        medals_data.append(md)
 
 # ラッコメダルは「思い出」対応：今は鳥羽だけだが、かつてラッコに会えた館を訪れたファンも記録できる
 # （最盛期1994年は全国28施設・122頭。今は鳥羽水族館の2頭のみ）
@@ -1440,7 +1447,9 @@ __ATTR_CSS__
 const STAMPS = __STAMPS__;
 const MEDALS = __MEDALS__;
 const REGIONS = __REGION_NAMES__;
-const TOTAL = STAMPS.length;
+const GONE = new Set(__GONE__); // 閉館館＝思い出枠。制覇の母数・分子から除外
+const TOTAL = STAMPS.filter(s=>!GONE.has(s.n)).length; // 今行ける館数
+const myVisitableCount = ()=>[...myVisits].filter(n=>!GONE.has(n)).length;
 let myVisits = new Set(JSON.parse(localStorage.getItem('myVisits')||'[]'));
 let myDates = JSON.parse(localStorage.getItem('myVisitDates')||'{}');
 
@@ -1467,12 +1476,13 @@ function medalState(m){
     const done = m.members.filter(n=>myVisits.has(n)).length;
     return { done, goal: m.members.length, earned: done === m.members.length };
   }
-  const done = Math.min(myVisits.size, m.target);
-  return { done, goal: m.target, earned: myVisits.size >= m.target };
+  const c = myVisitableCount();
+  const done = Math.min(c, m.target);
+  return { done, goal: m.target, earned: c >= m.target };
 }
 
 function render(){
-  const c = myVisits.size;
+  const c = myVisitableCount();
   document.getElementById('pCount').textContent = c;
   document.getElementById('pBar').style.width = (c/TOTAL*100) + '%';
 
@@ -1487,17 +1497,19 @@ function render(){
   document.getElementById('stampBook').innerHTML = REGIONS.map(r=>{
     const members = STAMPS.map((s,i)=>[s,i]).filter(([s])=>s.r===r);
     if(!members.length) return '';
-    const done = members.filter(([s])=>myVisits.has(s.n)).length;
+    const vis = members.filter(([s])=>!GONE.has(s.n)); // 制覇カウントは今行ける館だけ
+    const done = vis.filter(([s])=>myVisits.has(s.n)).length;
     const cells = members.map(([s,i])=>{
       const on = myVisits.has(s.n);
+      const isGone = GONE.has(s.n);
       const rot = ((i % 5) - 2) * 2.5;
       if(on && s.img){
         return '<div class="stamp on hasimg" onclick="openStamp('+i+')"><img src="'+s.img+'" alt="'+esc(s.n)+'"></div>';
       }
-      return '<div class="stamp '+(on?'on':'off')+'" style="--sc:'+(REGION_COLOR[r]||'#0096c7')+';--rot:'+rot+'deg" '+
-        'onclick="openStamp('+i+')"><span class="e">'+(on?s.e:'')+'</span><span class="n">'+esc(s.n)+'</span></div>';
+      return '<div class="stamp '+(on?'on':'off')+(isGone?' gone':'')+'" style="--sc:'+(REGION_COLOR[r]||'#0096c7')+';--rot:'+rot+'deg" '+
+        'onclick="openStamp('+i+')"><span class="e">'+(on?s.e:(isGone?'🕊':''))+'</span><span class="n">'+(isGone?'🕊':'')+esc(s.n)+'</span></div>';
     }).join('');
-    return '<div class="region-h"><h3>'+r+'</h3><span class="rc">'+done+' / '+members.length+'館</span></div>'+
+    return '<div class="region-h"><h3>'+r+'</h3><span class="rc">'+done+' / '+vis.length+'館</span></div>'+
       '<div class="stamps">'+cells+'</div>';
   }).join('');
 }
@@ -1551,11 +1563,16 @@ window.openMedal = function(i){
   body += s.earned
     ? '<div class="desc vdate">🏅 メダルゲット！おめでとう！</div>'
     : '<div class="desc">あと <b>'+left+'館</b> でゲット！</div>';
-  // ラッコの思い出：かつてラッコに会えた水族館（今はいません）
+  // 思い出枠：ラッコメダルは「かつてラッコに会えた館」、地方メダルは「閉館した館」
   if(m.past && m.past.length){
     const memN = m.past.filter(n=>myVisits.has(n)).length;
-    body += '<div class="past-h">🦦 かつてラッコに会えた水族館<span>（今はいません）</span></div>'+
-      '<div class="desc" style="margin:2px 0 8px">ラッコに会えた思い出：<b>'+(memN + s.done)+'</b> 館</div>'+
+    const isRakko = m.id === 'rakko';
+    const ph = isRakko ? '🦦 かつてラッコに会えた水族館<span>（今はいません）</span>'
+                       : '🕊 思い出の水族館<span>（閉館した館・制覇数には入りません）</span>';
+    const pl = isRakko ? 'ラッコに会えた思い出' : '行った思い出';
+    const pn = isRakko ? (memN + s.done) : memN;
+    body += '<div class="past-h">'+ph+'</div>'+
+      '<div class="desc" style="margin:2px 0 8px">'+pl+'：<b>'+pn+'</b> 館</div>'+
       '<div class="mlist">'+m.past.map(memberLink).join('')+'</div>';
   }
   box.innerHTML = visual + '<h3>'+esc(m.name)+'</h3>' + body +
@@ -1579,6 +1596,7 @@ passport_doc = (PASSPORT_TEMPLATE
     .replace("__FOOTER__", ATTR_FOOTER)
     .replace("__STAMPS__", json.dumps(stamps_data, ensure_ascii=False))
     .replace("__MEDALS__", json.dumps(medals_data, ensure_ascii=False))
+    .replace("__GONE__", json.dumps(sorted(gone_names), ensure_ascii=False))
     .replace("__REGION_NAMES__", json.dumps(list(REGIONS.keys()) + ["その他"], ensure_ascii=False)))
 with open("passport.html", "w") as f:
     f.write(passport_doc)
