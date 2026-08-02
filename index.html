@@ -230,6 +230,8 @@
   .tier-pills { display:flex; flex-wrap:wrap; gap:7px; }
   .tier-pills button { flex:none; white-space:nowrap; border:2px solid #d3dbe2; background:#fff; color:#5a6b7a; border-radius:999px; padding:6px 15px; cursor:pointer; font-size:.85rem; font-family:inherit; font-weight:bold; transition:background .15s,border-color .15s,color .15s; }
   .tier-pills button.active { color:#fff; }
+  .tier-pills .tier-n { font-size:.72rem; opacity:.7; margin-left:1px; }
+  .tier-pills button.active .tier-n { opacity:.95; }
   .tier-pills button[data-tier="一般"].active { background:#0ea5e9; border-color:#0ea5e9; }
   .tier-pills button[data-tier="上級"].active { background:#6366f1; border-color:#6366f1; }
   .tier-pills button[data-tier="マニア"].active { background:#db2777; border-color:#db2777; }
@@ -384,7 +386,7 @@
 <div class="controls" id="navRow"></div>
 <div class="tier-section">
   <div class="tier-card">
-    <div class="tier-head"><span>🐟 だれ向けで選ぶ</span><small>大きさじゃなく“たのしみ方”のタイプ。マニア＝通の穴場</small></div>
+    <div class="tier-head"><span>🐟 どこまで攻める？</span><small>下ほど"通"の穴場まで増える（上級＝一般＋上級で163館、マニア＝ぜんぶ181館）。数字は対象の館数</small></div>
     <div class="tier-pills" id="tierBtns"></div>
   </div>
 </div>
@@ -883,10 +885,13 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   let current = 'すべて';
   let currentTag = null;
   let currentTier = null;
+  // tierは累積レベル：一般⊂上級⊂マニア（下位を含む）。思い出(閉館)だけ別軸
+  const TIER_LEVEL = {'一般':1,'上級':2,'マニア':3};
   function tierMatch(tier, gone){
     if(!currentTier) return true;
     if(currentTier==='思い出') return !!gone;
-    return tier===currentTier;
+    if(gone) return false;
+    return (TIER_LEVEL[tier]||99) <= TIER_LEVEL[currentTier];
   }
   ['すべて', ...Object.keys(REGIONS)].forEach(r=>{
     const b = document.createElement('button');
@@ -913,17 +918,25 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     tagWrap.appendChild(b);
   });
 
-  // だれ向けフィルター（一般/上級/マニア/思い出）— 地域・カテゴリーとは独立してAND絞り込み
+  // だれ向けフィルター（一般/上級/マニア/思い出）— 累積レベル。地域・カテゴリーとは独立してAND絞り込み
+  const tierCounts = {'一般':0,'上級':0,'マニア':0,'思い出':0};
+  allMarkers.forEach(({tier,gone})=>{ if(gone) tierCounts['思い出']++; else if(tier) tierCounts[tier]++; });
+  const tierCum = {
+    '一般': tierCounts['一般'],
+    '上級': tierCounts['一般']+tierCounts['上級'],
+    'マニア': tierCounts['一般']+tierCounts['上級']+tierCounts['マニア'],
+    '思い出': tierCounts['思い出'],
+  };
   const TIERS = [
-    {key:'一般', label:'🐟 一般'},
-    {key:'上級', label:'🐬 上級'},
-    {key:'マニア', label:'🤿 マニア'},
-    {key:'思い出', label:'🕊 思い出'},
+    {key:'一般', emoji:'🐟'},
+    {key:'上級', emoji:'🐬'},
+    {key:'マニア', emoji:'🤿'},
+    {key:'思い出', emoji:'🕊'},
   ];
   const tierWrap = document.getElementById('tierBtns');
   TIERS.forEach(t=>{
     const b = document.createElement('button');
-    b.textContent = t.label;
+    b.innerHTML = `${t.emoji} ${t.key} <span class="tier-n">${tierCum[t.key]}</span>`;
     b.dataset.tier = t.key;
     b.onclick = ()=>{
       if(currentTier===t.key){ currentTier=null; b.classList.remove('active'); }
