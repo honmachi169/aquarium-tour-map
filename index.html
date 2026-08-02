@@ -222,6 +222,18 @@
   .controls { max-width:1100px; margin:0 auto 14px; padding:0 16px; display:flex; gap:8px; flex-wrap:wrap; }
   .controls button { border:2px solid var(--sea); background:#fff; color:var(--sea); border-radius:999px; padding:6px 16px; cursor:pointer; font-size:.85rem; font-family:inherit; font-weight:bold; }
   .controls button.active { background:var(--sea); color:#fff; }
+  /* ===== だれ向けフィルター（一般/上級/マニア/思い出） ===== */
+  .tier-section { max-width:1100px; margin:0 auto 12px; padding:0 16px; }
+  .tier-card { background:linear-gradient(160deg,#fff7fb,#f2f9ff); border:1.5px solid #e6d7f0; border-radius:16px; padding:11px 14px 13px; }
+  .tier-head { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-weight:bold; color:var(--sea-deep); font-size:.9rem; margin-bottom:9px; }
+  .tier-head small { flex-basis:100%; font-weight:normal; color:#9aa7b3; font-size:.72rem; line-height:1.35; }
+  .tier-pills { display:flex; flex-wrap:wrap; gap:7px; }
+  .tier-pills button { flex:none; white-space:nowrap; border:2px solid #d3dbe2; background:#fff; color:#5a6b7a; border-radius:999px; padding:6px 15px; cursor:pointer; font-size:.85rem; font-family:inherit; font-weight:bold; transition:background .15s,border-color .15s,color .15s; }
+  .tier-pills button.active { color:#fff; }
+  .tier-pills button[data-tier="一般"].active { background:#0ea5e9; border-color:#0ea5e9; }
+  .tier-pills button[data-tier="上級"].active { background:#6366f1; border-color:#6366f1; }
+  .tier-pills button[data-tier="マニア"].active { background:#db2777; border-color:#db2777; }
+  .tier-pills button[data-tier="思い出"].active { background:#a78bfa; border-color:#a78bfa; }
   .grid { max-width:1100px; margin:0 auto 60px; padding:0 16px; display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:18px; }
   .card { background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 3px 10px rgba(2,62,138,.12); display:flex; flex-direction:column; transition:transform .15s; border:3px solid transparent; }
   .card:hover { transform:translateY(-5px) rotate(-.5deg); border-color:var(--sky); }
@@ -370,6 +382,12 @@
 <div class="controls" id="regionBtns"></div>
 <div class="controls" id="fixedRow"></div>
 <div class="controls" id="navRow"></div>
+<div class="tier-section">
+  <div class="tier-card">
+    <div class="tier-head"><span>🐟 だれ向けで選ぶ</span><small>大きさじゃなく“たのしみ方”のタイプ。マニア＝通の穴場</small></div>
+    <div class="tier-pills" id="tierBtns"></div>
+  </div>
+</div>
 <div class="cat-section">
   <div class="cat-card">
     <div class="cat-head"><span>🐟 どんな気分で行く？</span><span class="cat-sorts" id="sortBtns"></span></div>
@@ -830,7 +848,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:a.upcoming?upIcon:fishIcon}).addTo(map)
       .bindPopup(buildHtml,{maxWidth:270, closeButton:true, autoPan:false});
-    allMarkers.push({m, tags:a.tags||[], name:a.name});
+    allMarkers.push({m, tags:a.tags||[], name:a.name, tier:a.tier, gone:!!a.gone});
   });
 
   // まだ紹介できていない水族館（薄いピン）
@@ -855,7 +873,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:wishIcon}).addTo(map)
       .bindPopup(buildHtml,{maxWidth:270, autoPan:false});
-    allMarkers.push({m, tags:a.tags||[], name:a.name});
+    allMarkers.push({m, tags:a.tags||[], name:a.name, tier:a.tier, gone:!!a.gone});
   });
 
   const btnWrap = document.getElementById('regionBtns');
@@ -864,6 +882,12 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   const cards = document.getElementById('cards');
   let current = 'すべて';
   let currentTag = null;
+  let currentTier = null;
+  function tierMatch(tier, gone){
+    if(!currentTier) return true;
+    if(currentTier==='思い出') return !!gone;
+    return tier===currentTier;
+  }
   ['すべて', ...Object.keys(REGIONS)].forEach(r=>{
     const b = document.createElement('button');
     b.textContent = r;
@@ -887,6 +911,30 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       applyMapFilter(); render();
     };
     tagWrap.appendChild(b);
+  });
+
+  // だれ向けフィルター（一般/上級/マニア/思い出）— 地域・カテゴリーとは独立してAND絞り込み
+  const TIERS = [
+    {key:'一般', label:'🐟 一般'},
+    {key:'上級', label:'🐬 上級'},
+    {key:'マニア', label:'🤿 マニア'},
+    {key:'思い出', label:'🕊 思い出'},
+  ];
+  const tierWrap = document.getElementById('tierBtns');
+  TIERS.forEach(t=>{
+    const b = document.createElement('button');
+    b.textContent = t.label;
+    b.dataset.tier = t.key;
+    b.onclick = ()=>{
+      if(currentTier===t.key){ currentTier=null; b.classList.remove('active'); }
+      else{
+        currentTier=t.key;
+        document.querySelectorAll('#tierBtns button').forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+      }
+      applyMapFilter(); render();
+    };
+    tierWrap.appendChild(b);
   });
 
   // PC（マウス操作）だけ：カテゴリー行が横スクロールできることを矢印・フェード・自動ピークで知らせる
@@ -955,8 +1003,9 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   navRow.appendChild(playLink);
 
   function applyMapFilter(){
-    allMarkers.forEach(({m,tags,name})=>{
-      const show = !currentTag || (currentTag==='__visited' ? myVisits.has(name) : currentTag==='__wish' ? myWishlist.has(name) : tags.includes(currentTag));
+    allMarkers.forEach(({m,tags,name,tier,gone})=>{
+      const tagOk = !currentTag || (currentTag==='__visited' ? myVisits.has(name) : currentTag==='__wish' ? myWishlist.has(name) : tags.includes(currentTag));
+      const show = tagOk && tierMatch(tier, gone);
       if(show){ if(!map.hasLayer(m)) m.addTo(map); }
       else{ if(map.hasLayer(m)) map.removeLayer(m); }
     });
@@ -1068,11 +1117,12 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     cards.innerHTML='';
     const q = animalQuery.trim().toLowerCase();
     const filtered = aqs.filter(a=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (currentTag==='__visited' ? myVisits.has(a.name) : currentTag==='__wish' ? myWishlist.has(a.name) : (a.tags||[]).includes(currentTag))))
+      .filter(a=> tierMatch(a.tier, a.gone))
       .filter(a=> !q || (a.animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.search_animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.only||'').toLowerCase().includes(q));
     const sorted = applySortOrder(filtered);
     filtered.length = 0; filtered.push(...sorted);
-    const filterActive = current!=='すべて' || currentTag || q;
-    const sig = current+'|'+currentTag+'|'+q;
+    const filterActive = current!=='すべて' || currentTag || currentTier || q;
+    const sig = current+'|'+currentTag+'|'+currentTier+'|'+q;
     if(sig!==lastSig){ shownCount = CARD_INIT; lastSig = sig; }
     const visList = filterActive ? filtered : filtered.slice(0, shownCount);
     visList.forEach(a=>{
