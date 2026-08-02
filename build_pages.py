@@ -264,7 +264,7 @@ loadYtComments();''' if v else ''
         "slug": slug, "name": a["name"], "pref": a.get("pref", ""), "url": page_url,
         "thumb": thumb or ogimg, "animals": a.get("animals") or [], "tags": a.get("tags") or [],
         "rakko_past": bool(a.get("rakko_past")), "rakko_past_note": a.get("rakko_past_note") or "",
-        "gone": bool(a.get("gone")),
+        "gone": bool(a.get("gone")), "tier": a.get("tier"),
         "mendako_history": bool(a.get("mendako_history")),
         "comment": a.get("highlight") or a.get("comment") or "", "lat": a.get("lat"), "lng": a.get("lng"),
         "stroller": a.get("stroller"), "nursing": a.get("nursing"), "locker": a.get("locker"),
@@ -1269,6 +1269,8 @@ stamps_data = []
 for m in entry_meta:
     st = {"n": m["name"], "p": m["pref"], "r": pref_to_region.get(m["pref"], "その他"),
           "u": m["url"], "e": _stamp_emoji(m)}
+    if m.get("tier"):
+        st["t"] = m["tier"]
     simg = f"assets/stamps/{m['slug']}.png"
     if os.path.exists(simg):
         st["img"] = simg
@@ -1365,6 +1367,11 @@ main { max-width:900px; margin:0 auto; padding:20px 16px 40px; }
 .cover .big small { font-size:1rem; color:#fff; font-weight:normal; }
 .pbar { background:rgba(255,255,255,.25); border-radius:999px; height:10px; margin:12px auto 6px; max-width:340px; overflow:hidden; }
 .pbar div { background:var(--sun); height:100%; border-radius:999px; width:0%; transition:width .8s ease; }
+.tierprog { display:flex; justify-content:center; flex-wrap:wrap; gap:6px; margin:11px auto 2px; max-width:370px; }
+.tierprog .tp { display:flex; align-items:center; gap:4px; background:rgba(255,255,255,.15); border:1.5px solid rgba(255,255,255,.34); border-radius:999px; padding:4px 11px; font-size:.8rem; font-weight:bold; color:#fff; }
+.tierprog .tp b { color:var(--sun); }
+.tierprog .tp small { font-weight:normal; opacity:.85; }
+.tierprog .tp.done { background:rgba(155,246,176,.24); border-color:#9bf6b0; }
 .cover .note { font-size:.7rem; opacity:.75; margin-top:8px; }
 h2 { color:var(--sea-deep); font-size:1.1rem; margin:26px 0 4px; }
 .sec-note { font-size:.76rem; color:#789; margin-bottom:12px; }
@@ -1426,6 +1433,7 @@ __ATTR_CSS__
     <div class="owner" id="ownerName" title="タップでなまえを変えられるよ"></div>
     <div class="big"><span id="pCount">0</span><small> / __TOTAL__館</small></div>
     <div class="pbar"><div id="pBar"></div></div>
+    <div class="tierprog" id="tierProg"></div>
     <div class="note">MAPの「⬜行ったらチェック」と連動してるよ。スタンプをタップしても押せる🐟</div>
   </div>
 
@@ -1481,10 +1489,20 @@ function medalState(m){
   return { done, goal: m.target, earned: c >= m.target };
 }
 
+const TIER_LEVEL = {'一般':1,'上級':2,'マニア':3};
+function renderTierProg(){
+  const st = (lv)=>{ const pool = STAMPS.filter(s=>!GONE.has(s.n) && (TIER_LEVEL[s.t]||99)<=lv); return {v: pool.filter(s=>myVisits.has(s.n)).length, t: pool.length}; };
+  const rows = [{e:'🐟',n:'一般',...st(1)},{e:'🐬',n:'上級',...st(2)},{e:'🤿',n:'マニア',...st(3)}];
+  document.getElementById('tierProg').innerHTML = rows.map(r=>{
+    const done = r.t>0 && r.v===r.t;
+    return '<span class="tp'+(done?' done':'')+'">'+r.e+r.n+' <b>'+r.v+'</b><small>/'+r.t+'</small>'+(done?' ✅':'')+'</span>';
+  }).join('');
+}
 function render(){
   const c = myVisitableCount();
   document.getElementById('pCount').textContent = c;
   document.getElementById('pBar').style.width = (c/TOTAL*100) + '%';
+  renderTierProg();
 
   document.getElementById('medalGrid').innerHTML = MEDALS.map((m,i)=>{
     const s = medalState(m);

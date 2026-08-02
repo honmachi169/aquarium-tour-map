@@ -222,20 +222,6 @@
   .controls { max-width:1100px; margin:0 auto 14px; padding:0 16px; display:flex; gap:8px; flex-wrap:wrap; }
   .controls button { border:2px solid var(--sea); background:#fff; color:var(--sea); border-radius:999px; padding:6px 16px; cursor:pointer; font-size:.85rem; font-family:inherit; font-weight:bold; }
   .controls button.active { background:var(--sea); color:#fff; }
-  /* ===== だれ向けフィルター（一般/上級/マニア/思い出） ===== */
-  .tier-section { max-width:1100px; margin:0 auto 12px; padding:0 16px; }
-  .tier-card { background:linear-gradient(160deg,#fff7fb,#f2f9ff); border:1.5px solid #e6d7f0; border-radius:16px; padding:11px 14px 13px; }
-  .tier-head { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-weight:bold; color:var(--sea-deep); font-size:.9rem; margin-bottom:9px; }
-  .tier-head small { flex-basis:100%; font-weight:normal; color:#9aa7b3; font-size:.72rem; line-height:1.35; }
-  .tier-pills { display:flex; flex-wrap:wrap; gap:7px; }
-  .tier-pills button { flex:none; white-space:nowrap; border:2px solid #d3dbe2; background:#fff; color:#5a6b7a; border-radius:999px; padding:6px 15px; cursor:pointer; font-size:.85rem; font-family:inherit; font-weight:bold; transition:background .15s,border-color .15s,color .15s; }
-  .tier-pills button.active { color:#fff; }
-  .tier-pills .tier-n { font-size:.72rem; opacity:.7; margin-left:1px; }
-  .tier-pills button.active .tier-n { opacity:.95; }
-  .tier-pills button[data-tier="一般"].active { background:#0ea5e9; border-color:#0ea5e9; }
-  .tier-pills button[data-tier="上級"].active { background:#6366f1; border-color:#6366f1; }
-  .tier-pills button[data-tier="マニア"].active { background:#db2777; border-color:#db2777; }
-  .tier-pills button[data-tier="思い出"].active { background:#a78bfa; border-color:#a78bfa; }
   .grid { max-width:1100px; margin:0 auto 60px; padding:0 16px; display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:18px; }
   .card { background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 3px 10px rgba(2,62,138,.12); display:flex; flex-direction:column; transition:transform .15s; border:3px solid transparent; }
   .card:hover { transform:translateY(-5px) rotate(-.5deg); border-color:var(--sky); }
@@ -384,12 +370,6 @@
 <div class="controls" id="regionBtns"></div>
 <div class="controls" id="fixedRow"></div>
 <div class="controls" id="navRow"></div>
-<div class="tier-section">
-  <div class="tier-card">
-    <div class="tier-head"><span>🐟 どこまで攻める？</span><small>下ほど"通"の穴場まで増える（上級＝一般＋上級で163館、マニア＝ぜんぶ181館）。数字は対象の館数</small></div>
-    <div class="tier-pills" id="tierBtns"></div>
-  </div>
-</div>
 <div class="cat-section">
   <div class="cat-card">
     <div class="cat-head"><span>🐟 どんな気分で行く？</span><span class="cat-sorts" id="sortBtns"></span></div>
@@ -884,15 +864,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   const cards = document.getElementById('cards');
   let current = 'すべて';
   let currentTag = null;
-  let currentTier = null;
-  // tierは累積レベル：一般⊂上級⊂マニア（下位を含む）。思い出(閉館)だけ別軸
-  const TIER_LEVEL = {'一般':1,'上級':2,'マニア':3};
-  function tierMatch(tier, gone){
-    if(!currentTier) return true;
-    if(currentTier==='思い出') return !!gone;
-    if(gone) return false;
-    return (TIER_LEVEL[tier]||99) <= TIER_LEVEL[currentTier];
-  }
   ['すべて', ...Object.keys(REGIONS)].forEach(r=>{
     const b = document.createElement('button');
     b.textContent = r;
@@ -916,38 +887,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       applyMapFilter(); render();
     };
     tagWrap.appendChild(b);
-  });
-
-  // だれ向けフィルター（一般/上級/マニア/思い出）— 累積レベル。地域・カテゴリーとは独立してAND絞り込み
-  const tierCounts = {'一般':0,'上級':0,'マニア':0,'思い出':0};
-  allMarkers.forEach(({tier,gone})=>{ if(gone) tierCounts['思い出']++; else if(tier) tierCounts[tier]++; });
-  const tierCum = {
-    '一般': tierCounts['一般'],
-    '上級': tierCounts['一般']+tierCounts['上級'],
-    'マニア': tierCounts['一般']+tierCounts['上級']+tierCounts['マニア'],
-    '思い出': tierCounts['思い出'],
-  };
-  const TIERS = [
-    {key:'一般', emoji:'🐟'},
-    {key:'上級', emoji:'🐬'},
-    {key:'マニア', emoji:'🤿'},
-    {key:'思い出', emoji:'🕊'},
-  ];
-  const tierWrap = document.getElementById('tierBtns');
-  TIERS.forEach(t=>{
-    const b = document.createElement('button');
-    b.innerHTML = `${t.emoji} ${t.key} <span class="tier-n">${tierCum[t.key]}</span>`;
-    b.dataset.tier = t.key;
-    b.onclick = ()=>{
-      if(currentTier===t.key){ currentTier=null; b.classList.remove('active'); }
-      else{
-        currentTier=t.key;
-        document.querySelectorAll('#tierBtns button').forEach(x=>x.classList.remove('active'));
-        b.classList.add('active');
-      }
-      applyMapFilter(); render();
-    };
-    tierWrap.appendChild(b);
   });
 
   // PC（マウス操作）だけ：カテゴリー行が横スクロールできることを矢印・フェード・自動ピークで知らせる
@@ -1016,9 +955,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   navRow.appendChild(playLink);
 
   function applyMapFilter(){
-    allMarkers.forEach(({m,tags,name,tier,gone})=>{
-      const tagOk = !currentTag || (currentTag==='__visited' ? myVisits.has(name) : currentTag==='__wish' ? myWishlist.has(name) : tags.includes(currentTag));
-      const show = tagOk && tierMatch(tier, gone);
+    allMarkers.forEach(({m,tags,name})=>{
+      const show = !currentTag || (currentTag==='__visited' ? myVisits.has(name) : currentTag==='__wish' ? myWishlist.has(name) : tags.includes(currentTag));
       if(show){ if(!map.hasLayer(m)) m.addTo(map); }
       else{ if(map.hasLayer(m)) map.removeLayer(m); }
     });
@@ -1130,12 +1068,11 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     cards.innerHTML='';
     const q = animalQuery.trim().toLowerCase();
     const filtered = aqs.filter(a=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (currentTag==='__visited' ? myVisits.has(a.name) : currentTag==='__wish' ? myWishlist.has(a.name) : (a.tags||[]).includes(currentTag))))
-      .filter(a=> tierMatch(a.tier, a.gone))
       .filter(a=> !q || (a.animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.search_animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.only||'').toLowerCase().includes(q));
     const sorted = applySortOrder(filtered);
     filtered.length = 0; filtered.push(...sorted);
-    const filterActive = current!=='すべて' || currentTag || currentTier || q;
-    const sig = current+'|'+currentTag+'|'+currentTier+'|'+q;
+    const filterActive = current!=='すべて' || currentTag || q;
+    const sig = current+'|'+currentTag+'|'+q;
     if(sig!==lastSig){ shownCount = CARD_INIT; lastSig = sig; }
     const visList = filterActive ? filtered : filtered.slice(0, shownCount);
     visList.forEach(a=>{
@@ -1213,6 +1150,17 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   // ===== 制覇マップ画像シェア =====
   const ALL_SPOTS = [...aqs, ...(data.unvisited||[])];
   const VISITABLE = ALL_SPOTS.filter(a=>!a.gone); // 今行ける館（制覇の母数）。閉館館は思い出枠として別扱い
+  // tier別の制覇状況（一般⊂上級⊂マニアの累積）。SNSで「一般はコンプ／マニアはまだまだ」を出すため
+  const TIER_LEVEL = {'一般':1,'上級':2,'マニア':3};
+  function tierProgress(){
+    const st = (lv)=>{ const pool = VISITABLE.filter(a=>(TIER_LEVEL[a.tier]||99)<=lv); return {v: pool.filter(a=>myVisits.has(a.name)).length, t: pool.length}; };
+    const gen=st(1), adv=st(2), man=st(3);
+    let badge='';
+    if(man.t>0 && man.v===man.t) badge='🏆 ぜんぶ制覇！';
+    else if(adv.v===adv.t) badge='🐬 上級までコンプリート！';
+    else if(gen.v===gen.t) badge='🐟 一般コンプリート！';
+    return {gen, adv, man, badge};
+  }
   const FONT = '"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif';
   let japanOutline = null;
   const shareImgs = {};
@@ -1300,35 +1248,59 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       ctx.lineWidth=3; ctx.strokeStyle='#fff'; ctx.stroke();
     });
 
-    // タイトル（上）・カウント（左上の空いた海に。日本地図は右上が北海道なので左上が空く）
-    const n = VISITABLE.filter(a=>myVisits.has(a.name)).length, total = VISITABLE.length;
+    // タイトル
     ctx.textAlign='center'; ctx.fillStyle='#fff';
     ctx.font='bold 46px '+FONT;
-    ctx.fillText('🐟 わたしの水族館ツアー制覇MAP', W/2, 66);
-    const numTxt = String(n), restTxt = ` / ${total}館 制覇！`;
-    ctx.textAlign='left';
-    ctx.shadowColor='rgba(2,62,138,.5)'; ctx.shadowBlur=8; ctx.shadowOffsetY=4;
-    ctx.fillStyle='#ffd166'; ctx.font='bold 104px '+FONT;
-    const wNum = ctx.measureText(numTxt).width;
-    ctx.fillText(numTxt, 80, 208);
-    ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
-    ctx.fillStyle='#fff'; ctx.font='bold 50px '+FONT;
-    ctx.fillText(restTxt, 80+wNum, 208);
+    ctx.fillText('🐟 わたしの水族館ツアー制覇MAP', W/2, 60);
 
-    // 凡例（左側の海に）＋フッター
-    const ly = 498;
-    ctx.beginPath(); ctx.arc(124, ly-14, 14, 0, Math.PI*2);
+    // tier別の制覇（一般＝王道／上級／マニアの累積。SNSで段階の自慢ができる）
+    const tp = tierProgress();
+    if(tp.badge){
+      ctx.font='bold 42px '+FONT; ctx.fillStyle='#ffd166'; ctx.textAlign='center';
+      ctx.fillText(tp.badge, W/2, 112);
+    }
+    // 左の海に半透明カードでtier進捗
+    const cardY = tp.badge?142:126, cardH=252;
+    ctx.fillStyle='rgba(2,62,138,.34)';
+    ctx.beginPath();
+    if(ctx.roundRect) ctx.roundRect(40, cardY, 486, cardH, 22); else ctx.rect(40, cardY, 486, cardH);
+    ctx.fill();
+    const rows = [
+      {e:'🐟', n:'一般',  ...tp.gen},
+      {e:'🐬', n:'上級',  ...tp.adv},
+      {e:'🤿', n:'マニア', ...tp.man},
+    ];
+    let py = cardY+70;
+    rows.forEach(r=>{
+      const done = r.t>0 && r.v===r.t;
+      ctx.textAlign='left';
+      ctx.font='bold 40px '+FONT; ctx.fillStyle='#fff';
+      ctx.fillText(`${r.e} ${r.n}`, 62, py);
+      ctx.font='bold 46px '+FONT; ctx.fillStyle='#ffd166';
+      ctx.fillText(String(r.v), 258, py);
+      const wv = ctx.measureText(String(r.v)).width;
+      ctx.font='bold 30px '+FONT; ctx.fillStyle='rgba(255,255,255,.92)';
+      ctx.fillText(`/${r.t}`, 258+wv+4, py);
+      const wt = ctx.measureText(`/${r.t}`).width;
+      ctx.font='bold 30px '+FONT;
+      ctx.fillStyle = done ? '#9bf6b0' : 'rgba(255,255,255,.62)';
+      ctx.fillText(done ? '✅コンプ！' : `あと${r.t-r.v}`, 258+wv+4+wt+16, py);
+      py += 74;
+    });
+
+    // 凡例＋思い出＋フッター
+    const ly = cardY+cardH+66;
+    ctx.beginPath(); ctx.arc(60, ly-13, 12, 0, Math.PI*2);
     ctx.fillStyle='#ff6b6b'; ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle='#fff'; ctx.stroke();
-    ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 42px '+FONT; ctx.textAlign='left';
-    ctx.fillText('＝ 行った水族館', 152, ly);
-    // 思い出の水族館（閉館館を回った人だけ・母数には入れない）
+    ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 32px '+FONT; ctx.textAlign='left';
+    ctx.fillText('＝ 行った水族館', 84, ly);
     const memN = ALL_SPOTS.filter(a=>a.gone && myVisits.has(a.name)).length;
     if(memN>0){
-      const my = ly+54;
-      ctx.beginPath(); ctx.arc(124, my-14, 14, 0, Math.PI*2);
+      const my = ly+48;
+      ctx.beginPath(); ctx.arc(60, my-12, 12, 0, Math.PI*2);
       ctx.fillStyle='#c8b6ff'; ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle='#fff'; ctx.stroke();
-      ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 38px '+FONT; ctx.textAlign='left';
-      ctx.fillText(`＝ 思い出の水族館 ${memN}館`, 152, my);
+      ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 28px '+FONT;
+      ctx.fillText(`＝ 思い出の水族館 ${memN}館`, 84, my);
     }
     ctx.textAlign='center';
     ctx.font='bold 30px '+FONT; ctx.fillStyle='rgba(255,255,255,.95)';
@@ -1359,13 +1331,14 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     const b = await canvasBlob();
     if(!b) return;
     const file = new File([b], 'suizokukan-seiha-map.png', {type:'image/png'});
-    const text = `わたしは全国の水族館 ${myVisits.size}/${ALL_SPOTS.length}館 制覇！🐟🏆\n#全国水族館ツアーMAP\nhttps://aquarium.yasasea.com/`;
+    const tp = tierProgress();
+    const text = `わたしの水族館めぐり🐟\n${tp.badge?tp.badge+'\n':''}一般${tp.gen.v}/${tp.gen.t}｜上級${tp.adv.v}/${tp.adv.t}｜マニア${tp.man.v}/${tp.man.t}\n#全国水族館ツアーMAP\nhttps://aquarium.yasasea.com/`;
     if(navigator.canShare && navigator.canShare({files:[file]})){
       try{ await navigator.share({files:[file], text}); return; }catch(e){ if(e.name==='AbortError') return; }
     }
     // シェア非対応（PCなど）：画像を保存してXの投稿画面を開く
     document.getElementById('mapImgSave').click();
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`わたしは全国の水族館 ${myVisits.size}/${ALL_SPOTS.length}館 制覇！🐟🏆\n#全国水族館ツアーMAP`)}&url=${encodeURIComponent('https://aquarium.yasasea.com/')}`,'_blank');
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`わたしの水族館めぐり🐟\n${tp.badge?tp.badge+'\n':''}一般${tp.gen.v}/${tp.gen.t}｜上級${tp.adv.v}/${tp.adv.t}｜マニア${tp.man.v}/${tp.man.t}\n#全国水族館ツアーMAP`)}&url=${encodeURIComponent('https://aquarium.yasasea.com/')}`,'_blank');
   };
 
   render();
