@@ -830,7 +830,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:a.upcoming?upIcon:fishIcon}).addTo(map)
       .bindPopup(buildHtml,{maxWidth:270, closeButton:true, autoPan:false});
-    allMarkers.push({m, tags:a.tags||[], name:a.name, tier:a.tier, gone:!!a.gone});
+    allMarkers.push({m, tags:a.tags||[], name:a.name});
   });
 
   // まだ紹介できていない水族館（薄いピン）
@@ -855,7 +855,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       + `</div></div></div>`;
     const m = L.marker([a.lat,a.lng],{icon:wishIcon}).addTo(map)
       .bindPopup(buildHtml,{maxWidth:270, autoPan:false});
-    allMarkers.push({m, tags:a.tags||[], name:a.name, tier:a.tier, gone:!!a.gone});
+    allMarkers.push({m, tags:a.tags||[], name:a.name});
   });
 
   const btnWrap = document.getElementById('regionBtns');
@@ -1150,17 +1150,6 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   // ===== 制覇マップ画像シェア =====
   const ALL_SPOTS = [...aqs, ...(data.unvisited||[])];
   const VISITABLE = ALL_SPOTS.filter(a=>!a.gone); // 今行ける館（制覇の母数）。閉館館は思い出枠として別扱い
-  // tier別の制覇状況（一般⊂上級⊂マニアの累積）。SNSで「一般はコンプ／マニアはまだまだ」を出すため
-  const TIER_LEVEL = {'一般':1,'上級':2,'マニア':3};
-  function tierProgress(){
-    const st = (lv)=>{ const pool = VISITABLE.filter(a=>(TIER_LEVEL[a.tier]||99)<=lv); return {v: pool.filter(a=>myVisits.has(a.name)).length, t: pool.length}; };
-    const gen=st(1), adv=st(2), man=st(3);
-    let badge='';
-    if(man.t>0 && man.v===man.t) badge='🏆 ぜんぶ制覇！';
-    else if(adv.v===adv.t) badge='🐬 上級までコンプリート！';
-    else if(gen.v===gen.t) badge='🐟 一般コンプリート！';
-    return {gen, adv, man, badge};
-  }
   const FONT = '"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif';
   let japanOutline = null;
   const shareImgs = {};
@@ -1248,59 +1237,35 @@ fetch('data.json').then(r=>r.json()).then(data=>{
       ctx.lineWidth=3; ctx.strokeStyle='#fff'; ctx.stroke();
     });
 
-    // タイトル
+    // タイトル（上）・カウント（左上の空いた海に。日本地図は右上が北海道なので左上が空く）
+    const n = VISITABLE.filter(a=>myVisits.has(a.name)).length, total = VISITABLE.length;
     ctx.textAlign='center'; ctx.fillStyle='#fff';
     ctx.font='bold 46px '+FONT;
-    ctx.fillText('🐟 わたしの水族館ツアー制覇MAP', W/2, 60);
+    ctx.fillText('🐟 わたしの水族館ツアー制覇MAP', W/2, 66);
+    const numTxt = String(n), restTxt = ` / ${total}館 制覇！`;
+    ctx.textAlign='left';
+    ctx.shadowColor='rgba(2,62,138,.5)'; ctx.shadowBlur=8; ctx.shadowOffsetY=4;
+    ctx.fillStyle='#ffd166'; ctx.font='bold 104px '+FONT;
+    const wNum = ctx.measureText(numTxt).width;
+    ctx.fillText(numTxt, 80, 208);
+    ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+    ctx.fillStyle='#fff'; ctx.font='bold 50px '+FONT;
+    ctx.fillText(restTxt, 80+wNum, 208);
 
-    // tier別の制覇（一般＝王道／上級／マニアの累積。SNSで段階の自慢ができる）
-    const tp = tierProgress();
-    if(tp.badge){
-      ctx.font='bold 42px '+FONT; ctx.fillStyle='#ffd166'; ctx.textAlign='center';
-      ctx.fillText(tp.badge, W/2, 112);
-    }
-    // 左の海に半透明カードでtier進捗
-    const cardY = tp.badge?142:126, cardH=252;
-    ctx.fillStyle='rgba(2,62,138,.34)';
-    ctx.beginPath();
-    if(ctx.roundRect) ctx.roundRect(40, cardY, 486, cardH, 22); else ctx.rect(40, cardY, 486, cardH);
-    ctx.fill();
-    const rows = [
-      {e:'🐟', n:'一般',  ...tp.gen},
-      {e:'🐬', n:'上級',  ...tp.adv},
-      {e:'🤿', n:'マニア', ...tp.man},
-    ];
-    let py = cardY+70;
-    rows.forEach(r=>{
-      const done = r.t>0 && r.v===r.t;
-      ctx.textAlign='left';
-      ctx.font='bold 40px '+FONT; ctx.fillStyle='#fff';
-      ctx.fillText(`${r.e} ${r.n}`, 62, py);
-      ctx.font='bold 46px '+FONT; ctx.fillStyle='#ffd166';
-      ctx.fillText(String(r.v), 258, py);
-      const wv = ctx.measureText(String(r.v)).width;
-      ctx.font='bold 30px '+FONT; ctx.fillStyle='rgba(255,255,255,.92)';
-      ctx.fillText(`/${r.t}`, 258+wv+4, py);
-      const wt = ctx.measureText(`/${r.t}`).width;
-      ctx.font='bold 30px '+FONT;
-      ctx.fillStyle = done ? '#9bf6b0' : 'rgba(255,255,255,.62)';
-      ctx.fillText(done ? '✅コンプ！' : `あと${r.t-r.v}`, 258+wv+4+wt+16, py);
-      py += 74;
-    });
-
-    // 凡例＋思い出＋フッター
-    const ly = cardY+cardH+66;
-    ctx.beginPath(); ctx.arc(60, ly-13, 12, 0, Math.PI*2);
+    // 凡例（左側の海に）＋フッター
+    const ly = 498;
+    ctx.beginPath(); ctx.arc(124, ly-14, 14, 0, Math.PI*2);
     ctx.fillStyle='#ff6b6b'; ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle='#fff'; ctx.stroke();
-    ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 32px '+FONT; ctx.textAlign='left';
-    ctx.fillText('＝ 行った水族館', 84, ly);
+    ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 42px '+FONT; ctx.textAlign='left';
+    ctx.fillText('＝ 行った水族館', 152, ly);
+    // 思い出の水族館（閉館館を回った人だけ・母数には入れない）
     const memN = ALL_SPOTS.filter(a=>a.gone && myVisits.has(a.name)).length;
     if(memN>0){
-      const my = ly+48;
-      ctx.beginPath(); ctx.arc(60, my-12, 12, 0, Math.PI*2);
+      const my = ly+54;
+      ctx.beginPath(); ctx.arc(124, my-14, 14, 0, Math.PI*2);
       ctx.fillStyle='#c8b6ff'; ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle='#fff'; ctx.stroke();
-      ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 28px '+FONT;
-      ctx.fillText(`＝ 思い出の水族館 ${memN}館`, 84, my);
+      ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 38px '+FONT; ctx.textAlign='left';
+      ctx.fillText(`＝ 思い出の水族館 ${memN}館`, 152, my);
     }
     ctx.textAlign='center';
     ctx.font='bold 30px '+FONT; ctx.fillStyle='rgba(255,255,255,.95)';
@@ -1331,14 +1296,13 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     const b = await canvasBlob();
     if(!b) return;
     const file = new File([b], 'suizokukan-seiha-map.png', {type:'image/png'});
-    const tp = tierProgress();
-    const text = `わたしの水族館めぐり🐟\n${tp.badge?tp.badge+'\n':''}一般${tp.gen.v}/${tp.gen.t}｜上級${tp.adv.v}/${tp.adv.t}｜マニア${tp.man.v}/${tp.man.t}\n#全国水族館ツアーMAP\nhttps://aquarium.yasasea.com/`;
+    const text = `わたしは全国の水族館 ${myVisits.size}/${ALL_SPOTS.length}館 制覇！🐟🏆\n#全国水族館ツアーMAP\nhttps://aquarium.yasasea.com/`;
     if(navigator.canShare && navigator.canShare({files:[file]})){
       try{ await navigator.share({files:[file], text}); return; }catch(e){ if(e.name==='AbortError') return; }
     }
     // シェア非対応（PCなど）：画像を保存してXの投稿画面を開く
     document.getElementById('mapImgSave').click();
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`わたしの水族館めぐり🐟\n${tp.badge?tp.badge+'\n':''}一般${tp.gen.v}/${tp.gen.t}｜上級${tp.adv.v}/${tp.adv.t}｜マニア${tp.man.v}/${tp.man.t}\n#全国水族館ツアーMAP`)}&url=${encodeURIComponent('https://aquarium.yasasea.com/')}`,'_blank');
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`わたしは全国の水族館 ${myVisits.size}/${ALL_SPOTS.length}館 制覇！🐟🏆\n#全国水族館ツアーMAP`)}&url=${encodeURIComponent('https://aquarium.yasasea.com/')}`,'_blank');
   };
 
   render();
