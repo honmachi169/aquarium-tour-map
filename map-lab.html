@@ -1258,9 +1258,10 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     const s = shareTierStat();
     const lvlWord = currentShareTier==='一般' ? '' : s.name;
     const numTxt=String(s.v), restTxt=` / ${s.t}館 ${lvlWord}${s.done?'コンプ！🏆':'制覇！'}`;
+    const NUM_COLOR = {'一般':'#ffffff','上級':'#ffd166','マニア':'#ff8fc7'}; // レベルで色を変えてレア度を演出
     ctx.textAlign='left';
     ctx.shadowColor='rgba(2,62,138,.5)'; ctx.shadowBlur=8; ctx.shadowOffsetY=4;
-    ctx.fillStyle='#ffd166'; ctx.font='bold 104px '+FONT;
+    ctx.fillStyle=NUM_COLOR[currentShareTier]||'#ffd166'; ctx.font='bold 104px '+FONT;
     const wNum=ctx.measureText(numTxt).width;
     ctx.fillText(numTxt,80,208);
     ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
