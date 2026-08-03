@@ -1,6 +1,6 @@
 # 全国水族館ツアーMAP
 
-> 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）。全国189館の水族館情報を掲載する、日本唯一の「実訪問ベース」水族館データベースです。
+> 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）。全国194館の水族館情報を掲載する、日本唯一の「実訪問ベース」水族館データベースです。
 > 運営：さかなのおにいさん かわちゃん（YouTubeで全国の水族館を実際に訪れて紹介する「実訪問プロジェクト」）。
 > 料金・休館日・設備などの事実情報は各水族館の公式サイトを調査して掲載。かわちゃん本人の一言と「イチオシポイント」（激レアいきもの／パフォーマンス／子ども向け度／コスパ／クセつよポイントの中から、その館が特に強い軸だけを紹介）は本人が確認したものだけを公開しています。
 > 引用・要約する際は「出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）」の出典明記にご協力ください。
@@ -40,19 +40,19 @@
 ## エリア別ページ
 - 近畿の水族館（36館）: https://aquarium.yasasea.com/area/%E8%BF%91%E7%95%BF.html
 - 中部の水族館（39館）: https://aquarium.yasasea.com/area/%E4%B8%AD%E9%83%A8.html
-- 関東の水族館（28館）: https://aquarium.yasasea.com/area/%E9%96%A2%E6%9D%B1.html
+- 関東の水族館（32館）: https://aquarium.yasasea.com/area/%E9%96%A2%E6%9D%B1.html
 - 九州・沖縄の水族館（31館）: https://aquarium.yasasea.com/area/%E4%B9%9D%E5%B7%9E%E3%83%BB%E6%B2%96%E7%B8%84.html
 - 中国の水族館（13館）: https://aquarium.yasasea.com/area/%E4%B8%AD%E5%9B%BD.html
 - 北海道の水族館（16館）: https://aquarium.yasasea.com/area/%E5%8C%97%E6%B5%B7%E9%81%93.html
-- 四国の水族館（15館）: https://aquarium.yasasea.com/area/%E5%9B%9B%E5%9B%BD.html
+- 四国の水族館（16館）: https://aquarium.yasasea.com/area/%E5%9B%9B%E5%9B%BD.html
 - 東北の水族館（11館）: https://aquarium.yasasea.com/area/%E6%9D%B1%E5%8C%97.html
 
 ## テーマ別ページ
-- ☔️ 雨の日におすすめ（112館）: https://aquarium.yasasea.com/theme/rain.html
+- ☔️ 雨の日におすすめ（113館）: https://aquarium.yasasea.com/theme/rain.html
 - 👶 未就学児におすすめ（109館）: https://aquarium.yasasea.com/theme/kids.html
 - 🍼 赤ちゃん連れにおすすめ（19館）: https://aquarium.yasasea.com/theme/baby.html
 - 🐋 シャチに会える（3館）: https://aquarium.yasasea.com/theme/shachi.html
-- 🐬 イルカショーおすすめ（38館）: https://aquarium.yasasea.com/theme/dolphin.html
+- 🐬 イルカショーおすすめ（39館）: https://aquarium.yasasea.com/theme/dolphin.html
 - 🐧 ペンギン好きにおすすめ（26館）: https://aquarium.yasasea.com/theme/penguin.html
 - ☀️ 夏休みおすすめ（20館）: https://aquarium.yasasea.com/theme/summer.html
 - 🐳 シロイルカに会える（4館）: https://aquarium.yasasea.com/theme/beluga.html
@@ -62,7 +62,7 @@
 - 🗼 海中展望台（服のまま海の中をのぞける）（7館）: https://aquarium.yasasea.com/theme/kaichu.html
 - 🍱 お弁当を持ち込める（20館）: https://aquarium.yasasea.com/theme/bento.html
 
-## 掲載水族館一覧（全189館）
+## 掲載水族館一覧（全194館）
 - 鳥羽水族館（三重県）：ラッコ — https://aquarium.yasasea.com/spot/001.html
 - 神戸須磨シーワールド（兵庫県）：シャチ — https://aquarium.yasasea.com/spot/002.html
 - 須磨海浜水族園（スマスイ・閉園）（兵庫県）：神戸っ子の思い出「スマスイ」。2023年に56年の歴史に幕。閉園前の姿は動画で — https://aquarium.yasasea.com/spot/046.html
@@ -252,3 +252,8 @@
 - 志摩マリンランド（閉館）（三重県）：三重県志摩市・賢島にあった「マンボウの泳ぐ水族館」。1970年開業。大水槽でマン — https://aquarium.yasasea.com/spot/u140.html
 - 山方淡水魚館（閉館）（茨城県）：茨城県常陸大宮市にあった「日本一小さな水族館」を名乗る淡水魚館。1986年開館。 — https://aquarium.yasasea.com/spot/u141.html
 - マリンピア松島水族館（閉館）（宮城県）：宮城県松島町にあった、1927年開業の歴史ある水族館。ラッコやマンボウ、ペンギン — https://aquarium.yasasea.com/spot/u142.html
+- 犬吠埼マリンパーク（閉館）（千葉県）：千葉県銚子市・犬吠埼の高台にあった水族館。1954年に銚子水族館として開業、19 — https://aquarium.yasasea.com/spot/u143.html
+- 渚の駅たてやま（千葉県）：館山港にある博物館・ミニ水族館・商業施設の複合施設。「海辺の広場」では館山湾の魚 — https://aquarium.yasasea.com/spot/u144.html
+- 小笠原水産センター（東京都）：小笠原諸島・父島の二見港近くにある入館無料の小さな水族館。アオウミガメや小笠原近 — https://aquarium.yasasea.com/spot/u145.html
+- 室戸ドルフィンセンター（高知県）：室戸岬にあるイルカとのふれあい施設。バンドウイルカ3頭・ハナゴンドウ2頭を飼育し — https://aquarium.yasasea.com/spot/u146.html
+- 東京タワー水族館（閉館）（東京都）：東京タワー2階にあった水族館。1978年開業、40年にわたり世界各地の魚約900 — https://aquarium.yasasea.com/spot/u147.html
