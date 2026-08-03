@@ -1254,39 +1254,24 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     ctx.font='bold 46px '+FONT;
     ctx.fillText('🐟 わたしの水族館ツアー制覇MAP', W/2, 62);
 
-    // レベルは1つだけ表示。一般＝前と同じ普通の大きい数字（レベル表記なし）、上級・マニア＝ラベル付き
+    // レベルは1つだけ表示。全レベル背景なしの大きい数字で統一。上級・マニアはレベル名を数字の上に添える（一般は表記なし＝従来どおり）
     const s = shareTierStat();
-    if(currentShareTier==='一般'){
-      const numTxt=String(s.v), restTxt=` / ${s.t}館 制覇！`;
+    let numY = 208;
+    if(currentShareTier!=='一般'){
       ctx.textAlign='left';
-      ctx.shadowColor='rgba(2,62,138,.5)'; ctx.shadowBlur=8; ctx.shadowOffsetY=4;
-      ctx.fillStyle='#ffd166'; ctx.font='bold 104px '+FONT;
-      const wNum=ctx.measureText(numTxt).width;
-      ctx.fillText(numTxt,80,208);
-      ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
-      ctx.fillStyle='#fff'; ctx.font='bold 50px '+FONT;
-      ctx.fillText(restTxt,80+wNum,208);
-    } else {
-      const cardX=40, cardY=98, cardW=470, cardH= s.done?170:126;
-      ctx.fillStyle='rgba(2,62,138,.36)';
-      ctx.beginPath();
-      if(ctx.roundRect) ctx.roundRect(cardX,cardY,cardW,cardH,20); else ctx.rect(cardX,cardY,cardW,cardH);
-      ctx.fill();
-      ctx.textAlign='left';
-      ctx.font='bold 44px '+FONT; ctx.fillStyle='#fff';
-      const lb=cardY+80;
-      ctx.fillText(`${s.emoji} ${s.name}`, cardX+24, lb);
-      const wl=ctx.measureText(`${s.emoji} ${s.name}`).width;
-      ctx.shadowColor='rgba(2,62,138,.45)'; ctx.shadowBlur=6; ctx.shadowOffsetY=3;
-      ctx.font='bold 82px '+FONT; ctx.fillStyle='#ffd166';
-      const numX=cardX+24+wl+24;
-      ctx.fillText(String(s.v), numX, lb+8);
-      const wn=ctx.measureText(String(s.v)).width;
-      ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
-      ctx.font='bold 40px '+FONT; ctx.fillStyle='#fff';
-      ctx.fillText(`/${s.t}`, numX+wn+6, lb+8);
-      if(s.done){ ctx.font='bold 40px '+FONT; ctx.fillStyle='#9bf6b0'; ctx.fillText('✅ コンプリート！', cardX+24, cardY+148); }
+      ctx.font='bold 46px '+FONT; ctx.fillStyle='#fff';
+      ctx.fillText(`${s.emoji} ${s.name}`, 80, 150);
+      numY = 236;
     }
+    const numTxt=String(s.v), restTxt=` / ${s.t}館 ${s.done?'コンプ！🏆':'制覇！'}`;
+    ctx.textAlign='left';
+    ctx.shadowColor='rgba(2,62,138,.5)'; ctx.shadowBlur=8; ctx.shadowOffsetY=4;
+    ctx.fillStyle='#ffd166'; ctx.font='bold 104px '+FONT;
+    const wNum=ctx.measureText(numTxt).width;
+    ctx.fillText(numTxt,80,numY);
+    ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+    ctx.fillStyle='#fff'; ctx.font='bold 50px '+FONT;
+    ctx.fillText(restTxt,80+wNum,numY);
 
     // 凡例（左側の海に）＋フッター
     const ly = 498;
@@ -1316,7 +1301,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     return new Promise(res=>document.getElementById('shareCanvas').toBlob(res,'image/png'));
   }
   const lvlBtn = document.getElementById('mapImgLevel');
-  function setLvlBtn(){ lvlBtn.textContent = TIER_BTN[currentShareTier]; }
+  function setLvlBtn(){ lvlBtn.textContent = '🐟レベル'; } /* ボタン表記は固定。表示中レベルはMAP内のラベルで分かる */
   lvlBtn.onclick = async ()=>{
     currentShareTier = TIER_ORDER[(TIER_ORDER.indexOf(currentShareTier)+1)%TIER_ORDER.length];
     setLvlBtn();
