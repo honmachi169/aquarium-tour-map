@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow"><!-- 非公開ラボ：tier制覇MAPの検証用。本番リンクなし・GA計測なし -->
+<title>会いに行こう！全国水族館ツアーMAP | さかなのおにいさん かわちゃんねる</title>
+<meta name="description" content="さかなのおにいさん かわちゃんと巡る全国165館以上の水族館マップ。動画・料金・休館日・みどころ・夏休みイベントがひと目でわかる！行った水族館をチェックして目指せ100館制覇🐟">
+<meta property="og:type" content="website">
+<meta property="og:title" content="会いに行こう！全国水族館ツアーMAP">
+<meta property="og:description" content="さかなのおにいさん かわちゃんと巡る全国165館以上の水族館マップ。キミはいくつ行ったことある？🐟">
+<meta property="og:image" content="https://aquarium.yasasea.com/assets/kawachan_web_ogp.png">
+<meta property="og:url" content="https://aquarium.yasasea.com/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"会いに行こう！全国水族館ツアーMAP","alternateName":"水族館マップ","url":"https://aquarium.yasasea.com/","description":"さかなのおにいさん かわちゃんが実際に訪れた全国165館以上の水族館を、動画・料金・休館日つきで紹介する水族館マップサイト。","inLanguage":"ja","publisher":{"@type":"Organization","name":"株式会社やさしいうみ","url":"https://sakana-bro.com/","logo":"https://aquarium.yasasea.com/assets/favicon-32x32.png","sameAs":["https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA","https://www.instagram.com/kawayanfishing/","https://twitter.com/sakana_bro"]}}</script>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root { --sea:#0096c7; --sea-deep:#023e8a; --sky:#caf0f8; --sand:#fff9ec; --coral:#ff6b6b; --sun:#ffd166; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif; background:var(--sand); color:#234; }
+
+  /* ===== ヘッダー ===== */
+  header { background:linear-gradient(180deg,#48cae4 0%,#0096c7 60%,#0077b6 100%); color:#fff; text-align:center; padding:26px 16px 0; position:relative; overflow:hidden; }
+  .about-jump { position:absolute; top:12px; right:14px; z-index:5; display:inline-flex; align-items:center; gap:3px; background:rgba(255,255,255,.92); color:var(--sea-deep); font-weight:bold; font-size:.78rem; text-decoration:none; padding:7px 14px; border-radius:999px; box-shadow:0 3px 10px rgba(2,62,138,.3); transition:transform .15s, box-shadow .15s; }
+  .about-jump:hover { transform:translateY(-2px); box-shadow:0 5px 16px rgba(2,62,138,.4); }
+  header .bubbles { position:absolute; inset:0; pointer-events:none; }
+  header .bubbles span { position:absolute; bottom:-30px; border-radius:50%; background:rgba(255,255,255,.18); animation:rise linear infinite; }
+  @keyframes rise { to { transform:translateY(-120vh); } }
+  h1 { font-size:clamp(1.7rem,5.5vw,2.7rem); line-height:1.25; text-shadow:0 2px 6px rgba(2,62,138,.4); position:relative; }
+  header .sub { opacity:.95; font-size:.9rem; margin-top:6px; position:relative; }
+  .hero { max-width:540px; width:76%; margin:10px auto -6px; display:block; filter:drop-shadow(0 6px 12px rgba(2,62,138,.35)); position:relative; cursor:pointer; transition:transform .35s ease; }
+  .hero:hover { transform:scale(1.04); }
+  .hero.spin { animation:heroSpin .8s ease-in-out; }
+  @keyframes heroSpin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+  .counter { max-width:520px; margin:0 auto; padding-bottom:8px; position:relative; }
+  .counter .num { font-size:2.1rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 4px rgba(2,62,138,.5); }
+  .counter .num small { font-size:1rem; font-weight:normal; color:#fff; }
+  .counter-sub-btn { position:fixed; bottom:18px; right:18px; z-index:1200; display:inline-flex; align-items:center; gap:4px; background:rgba(255,0,0,.75); color:#fff; font-size:.95rem; font-weight:bold; text-decoration:none; border-radius:999px; padding:11px 20px; box-shadow:0 3px 12px rgba(0,0,0,.25); white-space:nowrap; transition:opacity .2s, transform .15s, background .2s; opacity:.85; backdrop-filter:blur(2px); }
+  .counter-sub-btn:hover { opacity:1; background:#ff0000; transform:translateY(-2px); }
+  @media (max-width:640px) { .counter-sub-btn { position:static; display:inline-flex; margin-top:12px; opacity:1; font-size:.85rem; padding:9px 18px; } }
+  .bar { background:rgba(255,255,255,.3); border-radius:999px; height:16px; margin-top:8px; overflow:hidden; border:2px solid rgba(255,255,255,.5); cursor:pointer; }
+  .bar>div { background:linear-gradient(90deg,var(--sun),#ffe29a); height:100%; border-radius:999px; transition:width 1.2s ease-out, background .6s; }
+  .bar>div.mine { background:linear-gradient(90deg,#2a9d8f,#8fdcd2); }
+  .counter .num { transition:opacity .25s; cursor:pointer; }
+  .wave { display:block; width:calc(100% + 32px); margin-left:-16px; height:40px; margin-top:14px; }
+
+  /* ===== 地図 ===== */
+  #map { height:540px; max-width:1100px; margin:22px auto; border-radius:20px; box-shadow:0 6px 20px rgba(2,62,138,.18); border:4px solid #fff; }
+  /* パン/ズーム中のタイル境界の明滅を抑える（GPU合成ヒント・ジオメトリは変えない） */
+  .leaflet-tile { backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+
+  /* ===== 吹き出しポップアップ ===== */
+  .leaflet-popup-content-wrapper { border-radius:18px; box-shadow:0 6px 20px rgba(2,62,138,.3); padding:0; overflow:hidden; border:3px solid var(--sea); }
+  .leaflet-popup-content { margin:0; width:250px !important; }
+  .leaflet-popup-tip { border:3px solid var(--sea); }
+  .pp { font-family:inherit; }
+  .pp img.thumb { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
+  .pp .inner { padding:10px 12px 12px; }
+  .pp .pref { font-size:.7rem; color:#fff; background:var(--sea); border-radius:999px; padding:2px 10px; }
+  .pp h3 { font-size:.98rem; margin:4px 0 2px; color:var(--sea-deep); }
+  .pp .hl { font-size:.8rem; color:#456; margin:0 0 6px; line-height:1.45; }
+  .pp .info { font-size:.78rem; color:#345; background:#f0f8fc; border-radius:10px; padding:7px 10px; margin-bottom:8px; line-height:1.7; }
+  .pp .info .note { font-size:.66rem; color:#89a; display:block; }
+  .pp .btns { display:flex; flex-wrap:wrap; gap:6px; }
+  .pp .btn { font-size:.78rem; font-weight:bold; text-decoration:none; border-radius:999px; padding:5px 12px; }
+  .pp .btn.yt { background:var(--coral); color:#fff; }
+  .pp .btn.hp { background:var(--sky); color:var(--sea-deep); }
+  .pp .btn.sns { background:#eef2f6; color:#334; }
+  .chips { display:flex; flex-wrap:wrap; gap:5px; margin:2px 0 6px; }
+  .chip { font-size:.72rem; font-weight:bold; background:#e8f6fb; color:#075985; border:1.5px solid #7dd3fc; border-radius:999px; padding:2px 9px; }
+  .chip.only { background:#fff7db; color:#92600a; border-color:#f4c430; }
+  .chip.rakko-past { background:#f3eee7; color:#8a6d3b; border-color:#d8c3a5; border-style:dashed; }
+  .chip.rakko-past small { font-weight:normal; opacity:.75; }
+  .visitbtn { position:relative; font-size:.78rem; font-weight:bold; border-radius:999px; padding:5px 12px; cursor:pointer; border:2px solid #2a9d8f; background:#fff; color:#2a9d8f; font-family:inherit; overflow:visible; }
+  .wishbtn { font-size:.78rem; font-weight:bold; border-radius:999px; padding:5px 12px; cursor:pointer; border:2px solid #f4a460; background:#fff; color:#c47a1e; font-family:inherit; }
+  .wishbtn.on { background:#fff3d6; border-color:#f4a460; color:#a15c00; }
+  .visitbtn.on { background:#2a9d8f; color:#fff; }
+  /* 節目お祝い演出 */
+  .milestone-pop { position:fixed; left:0; right:0; bottom:-100%; display:flex; flex-direction:column; align-items:center; z-index:3000; pointer-events:none; transition:bottom .55s cubic-bezier(.2,1.4,.4,1); }
+  .milestone-pop.show { bottom:0; }
+  .milestone-pop img { width:min(320px,70vw); filter:drop-shadow(0 10px 24px rgba(0,0,0,.3)); }
+  .milestone-pop .milestone-text { background:#fff; border-radius:999px; padding:8px 24px; margin-bottom:-10px; font-weight:bold; color:var(--sea-deep); font-size:1.1rem; box-shadow:0 4px 14px rgba(0,0,0,.15); }
+  .milestone-overlay { position:fixed; inset:0; background:rgba(2,62,138,.15); z-index:2999; opacity:0; pointer-events:none; transition:opacity .4s; }
+  .milestone-overlay.show { opacity:1; }
+  .mini-toast { position:fixed; left:50%; bottom:24px; transform:translate(-50%,20px); background:var(--sea-deep); color:#fff; font-weight:bold; font-size:.85rem; padding:10px 20px; border-radius:999px; box-shadow:0 4px 14px rgba(0,0,0,.25); z-index:3000; opacity:0; transition:opacity .35s, transform .35s; pointer-events:none; }
+  .mini-toast.show { opacity:1; transform:translate(-50%,0); }
+  .mycount { font-size:.85rem; margin-top:6px; color:#fff; opacity:.95; }
+  .mycount b { color:var(--sun); font-size:1.1rem; }
+  .sharebtn { display:inline-block; text-decoration:none; font-family:inherit; font-size:.78rem; font-weight:bold; background:var(--sun); color:#5a4000; border:none; border-radius:999px; padding:5px 14px; cursor:pointer; box-shadow:0 2px 6px rgba(2,62,138,.25); }
+  .sharebtn:active { transform:scale(.96); }
+  .mycount-btns { display:flex; justify-content:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
+  .card.visited { border-color:#2a9d8f; }
+  .card.visited::after { content:"行った！"; position:absolute; top:8px; right:8px; background:#2a9d8f; color:#fff; font-size:.7rem; font-weight:bold; border-radius:999px; padding:3px 10px; transform:rotate(6deg); box-shadow:0 2px 5px rgba(0,0,0,.25); }
+  .card { position:relative; }
+
+  /* ===== コメント電光掲示板 ===== */
+  .ticker-wrap { background:var(--sea-deep); color:#ffe9a8; overflow:hidden; display:flex; align-items:center; height:38px; position:relative; }
+  .ticker-label { flex:none; background:var(--coral); color:#fff; font-size:.75rem; font-weight:bold; padding:0 12px; height:100%; display:flex; align-items:center; z-index:2; }
+  .ticker { flex:1; overflow:hidden; white-space:nowrap; position:relative; height:100%; }
+  .ticker-inner { display:inline-flex; align-items:center; height:100%; white-space:nowrap; padding-left:100%; animation:tick 40s linear infinite; font-size:.88rem; }
+  .ticker-inner span { margin-right:48px; }
+  .ticker-inner b { color:#7dd3fc; font-weight:bold; margin-right:6px; }
+  @keyframes tick { to { transform:translateX(-100%); } }
+  .ticker-post { flex:none; background:var(--sun); color:#5a4000; border:none; font-family:inherit; font-size:.78rem; font-weight:bold; padding:0 14px; height:100%; cursor:pointer; }
+  .cmodal { position:fixed; inset:0; background:rgba(2,62,138,.5); display:none; align-items:center; justify-content:center; z-index:2000; }
+  .cmodal.open { display:flex; }
+  .cmodal .box { background:#fff; border-radius:18px; padding:22px 20px; width:min(92vw,380px); box-shadow:0 10px 40px rgba(0,0,0,.3); }
+  .cmodal h3 { color:var(--sea-deep); margin-bottom:12px; }
+  .cmodal input, .cmodal textarea { width:100%; border:2px solid var(--sky); border-radius:10px; padding:8px 10px; font-family:inherit; font-size:16px; margin-bottom:10px; }
+  .cmodal textarea { height:70px; resize:none; }
+  .cmodal .row { display:flex; gap:8px; justify-content:flex-end; }
+  .cmodal button { border:none; border-radius:999px; padding:8px 18px; font-family:inherit; font-weight:bold; cursor:pointer; }
+  .cmodal .send { background:var(--sea); color:#fff; }
+  .cmodal .cancel { background:#eee; color:#456; }
+  .cmodal .msg { font-size:.8rem; color:var(--coral); min-height:1.2em; margin-bottom:6px; }
+
+  /* ===== カテゴリー・並び替えアコーディオン（PC/スマホ共通） ===== */
+  .cat-section { max-width:1100px; margin:0 auto 14px; padding:0 16px; }
+  .cat-card { background:linear-gradient(160deg,#eaf7fc,#f6fcfe); border:1.5px solid #cdeaf5; border-radius:16px; padding:11px 14px 13px; }
+  .cat-head { display:flex; align-items:center; justify-content:space-between; gap:8px; font-weight:bold; color:var(--sea-deep); font-size:.9rem; margin-bottom:9px; }
+  .cat-pills-wrap { position:relative; }
+  .cat-pills { display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:4px; scroll-snap-type:x proximity; }
+  .cat-pills::-webkit-scrollbar { display:none; }
+  .cat-pills button { scroll-snap-align:start; white-space:nowrap; flex:none; border:2px solid var(--sea); background:#fff; color:var(--sea); border-radius:999px; padding:6px 14px; cursor:pointer; font-size:.85rem; font-family:inherit; font-weight:bold; }
+  .cat-pills button.active { background:var(--sea); color:#fff; }
+  .cat-scroll-btn { display:none; }
+  @media (hover:hover) and (pointer:fine) {
+    /* マウス操作のPCだけ：矢印ボタン＋端のフェードで「横スクロールできる」ことを可視化 */
+    .cat-pills-wrap::before, .cat-pills-wrap::after { content:""; position:absolute; top:0; bottom:4px; width:28px; pointer-events:none; z-index:1; opacity:0; transition:opacity .2s; }
+    .cat-pills-wrap::before { left:0; background:linear-gradient(90deg,#eaf7fc,rgba(234,247,252,0)); }
+    .cat-pills-wrap::after { right:0; background:linear-gradient(270deg,#eaf7fc,rgba(234,247,252,0)); }
+    .cat-pills-wrap.at-start::before { opacity:0; }
+    .cat-pills-wrap:not(.at-start)::before { opacity:1; }
+    .cat-pills-wrap.at-end::after { opacity:0; }
+    .cat-pills-wrap:not(.at-end)::after { opacity:1; }
+    .cat-scroll-btn { display:flex; align-items:center; justify-content:center; position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:24px; height:24px; border-radius:50%; border:1.5px solid var(--sea); background:#fff; color:var(--sea); font-size:1rem; line-height:1; cursor:pointer; box-shadow:0 2px 6px rgba(2,62,138,.18); transition:opacity .2s; }
+    .cat-scroll-left { left:-4px; }
+    .cat-scroll-right { right:-4px; }
+    .cat-pills-wrap.at-start .cat-scroll-left,
+    .cat-pills-wrap.at-end .cat-scroll-right { opacity:0; pointer-events:none; }
+  }
+  .cat-sorts { display:flex; gap:6px; flex:none; }
+  .cat-sorts button { border:1.5px solid #b8d8e6; background:#fff; color:#4a7c93; border-radius:999px; padding:3px 10px; font-size:.72rem; font-family:inherit; font-weight:bold; cursor:pointer; }
+  .cat-sorts button.active { background:#4a7c93; color:#fff; border-color:#4a7c93; }
+  .cat-card .animal-search-wrap { margin:11px 0 0; padding:0; max-width:none; }
+
+  /* ===== スマホ表示 ===== */
+  .sp-only { display:none; }
+  @media (max-width:640px){
+    .pc-only { display:none; }
+    .sp-only { display:inline; }
+    .ticker-label { display:none; }
+    .ticker-post { flex:none; padding:0 12px; }
+    .legend { gap:8px; font-size:.72rem; margin:-4px auto 8px; flex-wrap:nowrap; overflow-x:auto; justify-content:center; }
+    #fixedRow { margin-top:8px; flex-wrap:nowrap !important; overflow-x:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; scrollbar-width:none; }
+    #fixedRow::-webkit-scrollbar { display:none; }
+    #fixedRow button, #fixedRow a { flex:none; white-space:nowrap; }
+    #navRow { margin-top:8px; flex-wrap:nowrap !important; overflow-x:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; scrollbar-width:none; }
+    #navRow::-webkit-scrollbar { display:none; }
+    #navRow a { flex:none; white-space:nowrap; }
+    .controls button { padding:6px 12px; font-size:.8rem; }
+    #map { height:480px; margin:14px 10px; }
+    .grid { padding:0 10px; gap:12px; }
+    /* 吹き出しが地図からはみ出さないように */
+    .leaflet-popup-content { width:280px !important; }
+    .pp .inner { padding:8px 12px 10px; }
+    .pp h3 { font-size:.92rem; margin:4px 0 2px; }
+    .pp .hl { font-size:.75rem; margin-bottom:5px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .pp .info { font-size:.73rem; line-height:1.55; padding:5px 9px; margin-bottom:6px; }
+    .pp .info .note { display:none; }
+    .pp .chips { margin:0 0 4px; }
+    .pp .btn { font-size:.73rem; padding:4px 10px; }
+    .pp .btn.sns { display:none; }
+    .pp .visitbtn, .pp .wishbtn { font-size:.73rem !important; padding:4px 10px !important; border-width:1.5px !important; }
+    .pp img.thumb { max-height:none; }
+  }
+  #tagBtns button { border-color:#f4a261; color:#c9660a; }
+  #tagBtns button.active { background:#f4a261; color:#fff; }
+  .visitedbtn { border:2px solid #2a9d8f !important; background:#fff; color:#2a9d8f !important; text-decoration:none; display:inline-flex; align-items:center; border-radius:999px; padding:6px 16px; font-size:.85rem; font-weight:bold; font-family:inherit; cursor:pointer; }
+  .visitedbtn.active { background:#2a9d8f !important; color:#fff !important; }
+  .wishlistbtn { border:2px solid #f4a460 !important; background:#fff; color:#c47a1e !important; text-decoration:none; display:inline-flex; align-items:center; border-radius:999px; padding:6px 16px; font-size:.85rem; font-weight:bold; font-family:inherit; cursor:pointer; }
+  .wishlistbtn.active { background:#f4a460 !important; color:#fff !important; }
+  #fixedRow { display:flex; gap:8px; flex-wrap:wrap; }
+  .animal-search-wrap { max-width:1100px; margin:14px auto 4px; padding:0 16px; position:relative; display:flex; gap:8px; align-items:center; }
+  .animal-search { flex:1; border:2px solid var(--sea); border-radius:999px; padding:10px 18px; font-size:16px; font-family:inherit; outline:none; background:#fff; }
+  .animal-search:focus { border-color:var(--sea-deep); box-shadow:0 0 0 3px rgba(0,150,199,.15); }
+  .animal-search-clear { border:none; background:#eef2f6; color:#456; border-radius:999px; width:34px; height:34px; font-size:.9rem; cursor:pointer; flex:none; }
+  .pp .soon { font-size:.8rem; color:var(--sea); font-weight:bold; }
+  .pp.wish .inner { padding-top:12px; }
+  .pp .wishtag { font-size:.72rem; color:#889; background:#eef2f6; border-radius:999px; padding:2px 10px; }
+
+  /* ===== 泳ぐ魚の飾り（タップでぷにっと跳ねる） ===== */
+  .deco { position:absolute; pointer-events:auto; opacity:.97; cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; }
+  @keyframes boing { 0%{transform:scale(1)} 30%{transform:scale(1.3) rotate(-12deg)} 60%{transform:scale(.88) rotate(9deg)} 100%{transform:scale(1) rotate(0)} }
+  .deco.boing { animation:boing .55s ease; }
+  .deco.p1 { width:min(220px,17vw); left:3%; top:90px; animation:sway 6s ease-in-out infinite; }
+  .deco.p2 { width:min(190px,15vw); left:16%; top:280px; animation:sway 7.5s ease-in-out infinite reverse; }
+  .deco.p3 { width:min(200px,16vw); left:4%; top:440px; animation:sway 5.5s ease-in-out infinite; }
+  .deco.p4 { width:min(170px,13vw); left:17%; top:600px; animation:sway 8s ease-in-out infinite reverse; }
+  .deco.p5 { width:min(220px,17vw); right:3%; top:100px; animation:sway 7s ease-in-out infinite reverse; }
+  .deco.p6 { width:min(190px,15vw); right:16%; top:300px; animation:sway 6.5s ease-in-out infinite; }
+  .deco.p7 { width:min(200px,16vw); right:4%; top:460px; animation:sway 8.5s ease-in-out infinite reverse; }
+  .deco.p8 { width:min(170px,13vw); right:17%; top:610px; animation:sway 6s ease-in-out infinite; }
+  @keyframes sway { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-14px) rotate(4deg)} }
+  @media (max-width:640px){
+    .deco { display:none; }
+    .deco.p1 { display:block; width:24vw; top:auto; bottom:250px; left:2%; }
+    .deco.p5 { display:block; width:24vw; top:auto; bottom:270px; right:2%; }
+  }
+  .legend { max-width:1100px; margin:-8px auto 10px; padding:0 20px; font-size:.82rem; color:#567; display:flex; gap:18px; flex-wrap:wrap; }
+  footer img.fishline { height:44px; margin:0 8px; vertical-align:middle; }
+  footer img.kawachan-illust { height:160px; max-width:90vw; object-fit:contain; vertical-align:bottom; margin:0; transition:transform .2s; }
+  footer .contact-link { display:inline-block; line-height:0; text-decoration:none; }
+  footer .contact-link:hover img.kawachan-illust { transform:scale(1.06); }
+
+  /* ===== フィルター＆カード ===== */
+  .controls { max-width:1100px; margin:0 auto 14px; padding:0 16px; display:flex; gap:8px; flex-wrap:wrap; }
+  .controls button { border:2px solid var(--sea); background:#fff; color:var(--sea); border-radius:999px; padding:6px 16px; cursor:pointer; font-size:.85rem; font-family:inherit; font-weight:bold; }
+  .controls button.active { background:var(--sea); color:#fff; }
+  .grid { max-width:1100px; margin:0 auto 60px; padding:0 16px; display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:18px; }
+  .card { background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 3px 10px rgba(2,62,138,.12); display:flex; flex-direction:column; transition:transform .15s; border:3px solid transparent; }
+  .card:hover { transform:translateY(-5px) rotate(-.5deg); border-color:var(--sky); }
+  .card img { width:100%; aspect-ratio:16/9; object-fit:cover; background:#cde; }
+  .card .body { padding:12px 14px 14px; flex:1; display:flex; flex-direction:column; gap:6px; }
+  .card h3 { font-size:1rem; color:var(--sea-deep); }
+  .card .pref { font-size:.75rem; color:#fff; background:var(--sea); border-radius:999px; padding:2px 10px; align-self:flex-start; }
+  .card .hl { font-size:.82rem; color:#456; flex:1; line-height:1.5; }
+  .card .links { display:flex; gap:8px; font-size:.8rem; flex-wrap:wrap; }
+  .card a { color:var(--sea); text-decoration:none; font-weight:bold; }
+  .card .cinfo { font-size:.76rem; color:#345; background:#f0f8fc; border-radius:10px; padding:6px 10px; line-height:1.6; }
+  .card .tab { font-size:.78rem; font-weight:bold; text-decoration:none; border-radius:999px; padding:5px 12px; }
+  .card .tab.yt { background:var(--coral); color:#fff; }
+  .card .tab.hp { background:var(--sky); color:var(--sea-deep); }
+  .card .tab.detail { background:var(--sea-deep); color:#fff; }
+  .card.upcoming { opacity:.7; border:3px dashed var(--sea); }
+  .summerinfo { font-size:.75rem; font-weight:bold; color:#a15c00; background:linear-gradient(90deg,#fff3cd,#ffe9b8); border:1.5px solid #ffd166; border-radius:10px; padding:6px 10px; margin:0 0 6px; line-height:1.5; }
+  .card .cbtn { font-size:.76rem; font-weight:bold; background:#fff; color:var(--sea); border:2px solid var(--sky); border-radius:999px; padding:4px 12px; cursor:pointer; font-family:inherit; }
+  .card h3 .namelink { color:inherit; text-decoration:none; }
+  .card h3 .namelink:hover { color:var(--sea); text-decoration:underline; }
+  .card .ytc { display:none; background:#fffdf5; border:2px solid #ffe8a3; border-radius:12px; padding:8px 10px; font-size:.74rem; line-height:1.55; color:#333; }
+  .card .ytc.open { display:block; }
+  .card .ytc .c1 { margin:0 0 6px; }
+  .card .ytc .c1:last-child { margin-bottom:0; }
+  .card .ytc .cn { color:var(--sea); font-weight:bold; margin-right:4px; }
+  .badge-closed { color:var(--coral); font-size:.75rem; font-weight:bold; }
+  /* ===== YouTube登録CTA ===== */
+  .rankbtn { border:2px solid #e0a800 !important; background:linear-gradient(90deg,#ffd166,#ffb703) !important; color:#7a4f00 !important; text-decoration:none; display:inline-flex; align-items:center; border-radius:999px; padding:6px 16px; font-size:.85rem; font-weight:bold; font-family:inherit; }
+  .postbtn { border-color:#e05656 !important; background:linear-gradient(90deg,#ff8787,#ff6b6b) !important; color:#fff !important; }
+  .playbtn { border-color:#2a9d8f !important; background:linear-gradient(90deg,#4ecdc4,#2a9d8f) !important; color:#fff !important; }
+  .yt-cta { background:linear-gradient(135deg,#023e8a,#0096c7); padding:28px 16px; text-align:center; }
+  .yt-cta h2 { color:#fff; font-size:1.15rem; margin-bottom:6px; }
+  .yt-cta p { color:#caf0f8; font-size:.88rem; margin-bottom:16px; line-height:1.6; }
+  .yt-cta-btn { display:inline-flex; align-items:center; gap:10px; background:#ff0000; color:#fff; font-weight:bold; font-size:1rem; text-decoration:none; border-radius:999px; padding:12px 28px; box-shadow:0 4px 14px rgba(0,0,0,.3); transition:transform .15s, box-shadow .15s; }
+  .yt-cta-btn:hover { transform:scale(1.05); box-shadow:0 6px 20px rgba(0,0,0,.4); }
+  .yt-cta-btn svg { width:28px; height:20px; fill:#fff; flex:none; }
+  .yt-stats { display:flex; justify-content:center; gap:28px; margin-top:18px; flex-wrap:wrap; }
+  .yt-stat { color:#fff; text-align:center; }
+  .yt-stat .num { font-size:2.1rem; font-weight:bold; display:block; color:var(--sun); text-shadow:0 2px 4px rgba(2,62,138,.5); }
+  .yt-stat .num small { font-size:1rem; font-weight:normal; color:#fff; }
+  .yt-stat .label { font-size:.75rem; color:#90e0ef; }
+  /* ===== かわちゃんねる紹介 ===== */
+  .about { background:linear-gradient(180deg,#e8f6fb,#caf0f8); padding:36px 16px; }
+  .about-inner { max-width:940px; margin:0 auto; display:flex; gap:32px; align-items:flex-start; }
+  .about-img { width:300px; flex:none; border-radius:20px; filter:drop-shadow(0 6px 16px rgba(2,62,138,.25)); }
+  .about-text h2 { color:var(--sea-deep); font-size:1.2rem; margin-bottom:4px; }
+  .about-kicker { font-size:.82rem; color:var(--sea); font-weight:bold; margin-bottom:10px; }
+  .about-text p { font-size:.88rem; color:#345; line-height:1.8; margin-bottom:10px; }
+  .about-text .profile { font-size:.82rem; background:#fff; border-radius:12px; padding:12px 16px; line-height:1.75; }
+  .about-career { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .about-career span { font-size:.78rem; font-weight:bold; background:var(--sea-deep); color:#fff; border-radius:999px; padding:4px 12px; }
+  .about-book { display:flex; align-items:center; gap:14px; background:#fff; border-radius:14px; padding:12px 16px; margin:10px 0; border:2px solid var(--sky); }
+  .about-book img { width:60px; border-radius:6px; flex:none; }
+  .about-book-text { font-size:.82rem; color:#234; line-height:1.6; }
+  .about-book-text b { color:var(--sea-deep); }
+  .about-links { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+  .about-links a { font-size:.85rem; font-weight:bold; text-decoration:none; background:var(--sea); color:#fff; border-radius:999px; padding:8px 18px; }
+  .about-links a.line { background:#06c755; }
+  .about-links a.yt { background:#ff0000; }
+  @media (max-width:640px){
+    .about-inner { flex-direction:column; align-items:center; text-align:left; }
+    .about-img { width:70%; max-width:240px; }
+  }
+
+  footer { text-align:center; padding:10px 26px 26px; font-size:.8rem; color:#578; background:var(--sky); }
+  footer a { color:var(--sea-deep); }
+</style>
+</head>
+<body>
+<header>
+  <div class="bubbles" id="bubbles"></div>
+  <a href="#about-profile" class="about-jump pc-only">🐟 さかなのおにいさん かわちゃんとは？</a>
+  <img loading="lazy" decoding="async" class="deco p1" src="assets/punio_shark.png" alt="">
+  <img loading="lazy" decoding="async" class="deco p2" src="assets/punio_takopaikapi.png" alt="">
+  <img loading="lazy" decoding="async" class="deco p3" src="assets/punio_kusamochi.png" alt="">
+  <img loading="lazy" decoding="async" class="deco p4" src="assets/punio_tenten.png" alt="">
+  <img loading="lazy" decoding="async" class="deco p5" src="assets/punio_hanabi.png" alt="">
+  <img loading="lazy" decoding="async" class="deco p6" src="assets/punio_kopemaru.png" alt="">
+  <img loading="lazy" decoding="async" class="deco p7" src="assets/punio_tacchu.png" alt="">
+  <img loading="lazy" decoding="async" class="deco p8" src="assets/punio_gyoran.png" alt="">
+  <h1>会いに行こう！<br>全国水族館ツアーMAP</h1>
+  <p class="sub">さかなのおにいさん かわちゃんと巡る<br class="sp-only">　目指せ100館！全国水族館ツアー</p>
+  <a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener" title="タップしてチャンネル登録🐟" id="heroLink">
+    <img class="hero" id="heroImg" src="assets/kawachan_web.png" alt="さかなのおにいさん かわちゃん（タップでチャンネル登録、スマホはかわちゃん紹介へ）">
+  </a>
+  <div class="counter">
+    <div class="num" id="barLabel" title="タップで かわちゃん⇄あなた を切替">
+      <span class="bl-kawachan"><small>🐟 かわちゃんねるは </small><span id="visited">0</span><small> / <span id="goal">100</span>館 制覇中！</small></span>
+      <span class="bl-mine" style="display:none"><small>🏆 あなたは </small><span id="mineNum">0</span><small> / <span id="mineTotal">159</span>館 制覇中！</small></span>
+    </div>
+    <div class="bar" id="barBox"><div id="barfill" style="width:0%"></div></div>
+    <div class="mycount">
+      <span class="mc-mine">あなたの制覇：<b id="myvisited">0</b> 館 🏆（⬜を押してチェック！）</span>
+      <span class="mc-kawachan" style="display:none">🐟 かわちゃんねるは <b id="kawaCount">0</b>/<span id="kawaGoal">100</span>館 YouTubeで紹介中！</span>
+      <div class="mycount-btns">
+        <button id="mapImgBtn" class="sharebtn">🗾 制覇マップをシェア</button>
+        <a href="passport.html" class="sharebtn">📖 すいぞくかんパスポート</a>
+      </div>
+    </div>
+    <a class="counter-sub-btn pc-only" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ かわちゃんねる登録🐟</a>
+  </div>
+  <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,45 350,-5 600,20 C850,45 1050,-5 1200,20 L1200,40 L0,40 Z" fill="#023e8a"/></svg>
+</header>
+
+<div class="ticker-wrap">
+  <div class="ticker"><div class="ticker-inner" id="tickerInner"></div></div>
+  <button class="ticker-post" onclick="document.getElementById('cmodal').classList.add('open')"><span class="pc-only">📮 コメントを送る</span><span class="sp-only">📮</span></button>
+</div>
+
+<div class="cmodal" id="cmodal">
+  <div class="box">
+    <h3>📮 みんなの声に参加しよう！</h3>
+    <input id="cname" maxlength="15" placeholder="なまえ（15文字まで）">
+    <textarea id="cmsg" maxlength="60" placeholder="すきな水族館・行った感想など（60文字まで）"></textarea>
+    <p class="msg" id="cerr"></p>
+    <div class="row">
+      <button class="cancel" onclick="document.getElementById('cmodal').classList.remove('open')">やめる</button>
+      <button class="send" id="csend" onclick="sendComment()">送る🐟</button>
+    </div>
+  </div>
+</div>
+
+<div class="cmodal" id="mapImgModal">
+  <div class="box" style="width:min(92vw,420px)">
+    <h3>🗾 わたしの制覇マップ</h3>
+    <canvas id="shareCanvas" style="width:100%;border-radius:12px;border:2px solid var(--sky);background:#0096c7"></canvas>
+    <p style="font-size:.75rem;color:#678;margin:8px 0 4px">画像を保存して、SNSでみんなに自慢しよう🐟</p>
+    <div class="row" style="margin-top:6px">
+      <button class="cancel" onclick="document.getElementById('mapImgModal').classList.remove('open')">とじる</button>
+      <button class="cancel" id="mapImgLevel" style="border-color:#6366f1;color:#4f46e5">🔀 一般</button>
+      <button class="send" id="mapImgSave">💾 保存</button>
+      <button class="send" id="mapImgShare">📤 シェア</button>
+    </div>
+  </div>
+</div>
+
+<div id="map"></div>
+<div class="legend">
+  <span class="pc-only">🐟 紹介済み（クリックで動画へ！）</span>
+  <span class="pc-only">📍 動画近日公開</span>
+  <span class="pc-only">⚪ これから紹介したい水族館</span>
+  <span class="sp-only">🐟紹介済み</span>
+  <span class="sp-only">📍近日公開</span>
+  <span class="sp-only">⚪これから紹介</span>
+</div>
+
+<div class="controls" id="regionBtns"></div>
+<div class="controls" id="fixedRow"></div>
+<div class="controls" id="navRow"></div>
+<div class="cat-section">
+  <div class="cat-card">
+    <div class="cat-head"><span>🐟 どんな気分で行く？</span><span class="cat-sorts" id="sortBtns"></span></div>
+    <div class="cat-pills-wrap" id="catPillsWrap">
+      <button class="cat-scroll-btn cat-scroll-left" id="catScrollLeft" aria-label="左へスクロール" type="button">‹</button>
+      <div class="cat-pills" id="tagBtns"></div>
+      <button class="cat-scroll-btn cat-scroll-right" id="catScrollRight" aria-label="右へスクロール" type="button">›</button>
+    </div>
+    <div class="animal-search-wrap">
+      <input type="text" id="animalSearch" class="animal-search" placeholder="🔍 会いたい魚・生きものの名前で検索（例：ジンベエザメ）" list="animalList" autocomplete="off">
+      <datalist id="animalList"></datalist>
+      <button class="animal-search-clear" id="animalSearchClear" style="display:none">✕</button>
+    </div>
+  </div>
+</div>
+<div class="grid" id="cards"></div>
+
+<!-- YouTube登録CTA -->
+<section class="yt-cta">
+  <h2>🐟 さかなのおにいさん かわちゃんねるとは？</h2>
+  <p>水族館は“自然への入り口”だと思っています<br>これからもひとつひとつの水族館を応援しながら<br>このサイトもみんなと一緒に楽しんで作っていきたいです🐟</p>
+  <a class="yt-cta-btn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 17" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 2.7S23.2.9 22.4.2C21.4-.8 20.3-.8 19.8-.7 16.5 0 12 0 12 0S7.5 0 4.2-.7C3.7-.8 2.6-.8 1.6.2.8.9.5 2.7.5 2.7S.2 4.8.2 6.9v1.9C.2 11 .5 13 .5 13s.3 1.8 1.1 2.5c1 1 2.3.97 2.9 1.07C6.4 16.8 12 17 12 17s4.5 0 7.8-.72c.5-.1 1.6-.1 2.6-1.08.8-.7 1.1-2.5 1.1-2.5s.3-2.1.3-4.2V6.9c0-2.1-.3-4.2-.3-4.2zM9.7 11.5V4.8l7 3.4-7 3.3z"/></svg>
+    チャンネル登録する
+  </a>
+  <div class="yt-stats">
+    <div class="yt-stat"><span class="num"><span id="yt-visited">46</span><small>館</small></span><span class="label">YouTubeで紹介した水族館</span></div>
+    <div class="yt-stat"><span class="num"><span id="yt-total">150+</span><small>館</small></span><span class="label">このサイトの掲載館数</span></div>
+    <div class="yt-stat"><span class="num">毎月</span><span class="label">新しい動画を公開中</span></div>
+  </div>
+</section>
+
+<!-- プロフィール -->
+<section class="about" id="about-profile">
+  <div class="about-inner">
+    <img loading="lazy" decoding="async" src="assets/kawachan_photo.png" alt="さかなのおにいさん かわちゃん" class="about-img">
+    <div class="about-text">
+      <h2>🐟 さかなのおにいさん かわちゃん</h2>
+      <p>さかなの魅力を歌・イラスト・クイズで楽しく伝えるさかなのおにいさん。全国１００館以上の水族館をまわり、こどもたちに生き物の不思議と海の大切さをわかりやすく伝えています。</p>
+      <div class="about-career">
+        <span>📺 テレビ東京「シナぷしゅ」</span>
+        <span>🎙 ラジオDJ</span>
+        <span>🎵 歌手</span>
+        <span>🎤 イベント・講演</span>
+        <span>✏️ 絵本作家</span>
+        <span>🐼 アドベンチャーワールド公式アンバサダー</span>
+      </div>
+      <div class="about-book">
+        <img src="assets/book_kusesugo.jpg" alt="全国クセすご水族館図鑑 書影">
+        <div class="about-book-text">
+          <b>📚 著書「全国クセすご水族館図鑑」（中央公論新社）など</b><br>
+          全国の水族館の愛すべき魅力をイラストと4コマまんがで紹介！ほかにも絵本や図鑑など著書多数🐟<br>
+          <a href="https://sakana-bro.com/goods/" target="_blank" rel="noopener" style="color:var(--sea);font-weight:bold;">書籍一覧はこちら →</a>
+        </div>
+      </div>
+      <p class="profile">💬 モットー：「子どもがさかなを好きになれば　海は豊かになる」</p>
+      <div class="about-links">
+        <a class="yt" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ YouTube登録</a>
+        <a href="https://sakana-bro.com/" target="_blank" rel="noopener">🌊 公式サイト</a>
+        <a class="line" href="https://lin.ee/qMPcnPq" target="_blank" rel="noopener">💬 公式LINE</a>
+        <a href="https://www.instagram.com/kawayanfishing/" target="_blank" rel="noopener">📷 Instagram</a>
+        <a href="https://twitter.com/sakana_bro" target="_blank" rel="noopener">𝕏</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="milestone-overlay" id="milestoneOverlay"></div>
+<div class="milestone-pop" id="milestonePop">
+  <div class="milestone-text" id="milestoneText">5館達成！</div>
+  <img loading="lazy" decoding="async" src="assets/milestone_illust.png" alt="やったー！">
+</div>
+
+<footer>
+  <a class="contact-link" href="https://sakana-bro.com/contact/" target="_blank" rel="noopener" title="お問い合わせ">
+    <img class="kawachan-illust" src="assets/about_1_trim.png" alt="かわちゃんにお問い合わせ">
+  </a>
+  <p style="margin-top:10px"><a href="aquarium-list.html">📖 掲載水族館一覧</a>　<a href="guide.html">🐬 かわちゃん流・水族館の楽しみ方</a>　<a href="passport.html">📖 すいぞくかんパスポート</a></p>
+  <p style="margin-top:8px"><a href="about.html">🐟 このサイトについて</a>　<a href="posts.html#iken">📮 ご意見箱</a>　<a href="about.html#work">💼 お仕事のご依頼</a>　<a href="about.html#facility">🏛 掲載施設の方へ</a>　<a href="about.html#privacy">🔒 プライバシーポリシー</a></p>
+  <p style="margin-top:8px">© 株式会社やさしいうみ ／ <a href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA">さかなのおにいさん かわちゃんねる</a></p>
+  <p id="updated"></p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ===== コメント電光掲示板 =====
+const COMMENT_API = "https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV1YlrB_UPx2_c3hMS9fG6YTunOrrOKROeHdHJg2QzXj/exec";
+const YT_API_KEY = "AIzaSyCASXQcc_wH8jOy9PA2oa5dUlBWUgRBGms";
+const YTC_NG = ["死ね","殺す","バカ","馬鹿","アホ","キモ","反対","抗議","虐待","動物愛護","愛護団体","保護団体","アニマルライツ","ヴィーガン","監禁","搾取","奴隷","解放しろ","閉鎖しろ","追い込み漁","boycott","ボイコット","署名","http://","https://"];
+const ytcCache = {};
+async function loadYtComments(videoId, box, btn){
+  if(box.classList.contains('open')){ box.classList.remove('open'); btn.textContent='💬 みんなの感想'; return; }
+  btn.textContent='💬 とじる';
+  box.classList.add('open');
+  if(ytcCache[videoId]){ box.innerHTML = ytcCache[videoId]; return; }
+  box.innerHTML = 'よみこみ中…🐟';
+  try{
+    const r = await fetch(`https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&order=relevance&maxResults=30&textFormat=plainText&key=${YT_API_KEY}`);
+    const d = await r.json();
+    const esc = s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const POSITIVE_WORDS = ['かわいい','可愛い','感動','最高','好き','癒','楽しい','たのしい','きれい','綺麗','面白','おもしろ','行きたい','よかった','良かった','うれしい','嬉しい','素敵','すごい','凄い','ありがとう','大好き','美しい','幸せ','素晴らしい','驚','ワクワク','わくわく'];
+    const positivityScore = (text)=> POSITIVE_WORDS.reduce((n,w)=> n + (text.includes(w)?1:0), 0);
+    const clean = (d.items||[])
+      .map(it=>it.snippet.topLevelComment.snippet)
+      .filter(c=>!YTC_NG.some(w=>(c.textDisplay+c.authorDisplayName).toLowerCase().includes(w.toLowerCase())))
+      .map(c=>({...c, _score: positivityScore(c.textDisplay) * 10 + (c.likeCount||0)}))
+      .sort((a,b)=> b._score - a._score);
+    const positive = clean.filter(c=>c._score > 0);
+    const items = (positive.length ? positive : clean).slice(0,3);
+    const html = items.length
+      ? items.map(c=>`<p class="c1"><span class="cn">${esc(c.authorDisplayName)}</span>${esc(c.textDisplay.length>90?c.textDisplay.slice(0,90)+'…':c.textDisplay)}</p>`).join('')
+      : 'コメントはまだないみたい🐠';
+    ytcCache[videoId] = html;
+    box.innerHTML = html;
+  }catch(e){ box.innerHTML = 'コメントをよみこめなかったよ🙏'; }
+}
+const SAMPLE_COMMENTS = [
+  {name:"かわちゃん", msg:"目指せ100館！みんなの好きな水族館おしえてね🐟"},
+  {name:"スタッフ", msg:"📮ボタンからコメントを送ると、ここに流れるよ！"}
+];
+const GREETING = {name:"かわちゃん", msg:"目指せ100館！みんなの好きな水族館、📮からコメントしてみてね🐟"};
+function renderTicker(list){
+  const inner = document.getElementById('tickerInner');
+  // 先頭は挨拶固定、以降は新しい順（idの先頭がタイムスタンプ）。旧・目指せ100館コメントは挨拶と重複するので除外
+  const rest = (list||[])
+    .filter(c=>!String(c.msg).startsWith('目指せ100館'))
+    .sort((a,b)=> String(b.id||'').localeCompare(String(a.id||'')));
+  const all = [GREETING, ...rest];
+  inner.innerHTML = all.map(c=>`<span><b>${esc(c.name)}</b>${esc(c.msg)}</span>`).join('');
+  inner.style.animationDuration = Math.max(25, all.length * 7) + 's';
+}
+function esc(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+async function loadComments(){
+  if(!COMMENT_API){ renderTicker(null); return; }
+  try{
+    const r = await fetch(COMMENT_API);
+    const list = await r.json();
+    renderTicker(list);
+  }catch(e){ renderTicker(null); }
+}
+async function sendComment(){
+  const name = document.getElementById('cname').value.trim() || 'ななしのさかな';
+  const msg = document.getElementById('cmsg').value.trim();
+  const err = document.getElementById('cerr');
+  if(!msg){ err.textContent = 'コメントを入れてね！'; return; }
+  if(!COMMENT_API){ err.textContent = 'コメント機能は準備中だよ、もうすこし待ってね🐟'; return; }
+  const btn = document.getElementById('csend');
+  btn.disabled = true; btn.textContent = '送信中…';
+  try{
+    const r = await fetch(COMMENT_API, {method:'POST', body: JSON.stringify({name, msg})});
+    const res = await r.json();
+    if(res.ok){
+      document.getElementById('cmodal').classList.remove('open');
+      document.getElementById('cmsg').value=''; err.textContent='';
+      loadComments();
+    } else {
+      err.textContent = res.error || '送信できなかった…もう一度試してね';
+    }
+  }catch(e){ err.textContent = '送信できなかった…もう一度試してね'; }
+  btn.disabled = false; btn.textContent = '送る🐟';
+}
+loadComments();
+setInterval(loadComments, 60000);
+
+// かわちゃんイラスト くるっと回転（アニメーション中の再トリガーを防止）
+const heroImg = document.getElementById('heroImg');
+if(heroImg){
+  let heroSpinning = false;
+  heroImg.addEventListener('animationend', ()=>{
+    heroImg.classList.remove('spin');
+    heroSpinning = false;
+  });
+  const triggerSpin = ()=>{
+    if(heroSpinning) return;
+    heroSpinning = true;
+    heroImg.classList.add('spin');
+  };
+  heroImg.addEventListener('mouseenter', triggerSpin);
+  heroImg.addEventListener('touchstart', triggerSpin, {passive:true});
+}
+// スマホではヒーロー画像タップでチャンネル登録の代わりに「かわちゃんとは？」へ移動
+const heroLink = document.getElementById('heroLink');
+if(heroLink){
+  heroLink.addEventListener('click', (e)=>{
+    if(window.matchMedia('(max-width:640px)').matches){
+      e.preventDefault();
+      document.getElementById('about-profile').scrollIntoView({behavior:'smooth'});
+    }
+  });
+}
+
+// あわ演出
+const bw = document.getElementById('bubbles');
+for(let i=0;i<14;i++){
+  const s = document.createElement('span');
+  const size = 8+Math.random()*22;
+  s.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*8}s`;
+  bw.appendChild(s);
+}
+
+const TAGS = {
+  "rain": ["☔️ 雨の日におすすめ", "☔️ 雨の日に"],
+  "summer": ["☀️ 夏休みおすすめ", "☀️ 夏休み"],
+  "kids": ["👶 未就学児におすすめ", "👶 未就学児に"],
+  "baby": ["🍼 赤ちゃん連れにおすすめ", "🍼 赤ちゃん連れに"],
+  "same": ["🦈 サメ好きにおすすめ", "🦈 サメ好きに"],
+  "dolphin": ["🐬 イルカショーおすすめ", "🐬 イルカショー"],
+  "deep": ["🐙 深海生物好きにおすすめ", "🐙 深海好きに"],
+  "penguin": ["🐧 ペンギン好きにおすすめ", "🐧 ペンギン好きに"],
+  "shachi": ["🐋 シャチに会える", "🐋 シャチ"],
+  "beluga": ["🐳 シロイルカに会える", "🐳 シロイルカ"],
+  "kaichu": ["🗼 海中展望台", "🗼 海中展望台"],
+  "bento": ["🍱 お弁当を持ち込める", "🍱 お弁当OK"]
+};
+const REGIONS = {
+  "北海道・東北": ["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県"],
+  "関東": ["茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県"],
+  "中部": ["新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県"],
+  "近畿": ["三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県"],
+  "中国・四国": ["鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県"],
+  "九州・沖縄": ["福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"]
+};
+
+// ぷにうお装飾：タップするとぷにっと跳ねる（終わったら元のゆらゆらに戻る）
+document.querySelectorAll('.deco').forEach(d=>{
+  d.addEventListener('click', ()=>{ d.classList.remove('boing'); void d.offsetWidth; d.classList.add('boing'); });
+  d.addEventListener('animationend', e=>{ if(e.animationName==='boing') d.classList.remove('boing'); });
+});
+
+fetch('data.json').then(r=>r.json()).then(data=>{
+  const aqs = data.aquariums;
+  // ④「魚に興味がなくても行く理由」になる事実ベースの軸を、既存フィールドから動的に付与（データは書き換えない）
+  const addFactTags = a => {
+    const tags = a.tags = (a.tags || []).slice();
+    const fb = a.food_bring || '';
+    if (/持込OK|持込可|持ち込み可|持参可|飲食可能|飲食可|飲食スペースあり|OK/.test(fb) && !tags.includes('bento')) tags.push('bento');
+  };
+  aqs.forEach(addFactTags);
+  (data.unvisited||[]).forEach(addFactTags);
+  const visited = aqs.filter(a=>!a.upcoming).length;
+  document.getElementById('visited').textContent = visited;
+  document.getElementById('yt-visited').textContent = visited;
+  document.getElementById('yt-total').textContent = aqs.length + (data.unvisited||[]).length;
+  document.getElementById('goal').textContent = data.goal;
+  document.getElementById('kawaCount').textContent = visited;
+  document.getElementById('kawaGoal').textContent = data.goal;
+  setTimeout(()=>{ document.getElementById('barfill').style.width = (visited/data.goal*100)+'%'; }, 300);
+  document.getElementById('updated').textContent = '最終更新：'+data.updated;
+
+  const map = L.map('map', {
+    minZoom: 5,
+    maxBounds: [[15.0,116.0],[58.0,158.0]],
+    maxBoundsViscosity: 1.0
+  }).setView([37.5,137.0],5);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors', detectRetina:true}).addTo(map);
+
+  function infoBox(a){
+    if(!a.fee && !a.closed) return '';
+    return `<div class="info">`
+      + (a.fee?`💰 大人 ${a.fee}`:'')
+      + (a.child?`<br>🧒 子ども ${a.child}`:'')
+      + (a.infant?`<br>👶 幼児 ${a.infant}`:'')
+      + (a.duration?`<br>⏱ 目安 ${a.duration}`:'')
+      + (a.closed?`<br>🗓 休み：${a.closed}`:'')
+      + `<span class="note">※最新は公式サイトで</span>`
+      + `</div>`;
+  }
+
+  // 吹き出しを開いたら見やすい位置に地図をパン（autoPanの代わり）
+  map.on('popupopen', function(e){
+    setTimeout(()=>{
+      const el = e.popup.getElement();
+      if(!el) return;
+      const px = map.project(e.popup.getLatLng(), map.getZoom());
+      px.y -= el.clientHeight * 0.32; // 吹き出しがやや下寄りに収まる位置
+      map.panTo(map.unproject(px, map.getZoom()), {animate:true});
+    }, 50);
+  });
+
+  const fishIcon = L.divIcon({className:'', html:'<div style="font-size:28px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))">🐟</div>', iconSize:[28,28], iconAnchor:[14,14], popupAnchor:[0,-14]});
+  const upIcon = L.divIcon({className:'', html:'<div style="font-size:24px;opacity:.55">📍</div>', iconSize:[24,24], iconAnchor:[12,24], popupAnchor:[0,-24]});
+
+  // 行った！チェック（このブラウザに保存）
+  let myVisits = new Set(JSON.parse(localStorage.getItem('myVisits')||'[]'));
+  let myVisitDates = JSON.parse(localStorage.getItem('myVisitDates')||'{}'); // パスポートのスタンプ日付用
+  // 閉館した館（gone）は「思い出の水族館」として別枠。制覇の分母・分子とシェア画像からは除外する
+  const GONE_NAMES = new Set([...(data.aquariums||[]), ...(data.unvisited||[])].filter(a=>a.gone).map(a=>a.name));
+  const goneCount = GONE_NAMES.size;
+  const myVisitableCount = ()=> [...myVisits].filter(n=>!GONE_NAMES.has(n)).length; // 今行ける館の制覇数
+  const myMemorialCount = ()=> [...myVisits].filter(n=>GONE_NAMES.has(n)).length;   // 思い出（閉館館）の記録数
+
+  // バーのリレー表示：最初はかわちゃんの42/100 → 数秒後に「あなたの制覇」へ（タップで切替）
+  let barMode = 'kawachan';
+  const totalAll = (data.aquariums||[]).length + (data.unvisited||[]).length - goneCount; // 今行ける館数（制覇の分母）
+  document.getElementById('mineTotal').textContent = totalAll;
+  function applyBar(mode){
+    barMode = mode;
+    const mine = mode === 'mine';
+    const fill = document.getElementById('barfill');
+    document.querySelector('.bl-kawachan').style.display = mine ? 'none' : '';
+    document.querySelector('.bl-mine').style.display = mine ? '' : 'none';
+    document.querySelector('.mc-mine').style.display = mine ? 'none' : '';
+    document.querySelector('.mc-kawachan').style.display = mine ? '' : 'none';
+    fill.classList.toggle('mine', mine);
+    if(mine){
+      document.getElementById('mineNum').textContent = myVisitableCount();
+      fill.style.width = (myVisitableCount()/totalAll*100)+'%';
+    } else {
+      fill.style.width = (visited/data.goal*100)+'%';
+    }
+  }
+  function switchBar(mode){
+    const label = document.getElementById('barLabel');
+    label.style.opacity = 0;
+    setTimeout(()=>{ applyBar(mode); label.style.opacity = 1; }, 250);
+  }
+  const flipBar = ()=>switchBar(barMode==='mine' ? 'kawachan' : 'mine');
+  document.getElementById('barLabel').onclick = flipBar;
+  document.getElementById('barBox').onclick = flipBar;
+  // 常に約4秒後に「あなたの制覇」バーへ自動リレー（タップでいつでも戻せる）
+  setTimeout(()=>switchBar('mine'), 3800);
+
+  function updateMyCount(){
+    document.getElementById('myvisited').textContent = myVisitableCount();
+    localStorage.setItem('myVisits', JSON.stringify([...myVisits]));
+    if(barMode === 'mine') applyBar('mine');
+  }
+  const MILESTONES = [5,10,15,20,30,40,50,60,80,100];
+  const SMALL_MILESTONES = [5]; // このあたりまでは控えめな演出
+  function showToast(msg){
+    const t = document.createElement('div');
+    t.className = 'mini-toast';
+    t.textContent = msg;
+    document.body.appendChild(t);
+    requestAnimationFrame(()=> t.classList.add('show'));
+    setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=> t.remove(), 400); }, 1800);
+  }
+  function checkMilestone(){
+    const n = myVisitableCount();
+    const total = totalAll;
+    const isAll = n>0 && n===total;
+    if(!isAll && !MILESTONES.includes(n)) return;
+    if(!isAll && SMALL_MILESTONES.includes(n)){
+      showToast(`🐟 ${n}館達成！ その調子〜`);
+      return;
+    }
+    const overlay = document.getElementById('milestoneOverlay');
+    const pop = document.getElementById('milestonePop');
+    const text = document.getElementById('milestoneText');
+    text.textContent = isAll ? `全${total}館 制覇！！🏆` : `${n}館達成！`;
+    overlay.classList.add('show');
+    pop.classList.add('show');
+    setTimeout(()=>{
+      overlay.classList.remove('show');
+      pop.classList.remove('show');
+    }, 2600);
+  }
+  function burst(el){
+    const emojis = ["🐟","🌟","🐠","✨","🐙"];
+    const rect = el.getBoundingClientRect();
+    for(let i=0;i<8;i++){
+      const s=document.createElement('span');
+      s.textContent=emojis[i%emojis.length];
+      s.style.cssText=`position:fixed;left:${rect.left+rect.width/2}px;top:${rect.top}px;font-size:1.3rem;pointer-events:none;z-index:99;transition:all .9s ease-out;`;
+      document.body.appendChild(s);
+      requestAnimationFrame(()=>{
+        s.style.transform=`translate(${(Math.random()-0.5)*160}px, ${-60-Math.random()*80}px) rotate(${(Math.random()-0.5)*180}deg)`;
+        s.style.opacity='0';
+      });
+      setTimeout(()=>s.remove(),950);
+    }
+  }
+  window.toggleVisit = function(name, ev){
+    const wasOn = myVisits.has(name);
+    if(wasOn){ myVisits.delete(name); delete myVisitDates[name]; }
+    else { myVisits.add(name); myVisitDates[name] = Date.now(); }
+    localStorage.setItem('myVisitDates', JSON.stringify(myVisitDates));
+    updateMyCount(); render();
+    document.querySelectorAll(`.visitbtn[data-name="${CSS.escape(name)}"]`).forEach(b=>{
+      const on = myVisits.has(name);
+      b.classList.toggle('on', on);
+      b.textContent = on ? '✅ 行った！' : '⬜ 行ったらチェック';
+      if(on){
+        burst(b);
+      }
+    });
+    if(!wasOn) checkMilestone();
+    // 初めてのチェックで、バーが「あなたの制覇」にリレーする（burstの後に）
+    if(!wasOn && myVisits.size === 1 && barMode !== 'mine'){ setTimeout(()=>switchBar('mine'), 700); }
+  };
+  function visitBtn(a){
+    const on = myVisits.has(a.name);
+    return `<button class="visitbtn${on?' on':''}" data-name="${a.name}" onclick="toggleVisit('${a.name.replace(/'/g,"\\'")}')">${on?'✅ 行った！':'⬜ 行ったらチェック'}</button>`;
+  }
+
+  // 行ってみたいリスト（このブラウザに保存）
+  let myWishlist = new Set(JSON.parse(localStorage.getItem('myWishlist')||'[]'));
+  function saveWishlist(){ localStorage.setItem('myWishlist', JSON.stringify([...myWishlist])); }
+  window.toggleWish = function(name){
+    if(myWishlist.has(name)) myWishlist.delete(name); else myWishlist.add(name);
+    saveWishlist();
+    document.querySelectorAll(`.wishbtn[data-name="${CSS.escape(name)}"]`).forEach(b=>{
+      const on = myWishlist.has(name);
+      b.classList.toggle('on', on);
+      b.textContent = on ? '💛 行きたい！' : '🤍 行きたいリストに追加';
+    });
+    if(typeof renderWishlist === 'function') renderWishlist();
+  };
+  function wishBtn(a){
+    const on = myWishlist.has(a.name);
+    return `<button class="wishbtn${on?' on':''}" data-name="${a.name}" onclick="toggleWish('${a.name.replace(/'/g,"\\'")}')">${on?'💛 行きたい！':'🤍 行きたいリストに追加'}</button>`;
+  }
+
+  const ANIMAL_ICONS = {
+    "シャチ":"🐋", "ラッコ":"🦦", "ジンベエザメ":"🦈", "シロワニ":"🦈",
+    "マンボウ":"🐟", "ピラルクー":"🐠", "エンペラーペンギン":"🐧", "フェアリーペンギン":"🐧",
+    "クラゲ":"🪼", "ベルーガ":"🐳"
+  };
+  function animalChips(a){
+    const chips = [];
+    (a.animals||[]).forEach(name=>{
+      chips.push(`<span class="chip">${ANIMAL_ICONS[name]||'🐟'} ${name}</span>`);
+    });
+    if(a.only) chips.push(`<span class="chip only">⭐ ${a.only}</span>`);
+    return chips.length ? `<div class="chips">${chips.join('')}</div>` : '';
+  }
+
+  function snsBtns(a){
+    if(!a.sns) return '';
+    let out = '';
+    if(a.sns.x) out += `<a class="btn sns" href="${a.sns.x}" target="_blank">𝕏</a>`;
+    if(a.sns.instagram) out += `<a class="btn sns" href="${a.sns.instagram}" target="_blank">📷 Insta</a>`;
+    return out;
+  }
+
+  const allMarkers = [];
+  aqs.forEach(a=>{
+    const v = a.videos[0];
+    const thumb = v ? `https://i.ytimg.com/vi/${v.id}/mqdefault.jpg` : '';
+    // 「行った！」「行きたい」ボタンは開くたびに最新状態で作り直す（静的HTMLだと再オープン時にチェックが古い状態のまま出てしまうため関数化）
+    const buildHtml = () => `<div class="pp">`
+      + (v ? `<a href="https://www.youtube.com/watch?v=${v.id}" target="_blank"><img class="thumb" src="${thumb}" alt="${a.name}"></a>` : '')
+      + `<div class="inner">`
+      + `<span class="pref">${a.pref}</span>`
+      + `<h3>${a.name}</h3>`
+      + `<p class="hl">${a.highlight||''}</p>`
+      + animalChips(a)
+      + (a.summer?`<div class="summerinfo">☀️ ${a.summer}</div>`:'')
+      + infoBox(a)
+      + `<div class="btns">`
+      + a.videos.map((vv,i)=>`<a class="btn yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):'を見る'}</a>`).join('')
+      + (a.url?`<a class="btn hp" href="${a.url}" target="_blank">公式サイト🔗</a>`:'')
+      + snsBtns(a)
+      + `<a class="btn hp" href="spot/${String(a.no).padStart(3,'0')}.html">📖 くわしく</a>`
+      + visitBtn(a)
+      + wishBtn(a)
+      + (a.upcoming?'<span class="soon">🔜 動画は近日公開！おたのしみに</span>':'')
+      + `</div></div></div>`;
+    const m = L.marker([a.lat,a.lng],{icon:a.upcoming?upIcon:fishIcon}).addTo(map)
+      .bindPopup(buildHtml,{maxWidth:270, closeButton:true, autoPan:false});
+    allMarkers.push({m, tags:a.tags||[], name:a.name});
+  });
+
+  // まだ紹介できていない水族館（薄いピン）
+  const wishIcon = L.divIcon({className:'', html:'<div style="width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid #9fb6c9;opacity:.85;box-shadow:0 1px 3px rgba(0,0,0,.3)"></div>', iconSize:[14,14], iconAnchor:[7,7], popupAnchor:[0,-8]});
+  (data.unvisited||[]).forEach((a,ui)=>{
+    a._slug = 'u'+String(ui).padStart(3,'0');
+    const buildHtml = () => `<div class="pp wish">`
+      + (a.photo?`<img class="thumb" src="${a.photo}" alt="${a.name}">`:'')
+      + `<div class="inner">`
+      + `<span class="wishtag">🔜 これから紹介したい水族館</span>`
+      + `<h3>${a.name}</h3>`
+      + `<p class="hl">${a.comment||''}<br>動画での紹介をおたのしみに！</p>`
+      + animalChips(a)
+      + (a.summer?`<div class="summerinfo">☀️ ${a.summer}</div>`:'')
+      + infoBox(a)
+      + `<div class="btns">`
+      + (a.url?`<a class="btn hp" href="${a.url}" target="_blank">公式サイト🔗</a>`:'')
+      + snsBtns(a)
+      + `<a class="btn hp" href="spot/${a._slug}.html">📖 くわしく</a>`
+      + visitBtn(a)
+      + wishBtn(a)
+      + `</div></div></div>`;
+    const m = L.marker([a.lat,a.lng],{icon:wishIcon}).addTo(map)
+      .bindPopup(buildHtml,{maxWidth:270, autoPan:false});
+    allMarkers.push({m, tags:a.tags||[], name:a.name});
+  });
+
+  const btnWrap = document.getElementById('regionBtns');
+  const tagWrap = document.getElementById('tagBtns');
+  const fixedRow = document.getElementById('fixedRow');
+  const cards = document.getElementById('cards');
+  let current = 'すべて';
+  let currentTag = null;
+  ['すべて', ...Object.keys(REGIONS)].forEach(r=>{
+    const b = document.createElement('button');
+    b.textContent = r;
+    if(r===current) b.classList.add('active');
+    b.onclick = ()=>{ current=r; document.querySelectorAll('#regionBtns button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(); };
+    btnWrap.appendChild(b);
+  });
+  function clearTagActive(){
+    document.querySelectorAll('#tagBtns button, #fixedRow button').forEach(x=>x.classList.remove('active'));
+  }
+  Object.entries(TAGS).forEach(([key,label])=>{
+    const b = document.createElement('button');
+    b.innerHTML = `<span class="pc-only">${label[0]}</span><span class="sp-only">${label[1]}</span>`;
+    b.onclick = ()=>{
+      if(currentTag===key){ currentTag=null; b.classList.remove('active'); }
+      else{
+        currentTag=key;
+        clearTagActive();
+        b.classList.add('active');
+      }
+      applyMapFilter(); render();
+    };
+    tagWrap.appendChild(b);
+  });
+
+  // PC（マウス操作）だけ：カテゴリー行が横スクロールできることを矢印・フェード・自動ピークで知らせる
+  const catWrap = document.getElementById('catPillsWrap');
+  const catScrollLeft = document.getElementById('catScrollLeft');
+  const catScrollRight = document.getElementById('catScrollRight');
+  function updateCatScrollState(){
+    const max = tagWrap.scrollWidth - tagWrap.clientWidth;
+    catWrap.classList.toggle('at-start', tagWrap.scrollLeft <= 2);
+    catWrap.classList.toggle('at-end', tagWrap.scrollLeft >= max - 2);
+  }
+  catScrollLeft.onclick = ()=> tagWrap.scrollBy({left:-160, behavior:'smooth'});
+  catScrollRight.onclick = ()=> tagWrap.scrollBy({left:160, behavior:'smooth'});
+  tagWrap.addEventListener('scroll', updateCatScrollState);
+  window.addEventListener('resize', updateCatScrollState);
+  updateCatScrollState();
+  const isPcPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(isPcPointer && !noMotion && (tagWrap.scrollWidth - tagWrap.clientWidth) > 20){
+    setTimeout(()=>{
+      tagWrap.scrollTo({left:70, behavior:'smooth'});
+      setTimeout(()=> tagWrap.scrollTo({left:0, behavior:'smooth'}), 650);
+    }, 500);
+  }
+  const visitedBtn = document.createElement('button');
+  visitedBtn.className = 'visitedbtn';
+  visitedBtn.innerHTML = '<span class="pc-only">✅ キミが訪れた水族館</span><span class="sp-only">✅ 訪れた水族館</span>';
+  visitedBtn.onclick = ()=>{
+    if(currentTag==='__visited'){ currentTag=null; visitedBtn.classList.remove('active'); }
+    else{
+      currentTag='__visited';
+      clearTagActive();
+      visitedBtn.classList.add('active');
+    }
+    applyMapFilter(); render();
+  };
+  fixedRow.appendChild(visitedBtn);
+  const wishListBtn = document.createElement('button');
+  wishListBtn.className = 'wishlistbtn';
+  wishListBtn.innerHTML = '<span class="pc-only">💛 行ってみたいリスト</span><span class="sp-only">💛 行きたいリスト</span>';
+  wishListBtn.onclick = ()=>{
+    if(currentTag==='__wish'){ currentTag=null; wishListBtn.classList.remove('active'); }
+    else{
+      currentTag='__wish';
+      clearTagActive();
+      wishListBtn.classList.add('active');
+    }
+    applyMapFilter(); render();
+  };
+  fixedRow.appendChild(wishListBtn);
+  const navRow = document.getElementById('navRow');
+  const rankLink = document.createElement('a');
+  rankLink.className = 'rankbtn';
+  rankLink.href = 'taste-ranking.html';
+  rankLink.innerHTML = '<span class="pc-only">🏆 かわちゃんのランキング</span><span class="sp-only">🏆 ランキング</span>';
+  navRow.appendChild(rankLink);
+  const postLink = document.createElement('a');
+  postLink.className = 'rankbtn postbtn';
+  postLink.href = 'posts.html';
+  postLink.innerHTML = '<span class="pc-only">📸 みんなの投稿機能</span><span class="sp-only">📸 投稿</span>';
+  navRow.appendChild(postLink);
+  const playLink = document.createElement('a');
+  playLink.className = 'rankbtn playbtn';
+  playLink.href = 'play.html';
+  playLink.innerHTML = '<span class="pc-only">🎮 あそぶ（さかなクイズ）</span><span class="sp-only">🎮 あそぶ</span>';
+  navRow.appendChild(playLink);
+
+  function applyMapFilter(){
+    allMarkers.forEach(({m,tags,name})=>{
+      const show = !currentTag || (currentTag==='__visited' ? myVisits.has(name) : currentTag==='__wish' ? myWishlist.has(name) : tags.includes(currentTag));
+      if(show){ if(!map.hasLayer(m)) m.addTo(map); }
+      else{ if(map.hasLayer(m)) map.removeLayer(m); }
+    });
+  }
+
+  let sortMode = 'default';
+  let viewCounts = null; // {videoId: count} キャッシュ
+  let publishDates = null; // {videoId: publishedAt(ISO文字列)} キャッシュ
+  async function fetchViewCounts(){
+    if(viewCounts) return viewCounts;
+    viewCounts = {};
+    const ids = aqs.map(a=> (a.videos[0]||{}).id).filter(Boolean);
+    for(let i=0;i<ids.length;i+=50){
+      const chunk = ids.slice(i,i+50);
+      try{
+        const r = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${chunk.join(',')}&key=${YT_API_KEY}`);
+        const d = await r.json();
+        (d.items||[]).forEach(it=>{ viewCounts[it.id] = Number(it.statistics.viewCount)||0; });
+      }catch(e){}
+    }
+    return viewCounts;
+  }
+  async function fetchPublishDates(){
+    if(publishDates) return publishDates;
+    publishDates = {};
+    const ids = aqs.map(a=> (a.videos[0]||{}).id).filter(Boolean);
+    for(let i=0;i<ids.length;i+=50){
+      const chunk = ids.slice(i,i+50);
+      try{
+        const r = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${chunk.join(',')}&key=${YT_API_KEY}`);
+        const d = await r.json();
+        (d.items||[]).forEach(it=>{ publishDates[it.id] = it.snippet.publishedAt; });
+      }catch(e){}
+    }
+    return publishDates;
+  }
+  function applySortOrder(list){
+    if(sortMode === 'new' && publishDates) return [...list].sort((a,b)=>{
+      const da = publishDates[(a.videos[0]||{}).id] || '';
+      const db = publishDates[(b.videos[0]||{}).id] || '';
+      if(da !== db) return da > db ? -1 : 1;
+      return (b.no||0) - (a.no||0);
+    });
+    if(sortMode === 'views' && viewCounts) return [...list].sort((a,b)=>{
+      const va = viewCounts[(a.videos[0]||{}).id] || 0;
+      const vb = viewCounts[(b.videos[0]||{}).id] || 0;
+      return vb - va;
+    });
+    return [...list].sort((a,b)=> (a.no||999) - (b.no||999));
+  }
+  const sortBtnsEl = document.getElementById('sortBtns');
+  const SORT_OPTIONS = [
+    {key:'new', label:'🆕 新着順'},
+    {key:'views', label:'👀 再生回数順'},
+  ];
+  SORT_OPTIONS.forEach(opt=>{
+    const b = document.createElement('button');
+    b.textContent = opt.label;
+    b.onclick = async ()=>{
+      if(sortMode === opt.key){
+        // もう一度押したら標準順に戻す
+        sortMode = 'default';
+        b.classList.remove('active');
+        render();
+        return;
+      }
+      if(opt.key === 'views'){
+        b.textContent = '👀 読み込み中…';
+        await fetchViewCounts();
+        b.textContent = opt.label;
+      }
+      if(opt.key === 'new'){
+        b.textContent = '🆕 読み込み中…';
+        await fetchPublishDates();
+        b.textContent = opt.label;
+      }
+      sortMode = opt.key;
+      document.querySelectorAll('#sortBtns button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      render();
+    };
+    sortBtnsEl.appendChild(b);
+  });
+
+  // 会いたい魚から検索
+  (function(){
+    const input = document.getElementById('animalSearch');
+    const clearBtn = document.getElementById('animalSearchClear');
+    const datalist = document.getElementById('animalList');
+    const allAnimals = new Set();
+    aqs.forEach(a=>{ (a.animals||[]).forEach(an=> allAnimals.add(an)); (a.search_animals||[]).forEach(an=> allAnimals.add(an)); if(a.only) allAnimals.add(a.only); });
+    [...allAnimals].sort().forEach(an=>{
+      const opt = document.createElement('option');
+      opt.value = an;
+      datalist.appendChild(opt);
+    });
+    input.addEventListener('input', ()=>{
+      animalQuery = input.value;
+      clearBtn.style.display = animalQuery ? 'block' : 'none';
+      render();
+    });
+    clearBtn.onclick = ()=>{ input.value=''; animalQuery=''; clearBtn.style.display='none'; render(); };
+  })();
+
+  let animalQuery = '';
+  const CARD_INIT = 8, CARD_MORE = 12;
+  let shownCount = CARD_INIT, lastSig = null;
+  function render(){
+    cards.innerHTML='';
+    const q = animalQuery.trim().toLowerCase();
+    const filtered = aqs.filter(a=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (currentTag==='__visited' ? myVisits.has(a.name) : currentTag==='__wish' ? myWishlist.has(a.name) : (a.tags||[]).includes(currentTag))))
+      .filter(a=> !q || (a.animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.search_animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.only||'').toLowerCase().includes(q));
+    const sorted = applySortOrder(filtered);
+    filtered.length = 0; filtered.push(...sorted);
+    const filterActive = current!=='すべて' || currentTag || q;
+    const sig = current+'|'+currentTag+'|'+q;
+    if(sig!==lastSig){ shownCount = CARD_INIT; lastSig = sig; }
+    const visList = filterActive ? filtered : filtered.slice(0, shownCount);
+    visList.forEach(a=>{
+      const v = a.videos[0];
+      const thumb = v ? `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg` : '';
+      const card = document.createElement('div');
+      card.className = 'card' + (a.upcoming?' upcoming':'') + (myVisits.has(a.name)?' visited':'');
+      card.innerHTML = `
+        ${v?`<a href="spot/${String(a.no).padStart(3,'0')}.html"><img loading="lazy" src="${thumb}" alt="${a.name}"></a>`:`<div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:#e0f2fe;font-size:2rem">🔜</div>`}
+        <div class="body">
+          <span class="pref">${a.pref}</span>
+          <h3><a class="namelink" href="spot/${String(a.no).padStart(3,'0')}.html">${a.name}</a> ${a.closed_flag?'<span class="badge-closed">閉館</span>':''}</h3>
+          <p class="hl">${a.highlight||''}</p>
+          ${animalChips(a)}
+          ${a.summer?`<div class="summerinfo">☀️ 夏休み：${a.summer}</div>`:''}
+          ${(a.fee||a.closed)&&!a.closed_flag?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}`:''}${a.child?`<br>🧒 子ども ${a.child}`:''}${a.infant?`<br>👶 幼児 ${a.infant}`:''}${a.duration?`<br>⏱ 所要時間 ${a.duration}`:''}${a.closed?`<br>🗓 休み：${a.closed}`:''}${a.gift?`<br>🎁 おみやげ：${a.gift}`:''}</div>`:''}
+          <div class="links">
+            ${a.videos.map((vv,i)=>`<a class="tab yt" href="https://www.youtube.com/watch?v=${vv.id}" target="_blank">▶ 動画${a.videos.length>1?(i+1):''}</a>`).join('')}
+            ${a.url?`<a class="tab hp" href="${a.url}" target="_blank">公式サイト</a>`:''}
+            ${a.sns&&a.sns.x?`<a class="tab hp" href="${a.sns.x}" target="_blank">𝕏</a>`:''}
+            ${a.sns&&a.sns.instagram?`<a class="tab hp" href="${a.sns.instagram}" target="_blank">📷 Insta</a>`:''}
+            <a class="tab detail" href="spot/${String(a.no).padStart(3,'0')}.html">📖 くわしく</a>
+            ${visitBtn(a)}
+            ${wishBtn(a)}
+            ${v?`<button class="cbtn" data-vid="${v.id}">💬 みんなの感想</button>`:''}
+          </div>
+          ${v?`<div class="ytc" data-vid="${v.id}"></div>`:''}
+        </div>`;
+      cards.appendChild(card);
+      const cb = card.querySelector('.cbtn');
+      if(cb) cb.onclick = ()=> loadYtComments(cb.dataset.vid, card.querySelector('.ytc'), cb);
+    });
+    // デフォルト（絞り込みなし）は初期数だけ表示して「もっと見る」で追加＝スマホでコンパクトに
+    if(!filterActive && filtered.length > shownCount){
+      const more = document.createElement('button');
+      more.textContent = `もっと見る（あと${filtered.length - shownCount}館）`;
+      more.style.cssText = 'grid-column:1/-1;margin:8px auto 4px;background:#fff;border:2px solid var(--sky);color:var(--sea-deep);font-weight:bold;font-size:.92rem;border-radius:999px;padding:13px 30px;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(2,62,138,.12);';
+      more.onclick = ()=>{ shownCount += CARD_MORE; render(); };
+      cards.appendChild(more);
+    }
+    // 🔜 まだ動画で紹介していない水族館も、絞り込み・検索中は一覧に出す（行った！チェックできるように）
+    if(filterActive){
+      const unv = (data.unvisited||[]).map((a,ui)=>({a, slug:'u'+String(ui).padStart(3,'0')}))
+        .filter(({a})=> (current==='すべて' || REGIONS[current].includes(a.pref)) && (!currentTag || (currentTag==='__visited' ? myVisits.has(a.name) : currentTag==='__wish' ? myWishlist.has(a.name) : (a.tags||[]).includes(currentTag))))
+        .filter(({a})=> !q || (a.animals||[]).some(an=> an.toLowerCase().includes(q)) || (a.search_animals||[]).some(an=> an.toLowerCase().includes(q)));
+      if(unv.length){
+        const div = document.createElement('div');
+        div.style.cssText = 'grid-column:1/-1;font-weight:bold;color:var(--sea-deep);opacity:.8;padding:6px 4px 0;';
+        div.textContent = '🔜 これから紹介したい水族館（行った！チェックもできるよ）';
+        cards.appendChild(div);
+      }
+      unv.forEach(({a, slug})=>{
+        const card = document.createElement('div');
+        card.className = 'card upcoming' + (myVisits.has(a.name)?' visited':'');
+        card.innerHTML = `
+          ${a.photo?`<a href="spot/${slug}.html"><img loading="lazy" src="${a.photo}" alt="${a.name}"></a>`:`<div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:#eef4f8;font-size:2rem">🔜</div>`}
+          <div class="body">
+            <span class="pref">${a.pref}</span>
+            <h3><a class="namelink" href="spot/${slug}.html">${a.name}</a></h3>
+            <p class="hl">${a.comment||''}</p>
+            ${animalChips(a)}
+            ${a.summer?`<div class="summerinfo">☀️ 夏休み：${a.summer}</div>`:''}
+            ${(a.fee||a.closed)?`<div class="cinfo">${a.fee?`💰 大人 ${a.fee}`:''}${a.child?`<br>🧒 子ども ${a.child}`:''}${a.closed?`<br>🗓 休み：${a.closed}`:''}</div>`:''}
+            <div class="links">
+              ${a.url?`<a class="tab hp" href="${a.url}" target="_blank">公式サイト</a>`:''}
+              <a class="tab detail" href="spot/${slug}.html">📖 くわしく</a>
+              ${visitBtn(a)}
+              ${wishBtn(a)}
+            </div>
+          </div>`;
+        cards.appendChild(card);
+      });
+    }
+  }
+  // ===== 制覇マップ画像シェア =====
+  const ALL_SPOTS = [...aqs, ...(data.unvisited||[])];
+  const VISITABLE = ALL_SPOTS.filter(a=>!a.gone); // 今行ける館（制覇の母数）。閉館館は思い出枠として別扱い
+  // 制覇MAPのレベル切替（一般⊂上級⊂マニアの累積）。1枚に1レベルだけ表示、モーダルの「レベル」で切替
+  const TIER_LEVEL = {'一般':1,'上級':2,'マニア':3};
+  const TIER_EMOJI = {'一般':'🐟','上級':'🐬','マニア':'🤿'};
+  const TIER_ORDER = ['一般','上級','マニア'];
+  let currentShareTier = '一般';
+  function shareTierStat(){
+    const lv = TIER_LEVEL[currentShareTier];
+    const pool = VISITABLE.filter(a=>(TIER_LEVEL[a.tier]||99)<=lv);
+    const v = pool.filter(a=>myVisits.has(a.name)).length;
+    return {name: currentShareTier, emoji: TIER_EMOJI[currentShareTier], v, t: pool.length, done: pool.length>0 && v===pool.length};
+  }
+  const FONT = '"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif';
+  let japanOutline = null;
+  const shareImgs = {};
+  function loadImg(key, src){
+    if(shareImgs[key]) return Promise.resolve(shareImgs[key]);
+    return new Promise(res=>{
+      const i = new Image();
+      i.onload = ()=>{ shareImgs[key] = i; res(i); };
+      i.onerror = ()=>res(null);
+      i.src = src;
+    });
+  }
+  async function drawShareMap(){
+    if(!japanOutline){
+      japanOutline = await fetch('assets/japan_light.json').then(r=>r.json());
+    }
+    await loadImg('kawachan','assets/kawachan_guide.png');
+    const cv = document.getElementById('shareCanvas');
+    const W = cv.width = 1080, H = cv.height = 1080;
+    const ctx = cv.getContext('2d');
+    const bg = ctx.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#48cae4'); bg.addColorStop(.55,'#0096c7'); bg.addColorStop(1,'#023e8a');
+    ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+
+    // 投影：本土＋沖縄インセット（左上）
+    const COS = Math.cos(38*Math.PI/180);
+    function makeProj(b, r){
+      const k = Math.min(r.w/((b.lng1-b.lng0)*COS), r.h/(b.lat1-b.lat0));
+      const ox = r.x + (r.w-(b.lng1-b.lng0)*COS*k)/2;
+      const oy = r.y + (r.h-(b.lat1-b.lat0)*k)/2;
+      return (lat,lng)=>[ox+(lng-b.lng0)*COS*k, oy+(b.lat1-lat)*k];
+    }
+    const main = makeProj({lng0:128.6,lng1:146.4,lat0:30.0,lat1:45.9},{x:40,y:110,w:1000,h:970});
+    const okiBox = {x:96,y:262,w:210,h:140};
+    const oki = makeProj({lng0:126.4,lng1:128.6,lat0:25.8,lat1:27.1},{x:okiBox.x+14,y:okiBox.y+34,w:okiBox.w-28,h:okiBox.h-46});
+    // 沖縄本島周辺だけインセットに描く（奄美・先島・小笠原などは枠からはみ出すため描かない）
+    const inOki = (lat,lng)=> lat>=25.8 && lat<=27.5 && lng>=126.4 && lng<=128.6;
+    const inMain = (lat,lng)=> lat>=30 && lat<=45.9 && lng>=128.6 && lng<=146.4;
+    const projFor = (lat,lng)=> inOki(lat,lng) ? oki(lat,lng) : inMain(lat,lng) ? main(lat,lng) : null;
+
+    // 陸地シルエット
+    ctx.fillStyle = 'rgba(255,255,255,.92)';
+    ctx.strokeStyle = 'rgba(2,62,138,.25)';
+    ctx.lineWidth = 2;
+    japanOutline.forEach(ring=>{
+      const [clng,clat] = ring[0];
+      const isOki = inOki(clat,clng);
+      if(!isOki && !inMain(clat,clng)) return;
+      ctx.beginPath();
+      ring.forEach(([lng,lat],i)=>{
+        const [x,y] = isOki ? oki(lat,lng) : main(lat,lng);
+        i ? ctx.lineTo(x,y) : ctx.moveTo(x,y);
+      });
+      ctx.closePath(); ctx.fill(); ctx.stroke();
+    });
+    // 沖縄インセット枠
+    ctx.strokeStyle='rgba(255,255,255,.7)'; ctx.lineWidth=2.5;
+    ctx.strokeRect(okiBox.x,okiBox.y,okiBox.w,okiBox.h);
+    ctx.fillStyle='rgba(255,255,255,.9)'; ctx.font='bold 22px '+FONT; ctx.textAlign='left';
+    ctx.fillText('沖縄', okiBox.x+10, okiBox.y+26);
+
+    // スポット（掲載館→行った館の順で重ね描き）
+    VISITABLE.forEach(a=>{
+      if(!a.lat||!a.lng) return;
+      const p = projFor(a.lat,a.lng);
+      if(!p) return;
+      ctx.beginPath(); ctx.arc(p[0],p[1],5,0,Math.PI*2);
+      ctx.fillStyle='rgba(2,62,138,.3)'; ctx.fill();
+    });
+    // 思い出（閉館館で行ったところ）：母数外・淡い紫で控えめに。回っていなければ0個で何も出ない
+    ALL_SPOTS.filter(a=>a.gone && myVisits.has(a.name)).forEach(a=>{
+      if(!a.lat||!a.lng) return;
+      const p = projFor(a.lat,a.lng);
+      if(!p) return;
+      ctx.beginPath(); ctx.arc(p[0],p[1],8,0,Math.PI*2);
+      ctx.fillStyle='#c8b6ff'; ctx.fill();
+      ctx.lineWidth=3; ctx.strokeStyle='#fff'; ctx.stroke();
+    });
+    VISITABLE.filter(a=>myVisits.has(a.name)).forEach(a=>{
+      if(!a.lat||!a.lng) return;
+      const p = projFor(a.lat,a.lng);
+      if(!p) return;
+      ctx.beginPath(); ctx.arc(p[0],p[1],9,0,Math.PI*2);
+      ctx.fillStyle='#ff6b6b'; ctx.fill();
+      ctx.lineWidth=3; ctx.strokeStyle='#fff'; ctx.stroke();
+    });
+
+    // タイトル
+    ctx.textAlign='center'; ctx.fillStyle='#fff';
+    ctx.font='bold 46px '+FONT;
+    ctx.fillText('🐟 わたしの水族館ツアー制覇MAP', W/2, 62);
+
+    // レベル1つだけ表示（左上の海。沖縄インセットは y262〜なので上に収める）
+    const s = shareTierStat();
+    const cardX=40, cardY=98, cardW=470, cardH= s.done?170:126;
+    ctx.fillStyle='rgba(2,62,138,.36)';
+    ctx.beginPath();
+    if(ctx.roundRect) ctx.roundRect(cardX,cardY,cardW,cardH,20); else ctx.rect(cardX,cardY,cardW,cardH);
+    ctx.fill();
+    // ラベル（🐟 一般 など）
+    ctx.textAlign='left';
+    ctx.font='bold 44px '+FONT; ctx.fillStyle='#fff';
+    const labelBaseline = cardY+80;
+    ctx.fillText(`${s.emoji} ${s.name}`, cardX+24, labelBaseline);
+    const wl = ctx.measureText(`${s.emoji} ${s.name}`).width;
+    // 数字
+    ctx.shadowColor='rgba(2,62,138,.45)'; ctx.shadowBlur=6; ctx.shadowOffsetY=3;
+    ctx.font='bold 82px '+FONT; ctx.fillStyle='#ffd166';
+    const numX = cardX+24+wl+24;
+    ctx.fillText(String(s.v), numX, labelBaseline+8);
+    const wn = ctx.measureText(String(s.v)).width;
+    ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+    ctx.font='bold 40px '+FONT; ctx.fillStyle='#fff';
+    ctx.fillText(`/${s.t}`, numX+wn+6, labelBaseline+8);
+    if(s.done){
+      ctx.font='bold 40px '+FONT; ctx.fillStyle='#9bf6b0';
+      ctx.fillText('✅ コンプリート！', cardX+24, cardY+148);
+    }
+
+    // 凡例（左側の海に）＋フッター
+    const ly = 498;
+    ctx.beginPath(); ctx.arc(124, ly-14, 14, 0, Math.PI*2);
+    ctx.fillStyle='#ff6b6b'; ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle='#fff'; ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 42px '+FONT; ctx.textAlign='left';
+    ctx.fillText('＝ 行った水族館', 152, ly);
+    // 思い出の水族館（閉館館を回った人だけ・母数には入れない）
+    const memN = ALL_SPOTS.filter(a=>a.gone && myVisits.has(a.name)).length;
+    if(memN>0){
+      const my = ly+54;
+      ctx.beginPath(); ctx.arc(124, my-14, 14, 0, Math.PI*2);
+      ctx.fillStyle='#c8b6ff'; ctx.fill(); ctx.lineWidth=4; ctx.strokeStyle='#fff'; ctx.stroke();
+      ctx.fillStyle='rgba(255,255,255,.98)'; ctx.font='bold 38px '+FONT; ctx.textAlign='left';
+      ctx.fillText(`＝ 思い出の水族館 ${memN}館`, 152, my);
+    }
+    ctx.textAlign='center';
+    ctx.font='bold 30px '+FONT; ctx.fillStyle='rgba(255,255,255,.95)';
+    ctx.fillText('©さかなのおにいさん かわちゃん', W/2, H-24);
+
+    // かわちゃん（右下・下端に寄せる）
+    if(shareImgs.kawachan){
+      ctx.drawImage(shareImgs.kawachan, W-395, H-390, 380, 380);
+    }
+  }
+  function canvasBlob(){
+    return new Promise(res=>document.getElementById('shareCanvas').toBlob(res,'image/png'));
+  }
+  const lvlBtn = document.getElementById('mapImgLevel');
+  function setLvlBtn(){ lvlBtn.textContent = '🔀 '+currentShareTier; }
+  lvlBtn.onclick = async ()=>{
+    currentShareTier = TIER_ORDER[(TIER_ORDER.indexOf(currentShareTier)+1)%TIER_ORDER.length];
+    setLvlBtn();
+    try{ await drawShareMap(); }catch(e){ console.error(e); }
+  };
+  document.getElementById('mapImgBtn').onclick = async ()=>{
+    currentShareTier = '一般'; setLvlBtn();
+    document.getElementById('mapImgModal').classList.add('open');
+    try{ await drawShareMap(); }catch(e){ console.error(e); }
+  };
+  document.getElementById('mapImgSave').onclick = async ()=>{
+    const b = await canvasBlob();
+    if(!b) return;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(b);
+    a.download = 'suizokukan-seiha-map.png';
+    a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 3000);
+  };
+  document.getElementById('mapImgShare').onclick = async ()=>{
+    const b = await canvasBlob();
+    if(!b) return;
+    const file = new File([b], 'suizokukan-seiha-map.png', {type:'image/png'});
+    const s = shareTierStat();
+    const text = `わたしの水族館めぐり🐟\n${s.emoji}${s.name} ${s.v}/${s.t}${s.done?' コンプリート！🏆':' 制覇！'}\n#全国水族館ツアーMAP\nhttps://aquarium.yasasea.com/`;
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      try{ await navigator.share({files:[file], text}); return; }catch(e){ if(e.name==='AbortError') return; }
+    }
+    // シェア非対応（PCなど）：画像を保存してXの投稿画面を開く
+    document.getElementById('mapImgSave').click();
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`わたしの水族館めぐり🐟\n${s.emoji}${s.name} ${s.v}/${s.t}${s.done?' コンプリート！🏆':' 制覇！'}\n#全国水族館ツアーMAP`)}&url=${encodeURIComponent('https://aquarium.yasasea.com/')}`,'_blank');
+  };
+
+  render();
+  updateMyCount();
+  if(location.hash.startsWith('#demo')){ /*検証用シード*/
+    const pick=(tier,k)=>VISITABLE.filter(a=>a.tier===tier).slice(0,k).map(a=>a.name);
+    const goneOne=ALL_SPOTS.filter(a=>a.gone).slice(0,1).map(a=>a.name);
+    myVisits=new Set([...pick('一般',22),...pick('上級',5),...pick('マニア',2),...goneOne]);
+    const m=location.hash.match(/#demo(\d)/); if(m) currentShareTier=TIER_ORDER[Math.min(+m[1]-1,2)]||'一般';
+    setLvlBtn(); document.getElementById('mapImgModal').classList.add('open'); drawShareMap();
+  }
+});
+</script>
+</body>
+</html>
