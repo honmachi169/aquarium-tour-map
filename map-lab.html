@@ -1254,24 +1254,18 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     ctx.font='bold 46px '+FONT;
     ctx.fillText('🐟 わたしの水族館ツアー制覇MAP', W/2, 62);
 
-    // レベルは1つだけ表示。全レベル背景なしの大きい数字で統一。上級・マニアはレベル名を数字の上に添える（一般は表記なし＝従来どおり）
+    // レベルは1つだけ表示。全レベル背景なしの大数字1行で統一。語尾でレベルを示す（上級制覇！/マニア制覇！、一般は制覇！）
     const s = shareTierStat();
-    let numY = 208;
-    if(currentShareTier!=='一般'){
-      ctx.textAlign='left';
-      ctx.font='bold 46px '+FONT; ctx.fillStyle='#fff';
-      ctx.fillText(`${s.emoji} ${s.name}`, 80, 150);
-      numY = 236;
-    }
-    const numTxt=String(s.v), restTxt=` / ${s.t}館 ${s.done?'コンプ！🏆':'制覇！'}`;
+    const lvlWord = currentShareTier==='一般' ? '' : s.name;
+    const numTxt=String(s.v), restTxt=` / ${s.t}館 ${lvlWord}${s.done?'コンプ！🏆':'制覇！'}`;
     ctx.textAlign='left';
     ctx.shadowColor='rgba(2,62,138,.5)'; ctx.shadowBlur=8; ctx.shadowOffsetY=4;
     ctx.fillStyle='#ffd166'; ctx.font='bold 104px '+FONT;
     const wNum=ctx.measureText(numTxt).width;
-    ctx.fillText(numTxt,80,numY);
+    ctx.fillText(numTxt,80,208);
     ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
     ctx.fillStyle='#fff'; ctx.font='bold 50px '+FONT;
-    ctx.fillText(restTxt,80+wNum,numY);
+    ctx.fillText(restTxt,80+wNum,208);
 
     // 凡例（左側の海に）＋フッター
     const ly = 498;
@@ -1326,14 +1320,14 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     if(!b) return;
     const file = new File([b], 'suizokukan-seiha-map.png', {type:'image/png'});
     const s = shareTierStat();
-    const head = currentShareTier==='一般' ? `全国の水族館 ${s.v}/${s.t}` : `${s.emoji}${s.name} ${s.v}/${s.t}`;
-    const text = `わたしの水族館めぐり🐟\n${head}${s.done?' コンプリート！🏆':' 制覇！'}\n#全国水族館ツアーMAP\nhttps://aquarium.yasasea.com/`;
+    const lvlWord = currentShareTier==='一般' ? '' : s.name;
+    const text = `わたしの水族館めぐり🐟\n${s.v}/${s.t}館 ${lvlWord}${s.done?'コンプ！🏆':'制覇！'}\n#全国水族館ツアーMAP\nhttps://aquarium.yasasea.com/`;
     if(navigator.canShare && navigator.canShare({files:[file]})){
       try{ await navigator.share({files:[file], text}); return; }catch(e){ if(e.name==='AbortError') return; }
     }
     // シェア非対応（PCなど）：画像を保存してXの投稿画面を開く
     document.getElementById('mapImgSave').click();
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`わたしの水族館めぐり🐟\n${head}${s.done?' コンプリート！🏆':' 制覇！'}\n#全国水族館ツアーMAP`)}&url=${encodeURIComponent('https://aquarium.yasasea.com/')}`,'_blank');
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`わたしの水族館めぐり🐟\n${s.v}/${s.t}館 ${lvlWord}${s.done?'コンプ！🏆':'制覇！'}\n#全国水族館ツアーMAP`)}&url=${encodeURIComponent('https://aquarium.yasasea.com/')}`,'_blank');
   };
 
   render();
