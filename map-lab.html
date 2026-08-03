@@ -350,7 +350,7 @@
     <p style="font-size:.75rem;color:#678;margin:8px 0 4px">画像を保存して、SNSでみんなに自慢しよう🐟</p>
     <div class="row" style="margin-top:6px">
       <button class="cancel" onclick="document.getElementById('mapImgModal').classList.remove('open')">とじる</button>
-      <button class="cancel" id="mapImgLevel" style="border-color:#6366f1;color:#4f46e5">🔀 一般</button>
+      <button class="cancel" id="mapImgLevel" style="border-color:#6366f1;color:#4f46e5">🐟レベル</button>
       <button class="send" id="mapImgSave">💾 保存</button>
       <button class="send" id="mapImgShare">📤 シェア</button>
     </div>
@@ -1152,7 +1152,8 @@ fetch('data.json').then(r=>r.json()).then(data=>{
   const VISITABLE = ALL_SPOTS.filter(a=>!a.gone); // 今行ける館（制覇の母数）。閉館館は思い出枠として別扱い
   // 制覇MAPのレベル切替（一般⊂上級⊂マニアの累積）。1枚に1レベルだけ表示、モーダルの「レベル」で切替
   const TIER_LEVEL = {'一般':1,'上級':2,'マニア':3};
-  const TIER_EMOJI = {'一般':'🐟','上級':'🐬','マニア':'🤿'};
+  const TIER_EMOJI = {'一般':'🐟','上級':'🐬','マニア':'🐡'};
+  const TIER_BTN = {'一般':'🐟レベル','上級':'🐬上級','マニア':'🐡マニア'};
   const TIER_ORDER = ['一般','上級','マニア'];
   let currentShareTier = '一般';
   function shareTierStat(){
@@ -1253,31 +1254,38 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     ctx.font='bold 46px '+FONT;
     ctx.fillText('🐟 わたしの水族館ツアー制覇MAP', W/2, 62);
 
-    // レベル1つだけ表示（左上の海。沖縄インセットは y262〜なので上に収める）
+    // レベルは1つだけ表示。一般＝前と同じ普通の大きい数字（レベル表記なし）、上級・マニア＝ラベル付き
     const s = shareTierStat();
-    const cardX=40, cardY=98, cardW=470, cardH= s.done?170:126;
-    ctx.fillStyle='rgba(2,62,138,.36)';
-    ctx.beginPath();
-    if(ctx.roundRect) ctx.roundRect(cardX,cardY,cardW,cardH,20); else ctx.rect(cardX,cardY,cardW,cardH);
-    ctx.fill();
-    // ラベル（🐟 一般 など）
-    ctx.textAlign='left';
-    ctx.font='bold 44px '+FONT; ctx.fillStyle='#fff';
-    const labelBaseline = cardY+80;
-    ctx.fillText(`${s.emoji} ${s.name}`, cardX+24, labelBaseline);
-    const wl = ctx.measureText(`${s.emoji} ${s.name}`).width;
-    // 数字
-    ctx.shadowColor='rgba(2,62,138,.45)'; ctx.shadowBlur=6; ctx.shadowOffsetY=3;
-    ctx.font='bold 82px '+FONT; ctx.fillStyle='#ffd166';
-    const numX = cardX+24+wl+24;
-    ctx.fillText(String(s.v), numX, labelBaseline+8);
-    const wn = ctx.measureText(String(s.v)).width;
-    ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
-    ctx.font='bold 40px '+FONT; ctx.fillStyle='#fff';
-    ctx.fillText(`/${s.t}`, numX+wn+6, labelBaseline+8);
-    if(s.done){
-      ctx.font='bold 40px '+FONT; ctx.fillStyle='#9bf6b0';
-      ctx.fillText('✅ コンプリート！', cardX+24, cardY+148);
+    if(currentShareTier==='一般'){
+      const numTxt=String(s.v), restTxt=` / ${s.t}館 制覇！`;
+      ctx.textAlign='left';
+      ctx.shadowColor='rgba(2,62,138,.5)'; ctx.shadowBlur=8; ctx.shadowOffsetY=4;
+      ctx.fillStyle='#ffd166'; ctx.font='bold 104px '+FONT;
+      const wNum=ctx.measureText(numTxt).width;
+      ctx.fillText(numTxt,80,208);
+      ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+      ctx.fillStyle='#fff'; ctx.font='bold 50px '+FONT;
+      ctx.fillText(restTxt,80+wNum,208);
+    } else {
+      const cardX=40, cardY=98, cardW=470, cardH= s.done?170:126;
+      ctx.fillStyle='rgba(2,62,138,.36)';
+      ctx.beginPath();
+      if(ctx.roundRect) ctx.roundRect(cardX,cardY,cardW,cardH,20); else ctx.rect(cardX,cardY,cardW,cardH);
+      ctx.fill();
+      ctx.textAlign='left';
+      ctx.font='bold 44px '+FONT; ctx.fillStyle='#fff';
+      const lb=cardY+80;
+      ctx.fillText(`${s.emoji} ${s.name}`, cardX+24, lb);
+      const wl=ctx.measureText(`${s.emoji} ${s.name}`).width;
+      ctx.shadowColor='rgba(2,62,138,.45)'; ctx.shadowBlur=6; ctx.shadowOffsetY=3;
+      ctx.font='bold 82px '+FONT; ctx.fillStyle='#ffd166';
+      const numX=cardX+24+wl+24;
+      ctx.fillText(String(s.v), numX, lb+8);
+      const wn=ctx.measureText(String(s.v)).width;
+      ctx.shadowColor='transparent'; ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+      ctx.font='bold 40px '+FONT; ctx.fillStyle='#fff';
+      ctx.fillText(`/${s.t}`, numX+wn+6, lb+8);
+      if(s.done){ ctx.font='bold 40px '+FONT; ctx.fillStyle='#9bf6b0'; ctx.fillText('✅ コンプリート！', cardX+24, cardY+148); }
     }
 
     // 凡例（左側の海に）＋フッター
@@ -1308,7 +1316,7 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     return new Promise(res=>document.getElementById('shareCanvas').toBlob(res,'image/png'));
   }
   const lvlBtn = document.getElementById('mapImgLevel');
-  function setLvlBtn(){ lvlBtn.textContent = '🔀 '+currentShareTier; }
+  function setLvlBtn(){ lvlBtn.textContent = TIER_BTN[currentShareTier]; }
   lvlBtn.onclick = async ()=>{
     currentShareTier = TIER_ORDER[(TIER_ORDER.indexOf(currentShareTier)+1)%TIER_ORDER.length];
     setLvlBtn();
@@ -1333,13 +1341,14 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     if(!b) return;
     const file = new File([b], 'suizokukan-seiha-map.png', {type:'image/png'});
     const s = shareTierStat();
-    const text = `わたしの水族館めぐり🐟\n${s.emoji}${s.name} ${s.v}/${s.t}${s.done?' コンプリート！🏆':' 制覇！'}\n#全国水族館ツアーMAP\nhttps://aquarium.yasasea.com/`;
+    const head = currentShareTier==='一般' ? `全国の水族館 ${s.v}/${s.t}` : `${s.emoji}${s.name} ${s.v}/${s.t}`;
+    const text = `わたしの水族館めぐり🐟\n${head}${s.done?' コンプリート！🏆':' 制覇！'}\n#全国水族館ツアーMAP\nhttps://aquarium.yasasea.com/`;
     if(navigator.canShare && navigator.canShare({files:[file]})){
       try{ await navigator.share({files:[file], text}); return; }catch(e){ if(e.name==='AbortError') return; }
     }
     // シェア非対応（PCなど）：画像を保存してXの投稿画面を開く
     document.getElementById('mapImgSave').click();
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`わたしの水族館めぐり🐟\n${s.emoji}${s.name} ${s.v}/${s.t}${s.done?' コンプリート！🏆':' 制覇！'}\n#全国水族館ツアーMAP`)}&url=${encodeURIComponent('https://aquarium.yasasea.com/')}`,'_blank');
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`わたしの水族館めぐり🐟\n${head}${s.done?' コンプリート！🏆':' 制覇！'}\n#全国水族館ツアーMAP`)}&url=${encodeURIComponent('https://aquarium.yasasea.com/')}`,'_blank');
   };
 
   render();
