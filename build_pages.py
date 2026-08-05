@@ -264,7 +264,7 @@ loadYtComments();''' if v else ''
         "slug": slug, "name": a["name"], "pref": a.get("pref", ""), "url": page_url,
         "thumb": thumb or ogimg, "animals": a.get("animals") or [], "tags": a.get("tags") or [],
         "rakko_past": bool(a.get("rakko_past")), "rakko_past_note": a.get("rakko_past_note") or "",
-        "gone": bool(a.get("gone")),
+        "gone": bool(a.get("gone")), "tier": a.get("tier"),
         "mendako_history": bool(a.get("mendako_history")),
         "comment": a.get("highlight") or a.get("comment") or "", "lat": a.get("lat"), "lng": a.get("lng"),
         "stroller": a.get("stroller"), "nursing": a.get("nursing"), "locker": a.get("locker"),
@@ -1269,6 +1269,8 @@ stamps_data = []
 for m in entry_meta:
     st = {"n": m["name"], "p": m["pref"], "r": pref_to_region.get(m["pref"], "その他"),
           "u": m["url"], "e": _stamp_emoji(m)}
+    if m.get("tier"):
+        st["t"] = m["tier"]
     simg = f"assets/stamps/{m['slug']}.png"
     if os.path.exists(simg):
         st["img"] = simg
@@ -1363,6 +1365,11 @@ main { max-width:900px; margin:0 auto; padding:20px 16px 40px; }
 .cover .owner .pen { font-size:.75rem; opacity:.75; }
 .cover .big { font-size:2.6rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 4px rgba(0,0,0,.3); margin-top:10px; line-height:1; }
 .cover .big small { font-size:1rem; color:#fff; font-weight:normal; }
+.tierprog { display:flex; justify-content:center; flex-wrap:wrap; gap:6px; margin:11px auto 2px; max-width:380px; }
+.tierprog .tp { display:flex; align-items:center; gap:4px; background:rgba(255,255,255,.14); border:1.5px solid rgba(255,255,255,.32); border-radius:999px; padding:4px 12px; font-size:.8rem; font-weight:bold; color:#fff; }
+.tierprog .tp b { font-size:.95rem; }
+.tierprog .tp small { font-weight:normal; opacity:.82; }
+.tierprog .tp.done { border-color:currentColor; }
 .pbar { background:rgba(255,255,255,.25); border-radius:999px; height:10px; margin:12px auto 6px; max-width:340px; overflow:hidden; }
 .pbar div { background:var(--sun); height:100%; border-radius:999px; width:0%; transition:width .8s ease; }
 .cover .note { font-size:.7rem; opacity:.75; margin-top:8px; }
@@ -1425,6 +1432,7 @@ __ATTR_CSS__
     <h1><span class="t1">すいぞくかん</span><span class="t2">パスポート</span></h1>
     <div class="owner" id="ownerName" title="タップでなまえを変えられるよ"></div>
     <div class="big"><span id="pCount">0</span><small> / __TOTAL__館</small></div>
+    <div class="tierprog" id="tierProg"></div>
     <div class="pbar"><div id="pBar"></div></div>
     <div class="note">MAPの「⬜行ったらチェック」と連動してるよ。スタンプをタップしても押せる🐟</div>
   </div>
@@ -1450,6 +1458,18 @@ const REGIONS = __REGION_NAMES__;
 const GONE = new Set(__GONE__); // 閉館館＝思い出枠。制覇の母数・分子から除外
 const TOTAL = STAMPS.filter(s=>!GONE.has(s.n)).length; // 今行ける館数
 const myVisitableCount = ()=>[...myVisits].filter(n=>!GONE.has(n)).length;
+// tier段階達成（一般⊂上級⊂マニアの累積）。カバーにチップ表示、コンプで色付き＋✅
+const TIER_LEVEL = {'一般':1,'上級':2,'マニア':3};
+const TIER_EMO = {'一般':'🐟','上級':'🐬','マニア':'🐡'};
+const TIER_COL = {'一般':'#ffd93b','上級':'#ff9e40','マニア':'#ff5252'};
+function renderTierProg(){
+  const st = (lv)=>{ const pool = STAMPS.filter(s=>!GONE.has(s.n) && (TIER_LEVEL[s.t]||99)<=lv); return {v: pool.filter(s=>myVisits.has(s.n)).length, t: pool.length}; };
+  const rows = [['一般',st(1)],['上級',st(2)],['マニア',st(3)]];
+  document.getElementById('tierProg').innerHTML = rows.map(([n,r])=>{
+    const done = r.t>0 && r.v===r.t;
+    return '<span class="tp'+(done?' done':'')+'"'+(done?' style="color:'+TIER_COL[n]+'"':'')+'>'+TIER_EMO[n]+n+' <b style="color:'+TIER_COL[n]+'">'+r.v+'</b><small>/'+r.t+'</small>'+(done?' ✅':'')+'</span>';
+  }).join('');
+}
 let myVisits = new Set(JSON.parse(localStorage.getItem('myVisits')||'[]'));
 let myDates = JSON.parse(localStorage.getItem('myVisitDates')||'{}');
 
@@ -1484,6 +1504,7 @@ function medalState(m){
 function render(){
   const c = myVisitableCount();
   document.getElementById('pCount').textContent = c;
+  renderTierProg();
   document.getElementById('pBar').style.width = (c/TOTAL*100) + '%';
 
   document.getElementById('medalGrid').innerHTML = MEDALS.map((m,i)=>{
