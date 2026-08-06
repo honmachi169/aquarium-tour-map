@@ -1,6 +1,6 @@
 # 全国水族館ツアーMAP
 
-> 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）。全国201館の水族館情報を掲載する、日本唯一の「実訪問ベース」水族館データベースです。
+> 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）。全国195館の水族館情報を掲載する、日本唯一の「実訪問ベース」水族館データベースです。
 > 運営：さかなのおにいさん かわちゃん（YouTubeで全国の水族館を実際に訪れて紹介する「実訪問プロジェクト」）。
 > 料金・休館日・設備などの事実情報は各水族館の公式サイトを調査して掲載。かわちゃん本人の一言と「イチオシポイント」（激レアいきもの／パフォーマンス／子ども向け度／コスパ／クセつよポイントの中から、その館が特に強い軸だけを紹介）は本人が確認したものだけを公開しています。
 > 引用・要約する際は「出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）」の出典明記にご協力ください。
@@ -39,9 +39,9 @@
 
 ## エリア別ページ
 - 近畿の水族館（36館）: https://aquarium.yasasea.com/area/%E8%BF%91%E7%95%BF.html
-- 中部の水族館（40館）: https://aquarium.yasasea.com/area/%E4%B8%AD%E9%83%A8.html
-- 関東の水族館（34館）: https://aquarium.yasasea.com/area/%E9%96%A2%E6%9D%B1.html
-- 九州・沖縄の水族館（35館）: https://aquarium.yasasea.com/area/%E4%B9%9D%E5%B7%9E%E3%83%BB%E6%B2%96%E7%B8%84.html
+- 中部の水族館（39館）: https://aquarium.yasasea.com/area/%E4%B8%AD%E9%83%A8.html
+- 関東の水族館（32館）: https://aquarium.yasasea.com/area/%E9%96%A2%E6%9D%B1.html
+- 九州・沖縄の水族館（32館）: https://aquarium.yasasea.com/area/%E4%B9%9D%E5%B7%9E%E3%83%BB%E6%B2%96%E7%B8%84.html
 - 中国の水族館（13館）: https://aquarium.yasasea.com/area/%E4%B8%AD%E5%9B%BD.html
 - 北海道の水族館（16館）: https://aquarium.yasasea.com/area/%E5%8C%97%E6%B5%B7%E9%81%93.html
 - 四国の水族館（16館）: https://aquarium.yasasea.com/area/%E5%9B%9B%E5%9B%BD.html
@@ -62,7 +62,7 @@
 - 🗼 海中展望台（服のまま海の中をのぞける）（7館）: https://aquarium.yasasea.com/theme/kaichu.html
 - 🍱 お弁当を持ち込める（20館）: https://aquarium.yasasea.com/theme/bento.html
 
-## 掲載水族館一覧（全201館）
+## 掲載水族館一覧（全195館）
 - 鳥羽水族館（三重県）：ラッコ — https://aquarium.yasasea.com/spot/001.html
 - 神戸須磨シーワールド（兵庫県）：シャチ — https://aquarium.yasasea.com/spot/002.html
 - 須磨海浜水族園（スマスイ・閉園）（兵庫県）：神戸っ子の思い出「スマスイ」。2023年に56年の歴史に幕。閉園前の姿は動画で — https://aquarium.yasasea.com/spot/046.html
@@ -257,10 +257,4 @@
 - 小笠原水産センター（東京都）：小笠原諸島・父島の二見港近くにある入館無料の小さな水族館。アオウミガメや小笠原近 — https://aquarium.yasasea.com/spot/u145.html
 - 室戸ドルフィンセンター（高知県）：室戸岬にあるイルカとのふれあい施設。バンドウイルカ3頭・ハナゴンドウ2頭を飼育し — https://aquarium.yasasea.com/spot/u146.html
 - 東京タワー水族館（閉館）（東京都）：東京タワー2階にあった水族館。1978年開業、40年にわたり世界各地の魚約900 — https://aquarium.yasasea.com/spot/u147.html
-- 天草いるかワールド（閉館）（熊本県）：熊本県天草市本渡町のリゾート施設（現・天草アレグリアガーデンズ）内にあった水族館 — https://aquarium.yasasea.com/spot/u148.html
-- ミュージアムパーク茨城県自然博物館（茨城県）：茨城県坂東市にある自然史博物館。「水の生き物」コーナーでは久慈川水系をモデルに、 — https://aquarium.yasasea.com/spot/u149.html
-- 北九州市ほたる館（福岡県）：北九州市小倉北区にある、ホタルと水辺の生きものを通して水辺環境を学べる施設。日本 — https://aquarium.yasasea.com/spot/u150.html
-- 八王子市北野環境学習センター あったかホール（生きもの展示室）（東京都）：八王子市の環境学習センター「あったかホール」3階にある生きもの展示室。浅川など市 — https://aquarium.yasasea.com/spot/u151.html
-- ららぽーと沼津 深海水槽（静岡県）：ショッピングモール「ららぽーと沼津」1階フードコート横にある、沼津港深海水族館が — https://aquarium.yasasea.com/spot/u152.html
-- 佐世保魚市場（長崎県）：長崎県佐世保市相浦にある卸売魚市場。入口に直径5m・高さ7.5m・水量150tの — https://aquarium.yasasea.com/spot/u153.html
-- 別府温泉 白池地獄 熱帯魚館（大分県）：別府温泉・鉄輪の「白池地獄」内にある、温泉熱を利用した熱帯魚館。アマゾンの大王魚 — https://aquarium.yasasea.com/spot/u154.html
+- 白池地獄 熱帯魚館（大分県）：別府地獄めぐりの一つ「白池地獄」の敷地内にある熱帯魚館。温泉の地熱を利用してピラ — https://aquarium.yasasea.com/spot/u148.html
