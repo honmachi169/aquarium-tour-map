@@ -53,6 +53,25 @@ for a in d["aquariums"]:
 for i, a in enumerate(d["unvisited"]):
     entries.append((f"u{i:03d}", a, False))
 
+# エリア別（8地方）。エリアページと、spotページの「同じエリアの水族館」内部リンク（回遊・SEO）で共用
+REGIONS = {
+    "北海道": ["北海道"],
+    "東北": ["青森県","岩手県","宮城県","秋田県","山形県","福島県"],
+    "関東": ["茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県"],
+    "中部": ["新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県"],
+    "近畿": ["三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県"],
+    "中国": ["鳥取県","島根県","岡山県","広島県","山口県"],
+    "四国": ["徳島県","香川県","愛媛県","高知県"],
+    "九州・沖縄": ["福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"],
+}
+pref_to_region = {p: r for r, prefs in REGIONS.items() for p in prefs}
+# slug付き全館ディレクトリ（同じエリアの水族館リンク生成用）
+spot_dir = [
+    {"slug": s, "name": x["name"], "pref": x.get("pref", ""),
+     "region": pref_to_region.get(x.get("pref", "")), "gone": bool(x.get("gone"))}
+    for s, x, _ in entries
+]
+
 E = html.escape
 urls = []
 entry_meta = []
@@ -201,6 +220,32 @@ loadYtComments();''' if v else ''
     share_text = f"{a['name']}、行ってみたい！🐟 #全国水族館ツアーMAP"
     page_url = f"{SITE}/spot/{slug}.html"
     urls.append(page_url)
+
+    # シェアボタン（モバイル94%なのでネイティブ共有を主役に、X/LINEをフォールバック）
+    x_url = "https://twitter.com/intent/tweet?text=" + urllib.parse.quote(share_text) + "&url=" + urllib.parse.quote(page_url)
+    line_url = "https://social-plugins.line.me/lineit/share?url=" + urllib.parse.quote(page_url)
+    share_html = f'''<div class="share">
+    <span class="share-lbl">🐟 いいと思ったらシェアしてね</span>
+    <button class="sh sh-native" type="button" onclick="if(navigator.share){{navigator.share({{title:document.title,url:location.href}})}}else{{location.href='{x_url}'}}">共有する</button>
+    <a class="sh sh-x" href="{x_url}" target="_blank" rel="noopener">𝕏</a>
+    <a class="sh sh-line" href="{line_url}" target="_blank" rel="noopener">LINE</a>
+  </div>'''
+
+    # 同じエリアの水族館（内部リンク＝回遊とSEOの受け皿。閉館館は除外・最大6館）
+    region = pref_to_region.get(a.get("pref", ""))
+    related_html = ""
+    if region:
+        peers = [p for p in spot_dir if p["region"] == region and p["name"] != a["name"] and not p["gone"]][:6]
+        if peers:
+            peer_links = "".join(
+                f'<a class="rel-item" href="{SITE}/spot/{p["slug"]}.html"><b>{E(p["name"])}</b><span>{E(p["pref"])}</span></a>'
+                for p in peers
+            )
+            related_html = (
+                f'<section class="related"><h2>🐟 {E(region)}エリアの水族館</h2>'
+                f'<div class="rel-list">{peer_links}</div>'
+                f'<a class="rel-all" href="{SITE}/area/{urllib.parse.quote(region)}.html">{E(region)}の水族館をもっと見る →</a></section>'
+            )
 
     ld_attraction = {
         "@context": "https://schema.org",
@@ -393,6 +438,22 @@ loadYtComments();''' if v else ''
   .quiz-box {{ background:#fff7db; border:2px solid var(--sun); border-radius:12px; padding:10px 14px; display:flex; flex-direction:column; gap:6px; margin-top:8px; }}
   .quiz-box label {{ font-size:.82rem; font-weight:bold; color:#8a6800; }}
   .quiz-box select {{ border:2px solid var(--sun); border-radius:8px; padding:6px 10px; font-size:.88rem; font-family:inherit; background:#fff; }}
+  .share {{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:14px 0 4px; }}
+  .share-lbl {{ font-size:.82rem; font-weight:bold; color:var(--sea-deep); width:100%; }}
+  .sh {{ border:none; border-radius:999px; padding:9px 18px; font-size:.85rem; font-weight:bold; cursor:pointer; font-family:inherit; text-decoration:none; display:inline-flex; align-items:center; }}
+  .sh-native {{ background:var(--coral); color:#fff; }}
+  .sh-x {{ background:#000; color:#fff; }}
+  .sh-line {{ background:#06c755; color:#fff; }}
+  .sh:hover {{ opacity:.88; }}
+  .related {{ margin:26px 0 6px; }}
+  .related h2 {{ font-size:1.05rem; color:var(--sea-deep); margin-bottom:10px; }}
+  .rel-list {{ display:grid; grid-template-columns:repeat(auto-fill,minmax(148px,1fr)); gap:8px; }}
+  .rel-item {{ display:flex; flex-direction:column; gap:2px; background:#fff; border:1.5px solid #cdeef8; border-radius:12px; padding:10px 12px; text-decoration:none; color:var(--sea-deep); transition:border-color .15s,transform .1s; }}
+  .rel-item:hover {{ border-color:var(--sea); transform:translateY(-2px); }}
+  .rel-item b {{ font-size:.86rem; line-height:1.35; }}
+  .rel-item span {{ font-size:.72rem; color:var(--sea); }}
+  .rel-all {{ display:inline-block; margin-top:12px; font-size:.85rem; font-weight:bold; color:var(--sea); text-decoration:none; }}
+  .rel-all:hover {{ text-decoration:underline; }}
 </style>
 </head>
 <body>
@@ -417,6 +478,7 @@ loadYtComments();''' if v else ''
   <div class="btns">
     {links}
   </div>
+  {share_html}
 
   <section class="posts-section">
     <h2>📸 訪問の思い出</h2>
@@ -453,6 +515,7 @@ loadYtComments();''' if v else ''
       </form>
     </div>
   </section>
+  {related_html}
   <div class="nav-cluster">
     <a class="backbtn" href="{SITE}/">🗾 MAPにもどる</a>
     <a class="ytbtn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録する</a>
@@ -731,18 +794,7 @@ for name, members in sorted(by_animal.items(), key=lambda kv: -len(kv[1])):
     new_page_urls.append(url)
     animal_index_links.append((name, len(members), url))
 
-# --- エリア別ページ（8地方に集約。1〜2館だけの県でも近隣とまとめて薄いページを避ける）---
-REGIONS = {
-    "北海道": ["北海道"],
-    "東北": ["青森県","岩手県","宮城県","秋田県","山形県","福島県"],
-    "関東": ["茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県"],
-    "中部": ["新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県"],
-    "近畿": ["三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県"],
-    "中国": ["鳥取県","島根県","岡山県","広島県","山口県"],
-    "四国": ["徳島県","香川県","愛媛県","高知県"],
-    "九州・沖縄": ["福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"],
-}
-pref_to_region = {p: r for r, prefs in REGIONS.items() for p in prefs}
+# --- エリア別ページ（8地方に集約。REGIONS/pref_to_regionはファイル冒頭で定義済み）---
 by_region = defaultdict(list)
 for m in entry_meta:
     r = pref_to_region.get(m["pref"])

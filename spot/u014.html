@@ -121,6 +121,22 @@
   .quiz-box { background:#fff7db; border:2px solid var(--sun); border-radius:12px; padding:10px 14px; display:flex; flex-direction:column; gap:6px; margin-top:8px; }
   .quiz-box label { font-size:.82rem; font-weight:bold; color:#8a6800; }
   .quiz-box select { border:2px solid var(--sun); border-radius:8px; padding:6px 10px; font-size:.88rem; font-family:inherit; background:#fff; }
+  .share { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:14px 0 4px; }
+  .share-lbl { font-size:.82rem; font-weight:bold; color:var(--sea-deep); width:100%; }
+  .sh { border:none; border-radius:999px; padding:9px 18px; font-size:.85rem; font-weight:bold; cursor:pointer; font-family:inherit; text-decoration:none; display:inline-flex; align-items:center; }
+  .sh-native { background:var(--coral); color:#fff; }
+  .sh-x { background:#000; color:#fff; }
+  .sh-line { background:#06c755; color:#fff; }
+  .sh:hover { opacity:.88; }
+  .related { margin:26px 0 6px; }
+  .related h2 { font-size:1.05rem; color:var(--sea-deep); margin-bottom:10px; }
+  .rel-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(148px,1fr)); gap:8px; }
+  .rel-item { display:flex; flex-direction:column; gap:2px; background:#fff; border:1.5px solid #cdeef8; border-radius:12px; padding:10px 12px; text-decoration:none; color:var(--sea-deep); transition:border-color .15s,transform .1s; }
+  .rel-item:hover { border-color:var(--sea); transform:translateY(-2px); }
+  .rel-item b { font-size:.86rem; line-height:1.35; }
+  .rel-item span { font-size:.72rem; color:var(--sea); }
+  .rel-all { display:inline-block; margin-top:12px; font-size:.85rem; font-weight:bold; color:var(--sea); text-decoration:none; }
+  .rel-all:hover { text-decoration:underline; }
 </style>
 </head>
 <body>
@@ -144,6 +160,12 @@
   
   <div class="btns">
     <a class="btn hp" href="https://bonin-ocean.net/" target="_blank" rel="noopener">公式サイト🔗</a>
+  </div>
+  <div class="share">
+    <span class="share-lbl">🐟 いいと思ったらシェアしてね</span>
+    <button class="sh sh-native" type="button" onclick="if(navigator.share){navigator.share({title:document.title,url:location.href})}else{location.href='https://twitter.com/intent/tweet?text=%E5%B0%8F%E7%AC%A0%E5%8E%9F%E6%B5%B7%E6%B4%8B%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%80%81%E8%A1%8C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F%E3%81%84%EF%BC%81%F0%9F%90%9F%20%23%E5%85%A8%E5%9B%BD%E6%B0%B4%E6%97%8F%E9%A4%A8%E3%83%84%E3%82%A2%E3%83%BCMAP&url=https%3A//aquarium.yasasea.com/spot/u014.html'}">共有する</button>
+    <a class="sh sh-x" href="https://twitter.com/intent/tweet?text=%E5%B0%8F%E7%AC%A0%E5%8E%9F%E6%B5%B7%E6%B4%8B%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%80%81%E8%A1%8C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F%E3%81%84%EF%BC%81%F0%9F%90%9F%20%23%E5%85%A8%E5%9B%BD%E6%B0%B4%E6%97%8F%E9%A4%A8%E3%83%84%E3%82%A2%E3%83%BCMAP&url=https%3A//aquarium.yasasea.com/spot/u014.html" target="_blank" rel="noopener">𝕏</a>
+    <a class="sh sh-line" href="https://social-plugins.line.me/lineit/share?url=https%3A//aquarium.yasasea.com/spot/u014.html" target="_blank" rel="noopener">LINE</a>
   </div>
 
   <section class="posts-section">
@@ -181,6 +203,7 @@
       </form>
     </div>
   </section>
+  <section class="related"><h2>🐟 関東エリアの水族館</h2><div class="rel-list"><a class="rel-item" href="https://aquarium.yasasea.com/spot/004.html"><b>アクアワールド茨城県大洗水族館</b><span>茨城県</span></a><a class="rel-item" href="https://aquarium.yasasea.com/spot/005.html"><b>横浜・八景島シーパラダイス</b><span>神奈川県</span></a><a class="rel-item" href="https://aquarium.yasasea.com/spot/008.html"><b>鴨川シーワールド</b><span>千葉県</span></a><a class="rel-item" href="https://aquarium.yasasea.com/spot/010.html"><b>すみだ水族館</b><span>東京都</span></a><a class="rel-item" href="https://aquarium.yasasea.com/spot/012.html"><b>マクセル アクアパーク品川</b><span>東京都</span></a><a class="rel-item" href="https://aquarium.yasasea.com/spot/014.html"><b>新江ノ島水族館</b><span>神奈川県</span></a></div><a class="rel-all" href="https://aquarium.yasasea.com/area/%E9%96%A2%E6%9D%B1.html">関東の水族館をもっと見る →</a></section>
   <div class="nav-cluster">
     <a class="backbtn" href="https://aquarium.yasasea.com/">🗾 MAPにもどる</a>
     <a class="ytbtn" href="https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA?sub_confirmation=1" target="_blank" rel="noopener">▶ チャンネル登録する</a>
