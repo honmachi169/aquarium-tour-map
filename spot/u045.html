@@ -121,13 +121,8 @@
   .quiz-box { background:#fff7db; border:2px solid var(--sun); border-radius:12px; padding:10px 14px; display:flex; flex-direction:column; gap:6px; margin-top:8px; }
   .quiz-box label { font-size:.82rem; font-weight:bold; color:#8a6800; }
   .quiz-box select { border:2px solid var(--sun); border-radius:8px; padding:6px 10px; font-size:.88rem; font-family:inherit; background:#fff; }
-  .share { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:14px 0 4px; }
-  .share-lbl { font-size:.82rem; font-weight:bold; color:var(--sea-deep); width:100%; }
-  .sh { border:none; border-radius:999px; padding:9px 18px; font-size:.85rem; font-weight:bold; cursor:pointer; font-family:inherit; text-decoration:none; display:inline-flex; align-items:center; }
-  .sh-native { background:var(--coral); color:#fff; }
-  .sh-x { background:#000; color:#fff; }
-  .sh-line { background:#06c755; color:#fff; }
-  .sh:hover { opacity:.88; }
+  .btn.share-btn { background:var(--coral); color:#fff; cursor:pointer; }
+  .btn.share-btn:hover { opacity:.88; }
   .related { margin:26px 0 6px; }
   .related h2 { font-size:1.05rem; color:var(--sea-deep); margin-bottom:10px; }
   .rel-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(148px,1fr)); gap:8px; }
@@ -159,13 +154,7 @@
   
   
   <div class="btns">
-    <a class="btn hp" href="http://kannonzaki-nature-museum.org/" target="_blank" rel="noopener">公式サイト🔗</a>
-  </div>
-  <div class="share">
-    <span class="share-lbl">🐟 いいと思ったらシェアしてね</span>
-    <button class="sh sh-native" type="button" onclick="if(navigator.share){navigator.share({title:document.title,url:location.href})}else{location.href='https://twitter.com/intent/tweet?text=%E8%A6%B3%E9%9F%B3%E5%B4%8E%E8%87%AA%E7%84%B6%E5%8D%9A%E7%89%A9%E9%A4%A8%E3%80%81%E8%A1%8C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F%E3%81%84%EF%BC%81%F0%9F%90%9F%20%23%E5%85%A8%E5%9B%BD%E6%B0%B4%E6%97%8F%E9%A4%A8%E3%83%84%E3%82%A2%E3%83%BCMAP&url=https%3A//aquarium.yasasea.com/spot/u045.html'}">共有する</button>
-    <a class="sh sh-x" href="https://twitter.com/intent/tweet?text=%E8%A6%B3%E9%9F%B3%E5%B4%8E%E8%87%AA%E7%84%B6%E5%8D%9A%E7%89%A9%E9%A4%A8%E3%80%81%E8%A1%8C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F%E3%81%84%EF%BC%81%F0%9F%90%9F%20%23%E5%85%A8%E5%9B%BD%E6%B0%B4%E6%97%8F%E9%A4%A8%E3%83%84%E3%82%A2%E3%83%BCMAP&url=https%3A//aquarium.yasasea.com/spot/u045.html" target="_blank" rel="noopener">𝕏</a>
-    <a class="sh sh-line" href="https://social-plugins.line.me/lineit/share?url=https%3A//aquarium.yasasea.com/spot/u045.html" target="_blank" rel="noopener">LINE</a>
+    <a class="btn hp" href="http://kannonzaki-nature-museum.org/" target="_blank" rel="noopener">公式サイト🔗</a><a class="btn share-btn" href="https://twitter.com/intent/tweet?text=%E8%A6%B3%E9%9F%B3%E5%B4%8E%E8%87%AA%E7%84%B6%E5%8D%9A%E7%89%A9%E9%A4%A8%E3%80%81%E8%A1%8C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F%E3%81%84%EF%BC%81%F0%9F%90%9F%20%23%E5%85%A8%E5%9B%BD%E6%B0%B4%E6%97%8F%E9%A4%A8%E3%83%84%E3%82%A2%E3%83%BCMAP&url=https%3A//aquarium.yasasea.com/spot/u045.html" target="_blank" rel="noopener" onclick="if(navigator.share){navigator.share({title:document.title,url:location.href});return false}">📤 SNS・一緒に行く人にシェアしてね</a>
   </div>
 
   <section class="posts-section">

@@ -221,15 +221,10 @@ loadYtComments();''' if v else ''
     page_url = f"{SITE}/spot/{slug}.html"
     urls.append(page_url)
 
-    # シェアボタン（モバイル94%なのでネイティブ共有を主役に、X/LINEをフォールバック）
+    # シェア：公式サイト等と同じボタン列に1つだけ追加（UIを長くしない）。
+    # モバイル94%なのでネイティブ共有シートを主役に（LINE・SNS・一緒に行く人へ即送れる）。非対応環境はX投稿にフォールバック。
     x_url = "https://twitter.com/intent/tweet?text=" + urllib.parse.quote(share_text) + "&url=" + urllib.parse.quote(page_url)
-    line_url = "https://social-plugins.line.me/lineit/share?url=" + urllib.parse.quote(page_url)
-    share_html = f'''<div class="share">
-    <span class="share-lbl">🐟 いいと思ったらシェアしてね</span>
-    <button class="sh sh-native" type="button" onclick="if(navigator.share){{navigator.share({{title:document.title,url:location.href}})}}else{{location.href='{x_url}'}}">共有する</button>
-    <a class="sh sh-x" href="{x_url}" target="_blank" rel="noopener">𝕏</a>
-    <a class="sh sh-line" href="{line_url}" target="_blank" rel="noopener">LINE</a>
-  </div>'''
+    links += f'<a class="btn share-btn" href="{x_url}" target="_blank" rel="noopener" onclick="if(navigator.share){{navigator.share({{title:document.title,url:location.href}});return false}}">📤 SNS・一緒に行く人にシェアしてね</a>'
 
     # 同じエリアの水族館（内部リンク＝回遊とSEOの受け皿。閉館館は除外・最大6館）
     region = pref_to_region.get(a.get("pref", ""))
@@ -438,13 +433,8 @@ loadYtComments();''' if v else ''
   .quiz-box {{ background:#fff7db; border:2px solid var(--sun); border-radius:12px; padding:10px 14px; display:flex; flex-direction:column; gap:6px; margin-top:8px; }}
   .quiz-box label {{ font-size:.82rem; font-weight:bold; color:#8a6800; }}
   .quiz-box select {{ border:2px solid var(--sun); border-radius:8px; padding:6px 10px; font-size:.88rem; font-family:inherit; background:#fff; }}
-  .share {{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:14px 0 4px; }}
-  .share-lbl {{ font-size:.82rem; font-weight:bold; color:var(--sea-deep); width:100%; }}
-  .sh {{ border:none; border-radius:999px; padding:9px 18px; font-size:.85rem; font-weight:bold; cursor:pointer; font-family:inherit; text-decoration:none; display:inline-flex; align-items:center; }}
-  .sh-native {{ background:var(--coral); color:#fff; }}
-  .sh-x {{ background:#000; color:#fff; }}
-  .sh-line {{ background:#06c755; color:#fff; }}
-  .sh:hover {{ opacity:.88; }}
+  .btn.share-btn {{ background:var(--coral); color:#fff; cursor:pointer; }}
+  .btn.share-btn:hover {{ opacity:.88; }}
   .related {{ margin:26px 0 6px; }}
   .related h2 {{ font-size:1.05rem; color:var(--sea-deep); margin-bottom:10px; }}
   .rel-list {{ display:grid; grid-template-columns:repeat(auto-fill,minmax(148px,1fr)); gap:8px; }}
@@ -478,7 +468,6 @@ loadYtComments();''' if v else ''
   <div class="btns">
     {links}
   </div>
-  {share_html}
 
   <section class="posts-section">
     <h2>📸 訪問の思い出</h2>
