@@ -130,5 +130,17 @@
       "生き物好き:マリンワールド海の中道 fileId 1i-3ZXH6T9YDyGZG755j8vXoo6OY-jVAz — 直前投稿(1rgZx8r2...)とMD5完全一致の重複画像。承認は1件のみで十分なため未承認のまま放置でOK"
     ]
   },
-  "photos_carryover_unapproved_no_action_needed": "はると・千歳水族館の複数重複投稿（fileId 1NqQX6NtbVgpuPRUsoYa1Z3T6OmuMSzgt/1Gw1GQL4SGqG1duWiXwwoUrFoEHdm5QCu/1sF8k5Ey5fcOX5x90-m5W59MvyF3skxTj/1dSKlQb8SK28fmCX5VN0Xf_A2yDLOdbQu/1KzbhK_jNRbDc8sSDRlVD6ettLcpaJhuW）、かわちゃん・伊勢シーパラダイスの重複（1iL_acsuA2-2ooUBqhZA0ROhLef4FEtvh）は過去のパトロールで重複と判定済み。未承認のまま放置でOK（削除はしない）"
+  "photos_carryover_unapproved_no_action_needed": "はると・千歳水族館の複数重複投稿（fileId 1NqQX6NtbVgpuPRUsoYa1Z3T6OmuMSzgt/1Gw1GQL4SGqG1duWiXwwoUrFoEHdm5QCu/1sF8k5Ey5fcOX5x90-m5W59MvyF3skxTj/1dSKlQb8SK28fmCX5VN0Xf_A2yDLOdbQu/1KzbhK_jNRbDc8sSDRlVD6ettLcpaJhuW）、かわちゃん・伊勢シーパラダイスの重複（1iL_acsuA2-2ooUBqhZA0ROhLef4FEtvh）は過去のパトロールで重複と判定済み。未承認のまま放置でOK（削除はしない）",
+  "photos_skipped_note": "下記fileIdは既承認投稿の重複写真。2026-08-06にかわちゃん判断で不承認(スキップ)決定。photos-listで再表示されても承認しないこと。",
+  "photos_skipped_fileids": {
+    "1NqQX6NtbVgpuPRUsoYa1Z3T6OmuMSzgt": "はると/千歳/サケ稚魚(重複)",
+    "1Gw1GQL4SGqG1duWiXwwoUrFoEHdm5QCu": "はると/千歳/サケ稚魚(重複)",
+    "1sF8k5Ey5fcOX5x90-m5W59MvyF3skxTj": "はると/千歳/サケ稚魚(重複)",
+    "1dSKlQb8SK28fmCX5VN0Xf_A2yDLOdbQu": "はると/千歳/サケ稚魚(重複)",
+    "1iL_acsuA2-2ooUBqhZA0ROhLef4FEtvh": "かわちゃん/伊勢/ゴマフアザラシ(重複)",
+    "1KzbhK_jNRbDc8sSDRlVD6ettLcpaJhuW": "はると/千歳/サケ稚魚(重複)",
+    "1i-3ZXH6T9YDyGZG755j8vXoo6OY-jVAz": "生き物好き/マリンワールド/ヤマノカミ(重複)",
+    "1BdBgS-tB1Sb2WUvWcXBs-QTS9g84u6aQ": "TAROのバァバ/おたる/チョウザメ(重複)",
+    "112P13dtSmJzKyjky9XCh9Qe068QBq3tv": "TAROのバァバ/登別/お城水族館(重複)"
+  }
 }
