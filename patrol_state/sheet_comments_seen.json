@@ -1,7 +1,7 @@
 {
   "note": "HP水族館MAPコメントシート（コメント/ご意見箱/写真タブ）で確認済みの投稿を日時+名前で記録。次回以降の重複スキャン防止用。",
-  "last_checked": "2026-08-05",
-  "note2": "COMMENT_API (script.google.com) は引き続きプロキシで403 connect_rejected（org policy）。youtube.com・WebFetch(任意ドメイン)も同様に403でブロックされる環境全体の一般的なネットワーク遮断が継続（07-27, 07-29, 07-31, 08-01, 08-03, 08-05で確認・8回連続）。WebSearchとGoogle Drive等の認証済みMCPコネクタのみ利用可能。write-back（ご意見箱既読化・写真承認・新着動画取得update_videos.py）はAPI/YouTube直叩きが必要なため今回も実施不可（Google DriveにはSheetsセル書き込みツールも無いため代替不可）。Google Driveコネクタで裏のスプレッドシート（ID 1XYuIe15S9odf57c1qfvBp3ldttfY974Mm23cIwgrrzw）を直接読み取り、read_file_content/get_file_metadataで代替。read_file_contentの出力が長大なため今回は「公開コメント」タブの後半（2026/08/03 0:50以降）が出力途中で切れており未確認 — 次回はページング等で全件確認すること。08-05時点でこの網羅性ブロックは環境管理者による恒久対応（ネットワークポリシーでscript.google.com等を許可 or このRoutineを別環境で実行）が必要な段階に来ている。",
+  "last_checked": "2026-08-06",
+  "note2": "【2026-08-06 誤診断を訂正】これまで8回『script.google.comがネットワークポリシーで403遮断・write-back不可』と記録してきたが、これは誤診断だった。Bashのcurl/python urllibで実測したところ script.google.com・youtube.com とも到達可能（GET/POSTとも200）。過去に失敗した本当の原因は (1)Apps Scriptが稀に302後に404を返す一時エラーを『遮断』と誤認 (2)制限のあるWebFetchツールに頼りBashのpython/curlを試していなかった (3)curl -L のPOSTは302でGETに落ち405になる（python urllibなら302を追って結果を拾える）。→ write-back は実際に可能。ご意見箱既読化・写真承認は patrol_writeback.py で行う（feedback-list / feedback-mark 行番号… / photos-list / photos-approve 行番号…）。merge_review.py はリトライ＋ブラウザUAを追加済み。新着動画取得 update_videos.py も youtube.com 到達可能なので動くはず。写真承認(=公開)はかわちゃん判断なので一覧確認のうえ明示行指定で。裏スプレッドシート直読み(Driveコネクタ ID 1XYuIe15S9odf57c1qfvBp3ldttfY974Mm23cIwgrrzw)は補助として引き続き有効。※2026-08-06にご意見行23-25(別府白池地獄・対応済み)を実際に既読化して書き戻し成功を確認済み。",
   "seen": [
     "2026/07/09 13:16:07|かわちゃん",
     "2026/07/11 0:21:45|深海博士の母",
