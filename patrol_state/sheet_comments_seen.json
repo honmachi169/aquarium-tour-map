@@ -1,6 +1,6 @@
 {
   "note": "HP水族館MAPコメントシート（コメント/ご意見箱/写真タブ）で確認済みの投稿を日時+名前で記録。次回以降の重複スキャン防止用。",
-  "last_checked": "2026-08-07",
+  "last_checked": "2026-08-09",
   "note3_2026-08-07_network_blocked": "本日のパトロールでは script.google.com（COMMENT_API本体）・youtube.com・および一般のWebFetch（aquarium.yasasea.com含む全外部ドメイン）がこのセッションのネットワークegressポリシーで403 EGRESS_BLOCKEDとなり、直接アクセス不可だった（note2の『誤診断だった、実は到達可能』という2026-08-06時点の結論は本日の環境には当てはまらない＝環境ごとにポリシーが異なる可能性が高い）。WebSearchとGoogle Drive/Slackコネクタ（OAuth経由）は利用可能だったため、代替手段として: (1) 裏スプレッドシート(ID 1XYuIe15S9odf57c1qfvBp3ldttfY974Mm23cIwgrrzw)をDriveコネクタのread_file_content/search_filesで直接読み、feedbackタブ全件・photosタブ全件・シート1(一般コメント)を2026/07/09〜08/03分まで確認（read_file_content が長文で途中打ち切られるため08/04〜08/07の一般コメント欄は今回未確認＝次回要フォロー）。feedbackタブは全行『対応メモ』が報告済み済みで新規0件、photosタブの未承認9件は全て2026-08-06にかわちゃん判断で『重複ゆえ不承認』済みのfileIdと一致し新規0件。(2) write-back(markFeedbackReported/approvePhotos)は今回0件のため実施不要だった。(3) 公式サイトのfee/closed確認(ステップ4)・新着動画取得(ステップ6)はWebFetch/youtube.com遮断のため今回スキップ（要インフラ確認）。次回実行時にscript.google.com等へのアクセスが復旧しているか要確認。",
   "note2": "【2026-08-06 誤診断を訂正】これまで8回『script.google.comがネットワークポリシーで403遮断・write-back不可』と記録してきたが、これは誤診断だった。Bashのcurl/python urllibで実測したところ script.google.com・youtube.com とも到達可能（GET/POSTとも200）。過去に失敗した本当の原因は (1)Apps Scriptが稀に302後に404を返す一時エラーを『遮断』と誤認 (2)制限のあるWebFetchツールに頼りBashのpython/curlを試していなかった (3)curl -L のPOSTは302でGETに落ち405になる（python urllibなら302を追って結果を拾える）。→ write-back は実際に可能。ご意見箱既読化・写真承認は patrol_writeback.py で行う（feedback-list / feedback-mark 行番号… / photos-list / photos-approve 行番号…）。merge_review.py はリトライ＋ブラウザUAを追加済み。新着動画取得 update_videos.py も youtube.com 到達可能なので動くはず。写真承認(=公開)はかわちゃん判断なので一覧確認のうえ明示行指定で。裏スプレッドシート直読み(Driveコネクタ ID 1XYuIe15S9odf57c1qfvBp3ldttfY974Mm23cIwgrrzw)は補助として引き続き有効。※2026-08-06にご意見行23-25(別府白池地獄・対応済み)を実際に既読化して書き戻し成功を確認済み。",
   "seen": [
@@ -96,7 +96,10 @@
     "2026/08/04 17:47:54|ななしのさかな",
     "2026/08/05 22:19:35|ななしのさかな",
     "2026/08/05 22:19:41|ななしのさかな",
-    "2026/08/05 22:21:28|ななしのさかな"
+    "2026/08/05 22:21:28|ななしのさかな",
+    "2026/08/04 17:26:55|えりか",
+    "2026/08/08 9:16:46|ten",
+    "2026/08/08 12:12:08|すいぞくかんだいすき"
   ],
   "corrections_made_2026-08-03": [
     "長崎ペンギン水族館：ご意見箱の指摘（生き物好き 2026/08/03）『長崎よりアドベンチャーワールドの方がペンギン飼育種類数が多い』をWebSearchで裏取り（アドベンチャーワールド公式トピックス：2026年7月18日にマゼランペンギン・フンボルトペンギンが仲間入りし10種類・飼育種数/羽数ともに世界最多に。長崎ペンギン水族館は9種のまま）。data.jsonのhighlightから『世界一』表記を削除（hitokoto欄は既に『飼育数ではアドベンチャーワールドだが、種類数では世界一の9種』と記載済みだったが、hitokotoは編集対象外のため未変更）。play.htmlのクイズ『ペンギンの飼育種類数が世界一の水族館は？』（答え：長崎ペンギン水族館）も同様に不正解になっているが、HTML/JS改修は対象外のためレポートのみ",
@@ -143,5 +146,6 @@
     "1i-3ZXH6T9YDyGZG755j8vXoo6OY-jVAz": "生き物好き/マリンワールド/ヤマノカミ(重複)",
     "1BdBgS-tB1Sb2WUvWcXBs-QTS9g84u6aQ": "TAROのバァバ/おたる/チョウザメ(重複)",
     "112P13dtSmJzKyjky9XCh9Qe068QBq3tv": "TAROのバァバ/登別/お城水族館(重複)"
-  }
+  },
+  "note4_2026-08-09": "本日も script.google.com（COMMENT_API）・aquarium.yasasea.com・youtube.com はネットワークegressポリシーで403 EGRESS_BLOCKED（curl/python urllib/WebFetch全て不可）。WebSearchとGoogle Driveコネクタ（OAuth経由）は利用可能。手順: (1) 裏スプレッドシート(ID 1XYuIe15S9odf57c1qfvBp3ldttfY974Mm23cIwgrrzw)をDriveコネクタread_file_contentで全文取得（今回は末尾まで打ち切りなく取得できた＝一般コメント欄も2026/08/08分まで確認済み）。ご意見箱タブは全行『報告済み』済みで新規0件、写真タブの未承認6行はすべて既知の重複投稿（2026-08-06判断分と同一内容、新規0件）。(2) write-back(markFeedbackReported/approvePhotos)はAPIへのPOSTが不可のため今回は実施不能（該当0件だからではなく物理的にできない。次回ネットワーク復旧時に再確認要）。(3) 公式サイトのfee/closed確認(ステップ4)はWebSearchで代替実施（8館確認・相違なし）。新着動画取得(ステップ6)はyoutube.com遮断のためupdate_videos.py実行不可、今回スキップ。(4) 一般コメント欄の新規未処理行3件（えりか2026/08/04・ten2026/08/08・すいぞくかんだいすき2026/08/08）を確認。えりか/tenは感想のみで対応不要。すいぞくかんだいすきの追加要望4件（ハンザケ自然館・森と水の源流館・深層水ミュージアム・海と鯨の博物館）のうち、深層水ミュージアムと鯨と海の科学館（要望の『海と鯨の博物館』の正式名称）はWebSearchで住所・料金・休館日・緯度経度まで裏取りできたためunvisitedに追加（計2件）。瑞穂ハンザケ自然館（島根）と森と水の源流館（奈良）は住所・料金・休館日はWebSearchで確認できたが、正確な緯度経度がWebSearchのみでは特定できず（地図API/WebFetch遮断のため）、座標未確定のまま追加すると地図ピンがずれる恐れがあるため今回は保留。次回、地図系アクセスが可能になった際に追加検討。"
 }
