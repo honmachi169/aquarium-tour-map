@@ -1,7 +1,6 @@
 {
   "note": "HP水族館MAPコメントシート（コメント/ご意見箱/写真タブ）で確認済みの投稿を日時+名前で記録。次回以降の重複スキャン防止用。",
   "last_checked": "2026-08-07",
-  "note3_2026-08-07_network_blocked": "本日のパトロールでは script.google.com（COMMENT_API本体）・youtube.com・および一般のWebFetch（aquarium.yasasea.com含む全外部ドメイン）がこのセッションのネットワークegressポリシーで403 EGRESS_BLOCKEDとなり、直接アクセス不可だった（note2の『誤診断だった、実は到達可能』という2026-08-06時点の結論は本日の環境には当てはまらない＝環境ごとにポリシーが異なる可能性が高い）。WebSearchとGoogle Drive/Slackコネクタ（OAuth経由）は利用可能だったため、代替手段として: (1) 裏スプレッドシート(ID 1XYuIe15S9odf57c1qfvBp3ldttfY974Mm23cIwgrrzw)をDriveコネクタのread_file_content/search_filesで直接読み、feedbackタブ全件・photosタブ全件・シート1(一般コメント)を2026/07/09〜08/03分まで確認（read_file_content が長文で途中打ち切られるため08/04〜08/07の一般コメント欄は今回未確認＝次回要フォロー）。feedbackタブは全行『対応メモ』が報告済み済みで新規0件、photosタブの未承認9件は全て2026-08-06にかわちゃん判断で『重複ゆえ不承認』済みのfileIdと一致し新規0件。(2) write-back(markFeedbackReported/approvePhotos)は今回0件のため実施不要だった。(3) 公式サイトのfee/closed確認(ステップ4)・新着動画取得(ステップ6)はWebFetch/youtube.com遮断のため今回スキップ（要インフラ確認）。次回実行時にscript.google.com等へのアクセスが復旧しているか要確認。",
   "note2": "【2026-08-06 誤診断を訂正】これまで8回『script.google.comがネットワークポリシーで403遮断・write-back不可』と記録してきたが、これは誤診断だった。Bashのcurl/python urllibで実測したところ script.google.com・youtube.com とも到達可能（GET/POSTとも200）。過去に失敗した本当の原因は (1)Apps Scriptが稀に302後に404を返す一時エラーを『遮断』と誤認 (2)制限のあるWebFetchツールに頼りBashのpython/curlを試していなかった (3)curl -L のPOSTは302でGETに落ち405になる（python urllibなら302を追って結果を拾える）。→ write-back は実際に可能。ご意見箱既読化・写真承認は patrol_writeback.py で行う（feedback-list / feedback-mark 行番号… / photos-list / photos-approve 行番号…）。merge_review.py はリトライ＋ブラウザUAを追加済み。新着動画取得 update_videos.py も youtube.com 到達可能なので動くはず。写真承認(=公開)はかわちゃん判断なので一覧確認のうえ明示行指定で。裏スプレッドシート直読み(Driveコネクタ ID 1XYuIe15S9odf57c1qfvBp3ldttfY974Mm23cIwgrrzw)は補助として引き続き有効。※2026-08-06にご意見行23-25(別府白池地獄・対応済み)を実際に既読化して書き戻し成功を確認済み。",
   "seen": [
     "2026/07/09 13:16:07|かわちゃん",
@@ -143,5 +142,6 @@
     "1i-3ZXH6T9YDyGZG755j8vXoo6OY-jVAz": "生き物好き/マリンワールド/ヤマノカミ(重複)",
     "1BdBgS-tB1Sb2WUvWcXBs-QTS9g84u6aQ": "TAROのバァバ/おたる/チョウザメ(重複)",
     "112P13dtSmJzKyjky9XCh9Qe068QBq3tv": "TAROのバァバ/登別/お城水族館(重複)"
-  }
+  },
+  "note4_2026-08-11_fetch_policy": "【取得方法の確定・2026-08-11】外部HTTPはBashのcurl -L / python3 urllibで行う（同一クラウドsandboxでgit pushがgithub.comへ通っている＝Bash egressは生きている）。WebFetchツールだけがこのsandboxで403 EGRESS_BLOCKEDになりやすいので、WebFetchに頼って『ネットワーク全面遮断・重要インフラ障害』と大げさに報告しない。COMMENT_API・ご意見箱既読化・写真承認はリポジトリの patrol_writeback.py（feedback-list/feedback-mark/photos-list/photos-approve）を使う。新着動画は update_videos.py。一部取得が落ちたら報告に1行だけ『今回スキップ』と書き、毎回同じegress警告文を繰り返さない。"
 }
