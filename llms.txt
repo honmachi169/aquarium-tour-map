@@ -1,6 +1,6 @@
 # 全国水族館ツアーMAP
 
-> 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）。全国204館の水族館情報を掲載する、日本唯一の「実訪問ベース」水族館データベースです。
+> 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）。全国207館の水族館情報を掲載する、日本唯一の「実訪問ベース」水族館データベースです。
 > 運営：さかなのおにいさん かわちゃん（YouTubeで全国の水族館を実際に訪れて紹介する「実訪問プロジェクト」）。
 > 料金・休館日・設備などの事実情報は各水族館の公式サイトを調査して掲載。かわちゃん本人の一言と「イチオシポイント」（激レアいきもの／パフォーマンス／子ども向け度／コスパ／クセつよポイントの中から、その館が特に強い軸だけを紹介）は本人が確認したものだけを公開しています。
 > 引用・要約する際は「出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）」の出典明記にご協力ください。
@@ -38,11 +38,11 @@
 - アカメに会える水族館（3館）: https://aquarium.yasasea.com/animals/%E3%82%A2%E3%82%AB%E3%83%A1.html
 
 ## エリア別ページ
-- 近畿の水族館（37館）: https://aquarium.yasasea.com/area/%E8%BF%91%E7%95%BF.html
+- 近畿の水族館（38館）: https://aquarium.yasasea.com/area/%E8%BF%91%E7%95%BF.html
 - 中部の水族館（41館）: https://aquarium.yasasea.com/area/%E4%B8%AD%E9%83%A8.html
-- 関東の水族館（34館）: https://aquarium.yasasea.com/area/%E9%96%A2%E6%9D%B1.html
+- 関東の水族館（35館）: https://aquarium.yasasea.com/area/%E9%96%A2%E6%9D%B1.html
 - 九州・沖縄の水族館（35館）: https://aquarium.yasasea.com/area/%E4%B9%9D%E5%B7%9E%E3%83%BB%E6%B2%96%E7%B8%84.html
-- 中国の水族館（13館）: https://aquarium.yasasea.com/area/%E4%B8%AD%E5%9B%BD.html
+- 中国の水族館（14館）: https://aquarium.yasasea.com/area/%E4%B8%AD%E5%9B%BD.html
 - 北海道の水族館（16館）: https://aquarium.yasasea.com/area/%E5%8C%97%E6%B5%B7%E9%81%93.html
 - 四国の水族館（16館）: https://aquarium.yasasea.com/area/%E5%9B%9B%E5%9B%BD.html
 - 東北の水族館（12館）: https://aquarium.yasasea.com/area/%E6%9D%B1%E5%8C%97.html
@@ -62,7 +62,7 @@
 - 🗼 海中展望台（服のまま海の中をのぞける）（7館）: https://aquarium.yasasea.com/theme/kaichu.html
 - 🍱 お弁当を持ち込める（20館）: https://aquarium.yasasea.com/theme/bento.html
 
-## 掲載水族館一覧（全204館）
+## 掲載水族館一覧（全207館）
 - 鳥羽水族館（三重県）：ラッコ — https://aquarium.yasasea.com/spot/001.html
 - 神戸須磨シーワールド（兵庫県）：シャチ — https://aquarium.yasasea.com/spot/002.html
 - 須磨海浜水族園（スマスイ・閉園）（兵庫県）：神戸っ子の思い出「スマスイ」。2023年に56年の歴史に幕。閉園前の姿は動画で — https://aquarium.yasasea.com/spot/046.html
@@ -267,3 +267,6 @@
 - 深層水ミュージアム（静岡県）：静岡県焼津市にある無料施設。駿河湾深層水の仕組みを映像やパネルで学べ、タカアシガ — https://aquarium.yasasea.com/spot/u155.html
 - 鯨と海の科学館（岩手県）：岩手県山田町にある鯨と三陸の海がテーマの科学館。全長17.6mのマッコウクジラ実 — https://aquarium.yasasea.com/spot/u156.html
 - 郡山金魚資料館（奈良県）：奈良県大和郡山市の金魚養殖業者「やまと錦魚園」が運営する資料館。日本三大金魚産地 — https://aquarium.yasasea.com/spot/u157.html
+- 西宮市環境学習サポートセンター ミニミニ水族館（兵庫県）：西宮市甲風園の環境学習サポートセンター内にある無料のミニ水族館。武庫川や甲子園浜 — https://aquarium.yasasea.com/spot/u158.html
+- 桐生が岡動物園水族館（群馬県）：群馬県桐生市の桐生が岡公園内、入園無料の市立動物園に併設された水族館。地方の小規 — https://aquarium.yasasea.com/spot/u159.html
+- 瑞穂ハンザケ自然館（島根県）：島根県邑南町（旧瑞穂町）にあるオオサンショウウオ（ハンザケ）専門の自然館。国の特 — https://aquarium.yasasea.com/spot/u160.html
