@@ -1338,6 +1338,15 @@ for mid, icon, name, desc, target in [
     ("mall", "👑", f"全{_total}館 完全制覇", "日本中の水族館をぜんぶ回った伝説の人！", _total),
 ]:
     medals_data.append({"id": mid, "icon": icon, "name": name, "desc": desc, "target": target})
+# 「何館まわったか」だけでなく「何回行ったか」も讃えるメダル（ご意見箱・ルナさんの再訪カウント要望から）
+for mid, icon, name, desc, kind, target in [
+    ("rep3", "🔁", "常連さん", "おなじ水族館に3回いった！すっかり顔なじみだね", "same", 3),
+    ("rep5", "💙", "ホーム水族館", "おなじ水族館に5回いった！そこがきみのホームだね", "same", 5),
+    ("trip10", "👣", "のべ10回おでかけ", "水族館へのおでかけが通算10回！", "total", 10),
+    ("trip50", "🎒", "のべ50回おでかけ", "通算50回！水族館が暮らしの一部だね", "total", 50),
+    ("year10", "🗓️", "1年で10館", "おなじ1年のうちに10館まわった！", "year", 10),
+]:
+    medals_data.append({"id": mid, "icon": icon, "name": name, "desc": desc, "kind": kind, "target": target})
 for mid, icon, name, desc, members in [
     ("shachi", "🐋", "シャチマスター", "シャチに会える水族館をぜんぶ制覇！", _members_animal("シャチ")),
     ("jinbei", "🦈", "ジンベエマスター", "ジンベエザメに会える水族館をぜんぶ制覇！", _members_animal("ジンベエザメ")),
@@ -1430,7 +1439,7 @@ h2 { color:var(--sea-deep); font-size:1.1rem; margin:26px 0 4px; }
 .region-h h3 { color:var(--sea-deep); font-size:.98rem; }
 .region-h .rc { font-size:.74rem; color:#789; font-weight:bold; }
 .stamps { display:grid; grid-template-columns:repeat(auto-fill,minmax(88px,1fr)); gap:10px; }
-.stamp { aspect-ratio:1; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; cursor:pointer; padding:6px; transition:transform .12s; }
+.stamp { position:relative; aspect-ratio:1; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; cursor:pointer; padding:6px; transition:transform .12s; }
 .stamp:hover { transform:scale(1.06); }
 .stamp .e { font-size:1.45rem; line-height:1.1; }
 .stamp .n { font-size:.55rem; font-weight:bold; line-height:1.25; overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; }
@@ -1461,6 +1470,38 @@ h2 { color:var(--sea-deep); font-size:1.1rem; margin:26px 0 4px; }
 .btn-visit.on { background:#2a9d8f; color:#fff; }
 .btn-spot { background:var(--coral); color:#fff; }
 .back { display:inline-block; margin-top:24px; color:var(--sea); font-weight:bold; text-decoration:none; }
+.trips { font-size:.8rem; color:#fff; opacity:.92; margin-top:7px; }
+.trips b { color:var(--sun); font-size:1.05rem; }
+.ybox { background:#fff; border-radius:16px; padding:14px 14px 6px; box-shadow:0 2px 8px rgba(2,62,138,.08); }
+.ytabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:11px; }
+.ytab { font-family:inherit; font-size:.78rem; font-weight:bold; border:2px solid var(--sky); background:#fff; color:#5b7c8d; border-radius:999px; padding:5px 13px; cursor:pointer; }
+.ytab.on { background:var(--sea); border-color:var(--sea); color:#fff; }
+.ystats { display:flex; gap:8px; text-align:center; margin-bottom:12px; }
+.ystat { flex:1; background:var(--sky); border-radius:12px; padding:9px 4px; }
+.ystat b { display:block; font-size:1.5rem; color:var(--sea-deep); line-height:1.1; }
+.ystat span { font-size:.65rem; color:#5b7c8d; font-weight:bold; }
+.ymonths { display:flex; align-items:flex-end; gap:3px; height:76px; margin:2px 0 10px; }
+.ybar { flex:1; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; height:100%; }
+.ybar i { width:72%; background:#e6eef3; border-radius:4px 4px 0 0; display:block; }
+.ybar.on i { background:linear-gradient(180deg,#48cae4,#0096c7); }
+.ybar b { font-size:.6rem; color:var(--sea-deep); order:-1; line-height:1.4; }
+.ybar span { font-size:.55rem; color:#9ab; margin-top:3px; }
+.yrow { display:flex; align-items:center; gap:8px; padding:8px 4px; border-top:1px dashed #e3ecf1; cursor:pointer; }
+.yrow .ye { font-size:1.1rem; }
+.yrow .yn { font-size:.82rem; font-weight:bold; color:#234; flex:1; line-height:1.35; }
+.yrow .yn em { font-style:normal; color:var(--coral); font-size:.72rem; margin-left:5px; }
+.yrow .yd { font-size:.68rem; color:#89a; text-align:right; white-space:nowrap; }
+.y-empty { font-size:.8rem; color:#789; line-height:1.75; }
+.ysh { display:block; margin:10px auto 8px; font-family:inherit; font-size:.78rem; font-weight:bold; border:none; border-radius:999px; padding:8px 16px; background:var(--sun); color:#6b4c00; cursor:pointer; }
+.stamp .rep { position:absolute; top:-1px; right:-1px; background:var(--coral); color:#fff; font-size:.58rem; font-weight:bold; border-radius:999px; padding:1px 6px; box-shadow:0 1px 3px rgba(0,0,0,.22); }
+.vlog { text-align:left; margin:8px 0 2px; max-height:30vh; overflow-y:auto; }
+.vlogrow { display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:.8rem; font-weight:bold; color:#456; padding:6px 8px; border-bottom:1px dashed #e3ecf1; }
+.vlogrow button { border:none; background:none; cursor:pointer; font-size:.9rem; opacity:.45; padding:2px 4px; }
+.vlogrow button:hover { opacity:1; }
+.addwrap { display:flex; gap:6px; justify-content:center; align-items:center; margin:10px 0 2px; flex-wrap:wrap; }
+.addwrap input { font-family:inherit; font-size:.8rem; border:2px solid var(--sky); border-radius:999px; padding:6px 11px; color:#234; background:#fff; }
+.btn-add { font-family:inherit; font-size:.82rem; font-weight:bold; border:none; border-radius:999px; padding:8px 14px; background:var(--sea); color:#fff; cursor:pointer; }
+.btn-file { display:inline-block; font-family:inherit; font-size:.85rem; font-weight:bold; border-radius:999px; padding:9px 18px; background:#eef2f5; color:#567; cursor:pointer; }
 __ATTR_CSS__
 </style>
 </head>
@@ -1473,10 +1514,15 @@ __ATTR_CSS__
     <h1><span class="t1">すいぞくかん</span><span class="t2">パスポート</span></h1>
     <div class="owner" id="ownerName" title="タップでなまえを変えられるよ"></div>
     <div class="big"><span id="pCount">0</span><small> / __TOTAL__館</small></div>
+    <div class="trips" id="pTrips"></div>
     <div class="tierprog" id="tierProg"></div>
     <div class="pbar"><div id="pBar"></div></div>
     <div class="note">MAPの「⬜行ったらチェック」と連動してるよ。スタンプをタップしても押せる🐟</div>
   </div>
+
+  <h2>🗓️ ことしの記録</h2>
+  <p class="sec-note">スタンプをタップして「行った日」を入れると、1年ごとのまとめが出るよ。同じ水族館に何回行ったかも数えられる🐟</p>
+  <div class="ybox" id="yearBox"></div>
 
   <h2>🏅 メダルコレクション</h2>
   <p class="sec-note">条件をクリアするとメダルがもらえるよ。タップすると「あと何館か」が見られる！</p>
@@ -1485,6 +1531,13 @@ __ATTR_CSS__
   <h2>📖 スタンプ帳</h2>
   <p class="sec-note">行った水族館のスタンプが押されていくよ。空いている枠は「これから行ける楽しみ」🐟</p>
   <div id="stampBook"></div>
+
+  <h2>💾 データのお引っこし</h2>
+  <p class="sec-note">パスポートはこの端末のブラウザの中だけに保存されてるよ。スマホを買いかえる前や、まんがいち消えちゃったときのために保存しておこう。</p>
+  <div class="rowbtns" style="justify-content:flex-start">
+    <button class="btn-close" onclick="exportData()">📤 データを保存する</button>
+    <label class="btn-file">📥 読みこむ<input type="file" accept="application/json,.json" style="display:none" onchange="importData(this)"></label>
+  </div>
 
   <a class="back" href="__SITE__/">← MAPにもどる</a>
   __FOOTER__
@@ -1513,6 +1566,59 @@ function renderTierProg(){
 }
 let myVisits = new Set(JSON.parse(localStorage.getItem('myVisits')||'[]'));
 let myDates = JSON.parse(localStorage.getItem('myVisitDates')||'{}');
+// 訪問ログ：1つの館に何回でも記録できる {"館名":["2026-08-19","2025-05-03"]}（""＝日付なし）
+// MAP側(index.html)は myVisits / myVisitDates しか見ないので、更新のたび両方へ書き戻して連動を保つ
+let myLog = JSON.parse(localStorage.getItem('myVisitLog')||'{}');
+
+const pad2 = v => String(v).padStart(2,'0');
+const ymd = t => { const d = new Date(t); return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate()); };
+const todayStr = () => ymd(Date.now());
+const fmtD = d => d ? (+d.slice(5,7))+'/'+(+d.slice(8,10)) : '日付なし';
+const fmtFull = d => d ? d.slice(0,4)+'年'+(+d.slice(5,7))+'月'+(+d.slice(8,10))+'日' : '日付なし';
+
+function syncLog(){
+  // MAPでチェック済みなのにログが無い館は、保存されている日付から1回ぶん起こす
+  myVisits.forEach(n=>{
+    if(!Array.isArray(myLog[n]) || !myLog[n].length) myLog[n] = [ myDates[n] ? ymd(myDates[n]) : '' ];
+  });
+  // MAPでチェックを外した館はログからも消す（「行ってない」が正）
+  Object.keys(myLog).forEach(n=>{ if(!myVisits.has(n)) delete myLog[n]; });
+}
+function saveAll(){
+  Object.keys(myLog).forEach(n=>{ if(!myLog[n] || !myLog[n].length) delete myLog[n]; });
+  myVisits = new Set(Object.keys(myLog));
+  Object.keys(myLog).forEach(n=>{
+    const dated = myLog[n].filter(Boolean).sort();
+    if(dated.length) myDates[n] = new Date(dated[dated.length-1]+'T00:00:00').getTime();
+  });
+  Object.keys(myDates).forEach(n=>{ if(!myVisits.has(n)) delete myDates[n]; });
+  localStorage.setItem('myVisitLog', JSON.stringify(myLog));
+  localStorage.setItem('myVisits', JSON.stringify([...myVisits]));
+  localStorage.setItem('myVisitDates', JSON.stringify(myDates));
+}
+const visitCount = n => (myLog[n]||[]).length;
+const sortedLog = n => (myLog[n]||[]).slice().sort().reverse(); // 新しい日付が上、日付なしは下
+const totalTrips = () => Object.keys(myLog).reduce((a,n)=>a+myLog[n].length,0);
+const maxSameCount = () => Object.keys(myLog).reduce((a,n)=>Math.max(a,myLog[n].length),0);
+function yearsInLog(){
+  const ys = new Set();
+  Object.keys(myLog).forEach(n=>myLog[n].forEach(d=>{ if(d) ys.add(d.slice(0,4)); }));
+  return [...ys].sort().reverse();
+}
+function yearStats(y){
+  const rows = [];
+  Object.keys(myLog).forEach(n=>{
+    const ds = myLog[n].filter(d=>d && d.slice(0,4)===y).sort();
+    if(ds.length) rows.push({n:n, ds:ds, first: myLog[n].filter(d=>d && d < y+'-01-01').length===0});
+  });
+  const months = Array(12).fill(0);
+  rows.forEach(r=>r.ds.forEach(d=>{ months[(+d.slice(5,7))-1]++; }));
+  rows.sort((a,b)=>b.ds[b.ds.length-1].localeCompare(a.ds[a.ds.length-1]));
+  return { rows: rows, places: rows.length, trips: rows.reduce((a,r)=>a+r.ds.length,0),
+           firsts: rows.filter(r=>r.first).length, months: months };
+}
+const bestYearPlaces = () => yearsInLog().reduce((a,y)=>Math.max(a, yearStats(y).places), 0);
+syncLog(); saveAll();
 
 // なまえ（このブラウザに保存）
 function ownerLabel(){
@@ -1532,7 +1638,12 @@ const REGION_COLOR = {'北海道':'#0077b6','東北':'#2a9d8f','関東':'#e76f51
   '近畿':'#0096c7','中国':'#e9a20a','四国':'#43aa8b','九州・沖縄':'#ef6079','その他':'#0096c7'};
 const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
 
+const MEDAL_UNIT = {same:'回', total:'回', year:'館'};
 function medalState(m){
+  if(m.kind){ // 回数系メダル（同じ館に何回・のべ何回・1年で何館）
+    const c = m.kind==='same' ? maxSameCount() : m.kind==='total' ? totalTrips() : bestYearPlaces();
+    return { done: Math.min(c, m.target), goal: m.target, earned: c >= m.target };
+  }
   if(m.members){
     const done = m.members.filter(n=>myVisits.has(n)).length;
     return { done, goal: m.members.length, earned: done === m.members.length };
@@ -1546,7 +1657,10 @@ function render(){
   const c = myVisitableCount();
   document.getElementById('pCount').textContent = c;
   renderTierProg();
+  const tr = totalTrips();
+  document.getElementById('pTrips').innerHTML = tr ? '👣 のべ <b>'+tr+'</b> 回おでかけ' : '';
   document.getElementById('pBar').style.width = (c/TOTAL*100) + '%';
+  renderYear();
 
   document.getElementById('medalGrid').innerHTML = MEDALS.map((m,i)=>{
     const s = medalState(m);
@@ -1565,11 +1679,13 @@ function render(){
       const on = myVisits.has(s.n);
       const isGone = GONE.has(s.n);
       const rot = ((i % 5) - 2) * 2.5;
+      const cnt = visitCount(s.n);
+      const rep = cnt > 1 ? '<span class="rep">×'+cnt+'</span>' : ''; // 再訪カウント
       if(on && s.img){
-        return '<div class="stamp on hasimg" onclick="openStamp('+i+')"><img src="'+s.img+'" alt="'+esc(s.n)+'"></div>';
+        return '<div class="stamp on hasimg" onclick="openStamp('+i+')"><img src="'+s.img+'" alt="'+esc(s.n)+'">'+rep+'</div>';
       }
       return '<div class="stamp '+(on?'on':'off')+(isGone?' gone':'')+'" style="--sc:'+(REGION_COLOR[r]||'#0096c7')+';--rot:'+rot+'deg" '+
-        'onclick="openStamp('+i+')"><span class="e">'+(on?s.e:(isGone?'🕊':''))+'</span><span class="n">'+(isGone?'🕊':'')+esc(s.n)+'</span></div>';
+        'onclick="openStamp('+i+')"><span class="e">'+(on?s.e:(isGone?'🕊':''))+'</span><span class="n">'+(isGone?'🕊':'')+esc(s.n)+'</span>'+rep+'</div>';
     }).join('');
     return '<div class="region-h"><h3>'+r+'</h3><span class="rc">'+done+' / '+vis.length+'館</span></div>'+
       '<div class="stamps">'+cells+'</div>';
@@ -1582,13 +1698,18 @@ modal.onclick = e => { if(e.target === modal) modal.classList.remove('open'); };
 
 window.openStamp = function(i){
   const s = STAMPS[i];
-  const on = myVisits.has(s.n);
-  const d = myDates[s.n];
-  const dateStr = on ? (d ? '✅ ' + new Date(d).toLocaleDateString('ja-JP') + ' にチェック' : '✅ 行った！') : '';
+  const log = sortedLog(s.n);
+  const on = log.length > 0;
   const visual = (on && s.img) ? '<img class="bigimg" src="'+s.img+'" alt="">' : '<div class="bige">'+(on?s.e:'⬜')+'</div>';
+  let body = on
+    ? '<div class="desc vdate">✅ '+log.length+'回 行ったよ！</div>'+
+      '<div class="vlog">'+log.map((d,j)=>'<div class="vlogrow"><span>'+(d?'🐟 '+fmtFull(d):'🐟 日付なし')+'</span>'+
+        '<button onclick="delVisit('+i+','+j+')" title="この記録を消す">🗑</button></div>').join('')+'</div>'
+    : '<div class="desc">まだスタンプが押されてないよ。行ったらチェックしてね🐟</div>';
+  body += '<div class="addwrap"><input type="date" id="vDate" value="'+todayStr()+'" max="'+todayStr()+'">'+
+    '<button class="btn-add" onclick="addVisit('+i+')">'+(on?'＋ また行った！':'＋ この日に行った')+'</button></div>';
   box.innerHTML = visual +
-    '<h3>'+esc(s.n)+'</h3><span class="pref">'+esc(s.p)+'</span>'+
-    (dateStr ? '<div class="desc vdate">'+dateStr+'</div>' : '<div class="desc">まだスタンプが押されてないよ。行ったらチェックしてね🐟</div>')+
+    '<h3>'+esc(s.n)+'</h3><span class="pref">'+esc(s.p)+'</span>'+ body +
     '<div class="rowbtns">'+
       '<button class="btn-close" onclick="pModal.classList.remove(\'open\')">とじる</button>'+
       '<button class="btn-visit'+(on?' on':'')+'" onclick="toggleVisit('+i+')">'+(on?'✅ 行った！':'⬜ 行った！を押す')+'</button>'+
@@ -1597,14 +1718,37 @@ window.openStamp = function(i){
   modal.classList.add('open');
 };
 
+// 日付を選んで1回ぶん追加（同じ館に何回でも押せる）
+window.addVisit = function(i){
+  const s = STAMPS[i];
+  const el = document.getElementById('vDate');
+  const d = el && el.value ? el.value : '';
+  const log = myLog[s.n] || (myLog[s.n] = []);
+  if(d && log.indexOf(d) >= 0){ alert('その日はもう記録してあるよ🐟'); return; }
+  log.push(d);
+  saveAll(); render(); openStamp(i);
+};
+
+// 履歴を1件だけ消す（表示と同じ並び順で消す）
+window.delVisit = function(i, j){
+  const s = STAMPS[i];
+  const log = sortedLog(s.n);
+  log.splice(j, 1);
+  if(log.length) myLog[s.n] = log; else delete myLog[s.n];
+  saveAll(); render(); openStamp(i);
+};
+
+// 「行った！」ボタン：未チェックなら今日で1回、チェック済みなら記録をぜんぶ取り消す
 window.toggleVisit = function(i){
   const s = STAMPS[i];
-  if(myVisits.has(s.n)){ myVisits.delete(s.n); delete myDates[s.n]; }
-  else { myVisits.add(s.n); myDates[s.n] = Date.now(); }
-  localStorage.setItem('myVisits', JSON.stringify([...myVisits]));
-  localStorage.setItem('myVisitDates', JSON.stringify(myDates));
-  render();
-  openStamp(i);
+  const cnt = visitCount(s.n);
+  if(cnt){
+    if(cnt > 1 && !confirm(s.n+' の記録 '+cnt+'回ぶんを、ぜんぶ取り消すよ。いい？')) return;
+    delete myLog[s.n];
+  } else {
+    myLog[s.n] = [todayStr()];
+  }
+  saveAll(); render(); openStamp(i);
 };
 
 window.openMedal = function(i){
@@ -1622,9 +1766,10 @@ window.openMedal = function(i){
     body += '<div class="mlist">'+m.members.map(memberLink).join('')+'</div>';
   }
   const left = s.goal - s.done;
+  const unit = MEDAL_UNIT[m.kind] || '館';
   body += s.earned
     ? '<div class="desc vdate">🏅 メダルゲット！おめでとう！</div>'
-    : '<div class="desc">あと <b>'+left+'館</b> でゲット！</div>';
+    : '<div class="desc">あと <b>'+left+unit+'</b> でゲット！（いま '+s.done+'/'+s.goal+unit+'）</div>';
   // 思い出枠：ラッコメダルは「かつてラッコに会えた館」、地方メダルは「閉館した館」
   if(m.past && m.past.length){
     const memN = m.past.filter(n=>myVisits.has(n)).length;
@@ -1640,6 +1785,92 @@ window.openMedal = function(i){
   box.innerHTML = visual + '<h3>'+esc(m.name)+'</h3>' + body +
     '<div class="rowbtns"><button class="btn-close" onclick="pModal.classList.remove(\'open\')">とじる</button></div>';
   modal.classList.add('open');
+};
+
+// ===== ことしの記録（年ごとのまとめ） =====
+let curYear = null;
+function renderYear(){
+  const wrap = document.getElementById('yearBox');
+  const years = yearsInLog();
+  const undated = Object.keys(myLog).reduce((a,n)=>a+myLog[n].filter(d=>!d).length,0);
+  if(!years.length){
+    wrap.innerHTML = '<div class="y-empty">まだ日付つきの記録がないよ。スタンプをタップして「行った日」を入れると、ここに1年のまとめが出るよ🐟'+
+      (undated ? '<br><small>（日付なしの記録が '+undated+' 件あるよ。日付を入れると集計されるよ）</small>' : '')+'</div>';
+    return;
+  }
+  const thisYear = String(new Date().getFullYear());
+  if(years.indexOf(thisYear) < 0){ years.push(thisYear); years.sort().reverse(); } // 今年はまだ0館でもタブを出す
+  if(years.indexOf(curYear) < 0) curYear = years[0];
+  const s = yearStats(curYear);
+  const tabs = years.map(y=>'<button class="ytab'+(y===curYear?' on':'')+'" onclick="setYear(\''+y+'\')">'+y+'年</button>').join('');
+  const stats = '<div class="ystats">'+
+    '<div class="ystat"><b>'+s.places+'</b><span>行った水族館</span></div>'+
+    '<div class="ystat"><b>'+s.trips+'</b><span>おでかけ回数</span></div>'+
+    '<div class="ystat"><b>'+s.firsts+'</b><span>はじめての館</span></div></div>';
+  const mx = Math.max.apply(null, s.months.concat([1]));
+  const bars = '<div class="ymonths">'+s.months.map((v,i)=>
+    '<div class="ybar'+(v?' on':'')+'">'+(v?'<b>'+v+'</b>':'')+
+    '<i style="height:'+(v ? Math.max(10, Math.round(v/mx*100)) : 3)+'%"></i><span>'+(i+1)+'</span></div>').join('')+'</div>';
+  let list = '';
+  if(s.rows.length){
+    list = s.rows.map(r=>{
+      const idx = STAMPS.findIndex(x=>x.n===r.n);
+      const times = r.ds.length>1 ? '<em>×'+r.ds.length+'回</em>' : (r.first ? '<em>はじめて</em>' : '');
+      return '<div class="yrow"'+(idx>=0?' onclick="openStamp('+idx+')"':'')+'>'+
+        '<span class="ye">'+(idx>=0?STAMPS[idx].e:'🐟')+'</span>'+
+        '<span class="yn">'+esc(r.n)+times+'</span>'+
+        '<span class="yd">'+r.ds.slice().reverse().map(fmtD).join('・')+'</span></div>';
+    }).join('');
+  } else {
+    list = '<div class="y-empty" style="border-top:1px dashed #e3ecf1;padding-top:12px">'+curYear+'年の記録はまだないよ。これからの1年、どこに行こうか🐟</div>';
+  }
+  const share = s.trips ? '<button class="ysh" onclick="shareYear()">📋 この1年のまとめをコピー</button>' : '';
+  wrap.innerHTML = '<div class="ytabs">'+tabs+'</div>'+stats+bars+list+share;
+}
+window.setYear = function(y){ curYear = y; renderYear(); };
+window.shareYear = function(){
+  const s = yearStats(curYear);
+  const nm = localStorage.getItem('passportName') || '';
+  const txt = (nm ? nm+'の' : '')+curYear+'年の水族館記録🐟\n'+
+    '行った水族館：'+s.places+'館／おでかけ：'+s.trips+'回／はじめての館：'+s.firsts+'館\n'+
+    'すいぞくかんパスポートで記録中！\n__SITE__/passport.html';
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(()=>alert('コピーしたよ！SNSに貼ってね🐟')).catch(()=>prompt('コピーしてね', txt));
+  } else { prompt('コピーしてね', txt); }
+};
+
+// ===== データのお引っこし（この端末のブラウザにしか無いので保存できるように） =====
+window.exportData = function(){
+  const data = { app:'suizokukan-passport', version:1, exported: todayStr(),
+    name: localStorage.getItem('passportName')||'', visits: myLog };
+  const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 1)], {type:'application/json'}));
+  const a = document.createElement('a');
+  a.href = url; a.download = 'suizokukan-passport-'+todayStr()+'.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
+};
+window.importData = function(el){
+  const f = el.files && el.files[0];
+  if(!f) return;
+  const r = new FileReader();
+  r.onload = ()=>{
+    try {
+      const d = JSON.parse(r.result);
+      if(!d || !d.visits || typeof d.visits !== 'object') throw 0;
+      let add = 0;
+      Object.keys(d.visits).forEach(n=>{
+        const inc = Array.isArray(d.visits[n]) ? d.visits[n] : [];
+        const cur = myLog[n] || (myLog[n] = []);
+        inc.forEach(dd=>{ const v = (typeof dd === 'string') ? dd : '';
+          if(v === '' || cur.indexOf(v) < 0){ cur.push(v); add++; } });
+      });
+      if(d.name && !localStorage.getItem('passportName')) localStorage.setItem('passportName', String(d.name).slice(0,10));
+      saveAll(); ownerLabel(); render();
+      alert('読みこんだよ🐟 記録を '+add+' 件たしました（いまの記録は消さずに合体してるよ）');
+    } catch(e){ alert('うまく読みこめなかったよ…「データを保存する」で作ったファイルを選んでね'); }
+    el.value = '';
+  };
+  r.readAsText(f);
 };
 
 ownerLabel();
