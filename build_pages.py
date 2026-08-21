@@ -1470,12 +1470,28 @@ h2 { color:var(--sea-deep); font-size:1.1rem; margin:26px 0 4px; }
 .btn-visit.on { background:#2a9d8f; color:#fff; }
 .btn-spot { background:var(--coral); color:#fff; }
 .back { display:inline-block; margin-top:24px; color:var(--sea); font-weight:bold; text-decoration:none; }
-.yacc > summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin:26px 0 4px; }
+.yacc { margin:24px 0 0; border-radius:18px; border:2.5px solid var(--sun); background:linear-gradient(135deg,#fff8e2,#ffeeb8);
+  box-shadow:0 3px 12px rgba(226,169,59,.28); overflow:hidden; transition:background .2s; }
+.yacc[open] { background:#fff; border-color:var(--sky); box-shadow:0 2px 8px rgba(2,62,138,.1); }
+.yacc > summary { list-style:none; cursor:pointer; display:block; padding:14px 16px; -webkit-tap-highlight-color:transparent; }
 .yacc > summary::-webkit-details-marker { display:none; }
-.yacc > summary h2 { margin:0; }
+.yacc > summary:active { background:rgba(255,255,255,.45); }
+.yhead { display:flex; align-items:center; gap:9px; }
+.yhead h2 { margin:0; flex:1; font-size:1.08rem; }
+.ynew { flex:none; background:var(--coral); color:#fff; font-size:.6rem; font-weight:bold; letter-spacing:.08em;
+  border-radius:999px; padding:3px 8px; box-shadow:0 1px 5px rgba(255,107,107,.55); animation:newpulse 1.8s ease-in-out infinite; }
+@keyframes newpulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.1); } }
+@media (prefers-reduced-motion:reduce){ .ynew { animation:none; } }
+.ysub { display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-top:8px; }
 .ysum { font-size:.74rem; font-weight:bold; color:#fff; background:var(--sea); border-radius:999px; padding:3px 11px; }
-.ychev { margin-left:auto; color:var(--sea); font-size:.78rem; transition:transform .2s; }
+.yhint { font-size:.68rem; font-weight:bold; color:#a8873a; }
+.yhint::after { content:"👆 タップでひらく"; }
+.yacc[open] .yhint::after { content:"タップでとじる"; }
+.yacc[open] .ynew { display:none; }
+.ychev { flex:none; color:var(--sea-deep); font-size:.8rem; transition:transform .2s; }
 .yacc[open] .ychev { transform:rotate(180deg); }
+.yacc .sec-note { padding:0 16px; }
+.yacc .ybox { background:transparent; box-shadow:none; border-radius:0; padding:0 16px 10px; }
 .yscv { width:100%; border-radius:12px; border:2px solid var(--sky); background:#0077b6; display:block; margin-top:4px; }
 .btn-save { background:#fff; color:var(--sea-deep); border:2px solid var(--sea-deep) !important; }
 .trips { font-size:.8rem; color:#fff; opacity:.92; margin-top:7px; }
@@ -1529,7 +1545,10 @@ __ATTR_CSS__
   </div>
 
   <details class="yacc" id="yearAcc">
-    <summary><h2>🗓️ ことしの記録</h2><span class="ysum" id="yearSum"></span><span class="ychev">▼</span></summary>
+    <summary>
+      <div class="yhead"><span class="ynew">NEW</span><h2>🗓️ ことしの記録</h2><span class="ychev">▼</span></div>
+      <div class="ysub"><span class="ysum" id="yearSum"></span><span class="yhint"></span></div>
+    </summary>
     <p class="sec-note">スタンプをタップして「行った日」を入れると、1年ごとのまとめが出るよ。同じ水族館に何回行ったかも数えられる🐟</p>
     <div class="ybox" id="yearBox"></div>
   </details>
