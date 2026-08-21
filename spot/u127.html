@@ -305,6 +305,15 @@ function recordPostTime() {
   arr.push(Date.now());
   localStorage.setItem(RATE_KEY, JSON.stringify(arr));
 }
+// すいぞくかんパスポートの「投稿」カウント（掲載される投稿だけ。ご意見箱は数えない）
+function recordMyPost(aquarium) {
+  try {
+    const log = JSON.parse(localStorage.getItem('myPostLog') || '[]');
+    const t = new Date(), p2 = v => String(v).padStart(2, '0');
+    log.push({ d: t.getFullYear()+'-'+p2(t.getMonth()+1)+'-'+p2(t.getDate()), a: aquarium || '' });
+    localStorage.setItem('myPostLog', JSON.stringify(log.slice(-500)));
+  } catch(e) {}
+}
 
 document.getElementById('post-form').onsubmit = async (ev) => {
   ev.preventDefault();
@@ -324,6 +333,7 @@ document.getElementById('post-form').onsubmit = async (ev) => {
       if (d.ok) {
         status.textContent = '送信できたよ！チームが確認したら掲載されるので待っててね🐟';
         recordPostTime();
+        recordMyPost(AQ_NAME);
         document.getElementById('post-form').reset();
         document.getElementById('p-preview').style.display = 'none';
         rulesBox.style.display = 'none';
@@ -340,6 +350,7 @@ document.getElementById('post-form').onsubmit = async (ev) => {
     const d = await res.json();
     if (d.ok) {
       status.textContent = '送信できたよ！ありがとう🐟';
+      recordMyPost(AQ_NAME);
       document.getElementById('post-form').reset();
       setTimeout(loadPosts, 800);
     } else { status.textContent = d.error || '送信エラー'; }

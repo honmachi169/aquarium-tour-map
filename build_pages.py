@@ -617,6 +617,15 @@ function recordPostTime() {{
   arr.push(Date.now());
   localStorage.setItem(RATE_KEY, JSON.stringify(arr));
 }}
+// すいぞくかんパスポートの「投稿」カウント（掲載される投稿だけ。ご意見箱は数えない）
+function recordMyPost(aquarium) {{
+  try {{
+    const log = JSON.parse(localStorage.getItem('myPostLog') || '[]');
+    const t = new Date(), p2 = v => String(v).padStart(2, '0');
+    log.push({{ d: t.getFullYear()+'-'+p2(t.getMonth()+1)+'-'+p2(t.getDate()), a: aquarium || '' }});
+    localStorage.setItem('myPostLog', JSON.stringify(log.slice(-500)));
+  }} catch(e) {{}}
+}}
 
 document.getElementById('post-form').onsubmit = async (ev) => {{
   ev.preventDefault();
@@ -636,6 +645,7 @@ document.getElementById('post-form').onsubmit = async (ev) => {{
       if (d.ok) {{
         status.textContent = '送信できたよ！チームが確認したら掲載されるので待っててね🐟';
         recordPostTime();
+        recordMyPost(AQ_NAME);
         document.getElementById('post-form').reset();
         document.getElementById('p-preview').style.display = 'none';
         rulesBox.style.display = 'none';
@@ -652,6 +662,7 @@ document.getElementById('post-form').onsubmit = async (ev) => {{
     const d = await res.json();
     if (d.ok) {{
       status.textContent = '送信できたよ！ありがとう🐟';
+      recordMyPost(AQ_NAME);
       document.getElementById('post-form').reset();
       setTimeout(loadPosts, 800);
     }} else {{ status.textContent = d.error || '送信エラー'; }}
@@ -1404,25 +1415,31 @@ body { font-family:"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif; ba
 header { background:linear-gradient(180deg,#48cae4,#0096c7); color:#fff; padding:14px 16px; }
 header a { color:#fff; text-decoration:none; font-weight:bold; font-size:.9rem; }
 main { max-width:900px; margin:0 auto; padding:20px 16px 40px; }
-.cover { background:linear-gradient(160deg,#023e8a,#0077b6); color:#fff; border-radius:20px; padding:26px 20px 22px; text-align:center; box-shadow:0 6px 18px rgba(2,62,138,.3); position:relative; overflow:hidden; }
+.cover { background:linear-gradient(160deg,#023e8a,#0077b6); color:#fff; border-radius:20px; padding:15px 18px 16px; text-align:center; box-shadow:0 6px 18px rgba(2,62,138,.3); position:relative; overflow:hidden; }
 .cover::before { content:"🐟"; position:absolute; font-size:7rem; opacity:.08; right:-14px; bottom:-24px; transform:rotate(-12deg); }
 .cover .sub { font-size:.72rem; letter-spacing:.28em; color:var(--sun); font-weight:bold; }
-.cover-chara { width:132px; height:auto; display:block; margin:6px auto -4px; filter:drop-shadow(0 4px 7px rgba(0,0,0,.28)); }
-.cover h1 { font-size:1.5rem; margin:2px 0 4px; line-height:1.24; }
-.cover h1 .t1, .cover h1 .t2 { display:block; }
-@media (max-width:360px){ .cover-chara { width:112px; } .cover h1 { font-size:1.34rem; } }
+.cover-top { display:flex; align-items:center; gap:12px; text-align:left; }
+.cover-chara { width:92px; height:auto; flex:none; filter:drop-shadow(0 4px 7px rgba(0,0,0,.28)); }
+.cover-id { flex:1; min-width:0; }
+.cover h1 { font-size:1.3rem; margin:0 0 3px; line-height:1.22; }
+@media (max-width:360px){ .cover-chara { width:76px; } .cover h1 { font-size:1.12rem; } }
 .cover .owner { font-size:.85rem; opacity:.92; cursor:pointer; }
 .cover .owner .pen { font-size:.75rem; opacity:.75; }
-.cover .big { font-size:2.6rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 4px rgba(0,0,0,.3); margin-top:10px; line-height:1; }
+.cover .big { font-size:2.4rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 4px rgba(0,0,0,.3); margin-top:8px; line-height:1; }
 .cover .big small { font-size:1rem; color:#fff; font-weight:normal; }
-.tierprog { display:flex; justify-content:center; flex-wrap:wrap; gap:6px; margin:11px auto 2px; max-width:380px; }
-.tierprog .tp { display:flex; align-items:center; gap:4px; background:rgba(255,255,255,.14); border:1.5px solid rgba(255,255,255,.32); border-radius:999px; padding:4px 12px; font-size:.8rem; font-weight:bold; color:#fff; }
-.tierprog .tp b { font-size:.95rem; }
-.tierprog .tp small { font-weight:normal; opacity:.82; }
-.tierprog .tp.done { border-color:currentColor; }
+.chips { display:flex; justify-content:center; flex-wrap:wrap; gap:7px; margin-top:11px; }
+.chips .chip { display:inline-flex; align-items:center; gap:5px; font-family:inherit; background:rgba(255,255,255,.15);
+  border:1.5px solid rgba(255,255,255,.32); border-radius:999px; padding:5px 12px; font-size:.75rem; font-weight:bold;
+  color:#fff; text-decoration:none; }
+.chips .chip b { color:var(--sun); font-size:.92rem; }
+.chips .chip.tap { background:rgba(255,209,102,.2); border-color:rgba(255,209,102,.75); cursor:pointer; }
+.chips .chip.tap:active { transform:scale(.97); }
 .pbar { background:rgba(255,255,255,.25); border-radius:999px; height:10px; margin:12px auto 6px; max-width:340px; overflow:hidden; }
 .pbar div { background:var(--sun); height:100%; border-radius:999px; width:0%; transition:width .8s ease; }
-.cover .note { font-size:.7rem; opacity:.75; margin-top:8px; }
+.cover .note { font-size:.68rem; opacity:.72; margin-top:9px; line-height:1.5; }
+.cover .note:empty { display:none; }
+.ypost { font-size:.76rem; font-weight:bold; color:#1d7f72; background:#e6f6f3; border-radius:11px; padding:7px 11px; margin:-3px 0 11px; }
+.ypost b { font-size:.92rem; }
 h2 { color:var(--sea-deep); font-size:1.1rem; margin:26px 0 4px; }
 .sec-note { font-size:.76rem; color:#789; margin-bottom:12px; }
 .medals { display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:12px; }
@@ -1494,8 +1511,6 @@ h2 { color:var(--sea-deep); font-size:1.1rem; margin:26px 0 4px; }
 .yacc .ybox { background:transparent; box-shadow:none; border-radius:0; padding:0 16px 10px; }
 .yscv { width:100%; border-radius:12px; border:2px solid var(--sky); background:#0077b6; display:block; margin-top:4px; }
 .btn-save { background:#fff; color:var(--sea-deep); border:2px solid var(--sea-deep) !important; }
-.trips { font-size:.8rem; color:#fff; opacity:.92; margin-top:7px; }
-.trips b { color:var(--sun); font-size:1.05rem; }
 .ybox { background:#fff; border-radius:16px; padding:14px 14px 6px; box-shadow:0 2px 8px rgba(2,62,138,.08); }
 .ytabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:11px; }
 .ytab { font-family:inherit; font-size:.78rem; font-weight:bold; border:2px solid var(--sky); background:#fff; color:#5b7c8d; border-radius:999px; padding:5px 13px; cursor:pointer; }
@@ -1534,14 +1549,17 @@ __ATTR_CSS__
 <main>
   <div class="cover">
     <div class="sub">AQUARIUM PASSPORT</div>
-    <img class="cover-chara" src="assets/passport_chara.png" alt="図鑑を読むさかなの子" width="132" height="123">
-    <h1><span class="t1">すいぞくかん</span><span class="t2">パスポート</span></h1>
-    <div class="owner" id="ownerName" title="タップでなまえを変えられるよ"></div>
+    <div class="cover-top">
+      <img class="cover-chara" src="assets/passport_chara.png" alt="図鑑を読むさかなの子" width="92" height="86">
+      <div class="cover-id">
+        <h1>すいぞくかんパスポート</h1>
+        <div class="owner" id="ownerName" title="タップでなまえを変えられるよ"></div>
+      </div>
+    </div>
     <div class="big"><span id="pCount">0</span><small> / __TOTAL__館</small></div>
-    <div class="trips" id="pTrips"></div>
-    <div class="tierprog" id="tierProg"></div>
     <div class="pbar"><div id="pBar"></div></div>
-    <div class="note">MAPの「⬜行ったらチェック」と連動してるよ。スタンプをタップしても押せる🐟</div>
+    <div class="chips" id="coverChips"></div>
+    <div class="note" id="coverNote"></div>
   </div>
 
   <details class="yacc" id="yearAcc">
@@ -1592,18 +1610,11 @@ const REGIONS = __REGION_NAMES__;
 const GONE = new Set(__GONE__); // 閉館館＝思い出枠。制覇の母数・分子から除外
 const TOTAL = STAMPS.filter(s=>!GONE.has(s.n)).length; // 今行ける館数
 const myVisitableCount = ()=>[...myVisits].filter(n=>!GONE.has(n)).length;
-// tier段階達成（一般⊂上級⊂マニアの累積）。カバーにチップ表示、コンプで色付き＋✅
-const TIER_LEVEL = {'一般':1,'上級':2,'マニア':3};
-const TIER_EMO = {'一般':'🐟','上級':'🐬','マニア':'🐡'};
-const TIER_COL = {'一般':'#ffd93b','上級':'#ff9e40','マニア':'#ff5252'};
-function renderTierProg(){
-  const st = (lv)=>{ const pool = STAMPS.filter(s=>!GONE.has(s.n) && (TIER_LEVEL[s.t]||99)<=lv); return {v: pool.filter(s=>myVisits.has(s.n)).length, t: pool.length}; };
-  const rows = [['一般',st(1)],['上級',st(2)],['マニア',st(3)]];
-  document.getElementById('tierProg').innerHTML = rows.map(([n,r])=>{
-    const done = r.t>0 && r.v===r.t;
-    return '<span class="tp'+(done?' done':'')+'"'+(done?' style="color:'+TIER_COL[n]+'"':'')+'>'+TIER_EMO[n]+n+' <b style="color:'+TIER_COL[n]+'">'+r.v+'</b><small>/'+r.t+'</small>'+(done?' ✅':'')+'</span>';
-  }).join('');
-}
+// みんなの投稿の回数（posts.html・各館ページで投稿が通ったときに記録される）
+let myPostLog = [];
+try { myPostLog = JSON.parse(localStorage.getItem('myPostLog') || '[]'); } catch(e) { myPostLog = []; }
+const postsInYear = y => myPostLog.filter(p => p && p.d && String(p.d).slice(0,4) === y).length;
+const thisYearStr = () => String(new Date().getFullYear());
 let myVisits = new Set(JSON.parse(localStorage.getItem('myVisits')||'[]'));
 let myDates = JSON.parse(localStorage.getItem('myVisitDates')||'{}');
 // 訪問ログ：1つの館に何回でも記録できる {"館名":["2026-08-19","2025-05-03"]}（""＝日付なし）
@@ -1696,10 +1707,11 @@ function medalState(m){
 function render(){
   const c = myVisitableCount();
   document.getElementById('pCount').textContent = c;
-  renderTierProg();
-  const tr = totalTrips();
-  document.getElementById('pTrips').innerHTML = tr ? '👣 のべ <b>'+tr+'</b> 回おでかけ' : '';
   document.getElementById('pBar').style.width = (c/TOTAL*100) + '%';
+  // はじめての人にだけ使い方を出す（枠を小さく保つため、スタンプが1つでもあれば消す）
+  document.getElementById('coverNote').innerHTML =
+    c ? '' : 'MAPの「⬜行ったらチェック」と連動してるよ。スタンプをタップしても押せる🐟';
+  renderChips();
   renderYear();
 
   document.getElementById('medalGrid').innerHTML = MEDALS.map((m,i)=>{
@@ -1731,6 +1743,24 @@ function render(){
       '<div class="stamps">'+cells+'</div>';
   }).join('');
 }
+
+// 表紙のチップ：今年の記録／のべ回数／投稿回数。今年のぶんはタップで「ことしの記録」が開く
+function renderChips(){
+  const y = thisYearStr();
+  const ys = yearStats(y), tr = totalTrips(), pc = myPostLog.length;
+  const out = ['<button class="chip tap" onclick="openYear()">🗓️ '+y+'年 <b>'+ys.places+'</b>館・<b>'+ys.trips+'</b>回 ›</button>'];
+  if(tr) out.push('<span class="chip">👣 のべ <b>'+tr+'</b> 回</span>');
+  out.push('<a class="chip tap" href="__SITE__/posts.html">📸 '+(pc ? '投稿 <b>'+pc+'</b> 回' : '投稿してみる ›')+'</a>');
+  document.getElementById('coverChips').innerHTML = out.join('');
+}
+window.openYear = function(){
+  curYear = thisYearStr();
+  renderYear();
+  const acc = document.getElementById('yearAcc');
+  acc.open = true;
+  localStorage.setItem('yearAccOpen', '1');
+  setTimeout(()=>acc.scrollIntoView({behavior:'smooth', block:'start'}), 60);
+};
 
 const modal = document.getElementById('pModal');
 const box = document.getElementById('pModalBox');
@@ -1868,7 +1898,9 @@ function renderYear(){
   const share = s.trips ? '<button class="ysh" onclick="shareYear()">📤 1年のまとめをシェア</button>' : '';
   document.getElementById('yearSum').textContent =
     s.trips ? curYear+'年 '+s.places+'館・'+s.trips+'回' : curYear+'年はまだ0館';
-  wrap.innerHTML = '<div class="ytabs">'+tabs+'</div>'+stats+bars+list+share;
+  const py = postsInYear(curYear);
+  const postLine = py ? '<div class="ypost">📸 '+curYear+'年はみんなの投稿を <b>'+py+'</b>回 してくれたよ。ありがとう！</div>' : '';
+  wrap.innerHTML = '<div class="ytabs">'+tabs+'</div>'+stats+postLine+bars+list+share;
 }
 window.setYear = function(y){ curYear = y; renderYear(); };
 // ===== 1年のまとめをビジュアルでシェア（TOPの制覇マップと同じ作り） =====
