@@ -45,6 +45,8 @@ main { max-width:900px; margin:0 auto; padding:20px 16px 40px; }
 .pbar div { background:var(--sun); height:100%; border-radius:999px; width:0%; transition:width .8s ease; }
 .cover .note { font-size:.68rem; opacity:.72; margin-top:9px; line-height:1.5; }
 .cover .note:empty { display:none; }
+.yhome { font-size:.78rem; font-weight:bold; color:#1b5e8a; background:#e3f2fb; border-radius:11px; padding:8px 11px; margin:-3px 0 9px; }
+.yhome b { font-size:.9rem; color:var(--sea-deep); }
 .ypost { font-size:.76rem; font-weight:bold; color:#1d7f72; background:#e6f6f3; border-radius:11px; padding:7px 11px; margin:-3px 0 11px; }
 .ypost b { font-size:.92rem; }
 h2 { color:var(--sea-deep); font-size:1.1rem; margin:26px 0 4px; }
@@ -276,6 +278,16 @@ function yearStats(y){
            firsts: rows.filter(r=>r.first).length, months: months };
 }
 const bestYearPlaces = () => yearsInLog().reduce((a,y)=>Math.max(a, yearStats(y).places), 0);
+// ホーム水族館＝いちばん行った館。回数が同じときは最近行ったほうを選ぶ
+function homeSpot(){
+  let best = null;
+  Object.keys(myLog).forEach(n=>{
+    const c = myLog[n].length;
+    const last = myLog[n].filter(Boolean).sort().pop() || '';
+    if(!best || c > best.c || (c === best.c && last > best.last)) best = { n:n, c:c, last:last };
+  });
+  return (best && best.c >= 2) ? best : null; // 1回だけなら「ホーム」とは呼ばない
+}
 syncLog(); saveAll();
 
 // なまえ（このブラウザに保存）
@@ -505,9 +517,11 @@ function renderYear(){
   const share = s.trips ? '<button class="ysh" onclick="shareYear()">📤 1年のまとめをシェア</button>' : '';
   document.getElementById('yearSum').textContent =
     s.trips ? curYear+'年 '+s.places+'館・'+s.trips+'回' : curYear+'年はまだ0館';
+  const hm = homeSpot();
+  const homeLine = hm ? '<div class="yhome">💙 わたしのホーム水族館は <b>'+esc(hm.n)+'</b>（'+hm.c+'回）</div>' : '';
   const py = postsInYear(curYear);
   const postLine = py ? '<div class="ypost">📸 '+curYear+'年はみんなの投稿を <b>'+py+'</b>回 してくれたよ。ありがとう！</div>' : '';
-  wrap.innerHTML = '<div class="ytabs">'+tabs+'</div>'+stats+postLine+bars+list+share;
+  wrap.innerHTML = '<div class="ytabs">'+tabs+'</div>'+stats+homeLine+postLine+bars+list+share;
 }
 window.setYear = function(y){ curYear = y; renderYear(); };
 // ===== 1年のまとめをビジュアルでシェア（TOPの制覇マップと同じ作り） =====
@@ -529,84 +543,115 @@ async function drawYearShare(){
   const W = cv.width = 1080, H = cv.height = 1080;
   const ctx = cv.getContext('2d');
   const s = yearStats(curYear);
+  const hm = homeSpot();
+  const emoOf = n => { const i = STAMPS.findIndex(x=>x.n===n); return i>=0 ? STAMPS[i].e : '\uD83D\uDC1F'; };
+  const short = (n,len) => n.length > len ? n.slice(0,len-1)+'\u2026' : n;
 
   const bg = ctx.createLinearGradient(0,0,0,H);
   bg.addColorStop(0,'#48cae4'); bg.addColorStop(.5,'#0077b6'); bg.addColorStop(1,'#023e8a');
   ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
   ctx.fillStyle = 'rgba(255,255,255,.07)';
-  [[130,880,70],[980,300,52],[905,880,38],[60,470,34],[1010,610,26]].forEach(b=>{
+  [[120,935,66],[985,250,48],[70,430,30],[1015,700,26]].forEach(b=>{
     ctx.beginPath(); ctx.arc(b[0],b[1],b[2],0,Math.PI*2); ctx.fill(); });
 
   // 見出し
   ctx.textAlign='center';
-  ctx.fillStyle='#ffd166'; ctx.font='bold 30px '+YFONT;
-  ctx.fillText('A Q U A R I U M   P A S S P O R T', W/2, 62);
-  ctx.fillStyle='#fff'; ctx.font='bold 60px '+YFONT;
-  ctx.fillText(curYear+'年 わたしの水族館記録', W/2, 132);
+  ctx.fillStyle='#ffd166'; ctx.font='bold 28px '+YFONT;
+  ctx.fillText('A Q U A R I U M   P A S S P O R T', W/2, 54);
+  ctx.fillStyle='#fff'; ctx.font='bold 56px '+YFONT;
+  ctx.fillText(curYear+'年 わたしの水族館記録', W/2, 116);
   const nm = localStorage.getItem('passportName') || '';
-  ctx.font='bold 32px '+YFONT; ctx.fillStyle='rgba(255,255,255,.85)';
-  ctx.fillText(nm ? nm+' の パスポート' : '🐟 すいぞくかんパスポート', W/2, 180);
+  ctx.font='bold 30px '+YFONT; ctx.fillStyle='rgba(255,255,255,.85)';
+  ctx.fillText(nm ? nm+' の パスポート' : '\uD83D\uDC1F すいぞくかんパスポート', W/2, 162);
 
-  // 数字カード3つ
-  const cards = [['行った水族館', s.places, '館'], ['おでかけ', s.trips, '回'], ['はじめての館', s.firsts, '館']];
-  const cw=312, gap=24, x0=(W-(cw*3+gap*2))/2, cy=210, ch=198;
-  cards.forEach((c,i)=>{
-    const x = x0+i*(cw+gap);
-    ctx.fillStyle='rgba(255,255,255,.15)'; yRoundRect(ctx,x,cy,cw,ch,26); ctx.fill();
-    ctx.strokeStyle='rgba(255,255,255,.34)'; ctx.lineWidth=3; ctx.stroke();
-    ctx.font='bold 92px '+YFONT; const nw = ctx.measureText(String(c[1])).width;
-    ctx.font='bold 32px '+YFONT;  const uw = ctx.measureText(c[2]).width;
-    const sx = x+cw/2-(nw+uw+6)/2;
-    ctx.textAlign='left';
-    ctx.fillStyle='#ffd166'; ctx.font='bold 92px '+YFONT; ctx.fillText(String(c[1]), sx, cy+122);
-    ctx.fillStyle='#fff';    ctx.font='bold 32px '+YFONT; ctx.fillText(c[2], sx+nw+6, cy+122);
-    ctx.textAlign='center';
-    ctx.fillStyle='rgba(255,255,255,.9)'; ctx.font='bold 29px '+YFONT;
-    ctx.fillText(c[0], x+cw/2, cy+166);
-  });
-
-  // 月べつグラフ
-  const gx=70, gy=458, gw=W-140, gh=164, bw=gw/12;
-  const mmax = Math.max.apply(null, s.months.concat([1]));
-  ctx.textAlign='left'; ctx.fillStyle='rgba(255,255,255,.8)'; ctx.font='bold 26px '+YFONT;
-  ctx.fillText('月べつのおでかけ', gx, gy-18);
-  ctx.textAlign='center';
-  s.months.forEach((v,i)=>{
-    const bh = v ? Math.max(14, v/mmax*gh) : 5;
-    const x = gx+i*bw+bw*0.19, w = bw*0.62;
-    ctx.fillStyle = v ? '#ffd166' : 'rgba(255,255,255,.2)';
-    yRoundRect(ctx, x, gy+gh-bh, w, bh, 7); ctx.fill();
-    if(v){ ctx.fillStyle='#fff'; ctx.font='bold 26px '+YFONT; ctx.fillText(String(v), x+w/2, gy+gh-bh-12); }
-    ctx.fillStyle='rgba(255,255,255,.72)'; ctx.font='bold 23px '+YFONT;
-    ctx.fillText(String(i+1), x+w/2, gy+gh+32);
-  });
-  ctx.fillStyle='rgba(255,255,255,.45)'; ctx.fillRect(gx, gy+gh, gw, 2);
-
-  // かわちゃん（右下）
-  if(yImgs.chara) ctx.drawImage(yImgs.chara, 806, 752, 250, 232);
-
-  // 行った水族館リスト（左）
-  const lx=70, ly=700, MAXL=6;
-  ctx.textAlign='left'; ctx.fillStyle='rgba(255,255,255,.8)'; ctx.font='bold 26px '+YFONT;
-  ctx.fillText('行った水族館', lx, ly);
-  s.rows.slice(0, MAXL).forEach((r,i)=>{
-    const y = ly+48+i*44;
-    const idx = STAMPS.findIndex(x=>x.n===r.n);
-    const label = (idx>=0 ? STAMPS[idx].e : '🐟')+' '+(r.n.length>16 ? r.n.slice(0,15)+'…' : r.n);
-    ctx.fillStyle='#fff'; ctx.font='bold 33px '+YFONT;
-    ctx.fillText(label, lx, y);
-    if(r.ds.length>1){
-      ctx.fillStyle='#ffb3c1'; ctx.font='bold 29px '+YFONT;
-      ctx.fillText('×'+r.ds.length, lx+ctx.measureText(label).width+12, y);
-    }
-  });
-  if(s.rows.length > MAXL){
-    ctx.fillStyle='rgba(255,255,255,.85)'; ctx.font='bold 29px '+YFONT;
-    ctx.fillText('ほか '+(s.rows.length-MAXL)+'館', lx, ly+48+MAXL*44);
+  // ホーム水族館（主役）。まだ無い人には「2回行くと決まるよ」を出して再訪のきっかけにする
+  const numY = 470;
+  const cx=90, cy=194, cw=900, chh=196;
+  ctx.fillStyle='rgba(255,255,255,'+(hm ? '.16' : '.09')+')'; yRoundRect(ctx,cx,cy,cw,chh,28); ctx.fill();
+  ctx.lineWidth=3.5;
+  if(hm){ ctx.strokeStyle='rgba(255,209,102,.85)'; }
+  else { ctx.setLineDash([10,8]); ctx.strokeStyle='rgba(255,255,255,.5)'; }
+  ctx.stroke(); ctx.setLineDash([]);
+  ctx.beginPath(); ctx.arc(cx+118, cy+chh/2, 70, 0, Math.PI*2);
+  ctx.fillStyle = hm ? 'rgba(255,255,255,.92)' : 'rgba(255,255,255,.22)'; ctx.fill();
+  ctx.textAlign='center'; ctx.font=(hm ? '72px ' : 'bold 64px ')+YFONT;
+  ctx.fillStyle = hm ? '#234' : 'rgba(255,255,255,.75)';
+  ctx.fillText(hm ? emoOf(hm.n) : '？', cx+118, cy+chh/2+26);
+  ctx.textAlign='left';
+  ctx.fillStyle='rgba(255,255,255,.85)'; ctx.font='bold 28px '+YFONT;
+  ctx.fillText('\uD83D\uDC99 わたしのホーム水族館', cx+218, cy+62);
+  if(hm){
+    ctx.fillStyle='#fff'; ctx.font='bold 46px '+YFONT;
+    ctx.fillText(short(hm.n, 13), cx+218, cy+118);
+    ctx.fillStyle='#ffd166'; ctx.font='bold 36px '+YFONT;
+    ctx.fillText('×'+hm.c+'回 行ったよ', cx+218, cy+166);
+  } else {
+    ctx.fillStyle='#fff'; ctx.font='bold 38px '+YFONT;
+    ctx.fillText('まだ決まってない', cx+218, cy+114);
+    ctx.fillStyle='rgba(255,255,255,.8)'; ctx.font='bold 27px '+YFONT;
+    ctx.fillText('おなじ水族館に2回行くと決まるよ', cx+218, cy+160);
   }
 
-  ctx.textAlign='center'; ctx.font='bold 27px '+YFONT; ctx.fillStyle='rgba(255,255,255,.92)';
-  ctx.fillText('すいぞくかんパスポート ／ aquarium.yasasea.com', W/2, H-30);
+  // 数字（今年の館数・回数・通算の制覇数）
+  const nums = [[String(s.places), '館', curYear+'年に行った'],
+                [String(s.trips), '回', 'おでかけ'],
+                [String(myVisitableCount())+'/'+TOTAL, '館', '通算の制覇']];
+  nums.forEach((n,i)=>{
+    const cx2 = 180 + i*360;
+    ctx.font='bold 62px '+YFONT; const nw = ctx.measureText(n[0]).width;
+    ctx.font='bold 26px '+YFONT;  const uw = ctx.measureText(n[1]).width;
+    ctx.textAlign='left';
+    ctx.fillStyle='#ffd166'; ctx.font='bold 62px '+YFONT; ctx.fillText(n[0], cx2-(nw+uw+5)/2, numY);
+    ctx.fillStyle='#fff';    ctx.font='bold 26px '+YFONT; ctx.fillText(n[1], cx2-(nw+uw+5)/2+nw+5, numY);
+    ctx.textAlign='center';
+    ctx.fillStyle='rgba(255,255,255,.88)'; ctx.font='bold 26px '+YFONT;
+    ctx.fillText(n[2], cx2, numY+38);
+  });
+
+  // その年に行った館のスタンプを並べる（一目で「いっぱい行ってる」が伝わる）
+  const gTop = numY + 92;
+  ctx.textAlign='left'; ctx.fillStyle='rgba(255,255,255,.82)'; ctx.font='bold 26px '+YFONT;
+  ctx.fillText(curYear+'年に行った水族館', 90, gTop);
+  const COLS=5, CELL=186, R=52, x0=168, rowH=156;
+  const total = s.rows.length, MAXC = 10;
+  const showN = total > MAXC ? MAXC-1 : Math.min(total, MAXC);
+  ctx.textAlign='center';
+  for(let i=0; i<showN; i++){
+    const cx3 = x0 + (i%COLS)*CELL, cy3 = gTop + 76 + Math.floor(i/COLS)*rowH;
+    const r = s.rows[i];
+    ctx.beginPath(); ctx.arc(cx3, cy3, R, 0, Math.PI*2);
+    ctx.fillStyle='rgba(255,255,255,.94)'; ctx.fill();
+    ctx.strokeStyle='#ffd166'; ctx.lineWidth=4; ctx.stroke();
+    ctx.font='50px '+YFONT; ctx.fillText(emoOf(r.n), cx3, cy3+18);
+    if(r.ds.length > 1){
+      ctx.beginPath(); ctx.arc(cx3+40, cy3-40, 25, 0, Math.PI*2);
+      ctx.fillStyle='#ff6b6b'; ctx.fill();
+      ctx.fillStyle='#fff'; ctx.font='bold 26px '+YFONT; ctx.fillText('×'+r.ds.length, cx3+40, cy3-31);
+    }
+    ctx.fillStyle='#fff'; ctx.font='bold 21px '+YFONT;
+    const nmS = short(r.n, 8);
+    ctx.fillText(nmS, cx3, cy3+R+30);
+  }
+  if(total > MAXC){
+    const i = showN;
+    const cx3 = x0 + (i%COLS)*CELL, cy3 = gTop + 76 + Math.floor(i/COLS)*rowH;
+    ctx.beginPath(); ctx.arc(cx3, cy3, R, 0, Math.PI*2);
+    ctx.setLineDash([9,7]); ctx.strokeStyle='rgba(255,255,255,.8)'; ctx.lineWidth=4; ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#fff'; ctx.font='bold 34px '+YFONT; ctx.fillText('+'+(total-showN), cx3, cy3+12);
+    ctx.font='bold 21px '+YFONT; ctx.fillText('ほか', cx3, cy3+R+30);
+  }
+
+  // 投稿回数（0のときは出さない）とフッター
+  const py = postsInYear(curYear);
+  ctx.textAlign='center';
+  if(py){
+    ctx.fillStyle='#ffd166'; ctx.font='bold 30px '+YFONT;
+    ctx.fillText('\uD83D\uDCF8 みんなの投稿 '+py+'回', W/2 - 60, H-78);
+  }
+  if(yImgs.chara) ctx.drawImage(yImgs.chara, 902, 902, 150, 139);
+  ctx.font='bold 26px '+YFONT; ctx.fillStyle='rgba(255,255,255,.92)';
+  ctx.fillText('すいぞくかんパスポート ／ aquarium.yasasea.com', W/2 - 60, H-28);
 }
 function yCanvasBlob(){
   return new Promise(res=>document.getElementById('yShareCanvas').toBlob(res,'image/png'));
@@ -614,9 +659,11 @@ function yCanvasBlob(){
 function yShareText(){
   const s = yearStats(curYear);
   const nm = localStorage.getItem('passportName') || '';
+  const hm = homeSpot();
   return (nm ? nm+'の' : '')+curYear+'年の水族館記録🐟\n'+
-    '行った水族館 '+s.places+'館／おでかけ '+s.trips+'回／はじめての館 '+s.firsts+'館\n'+
-    '#すいぞくかんパスポート #全国水族館ツアーMAP';
+    '行った水族館 '+s.places+'館／おでかけ '+s.trips+'回／通算 '+myVisitableCount()+'館\n'+
+    (hm ? 'わたしのホーム水族館は '+hm.n+'（'+hm.c+'回）💙\n' : '')+
+    '#すいぞくかんパスポート #わたしのホーム水族館 #全国水族館ツアーMAP';
 }
 window.shareYear = async function(){
   document.getElementById('ysTitle').textContent = '🗓️ '+curYear+'年のまとめ';
