@@ -1470,6 +1470,14 @@ h2 { color:var(--sea-deep); font-size:1.1rem; margin:26px 0 4px; }
 .btn-visit.on { background:#2a9d8f; color:#fff; }
 .btn-spot { background:var(--coral); color:#fff; }
 .back { display:inline-block; margin-top:24px; color:var(--sea); font-weight:bold; text-decoration:none; }
+.yacc > summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin:26px 0 4px; }
+.yacc > summary::-webkit-details-marker { display:none; }
+.yacc > summary h2 { margin:0; }
+.ysum { font-size:.74rem; font-weight:bold; color:#fff; background:var(--sea); border-radius:999px; padding:3px 11px; }
+.ychev { margin-left:auto; color:var(--sea); font-size:.78rem; transition:transform .2s; }
+.yacc[open] .ychev { transform:rotate(180deg); }
+.yscv { width:100%; border-radius:12px; border:2px solid var(--sky); background:#0077b6; display:block; margin-top:4px; }
+.btn-save { background:#fff; color:var(--sea-deep); border:2px solid var(--sea-deep) !important; }
 .trips { font-size:.8rem; color:#fff; opacity:.92; margin-top:7px; }
 .trips b { color:var(--sun); font-size:1.05rem; }
 .ybox { background:#fff; border-radius:16px; padding:14px 14px 6px; box-shadow:0 2px 8px rgba(2,62,138,.08); }
@@ -1520,9 +1528,11 @@ __ATTR_CSS__
     <div class="note">MAPの「⬜行ったらチェック」と連動してるよ。スタンプをタップしても押せる🐟</div>
   </div>
 
-  <h2>🗓️ ことしの記録</h2>
-  <p class="sec-note">スタンプをタップして「行った日」を入れると、1年ごとのまとめが出るよ。同じ水族館に何回行ったかも数えられる🐟</p>
-  <div class="ybox" id="yearBox"></div>
+  <details class="yacc" id="yearAcc">
+    <summary><h2>🗓️ ことしの記録</h2><span class="ysum" id="yearSum"></span><span class="ychev">▼</span></summary>
+    <p class="sec-note">スタンプをタップして「行った日」を入れると、1年ごとのまとめが出るよ。同じ水族館に何回行ったかも数えられる🐟</p>
+    <div class="ybox" id="yearBox"></div>
+  </details>
 
   <h2>🏅 メダルコレクション</h2>
   <p class="sec-note">条件をクリアするとメダルがもらえるよ。タップすると「あと何館か」が見られる！</p>
@@ -1544,6 +1554,17 @@ __ATTR_CSS__
 </main>
 
 <div class="pmodal" id="pModal"><div class="box" id="pModalBox"></div></div>
+
+<div class="pmodal" id="yShareModal"><div class="box">
+  <h3 id="ysTitle">🗓️ 1年のまとめ</h3>
+  <canvas id="yShareCanvas" class="yscv"></canvas>
+  <div class="desc" style="margin:8px 0 0">画像を保存して、SNSでみんなに見せよう🐟</div>
+  <div class="rowbtns">
+    <button class="btn-close" onclick="document.getElementById('yShareModal').classList.remove('open')">とじる</button>
+    <button class="btn-save" id="ysSave">💾 保存</button>
+    <button class="btn-spot" id="ysShare">📤 シェア</button>
+  </div>
+</div></div>
 
 <script>
 const STAMPS = __STAMPS__;
@@ -1794,6 +1815,7 @@ function renderYear(){
   const years = yearsInLog();
   const undated = Object.keys(myLog).reduce((a,n)=>a+myLog[n].filter(d=>!d).length,0);
   if(!years.length){
+    document.getElementById('yearSum').textContent = 'まだ記録なし';
     wrap.innerHTML = '<div class="y-empty">まだ日付つきの記録がないよ。スタンプをタップして「行った日」を入れると、ここに1年のまとめが出るよ🐟'+
       (undated ? '<br><small>（日付なしの記録が '+undated+' 件あるよ。日付を入れると集計されるよ）</small>' : '')+'</div>';
     return;
@@ -1824,20 +1846,152 @@ function renderYear(){
   } else {
     list = '<div class="y-empty" style="border-top:1px dashed #e3ecf1;padding-top:12px">'+curYear+'年の記録はまだないよ。これからの1年、どこに行こうか🐟</div>';
   }
-  const share = s.trips ? '<button class="ysh" onclick="shareYear()">📋 この1年のまとめをコピー</button>' : '';
+  const share = s.trips ? '<button class="ysh" onclick="shareYear()">📤 1年のまとめをシェア</button>' : '';
+  document.getElementById('yearSum').textContent =
+    s.trips ? curYear+'年 '+s.places+'館・'+s.trips+'回' : curYear+'年はまだ0館';
   wrap.innerHTML = '<div class="ytabs">'+tabs+'</div>'+stats+bars+list+share;
 }
 window.setYear = function(y){ curYear = y; renderYear(); };
-window.shareYear = function(){
+// ===== 1年のまとめをビジュアルでシェア（TOPの制覇マップと同じ作り） =====
+const YFONT = '"Hiragino Maru Gothic ProN","Rounded Mplus 1c",sans-serif';
+const yImgs = {};
+function yLoadImg(key, src){
+  if(yImgs[key]) return Promise.resolve(yImgs[key]);
+  return new Promise(res=>{ const i = new Image();
+    i.onload = ()=>{ yImgs[key] = i; res(i); }; i.onerror = ()=>res(null); i.src = src; });
+}
+function yRoundRect(ctx,x,y,w,h,r){
+  ctx.beginPath(); ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+}
+async function drawYearShare(){
+  await yLoadImg('chara','assets/passport_chara.png');
+  const cv = document.getElementById('yShareCanvas');
+  const W = cv.width = 1080, H = cv.height = 1080;
+  const ctx = cv.getContext('2d');
+  const s = yearStats(curYear);
+
+  const bg = ctx.createLinearGradient(0,0,0,H);
+  bg.addColorStop(0,'#48cae4'); bg.addColorStop(.5,'#0077b6'); bg.addColorStop(1,'#023e8a');
+  ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = 'rgba(255,255,255,.07)';
+  [[130,880,70],[980,300,52],[905,880,38],[60,470,34],[1010,610,26]].forEach(b=>{
+    ctx.beginPath(); ctx.arc(b[0],b[1],b[2],0,Math.PI*2); ctx.fill(); });
+
+  // 見出し
+  ctx.textAlign='center';
+  ctx.fillStyle='#ffd166'; ctx.font='bold 30px '+YFONT;
+  ctx.fillText('A Q U A R I U M   P A S S P O R T', W/2, 62);
+  ctx.fillStyle='#fff'; ctx.font='bold 60px '+YFONT;
+  ctx.fillText(curYear+'年 わたしの水族館記録', W/2, 132);
+  const nm = localStorage.getItem('passportName') || '';
+  ctx.font='bold 32px '+YFONT; ctx.fillStyle='rgba(255,255,255,.85)';
+  ctx.fillText(nm ? nm+' の パスポート' : '🐟 すいぞくかんパスポート', W/2, 180);
+
+  // 数字カード3つ
+  const cards = [['行った水族館', s.places, '館'], ['おでかけ', s.trips, '回'], ['はじめての館', s.firsts, '館']];
+  const cw=312, gap=24, x0=(W-(cw*3+gap*2))/2, cy=210, ch=198;
+  cards.forEach((c,i)=>{
+    const x = x0+i*(cw+gap);
+    ctx.fillStyle='rgba(255,255,255,.15)'; yRoundRect(ctx,x,cy,cw,ch,26); ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.34)'; ctx.lineWidth=3; ctx.stroke();
+    ctx.font='bold 92px '+YFONT; const nw = ctx.measureText(String(c[1])).width;
+    ctx.font='bold 32px '+YFONT;  const uw = ctx.measureText(c[2]).width;
+    const sx = x+cw/2-(nw+uw+6)/2;
+    ctx.textAlign='left';
+    ctx.fillStyle='#ffd166'; ctx.font='bold 92px '+YFONT; ctx.fillText(String(c[1]), sx, cy+122);
+    ctx.fillStyle='#fff';    ctx.font='bold 32px '+YFONT; ctx.fillText(c[2], sx+nw+6, cy+122);
+    ctx.textAlign='center';
+    ctx.fillStyle='rgba(255,255,255,.9)'; ctx.font='bold 29px '+YFONT;
+    ctx.fillText(c[0], x+cw/2, cy+166);
+  });
+
+  // 月べつグラフ
+  const gx=70, gy=458, gw=W-140, gh=164, bw=gw/12;
+  const mmax = Math.max.apply(null, s.months.concat([1]));
+  ctx.textAlign='left'; ctx.fillStyle='rgba(255,255,255,.8)'; ctx.font='bold 26px '+YFONT;
+  ctx.fillText('月べつのおでかけ', gx, gy-18);
+  ctx.textAlign='center';
+  s.months.forEach((v,i)=>{
+    const bh = v ? Math.max(14, v/mmax*gh) : 5;
+    const x = gx+i*bw+bw*0.19, w = bw*0.62;
+    ctx.fillStyle = v ? '#ffd166' : 'rgba(255,255,255,.2)';
+    yRoundRect(ctx, x, gy+gh-bh, w, bh, 7); ctx.fill();
+    if(v){ ctx.fillStyle='#fff'; ctx.font='bold 26px '+YFONT; ctx.fillText(String(v), x+w/2, gy+gh-bh-12); }
+    ctx.fillStyle='rgba(255,255,255,.72)'; ctx.font='bold 23px '+YFONT;
+    ctx.fillText(String(i+1), x+w/2, gy+gh+32);
+  });
+  ctx.fillStyle='rgba(255,255,255,.45)'; ctx.fillRect(gx, gy+gh, gw, 2);
+
+  // かわちゃん（右下）
+  if(yImgs.chara) ctx.drawImage(yImgs.chara, 806, 752, 250, 232);
+
+  // 行った水族館リスト（左）
+  const lx=70, ly=700, MAXL=6;
+  ctx.textAlign='left'; ctx.fillStyle='rgba(255,255,255,.8)'; ctx.font='bold 26px '+YFONT;
+  ctx.fillText('行った水族館', lx, ly);
+  s.rows.slice(0, MAXL).forEach((r,i)=>{
+    const y = ly+48+i*44;
+    const idx = STAMPS.findIndex(x=>x.n===r.n);
+    const label = (idx>=0 ? STAMPS[idx].e : '🐟')+' '+(r.n.length>16 ? r.n.slice(0,15)+'…' : r.n);
+    ctx.fillStyle='#fff'; ctx.font='bold 33px '+YFONT;
+    ctx.fillText(label, lx, y);
+    if(r.ds.length>1){
+      ctx.fillStyle='#ffb3c1'; ctx.font='bold 29px '+YFONT;
+      ctx.fillText('×'+r.ds.length, lx+ctx.measureText(label).width+12, y);
+    }
+  });
+  if(s.rows.length > MAXL){
+    ctx.fillStyle='rgba(255,255,255,.85)'; ctx.font='bold 29px '+YFONT;
+    ctx.fillText('ほか '+(s.rows.length-MAXL)+'館', lx, ly+48+MAXL*44);
+  }
+
+  ctx.textAlign='center'; ctx.font='bold 27px '+YFONT; ctx.fillStyle='rgba(255,255,255,.92)';
+  ctx.fillText('すいぞくかんパスポート ／ __SITE_HOST__', W/2, H-30);
+}
+function yCanvasBlob(){
+  return new Promise(res=>document.getElementById('yShareCanvas').toBlob(res,'image/png'));
+}
+function yShareText(){
   const s = yearStats(curYear);
   const nm = localStorage.getItem('passportName') || '';
-  const txt = (nm ? nm+'の' : '')+curYear+'年の水族館記録🐟\n'+
-    '行った水族館：'+s.places+'館／おでかけ：'+s.trips+'回／はじめての館：'+s.firsts+'館\n'+
-    'すいぞくかんパスポートで記録中！\n__SITE__/passport.html';
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(txt).then(()=>alert('コピーしたよ！SNSに貼ってね🐟')).catch(()=>prompt('コピーしてね', txt));
-  } else { prompt('コピーしてね', txt); }
+  return (nm ? nm+'の' : '')+curYear+'年の水族館記録🐟\n'+
+    '行った水族館 '+s.places+'館／おでかけ '+s.trips+'回／はじめての館 '+s.firsts+'館\n'+
+    '#すいぞくかんパスポート #全国水族館ツアーMAP';
+}
+window.shareYear = async function(){
+  document.getElementById('ysTitle').textContent = '🗓️ '+curYear+'年のまとめ';
+  document.getElementById('yShareModal').classList.add('open');
+  try { await drawYearShare(); } catch(e){ console.error(e); }
 };
+document.getElementById('ysSave').onclick = async ()=>{
+  const b = await yCanvasBlob(); if(!b) return;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(b); a.download = 'suizokukan-passport-'+curYear+'.png';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 3000);
+};
+document.getElementById('ysShare').onclick = async ()=>{
+  const b = await yCanvasBlob(); if(!b) return;
+  const file = new File([b], 'suizokukan-passport-'+curYear+'.png', {type:'image/png'});
+  const text = yShareText();
+  if(navigator.canShare && navigator.canShare({files:[file]})){
+    try { await navigator.share({files:[file], text}); return; } catch(e){ if(e.name === 'AbortError') return; }
+  }
+  // シェア非対応（PCなど）：画像を保存してXの投稿画面を開く
+  document.getElementById('ysSave').click();
+  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+
+    '&url='+encodeURIComponent('__SITE__/passport.html'), '_blank');
+};
+document.getElementById('yShareModal').onclick = function(e){
+  if(e.target === this) this.classList.remove('open');
+};
+
+// アコーディオンの開閉を覚えておく（初期はたたんで、メダルがすぐ見えるように）
+const yAcc = document.getElementById('yearAcc');
+if(localStorage.getItem('yearAccOpen') === '1') yAcc.open = true;
+yAcc.addEventListener('toggle', ()=>localStorage.setItem('yearAccOpen', yAcc.open ? '1' : '0'));
 
 // ===== データのお引っこし（この端末のブラウザにしか無いので保存できるように） =====
 window.exportData = function(){
@@ -1881,6 +2035,7 @@ render();
 """
 passport_doc = (PASSPORT_TEMPLATE
     .replace("__GA__", GA_SNIPPET)
+    .replace("__SITE_HOST__", SITE.split("//")[-1].rstrip("/"))
     .replace("__SITE__", SITE)
     .replace("__BRAND__", BRAND_NAME)
     .replace("__AUTHOR__", AUTHOR_NAME)
