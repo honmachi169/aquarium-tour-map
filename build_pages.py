@@ -1421,9 +1421,9 @@ main { max-width:900px; margin:0 auto; padding:20px 16px 40px; }
 .cover-top { display:flex; align-items:center; gap:12px; text-align:left; }
 .cover-chara { width:92px; height:auto; flex:none; filter:drop-shadow(0 4px 7px rgba(0,0,0,.28)); }
 .cover-id { flex:1; min-width:0; }
-.cover h1 { font-size:1.3rem; margin:0 0 3px; line-height:1.22; }
-@media (max-width:360px){ .cover-chara { width:76px; } .cover h1 { font-size:1.12rem; } }
-.cover .owner { font-size:.85rem; opacity:.92; cursor:pointer; }
+.cover h1 { font-size:clamp(.95rem, 4.4vw, 1.3rem); margin:0 0 3px; line-height:1.22; white-space:nowrap; }
+@media (max-width:360px){ .cover-chara { width:74px; } }
+.cover .owner { font-size:.82rem; opacity:.92; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .cover .owner .pen { font-size:.75rem; opacity:.75; }
 .cover .big { font-size:2.4rem; font-weight:bold; color:var(--sun); text-shadow:0 2px 4px rgba(0,0,0,.3); margin-top:8px; line-height:1; }
 .cover .big small { font-size:1rem; color:#fff; font-weight:normal; }
@@ -1440,6 +1440,12 @@ main { max-width:900px; margin:0 auto; padding:20px 16px 40px; }
 .cover .note:empty { display:none; }
 .yhome { font-size:.78rem; font-weight:bold; color:#1b5e8a; background:#e3f2fb; border-radius:11px; padding:8px 11px; margin:-3px 0 9px; }
 .yhome b { font-size:.9rem; color:var(--sea-deep); }
+.ychg { margin-left:7px; font-family:inherit; font-size:.68rem; font-weight:bold; border:1.5px solid var(--sea);
+  background:#fff; color:var(--sea); border-radius:999px; padding:2px 10px; cursor:pointer; }
+.ychg:active { transform:scale(.96); }
+.btn-home { background:#fff; color:#0077b6; border:2px solid #0077b6 !important; }
+.btn-home.on { background:#0077b6; color:#fff; }
+.pmodal .mlist a small { color:#89a; font-weight:bold; margin-left:auto; }
 .ypost { font-size:.76rem; font-weight:bold; color:#1d7f72; background:#e6f6f3; border-radius:11px; padding:7px 11px; margin:-3px 0 11px; }
 .ypost b { font-size:.92rem; }
 h2 { color:var(--sea-deep); font-size:1.1rem; margin:26px 0 4px; }
@@ -1671,23 +1677,36 @@ function yearStats(y){
            firsts: rows.filter(r=>r.first).length, months: months };
 }
 const bestYearPlaces = () => yearsInLog().reduce((a,y)=>Math.max(a, yearStats(y).places), 0);
-// ホーム水族館＝いちばん行った館。回数が同じときは最近行ったほうを選ぶ
-function homeSpot(){
+// ホーム水族館：自分で選べる。選んでいなければ「いちばん行った館」を自動で立てる
+function autoHome(){
   let best = null;
   Object.keys(myLog).forEach(n=>{
     const c = myLog[n].length;
     const last = myLog[n].filter(Boolean).sort().pop() || '';
     if(!best || c > best.c || (c === best.c && last > best.last)) best = { n:n, c:c, last:last };
   });
-  return (best && best.c >= 2) ? best : null; // 1回だけなら「ホーム」とは呼ばない
+  return (best && best.c >= 2) ? best : null; // 自動のときは1回だけの館を「ホーム」にはしない
 }
+function getHome(){
+  const pick = localStorage.getItem('homeSpot');
+  if(pick){
+    if(myLog[pick]) return { n:pick, c:myLog[pick].length, picked:true };
+    localStorage.removeItem('homeSpot'); // 記録を消した館は自動的にホームを解除
+  }
+  const a = autoHome();
+  return a ? { n:a.n, c:a.c, picked:false } : null;
+}
+window.setHome = function(n){
+  if(n) localStorage.setItem('homeSpot', n); else localStorage.removeItem('homeSpot');
+  render();
+};
 syncLog(); saveAll();
 
 // なまえ（このブラウザに保存）
 function ownerLabel(){
   const n = localStorage.getItem('passportName') || '';
   document.getElementById('ownerName').innerHTML =
-    (n ? n + ' の パスポート' : 'なまえを入れる') + ' <span class="pen">✏️</span>';
+    (n ? n + ' の 記録' : 'なまえを入れる') + ' <span class="pen">✏️</span>';
 }
 document.getElementById('ownerName').onclick = ()=>{
   const cur = localStorage.getItem('passportName') || '';
@@ -1759,9 +1778,8 @@ function render(){
 // 表紙のチップ：今年の記録／のべ回数／投稿回数。今年のぶんはタップで「ことしの記録」が開く
 function renderChips(){
   const y = thisYearStr();
-  const ys = yearStats(y), tr = totalTrips(), pc = myPostLog.length;
-  const out = ['<button class="chip tap" onclick="openYear()">🗓️ '+y+'年 <b>'+ys.places+'</b>館・<b>'+ys.trips+'</b>回 ›</button>'];
-  if(tr) out.push('<span class="chip">👣 のべ <b>'+tr+'</b> 回</span>');
+  const ys = yearStats(y), pc = myPostLog.length;
+  const out = ['<button class="chip tap" onclick="openYear()">🗓️ '+y+'年 <b>'+ys.places+'</b>館 ›</button>'];
   out.push('<a class="chip tap" href="__SITE__/posts.html">📸 '+(pc ? '投稿 <b>'+pc+'</b> 回' : '投稿してみる ›')+'</a>');
   document.getElementById('coverChips').innerHTML = out.join('');
 }
@@ -1790,14 +1808,59 @@ window.openStamp = function(i){
     : '<div class="desc">まだスタンプが押されてないよ。行ったらチェックしてね🐟</div>';
   body += '<div class="addwrap"><input type="date" id="vDate" value="'+todayStr()+'" max="'+todayStr()+'">'+
     '<button class="btn-add" onclick="addVisit('+i+')">'+(on?'＋ また行った！':'＋ この日に行った')+'</button></div>';
+  const hmNow = getHome();
+  const isHome = !!(hmNow && hmNow.n === s.n);
+  const homeBtn = on
+    ? '<button class="btn-home'+(isHome?' on':'')+'" onclick="toggleHome('+i+')">'+
+      (isHome ? '💙 ホーム水族館' : '🤍 ホームにする')+'</button>' : '';
   box.innerHTML = visual +
     '<h3>'+esc(s.n)+'</h3><span class="pref">'+esc(s.p)+'</span>'+ body +
     '<div class="rowbtns">'+
       '<button class="btn-close" onclick="pModal.classList.remove(\'open\')">とじる</button>'+
       '<button class="btn-visit'+(on?' on':'')+'" onclick="toggleVisit('+i+')">'+(on?'✅ 行った！':'⬜ 行った！を押す')+'</button>'+
+      homeBtn +
       '<a class="btn-spot" href="'+s.u+'">くわしく🐟</a>'+
     '</div>';
   modal.classList.add('open');
+};
+
+// ホーム水族館をえらぶ（行ったことのある館からだけ選べる）
+let HOMEPICK = [];
+window.openHomePick = function(){
+  // 並びは自動判定と同じ基準（回数が多い順→最近行った順）にして、先頭＝おまかせの館に揃える
+  const lastOf = n => myLog[n].filter(Boolean).sort().pop() || '';
+  HOMEPICK = Object.keys(myLog).sort((a,b)=>{
+    const d = myLog[b].length - myLog[a].length;
+    if(d !== 0) return d;
+    const l = lastOf(b).localeCompare(lastOf(a));
+    return l !== 0 ? l : a.localeCompare(b, 'ja');
+  });
+  const cur = localStorage.getItem('homeSpot') || '';
+  const rows = HOMEPICK.map((n,k)=>{
+    const i = STAMPS.findIndex(x=>x.n===n);
+    const emo = i>=0 ? STAMPS[i].e : '🐟';
+    return '<a href="javascript:void(0)" onclick="pickHome('+k+')" class="'+(cur===n?'':'todo')+'">'+
+      (cur===n ? '💙' : emo)+' '+esc(n)+' <small>×'+myLog[n].length+'</small></a>';
+  }).join('');
+  box.innerHTML = '<div class="bige">💙</div><h3>ホーム水族館をえらぶ</h3>'+
+    '<div class="desc">きみのいちばんの水族館はどこ？ シェアするとその水族館の人にも届くかも🐟</div>'+
+    (rows ? '<div class="mlist">'+rows+'</div>'
+          : '<div class="desc">まだ行った水族館の記録がないよ。スタンプを押してからえらんでね</div>')+
+    '<div class="rowbtns">'+
+      '<button class="btn-close" onclick="pModal.classList.remove(\'open\')">とじる</button>'+
+      '<button class="btn-save" onclick="pickHome(-1)">おまかせにする</button>'+
+    '</div>';
+  modal.classList.add('open');
+};
+window.pickHome = function(k){
+  setHome(k >= 0 ? HOMEPICK[k] : null);
+  modal.classList.remove('open');
+};
+// スタンプを見ているその場でホームに指定できる
+window.toggleHome = function(i){
+  const n = STAMPS[i].n;
+  setHome(localStorage.getItem('homeSpot') === n ? null : n);
+  openStamp(i);
 };
 
 // 日付を選んで1回ぶん追加（同じ館に何回でも押せる）
@@ -1910,8 +1973,13 @@ function renderYear(){
   const share = s.trips ? '<button class="ysh" onclick="shareYear()">📤 1年のまとめをシェア</button>' : '';
   document.getElementById('yearSum').textContent =
     s.trips ? curYear+'年 '+s.places+'館・'+s.trips+'回' : curYear+'年はまだ0館';
-  const hm = homeSpot();
-  const homeLine = hm ? '<div class="yhome">💙 わたしのホーム水族館は <b>'+esc(hm.n)+'</b>（'+hm.c+'回）</div>' : '';
+  const hm = getHome();
+  const homeLine = hm
+    ? '<div class="yhome">💙 わたしのホーム水族館は <b>'+esc(hm.n)+'</b>（'+hm.c+'回）'+
+      '<button class="ychg" onclick="openHomePick()">かえる</button></div>'
+    : (Object.keys(myLog).length
+        ? '<div class="yhome">💙 ホーム水族館はまだ決まってないよ'+
+          '<button class="ychg" onclick="openHomePick()">えらぶ</button></div>' : '');
   const py = postsInYear(curYear);
   const postLine = py ? '<div class="ypost">📸 '+curYear+'年はみんなの投稿を <b>'+py+'</b>回 してくれたよ。ありがとう！</div>' : '';
   wrap.innerHTML = '<div class="ytabs">'+tabs+'</div>'+stats+homeLine+postLine+bars+list+share;
@@ -1936,7 +2004,7 @@ async function drawYearShare(){
   const W = cv.width = 1080, H = cv.height = 1080;
   const ctx = cv.getContext('2d');
   const s = yearStats(curYear);
-  const hm = homeSpot();
+  const hm = getHome();
   const emoOf = n => { const i = STAMPS.findIndex(x=>x.n===n); return i>=0 ? STAMPS[i].e : '\uD83D\uDC1F'; };
   const short = (n,len) => n.length > len ? n.slice(0,len-1)+'\u2026' : n;
 
@@ -1951,11 +2019,13 @@ async function drawYearShare(){
   ctx.textAlign='center';
   ctx.fillStyle='#ffd166'; ctx.font='bold 28px '+YFONT;
   ctx.fillText('A Q U A R I U M   P A S S P O R T', W/2, 54);
-  ctx.fillStyle='#fff'; ctx.font='bold 56px '+YFONT;
-  ctx.fillText(curYear+'年 わたしの水族館記録', W/2, 116);
   const nm = localStorage.getItem('passportName') || '';
-  ctx.font='bold 30px '+YFONT; ctx.fillStyle='rgba(255,255,255,.85)';
-  ctx.fillText(nm ? nm+' の パスポート' : '\uD83D\uDC1F すいぞくかんパスポート', W/2, 162);
+  ctx.fillStyle='#fff';
+  const ttl = (nm ? nm+' の ' : 'わたしの ')+curYear+'年の記録';
+  let tpx = 56;
+  while(tpx > 34){ ctx.font='bold '+tpx+'px '+YFONT; if(ctx.measureText(ttl).width <= 940) break; tpx -= 2; }
+  ctx.font='bold '+tpx+'px '+YFONT;
+  ctx.fillText(ttl, W/2, 130);
 
   // ホーム水族館（主役）。まだ無い人には「2回行くと決まるよ」を出して再訪のきっかけにする
   const numY = 470;
@@ -1974,8 +2044,16 @@ async function drawYearShare(){
   ctx.fillStyle='rgba(255,255,255,.85)'; ctx.font='bold 28px '+YFONT;
   ctx.fillText('\uD83D\uDC99 わたしのホーム水族館', cx+218, cy+62);
   if(hm){
-    ctx.fillStyle='#fff'; ctx.font='bold 46px '+YFONT;
-    ctx.fillText(short(hm.n, 13), cx+218, cy+118);
+    // 水族館の人が見ても嬉しいように、館名は切らずに入るまで文字を縮める
+    const maxW = cw - 218 - 30;
+    let nameTxt = hm.n, px = 50;
+    while(px > 26){ ctx.font='bold '+px+'px '+YFONT; if(ctx.measureText(nameTxt).width <= maxW) break; px -= 2; }
+    if(ctx.measureText(nameTxt).width > maxW){
+      while(nameTxt.length > 4 && ctx.measureText(nameTxt+'…').width > maxW) nameTxt = nameTxt.slice(0,-1);
+      nameTxt += '…';
+    }
+    ctx.fillStyle='#fff'; ctx.font='bold '+px+'px '+YFONT;
+    ctx.fillText(nameTxt, cx+218, cy+118);
     ctx.fillStyle='#ffd166'; ctx.font='bold 36px '+YFONT;
     ctx.fillText('×'+hm.c+'回 行ったよ', cx+218, cy+166);
   } else {
@@ -2049,14 +2127,19 @@ async function drawYearShare(){
 function yCanvasBlob(){
   return new Promise(res=>document.getElementById('yShareCanvas').toBlob(res,'image/png'));
 }
+// 館名をハッシュタグに（水族館の人のエゴサに引っかかるように）。カッコ書きと記号は落とす
+function hashTag(n){
+  return n.replace(/[（(].*$/, '').replace(/[\s・、。，,！!？?#＃＆&\/／]/g, '').trim();
+}
 function yShareText(){
   const s = yearStats(curYear);
   const nm = localStorage.getItem('passportName') || '';
-  const hm = homeSpot();
+  const hm = getHome();
   return (nm ? nm+'の' : '')+curYear+'年の水族館記録🐟\n'+
-    '行った水族館 '+s.places+'館／おでかけ '+s.trips+'回／通算 '+myVisitableCount()+'館\n'+
+    curYear+'年に行った '+s.places+'館／おでかけ '+s.trips+'回／通算 '+myVisitableCount()+'/'+TOTAL+'館\n'+
     (hm ? 'わたしのホーム水族館は '+hm.n+'（'+hm.c+'回）💙\n' : '')+
-    '#すいぞくかんパスポート #わたしのホーム水族館 #全国水族館ツアーMAP';
+    '#すいぞくかんパスポート #わたしのホーム水族館'+
+    (hm ? ' #'+hashTag(hm.n) : '')+' #全国水族館ツアーMAP';
 }
 window.shareYear = async function(){
   document.getElementById('ysTitle').textContent = '🗓️ '+curYear+'年のまとめ';
@@ -2094,7 +2177,7 @@ yAcc.addEventListener('toggle', ()=>localStorage.setItem('yearAccOpen', yAcc.ope
 // ===== データのお引っこし（この端末のブラウザにしか無いので保存できるように） =====
 window.exportData = function(){
   const data = { app:'suizokukan-passport', version:1, exported: todayStr(),
-    name: localStorage.getItem('passportName')||'', visits: myLog };
+    name: localStorage.getItem('passportName')||'', home: localStorage.getItem('homeSpot')||'', visits: myLog };
   const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 1)], {type:'application/json'}));
   const a = document.createElement('a');
   a.href = url; a.download = 'suizokukan-passport-'+todayStr()+'.json';
@@ -2117,6 +2200,7 @@ window.importData = function(el){
           if(v === '' || cur.indexOf(v) < 0){ cur.push(v); add++; } });
       });
       if(d.name && !localStorage.getItem('passportName')) localStorage.setItem('passportName', String(d.name).slice(0,10));
+      if(d.home && !localStorage.getItem('homeSpot')) localStorage.setItem('homeSpot', String(d.home));
       saveAll(); ownerLabel(); render();
       alert('読みこんだよ🐟 記録を '+add+' 件たしました（いまの記録は消さずに合体してるよ）');
     } catch(e){ alert('うまく読みこめなかったよ…「データを保存する」で作ったファイルを選んでね'); }
