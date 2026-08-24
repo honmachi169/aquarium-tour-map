@@ -149,7 +149,7 @@
   
   
   <table><tr><th>💰 大人</th><td>310円</td></tr><tr><th>🧒 子ども</th><td>160円（中学生以下）</td></tr><tr><th>🗓 休館日</th><td>月曜日・火曜日、年末年始（12/28〜1/4）</td></tr></table>
-  <p class="note">※2026年7月時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に<a href="http://www.ohtv.ne.jp/mizuho-hanzake/" target="_blank" rel="noopener">公式サイト</a>をご確認ください。情報は各館の公式サイトをもとに<a href="https://aquarium.yasasea.com/about.html">株式会社やさしいうみ</a>が掲載しています。</p>
+  <p class="note">※2026年8月時点の情報です。子ども・幼児料金の年齢区分は館ごとに異なります。おでかけ前に<a href="http://www.ohtv.ne.jp/mizuho-hanzake/" target="_blank" rel="noopener">公式サイト</a>をご確認ください。情報は各館の公式サイトをもとに<a href="https://aquarium.yasasea.com/about.html">株式会社やさしいうみ</a>が掲載しています。</p>
   
   
   
@@ -305,6 +305,15 @@ function recordPostTime() {
   arr.push(Date.now());
   localStorage.setItem(RATE_KEY, JSON.stringify(arr));
 }
+// すいぞくかんパスポートの「投稿」カウント（掲載される投稿だけ。ご意見箱は数えない）
+function recordMyPost(aquarium) {
+  try {
+    const log = JSON.parse(localStorage.getItem('myPostLog') || '[]');
+    const t = new Date(), p2 = v => String(v).padStart(2, '0');
+    log.push({ d: t.getFullYear()+'-'+p2(t.getMonth()+1)+'-'+p2(t.getDate()), a: aquarium || '' });
+    localStorage.setItem('myPostLog', JSON.stringify(log.slice(-500)));
+  } catch(e) {}
+}
 
 document.getElementById('post-form').onsubmit = async (ev) => {
   ev.preventDefault();
@@ -324,6 +333,7 @@ document.getElementById('post-form').onsubmit = async (ev) => {
       if (d.ok) {
         status.textContent = '送信できたよ！チームが確認したら掲載されるので待っててね🐟';
         recordPostTime();
+        recordMyPost(AQ_NAME);
         document.getElementById('post-form').reset();
         document.getElementById('p-preview').style.display = 'none';
         rulesBox.style.display = 'none';
@@ -340,6 +350,7 @@ document.getElementById('post-form').onsubmit = async (ev) => {
     const d = await res.json();
     if (d.ok) {
       status.textContent = '送信できたよ！ありがとう🐟';
+      recordMyPost(AQ_NAME);
       document.getElementById('post-form').reset();
       setTimeout(loadPosts, 800);
     } else { status.textContent = d.error || '送信エラー'; }
