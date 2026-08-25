@@ -1,9 +1,19 @@
 {
- "count": 178,
- "nextLive": "AMKugiz0oxE",
- "nextLiveDate": "2026-08-23T00:00:00+00:00",
- "nextLiveTitle": "おうちで飼えるさかな",
+ "count": 179,
+ "nextLive": "jP6UiNhOdQw",
+ "nextLiveDate": "2026-09-05T00:00:00+00:00",
+ "nextLiveTitle": "金と銀のさかな",
  "items": [
+  {
+   "id": "1hiltx6RjOBuulVIRRgCxr6NHGYozcNKr",
+   "title": "おうちで飼えるさかな",
+   "date": "2026.8.25",
+   "iso": "2026-08-25",
+   "cat": "weekly",
+   "thumb": "https://drive.google.com/thumbnail?id=1hiltx6RjOBuulVIRRgCxr6NHGYozcNKr&sz=w800",
+   "dl": "https://drive.google.com/uc?export=download&id=1hiltx6RjOBuulVIRRgCxr6NHGYozcNKr",
+   "video": "AMKugiz0oxE"
+  },
   {
    "id": "18YOj1n4JOKle09hRRWg7qYmPSGcM7r6X",
    "title": "おさかなしりとりサマー",
