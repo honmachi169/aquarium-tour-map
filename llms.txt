@@ -1,6 +1,6 @@
 # 全国水族館ツアーMAP
 
-> 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）。全国208館の水族館情報を掲載する、日本唯一の「実訪問ベース」水族館データベースです。
+> 出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）。全国209館の水族館情報を掲載する、日本唯一の「実訪問ベース」水族館データベースです。
 > 運営：さかなのおにいさん かわちゃん（YouTubeで全国の水族館を実際に訪れて紹介する「実訪問プロジェクト」）。
 > 料金・休館日・設備などの事実情報は各水族館の公式サイトを調査して掲載。かわちゃん本人の一言と「イチオシポイント」（激レアいきもの／パフォーマンス／子ども向け度／コスパ／クセつよポイントの中から、その館が特に強い軸だけを紹介）は本人が確認したものだけを公開しています。
 > 引用・要約する際は「出典：全国水族館ツアーMAP（さかなのおにいさん かわちゃん）」の出典明記にご協力ください。
@@ -45,10 +45,10 @@
 - 中国の水族館（14館）: https://aquarium.yasasea.com/area/%E4%B8%AD%E5%9B%BD.html
 - 北海道の水族館（16館）: https://aquarium.yasasea.com/area/%E5%8C%97%E6%B5%B7%E9%81%93.html
 - 四国の水族館（16館）: https://aquarium.yasasea.com/area/%E5%9B%9B%E5%9B%BD.html
-- 東北の水族館（12館）: https://aquarium.yasasea.com/area/%E6%9D%B1%E5%8C%97.html
+- 東北の水族館（13館）: https://aquarium.yasasea.com/area/%E6%9D%B1%E5%8C%97.html
 
 ## テーマ別ページ
-- ☔️ 雨の日におすすめ（118館）: https://aquarium.yasasea.com/theme/rain.html
+- ☔️ 雨の日におすすめ（119館）: https://aquarium.yasasea.com/theme/rain.html
 - 👶 未就学児におすすめ（111館）: https://aquarium.yasasea.com/theme/kids.html
 - 🍼 赤ちゃん連れにおすすめ（19館）: https://aquarium.yasasea.com/theme/baby.html
 - 🐋 シャチに会える（3館）: https://aquarium.yasasea.com/theme/shachi.html
@@ -62,7 +62,7 @@
 - 🗼 海中展望台（服のまま海の中をのぞける）（7館）: https://aquarium.yasasea.com/theme/kaichu.html
 - 🍱 お弁当を持ち込める（20館）: https://aquarium.yasasea.com/theme/bento.html
 
-## 掲載水族館一覧（全208館）
+## 掲載水族館一覧（全209館）
 - 鳥羽水族館（三重県）：ラッコ — https://aquarium.yasasea.com/spot/001.html
 - 神戸須磨シーワールド（兵庫県）：シャチ — https://aquarium.yasasea.com/spot/002.html
 - 須磨海浜水族園（スマスイ・閉園）（兵庫県）：神戸っ子の思い出「スマスイ」。2023年に56年の歴史に幕。閉園前の姿は動画で — https://aquarium.yasasea.com/spot/046.html
@@ -271,3 +271,4 @@
 - 桐生が岡動物園水族館（群馬県）：群馬県桐生市の桐生が岡公園内、入園無料の市立動物園に併設された水族館。地方の小規 — https://aquarium.yasasea.com/spot/u159.html
 - 瑞穂ハンザケ自然館（島根県）：島根県邑南町（旧瑞穂町）にあるオオサンショウウオ（ハンザケ）専門の自然館。国の特 — https://aquarium.yasasea.com/spot/u160.html
 - 佐賀県立宇宙科学館《ゆめぎんが》（佐賀県）：佐賀県武雄市の総合科学博物館。「ゆめぎんがアクアリウム」で有明海の干潟水槽など佐 — https://aquarium.yasasea.com/spot/u161.html
+- 気仙沼シャークミュージアム（宮城県）：サメの津波体験シアターやサメの実物大模型で知られる、日本唯一のサメ専門博物館。気 — https://aquarium.yasasea.com/spot/u162.html
