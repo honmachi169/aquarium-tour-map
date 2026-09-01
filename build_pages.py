@@ -177,7 +177,7 @@ for slug, a, intro in entries:
             rating_rows += f'<div class="rate-row"><span class="rate-label">{E(label)}</span><span class="rate-stars">{stars}</span></div>'
     ratings_box = f'<div class="ratings-box"><div class="hk-label">🐟 {AUTHOR_NAME}のイチオシポイント</div>{rating_rows}</div>' if rating_rows else ""
 
-    summer = f'<div class="summer">☀️ <b>2026年 夏休み情報：</b>{E(a["summer"])}</div>' if a.get("summer") else ""
+    summer = f'<div class="summer">🍂 <b>2026年 秋のおでかけ情報：</b>{E(a["summer"])}</div>' if a.get("summer") else ""
     notice = f'<div class="notice-box">⚠️ <b>ご注意：</b>{E(a["notice"])}</div>' if a.get("notice") else ""
     videos = "".join(
         f'<div class="video"><iframe loading="lazy" src="https://www.youtube.com/embed/{vv["id"]}" '
