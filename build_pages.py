@@ -1037,7 +1037,8 @@ about_person_ld = json.dumps({
     "description": "「子どもがさかなを好きになれば海は豊かになる」をモットーに、YouTubeで全国の水族館を紹介するさかなのおにいさん。テレビ東京「シナぷしゅ」出演、著書「全国クセすご水族館図鑑」。",
     "url": "https://sakana-bro.com/", "image": f"{SITE}/assets/kawachan_web_ogp.png",
     "sameAs": ["https://sakana-bro.com/", "https://www.youtube.com/channel/UCNpTW5hGX4mKr3hxFu_nReA",
-               "https://www.instagram.com/kawayanfishing/", "https://twitter.com/sakana_bro"],
+               "https://www.instagram.com/kawayanfishing/", "https://x.com/sakana_bro",
+               "https://x.com/honmachi169"],
     "worksFor": {"@type": "Organization", "name": "株式会社やさしいうみ", "url": "https://sakana-bro.com/"}
 }, ensure_ascii=False)
 about_doc = f"""<!DOCTYPE html>
