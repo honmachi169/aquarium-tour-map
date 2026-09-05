@@ -1,9 +1,19 @@
 {
- "count": 179,
- "nextLive": "jP6UiNhOdQw",
- "nextLiveDate": "2026-09-05T00:00:00+00:00",
- "nextLiveTitle": "金と銀のさかな",
+ "count": 180,
+ "nextLive": "m7uDV7yuP5Y",
+ "nextLiveDate": "2026-09-12T00:00:00+00:00",
+ "nextLiveTitle": "おさかなかくれんぼ",
  "items": [
+  {
+   "id": "1_CcPUKxlGzGf-DW13fEp-NzXoKZPgjb6",
+   "title": "カレンダー 金と銀のさかな",
+   "date": "2026年9月",
+   "iso": "2026-09-01",
+   "cat": "weekly",
+   "thumb": "https://drive.google.com/thumbnail?id=1_CcPUKxlGzGf-DW13fEp-NzXoKZPgjb6&sz=w800",
+   "dl": "https://drive.google.com/uc?export=download&id=1_CcPUKxlGzGf-DW13fEp-NzXoKZPgjb6",
+   "video": "jP6UiNhOdQw"
+  },
   {
    "id": "1hiltx6RjOBuulVIRRgCxr6NHGYozcNKr",
    "title": "おうちで飼えるさかな",
