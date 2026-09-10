@@ -1299,7 +1299,11 @@ fetch('data.json').then(r=>r.json()).then(data=>{
     try{ await drawShareMap(); }catch(e){ console.error(e); }
   };
   document.getElementById('mapImgBtn').onclick = async ()=>{
-    currentShareTier = '一般';
+    // 初期レベルは「行った館が全部数えられる」最小レベル（上級/マニア館に行った人が
+    // 一般レベルの母数で数えられて『制覇数が減って見える』のを防ぐ）
+    let lv = 1;
+    VISITABLE.forEach(a=>{ if(myVisits.has(a.name)) lv = Math.max(lv, TIER_LEVEL[a.tier]||1); });
+    currentShareTier = TIER_ORDER[lv-1];
     document.getElementById('mapImgModal').classList.add('open');
     try{ await drawShareMap(); }catch(e){ console.error(e); }
   };
