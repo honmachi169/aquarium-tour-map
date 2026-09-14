@@ -31,13 +31,17 @@ API = "https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV1YlrB_UP
 KEY = "yasasea-kawachan-review-2026"
 UA = {"User-Agent": "Mozilla/5.0"}
 
+# Apps Script は行数が増えるとレスポンスまで1分以上かかることがある。
+# 30秒だと feedback-mark が4回とも全滅した（2026-09-11のパトロールで実測）ので余裕をとる。
+TIMEOUT = 180
+
 
 def get_json(url, tries=4):
     last = None
     for i in range(tries):
         try:
             req = urllib.request.Request(url, headers=UA)
-            with urllib.request.urlopen(req, timeout=30) as r:
+            with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
                 return json.load(r)
         except Exception as e:
             last = e
@@ -55,7 +59,7 @@ def post_json(payload, tries=4):
     for i in range(tries):
         try:
             req = urllib.request.Request(API, data=body, headers=hdr)
-            with urllib.request.urlopen(req, timeout=30) as r:
+            with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
                 return json.load(r)
         except Exception as e:
             last = e
