@@ -1,9 +1,19 @@
 {
- "count": 181,
- "nextLive": "o_cZBuOG-x0",
- "nextLiveDate": "2026-09-20T00:00:00+00:00",
- "nextLiveTitle": "長生きのさかな",
+ "count": 182,
+ "nextLive": "fvvXLAwfob0",
+ "nextLiveDate": "2026-10-03T00:00:00+00:00",
+ "nextLiveTitle": "ハロウィンのさかな",
  "items": [
+  {
+   "id": "1xYpCansU9BmR4bGV0H29Lq_20tMI75X9",
+   "title": "長生きの魚",
+   "date": "2026.9.23",
+   "iso": "2026-09-23",
+   "cat": "weekly",
+   "thumb": "https://drive.google.com/thumbnail?id=1xYpCansU9BmR4bGV0H29Lq_20tMI75X9&sz=w800",
+   "dl": "https://drive.google.com/uc?export=download&id=1xYpCansU9BmR4bGV0H29Lq_20tMI75X9",
+   "video": "o_cZBuOG-x0"
+  },
   {
    "id": "1oW1XSuDDLTdHIzlAbt5pp_AxI8zhGLu4",
    "title": "かくれんぼ",
