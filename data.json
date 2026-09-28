@@ -3452,9 +3452,9 @@
       "pref": "沖縄県",
       "lat": 26.4087,
       "lng": 127.7155,
-      "url": "https://www.tabirai.net/sightseeing/feature/experience163.aspx",
-      "fee": "900円",
-      "child": "600円",
+      "url": "https://www.seaseed.com/coral-farm",
+      "fee": "900円（大人）",
+      "child": "300円（6〜15歳）／600円（学生）、5歳以下無料",
       "closed": "水曜",
       "comment": "陸上でサンゴ礁の生態系を再現した体験型施設。サンゴの株分け体験もできる",
       "tags": [
@@ -7135,6 +7135,32 @@
         "アマゴ",
         "イワナ",
         "オオサンショウウオ"
+      ],
+      "visited": false,
+      "tags": [
+        "rain"
+      ],
+      "tier": "マニア"
+    },
+    {
+      "name": "広島市水産振興センター 魚と漁業の資料展示室",
+      "pref": "広島県",
+      "lat": 34.3623,
+      "lng": 132.3807,
+      "url": "https://www.haff.city.hiroshima.jp/info/suisansc/",
+      "fee": "無料",
+      "child": "無料",
+      "closed": "土曜・日曜（第3日曜を除く）・祝日・振替休日・12/29〜1/3・8/6",
+      "comment": "広島市西区の商工センターにある水産振興センター内の無料展示室。第一展示室は瀬戸内海・広島湾の海の魚と広島かきの養殖、第二展示室は太田川の淡水魚と世界の貝。牡蠣養殖の解説が詳しい。",
+      "search_animals": [
+        "マダイ",
+        "メバル",
+        "マコガレイ",
+        "アイナメ",
+        "オイカワ",
+        "カワムツ",
+        "ヤマメ",
+        "スッポン"
       ],
       "visited": false,
       "tags": [
