@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>4期生 キラボシカード図鑑｜おさかなスクール</title>
+<meta name="description" content="おさかなスクール4期生（2025年7月〜8月）。おさかなスクール初のリアル開催。アドベンチャーワールドの全面協力のもと、島根・愛媛・石垣島をはじめ全国から34名の小学生が集まりました。この夏の自由研究をまとめた「キラボシカード図">
+<meta name="theme-color" content="#1ccee1">
+<meta name="robots" content="noindex,nofollow">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C3DJNZQN"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-J4C3DJNZQN");</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chango&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+<style>/* おさかなスクール：甲子園ページ（koshien.html）と同じ配色・書体。水色の地に白い島を浮かべる */
+:root{
+  --ground:#e4ffff; --surface:#ffffff; --surface-2:#f2ffff;
+  --ink:#2e5174; --ink-soft:#5c7b99;
+  --aqua:#1ccee1; --aqua-pale:#cdf3f3; --aqua-line:#9bdbdb;
+  --navy:#0c44ad; --navy-deep:#204872; --coral:#ff6b8b; --gold:#f5b731;
+  --btn-text:#ffffff; --shadow:0 4px 0 rgba(46,81,116,.10);
+  --lb-bg:rgba(6,32,51,.92);
+  --f-body:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
+  --f-num:"Chango","Zen Maru Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#062033; --surface:#0d3048; --surface-2:#0a2a40;
+    --ink:#dff4fb; --ink-soft:#94b8cd;
+    --aqua:#3fdcec; --aqua-pale:#12415e; --aqua-line:#1d5a7c;
+    --navy:#2b7fd4; --navy-deep:#8fd3e8; --coral:#ff8fa8; --gold:#ffc94d;
+    --btn-text:#062033; --shadow:0 4px 0 rgba(0,0,0,.25); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#062033; --surface:#0d3048; --surface-2:#0a2a40;
+  --ink:#dff4fb; --ink-soft:#94b8cd;
+  --aqua:#3fdcec; --aqua-pale:#12415e; --aqua-line:#1d5a7c;
+  --navy:#2b7fd4; --navy-deep:#8fd3e8; --coral:#ff8fa8; --gold:#ffc94d;
+  --btn-text:#062033; --shadow:0 4px 0 rgba(0,0,0,.25); color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-body);font-weight:700;font-size:16px;line-height:1.9;word-break:auto-phrase;text-wrap:pretty}
+p,li,td,th,dd,figcaption,blockquote{word-break:auto-phrase}
+h1,h2,h3{text-wrap:balance}
+a{color:inherit;overflow-wrap:anywhere}
+img{display:block;max-width:100%;height:auto}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+.narrow{max-width:900px}
+.ph{display:inline-block;max-width:100%}
+
+/* 上の帯 */
+.bar{background:var(--surface);border-bottom:3px solid var(--aqua-line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.bar-in{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px}
+.brand{font-weight:900;font-size:18px;text-decoration:none;color:var(--ink);letter-spacing:.04em}
+.sup{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--ink-soft);letter-spacing:.06em}
+.sup img{height:16px;width:auto}
+:root[data-theme="dark"] .sup img{filter:brightness(1.9)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sup img{filter:brightness(1.9)}}
+
+/* トップのヒーロー */
+.hero{background:radial-gradient(120% 70% at 50% 0%,var(--aqua-pale) 0%,var(--ground) 72%);padding-block:44px 10px;text-align:center}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.12em;color:var(--ink-soft)}
+.htitle{margin:6px 0 0;font-size:clamp(38px,8vw,68px);line-height:1.2;font-weight:900;letter-spacing:.04em}
+.k-sub{margin:14px auto 0;font-size:clamp(17px,3.4vw,24px);line-height:1.6;font-weight:900}
+.mark{background:linear-gradient(transparent 64%,var(--aqua-pale) 64%);padding:0 .08em}
+.hero-photo{margin:30px 0 0;border-radius:20px;overflow:hidden;box-shadow:0 8px 0 rgba(46,81,116,.08)}
+.hero-photo img{width:100%;aspect-ratio:16/8;object-fit:cover}
+.hero-cap{font-size:12.5px;color:var(--ink-soft);font-weight:500;margin:10px 0 0}
+.facts{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:12px;grid-template-columns:repeat(4,1fr)}
+.facts li{background:var(--surface);border:3px solid var(--aqua-line);border-radius:18px;padding:18px 10px;min-width:0}
+.facts .big{display:block;font-family:var(--f-num);font-weight:400;font-size:clamp(24px,4vw,34px);line-height:1.2;color:var(--navy);font-variant-numeric:tabular-nums;white-space:nowrap}
+.facts .unit{font-family:var(--f-body);font-weight:900;font-size:.45em;margin-left:2px}
+.facts .label{display:block;font-size:12.5px;margin-top:8px;line-height:1.6}
+.facts .hi{border-color:var(--aqua)}
+.facts .hi .big{color:var(--coral)}
+@media (max-width:760px){.facts{grid-template-columns:repeat(2,1fr)}}
+
+/* セクション */
+.sec{background:var(--surface);padding-block:8px 64px}
+.sec.alt{background:var(--ground)}
+.sec + .sec{border-top:0}
+.h2{text-align:center;margin:56px 0 8px;font-size:clamp(22px,4vw,32px);line-height:1.5;font-weight:900}
+.h2-en{display:block;font-family:var(--f-num);font-weight:400;font-size:12px;letter-spacing:.2em;color:var(--aqua);margin-bottom:6px}
+.h2::after{content:"";display:block;width:56px;height:5px;border-radius:99px;background:var(--aqua);margin:16px auto 0}
+.h3{margin:40px 0 14px;font-size:18px;font-weight:900;display:flex;align-items:center;gap:10px}
+.h3::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--aqua);flex:none}
+.lead{text-align:center;margin:24px auto 0;font-weight:500;line-height:2.1}
+.hint{text-align:center;margin:6px 0 0;font-size:14px;color:var(--ink-soft);font-weight:500}
+.count{text-align:center;margin:18px 0 0;font-size:15px}
+.count b{font-family:var(--f-num);font-weight:400;font-size:30px;color:var(--coral);margin-right:4px}
+
+/* 3つの力 */
+.pillars{list-style:none;margin:34px 0 0;padding:0;display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
+.pillars li{background:var(--surface-2);border-radius:18px;padding:24px 22px;border-top:6px solid var(--aqua);min-width:0}
+.pk{display:inline-block;font-size:13px;background:var(--aqua);color:var(--btn-text);border-radius:99px;padding:3px 14px;margin-bottom:10px}
+.pillars h3{margin:0 0 8px;font-size:16.5px;line-height:1.6;font-weight:900}
+.pillars p{margin:0;font-size:14px;font-weight:500;line-height:1.95}
+@media (max-width:760px){.pillars{grid-template-columns:1fr}}
+.courses{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 0}
+.courses > div{border:3px dashed var(--aqua-line);border-radius:18px;padding:18px 20px;min-width:0}
+.courses p{margin:0;font-size:14px;font-weight:500;line-height:1.9}
+.courses .ck{font-weight:900;font-size:16px;margin-bottom:4px;color:var(--navy)}
+@media (max-width:600px){.courses{grid-template-columns:1fr}}
+
+/* これまでのスクール */
+.timeline{list-style:none;margin:36px 0 0;padding:0;display:grid;gap:18px;grid-template-columns:repeat(2,1fr)}
+.tcard a{display:grid;grid-template-columns:42% 1fr;height:100%;background:var(--surface);border-radius:20px;overflow:hidden;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .2s}
+.tcard a:hover{transform:translateY(-3px)}
+.tcard a:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+.tthumb{background:var(--aqua-pale)}
+.tthumb img{width:100%;height:100%;object-fit:cover;aspect-ratio:1/1}
+.tbody{padding:18px 18px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.tno{margin:0;font-family:var(--f-num);font-weight:400;color:var(--aqua);font-size:15px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.tno span{font-family:var(--f-body);font-weight:700;color:var(--ink-soft);font-size:12px}
+.tbody h3{margin:0;font-size:19px;line-height:1.45;font-weight:900}
+.tmeta{margin:0;font-size:12.5px;color:var(--ink-soft);font-weight:500;line-height:1.7}
+.tcollab{margin:0;font-size:13px;line-height:1.6}
+.tcollab span{display:inline-block;font-size:11px;background:var(--aqua-pale);border-radius:99px;padding:1px 10px;margin-right:6px}
+.tgo{margin-top:auto;padding-top:6px;font-size:13.5px;color:var(--navy);font-weight:900}
+.arrow{font-family:var(--f-num);font-weight:400;font-size:12px;margin-left:8px}
+@media (max-width:860px){.timeline{grid-template-columns:1fr}}
+@media (max-width:420px){.tcard a{grid-template-columns:38% 1fr}.tbody h3{font-size:17px}}
+
+/* パートナー */
+.partners{list-style:none;margin:0;padding:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.partners li{display:flex;flex-direction:column;background:var(--surface-2);border:2px solid var(--aqua-line);border-radius:16px;overflow:hidden}
+.pmark{background:#ffffff;display:flex;align-items:center;justify-content:center;padding:14px 16px;height:86px;border-bottom:2px solid var(--aqua-line)}
+.pmark img{max-height:46px;max-width:100%;width:auto;object-fit:contain}
+.pname{font-weight:900;font-size:16px;line-height:1.45;text-align:center;color:#2e5174}
+.pbody{padding:12px 16px 14px;min-width:0}
+.pwhen{margin:0;font-size:12px;color:var(--ink-soft);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pwhen span{background:var(--aqua);color:var(--btn-text);border-radius:99px;padding:0 10px;font-weight:900}
+.pname2{margin:4px 0 0;font-weight:900;font-size:14px}
+.prole{margin:4px 0 0;font-size:13.5px;font-weight:500;line-height:1.75}
+.experts{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.experts li{background:var(--surface-2);border:2px solid var(--aqua-line);border-radius:99px;padding:6px 18px;font-size:13px;font-weight:500}
+.experts b{font-weight:900;margin-right:8px}
+.koshien-link,.yt{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:30px 0 0;background:var(--surface-2);border:3px solid var(--gold);border-radius:18px;padding:18px 22px;text-decoration:none;color:var(--ink)}
+.koshien-link:hover,.yt:hover{transform:translateY(-2px)}
+.kl-k,.yt-k{background:var(--gold);color:#3a2a00;border-radius:99px;padding:3px 14px;font-size:12px;font-weight:900;flex:none}
+.kl-t{font-weight:900;flex:1 1 16em;min-width:0}
+.yt{border-color:var(--coral)}
+.yt-k{background:var(--coral);color:#ffffff}
+.yt span:nth-child(2){flex:1 1 16em;font-weight:900;min-width:0}
+
+/* 声 */
+.quotes{display:flex;gap:16px;margin:34px 0 0;padding:4px 4px 16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-color:var(--aqua-line) transparent}
+blockquote{margin:0;background:var(--surface-2);border-radius:20px;padding:26px 24px;font-weight:500;line-height:2;font-size:14.5px;flex:0 0 min(380px,84%);scroll-snap-align:start}
+.sec.alt blockquote{background:var(--surface)}
+blockquote p{margin:0}
+blockquote .qh{font-weight:900;font-size:16px;line-height:1.6;margin-bottom:10px;color:var(--navy)}
+blockquote .qh::before{content:"“";font-family:var(--f-num);color:var(--aqua);font-size:34px;line-height:1;display:block}
+blockquote footer{margin-top:14px;font-size:12.5px;color:var(--ink-soft);font-weight:700}
+.swipe-hint{text-align:center;font-size:12.5px;color:var(--ink-soft);margin:2px 0 0}
+
+/* メッセージ */
+.voice{background:var(--surface-2);border-radius:22px;padding:32px 30px;margin:32px 0 0;border-left:8px solid var(--aqua)}
+.voice p{margin:0 0 1em;font-weight:500;line-height:2.1}
+.sign{display:flex;align-items:center;justify-content:flex-end;gap:14px;margin-top:18px;font-size:15px;font-weight:900}
+.sign img{width:220px;margin-right:-62px;clip-path:polygon(0 0,100% 0,100% 56%,61% 56%,61% 100%,0 100%)}
+.role{display:block;font-size:12px;color:var(--ink-soft)}
+@media (max-width:520px){.voice{padding:26px 20px}.sign{justify-content:center;gap:4px}.sign img{width:170px;margin-right:-48px}}
+
+/* CTA */
+.cta-sec{background:var(--ground);padding-top:40px}
+.ctas{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cta{background:var(--surface);border-radius:24px;padding:34px 28px;text-align:center;border:3px solid var(--aqua);min-width:0}
+.cta h2{margin:0 0 10px;font-size:clamp(20px,3.2vw,25px);line-height:1.5;font-weight:900}
+.cta p{margin:0;font-weight:500;line-height:2;font-size:14.5px}
+.badge{display:inline-block;background:var(--gold);color:#3a2a00;border-radius:99px;padding:4px 18px;font-size:12.5px;font-weight:900;margin-bottom:12px}
+.badge.navy{background:var(--navy);color:var(--btn-text)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:22px 0 0}
+.k-btn{display:inline-flex;align-items:center;justify-content:center;background:var(--navy);color:var(--btn-text);text-decoration:none;border-radius:12px;padding:16px 26px;font-size:15.5px;font-weight:900;box-shadow:var(--shadow);min-height:60px;transition:transform .2s}
+.k-btn:hover{transform:translateY(-2px)}
+.k-btn:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+.k-btn.k-line{background:var(--aqua);color:#073042}
+.k-btn.ghost{background:transparent;color:var(--navy);border:3px solid var(--navy);box-shadow:none}
+@media (max-width:760px){.ctas{grid-template-columns:1fr}}
+.page-foot{padding-block:40px 56px;text-align:center;font-size:12.5px;color:var(--ink-soft);font-weight:500;line-height:2;background:var(--ground)}
+.page-foot p{margin:0}
+
+/* 各期ページ */
+.phero{background:radial-gradient(120% 80% at 20% 0%,var(--aqua-pale) 0%,var(--ground) 70%);padding-block:36px 26px}
+.phero-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:36px;align-items:center}
+.kv{border-radius:20px;overflow:hidden;box-shadow:0 8px 0 rgba(46,81,116,.08);background:var(--surface)}
+.kv img{width:100%}
+.kv.photo img{aspect-ratio:4/3;object-fit:cover}
+.phero-txt{min-width:0}
+.phero h1{margin:6px 0 0;font-size:clamp(28px,5vw,44px);line-height:1.35;font-weight:900}
+.plead{margin:14px 0 0;font-weight:500;line-height:2.05}
+.pfacts{margin:20px 0 0;display:grid;gap:8px}
+.pfacts div{display:grid;grid-template-columns:5.5em 1fr;gap:10px;align-items:baseline}
+.pfacts dt{font-size:12px;background:var(--surface);border:2px solid var(--aqua-line);border-radius:99px;text-align:center;padding:1px 0}
+.pfacts dd{margin:0;font-size:15px;min-width:0}
+@media (max-width:820px){.phero-in{grid-template-columns:1fr;gap:22px}.kv{max-width:520px;margin:0 auto;width:100%}}
+.shots{display:grid;gap:12px;margin:22px 0 0;grid-template-columns:repeat(3,1fr)}
+.shots.n1{grid-template-columns:1fr;max-width:720px;margin-inline:auto}
+.shots.n2{grid-template-columns:1fr 1fr}
+.shots img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;border-radius:14px}
+@media (max-width:600px){.shots,.shots.n2{grid-template-columns:1fr 1fr}}
+
+.works{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.works.wide{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.work{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;width:100%;height:100%;background:var(--surface-2);border:2px solid var(--aqua-line);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--ink);transition:transform .2s,border-color .2s}
+.sec.alt .work{background:var(--surface)}
+.work:hover{transform:translateY(-3px);border-color:var(--aqua)}
+.work:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.work img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#ffffff}
+.works.wide .work img{aspect-ratio:auto;object-fit:contain}
+.wname{display:block;padding:8px 10px 2px;font-size:13px;line-height:1.5;font-weight:900;text-align:center}
+.wtag{display:block;margin:2px auto 10px;font-size:11px;background:var(--aqua);color:var(--btn-text);border-radius:99px;padding:0 10px}
+.is-pdf .wname{padding-bottom:0}
+@media (max-width:420px){.works{grid-template-columns:repeat(2,1fr);gap:10px}}
+
+.steps{list-style:none;margin:34px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
+.steps li{display:grid;grid-template-columns:auto 1fr;gap:16px;background:var(--surface-2);border-radius:18px;padding:20px 22px;align-items:start}
+.chip{background:var(--aqua);color:var(--btn-text);border-radius:999px;padding:3px 14px;font-size:12.5px;font-weight:900;white-space:nowrap;margin-top:3px}
+.steps li > div{min-width:0}
+.steps h3{margin:0;font-size:17px;line-height:1.55;font-weight:900}
+.steps p{margin:4px 0 0;font-size:14.5px;font-weight:500;line-height:1.95}
+@media (max-width:520px){.steps li{grid-template-columns:1fr;gap:8px}.chip{justify-self:start}}
+
+.guests{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.guests li{background:var(--surface);border-radius:14px;padding:14px 18px;border:2px solid var(--aqua-line);display:flex;flex-direction:column;gap:2px}
+.guests b{font-size:12.5px;color:var(--ink-soft)}
+.gname{font-size:15.5px;font-weight:900}
+.topic{align-self:flex-start;margin-top:6px;font-size:12px;background:var(--aqua-pale);border-radius:99px;padding:2px 12px}
+.slides{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+.slides .work img{aspect-ratio:auto}
+
+details.youkou{margin:36px 0 0;background:var(--surface);border:2px solid var(--aqua-line);border-radius:16px;overflow:hidden}
+details.youkou summary{cursor:pointer;padding:16px 22px;font-weight:900;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.youkou summary::after{content:"＋";color:var(--aqua);font-size:20px}
+details.youkou[open] summary::after{content:"－"}
+details.youkou summary:focus-visible{outline:3px solid var(--coral);outline-offset:-3px}
+.tbl{overflow-x:auto;padding:0 22px 18px}
+.tbl table{border-collapse:collapse;width:100%;font-size:14px}
+.tbl th{text-align:left;white-space:nowrap;padding:10px 16px 10px 0;color:var(--ink-soft);vertical-align:top;border-top:1px solid var(--aqua-line)}
+.tbl td{padding:10px 0;font-weight:500;border-top:1px solid var(--aqua-line)}
+
+.pnav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:44px 0 0}
+.pn{display:flex;flex-direction:column;background:var(--surface);border:2px solid var(--aqua-line);border-radius:16px;padding:14px 18px;text-decoration:none;font-weight:900;font-size:14.5px;line-height:1.6;min-width:0}
+.pn:hover{border-color:var(--aqua)}
+.pn.next{text-align:right}
+.pn-k{font-size:11.5px;color:var(--ink-soft)}
+.back{text-align:center;margin:20px 0 10px}
+@media (max-width:520px){.pnav{grid-template-columns:1fr}.pn.next{text-align:left}}
+
+/* 大きく見る */
+.lb{position:fixed;inset:0;z-index:20;background:var(--lb-bg);display:flex;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 50px) 56px calc(env(safe-area-inset-bottom,0px) + 30px)}
+.lb figure{margin:0;max-width:100%;max-height:100%;display:flex;flex-direction:column;align-items:center;gap:10px}
+.lb img{max-height:calc(100vh - 140px);width:auto;max-width:100%;border-radius:8px;background:#ffffff}
+.lb figcaption{color:#ffffff;font-weight:900;font-size:16px}
+.lb button{all:unset;cursor:pointer;position:absolute;color:#ffffff;font-size:38px;line-height:1;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.12)}
+.lb button:focus-visible{outline:3px solid var(--aqua)}
+.lb-x{top:calc(env(safe-area-inset-top,0px) + 8px);right:10px}
+.lb-p{left:6px;top:50%;transform:translateY(-50%)}
+.lb-n{right:6px;top:50%;transform:translateY(-50%)}
+@media (max-width:520px){.lb{padding-inline:8px}.lb-p,.lb-n{top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);transform:none}}
+
+.wave{display:block;width:100%;height:40px;fill:var(--surface)}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+.lb[hidden]{display:none}
+.partners{grid-template-columns:repeat(5,1fr)}
+@media (max-width:960px){.partners{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.partners{grid-template-columns:1fr}}
+.tcard.first{grid-column:1/-1}
+.tcard.first a{grid-template-columns:48% 1fr}
+.tcard.first .tthumb img{aspect-ratio:16/10}
+.tcard.first .tbody{padding:26px 28px;justify-content:center}
+.tcard.first .tbody h3{font-size:clamp(20px,3vw,28px)}
+@media (max-width:860px){.tcard.first a{grid-template-columns:1fr}.tcard.first .tthumb img{aspect-ratio:16/9}}
+
+/* ===== v2 ===== */
+/* 実績の数字 */
+.facts2{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:12px;margin:26px 0 0;text-align:center}
+.f-main{background:var(--navy);color:var(--btn-text);border-radius:22px;padding:22px 16px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.f-pre{font-size:14px;letter-spacing:.06em}
+.f-big{font-size:clamp(22px,3.4vw,30px);font-weight:900;line-height:1.3}
+.f-big b{font-family:var(--f-num);font-weight:400;font-size:2.4em;color:var(--gold);margin:0 .08em;line-height:1}
+.f-sub{font-size:13.5px}
+.f-side{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.f-side li{background:var(--surface);border:3px solid var(--aqua-line);border-radius:18px;padding:16px 8px;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.f-side li:first-child{border-color:var(--aqua)}
+.f-side li:first-child .big{color:var(--coral)}
+.f-side .big{display:block;font-family:var(--f-num);font-weight:400;font-size:clamp(22px,3.2vw,30px);line-height:1.2;color:var(--navy);white-space:nowrap}
+.f-side .big2{display:block;font-size:clamp(16px,2.2vw,20px);font-weight:900;line-height:1.35;color:var(--navy)}
+.f-side .unit{font-family:var(--f-body);font-weight:900;font-size:.45em;margin-left:2px}
+.f-side .label{display:block;font-size:12px;margin-top:6px;line-height:1.6}
+@media (max-width:820px){.facts2{grid-template-columns:1fr}}
+@media (max-width:480px){.f-side{grid-template-columns:1fr 1fr}.f-side li:last-child{grid-column:1/-1}}
+
+/* 流れる写真 */
+.marquee{overflow:hidden;padding:30px 0 4px}
+.marquee-track{display:flex;gap:12px;width:max-content;animation:slide 70s linear infinite}
+.marquee-track img{height:200px;width:auto;border-radius:14px;flex:none;object-fit:cover;background:var(--aqua-pale)}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (max-width:600px){.marquee-track img{height:140px}}
+@media (prefers-reduced-motion: reduce){.marquee-track{animation:none}.marquee{overflow-x:auto}}
+
+/* 期生バッジと季節 */
+.kibadge{display:inline-flex;align-items:baseline;gap:2px;background:var(--coral);color:#ffffff;border-radius:99px;padding:2px 14px 4px;font-weight:900;font-size:13px;line-height:1.2}
+.kibadge b{font-family:var(--f-num);font-weight:400;font-size:24px;line-height:1}
+.schip{display:inline-block;border-radius:99px;padding:2px 12px;font-size:12.5px;font-weight:900;line-height:1.6}
+.schip.sum{background:#ffe3a3;color:#7a4a00}
+.schip.win{background:#d6e4ff;color:#1b3f8f}
+.pbadges{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0}
+.pb-s{font-size:13px;color:var(--ink-soft)}
+
+/* これまでのスクール（年ごと） */
+.ylegend{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;justify-content:center;margin:18px 0 0;font-size:13px;font-weight:500}
+.ylegend .schip{margin-left:8px}
+.years{display:flex;flex-direction:column;gap:22px;margin:28px 0 0}
+.yrow{display:grid;grid-template-columns:90px 1fr;gap:16px;align-items:start}
+.ylabel{margin:8px 0 0;font-size:14px;color:var(--ink-soft);text-align:center;position:sticky;top:70px}
+.ylabel b{display:block;font-family:var(--f-num);font-weight:400;font-size:26px;color:var(--navy);line-height:1.1}
+.ycards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ycard{display:flex;flex-direction:column;background:var(--surface);border-radius:20px;overflow:hidden;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .2s;min-width:0}
+.ycard:hover{transform:translateY(-3px)}
+.ycard:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+.ythumb{position:relative;background:var(--aqua-pale);aspect-ratio:16/10;overflow:hidden}
+.ythumb img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.ythumb .kibadge{position:absolute;left:12px;top:12px;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+.ybody{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1;align-items:flex-start}
+.ybody h3{margin:2px 0 0;font-size:19px;line-height:1.45;font-weight:900}
+.ycard.next{background:var(--surface-2);border:3px dashed var(--aqua-line);box-shadow:none}
+.ycard.next .ythumb{display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,var(--aqua-pale) 0 14px,var(--surface-2) 14px 28px)}
+.ycard.next .kibadge{background:var(--navy)}
+.soon{font-family:var(--f-num);font-size:20px;color:var(--aqua);letter-spacing:.08em}
+@media (max-width:760px){.yrow{grid-template-columns:1fr;gap:8px}.ylabel{position:static;text-align:left;margin:0}.ylabel b{display:inline;margin-right:4px}}
+@media (max-width:560px){.ycards{grid-template-columns:1fr}}
+
+/* メインスポンサー */
+.main-sponsor{margin:30px 0 0;background:linear-gradient(135deg,var(--surface) 0%,var(--surface-2) 100%);border:4px solid var(--navy);border-radius:26px;padding:26px 30px 30px;position:relative}
+.ms-k{margin:0 0 14px;display:inline-block;background:var(--navy);color:var(--btn-text);font-family:var(--f-num);font-size:13px;letter-spacing:.16em;border-radius:99px;padding:4px 16px}
+.ms-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:30px;align-items:center}
+.ms-logo{background:#ffffff;border-radius:18px;display:flex;align-items:center;justify-content:center;padding:34px 26px;min-height:170px;border:2px solid var(--aqua-line)}
+.ms-logo img{width:100%;max-width:340px}
+.ms-txt h3{margin:0 0 8px;font-size:clamp(19px,2.6vw,24px);font-weight:900;line-height:1.45}
+.ms-txt p{margin:0;font-weight:500;line-height:2;font-size:15px}
+.ms-list{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.ms-list li{background:var(--aqua-pale);border-radius:99px;padding:3px 14px;font-size:13px}
+.ms-link{display:inline-block;margin-top:14px;font-weight:900;color:var(--navy);font-size:14.5px}
+@media (max-width:760px){.ms-in{grid-template-columns:1fr;gap:18px}.main-sponsor{padding:22px 18px 24px}.ms-logo{min-height:120px;padding:24px}}
+.partners.p5{grid-template-columns:repeat(5,1fr)}
+.partners.p4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:960px){.partners.p5,.partners.p4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.partners.p5,.partners.p4{grid-template-columns:1fr}}
+
+/* 作品一覧：アコーディオン */
+.gal{margin:26px 0 0}
+.gal .works{margin:0}
+.works.wide{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.works.wide .work img{aspect-ratio:16/9;object-fit:cover}
+.wtitle{display:block;padding:0 12px 10px;font-size:12px;line-height:1.55;text-align:center;font-weight:500;color:var(--ink-soft)}
+details.more{margin:16px 0 0}
+details.more > summary,details.kgroup > summary{cursor:pointer;list-style:none}
+details.more > summary::-webkit-details-marker,details.kgroup > summary::-webkit-details-marker{display:none}
+details.more > summary{display:flex;justify-content:center}
+details.more > summary span{display:inline-flex;align-items:center;gap:10px;background:var(--navy);color:var(--btn-text);border-radius:12px;padding:14px 26px;font-weight:900;min-height:56px}
+details.more > summary span::after{content:"＋";font-size:18px}
+details.more[open] > summary span::after{content:"－"}
+details.more[open] > summary{margin-bottom:16px}
+details.more > summary:focus-visible span{outline:3px solid var(--coral);outline-offset:3px}
+.kidx-k{text-align:center;margin:0 0 10px;font-size:13px;color:var(--ink-soft);font-weight:500}
+.kidx{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:0 0 18px;position:sticky;top:58px;z-index:3;background:var(--surface);padding:8px 0}
+.kchip{display:inline-flex;align-items:baseline;gap:3px;text-decoration:none;background:var(--surface-2);border:2px solid var(--aqua-line);border-radius:12px;padding:6px 12px;font-weight:900;font-size:16px;color:var(--ink);min-width:48px;justify-content:center}
+.kchip small{font-size:11px;color:var(--ink-soft);font-weight:700}
+.kchip:hover,.kchip:focus-visible{border-color:var(--aqua);outline:none}
+.kall{all:unset;cursor:pointer;background:var(--navy);color:var(--btn-text);border-radius:12px;padding:6px 14px;font-weight:900;font-size:13.5px}
+.kall:focus-visible{outline:3px solid var(--coral)}
+details.kgroup{border:2px solid var(--aqua-line);border-radius:16px;background:var(--surface);margin:0 0 10px;overflow:hidden;scroll-margin-top:130px}
+details.kgroup > summary{display:flex;align-items:center;gap:12px;padding:14px 18px;font-weight:900}
+details.kgroup > summary::after{content:"＋";margin-left:auto;color:var(--aqua);font-size:20px}
+details.kgroup[open] > summary::after{content:"－"}
+details.kgroup > summary:focus-visible{outline:3px solid var(--coral);outline-offset:-3px}
+.kg-k{font-size:17px}
+.kg-n{font-size:12.5px;color:var(--ink-soft);background:var(--aqua-pale);border-radius:99px;padding:1px 10px}
+details.kgroup .works{padding:4px 16px 18px}
+
+/* ===== v3 ===== */
+.f-big b{font-size:2.2em}
+.f-main{padding:26px 16px}
+.ycard{display:grid;grid-template-columns:minmax(0,44%) minmax(0,1fr)}
+.ythumb{aspect-ratio:1/1;background:#ffffff}
+.ythumb img{object-fit:contain;object-position:center}
+.ybody{padding:16px 16px 16px}
+.ybody h3{font-size:18px}
+.ycard.next .ythumb{flex-direction:column;gap:10px}
+@media (max-width:1000px) and (min-width:561px){.ycard{grid-template-columns:1fr}}
+@media (max-width:400px){.ycard{grid-template-columns:minmax(0,40%) minmax(0,1fr)}.ybody h3{font-size:16px}}
+
+/* ===== v4 各期ページ ===== */
+.phero2{background:radial-gradient(120% 70% at 50% 0%,var(--aqua-pale) 0%,var(--ground) 72%);padding-block:30px 10px;text-align:center}
+.phero2 .pbadges{justify-content:center}
+.phero2 h1{margin:10px 0 0;font-size:clamp(28px,5vw,46px);line-height:1.35;font-weight:900}
+.pmain{margin:22px 0 0;border-radius:22px;overflow:hidden;box-shadow:0 8px 0 rgba(46,81,116,.08);background:var(--surface)}
+.pmain.photo img{width:100%;aspect-ratio:16/8;object-fit:cover}
+.pmain.illust{background:linear-gradient(135deg,var(--aqua-pale),var(--surface-2));padding:20px}
+.pmain.illust img{max-height:560px;width:auto;margin:0 auto;border-radius:14px}
+.pinfo{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:28px;text-align:left;margin:24px 0 0;align-items:start}
+.pinfo .plead{margin:0}
+.pinfo .pfacts{margin:0;background:var(--surface);border-radius:18px;padding:16px 18px;border:2px solid var(--aqua-line)}
+@media (max-width:820px){.pinfo{grid-template-columns:1fr;gap:16px}.pmain.photo img{aspect-ratio:4/3}}
+
+/* 見出し横のかわちゃん */
+.h2-wrap{position:relative}
+.chara{position:absolute;width:118px;height:auto;top:22px;pointer-events:none}
+.chara.l{left:6%}
+.chara.r{right:6%}
+@media (max-width:760px){.chara{width:78px;top:30px}.chara.l{left:0}.chara.r{right:0}}
+.navwrap{position:relative}
+.chara.run{position:absolute;width:96px;right:12px;top:-6px}
+@media (max-width:600px){.chara.run{width:70px;top:-26px}}
+
+/* 作品：全員そのまま並べる */
+.kidx{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:0 0 16px;position:sticky;top:58px;z-index:3;background:var(--surface);padding:8px 0}
+.kidx-k{font-size:12.5px;color:var(--ink-soft);margin-right:4px;font-weight:700}
+.kchip{min-width:42px;padding:5px 10px;font-size:15px}
+.kgroup2{scroll-margin-top:130px;margin:0 0 22px}
+.kg-h{margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.kg-h::after{content:"";flex:1;height:2px;background:var(--aqua-line);border-radius:2px}
+.kg-k{font-size:17px;font-weight:900;background:var(--aqua-pale);border-radius:10px;padding:2px 14px}
+.kgroup2 .works{margin:0}
+.works{grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:12px}
+
+/* こんなことをしました：写真つき */
+.steps li{background:var(--surface)}
+.spics{display:grid;gap:10px;margin:12px 0 0;grid-template-columns:repeat(3,1fr)}
+.spics.n1{grid-template-columns:minmax(0,1fr);max-width:460px}
+.spics.n2{grid-template-columns:1fr 1fr}
+.spics img{width:100%;aspect-ratio:4/3;border-radius:12px;background:var(--surface-2)}
+.spics img.cover{object-fit:cover}
+.spics img.contain{object-fit:contain}
+.steps .yt{margin:14px 0 0}
+@media (max-width:520px){.spics{grid-template-columns:1fr 1fr}.spics.n1{max-width:none}}
+
+/* 保護者の声：流れる帯 */
+.voices{padding-bottom:40px}
+.vmarquee{overflow:hidden;padding:30px 0 10px}
+.vtrack{display:flex;gap:16px;width:max-content;animation:slide 110s linear infinite;align-items:stretch}
+.vmarquee:hover .vtrack,.vmarquee:focus-within .vtrack{animation-play-state:paused}
+.vtrack blockquote{flex:0 0 360px;scroll-snap-align:none}
+@media (max-width:600px){.vtrack blockquote{flex-basis:290px}}
+@media (prefers-reduced-motion: reduce){.vtrack{animation:none}.vmarquee{overflow-x:auto}}
+
+/* 前のスクール／次のスクール */
+.pnav2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:56px 0 0}
+.pv{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink);background:var(--surface);border-radius:20px;padding:12px;box-shadow:var(--shadow);border:3px solid var(--aqua);transition:transform .2s;min-width:0}
+.pv:hover{transform:translateY(-3px)}
+.pv:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+.pv.next{justify-content:flex-end;text-align:right}
+.pv.empty{visibility:hidden}
+.pv img{width:84px;height:84px;border-radius:12px;object-fit:cover;flex:none;background:#ffffff}
+.pv-t{display:flex;flex-direction:column;min-width:0;gap:2px}
+.pv-t small{font-size:12px;color:var(--ink-soft);font-weight:900}
+.pv-t b{font-size:15.5px;line-height:1.5}
+.pv-s{font-size:12px;color:var(--ink-soft)}
+.arw{flex:none;width:54px;height:54px;border-radius:50%;background:var(--navy);color:var(--btn-text);display:flex;align-items:center;justify-content:center}
+.arw svg{width:28px;height:28px}
+.pv.soon{border-style:dashed;background:var(--surface-2)}
+@media (max-width:600px){.pnav2{grid-template-columns:1fr}.pv img{width:64px;height:64px}.arw{width:46px;height:46px}}
+.chara.run{top:-74px;right:28px;width:88px}
+@media (max-width:600px){.chara.run{top:-60px;width:64px}}
+.sec.alt .main-sponsor{background:var(--surface)}
+.sec.alt .partners li,.sec.alt .experts li{background:var(--surface)}
+.back{display:flex;align-items:center;justify-content:center;gap:14px}
+.chara-inline{width:84px;height:auto}
+@media (max-width:420px){.chara-inline{width:60px}}
+.ytags{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0}
+.ytags .kibadge{padding:1px 12px 3px}
+.ytags .kibadge b{font-size:20px}
+.kibadge.navy{background:var(--navy)}
+.soon{font-size:clamp(12px,1.5vw,16px);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="page" lang="ja">
+<header class="bar"><div class="wrap bar-in"><a class="brand" href="index.html">おさかなスクール</a><span class="sup">supported by <img src="img/logo/furuno.png" alt="FURUNO"></span></div></header>
+<header class="phero2"><div class="wrap">
+  <p class="pbadges"><span class="kibadge inline"><b>4</b>期生</span><span class="schip sum">2025 夏</span><span class="pb-s">サマースクール</span></p>
+  <h1>キラボシカード図鑑</h1>
+  <div class="pmain photo"><img src="img/s4/kv.jpg" alt="4期生「キラボシカード図鑑」"></div>
+  <div class="pinfo"><p class="plead"><span class="ph">おさかなスクール初のリアル開催。</span><span class="ph">アドベンチャーワールドの全面協力のもと、島根・愛媛・石垣島をはじめ全国から34名の小学生が集まりました。</span><span class="ph">この夏の自由研究をまとめた「キラボシカード図鑑」を、センタードームのステージで一人ずつ発表しました。</span></p><dl class="pfacts"><div><dt>時期</dt><dd>2025年7月〜8月</dd></div><div><dt>参加</dt><dd>実習生 34名／研究生 約250名</dd></div><div><dt>かたち</dt><dd>オンライン講座＋アドベンチャーワールドで発表会</dd></div><div><dt>コラボ</dt><dd>アドベンチャーワールド</dd></div></dl></div>
+</div></header>
+<div class="marquee" aria-label="4期生のようす"><div class="marquee-track"><img src="img/s4/p0.jpg" alt="" loading="lazy"><img src="img/s4/p1.jpg" alt="" loading="lazy"><img src="img/s4/w000.jpg" alt="" loading="lazy"><img src="img/s4/w001.jpg" alt="" loading="lazy"><img src="img/s4/w002.jpg" alt="" loading="lazy"><img src="img/s4/w003.jpg" alt="" loading="lazy"><img src="img/s4/w004.jpg" alt="" loading="lazy"><img src="img/s4/w005.jpg" alt="" loading="lazy"><img src="img/s4/w006.jpg" alt="" loading="lazy"><img src="img/s4/w007.jpg" alt="" loading="lazy"><img src="img/s4/w008.jpg" alt="" loading="lazy"><img src="img/s4/w009.jpg" alt="" loading="lazy"><img src="img/s4/w010.jpg" alt="" loading="lazy"><img src="img/s4/w011.jpg" alt="" loading="lazy"><img src="img/s4/w012.jpg" alt="" loading="lazy"><img src="img/s4/w013.jpg" alt="" loading="lazy"><img src="img/s4/p0.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/p1.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w000.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w001.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w002.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w003.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w004.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w005.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w006.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w007.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w008.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w009.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w010.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w011.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w012.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s4/w013.jpg" alt="" aria-hidden="true" loading="lazy"></div></div>
+<section class="sec"><div class="wrap">
+<div class="h2-wrap"><img class="chara l" src="img/chara/draw.png" alt=""><h2 class="h2"><span class="h2-en">WORKS</span>みんなのキラボシカード図鑑</h2></div><p class="count"><b>34</b>作品</p><p class="hint">作品を押すと大きく見られます。左右の矢印で次の作品へ進めます。</p>
+<div class="gal" data-lb><ul class="works"><li><button class="work" type="button" data-full="img/s4/w000.jpg" data-name="あお"><img src="img/s4/w000.jpg" alt="あおさんの作品" loading="lazy"><span class="wname">あお</span></button></li><li><button class="work" type="button" data-full="img/s4/w001.jpg" data-name="あおちゃん"><img src="img/s4/w001.jpg" alt="あおちゃんさんの作品" loading="lazy"><span class="wname">あおちゃん</span></button></li><li><button class="work" type="button" data-full="img/s4/w002.jpg" data-name="いとちゃん"><img src="img/s4/w002.jpg" alt="いとちゃんさんの作品" loading="lazy"><span class="wname">いとちゃん</span></button></li><li><button class="work" type="button" data-full="img/s4/w003.jpg" data-name="いろは"><img src="img/s4/w003.jpg" alt="いろはさんの作品" loading="lazy"><span class="wname">いろは</span></button></li><li><button class="work" type="button" data-full="img/s4/w004.jpg" data-name="エイちゃん"><img src="img/s4/w004.jpg" alt="エイちゃんさんの作品" loading="lazy"><span class="wname">エイちゃん</span></button></li><li><button class="work" type="button" data-full="img/s4/w005.jpg" data-name="けんたろう"><img src="img/s4/w005.jpg" alt="けんたろうさんの作品" loading="lazy"><span class="wname">けんたろう</span></button></li><li><button class="work" type="button" data-full="img/s4/w006.jpg" data-name="こう"><img src="img/s4/w006.jpg" alt="こうさんの作品" loading="lazy"><span class="wname">こう</span></button></li><li><button class="work" type="button" data-full="img/s4/w007.jpg" data-name="こうた"><img src="img/s4/w007.jpg" alt="こうたさんの作品" loading="lazy"><span class="wname">こうた</span></button></li><li><button class="work" type="button" data-full="img/s4/w008.jpg" data-name="さやか"><img src="img/s4/w008.jpg" alt="さやかさんの作品" loading="lazy"><span class="wname">さやか</span></button></li><li><button class="work" type="button" data-full="img/s4/w009.jpg" data-name="しゅんのすけ"><img src="img/s4/w009.jpg" alt="しゅんのすけさんの作品" loading="lazy"><span class="wname">しゅんのすけ</span></button></li><li><button class="work" type="button" data-full="img/s4/w010.jpg" data-name="しょうご"><img src="img/s4/w010.jpg" alt="しょうごさんの作品" loading="lazy"><span class="wname">しょうご</span></button></li><li><button class="work" type="button" data-full="img/s4/w011.jpg" data-name="そうちゃん"><img src="img/s4/w011.jpg" alt="そうちゃんさんの作品" loading="lazy"><span class="wname">そうちゃん</span></button></li><li><button class="work" type="button" data-full="img/s4/w012.jpg" data-name="ダイオウイカおりと"><img src="img/s4/w012.jpg" alt="ダイオウイカおりとさんの作品" loading="lazy"><span class="wname">ダイオウイカおりと</span></button></li><li><button class="work" type="button" data-full="img/s4/w013.jpg" data-name="タイガ"><img src="img/s4/w013.jpg" alt="タイガさんの作品" loading="lazy"><span class="wname">タイガ</span></button></li><li><button class="work" type="button" data-full="img/s4/w014.jpg" data-name="たかちゃん"><img src="img/s4/w014.jpg" alt="たかちゃんさんの作品" loading="lazy"><span class="wname">たかちゃん</span></button></li><li><button class="work" type="button" data-full="img/s4/w015.jpg" data-name="ちなつ"><img src="img/s4/w015.jpg" alt="ちなつさんの作品" loading="lazy"><span class="wname">ちなつ</span></button></li><li><button class="work" type="button" data-full="img/s4/w016.jpg" data-name="なっちゃん"><img src="img/s4/w016.jpg" alt="なっちゃんさんの作品" loading="lazy"><span class="wname">なっちゃん</span></button></li><li><button class="work" type="button" data-full="img/s4/w017.jpg" data-name="にっちー"><img src="img/s4/w017.jpg" alt="にっちーさんの作品" loading="lazy"><span class="wname">にっちー</span></button></li><li><button class="work" type="button" data-full="img/s4/w018.jpg" data-name="はるたくん"><img src="img/s4/w018.jpg" alt="はるたくんさんの作品" loading="lazy"><span class="wname">はるたくん</span></button></li><li><button class="work" type="button" data-full="img/s4/w019.jpg" data-name="はるちゃん"><img src="img/s4/w019.jpg" alt="はるちゃんさんの作品" loading="lazy"><span class="wname">はるちゃん</span></button></li><li><button class="work" type="button" data-full="img/s4/w020.jpg" data-name="はるちゃん"><img src="img/s4/w020.jpg" alt="はるちゃんさんの作品" loading="lazy"><span class="wname">はるちゃん</span></button></li><li><button class="work" type="button" data-full="img/s4/w021.jpg" data-name="はるま"><img src="img/s4/w021.jpg" alt="はるまさんの作品" loading="lazy"><span class="wname">はるま</span></button></li><li><button class="work" type="button" data-full="img/s4/w022.jpg" data-name="ひなた"><img src="img/s4/w022.jpg" alt="ひなたさんの作品" loading="lazy"><span class="wname">ひなた</span></button></li><li><button class="work" type="button" data-full="img/s4/w023.jpg" data-name="ふぐちゃん"><img src="img/s4/w023.jpg" alt="ふぐちゃんさんの作品" loading="lazy"><span class="wname">ふぐちゃん</span></button></li><li><button class="work" type="button" data-full="img/s4/w024.jpg" data-name="むっちゃん"><img src="img/s4/w024.jpg" alt="むっちゃんさんの作品" loading="lazy"><span class="wname">むっちゃん</span></button></li><li><button class="work" type="button" data-full="img/s4/w025.jpg" data-name="むむつん"><img src="img/s4/w025.jpg" alt="むむつんさんの作品" loading="lazy"><span class="wname">むむつん</span></button></li><li><button class="work" type="button" data-full="img/s4/w026.jpg" data-name="めめちゃん"><img src="img/s4/w026.jpg" alt="めめちゃんさんの作品" loading="lazy"><span class="wname">めめちゃん</span></button></li><li><button class="work" type="button" data-full="img/s4/w027.jpg" data-name="ももちゃん"><img src="img/s4/w027.jpg" alt="ももちゃんさんの作品" loading="lazy"><span class="wname">ももちゃん</span></button></li><li><button class="work" type="button" data-full="img/s4/w028.jpg" data-name="もんがらこうたろう"><img src="img/s4/w028.jpg" alt="もんがらこうたろうさんの作品" loading="lazy"><span class="wname">もんがらこうたろう</span></button></li><li><button class="work" type="button" data-full="img/s4/w029.jpg" data-name="ゆうり"><img src="img/s4/w029.jpg" alt="ゆうりさんの作品" loading="lazy"><span class="wname">ゆうり</span></button></li><li><button class="work" type="button" data-full="img/s4/w030.jpg" data-name="ユズハ"><img src="img/s4/w030.jpg" alt="ユズハさんの作品" loading="lazy"><span class="wname">ユズハ</span></button></li><li><button class="work" type="button" data-full="img/s4/w031.jpg" data-name="ゆまおるか"><img src="img/s4/w031.jpg" alt="ゆまおるかさんの作品" loading="lazy"><span class="wname">ゆまおるか</span></button></li><li><button class="work" type="button" data-full="img/s4/w032.jpg" data-name="ようた"><img src="img/s4/w032.jpg" alt="ようたさんの作品" loading="lazy"><span class="wname">ようた</span></button></li><li><button class="work" type="button" data-full="img/s4/w033.jpg" data-name="わくじら"><img src="img/s4/w033.jpg" alt="わくじらさんの作品" loading="lazy"><span class="wname">わくじら</span></button></li></ul></div>
+</div></section>
+<section class="sec alt"><div class="wrap narrow"><div class="h2-wrap"><img class="chara r" src="img/chara/point.png" alt=""><h2 class="h2"><span class="h2-en">PROGRAM</span>こんなことをしました</h2></div>
+<ol class="steps"><li><span class="chip">第1回</span><div><h3>自己紹介・カードのテーマ発表</h3><p>オンラインで、自分がつくるカード図鑑のテーマを宣言。</p></div></li><li><span class="chip">第2回</span><div><h3>お絵描き・伝え方教室＋飼育員さんのトークショー</h3><p>アドベンチャーワールドの飼育員 北田さん・安達さんをゲストに迎えたオンライン講座。研究生も一緒に参加しました。</p><div class="spics n1"><img class="contain" src="img/s4/step1.jpg" alt="" loading="lazy"></div></div></li><li><span class="chip">第3回</span><div><h3>グループ交流会</h3><p>チームの仲間とカードを見せ合い、赤ペンかわちゃんのフィードバックで仕上げ。</p></div></li><li><span class="chip">第4回</span><div><h3>アドベンチャーワールドで特別講座・発表会</h3><p>8月23日、センタードームで発表会。たくさんの来場者に見守られながら、一人ひとりが自分の「好き」を伝えました。</p><div class="spics n3"><img class="cover" src="img/s4/kv.jpg" alt="" loading="lazy"><img class="cover" src="img/s4/p0.jpg" alt="" loading="lazy"><img class="cover" src="img/s4/p1.jpg" alt="" loading="lazy"></div><a class="yt" href="https://youtu.be/-SVpAp4aP7g" target="_blank" rel="noopener"><span class="yt-k">YouTube</span><span>おさかなサマースクール2025 特別授業 with アドベンチャーワールドを見る</span><span class="arrow">&gt;</span></a></div></li></ol></div></section>
+<section class="sec voices"><div class="wrap"><div class="h2-wrap"><img class="chara r" src="img/chara/yatta.png" alt=""><h2 class="h2"><span class="h2-en">VOICE</span>保護者のみなさんの声</h2></div></div><div class="vmarquee"><div class="vtrack"><blockquote><p class="qh">娘の“スキ”を再認識できた夏</p><p>娘がカード図鑑を作るために、図鑑や図書館の本で好きな魚を探し求め、調べている姿を見て、娘のスキという気持ちが深く大きいものだと再認識することができました。かわちゃんが仰っていた「いつか魚が好きではなくなってもいい。好きなものはたくさんあっていい。」というお言葉で、なんだか気持ちが軽くなりました。</p></blockquote><blockquote><p class="qh">息子を信じて任せてみよう！と思えた</p><p>ZOOMやグループチャットでは自分で文字を打ち、この文で良いかな？と確認しながら送っている姿をみて、ちゃんと相手の気持ちを考えたり相手の良いところ見つけられたんだな〜と驚かされました。発表ではただ読むだけでなく、聴いてくれる方に伝わる言い方や表現をしていて、私の不安だった気持ちを感動へと変えさせてくれました。</p></blockquote><blockquote><p class="qh">比べずに認められた我が子の成長</p><p>人前で話すことが本当に苦手な子が自らがんばると決めて本人なりに工夫して発表しようとしていて、嫌なことから逃げるのではなく少しずつやってみようという努力がみられました。一人一人の発表を見て、みんなちがうけど、1人1人が素晴らしい、わが子のありのままでこの子なりの努力がすばらしいんだと感じることができました。</p></blockquote><blockquote><p class="qh">親子で最高の夏の思い出ができた！</p><p>初めてのzoom、詳しくない知識で大丈夫なのかと思いながらの参加でしたが、いつでも前向きに一生懸命取り組むことができました。同じチームの仲間たちとオンラインでも現地でも話せたことがとても嬉しかったようです。大きな舞台での発表も娘にとって大きな財産になりました。</p></blockquote><blockquote><p class="qh">大舞台で得た自信と成長。環境への意識も芽生えた</p><p>当日の舞台の様子をみて少し怯んでおりましたが、かわちゃんのトークショーや周りの子達との交流で緊張もほぐれ、大舞台を乗り越えたという自信にも繋がってる様子でした。最近、休日のお出かけに「ペットボトルは嫌」という発言が増え、聞いてみたところ“ゴミ軽減”の意識からでした。</p></blockquote><blockquote aria-hidden="true"><p class="qh">娘の“スキ”を再認識できた夏</p><p>娘がカード図鑑を作るために、図鑑や図書館の本で好きな魚を探し求め、調べている姿を見て、娘のスキという気持ちが深く大きいものだと再認識することができました。かわちゃんが仰っていた「いつか魚が好きではなくなってもいい。好きなものはたくさんあっていい。」というお言葉で、なんだか気持ちが軽くなりました。</p></blockquote><blockquote aria-hidden="true"><p class="qh">息子を信じて任せてみよう！と思えた</p><p>ZOOMやグループチャットでは自分で文字を打ち、この文で良いかな？と確認しながら送っている姿をみて、ちゃんと相手の気持ちを考えたり相手の良いところ見つけられたんだな〜と驚かされました。発表ではただ読むだけでなく、聴いてくれる方に伝わる言い方や表現をしていて、私の不安だった気持ちを感動へと変えさせてくれました。</p></blockquote><blockquote aria-hidden="true"><p class="qh">比べずに認められた我が子の成長</p><p>人前で話すことが本当に苦手な子が自らがんばると決めて本人なりに工夫して発表しようとしていて、嫌なことから逃げるのではなく少しずつやってみようという努力がみられました。一人一人の発表を見て、みんなちがうけど、1人1人が素晴らしい、わが子のありのままでこの子なりの努力がすばらしいんだと感じることができました。</p></blockquote><blockquote aria-hidden="true"><p class="qh">親子で最高の夏の思い出ができた！</p><p>初めてのzoom、詳しくない知識で大丈夫なのかと思いながらの参加でしたが、いつでも前向きに一生懸命取り組むことができました。同じチームの仲間たちとオンラインでも現地でも話せたことがとても嬉しかったようです。大きな舞台での発表も娘にとって大きな財産になりました。</p></blockquote><blockquote aria-hidden="true"><p class="qh">大舞台で得た自信と成長。環境への意識も芽生えた</p><p>当日の舞台の様子をみて少し怯んでおりましたが、かわちゃんのトークショーや周りの子達との交流で緊張もほぐれ、大舞台を乗り越えたという自信にも繋がってる様子でした。最近、休日のお出かけに「ペットボトルは嫌」という発言が増え、聞いてみたところ“ゴミ軽減”の意識からでした。</p></blockquote></div></div><p class="swipe-hint">カーソルを合わせると止まります</p></section>
+<div class="wrap narrow"><details class="youkou"><summary>このときの募集要項</summary><div class="tbl"><table><tr><th>対象</th><td>実習生：さかなや生き物が好きな小学生30名（15名×2クラス・抽選）／研究生：年齢・居住地問わず</td></tr><tr><th>参加費</th><td>実習生9,900円／研究生2,200円</td></tr><tr><th>日程</th><td>第1回 7/31・第2回 8/6・第3回 8/14（オンライン）／第4回 8/23 アドベンチャーワールド</td></tr></table></div></details></div>
+<div class="wrap navwrap"><nav class="pnav2" aria-label="ほかのスクール"><a class="pv prev" href="w3.html"><span class="arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><img src="img/card/w3.jpg" alt="" loading="lazy"><span class="pv-t"><small>前のスクール</small><b>3期生　深海特集</b><span class="pv-s">2024 冬</span></span></a><a class="pv next" href="w5.html"><img src="img/card/w5.jpg" alt="" loading="lazy"><span class="pv-t"><small>次のスクール</small><b>5期生　サメ博士になろう！</b><span class="pv-s">2025 冬</span></span><span class="arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 4 8 8-8 8" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></nav><p class="back"><img class="chara-inline" src="img/chara/run.png" alt=""><a class="k-btn ghost" href="index.html">すべてのスクールを見る<span class="arrow">&gt;</span></a></p></div>
+<section class="sec cta-sec"><div class="wrap">
+<div class="ctas">
+  <div class="cta"><span class="badge">参加したい方へ</span><h2>次のスクールのお知らせ</h2>
+    <p>募集の開始は、さかなのおにいさん かわちゃんの公式LINEでいちばんにお知らせしています。</p>
+    <div class="btns"><a class="k-btn k-line" href="https://lin.ee/qMPcnPq" target="_blank" rel="noopener">公式LINEに登録する<span class="arrow">&gt;</span></a></div></div>
+  <div class="cta"><span class="badge navy">企業・団体のみなさまへ</span><h2>協賛・コラボのご相談</h2>
+    <p>講座の講師、作品の審査や賞のご提供、発表会の会場、協賛金など、関わり方はさまざまです。</p>
+    <div class="btns"><a class="k-btn" href="https://sakana-bro.com/contact/" target="_blank" rel="noopener">お問い合わせ・ご相談<span class="arrow">&gt;</span></a></div></div>
+</div></div></section>
+<footer class="page-foot"><div class="wrap"><p>主催：株式会社やさしいうみ（さかなのおにいさん かわちゃん）</p><p>おさかなスクールは FURUNO のサポートを受けて開催しています。</p></div></footer>
+</div><div class="lb" id="lb" hidden><button class="lb-x" type="button" aria-label="閉じる">×</button><button class="lb-p" type="button" aria-label="前へ">‹</button><figure><img alt=""><figcaption></figcaption></figure><button class="lb-n" type="button" aria-label="次へ">›</button></div>
+<script>(function(){
+  /* ほかのページから来たときは、いつも一番上から見せる */
+  try{ if('scrollRestoration' in history){ history.scrollRestoration='manual'; } }catch(e){}
+  function toTop(){ if(!location.hash){ window.scrollTo(0,0); } }
+  toTop(); window.addEventListener('load',toTop); window.addEventListener('pageshow',toTop);
+})();
+(function(){
+  var lb=document.getElementById('lb'); if(!lb) return;
+  var im=lb.querySelector('img'), cap=lb.querySelector('figcaption'), list=[], i=0, last=null;
+  function show(){ var b=list[i]; im.src=b.getAttribute('data-full'); im.alt=b.getAttribute('data-name')||''; cap.textContent=b.getAttribute('data-name')||''; }
+  function open(btn){ var g=btn.closest('[data-lb]')||btn.closest('ul'); list=[].slice.call(g.querySelectorAll('button.work')); i=list.indexOf(btn); last=btn; show(); lb.hidden=false; document.body.style.overflow='hidden'; lb.querySelector('.lb-x').focus(); }
+  function close(){ lb.hidden=true; document.body.style.overflow=''; im.removeAttribute('src'); if(last) last.focus(); }
+  function step(d){ i=(i+d+list.length)%list.length; show(); }
+  document.addEventListener('click',function(e){ var b=e.target.closest('button.work'); if(b){ open(b); } });
+  lb.querySelector('.lb-x').addEventListener('click',close);
+  lb.querySelector('.lb-p').addEventListener('click',function(){step(-1)});
+  lb.querySelector('.lb-n').addEventListener('click',function(){step(1)});
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown',function(e){ if(lb.hidden) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') step(-1); if(e.key==='ArrowRight') step(1); });
+  var x0=null; lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  lb.addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>50) step(dx<0?1:-1); x0=null; });
+  document.addEventListener('click',function(e){
+    var c=e.target.closest('.kchip'); if(c){ var d=document.getElementById(c.getAttribute('data-open')); if(d){ d.open=true; } }
+    var a=e.target.closest('.kall'); if(a){ var gs=a.closest('.gal').querySelectorAll('details.kgroup'); var openAll=a.textContent.indexOf('開く')>=0; gs.forEach(function(x){x.open=openAll}); a.textContent=openAll?'ぜんぶ閉じる':'ぜんぶ開く'; }
+  });
+})();
+</script>
+</body>
+</html>
