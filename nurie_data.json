@@ -1,9 +1,19 @@
 {
- "count": 182,
- "nextLive": "fvvXLAwfob0",
- "nextLiveDate": "2026-10-03T00:00:00+00:00",
- "nextLiveTitle": "ハロウィンのさかな",
+ "count": 183,
+ "nextLive": "AtAwDHkWW68",
+ "nextLiveDate": "2026-10-10T00:00:00+00:00",
+ "nextLiveTitle": "おさかな運動会",
  "items": [
+  {
+   "id": "1SfEnYRI4qhZXPE7ZwyFfuFoD7v3gqraq",
+   "title": "カレンダー ハロウィン",
+   "date": "2026年10月",
+   "iso": "2026-10-01",
+   "cat": "weekly",
+   "thumb": "https://drive.google.com/thumbnail?id=1SfEnYRI4qhZXPE7ZwyFfuFoD7v3gqraq&sz=w800",
+   "dl": "https://drive.google.com/uc?export=download&id=1SfEnYRI4qhZXPE7ZwyFfuFoD7v3gqraq",
+   "video": "fvvXLAwfob0"
+  },
   {
    "id": "1xYpCansU9BmR4bGV0H29Lq_20tMI75X9",
    "title": "長生きの魚",
