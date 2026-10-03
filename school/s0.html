@@ -472,6 +472,17 @@ details.kgroup .works{padding:4px 16px 18px}
 .ytags .kibadge b{font-size:20px}
 .kibadge.navy{background:var(--navy)}
 .soon{font-size:clamp(12px,1.5vw,16px);white-space:nowrap}
+/* タイトル左右のぷにうお・supported by */
+.htitle-row{display:flex;align-items:center;justify-content:center;gap:clamp(8px,2vw,24px);margin-top:4px}
+.htitle-row .htitle{margin:0}
+.puni{width:clamp(56px,10vw,120px);height:auto;flex:none}
+.puni.l{transform:rotate(-8deg)}
+.puni.r{transform:rotate(8deg)}
+.supported{display:flex;align-items:center;justify-content:center;gap:10px;margin:8px 0 0;font-size:13px;letter-spacing:.06em;color:var(--ink-soft)}
+.supported img{height:20px;width:auto}
+:root[data-theme="dark"] .supported img{filter:brightness(1.9)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .supported img{filter:brightness(1.9)}}
+@media (max-width:420px){.htitle{font-size:32px}.puni{width:48px}}
 </style>
 </head>
 <body>

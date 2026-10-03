@@ -472,6 +472,17 @@ details.kgroup .works{padding:4px 16px 18px}
 .ytags .kibadge b{font-size:20px}
 .kibadge.navy{background:var(--navy)}
 .soon{font-size:clamp(12px,1.5vw,16px);white-space:nowrap}
+/* タイトル左右のぷにうお・supported by */
+.htitle-row{display:flex;align-items:center;justify-content:center;gap:clamp(8px,2vw,24px);margin-top:4px}
+.htitle-row .htitle{margin:0}
+.puni{width:clamp(56px,10vw,120px);height:auto;flex:none}
+.puni.l{transform:rotate(-8deg)}
+.puni.r{transform:rotate(8deg)}
+.supported{display:flex;align-items:center;justify-content:center;gap:10px;margin:8px 0 0;font-size:13px;letter-spacing:.06em;color:var(--ink-soft)}
+.supported img{height:20px;width:auto}
+:root[data-theme="dark"] .supported img{filter:brightness(1.9)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .supported img{filter:brightness(1.9)}}
+@media (max-width:420px){.htitle{font-size:32px}.puni{width:48px}}
 </style>
 </head>
 <body>
@@ -482,7 +493,7 @@ details.kgroup .works{padding:4px 16px 18px}
   <p class="pbadges"><span class="kibadge inline"><b>6</b>期生</span><span class="schip sum">2026 夏</span><span class="pb-s">サマースクール</span></p>
   <h1><span class="ph">クイズ図鑑と</span><span class="ph">おさかな甲子園</span></h1>
   <div class="pmain photo"><img src="img/s6/kv.jpg" alt="6期生「クイズ図鑑とおさかな甲子園」"></div>
-  <div class="pinfo"><p class="plead"><span class="ph">神戸須磨シーワールドをコラボ水族館に迎えた夏。</span><span class="ph">オルカトレーナーさんの特別講座で学び、一人ひとりがクイズ図鑑をつくりました。</span><span class="ph">最終回は須磨シーワールドで発表会を開き、同じ日に「おさかな甲子園」第0回を同時開催しました。</span></p><dl class="pfacts"><div><dt>時期</dt><dd>2026年7月〜9月</dd></div><div><dt>参加</dt><dd>実習生 36名</dd></div><div><dt>かたち</dt><dd>オンライン講座＋須磨シーワールドで発表会</dd></div><div><dt>コラボ</dt><dd>神戸須磨シーワールド</dd></div></dl></div>
+  <div class="pinfo"><p class="plead"><span class="ph">神戸須磨シーワールドをコラボ水族館に迎えた夏。</span><span class="ph">オルカトレーナーさんの特別講座で学び、一人ひとりがクイズ図鑑をつくりました。</span><span class="ph">最終回は須磨シーワールドで発表会を開き、同じ日に「おさかな甲子園」第0回を同時開催しました。</span></p><dl class="pfacts"><div><dt>時期</dt><dd>2026年7月〜9月</dd></div><div><dt>参加</dt><dd>実習生 36名／研究生 約150名</dd></div><div><dt>かたち</dt><dd>オンライン講座＋須磨シーワールドで発表会</dd></div><div><dt>コラボ</dt><dd>神戸須磨シーワールド</dd></div></dl></div>
 </div></header>
 <div class="marquee" aria-label="6期生のようす"><div class="marquee-track"><img src="img/s6/p0.jpg" alt="" loading="lazy"><img src="img/s6/p1.jpg" alt="" loading="lazy"><img src="img/s6/p2.jpg" alt="" loading="lazy"><img src="img/s6/p3.jpg" alt="" loading="lazy"><img src="img/s6/p4.jpg" alt="" loading="lazy"><img src="img/s6/p5.jpg" alt="" loading="lazy"><img src="img/s6/x0.jpg" alt="" loading="lazy"><img src="img/s6/x1.jpg" alt="" loading="lazy"><img src="img/s6/x2.jpg" alt="" loading="lazy"><img src="img/s6/x3.jpg" alt="" loading="lazy"><img src="img/s6/x4.jpg" alt="" loading="lazy"><img src="img/s6/x5.jpg" alt="" loading="lazy"><img src="img/s6/x6.jpg" alt="" loading="lazy"><img src="img/s6/x7.jpg" alt="" loading="lazy"><img src="img/s6/x8.jpg" alt="" loading="lazy"><img src="img/s6/w000.jpg" alt="" loading="lazy"><img src="img/s6/p0.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/p1.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/p2.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/p3.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/p4.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/p5.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/x0.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/x1.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/x2.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/x3.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/x4.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/x5.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/x6.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/x7.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/x8.jpg" alt="" aria-hidden="true" loading="lazy"><img src="img/s6/w000.jpg" alt="" aria-hidden="true" loading="lazy"></div></div>
 <div class="wrap"><a class="koshien-link" href="https://aquarium.yasasea.com/koshien.html" target="_blank" rel="noopener">

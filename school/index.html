@@ -472,6 +472,17 @@ details.kgroup .works{padding:4px 16px 18px}
 .ytags .kibadge b{font-size:20px}
 .kibadge.navy{background:var(--navy)}
 .soon{font-size:clamp(12px,1.5vw,16px);white-space:nowrap}
+/* タイトル左右のぷにうお・supported by */
+.htitle-row{display:flex;align-items:center;justify-content:center;gap:clamp(8px,2vw,24px);margin-top:4px}
+.htitle-row .htitle{margin:0}
+.puni{width:clamp(56px,10vw,120px);height:auto;flex:none}
+.puni.l{transform:rotate(-8deg)}
+.puni.r{transform:rotate(8deg)}
+.supported{display:flex;align-items:center;justify-content:center;gap:10px;margin:8px 0 0;font-size:13px;letter-spacing:.06em;color:var(--ink-soft)}
+.supported img{height:20px;width:auto}
+:root[data-theme="dark"] .supported img{filter:brightness(1.9)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .supported img{filter:brightness(1.9)}}
+@media (max-width:420px){.htitle{font-size:32px}.puni{width:48px}}
 </style>
 </head>
 <body>
@@ -480,7 +491,8 @@ details.kgroup .works{padding:4px 16px 18px}
 <header class="bar"><div class="wrap bar-in"><a class="brand" href="index.html">おさかなスクール</a><span class="sup">supported by <img src="img/logo/furuno.png" alt="FURUNO"></span></div></header>
 <header class="hero"><div class="wrap">
   <p class="eyebrow">さかなのおにいさん かわちゃん 主宰</p>
-  <h1 class="htitle">おさかなスクール</h1>
+  <div class="htitle-row"><img class="puni l" src="img/chara/puni_orca.png" alt=""><h1 class="htitle">おさかなスクール</h1><img class="puni r" src="img/chara/puni_shark.png" alt=""></div>
+  <p class="supported">supported by <img src="img/logo/furuno.png" alt="FURUNO"></p>
   <p class="k-sub">さかな好きの<span class="mark">「好き」を育てる</span>スクール</p>
   <div class="hero-photo"><img src="img/s4/kv.jpg" alt="アドベンチャーワールドで開いた発表会に集まった4期生と保護者のみなさん"></div>
   <p class="hero-cap">4期生の発表会／2025年8月 アドベンチャーワールド</p>
@@ -516,7 +528,7 @@ details.kgroup .works{padding:4px 16px 18px}
 <div class="years"><div class="yrow"><p class="ylabel"><b>2026</b>年</p><div class="ycards"><a class="ycard" href="s6.html">
   <div class="ythumb"><img src="img/card/s6.jpg" alt="6期生のイラスト" loading="lazy"></div>
   <div class="ybody"><p class="ytags"><span class="kibadge"><b>6</b>期生</span><span class="schip sum">2026 夏</span></p><h3>クイズ図鑑とおさかな甲子園</h3>
-  <p class="tmeta">2026年7月〜9月 ／ 36名（実習生）</p><p class="tcollab"><span>コラボ</span>神戸須磨シーワールド</p>
+  <p class="tmeta">2026年7月〜9月 ／ 36名（実習生）＋研究生 約150名</p><p class="tcollab"><span>コラボ</span>神戸須磨シーワールド</p>
   <span class="tgo">作品36点と記録を見る<span class="arrow">&gt;</span></span></div></a><a class="ycard next" href="https://lin.ee/qMPcnPq" target="_blank" rel="noopener">
   <div class="ythumb"><span class="soon">COMING SOON</span></div>
   <div class="ybody"><p class="ytags"><span class="kibadge navy"><b>7</b>期生</span><span class="schip win">2026 冬</span></p><h3>次のスクールを準備中</h3>
@@ -528,15 +540,15 @@ details.kgroup .works{padding:4px 16px 18px}
   <span class="tgo">作品34点と記録を見る<span class="arrow">&gt;</span></span></div></a><a class="ycard" href="w5.html">
   <div class="ythumb"><img src="img/card/w5.jpg" alt="5期生のイラスト" loading="lazy"></div>
   <div class="ybody"><p class="ytags"><span class="kibadge"><b>5</b>期生</span><span class="schip win">2025 冬</span></p><h3>サメ博士になろう！</h3>
-  <p class="tmeta">2025年12月〜2026年1月 ／ 144作品（サメ未来図鑑）</p><p class="tcollab"><span>コラボ</span>沖縄美ら海水族館</p>
+  <p class="tmeta">2025年12月〜2026年1月 ／ 約250名（年齢・居住地問わず）</p><p class="tcollab"><span>コラボ</span>沖縄美ら海水族館</p>
   <span class="tgo">作品144点と記録を見る<span class="arrow">&gt;</span></span></div></a></div></div><div class="yrow"><p class="ylabel"><b>2024</b>年</p><div class="ycards"><a class="ycard" href="s2.html">
   <div class="ythumb"><img src="img/card/s2.jpg" alt="2期生のイラスト" loading="lazy"></div>
   <div class="ybody"><p class="ytags"><span class="kibadge"><b>2</b>期生</span><span class="schip sum">2024 夏</span></p><h3>オリジナルクイズ図鑑</h3>
-  <p class="tmeta">2024年8月 ／ 30名（実習生）</p><p class="tcollab"><span>コラボ</span>átoa（神戸）</p>
+  <p class="tmeta">2024年8月 ／ 30名（実習生）＋研究生 約100名</p><p class="tcollab"><span>コラボ</span>átoa（神戸）</p>
   <span class="tgo">作品30点と記録を見る<span class="arrow">&gt;</span></span></div></a><a class="ycard" href="w3.html">
   <div class="ythumb"><img src="img/card/w3.jpg" alt="3期生のイラスト" loading="lazy"></div>
   <div class="ybody"><p class="ytags"><span class="kibadge"><b>3</b>期生</span><span class="schip win">2024 冬</span></p><h3>深海特集</h3>
-  <p class="tmeta">2024年12月〜2025年1月 ／ 100名超（子どもから大人まで）</p><p class="tcollab"><span>コラボ</span>竹島水族館</p>
+  <p class="tmeta">2024年12月〜2025年1月 ／ 約150名（子どもから大人まで）</p><p class="tcollab"><span>コラボ</span>竹島水族館</p>
   <span class="tgo">作品99点と記録を見る<span class="arrow">&gt;</span></span></div></a></div></div><div class="yrow"><p class="ylabel"><b>2023</b>年</p><div class="ycards"><a class="ycard" href="s0.html">
   <div class="ythumb"><img src="img/card/s0.jpg" alt="0期生のイラスト" loading="lazy"></div>
   <div class="ybody"><p class="ytags"><span class="kibadge"><b>0</b>期生</span><span class="schip sum">2023 夏</span></p><h3>自分だけの図鑑</h3>
@@ -544,7 +556,7 @@ details.kgroup .works{padding:4px 16px 18px}
   <span class="tgo">作品15点と記録を見る<span class="arrow">&gt;</span></span></div></a><a class="ycard" href="w1.html">
   <div class="ythumb"><img src="img/card/w1.jpg" alt="1期生のイラスト" loading="lazy"></div>
   <div class="ybody"><p class="ytags"><span class="kibadge"><b>1</b>期生</span><span class="schip win">2023 冬</span></p><h3>2024年のカレンダーづくり</h3>
-  <p class="tmeta">2023年12月〜2024年1月 ／ 31名（実習生）</p>
+  <p class="tmeta">2023年12月〜2024年1月 ／ 31名（実習生）＋研究生 約50名</p>
   <span class="tgo">作品31点と記録を見る<span class="arrow">&gt;</span></span></div></a></div></div></div>
 </div></section>
 <section class="sec voices"><div class="wrap"><div class="h2-wrap"><img class="chara r" src="img/chara/yatta.png" alt=""><h2 class="h2"><span class="h2-en">VOICE</span>参加した保護者のみなさんの声</h2></div></div><div class="vmarquee"><div class="vtrack"><blockquote><p class="qh">親も心の変化がありました</p><p>こういうことは苦手だろうな、という親の心配をとっぱらってくれるくらい、「好き」という気持ちはすごいんだなと感じました。伝えたい、好きだというパッションで堂々と元気に発表しきった息子の姿に感動しました。今回のサマースクールへの参加で、私の中で、心配ではなく、ただ応援するだけで大丈夫だという心の変化が大きくありました。</p><footer>2期生の保護者さま</footer></blockquote><blockquote><p class="qh">比べずに認められた我が子の成長</p><p>人前で話すことが本当に苦手な子が自らがんばると決めて本人なりに工夫して発表しようとしていて、嫌なことから逃げるのではなく少しずつやってみようという努力がみられました。一人一人の発表を見て、みんなちがうけど、1人1人が素晴らしい、わが子のありのままでこの子なりの努力がすばらしいんだと感じることができました。</p><footer>4期生の保護者さま</footer></blockquote><blockquote><p class="qh">本気だからの涙、そして成長</p><p>息子は挑戦を好みません。そんな息子もコンテストに向け頑張っていました。そして、入賞できず泣いてました。いつもだとテンションを上げて誤魔化しますが、今回は泣きました。それだけ、挑戦したことに向き合えたのだと思います。息子も「またやる！」と言ってます。悔しい気持ちをまともに感じることができた、よい経験になりました。</p><footer>3期生の保護者さま</footer></blockquote><blockquote><p class="qh">大人の感覚を押し付けていたと気づけた</p><p>図鑑の描き方で、はみ出さないでねと声かけしていたのですが、みなさん自由に描いているのを見て、自分が大人の感覚を押し付けていたなと反省しました。枠に収まらなくても伝えたいことがあるなら描いてもいいんだよと、これからも見守っていきたいです。</p><footer>5期生の保護者さま</footer></blockquote><blockquote><p class="qh">大舞台で得た自信と成長。環境への意識も芽生えた</p><p>当日の舞台の様子をみて少し怯んでおりましたが、かわちゃんのトークショーや周りの子達との交流で緊張もほぐれ、大舞台を乗り越えたという自信にも繋がってる様子でした。最近、休日のお出かけに「ペットボトルは嫌」という発言が増え、聞いてみたところ“ゴミ軽減”の意識からでした。</p><footer>4期生の保護者さま</footer></blockquote><blockquote><p class="qh">さかな好きな仲間ができた！</p><p>魚が好きな友達がいなくて、ずっと1人で魚の絵を描いていましたが、コミュニティラインに参加してみて色々な水族館情報など教えてもらってすごく楽しそうでした。絵もコツコツ描いてちゃんと納得出来る形で初めて描き上げる事ができた上、皆に見てもらえてますます魚が好きになったようです。</p><footer>3期生の保護者さま</footer></blockquote><blockquote aria-hidden="true"><p class="qh">親も心の変化がありました</p><p>こういうことは苦手だろうな、という親の心配をとっぱらってくれるくらい、「好き」という気持ちはすごいんだなと感じました。伝えたい、好きだというパッションで堂々と元気に発表しきった息子の姿に感動しました。今回のサマースクールへの参加で、私の中で、心配ではなく、ただ応援するだけで大丈夫だという心の変化が大きくありました。</p><footer>2期生の保護者さま</footer></blockquote><blockquote aria-hidden="true"><p class="qh">比べずに認められた我が子の成長</p><p>人前で話すことが本当に苦手な子が自らがんばると決めて本人なりに工夫して発表しようとしていて、嫌なことから逃げるのではなく少しずつやってみようという努力がみられました。一人一人の発表を見て、みんなちがうけど、1人1人が素晴らしい、わが子のありのままでこの子なりの努力がすばらしいんだと感じることができました。</p><footer>4期生の保護者さま</footer></blockquote><blockquote aria-hidden="true"><p class="qh">本気だからの涙、そして成長</p><p>息子は挑戦を好みません。そんな息子もコンテストに向け頑張っていました。そして、入賞できず泣いてました。いつもだとテンションを上げて誤魔化しますが、今回は泣きました。それだけ、挑戦したことに向き合えたのだと思います。息子も「またやる！」と言ってます。悔しい気持ちをまともに感じることができた、よい経験になりました。</p><footer>3期生の保護者さま</footer></blockquote><blockquote aria-hidden="true"><p class="qh">大人の感覚を押し付けていたと気づけた</p><p>図鑑の描き方で、はみ出さないでねと声かけしていたのですが、みなさん自由に描いているのを見て、自分が大人の感覚を押し付けていたなと反省しました。枠に収まらなくても伝えたいことがあるなら描いてもいいんだよと、これからも見守っていきたいです。</p><footer>5期生の保護者さま</footer></blockquote><blockquote aria-hidden="true"><p class="qh">大舞台で得た自信と成長。環境への意識も芽生えた</p><p>当日の舞台の様子をみて少し怯んでおりましたが、かわちゃんのトークショーや周りの子達との交流で緊張もほぐれ、大舞台を乗り越えたという自信にも繋がってる様子でした。最近、休日のお出かけに「ペットボトルは嫌」という発言が増え、聞いてみたところ“ゴミ軽減”の意識からでした。</p><footer>4期生の保護者さま</footer></blockquote><blockquote aria-hidden="true"><p class="qh">さかな好きな仲間ができた！</p><p>魚が好きな友達がいなくて、ずっと1人で魚の絵を描いていましたが、コミュニティラインに参加してみて色々な水族館情報など教えてもらってすごく楽しそうでした。絵もコツコツ描いてちゃんと納得出来る形で初めて描き上げる事ができた上、皆に見てもらえてますます魚が好きになったようです。</p><footer>3期生の保護者さま</footer></blockquote></div></div><p class="swipe-hint">カーソルを合わせると止まります</p></section>
