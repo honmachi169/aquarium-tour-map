@@ -500,6 +500,16 @@ details.kgroup .works{padding:4px 16px 18px}
 .spics img.contain{aspect-ratio:auto;height:auto;max-height:340px;object-fit:contain;background:transparent}
 @media (min-width:900px){.gal[style*="--cols"] > .works{grid-template-columns:repeat(var(--cols),1fr)}}
 .nwb{display:inline-block;max-width:100%}
+/* 2026年：甲子園はスクールと別枠で横長に */
+.ycard.koshien{grid-column:1/-1;border:3px solid var(--coral)}
+.ycard.koshien .ythumb{aspect-ratio:auto}
+.ycard.koshien .ythumb img{object-fit:cover;object-position:center}
+.evbadge{display:inline-block;background:var(--coral);color:#fff;font-weight:800;font-size:12px;letter-spacing:.08em;padding:3px 10px;border-radius:999px}
+.klogo{display:block;width:min(260px,80%);height:auto;margin:6px 0 2px}
+@media (min-width:561px){.ycard.koshien{grid-template-columns:minmax(0,44%) minmax(0,1fr)}}
+@media (max-width:560px){.ycard.koshien .ythumb{aspect-ratio:16/10}}
+.ycards{grid-auto-flow:row dense}
+@media (max-width:560px){.ycard.koshien{display:flex;flex-direction:column}.ycard.koshien .ythumb{aspect-ratio:16/9}}
 </style>
 </head>
 <body>
@@ -544,9 +554,16 @@ details.kgroup .works{padding:4px 16px 18px}
 <div class="ylegend"><span class="schip sum">夏</span>サマースクール<span class="schip win">冬</span>ウィンタースクール</div>
 <div class="years"><div class="yrow"><p class="ylabel"><b>2026</b>年</p><div class="ycards"><a class="ycard" href="s6.html">
   <div class="ythumb"><img src="img/card/s6.jpg" alt="6期生のイラスト" loading="lazy"></div>
-  <div class="ybody"><p class="ytags"><span class="kibadge"><b>6</b>期生</span><span class="schip sum">2026 夏</span></p><h3><span class="ph">クイズ図鑑と</span><span class="ph">おさかな甲子園</span></h3>
+  <div class="ybody"><p class="ytags"><span class="kibadge"><b>6</b>期生</span><span class="schip sum">2026 夏</span></p><h3><span class="ph">クイズ図鑑と</span><span class="ph">須磨シーワールド発表会</span></h3>
   <p class="tmeta"><span class="nw">2026年7月〜9月</span> <span class="nw">36名（実習生）</span><span class="nw">＋研究生 約150名</span></p><p class="tcollab"><span>コラボ</span>神戸須磨シーワールド</p>
-  <span class="tgo">作品36点と記録を見る<span class="arrow">&gt;</span></span></div></a><a class="ycard next" href="https://lin.ee/qMPcnPq" target="_blank" rel="noopener">
+  <span class="tgo">作品36点と記録を見る<span class="arrow">&gt;</span></span></div></a><a class="ycard koshien" href="https://aquarium.yasasea.com/koshien.html" target="_blank" rel="noopener">
+  <div class="ythumb"><img src="img/koshien_card.jpg" alt="おさかな甲子園で会場全体が手を挙げるようす" loading="lazy"></div>
+  <div class="ybody"><p class="ytags"><span class="evbadge">EVENT</span><span class="schip sum">2026 夏</span></p>
+  <img class="klogo" src="img/logo/koshien.png" alt="おさかな甲子園">
+  <h3>おさかな甲子園 第0回</h3>
+  <p class="tmeta"><span class="nw">2026年9月6日（土）</span> <span class="nw">神戸須磨シーワールド</span> <span class="nw">協賛 10社</span></p>
+  <p class="tcollab"><span>同日開催</span>6期生の発表会と同じ日に、チーム対抗のさかなクイズ大会を開きました</p>
+  <span class="tgo">開催レポートを見る<span class="arrow">&gt;</span></span></div></a><a class="ycard next" href="https://lin.ee/qMPcnPq" target="_blank" rel="noopener">
   <div class="ythumb"><span class="soon">COMING SOON</span></div>
   <div class="ybody"><p class="ytags"><span class="kibadge navy"><b>7</b>期生</span><span class="schip win">2026 冬</span></p><h3>次のスクールを準備中</h3>
   <p class="tmeta">募集の開始は、公式LINEでいちばんにお知らせします。</p>
