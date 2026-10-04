@@ -483,6 +483,11 @@ details.kgroup .works{padding:4px 16px 18px}
 :root[data-theme="dark"] .supported img{filter:brightness(1.9)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .supported img{filter:brightness(1.9)}}
 @media (max-width:420px){.htitle{font-size:32px}.puni{width:48px}}
+/* 保護者の声：自動で流れつつ、指・マウスでも動かせる */
+.vmarquee{overflow-x:auto;scrollbar-width:none;cursor:grab;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch}
+.vmarquee::-webkit-scrollbar{display:none}
+.vmarquee.dragging{cursor:grabbing;user-select:none}
+.vtrack{animation:none !important}
 </style>
 </head>
 <body>
@@ -542,6 +547,37 @@ details.kgroup .works{padding:4px 16px 18px}
   document.addEventListener('click',function(e){
     var c=e.target.closest('.kchip'); if(c){ var d=document.getElementById(c.getAttribute('data-open')); if(d){ d.open=true; } }
     var a=e.target.closest('.kall'); if(a){ var gs=a.closest('.gal').querySelectorAll('details.kgroup'); var openAll=a.textContent.indexOf('開く')>=0; gs.forEach(function(x){x.open=openAll}); a.textContent=openAll?'ぜんぶ閉じる':'ぜんぶ開く'; }
+  });
+})();
+/* 保護者の声：自動で横に流す。触る・ドラッグ・ホイールで手動、離すと続きから流れる */
+(function(){
+  var reduce=false; try{ reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  [].forEach.call(document.querySelectorAll('.vmarquee'),function(box){
+    var track=box.querySelector('.vtrack'); if(!track) return;
+    var paused=false, resumeAt=0, pos=0, speed=0.35;
+    function half(){ return track.scrollWidth/2; }
+    function hold(ms){ paused=true; resumeAt=Date.now()+(ms||2500); }
+    function wrap(){ var h=half(); if(h<=0) return; if(box.scrollLeft>=h){ box.scrollLeft-=h; pos-=h; } else if(box.scrollLeft<=0){ box.scrollLeft+=h; pos+=h; } }
+    function tick(){
+      if(!reduce){
+        if(paused && Date.now()>resumeAt && !box.matches(':hover') && !box.classList.contains('dragging')){ paused=false; pos=box.scrollLeft; }
+        if(!paused){ pos+=speed; box.scrollLeft=pos; if(Math.abs(box.scrollLeft-pos)>2){ pos=box.scrollLeft; } wrap(); }
+      }
+      requestAnimationFrame(tick);
+    }
+    /* マウスでドラッグ */
+    var down=false, sx=0, sl=0, moved=false;
+    box.addEventListener('pointerdown',function(e){ if(e.pointerType!=='mouse') { hold(); return; } down=true; moved=false; sx=e.clientX; sl=box.scrollLeft; box.classList.add('dragging'); hold(); });
+    window.addEventListener('pointermove',function(e){ if(!down) return; var dx=e.clientX-sx; if(Math.abs(dx)>3) moved=true; box.scrollLeft=sl-dx; wrap(); sl=box.scrollLeft+dx; });
+    window.addEventListener('pointerup',function(){ if(!down) return; down=false; box.classList.remove('dragging'); hold(); });
+    box.addEventListener('click',function(e){ if(moved){ e.preventDefault(); moved=false; } },true);
+    /* 指でスワイプ・ホイール・スクロール */
+    box.addEventListener('touchstart',function(){ hold(4000); },{passive:true});
+    box.addEventListener('wheel',function(){ hold(); wrap(); },{passive:true});
+    box.addEventListener('scroll',function(){ if(paused){ wrap(); } },{passive:true});
+    box.addEventListener('mouseenter',function(){ hold(1500); });
+    box.scrollLeft=1; pos=1;
+    requestAnimationFrame(tick);
   });
 })();
 </script>
