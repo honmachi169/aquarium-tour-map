@@ -556,6 +556,19 @@ details.kgroup .works{padding:4px 16px 18px}
 .totop span{font-size:10px;margin-top:2px}
 @media (min-width:561px){.totop{display:none}}
 .totop[hidden]{display:none}
+/* 作品：あいうえお行ごとの開け閉め */
+.kacc{border:2px solid var(--aqua-line);border-radius:14px;background:var(--surface);margin:0 0 10px;scroll-margin-top:130px;overflow:hidden}
+.kacc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:10px 14px;font-weight:900}
+.kacc summary::-webkit-details-marker{display:none}
+.kacc summary:focus-visible{outline:3px solid var(--coral);outline-offset:-3px}
+.kacc .kg-n{font-size:13px;color:var(--ink-soft);font-weight:700}
+.kacc .kg-o{margin-left:auto;width:28px;height:28px;border-radius:50%;background:var(--aqua);position:relative;flex:none}
+.kacc .kg-o::before,.kacc .kg-o::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:3px;background:var(--btn-text);border-radius:2px;transform:translate(-50%,-50%)}
+.kacc .kg-o::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .2s}
+.kacc[open] .kg-o::after{transform:translate(-50%,-50%) rotate(0deg)}
+.kacc[open] summary{border-bottom:2px solid var(--aqua-line)}
+.kacc > .works{margin:0;padding:12px}
+@media (max-width:560px){.kacc > .works{padding:8px}.kacc summary{padding:8px 12px}}
 </style>
 </head>
 <body>
@@ -609,7 +622,7 @@ details.kgroup .works{padding:4px 16px 18px}
   lb.addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>50) step(dx<0?1:-1); x0=null; });
   document.addEventListener('click',function(e){
     var c=e.target.closest('.kchip'); if(c){ var d=document.getElementById(c.getAttribute('data-open')); if(d){ d.open=true; } }
-    var a=e.target.closest('.kall'); if(a){ var gs=a.closest('.gal').querySelectorAll('details.kgroup'); var openAll=a.textContent.indexOf('開く')>=0; gs.forEach(function(x){x.open=openAll}); a.textContent=openAll?'ぜんぶ閉じる':'ぜんぶ開く'; }
+    var a=e.target.closest('.kall'); if(a){ var gs=a.closest('.gal').querySelectorAll('details.kgroup,details.kacc'); var openAll=a.textContent.indexOf('開く')>=0; gs.forEach(function(x){x.open=openAll}); a.textContent=openAll?'ぜんぶ閉じる':'ぜんぶ開く'; }
   });
 })();
 /* 保護者の声：自動で横に流す。触る・ドラッグ・ホイールで手動、離すと続きから流れる */
