@@ -500,16 +500,11 @@ details.kgroup .works{padding:4px 16px 18px}
 .spics img.contain{aspect-ratio:auto;height:auto;max-height:340px;object-fit:contain;background:transparent}
 @media (min-width:900px){.gal[style*="--cols"] > .works{grid-template-columns:repeat(var(--cols),1fr)}}
 .nwb{display:inline-block;max-width:100%}
-/* 2026年：甲子園はスクールと別枠で横長に */
-.ycard.koshien{grid-column:1/-1;border:3px solid var(--coral)}
-.ycard.koshien .ythumb{aspect-ratio:auto}
-.ycard.koshien .ythumb img{object-fit:cover;object-position:center}
+/* 2026年：甲子園は別カード（大きさは他のカードと同じ） */
+.ycard.koshien{border:3px solid var(--coral)}
 .evbadge{display:inline-block;background:var(--coral);color:#fff;font-weight:800;font-size:12px;letter-spacing:.08em;padding:3px 10px;border-radius:999px}
-.klogo{display:block;width:min(260px,80%);height:auto;margin:6px 0 2px}
-@media (min-width:561px){.ycard.koshien{grid-template-columns:minmax(0,44%) minmax(0,1fr)}}
-@media (max-width:560px){.ycard.koshien .ythumb{aspect-ratio:16/10}}
 .ycards{grid-auto-flow:row dense}
-@media (max-width:560px){.ycard.koshien{display:flex;flex-direction:column}.ycard.koshien .ythumb{aspect-ratio:16/9}}
+@media (min-width:561px){.ycard.koshien{grid-column:1;grid-row:2}}
 </style>
 </head>
 <body>
