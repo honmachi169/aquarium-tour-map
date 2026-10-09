@@ -3222,8 +3222,8 @@
       "lat": 44.0089,
       "lng": 144.2481,
       "url": "https://www.ryuhyokan.com/",
-      "fee": "750円",
-      "child": "540円（小中学生）",
+      "fee": "990円",
+      "child": "770円（小中学生）、高校生880円",
       "closed": "定休日なし",
       "comment": "天都山にある流氷とオホーツク海の生き物がテーマの施設。マイナス15度の「流氷体感室」で本物の流氷にさわれる",
       "tags": [
@@ -6386,7 +6386,7 @@
       "url": "https://www.city.kasaoka.okayama.jp/site/kabutogani/",
       "fee": "500円",
       "child": "200円（小中学生）",
-      "closed": "月曜（祝日は翌日）・年末年始（春休み・GW・夏休みは無休）",
+      "closed": "月曜（祝日・振替休日は翌日）・祝日の翌日・年末年始（春休み・GW・夏休みは無休）",
       "visited": false,
       "tags": [
         "rain",
@@ -6408,7 +6408,7 @@
       "url": "https://www.fra.go.jp/sakemori/",
       "fee": "無料",
       "child": "無料",
-      "closed": "火曜・年末年始（12/27〜1/5）【要確認】",
+      "closed": "火曜・年末年始（12/27〜1/5）",
       "visited": false,
       "tags": [
         "rain",
