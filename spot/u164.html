@@ -203,6 +203,8 @@
 </main>
 <script>
 const COMMENT_API = "https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV1YlrB_UPx2_c3hMS9fG6YTunOrrOKROeHdHJg2QzXj/exec";
+// 重複投稿で誤って承認した写真（写真シートF88・F105・F110・F112）。APIに承認取り消しが無いのでページ側で出さない（2026-10-09）
+const HIDDEN_PHOTO_IDS = ["1fbmgXkHCMXAGq7brNzIXusKZU-Wj6rA_","1HjVZCP3Dyaz72HrNhRloMaPsAWxfB5ah","1vNbzLpLLJYie4G9Gg6LlC9fjuZ8JVTwC","1iVWYu4MS-I5WGbKeJU6SeEieHIW_4uBx"];
 const AQ_NAME = "ミニ水族館RyuLabo";
 
 const escP = s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -240,7 +242,7 @@ async function loadPosts() {
       fetch(COMMENT_API + '?photos=1&aquarium=' + encodeURIComponent(AQ_NAME))
     ]);
     const comments = await cRes.json();
-    const photos = await pRes.json();
+    const photos = (await pRes.json()).filter(p => !HIDDEN_PHOTO_IDS.some(id => (p.img||'').includes(id)));
     allPosts = [...comments, ...photos].sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
     if (!allPosts.length) { el.innerHTML = '<p class="empty">まだ投稿がないよ！最初の感想を書いてみて🐟</p>'; return; }
     shownPosts = 0;
