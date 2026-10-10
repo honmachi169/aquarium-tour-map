@@ -1,9 +1,19 @@
 {
- "count": 183,
- "nextLive": "AtAwDHkWW68",
- "nextLiveDate": "2026-10-10T00:00:00+00:00",
- "nextLiveTitle": "おさかな運動会",
+ "count": 184,
+ "nextLive": "_95OuSISr8w",
+ "nextLiveDate": "2026-10-17T00:00:00+00:00",
+ "nextLiveTitle": "おさかなしりとりマッハ！",
  "items": [
+  {
+   "id": "1digkSpwhUdjhjGfa_Nye5c1xjHqcK-Aj",
+   "title": "おさかな運動会",
+   "date": "2026.10.10",
+   "iso": "2026-10-10",
+   "cat": "weekly",
+   "thumb": "https://drive.google.com/thumbnail?id=1digkSpwhUdjhjGfa_Nye5c1xjHqcK-Aj&sz=w800",
+   "dl": "https://drive.google.com/uc?export=download&id=1digkSpwhUdjhjGfa_Nye5c1xjHqcK-Aj",
+   "video": "AtAwDHkWW68"
+  },
   {
    "id": "1SfEnYRI4qhZXPE7ZwyFfuFoD7v3gqraq",
    "title": "カレンダー ハロウィン",
