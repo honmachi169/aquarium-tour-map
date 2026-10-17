@@ -26,9 +26,22 @@ import json
 import sys
 import time
 import urllib.request
+import os
+# 合言葉はリポに置かない（公開リポなので。2026-10-17）。Macの ~/.config/yasasea/aquarium_review_key に1行で置く
+def _load_key():
+    k = os.environ.get("AQUA_REVIEW_KEY")
+    if k:
+        return k.strip()
+    p = os.path.expanduser("~/.config/yasasea/aquarium_review_key")
+    try:
+        return open(p, encoding="utf-8").read().strip()
+    except OSError:
+        raise SystemExit(f"[fatal] 合言葉ファイルがありません: {p}")
+
+
 
 API = "https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV1YlrB_UPx2_c3hMS9fG6YTunOrrOKROeHdHJg2QzXj/exec"
-KEY = "yasasea-kawachan-review-2026"
+KEY = _load_key()
 UA = {"User-Agent": "Mozilla/5.0"}
 
 # Apps Script は行数が増えるとレスポンスまで1分以上かかることがある。

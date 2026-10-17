@@ -69,7 +69,13 @@
 </main>
 
 <script>
-const REVIEW_KEY = 'yasasea-kawachan-review-2026';
+// 合言葉はページに埋め込まない（公開サイトなので。2026-10-17）。初回だけ入力し、この端末に覚えさせる
+let REVIEW_KEY = '';
+try { REVIEW_KEY = localStorage.getItem('aquaReviewKey') || ''; } catch (e) {}
+if (!REVIEW_KEY) {
+  REVIEW_KEY = (prompt('合言葉を入れてください') || '').trim();
+  try { if (REVIEW_KEY) localStorage.setItem('aquaReviewKey', REVIEW_KEY); } catch (e) {}
+}
 const API = 'https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV1YlrB_UPx2_c3hMS9fG6YTunOrrOKROeHdHJg2QzXj/exec';
 const RATING_LABEL = {rare:'🦈 激レアいきもの', perf:'🐬 パフォーマンス', kids:'👶 子ども向け度', cospa:'💰 コスパ', kuse:'🌀 クセつよポイント'};
 

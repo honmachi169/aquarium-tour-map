@@ -3,9 +3,23 @@
 # data.jsonのvisited/verified/hitokoto/ratingsに反映する。
 # 使い方: python3 merge_review.py  →  python3 build_pages.py  → git commit/push
 import json, urllib.request, time
+import os
+
+# 合言葉はリポに置かない（公開リポなので。2026-10-17）。Macの ~/.config/yasasea/aquarium_review_key に1行で置く
+def _load_key():
+    k = os.environ.get("AQUA_REVIEW_KEY")
+    if k:
+        return k.strip()
+    p = os.path.expanduser("~/.config/yasasea/aquarium_review_key")
+    try:
+        return open(p, encoding="utf-8").read().strip()
+    except OSError:
+        raise SystemExit(f"[fatal] 合言葉ファイルがありません: {p}")
+
+
 
 API = "https://script.google.com/macros/s/AKfycbz6A_7okvNBKrrygHuOgJ4TQV1YlrB_UPx2_c3hMS9fG6YTunOrrOKROeHdHJg2QzXj/exec"
-REVIEW_KEY = "yasasea-kawachan-review-2026"
+REVIEW_KEY = _load_key()
 
 
 def fetch_json(url, tries=4):
