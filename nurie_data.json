@@ -1,9 +1,19 @@
 {
- "count": 184,
- "nextLive": "_95OuSISr8w",
- "nextLiveDate": "2026-10-17T00:00:00+00:00",
- "nextLiveTitle": "おさかなしりとりマッハ！",
+ "count": 185,
+ "nextLive": "BfiAKUgFhyI",
+ "nextLiveDate": "2026-10-27T11:00:00+00:00",
+ "nextLiveTitle": "秋が旬のさかな",
  "items": [
+  {
+   "id": "10PG9V2bYStFr0e8PTQu40-nsxRBxxCly",
+   "title": "おさかなしりとりマッハ",
+   "date": "2026.10.17",
+   "iso": "2026-10-17",
+   "cat": "weekly",
+   "thumb": "https://drive.google.com/thumbnail?id=10PG9V2bYStFr0e8PTQu40-nsxRBxxCly&sz=w800",
+   "dl": "https://drive.google.com/uc?export=download&id=10PG9V2bYStFr0e8PTQu40-nsxRBxxCly",
+   "video": "_95OuSISr8w"
+  },
   {
    "id": "1digkSpwhUdjhjGfa_Nye5c1xjHqcK-Aj",
    "title": "おさかな運動会",
