@@ -1,9 +1,19 @@
 {
- "count": 185,
- "nextLive": "BfiAKUgFhyI",
- "nextLiveDate": "2026-10-27T11:00:00+00:00",
- "nextLiveTitle": "秋が旬のさかな",
+ "count": 186,
+ "nextLive": "m7WUAanhuSY",
+ "nextLiveDate": "2026-11-04T11:00:00+00:00",
+ "nextLiveTitle": "城崎マリンワールドの生きもの",
  "items": [
+  {
+   "id": "1-uGmx3P9oIHkLs79oP8nfC8KEbuMkAbG",
+   "title": "秋が旬の美味しいさかな",
+   "date": "2026年11月",
+   "iso": "2026-11-01",
+   "cat": "weekly",
+   "thumb": "https://drive.google.com/thumbnail?id=1-uGmx3P9oIHkLs79oP8nfC8KEbuMkAbG&sz=w800",
+   "dl": "https://drive.google.com/uc?export=download&id=1-uGmx3P9oIHkLs79oP8nfC8KEbuMkAbG",
+   "video": "BfiAKUgFhyI"
+  },
   {
    "id": "10PG9V2bYStFr0e8PTQu40-nsxRBxxCly",
    "title": "おさかなしりとりマッハ",
