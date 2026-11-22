@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J4C3DJNZQN"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-J4C3DJNZQN");</script>
+<title>おさかなWINTERスクール2026｜さかなのおにいさん かわちゃん</title>
+<meta name="description" content="さかなのおにいさんかわちゃんと、冬休みにおうちでおさかなをさばこう。オンライン全4回（12/15〜1/9）。オリジナル子ども包丁と、千里水産の鮮魚ボックスつきプランあり。申込締切12/8（火）。">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://aquarium.yasasea.com/winter.html">
+<link rel="icon" href="assets/favicon.ico">
+<meta name="theme-color" content="#25428f">
+<meta property="og:title" content="おさかなWINTERスクール2026｜おうちがおさかな教室に！">
+<meta property="og:description" content="かわちゃんと、プロの先生と、冬休みにおさかなをさばこう。オンライン全4回・子ども包丁と鮮魚ボックスつきプランあり。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aquarium.yasasea.com/winter.html">
+<meta property="og:image" content="https://aquarium.yasasea.com/assets/winter/ogp.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="おさかなWINTERスクール2026 おうちがおさかな教室に！">
+<meta property="og:site_name" content="やさしいうみ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://aquarium.yasasea.com/assets/winter/ogp.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@500;700;900&family=Chango&display=swap">
+<style>
+/* layout: 冬の空（水色）から海の底（紺）へ、波で区切りながら潜っていく1本道。各セクションにかわちゃんが案内役で出てくる */
+:root{
+  --sky:#d6e8fb;
+  --sky-2:#b9d6f5;
+  --paper:#ffffff;
+  --navy:#25428f;
+  --navy-deep:#182d66;
+  --ink:#1f3570;
+  --ink-soft:#4a5e92;
+  --yellow:#ffe14d;
+  --coral:#ff6f61;
+  --line:#c9daf3;
+  --f-disp:"Mochiy Pop One","Zen Maru Gothic","Hiragino Maru Gothic ProN",sans-serif;
+  --f-body:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
+  --f-num:"Chango","Mochiy Pop One",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--sky);color:var(--ink);font-family:var(--f-body);font-weight:500;font-size:16px;line-height:1.9;word-break:auto-phrase;text-wrap:pretty;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+p,li,td,blockquote,figcaption,dd{word-break:auto-phrase}
+h1,h2,h3{text-wrap:balance;margin:0;font-weight:400}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+.ph{display:inline-block;max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));position:relative}
+.band{padding-block:80px;position:relative}
+.band.deep{background:var(--navy);color:#fff}
+.band.paper{background:var(--paper)}
+.band.sky{background:var(--sky)}
+.mk{background:linear-gradient(transparent 58%,var(--yellow) 58%,var(--yellow) 92%,transparent 92%);padding:0 .1em}
+.deep .mk{background:none;color:var(--yellow)}
+
+/* 波の区切り（上の色→下の色） */
+.wave{display:block;width:100%;height:56px;margin-bottom:-1px;background:var(--fr)}
+.sep-dots{height:0;border-top:4px dotted var(--line);max-width:200px;margin:0 auto}
+.wave path{fill:var(--to)}
+.w-sky-paper{background:var(--sky);--to:var(--paper)}
+.w-paper-deep{background:var(--paper);--to:var(--navy)}
+.w-deep-sky{background:var(--navy);--to:var(--sky)}
+.w-sky-deep{background:var(--sky);--to:var(--navy)}
+.w-deep-paper{background:var(--navy);--to:var(--paper)}
+.w-paper-sky{background:var(--paper);--to:var(--sky)}
+
+/* 見出し：かわちゃんが横から案内 */
+.head{display:flex;align-items:flex-end;justify-content:center;gap:18px;margin-bottom:40px;text-align:center}
+.head .ht{min-width:0}
+.head .guide{width:110px;flex:none}
+.head .guide.r{order:2}
+.eyebrow{font-family:var(--f-num);font-size:13px;letter-spacing:.18em;color:var(--ink-soft);display:block;margin-bottom:8px}
+.deep .eyebrow{color:#a9c2f2}
+.h2{font-family:var(--f-disp);font-size:clamp(26px,4.4vw,40px);line-height:1.35;color:var(--navy)}
+.deep .h2{color:#fff}
+.lead{margin:14px 0 0;font-size:17px;color:var(--ink-soft)}
+.deep .lead{color:#e3ebff}
+
+/* ボタン */
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:0 36px;border-radius:999px;background:var(--navy);color:#fff;font-family:var(--f-disp);font-size:19px;text-decoration:none;box-shadow:0 6px 0 var(--navy-deep);transition:transform .15s,box-shadow .15s}
+.cta:hover{transform:translateY(2px);box-shadow:0 4px 0 var(--navy-deep)}
+.cta:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+.cta.y{background:var(--yellow);color:var(--navy-deep);box-shadow:0 6px 0 #c9a800}
+.cta svg{width:20px;height:20px}
+.count{font-weight:900;font-size:15px}
+.count b{font-family:var(--f-num);font-size:30px;color:var(--coral);margin:0 4px;font-weight:400}
+
+/* ふわふわ */
+@keyframes bob{50%{transform:translateY(-10px) rotate(-3deg)}}
+@keyframes bob2{50%{transform:translateY(8px) rotate(4deg)}}
+@keyframes swim{from{transform:translateX(-30vw) scaleX(-1)}to{transform:translateX(130vw) scaleX(-1)}}
+.bob{animation:bob 3.4s ease-in-out infinite}
+.bob2{animation:bob2 4s ease-in-out infinite}
+
+/* ===== HERO ===== */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#eef5ff 0%,var(--sky) 60%,var(--sky-2) 100%);padding-block:24px 0}
+#snow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .wrap{z-index:1}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft);font-weight:700}
+.chip{background:var(--paper);border:2px solid var(--navy);border-radius:999px;padding:4px 14px;font-weight:900;font-size:14px;color:var(--ink)}
+.chip.hot{background:var(--coral);border-color:var(--coral);color:#fff}
+.hero-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:40px;align-items:center;margin-top:18px;padding-bottom:56px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hero-visual{position:relative}
+.hero-visual .feed{width:100%;height:auto;border-radius:26px;box-shadow:0 14px 0 rgba(37,66,143,.16),0 20px 40px rgba(31,53,112,.18);transform:rotate(2deg);animation:feedin .9s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes feedin{from{transform:rotate(8deg) scale(.9);opacity:0}to{transform:rotate(2deg);opacity:1}}
+.hero-visual .tag{position:absolute;right:-12px;top:52%;background:var(--coral);color:#fff;font-family:var(--f-disp);font-size:clamp(14px,1.8vw,18px);padding:8px 16px;border-radius:14px;transform:rotate(5deg);box-shadow:0 4px 0 rgba(0,0,0,.12)}
+.hero-side{order:-1;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.hero-kawa{position:relative;width:min(300px,80%)}
+.hero-kawa .me{width:100%;height:auto;filter:drop-shadow(0 8px 0 rgba(37,66,143,.12))}
+.hero-kawa .bubble{position:absolute;left:-30%;top:30%;z-index:2;background:var(--paper);border:3px solid var(--navy);border-radius:22px;padding:10px 16px;font-family:var(--f-disp);font-size:clamp(14px,1.7vw,18px);color:var(--navy);line-height:1.45;transform:rotate(-4deg)}
+.hero-kawa .bubble::after{content:"";position:absolute;right:-16px;top:50%;margin-top:-10px;border:10px solid transparent;border-left:16px solid var(--navy);border-right:0}
+.hero-kawa .p1{position:absolute;right:-14%;top:4%;width:26%;height:auto}
+.hero .sub{font-size:clamp(17px,2vw,21px);font-weight:900;margin:14px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;justify-content:center}
+.hero-cta{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:22px}
+
+/* ===== MESSAGE ===== */
+.msg{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:44px;align-items:center}
+.msg-body p{margin:0 0 1.05em;font-size:17px}
+.msg-body .hook{font-family:var(--f-disp);font-size:clamp(22px,3vw,30px);line-height:1.5;color:var(--navy);margin:0 0 22px}
+.msg-body .sig{font-family:var(--f-disp);color:var(--navy);font-size:20px;margin-top:6px}
+.msg-photo{margin:0;background:var(--paper);padding:12px 12px 14px;border-radius:6px;box-shadow:0 8px 22px rgba(31,53,112,.18);transform:rotate(2.5deg);max-width:340px;justify-self:center}
+.msg-photo img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:3px}
+.msg-photo figcaption{font-family:var(--f-disp);text-align:center;color:var(--navy);font-size:15px;margin-top:8px}
+/* 4つの入口（写真） */
+.doors{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:56px}
+.door{margin:0;background:var(--paper);padding:10px 10px 12px;border-radius:6px;box-shadow:0 6px 18px rgba(31,53,112,.14);transform:rotate(var(--r,-2deg));transition:transform .3s}
+.door:hover{transform:rotate(0) translateY(-6px) scale(1.03)}
+.door img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:3px}
+.door figcaption{font-family:var(--f-disp);text-align:center;color:var(--navy);font-size:15px;margin-top:8px;line-height:1.4}
+.doors-lead{text-align:center;font-family:var(--f-disp);color:var(--navy);font-size:20px;margin-top:56px}
+.doors-lead + .doors{margin-top:22px}
+
+/* ===== BEST3 ===== */
+.best{display:grid;gap:30px}
+.b-card{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);background:var(--paper);border-radius:30px;overflow:visible;color:var(--ink);position:relative}
+.b-card:nth-child(even) .b-img{order:2}
+.b-img{position:relative;min-height:320px;border-radius:30px 0 0 30px;overflow:hidden}
+.b-card:nth-child(even) .b-img{border-radius:0 30px 30px 0}
+.b-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.b-txt{padding:38px 36px 100px;min-width:0;position:relative}
+.num{position:absolute;top:-22px;left:24px;width:64px;height:64px;border-radius:50%;background:var(--yellow);color:var(--navy-deep);display:grid;place-items:center;font-family:var(--f-num);font-size:30px;box-shadow:0 5px 0 #c9a800;z-index:2}
+.b-card:nth-child(even) .num{left:auto;right:24px}
+.b-txt .lab{font-family:var(--f-disp);color:var(--ink-soft);font-size:14px}
+.b-txt h3{font-family:var(--f-disp);font-size:clamp(23px,3vw,31px);line-height:1.4;margin:6px 0 14px;color:var(--navy)}
+.b-txt p{margin:0 0 .8em}
+.b-txt .deco{position:absolute;right:18px;bottom:14px;width:96px;opacity:.95}
+.note{font-size:13px;color:var(--ink-soft)}
+.who{display:flex;gap:12px;align-items:center;background:var(--sky);border-radius:16px;padding:12px 16px;margin-top:14px;margin-right:90px}
+.who b{font-family:var(--f-disp);color:var(--navy);font-size:18px;font-weight:400}
+.who span{font-size:13px;line-height:1.55;display:block}
+
+/* 泳ぐ魚（濃い帯の背景） */
+.swimmer{position:absolute;left:0;width:110px;opacity:.22;pointer-events:none;animation:swim linear infinite}
+
+/* ===== BOX GAME ===== */
+.game{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:center}
+.box-stage{position:relative;aspect-ratio:4/3;max-width:100%;background:radial-gradient(ellipse at 50% 75%,#fff 0%,#e8f2ff 55%,var(--sky-2) 100%);border-radius:30px;overflow:hidden;cursor:pointer;border:4px dashed var(--navy)}
+.crate{position:absolute;left:12%;right:12%;bottom:9%;height:44%;background:linear-gradient(#3a9bea,#2a80d0);border-radius:10px 10px 18px 18px;box-shadow:inset 0 -14px 0 rgba(0,0,0,.12)}
+.crate::before{content:"千里水産 鮮魚ボックス";position:absolute;inset:auto 0 20% 0;text-align:center;color:#fff;font-family:var(--f-disp);font-size:clamp(13px,1.8vw,18px)}
+.lid{position:absolute;left:9%;right:9%;bottom:51%;height:12%;background:#1f74c4;border-radius:10px;transform-origin:6% 100%;transition:transform .6s cubic-bezier(.3,1.5,.5,1);z-index:3}
+.box-stage.open .lid{transform:rotate(-28deg) translate(-12%,-150%);opacity:.9}
+.box-stage.open .fishes{z-index:5}
+.ice{position:absolute;left:14%;right:14%;bottom:50%;height:6%;background:repeating-linear-gradient(90deg,#fff 0 14px,#e6f3ff 14px 22px);border-radius:6px;z-index:1}
+.fishes{position:absolute;inset:0;z-index:2;pointer-events:none}
+.fishes figure{position:absolute;margin:0;width:25%;text-align:center;transform:translate(-50%,40%) scale(.2);opacity:0;transition:left .7s cubic-bezier(.3,1.6,.5,1),top .7s cubic-bezier(.3,1.6,.5,1),transform .7s cubic-bezier(.3,1.6,.5,1),opacity .3s}
+.box-stage.open .fishes figure{opacity:1}
+.fishes figure svg{width:100%;height:auto;display:block}
+.fishes figcaption small{display:block;font-family:var(--f-body);font-weight:900;font-size:10px;color:var(--coral);line-height:1.2}
+.fishes figcaption{font-family:var(--f-disp);font-size:clamp(12px,1.5vw,15px);background:var(--paper);border:2px solid var(--navy);border-radius:999px;display:inline-block;padding:0 10px;color:var(--navy);margin-top:2px}
+.tap{position:absolute;left:50%;top:14%;transform:translateX(-50%);background:var(--navy);color:#fff;font-family:var(--f-disp);font-size:16px;padding:8px 20px;border-radius:999px;white-space:nowrap;z-index:4;box-shadow:0 4px 0 var(--navy-deep)}
+.box-stage.open .tap{display:none}
+.box-stage .peek{position:absolute;right:3%;bottom:4%;width:20%;z-index:4}
+.game-side h3{font-family:var(--f-disp);color:var(--navy);font-size:clamp(23px,3vw,31px);line-height:1.4;margin-bottom:12px}
+.game-side .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.ghost{min-height:50px;padding:0 24px;border-radius:999px;border:3px solid var(--navy);background:var(--paper);color:var(--navy);font-family:var(--f-disp);font-size:16px;cursor:pointer}
+.boxlist{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:6px;font-size:14.5px}
+.boxlist li{background:var(--paper);border-radius:12px;padding:6px 12px;line-height:1.6}
+.boxlist b{display:inline-block;background:var(--navy);color:#fff;border-radius:999px;padding:0 10px;margin-right:8px;font-size:12px}
+.result{min-height:3.8em;font-weight:900;font-size:18px;margin-top:10px;color:var(--navy);background:var(--paper);border-radius:18px;padding:12px 16px}
+
+/* ===== SCHEDULE ===== */
+.tl{list-style:none;margin:0 auto;padding:0;max-width:820px;position:relative}
+.tl::before{content:"";position:absolute;left:104px;top:8px;bottom:8px;width:4px;background:repeating-linear-gradient(var(--yellow) 0 10px,transparent 10px 18px);border-radius:2px}
+.tl li{display:grid;grid-template-columns:90px 30px minmax(0,1fr);gap:0 14px;align-items:center;padding:10px 0}
+.tl .d{font-family:var(--f-num);font-size:26px;line-height:1.1;text-align:right;color:#fff}
+.tl .d small{display:block;font-family:var(--f-body);font-weight:900;font-size:13px;color:#a9c2f2;margin-top:4px}
+.tl .dot{width:22px;height:22px;border-radius:50%;background:var(--navy);border:4px solid var(--yellow);justify-self:center;position:relative;z-index:1}
+.tl .main .dot{background:var(--yellow)}
+.tl .t{min-width:0}
+.tl .t .k{font-size:13px;font-weight:900;color:#a9c2f2}
+.tl .t h3{font-family:var(--f-disp);font-size:clamp(18px,2.4vw,23px);line-height:1.45;color:#fff}
+.tl .t p{margin:2px 0 0;font-size:14px;color:#e3ebff}
+.tl li.main .t{background:var(--paper);border-radius:20px;padding:14px 18px;display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:12px;align-items:center}
+.tl li.main .t .k{color:var(--coral)}
+.tl li.main .t h3{color:var(--navy)}
+.tl li.main .t .one{color:var(--ink);font-size:14.5px;line-height:1.7;margin-top:4px}
+.tl li.main .t img{width:92px;max-height:80px;object-fit:contain}
+.arc{max-width:820px;margin:28px auto 0;background:var(--yellow);color:var(--navy-deep);border-radius:20px;padding:14px 22px;font-weight:900;text-align:center;font-size:17px}
+
+/* ===== GRANDPRIX ===== */
+.gp-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.gp-steps li{background:var(--sky);border-radius:24px;padding:22px 18px 16px;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;min-width:0}
+.gp-steps li.big{background:var(--navy);color:#fff}
+.gp-steps .n{width:44px;height:44px;border-radius:50%;background:var(--yellow);color:var(--navy-deep);display:grid;place-items:center;font-family:var(--f-num);font-size:22px;box-shadow:0 4px 0 #c9a800}
+.gp-steps b{font-family:var(--f-disp);font-weight:400;font-size:20px;color:var(--navy);margin-top:10px}
+.gp-steps li.big b{color:var(--yellow)}
+.gp-steps p{margin:6px 0 10px;font-size:14.5px;line-height:1.7}
+.gp-steps img{width:auto;max-width:110px;max-height:90px;margin-top:auto}
+.prize{margin-top:28px;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px}
+.prize-main{background:linear-gradient(135deg,#fff6c4,var(--yellow));border-radius:26px;padding:26px 28px;border:3px solid var(--navy)}
+.prize-main h3{font-family:var(--f-disp);color:var(--navy);font-size:clamp(20px,2.6vw,26px);line-height:1.5;margin:10px 0 6px}
+.prize-all{background:var(--sky);border-radius:26px;padding:26px 24px;display:flex;flex-direction:column;justify-content:center}
+.prize-all b{font-family:var(--f-disp);font-weight:400;color:var(--navy);font-size:18px}
+.prize-all p{margin:6px 0 0}
+.gp-last{text-align:center;margin:22px 0 0;font-size:16px}
+.gp-last b{font-family:var(--f-num);font-weight:400;color:var(--coral);font-size:24px}
+
+/* ===== PLANS ===== */
+.finder{background:var(--paper);border-radius:26px;padding:20px 24px;display:flex;flex-wrap:wrap;gap:14px 26px;align-items:center;justify-content:center;margin-bottom:34px;border:3px solid var(--navy);position:relative}
+.finder .q{font-family:var(--f-disp);color:var(--navy);font-size:18px}
+.tg{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-weight:900;user-select:none;font-size:16px}
+.tg input{position:absolute;opacity:0;width:1px;height:1px}
+.tg .sw{width:58px;height:32px;border-radius:999px;background:var(--line);position:relative;transition:background .2s;flex:none}
+.tg .sw::after{content:"";position:absolute;left:4px;top:4px;width:24px;height:24px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.tg input:checked+.sw{background:var(--navy)}
+.tg input:checked+.sw::after{transform:translateX(26px)}
+.tg input:focus-visible+.sw{outline:3px solid var(--coral);outline-offset:2px}
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.plan{background:var(--paper);border-radius:24px;padding:0 0 20px;text-align:center;border:3px solid transparent;transition:transform .25s,border-color .25s,box-shadow .25s,opacity .25s;position:relative;display:flex;flex-direction:column;align-items:center;overflow:visible}
+.plan .pic{width:100%;aspect-ratio:16/10;border-radius:21px 21px 0 0;overflow:hidden;background:var(--sky);display:grid;grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:2px}
+.plan .pic img{min-height:0}
+.plan .pic img{width:100%;height:100%;object-fit:cover}
+.plan .pic.one{grid-template-rows:1fr}
+.plan .pic.kawa{background:#eaf3ff;display:flex;align-items:flex-end;justify-content:center}
+.plan .pic.kawa img{width:auto;height:92%;object-fit:contain}
+.plan .l{font-family:var(--f-num);font-size:40px;line-height:1;color:var(--navy);margin-top:14px}
+.plan .n{font-family:var(--f-disp);font-size:16px;margin-top:8px;color:var(--navy)}
+.plan .p{font-family:var(--f-num);font-size:28px;margin-top:4px;font-variant-numeric:tabular-nums}
+.plan .p small{font-family:var(--f-body);font-size:12px;font-weight:900;margin-left:2px}
+.plan ul{list-style:none;padding:0 16px;margin:10px 0 0;font-size:14px;line-height:1.8;text-align:left;width:100%}
+.plan ul li::before{content:"●";color:var(--yellow);-webkit-text-stroke:1px var(--navy);margin-right:6px;font-size:11px}
+.plan ul li.off{color:#a3aecb;text-decoration:line-through}
+.plan ul li.off::before{color:transparent}
+.buy{margin:14px 16px 0;align-self:stretch;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;background:var(--navy);color:#fff;text-decoration:none;font-family:var(--f-disp);font-size:15px;box-shadow:0 4px 0 var(--navy-deep)}
+.buy:hover{transform:translateY(2px);box-shadow:0 2px 0 var(--navy-deep)}
+.plan.hit .buy{background:var(--yellow);color:var(--navy-deep);box-shadow:0 4px 0 #c9a800}
+.plan.hit{border-color:var(--navy);transform:translateY(-8px);box-shadow:0 10px 0 var(--navy)}
+.plan .rec{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--coral);color:#fff;font-family:var(--f-disp);font-size:13px;padding:3px 14px;border-radius:999px;white-space:nowrap;z-index:1}
+.plan-cta{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:36px;position:relative}
+.plan-cta .pick{font-weight:900;font-size:18px;background:var(--paper);border-radius:999px;padding:6px 22px}
+.plan-cta{flex-direction:row;justify-content:center;gap:14px;margin-top:28px}
+.plan-cta .onegai{position:static;width:80px;order:-1}
+.incl{margin-top:36px;background:var(--paper);border-radius:24px;padding:26px 28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 32px}
+.incl h3{font-family:var(--f-disp);color:var(--navy);font-size:19px;grid-column:1/-1;margin-bottom:6px}
+.incl dl{margin:0;display:grid;grid-template-columns:5em minmax(0,1fr);gap:6px 12px;font-size:16px}
+.incl dt{font-weight:900;color:var(--navy)}
+.incl dd{margin:0}
+.incl ul{margin:0;padding-left:1.2em;font-size:16px}
+.ship{grid-column:1/-1;font-size:13px;color:var(--ink-soft);border-top:2px dashed var(--line);padding-top:12px;margin-top:8px}
+
+/* ===== TEACHERS ===== */
+.tchs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.tch{background:var(--sky);border-radius:28px;overflow:hidden;display:flex;flex-direction:column}
+.tch .pic{aspect-ratio:3/2;overflow:hidden;position:relative}
+.tch .pic img{width:100%;height:100%;object-fit:cover}
+.tch.kw .pic{background:linear-gradient(180deg,#bfe9f3,#7fd0e6);display:flex;align-items:flex-end;justify-content:center}
+.tch.kw .pic img{width:auto;height:96%;object-fit:contain}
+.tch .body{padding:22px 26px 26px}
+.tch .role{font-size:13px;font-weight:900;color:var(--ink-soft);line-height:1.6;display:block}
+.tch h3{font-family:var(--f-disp);font-size:27px;color:var(--navy);margin:4px 0 10px}
+.tch h3 small{font-size:14px;margin-left:8px}
+.tch p{margin:0;font-size:15.5px}
+
+/* ===== SPONSORS ===== */
+.sp-main{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);background:var(--paper);border-radius:30px;overflow:hidden;color:var(--ink);margin-bottom:24px}
+.sp-main .ph-img{position:relative;min-height:290px}
+.sp-main .ph-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sp-main .body{padding:30px 32px}
+.badge{display:inline-block;background:var(--yellow);color:var(--navy-deep);font-family:var(--f-disp);font-size:13px;padding:3px 12px;border-radius:999px}
+.sp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.sp-sub{text-align:center;font-family:var(--f-disp);color:#e3ebff;font-size:16px;margin:34px 0 12px}
+.sp.sp-small{flex-direction:row;max-width:720px;margin:0 auto;align-items:stretch}
+.sp.sp-small .ph-img{aspect-ratio:auto;width:180px;flex:none;background:#fff}
+.sp.sp-small .ph-img img{object-fit:contain!important}
+.sp.sp-small .body{padding:16px 20px;gap:4px}
+.sp.sp-small .logo-plate{height:40px}
+.sp.sp-small .logo-plate img{max-height:24px}
+.sp.sp-small p{font-size:14px;line-height:1.7}
+.sp{background:var(--paper);border-radius:26px;overflow:hidden;color:var(--ink);display:flex;flex-direction:column}
+.sp .ph-img{aspect-ratio:16/10;overflow:hidden}
+.sp .ph-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.sp:hover .ph-img img{transform:scale(1.05)}
+.sp .body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:8px;flex:1}
+.logo-plate{height:64px;display:flex;align-items:center}
+.logo-plate a{display:inline-flex;align-items:center;gap:10px;text-decoration:none;border-radius:10px;padding:4px 6px;margin-left:-6px;transition:background .2s}
+.logo-plate a:hover{background:var(--sky)}
+.logo-plate .ext{font-size:12px;font-weight:900;color:var(--ink-soft);white-space:nowrap}
+.logo-plate img{max-height:52px;max-width:220px;width:auto}
+.sp-main .logo-plate img{max-height:40px}
+.catch{font-family:var(--f-disp);color:var(--navy);font-size:17px;line-height:1.5}
+.sp p,.sp-main p{margin:0;font-size:15px;line-height:1.85}
+.sp .give{margin-top:auto;padding-top:10px;font-size:14px;font-weight:900;color:var(--navy);border-top:2px dashed var(--line)}
+.sp-extra{margin-top:30px;display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center;color:#e3ebff;font-size:14.5px;text-align:center}
+.sp-extra .pill{background:rgba(255,255,255,.12);border-radius:999px;padding:8px 18px;display:inline-flex;align-items:center;gap:10px}
+.sp-extra img{width:52px;height:52px;border-radius:12px;background:#fff;padding:3px}
+.thanks{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:34px;font-family:var(--f-disp);color:#fff;font-size:clamp(17px,2.4vw,22px);text-align:center}
+.thanks img{width:120px}
+
+/* ===== VOICE ===== */
+.voices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.voice{background:var(--sky);border-radius:28px 28px 28px 6px;padding:28px 24px 22px;position:relative;margin:0}
+.voice p{margin:0;font-size:16px}
+.voice::before{content:"“";font-family:var(--f-num);font-size:62px;line-height:1;color:var(--yellow);position:absolute;top:-8px;left:16px;-webkit-text-stroke:2px var(--navy)}
+.voice footer{margin-top:12px;font-size:13px;color:var(--ink-soft);font-weight:900}
+.voice .pu{position:absolute;right:-8px;top:-30px;width:64px}
+
+.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:16px}
+.stats span{background:var(--yellow);color:var(--navy-deep);border-radius:999px;padding:6px 16px;font-weight:900;font-size:15px}
+.stats b{font-family:var(--f-num);font-weight:400;font-size:22px;margin:0 3px}
+/* ===== FAQ ===== */
+.faq{max-width:820px;margin:0 auto;display:grid;gap:12px}
+.faq details{background:var(--sky);border-radius:20px;padding:0 22px}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:900;font-size:17px;color:var(--navy);display:flex;gap:12px;align-items:flex-start}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"Q";font-family:var(--f-num);color:var(--coral)}
+.faq summary::after{content:"＋";margin-left:auto;color:var(--navy)}
+.faq details[open] summary::after{content:"－"}
+.faq details p{margin:0 0 18px;font-size:16px}
+.faq details p a{color:var(--navy);font-weight:900}
+.faq .src{display:block;margin-top:6px;font-size:12.5px;color:var(--ink-soft)}
+.faq-sub{margin:22px 0 2px;font-family:var(--f-disp);color:var(--navy);font-size:17px;border-left:6px solid var(--yellow);padding-left:10px}
+
+/* ===== FINAL ===== */
+.final{text-align:center;overflow:hidden}
+.final .stage{display:flex;justify-content:center;align-items:flex-end;gap:10px;margin-bottom:14px}
+.final .stage img{width:150px}
+.final .stage img.me{width:220px}
+.final h2{font-family:var(--f-disp);font-size:clamp(28px,5vw,50px);line-height:1.4;color:#fff}
+.final .hero-cta{justify-content:center;flex-direction:column;padding-bottom:0}
+.final .count{color:#fff}
+.final .count b{color:var(--yellow)}
+footer.page{background:var(--navy-deep);color:#c1cff0;font-size:13px;text-align:center;padding-block:28px;line-height:1.8}
+
+/* スクロールで出てくる（静止時は見えたまま） */
+.dock{display:none}
+@media (max-width:860px){
+  .dock{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);box-shadow:0 -4px 16px rgba(31,53,112,.15);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+  .dock .cta{min-height:50px;font-size:16px;padding:0 20px}
+  .dock .count{font-size:13px}
+  .dock .count b{font-size:22px}
+  footer.page{padding-bottom:96px}
+}
+.rv.in{animation:rise .7s cubic-bezier(.2,.8,.3,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.door.rv.in{animation:rise .7s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--n,0)*90ms)}
+
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:28px}
+  .hero-visual{max-width:520px;margin:0 auto}
+  .hero-side{order:0}
+  .hero-kawa{width:min(230px,62%)}
+  .hero-kawa .bubble{font-size:13px;padding:8px 12px;left:-34%}
+  .msg,.game{grid-template-columns:minmax(0,1fr)}
+  .msg-photo{max-width:280px}
+  .doors{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .b-card,.sp-main{grid-template-columns:minmax(0,1fr)}
+  .b-card:nth-child(even) .b-img{order:0}
+  .b-img,.b-card:nth-child(even) .b-img{min-height:240px;border-radius:30px 30px 0 0}
+  .b-card:nth-child(even) .num{right:auto;left:24px}
+  .plans{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}
+  .tchs,.voices{grid-template-columns:minmax(0,1fr)}
+  .gp-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .prize{grid-template-columns:minmax(0,1fr)}
+  .voices{row-gap:36px}
+  .incl{grid-template-columns:minmax(0,1fr)}
+  .sp-grid{grid-template-columns:minmax(0,1fr)}
+  .sp.sp-small{flex-direction:column}
+  .sp.sp-small .ph-img{width:100%;aspect-ratio:16/9}
+  .plan-cta .onegai{display:none}
+}
+@media (max-width:560px){
+  .band{padding-block:56px}
+  .head{flex-direction:column;align-items:center;gap:6px}
+  .head .guide,.head .guide.r{width:84px;order:0}
+  .b-txt{padding:34px 20px 26px}
+  .b-txt .deco{display:none}
+  .who{margin-right:0}
+  .tl::before{left:66px}
+  .tl li{grid-template-columns:54px 26px minmax(0,1fr);gap:0 10px}
+  .tl .d{font-size:18px}
+  .tl li.main .t{grid-template-columns:minmax(0,1fr) 56px;padding:12px 14px}
+  .tl li.main .t img{width:56px}
+  .plans{gap:12px}
+  .plan .l{font-size:32px}.plan .p{font-size:21px}
+  .plan ul{font-size:12.5px;padding:0 10px}
+  .finder{flex-direction:column;align-items:flex-start}
+  .final .stage img{width:96px}.final .stage img.me{width:150px}
+  .thanks img{width:80px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .swimmer{display:none}
+}
+</style>
+</head>
+<body>
+<div lang="ja">
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <canvas id="snow" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-top">
+      <span>さかなのおにいさん かわちゃんの おさかなスクール</span>
+      <span class="chip hot">7期生 募集中！</span>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-visual">
+        <h1 class="sr">おさかなWINTERスクール2026　おうちがおさかな教室に！</h1>
+        <img class="feed" src="assets/winter/hero_feed.jpg" alt="おさかなスクール SUPPORTED BY FURUNO 7期生。おうちがおさかな教室に！ 木箱いっぱいのタイ・キンメダイ・サンマ・アジ・サザエ・ハマグリ・エビと、バンザイするかわちゃん。ウィンタースクールだけの魅力ベスト3" width="1080" height="1350">
+        <span class="tag">何が届くかは、お楽しみ！</span>
+      </div>
+      <div class="hero-side">
+        <div class="hero-kawa">
+          <span class="bubble bob2">いっしょに<br>さばこう！</span>
+          <img class="p1 bob" src="assets/winter/p_kopi.png" alt="" aria-hidden="true">
+          <img class="me" src="assets/winter/kp_point2.png" alt="両手で指さす、さかなのおにいさん かわちゃん" width="620" height="854">
+        </div>
+        <p class="sub"><span class="ph">かわちゃんと、プロの先生と、</span><span class="ph">冬休みにおさかなをさばこう！</span></p>
+        <div class="chips">
+          <span class="chip">オンライン 全4回</span>
+          <span class="chip">12/15 → 1/9</span>
+          <span class="chip">アーカイブあり</span>
+          <span class="chip">だれでも参加OK</span>
+          <span class="chip hot">6,600円〜（税込）</span>
+        </div>
+        <div class="hero-cta">
+          <a class="cta y" href="https://sakana0213.stores.jp" target="_blank" rel="noopener">STORESで申し込む
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <div class="count" data-count>締切 12/8（火）まで あと<b>--</b>日</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<svg class="wave" style="--fr:var(--sky);--to:var(--navy)" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 28 C 240 0 480 56 720 28 S 1200 0 1440 28 V56 H0Z"/></svg>
+
+<!-- ===== BEST3 ===== -->
+<section class="band deep" id="best3" style="overflow:hidden">
+  <img class="swimmer" src="assets/winter/f_aji.png" alt="" aria-hidden="true" style="top:12%;animation-duration:38s">
+  <img class="swimmer" src="assets/winter/f_iwashi.png" alt="" aria-hidden="true" style="top:58%;animation-duration:52s;animation-delay:-20s">
+  <div class="wrap">
+    <div class="head rv">
+      <img class="guide bob" src="assets/winter/k_shibou.png" alt="" aria-hidden="true">
+      <div class="ht">
+        <span class="eyebrow">WHY WINTER SCHOOL</span>
+        <h2 class="h2"><span class="ph">ウィンタースクールだけの</span><span class="ph"><span class="mk">魅力ベスト3</span></span></h2>
+      </div>
+    </div>
+    <div class="best">
+      <article class="b-card rv">
+        <span class="num">1</span>
+        <div class="b-img"><img src="assets/winter/sensei.jpg" alt="タイを持つ早武忠利先生" loading="lazy"></div>
+        <div class="b-txt">
+          <span class="lab">ウィンタースクールの魅力①</span>
+          <h3>さかながさばけるようになる！</h3>
+          <p>オンラインで、プロの先生が教えてくれます。アジの三枚おろしから調理、珍しいおさかなまで。未就学児も大人も初心者も、親子で一緒に楽しく学ぼう！</p>
+          <div class="who"><div><b>ハヤタケ先生</b><span>早武忠利（大日本水産会 魚食普及推進センター長・水産庁長官任命 お魚かたりべ）</span></div></div>
+          <img class="deco bob" src="assets/winter/f_aji.png" alt="" aria-hidden="true">
+        </div>
+      </article>
+      <article class="b-card rv">
+        <span class="num">2</span>
+        <div class="b-img"><img src="assets/winter/knife.jpg" alt="魚のイラストが入ったオリジナル子ども包丁" loading="lazy"></div>
+        <div class="b-txt">
+          <span class="lab">ウィンタースクールの魅力②</span>
+          <h3>オリジナル子ども包丁が届く！</h3>
+          <p>子どもの「マイ包丁」で、冬休みにはじめての一歩を。堺の包丁・青木刃物さんとコラボした、今回だけのオリジナルデザインをおうちに届けます。</p>
+          <p class="note">※包丁つきプラン（B・D）の特典です。写真はイメージです</p>
+          <img class="deco bob2" src="assets/winter/p_toppi.png" alt="" aria-hidden="true">
+        </div>
+      </article>
+      <article class="b-card rv">
+        <span class="num">3</span>
+        <div class="b-img"><img src="assets/winter/box.jpg" alt="青い箱に入った鮮魚" loading="lazy"></div>
+        <div class="b-txt">
+          <span class="lab">ウィンタースクールの魅力③</span>
+          <h3>おうちにさかなが届く！</h3>
+          <p>千里水産さんから、新鮮なおさかなが5匹。アジ・タイの定番から、タチウオ・カサゴ、なかなか出会えない未利用魚まで。何が入っているかは、開けてからのお楽しみ！</p>
+          <p class="note">※鮮魚ボックスつきプラン（C・D）の特典です。写真はイメージです</p>
+          <img class="deco bob" src="assets/winter/f_kasago.png" alt="" aria-hidden="true">
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<svg class="wave" style="--fr:var(--navy);--to:var(--sky)" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 300 56 520 0 760 26 S 1180 56 1440 22 V56 H0Z"/></svg>
+
+<!-- ===== BOX GAME ===== -->
+<section class="band sky" id="box">
+  <div class="wrap game">
+    <div class="box-stage rv" id="stage" role="button" tabindex="0" aria-label="鮮魚ボックスを開ける">
+      <div class="crate"></div>
+      <div class="ice"></div>
+      <div class="lid"></div>
+      <div class="fishes" id="fishes"></div>
+      <span class="tap">ここをタップ！</span>
+      <img class="peek" src="assets/winter/k_bikkuri.png" alt="" aria-hidden="true" id="peek">
+    </div>
+    <div class="game-side rv">
+      <span class="eyebrow">PLAY</span>
+      <h3><span class="ph">鮮魚ボックス、</span><span class="ph">何が入ってるかな？</span></h3>
+      <p>本物のボックスは、<b>定番の魚2匹＋珍しい魚2匹＋未利用魚1匹</b>の計5匹。何が入るかはその日の水揚げしだい！ためしに開けてみよう。</p>
+      <ul class="boxlist"><li><b>定番</b>アジ・タイ・サバ から2種</li><li><b>珍しい</b>タチウオ・ホウボウ・イカ・カサゴ・ソイ・イトヨリ・レンコダイ・サゴシ から2種</li><li><b>未利用魚</b>アイゴ・ボラ・ミズカマス から1種</li></ul>
+      <p class="result" id="result" aria-live="polite">まだフタがしまっているよ。左のボックスをタップしてね。</p>
+      <div class="btns">
+        <button class="ghost" id="again" type="button">もう一回あける</button>
+      </div>
+      <p class="note">※千里水産さんが豊洲市場などから仕入れて、ヤマト便でお届けします。魚は選べません</p>
+    </div>
+  </div>
+</section>
+<svg class="wave" style="--fr:var(--sky);--to:var(--navy)" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 C 260 56 560 0 820 30 S 1240 50 1440 20 V56 H0Z"/></svg>
+
+<!-- ===== SCHEDULE ===== -->
+<section class="band deep" id="schedule" style="overflow:hidden">
+  <img class="swimmer" src="assets/winter/f_tachiuo.png" alt="" aria-hidden="true" style="top:20%;animation-duration:46s;width:150px">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="ht">
+        <span class="eyebrow">SCHEDULE</span>
+        <h2 class="h2">スケジュール</h2>
+        <p class="lead">講座はすべてオンライン。おうちのキッチンから参加できます。</p>
+      </div>
+      <img class="guide r bob" src="assets/winter/k_run.png" alt="" aria-hidden="true">
+    </div>
+    <ol class="tl">
+      <li class="rv"><span class="d">11/6<small>金</small></span><span class="dot"></span><div class="t"><span class="k">STORESで</span><h3>申込スタート</h3></div></li>
+      <li class="rv"><span class="d">12/8<small>火</small></span><span class="dot"></span><div class="t"><span class="k">全プラン</span><h3>申込締切</h3><p>包丁・鮮魚ボックスは数に限りがあります。お早めに！</p></div></li>
+      <li class="rv main"><span class="d">12/15<small>火 19:00</small></span><span class="dot"></span><div class="t"><div><span class="k">第1回</span><h3>入門！レンチンフィッシュ</h3><p class="one">火も包丁も使わない！レンジでチンするだけのおさかな料理を、かわちゃんと作ろう。見るだけでもOK</p></div><img src="assets/winter/f_saba.png" alt="" aria-hidden="true"></div></li>
+      <li class="rv main"><span class="d">12/20<small>日 14:00</small></span><span class="dot"></span><div class="t"><div><span class="k">第2回</span><h3>本番！プロの料理人のさばき方講座</h3><p class="one">スーパーで買ったアジや好きな魚を、ハヤタケ先生といっしょにおうちのキッチンでさばこう</p></div><img src="assets/winter/f_aji.png" alt="" aria-hidden="true"></div></li>
+      <li class="rv main"><span class="d">12/22<small>火 19:00</small></span><span class="dot"></span><div class="t"><div><span class="k">第3回</span><h3>挑戦！珍しいさかなをさばいてみよう！</h3><p class="one">鮮魚ボックスに入っている珍しい魚や未利用魚にチャレンジ。キッチンスタジオから、さばき方と食べ方をお届け</p></div><img src="assets/winter/f_kasago.png" alt="" aria-hidden="true"></div></li>
+      <li class="rv main"><span class="d">1/9<small>2027 土 10:00</small></span><span class="dot"></span><div class="t"><div><span class="k">第4回</span><h3>おさかな料理図鑑グランプリ YouTubeライブ</h3><p class="one">みんなの「おさかな料理図鑑」からグランプリを発表！豪華賞品が当たる</p></div><img src="assets/winter/k_oekaki.png" alt="" aria-hidden="true"></div></li>
+    </ol>
+    <p class="arc rv">アーカイブはすべて残すので、あとからでも見返せます</p>
+  </div>
+</section>
+<svg class="wave" style="--fr:var(--navy);--to:var(--paper)" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 28 C 240 0 480 56 720 28 S 1200 0 1440 28 V56 H0Z"/></svg>
+
+<!-- ===== GRANDPRIX ===== -->
+<section class="band paper" id="grandprix">
+  <div class="wrap">
+    <div class="head rv">
+      <img class="guide bob" src="assets/winter/k_oekaki.png" alt="" aria-hidden="true">
+      <div class="ht">
+        <span class="eyebrow">GRAND PRIX</span>
+        <h2 class="h2"><span class="ph">おさかな料理図鑑</span><span class="ph"><span class="mk">グランプリ</span></span></h2>
+        <p class="lead"><span class="ph">講座で作ったおさかな料理を「図鑑」にまとめて応募しよう。</span><span class="ph">グランプリには豪華賞品！</span></p>
+      </div>
+    </div>
+    <ol class="gp-steps">
+      <li class="rv"><span class="n">1</span><b>つくる</b><p>講座で習ったおさかな料理を、おうちで作ってみよう</p><img src="assets/winter/f_aji.png" alt="" aria-hidden="true"></li>
+      <li class="rv"><span class="n">2</span><b>まとめる</b><p>写真と、魚のこと・作ってみた感想を図鑑のシートに。シートは第1回のあとに配ります</p><img src="assets/winter/k_oekaki.png" alt="" aria-hidden="true"></li>
+      <li class="rv"><span class="n">3</span><b>応募する</b><p>フォームから提出。審査員が1作品ずつ見て選びます</p><img src="assets/winter/p_toppi.png" alt="" aria-hidden="true"></li>
+      <li class="rv big"><span class="n">!</span><b>1/9（土）10時 発表</b><p>YouTubeライブで、グランプリと協賛企業賞を発表！</p><img src="assets/winter/k_jump.png" alt="" aria-hidden="true"></li>
+    </ol>
+    <div class="prize rv">
+      <div class="prize-main">
+        <span class="badge">豪華賞品</span>
+        <h3><span class="ph">グランプリ・協賛企業賞には、</span><span class="ph">スポンサー企業からの豪華賞品と賞状をお届け！</span></h3>
+        <p class="note">賞の名前と賞品は、決まりしだいお知らせします</p>
+      </div>
+      <div class="prize-all">
+        <b>図鑑を出した人は全員</b>
+        <p>ニューイヤーカードと、認定オリジナルバッジをプレゼント</p>
+      </div>
+    </div>
+    <p class="gp-last rv">昨年のウィンタースクールでは、<b>152作品</b>の図鑑が集まりました</p>
+  </div>
+</section>
+<svg class="wave" style="--fr:var(--paper);--to:var(--sky)" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 300 56 520 0 760 26 S 1180 56 1440 22 V56 H0Z"/></svg>
+
+<!-- ===== PLANS ===== -->
+<section class="band sky" id="plans">
+  <div class="wrap">
+    <div class="head rv">
+      <img class="guide bob" src="assets/winter/k_quiz.png" alt="" aria-hidden="true">
+      <div class="ht">
+        <span class="eyebrow">PLANS</span>
+        <h2 class="h2">参加プランと料金</h2>
+        <p class="lead">講座は4プランとも同じ。包丁と鮮魚ボックスがつくかどうかで選べます</p>
+      </div>
+    </div>
+    <div class="plans">
+      <div class="plan rv" data-plan="A"><div class="pic kawa"><img src="assets/winter/k_jump.png" alt="" aria-hidden="true"></div><span class="l">A</span><span class="n">参加のみ</span><span class="p">6,600<small>円</small></span>
+        <ul><li>講座 全4回・アーカイブ</li><li class="off">子ども包丁</li><li class="off">鮮魚ボックス</li></ul><a class="buy" href="https://sakana0213.stores.jp/items/6aecb3adaf964a7844dacfb7" target="_blank" rel="noopener">Aプランを申し込む</a></div>
+      <div class="plan rv" data-plan="B"><div class="pic one"><img src="assets/winter/knife.jpg" alt="" aria-hidden="true"></div><span class="l">B</span><span class="n">包丁つき</span><span class="p">9,900<small>円</small></span>
+        <ul><li>講座 全4回・アーカイブ</li><li>子ども包丁</li><li class="off">鮮魚ボックス</li></ul><a class="buy" href="https://sakana0213.stores.jp/items/6aecb67f7157866270cbddf5" target="_blank" rel="noopener">Bプランを申し込む</a></div>
+      <div class="plan rv" data-plan="C"><div class="pic one"><img src="assets/winter/box.jpg" alt="" aria-hidden="true"></div><span class="l">C</span><span class="n">鮮魚ボックスつき</span><span class="p">12,000<small>円</small></span>
+        <ul><li>講座 全4回・アーカイブ</li><li class="off">子ども包丁</li><li>鮮魚ボックス</li></ul><a class="buy" href="https://sakana0213.stores.jp/items/6aed1cc59205b6c732827ef6" target="_blank" rel="noopener">Cプランを申し込む</a></div>
+      <div class="plan rv hit" data-plan="D"><span class="rec">おすすめ！</span><div class="pic"><img src="assets/winter/knife_wide.jpg" alt="" aria-hidden="true"><img src="assets/winter/box.jpg" alt="" aria-hidden="true"></div><span class="l">D</span><span class="n">包丁＋鮮魚ボックス</span><span class="p">15,000<small>円</small></span>
+        <ul><li>講座 全4回・アーカイブ</li><li>子ども包丁</li><li>鮮魚ボックス</li></ul><a class="buy" href="https://sakana0213.stores.jp/items/6aecbce56fb00ffe872cdbab" target="_blank" rel="noopener">Dプランを申し込む</a></div>
+    </div>
+    <div class="plan-cta">
+      <span class="note">料金はすべて税込です。各プランのボタンから、STORESの申込ページへ進めます</span>
+      <img class="onegai bob2" src="assets/winter/k_onegai.png" alt="" aria-hidden="true">
+    </div>
+    <div class="incl rv">
+      <h3>募集要項</h3>
+      <dl>
+        <dt>対象</dt><dd>年齢・居住地問わず、どなたでも</dd>
+        <dt>開催</dt><dd>オンライン（全4回）</dd>
+        <dt>締切</dt><dd>2026年12月8日（火）</dd>
+      </dl>
+      <ul>
+        <li>全4回（アーカイブあり）</li>
+        <li>図鑑を出した人に、ニューイヤーカードや認定オリジナルバッジをプレゼント</li>
+        <li>おさかな料理図鑑グランプリのエントリー権</li>
+        <li>LINEオープンチャットの参加権</li>
+      </ul>
+      <p class="ship">（C）（D）の鮮魚ボックスは、発送と鮮度管理のため、本スクールのスポンサー企業でもある株式会社千里水産からお客さまへ直接お送りします。個人情報の第三者委託についてはSTORESのプライバシーポリシーに記載しています。必ずご確認・ご同意のうえお申し込みください。</p>
+    </div>
+  </div>
+</section>
+<svg class="wave" style="--fr:var(--sky);--to:var(--paper)" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 C 260 56 560 0 820 30 S 1240 50 1440 20 V56 H0Z"/></svg>
+
+<!-- ===== TEACHERS ===== -->
+<section class="band paper" id="teachers">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="ht">
+        <span class="eyebrow">TEACHERS</span>
+        <h2 class="h2">教えるのは、このふたり！</h2>
+      </div>
+    </div>
+    <div class="tchs">
+      <article class="tch rv">
+        <div class="pic"><img src="assets/winter/sensei.jpg" alt="早武忠利先生" loading="lazy"></div>
+        <div class="body">
+          <span class="role">大日本水産会 魚食普及推進センター長・水産庁長官任命 お魚かたりべ</span>
+          <h3>早武 忠利<small>ハヤタケ先生</small></h3>
+          <p>アジの三枚おろしから、珍しいおさかなのさばき方まで。プロの技を、子どもにもわかる言葉で教えてくれます。</p>
+        </div>
+      </article>
+      <article class="tch kw rv">
+        <div class="pic"><img src="assets/winter/kp_point.png" alt="さかなのおにいさん かわちゃん" loading="lazy"></div>
+        <div class="body">
+          <span class="role">さかなのおにいさん</span>
+          <h3>かわちゃん</h3>
+          <p>アナウンサー・絵本作家・音楽・YouTubeなど、テレビ東京「シナぷしゅ」では作詞作曲・歌・イラストも手がけるマルチクリエイター。書籍6冊、イベントは年間60本以上。FURUNO・アドベンチャーワールドのアンバサダーを務める。合言葉は「こどもがさかなを好きになれば、海は豊かになる」。</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<svg class="wave" style="--fr:var(--paper);--to:var(--sky)" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 28 C 240 0 480 56 720 28 S 1200 0 1440 28 V56 H0Z"/></svg>
+
+<!-- ===== MESSAGE ===== -->
+<section class="band sky" id="message">
+  <div class="wrap">
+    <div class="msg">
+      <div class="msg-body rv">
+        <span class="eyebrow">MESSAGE</span>
+        <p class="hook"><span class="ph">さかなをさばける人が</span><span class="ph">一人でも増えたら、</span><span class="ph">海はもっと元気になる。</span></p>
+        <p>さかなの魅力って、釣ってうれしい、水族館でたのしい、育ててかわいい、食べておいしい…たくさんの入口があること！</p>
+        <p>でも、そんなさかなを食べる家庭が今減っています。海の環境も変わって、さかなも獲れなくなってきました。</p>
+        <p>さかなをさばける人が一人でも増えて、おいしいさかなと海を守るこどもたちを増やしたい。そんな思いから、今年は「魚食」をテーマに、たくさんの方のお力を借りて、とびきり楽しいエデュテインメント・スクールをお届けします。</p>
+        <p>この冬、一緒に新しいことに挑戦しよう！</p>
+        <p class="sig">さかなのおにいさん かわちゃん</p>
+      </div>
+      <figure class="msg-photo rv"><img src="assets/winter/ph_fishhold.jpg" alt="釣った大きなハタを持って笑うかわちゃん" width="768" height="1024" loading="lazy"><figcaption>さかなは、釣っても食べてもおもしろい！</figcaption></figure>
+    </div>
+    <p class="doors-lead rv">さかなには、たくさんの入口がある！</p>
+    <div class="doors">
+      <figure class="door rv" style="--r:-3deg;--n:0"><img src="assets/winter/ph_buri.jpg" alt="船の上で大きなブリを持つかわちゃん" loading="lazy"><figcaption>釣ってうれしい</figcaption></figure>
+      <figure class="door rv" style="--r:2deg;--n:1"><img src="assets/winter/ph_aquarium.jpg" alt="魚が泳ぐ大きな水槽の前で両手を広げるかわちゃん" loading="lazy"><figcaption>水族館でたのしい</figcaption></figure>
+      <figure class="door rv" style="--r:-1.5deg;--n:2"><img src="assets/winter/ph_backyard.jpg" alt="水族館のバックヤードで自撮りするかわちゃん" loading="lazy"><figcaption>裏側ものぞいて</figcaption></figure>
+      <figure class="door rv" style="--r:3deg;--n:3"><img src="assets/winter/ph_kids.jpg" alt="シャチのぬいぐるみを掲げて盛り上がる子どもたち" loading="lazy" style="object-position:50% 30%"><figcaption>この冬は、食べておいしい！</figcaption></figure>
+    </div>
+  </div>
+</section>
+<svg class="wave" style="--fr:var(--sky);--to:var(--paper)" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 300 56 520 0 760 26 S 1180 56 1440 22 V56 H0Z"/></svg>
+
+<!-- ===== VOICE ===== -->
+<section class="band paper" id="voice">
+  <div class="wrap">
+    <div class="head rv">
+      <img class="guide bob" src="assets/winter/k_tanken.png" alt="" aria-hidden="true" style="width:150px">
+      <div class="ht">
+        <span class="eyebrow">VOICE</span>
+        <h2 class="h2"><span class="ph">昨年のウィンタースクール</span><span class="ph">参加保護者の声</span></h2>
+        <div class="stats"><span><b>219</b>人が参加</span><span><b>152</b>作品の図鑑が集まった</span><span>アンケート<b>44</b>人中<b>43</b>人が「満足」</span></div>
+      </div>
+    </div>
+    <div class="voices">
+      <blockquote class="voice rv"><img class="pu bob" src="assets/winter/p_orca.png" alt="" aria-hidden="true"><p>外見のかわいさだけでなく、生き物がどこで生きて何を食べているかという背景に興味を持ち、図鑑などを細かく観察しながら絵を描くことが増えました。</p><footer>昨年の参加保護者さま</footer></blockquote>
+      <blockquote class="voice rv"><img class="pu bob2" src="assets/winter/p_kopi.png" alt="" aria-hidden="true"><p>第一線で活躍される専門家のお話を聞けたことが大きな刺激となり、自身の将来の夢や進路に向けたモチベーションを高める貴重な時間になりました。</p><footer>昨年の参加保護者さま</footer></blockquote>
+      <blockquote class="voice rv"><img class="pu bob" src="assets/winter/p_hanabi.png" alt="" aria-hidden="true"><p>細やかな準備や楽しい企画の数々に親子で大満足しています。これからも子どもたちに夢とハッピーを届けてくれる活動を心から応援しています！</p><footer>昨年の参加保護者さま</footer></blockquote>
+    </div>
+  </div>
+</section>
+<svg class="wave" style="--fr:var(--paper);--to:var(--navy)" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 C 260 56 560 0 820 30 S 1240 50 1440 20 V56 H0Z"/></svg>
+
+<!-- ===== SPONSORS ===== -->
+<section class="band deep" id="sponsors" style="overflow:hidden">
+  <img class="swimmer" src="assets/winter/f_katsuo.png" alt="" aria-hidden="true" style="top:6%;animation-duration:44s">
+  <img class="swimmer" src="assets/winter/f_saba.png" alt="" aria-hidden="true" style="top:70%;animation-duration:56s;animation-delay:-30s">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="ht">
+        <span class="eyebrow">SPONSORS</span>
+        <h2 class="h2">スポンサー企業のみなさま</h2>
+        <p class="lead"><span class="ph">今回のスクールも、</span><span class="ph">たくさんの企業のサポートで実現しています！</span></p>
+      </div>
+    </div>
+
+    <article class="sp-main rv">
+      <div class="ph-img"><img src="assets/winter/sp_furuno.jpg" alt="FURUNOのシステムを積んだ漁船" loading="lazy"></div>
+      <div class="body">
+        <span class="badge">メインスポンサー</span>
+        <div class="logo-plate"><a href="https://www.furuno.co.jp/" target="_blank" rel="noopener" title="FURUNOの公式サイトへ"><img src="assets/winter/logo_furuno.png" alt="FURUNO" loading="lazy"><span class="ext" aria-hidden="true">公式サイト ↗</span></a></div>
+        <p class="catch">世界で初めて魚群探知機を実用化した、兵庫・西宮発のグローバル企業</p>
+        <p>2023年から、かわちゃんが公式アンバサダーを務めています。魚の群れを「音」で見つける技術をはじめ、航海に欠かせない技術を通して世界中の漁業や船の安全を支えています。「海を未来にプロジェクト」の一環として、このスクールを最初から応援してくださっています。</p>
+      </div>
+    </article>
+
+    <div class="sp-grid">
+      <article class="sp rv">
+        <div class="ph-img"><img src="assets/winter/sp_aoki.jpg" alt="包丁をつくる職人" loading="lazy"></div>
+        <div class="body">
+          <div class="logo-plate"><a href="https://aoki-hamono.co.jp/" target="_blank" rel="noopener" title="青木刃物製作所の公式サイトへ"><img src="assets/winter/logo_aoki.png" alt="堺孝行（青木刃物製作所）" loading="lazy"><span class="ext" aria-hidden="true">公式サイト ↗</span></a></div>
+          <p class="catch">堺打刃物の伝統と職人技「青木刃物製作所」</p>
+          <p>約80年にわたり大阪・堺で包丁をつくり、国内外の料理人に愛される「堺孝行」ブランドを展開。今回は特別に、スクール限定デザインの子ども包丁をつくっていただきました。</p>
+          <span class="give">提供：オリジナル子ども包丁</span>
+        </div>
+      </article>
+      <article class="sp rv">
+        <div class="ph-img"><img src="assets/winter/sp_senri.jpg" alt="千里水産の店頭に並ぶ鮮魚" loading="lazy"></div>
+        <div class="body">
+          <div class="logo-plate"><a href="https://senrisuisan.com/" target="_blank" rel="noopener" title="千里水産の公式サイトへ"><img src="assets/winter/logo_senri.png" alt="千里水産" loading="lazy"><span class="ext" aria-hidden="true">公式サイト ↗</span></a></div>
+          <p class="catch">海がないからこそ、鮮度にこだわる。山梨・甲府の「千里水産」</p>
+          <p>旬のものから珍しいものまで、約150種類のさかなを扱う水産会社。豊洲市場をはじめ各地から仕入れた新鮮なさかなを、厳選した鮮魚ボックスにしてお届けいただきます。</p>
+          <span class="give">提供：鮮魚ボックス</span>
+        </div>
+      </article>
+      <article class="sp rv">
+        <div class="ph-img"><img src="assets/winter/sp_peacock.jpg" alt="ピーコック魔法瓶の電気調理器でエビやホタテを焼くようす" loading="lazy"></div>
+        <div class="body">
+          <div class="logo-plate"><a href="https://www.the-peacock.co.jp/" target="_blank" rel="noopener" title="ピーコック魔法瓶の公式サイトへ"><img src="assets/winter/logo_peacock.png" alt="Peacock ピーコック魔法瓶" loading="lazy"><span class="ext" aria-hidden="true">公式サイト ↗</span></a></div>
+          <p class="catch">「食に感動を！」ピーコック魔法瓶</p>
+          <p>創業76年で培った技術と発想力で、水筒やステンレスボトル、電気調理器など、暮らしに寄り添う製品を開発。自分で調理しておいしく食べる喜びを感じてもらえるよう、スクールを応援いただいています。</p>
+          <span class="give">提供：調理家電</span>
+        </div>
+      </article>
+      <article class="sp rv">
+        <div class="ph-img"><img src="assets/winter/sp_manten.jpg" alt="メヒカリ" loading="lazy" style="object-position:50% 40%"></div>
+        <div class="body">
+          <div class="logo-plate"><a href="https://www.manten-ff.com/" target="_blank" rel="noopener" title="まんてんの公式サイトへ"><img src="assets/winter/logo_manten.png" alt="まんてん" loading="lazy"><span class="ext" aria-hidden="true">公式サイト ↗</span></a></div>
+          <p class="catch">愛知・豊橋のメヒカリ加工「まんてん」</p>
+          <p>愛知県蒲郡産のメヒカリやニギスを中心に、全国の学校給食や外食向けに製造・加工。未利用魚の活用や食育にも取り組まれています。ふだん出会えない深海魚を通じて、食べる楽しさを届けます。</p>
+          <span class="give">提供：メヒカリ</span>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="sp-sub rv">物品でご協力いただいている企業</p>
+    <article class="sp sp-small rv">
+        <div class="ph-img"><img src="assets/winter/sp_fujita.jpg" alt="藤田金属の鉄フライパン" loading="lazy" style="object-fit:contain;background:#fff"></div>
+        <div class="body">
+          <div class="logo-plate"><a href="http://www.fujita-kinzoku.jp/" target="_blank" rel="noopener" title="藤田金属の公式サイトへ"><img src="assets/winter/logo_fujita.png" alt="FUJITA KINZOKU 藤田金属" loading="lazy"><span class="ext" aria-hidden="true">公式サイト ↗</span></a></div>
+          <p class="catch">鉄フライパンの「藤田金属」</p>
+          <p>1951年の創業以来、ものづくりのまち大阪・八尾で、職人技とアイデアを活かした鉄フライパンをはじめとする調理道具を製造。「料理って楽しい！」を届けるため、スクールを応援いただいています。</p>
+          <span class="give">提供：鉄フライパン</span>
+        </div>
+      </article>
+
+    <div class="sp-extra rv">
+      <span class="pill">会場協力：つり人社（キッチンスタジオ）</span>
+      <span class="pill"><img src="assets/winter/sakananohi.png" alt="さかなの日">やさしいうみは水産庁「さかなの日」賛同メンバーです</span>
+    </div>
+    <p class="thanks rv"><img class="bob" src="assets/winter/k_tachiuo.png" alt="" aria-hidden="true"><span>応援してくださるみなさま、<br>ありがとうございます！</span></p>
+  </div>
+</section>
+<svg class="wave" style="--fr:var(--navy);--to:var(--paper)" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 28 C 240 0 480 56 720 28 S 1200 0 1440 28 V56 H0Z"/></svg>
+
+<!-- ===== FAQ ===== -->
+<section class="band paper" id="faq">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="ht"><span class="eyebrow">Q&amp;A</span><h2 class="h2">よくある質問</h2></div>
+      <img class="guide r bob2" src="assets/winter/k_bikkuri.png" alt="" aria-hidden="true">
+    </div>
+    <div class="faq">
+      <details class="rv"><summary>当日の時間に参加できなくても大丈夫？</summary><p>大丈夫です。アーカイブをすべて残すので、あとからでも見返せます。</p></details>
+      <details class="rv"><summary>小さい子でもついていける？</summary><p>未就学児も大人も初心者も、親子で一緒に楽しめる内容です。第1回は火も包丁も使わないレンジ料理で、見るだけの参加もOK。包丁を使う回は、保護者の方と一緒に参加してください。</p></details>
+      <details class="rv"><summary>顔や声は映る？</summary><p>講座はZoomウェビナーで配信します。参加者の顔や声は映りません。質問はチャットから送れます。</p></details>
+      <details class="rv"><summary>何を用意すればいい？</summary><p>第1回はスーパーで買える材料と耐熱容器だけ。レシピと買い物リストは事前にお送りします。第2回は、スーパーでアジや好きな魚を買っておいてください（くわしくは前もってご案内します）。</p></details>
+      <details class="rv"><summary>鮮魚ボックスはどうやって届く？</summary><p>千里水産からヤマト便で届きます。定番の魚2匹・珍しい魚2匹・未利用魚1匹の計5匹で、何が入るかはその時の水揚げしだい。魚は選べません。届いたらすぐ冷蔵庫へ入れて、第2回・第3回で使います。</p></details>
+      <details class="rv"><summary>申し込みはどこから？</summary><p>STORES（さかなのおにいさんかわちゃんストア）のトップページから、プランを選んでお申し込みください。締切は12月8日（火）です。</p></details>
+      <p class="faq-sub rv">お申し込み前にご確認ください（規約）</p>
+      <details class="rv"><summary>個人情報は、どこかに渡りますか？（C・Dプラン）</summary><p>鮮魚ボックスつきの（C）（D）プランは、品質を保って直送するため、製造・発送元の株式会社千里水産からお届けします。そのため、お申し込みいただいた時点で、配送に必要な範囲の個人情報（氏名・住所・電話番号・注文内容）を千里水産に提供することに同意いただいたものとみなします。当ストアと千里水産は、お預かりした個人情報を、配送と配送に関するお問い合わせ対応以外には使いません。<span class="src">（利用規約 第8条）</span></p></details>
+      <details class="rv"><summary>届いた鮮魚ボックスに問題があったら？</summary><p>商品が届いた当日か翌日までに、<a href="https://sakana0213.stores.jp/inquiry" target="_blank" rel="noopener">ストアのお問い合わせフォーム</a>からご連絡ください。内容を確認のうえ、製造・発送元の株式会社千里水産と連携して、代わりの品の再送などで対応します。<span class="src">（特定商取引法に基づく表示）</span></p></details>
+      <details class="rv"><summary>返品やキャンセルはできますか？</summary><p>商品の返品は、ストアの<a href="https://sakana0213.stores.jp/tokushoho" target="_blank" rel="noopener">特定商取引法に基づく表示</a>にある「返品についての特約事項」に従って対応します。鮮魚ボックスは生ものです。お申し込みの前に必ずご確認ください。<span class="src">（利用規約 第7条）</span></p></details>
+      <details class="rv"><summary>不在などで受け取れなかったら？</summary><p>受け取りの拒否、長いあいだの不在、届け先の不明など、お客さまのご都合で受け取れなかった場合は、ご登録の連絡先へのご連絡と、ご指定の届け先へのお届けをもって、お渡ししたものとさせていただきます。受け取れる日時に余裕をもってご準備ください。<span class="src">（利用規約 第11条）</span></p></details>
+      <details class="rv"><summary>子どもが自分で申し込んでもいい？</summary><p>未成年の方がお申し込みになる場合は、保護者の方の同意が必要です。<span class="src">（利用規約 第4条）</span></p></details>
+      <details class="rv"><summary>個人情報の取り扱いは？</summary><p>個人情報は、ストアのプライバシーポリシーに従って取り扱います。利用規約・プライバシーポリシーは、お申し込みの画面（STORES）からご確認いただけます。<span class="src">（利用規約 第9条）</span></p></details>
+    </div>
+  </div>
+</section>
+<svg class="wave" style="--fr:var(--paper);--to:var(--navy)" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 300 56 520 0 760 26 S 1180 56 1440 22 V56 H0Z"/></svg>
+
+<!-- ===== FINAL ===== -->
+<section class="band deep final">
+  <div class="wrap">
+    <div class="stage rv">
+      <img class="bob2" src="assets/winter/p_toppi.png" alt="" aria-hidden="true">
+      <img class="me bob" src="assets/winter/k_jump.png" alt="" aria-hidden="true">
+      <img class="bob2" src="assets/winter/p_orca.png" alt="" aria-hidden="true">
+    </div>
+    <h2><span class="ph">この冬、</span><span class="ph">一緒に新しいことに</span><span class="ph">挑戦しよう！</span></h2>
+    <div class="hero-cta">
+      <a class="cta y" href="https://sakana0213.stores.jp" target="_blank" rel="noopener">STORESで申し込む
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <div class="count" data-count>締切 12/8（火）まで あと<b>--</b>日</div>
+    </div>
+  </div>
+</section>
+
+<div class="dock" aria-label="申し込み">
+  <span class="count" data-count>締切まで あと<b>--</b>日</span>
+  <a class="cta y" href="https://sakana0213.stores.jp" target="_blank" rel="noopener">STORESで申し込む</a>
+</div>
+
+<footer class="page">
+  <div class="wrap">
+    おさかなWINTERスクール2026（おさかなスクール 7期生）<br>
+    主催：株式会社やさしいうみ　／　SUPPORTED BY FURUNO
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* 見出しを1文字ずつ */
+  var n=0;
+  document.querySelectorAll('[data-split]').forEach(function(el){
+    var s=el.dataset.split, key=el.dataset.key||'', out='';
+    var ki = key ? s.indexOf(key) : -1;
+    Array.from(s).forEach(function(c,i){
+      var k = ki>=0 && i>=ki && i<ki+key.length;
+      out+='<span class="ch'+(k?' k':'')+'" style="--i:'+(n++)+'">'+c+'</span>';
+    });
+    el.innerHTML=out;
+  });
+
+  /* 締切カウントダウン（日本時間 12/8 23:59） */
+  var end = new Date('2026-12-08T23:59:59+09:00').getTime();
+  function tick(){
+    var d = Math.ceil((end-Date.now())/86400000);
+    document.querySelectorAll('[data-count]').forEach(function(el){
+      if(d<0){el.textContent='お申し込みは締め切りました';}
+      else if(d===0){el.innerHTML='申込締切は<b>今日</b>まで！';}
+      else el.querySelector('b').textContent=d;
+    });
+  }
+  tick(); setInterval(tick,60000);
+
+  /* スクロールで出てくる（最初から見えている分はそのまま） */
+  if(!reduce && 'IntersectionObserver' in window){
+    var vh=innerHeight;
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    },{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){
+      if(el.getBoundingClientRect().top>vh) io.observe(el);
+    });
+  }
+
+  /* 雪 */
+  var cv=document.getElementById('snow'), cx=cv.getContext('2d'), fl=[];
+  function size(){cv.width=cv.offsetWidth*devicePixelRatio;cv.height=cv.offsetHeight*devicePixelRatio;}
+  size(); addEventListener('resize',size);
+  for(var i=0;i<70;i++) fl.push({x:Math.random(),y:Math.random(),r:Math.random()*2.6+1,v:Math.random()*.0006+.0003,w:Math.random()*6});
+  function draw(t){
+    cx.clearRect(0,0,cv.width,cv.height);
+    cx.fillStyle='rgba(255,255,255,.9)';
+    fl.forEach(function(f){
+      if(!reduce){f.y+=f.v; if(f.y>1.02){f.y=-.02;f.x=Math.random();}}
+      var x=(f.x+Math.sin(t/1800+f.w)*.01)*cv.width, y=f.y*cv.height;
+      cx.beginPath(); cx.arc(x,y,f.r*devicePixelRatio,0,7); cx.fill();
+    });
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+
+  /* 鮮魚ボックス（イラストはすべて背景透過を確認ずみ） */
+  /* 千里水産の資料（鮮魚BOX）どおり：定番2＋珍しい2＋低未利用1＝5匹。イラストは背景透過を確認ずみ。無いものは影絵 */
+  var TEIBAN=[['aji','アジ'],['tai','タイ'],['saba','サバ']];
+  var MEZURASHI=[['tachiuo','タチウオ'],['','ホウボウ'],['ika','イカ'],['kasago','カサゴ'],['','ソイ'],['itoyori','イトヨリ'],['','レンコダイ'],['','サゴシ']];
+  var MIRIYOU=[['','アイゴ'],['bora','ボラ'],['','ミズカマス']];
+  var SIL='<svg viewBox="0 0 120 60" aria-hidden="true"><path d="M8 30 C 30 4 78 4 96 26 L114 10 L108 30 L114 50 L96 34 C 78 56 30 56 8 30Z" fill="#25428f" opacity=".85"/><circle cx="28" cy="27" r="4" fill="#fff"/><text x="58" y="36" font-size="22" text-anchor="middle" fill="#ffe14d" font-family="sans-serif" font-weight="900">?</text></svg>';
+  var stage=document.getElementById('stage'), box=document.getElementById('fishes'), res=document.getElementById('result'), peek=document.getElementById('peek');
+  var SPOT=[[20,30],[50,17],[80,30],[33,52],[67,52]];
+  function take(arr,n){return arr.slice().sort(function(){return Math.random()-.5}).slice(0,n);}
+  function open(){
+    var a=take(TEIBAN,2), b=take(MEZURASHI,2), c=take(MIRIYOU,1);
+    var pick=a.map(function(f){return f.concat('定番')}).concat(b.map(function(f){return f.concat('珍しい')}),c.map(function(f){return f.concat('未利用魚')}));
+    box.innerHTML=pick.map(function(f,i){
+      var pic=f[0]?'<img src="assets/winter/f_'+f[0]+'.png" alt="">':SIL;
+      return '<figure style="left:50%;top:70%" data-x="'+SPOT[i][0]+'" data-y="'+SPOT[i][1]+'">'+pic+'<figcaption><small>'+f[2]+'</small>'+f[1]+'</figcaption></figure>';
+    }).join('');
+    stage.classList.remove('open'); void stage.offsetWidth; stage.classList.add('open');
+    peek.src='assets/winter/k_yatta.png';
+    box.querySelectorAll('figure').forEach(function(el,i){
+      setTimeout(function(){ el.style.left=el.dataset.x+'%'; el.style.top=el.dataset.y+'%'; el.style.transform='translate(-50%,-50%) rotate('+(Math.random()*16-8)+'deg)'; }, 120+i*110);
+    });
+    res.innerHTML='やった！ 定番の<b>'+a.map(function(f){return f[1]}).join('・')+'</b>、珍しい<b>'+b.map(function(f){return f[1]}).join('・')+'</b>、未利用魚の<b>'+c[0][1]+'</b>が入っていたよ！';
+  }
+  stage.addEventListener('click',open);
+  stage.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  document.getElementById('again').addEventListener('click',open);
+
+})();
+</script>
+
+</body>
+</html>
