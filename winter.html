@@ -177,7 +177,7 @@ a{color:inherit}
 .fishes figcaption{font-family:var(--f-disp);font-size:clamp(12px,1.5vw,15px);background:var(--paper);border:2px solid var(--navy);border-radius:999px;display:inline-block;padding:0 10px;color:var(--navy);margin-top:2px}
 .tap{position:absolute;left:50%;top:14%;transform:translateX(-50%);background:var(--navy);color:#fff;font-family:var(--f-disp);font-size:16px;padding:8px 20px;border-radius:999px;white-space:nowrap;z-index:4;box-shadow:0 4px 0 var(--navy-deep)}
 .box-stage.open .tap{display:none}
-.box-stage .peek{position:absolute;right:3%;bottom:4%;width:20%;z-index:4}
+.box-stage .peek{position:absolute;right:1%;bottom:2%;width:28%;z-index:6;animation:bob 3.4s ease-in-out infinite}
 .game-side h3{font-family:var(--f-disp);color:var(--navy);font-size:clamp(23px,3vw,31px);line-height:1.4;margin-bottom:12px}
 .game-side .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
 .ghost{min-height:50px;padding:0 24px;border-radius:999px;border:3px solid var(--navy);background:var(--paper);color:var(--navy);font-family:var(--f-disp);font-size:16px;cursor:pointer}
@@ -271,8 +271,6 @@ a{color:inherit}
 .tch{background:var(--sky);border-radius:28px;overflow:hidden;display:flex;flex-direction:column}
 .tch .pic{aspect-ratio:3/2;overflow:hidden;position:relative}
 .tch .pic img{width:100%;height:100%;object-fit:cover}
-.tch.kw .pic{background:linear-gradient(180deg,#bfe9f3,#7fd0e6);display:flex;align-items:flex-end;justify-content:center}
-.tch.kw .pic img{width:auto;height:96%;object-fit:contain}
 .tch .body{padding:22px 26px 26px}
 .tch .role{font-size:13px;font-weight:900;color:var(--ink-soft);line-height:1.6;display:block}
 .tch h3{font-family:var(--f-disp);font-size:27px;color:var(--navy);margin:4px 0 10px}
@@ -501,8 +499,9 @@ section.band[id]{scroll-margin-top:12px}
   /* 講師：写真を左に小さく */
   .tchs{gap:12px}
   .tch{flex-direction:row;align-items:stretch;border-radius:18px}
-  .tch .pic{aspect-ratio:auto;width:108px;flex:none}
-  .tch.kw .pic img{height:100%;width:100%;object-fit:cover;object-position:50% 15%}
+  .tch{align-items:flex-start}
+  .tch .pic{aspect-ratio:4/5;width:112px;flex:none;align-self:flex-start;margin:12px 0 12px 12px;border-radius:12px}
+  .tch.kw .pic img{object-position:50% 12%}
   .tch .body{padding:12px 14px}
   .tch .role{font-size:11px}
   .tch h3{font-size:19px;margin:2px 0 4px}
@@ -582,9 +581,8 @@ section.band[id]{scroll-margin-top:12px}
   .doors.slider .door{flex:0 0 64%}
   .dnav{display:none}
   .past .cta{min-height:50px;font-size:15px}
-  .tch.kw .pic{background:linear-gradient(180deg,#bfe9f3,#7fd0e6);display:flex;align-items:flex-end;justify-content:center}
-  .tch.kw .pic img{object-fit:contain;object-position:50% 100%;height:96%;width:100%}
 }
+.tch.kw .pic img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
 </style>
 </head>
 <body>
@@ -704,7 +702,7 @@ section.band[id]{scroll-margin-top:12px}
       <div class="lid"></div>
       <div class="fishes" id="fishes"></div>
       <span class="tap">ここをタップ！</span>
-      <img class="peek" src="assets/winter/k_bikkuri.png" alt="" aria-hidden="true" id="peek">
+      <img class="peek" src="assets/winter/k_santa.png" alt="" aria-hidden="true" id="peek">
     </div>
     <div class="game-side rv">
       <span class="eyebrow">PLAY</span>
@@ -842,7 +840,7 @@ section.band[id]{scroll-margin-top:12px}
         </div>
       </article>
       <article class="tch kw rv">
-        <div class="pic"><img src="assets/winter/kp_point.png" alt="さかなのおにいさん かわちゃん" loading="lazy"></div>
+        <div class="pic"><img src="assets/winter/kp_teacher.jpg" alt="さかなのおにいさん かわちゃん" loading="lazy"></div>
         <div class="body">
           <span class="role">さかなのおにいさん</span>
           <h3>かわちゃん</h3>
@@ -1119,7 +1117,7 @@ section.band[id]{scroll-margin-top:12px}
       return '<figure style="left:50%;top:70%" data-x="'+SPOT[i][0]+'" data-y="'+SPOT[i][1]+'">'+pic+'<figcaption><small>'+f[2]+'</small>'+f[1]+'</figcaption></figure>';
     }).join('');
     stage.classList.remove('open'); void stage.offsetWidth; stage.classList.add('open');
-    peek.src='assets/winter/k_yatta.png';
+    
     box.querySelectorAll('figure').forEach(function(el,i){
       setTimeout(function(){ el.style.left=el.dataset.x+'%'; el.style.top=el.dataset.y+'%'; el.style.transform='translate(-50%,-50%) rotate('+(Math.random()*16-8)+'deg)'; }, 120+i*110);
     });
