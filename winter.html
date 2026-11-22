@@ -99,7 +99,7 @@ a{color:inherit}
 .bob2{animation:bob2 4s ease-in-out infinite}
 
 /* ===== HERO ===== */
-.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#eef5ff 0%,var(--sky) 60%,var(--sky-2) 100%);padding-block:24px 0}
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#eef5ff 0%,var(--sky-2) 55%,var(--sky) 100%);padding-block:24px 0}
 #snow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .hero .wrap{z-index:1}
 .hero-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft);font-weight:700}
@@ -552,7 +552,7 @@ section.band[id]{scroll-margin-top:12px}
 /* 横スライド（スマホだけ）：点で位置を見せる */
 .dots{display:none}
 @media (max-width:560px){
-  .slider{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .slider{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .slider::-webkit-scrollbar{display:none}
   .slider > *{scroll-snap-align:center}
   .best.slider{gap:12px;padding:20px 4px 6px;margin:0 -4px}
@@ -1155,6 +1155,25 @@ section.band[id]{scroll-margin-top:12px}
     dp.addEventListener('click',function(){dr.scrollBy({left:-280,behavior:'smooth'})});
     dn.addEventListener('click',function(){dr.scrollBy({left:280,behavior:'smooth'})});
     dr.addEventListener('scroll',function(){requestAnimationFrame(dupd)},{passive:true}); addEventListener('resize',dupd); dupd();}
+
+  /* スライドをゆっくり自動で流す（触ったら少し止まる・動きを減らす設定なら止める） */
+  if(!reduce){
+    document.querySelectorAll('.slider').forEach(function(sl){
+      var pauseUntil=0, hover=false;
+      function hold(){pauseUntil=Date.now()+8000}
+      ['touchstart','pointerdown','wheel','keydown'].forEach(function(ev){sl.addEventListener(ev,hold,{passive:true})});
+      sl.addEventListener('mouseenter',function(){hover=true}); sl.addEventListener('mouseleave',function(){hover=false});
+      setInterval(function(){
+        if(hover||Date.now()<pauseUntil||sl.scrollWidth<=sl.clientWidth+4) return;
+        var r=sl.getBoundingClientRect(); if(r.bottom<0||r.top>innerHeight) return;
+        var items=Array.from(sl.children), c=sl.scrollLeft+sl.clientWidth/2, idx=0, bd=1e9;
+        items.forEach(function(it,i){var m=Math.abs(it.offsetLeft+it.offsetWidth/2-c);if(m<bd){bd=m;idx=i}});
+        var atEnd=sl.scrollLeft+sl.clientWidth>=sl.scrollWidth-4;
+        var next=atEnd?items[0]:items[Math.min(idx+1,items.length-1)];
+        sl.scrollTo({left:Math.max(0,next.offsetLeft-(sl.clientWidth-next.offsetWidth)/2),behavior:'smooth'});
+      },4500);
+    });
+  }
 })();
 </script>
 
