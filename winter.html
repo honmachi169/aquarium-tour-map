@@ -409,10 +409,184 @@ footer.page{background:var(--navy-deep);color:#c1cff0;font-size:13px;text-align:
   *,*::before,*::after{animation:none!important;transition:none!important}
   .swimmer{display:none}
 }
+
+
+/* 右上のメニュー */
+.menu-btn{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));z-index:40;display:flex;align-items:center;gap:8px;height:46px;padding:0 16px 0 14px;border-radius:999px;border:0;background:var(--navy);color:#fff;font-family:var(--f-disp);font-size:13px;cursor:pointer;box-shadow:0 4px 0 var(--navy-deep),0 6px 16px rgba(24,45,102,.25)}
+.menu-btn .bars,.menu-btn .bars::before,.menu-btn .bars::after{display:block;width:18px;height:2.5px;border-radius:2px;background:#fff;transition:transform .2s,opacity .2s}
+.menu-btn .bars{position:relative}
+.menu-btn .bars::before,.menu-btn .bars::after{content:"";position:absolute;left:0}
+.menu-btn .bars::before{top:-6px}.menu-btn .bars::after{top:6px}
+.menu-btn[aria-expanded="true"] .bars{background:transparent}
+.menu-btn[aria-expanded="true"] .bars::before{transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] .bars::after{transform:translateY(-6px) rotate(-45deg)}
+.menu-panel{position:fixed;top:calc(66px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));z-index:40;width:min(280px,calc(100vw - 24px));max-height:calc(100vh - 90px);overflow:auto;background:var(--paper);border:3px solid var(--navy);border-radius:20px;padding:8px;display:flex;flex-direction:column;box-shadow:0 12px 30px rgba(24,45,102,.25)}
+.menu-panel[hidden]{display:none!important}
+.menu-panel a{display:block;padding:11px 14px;border-radius:12px;text-decoration:none;color:var(--navy);font-weight:900;font-size:15px}
+.menu-panel a:hover,.menu-panel a:focus-visible{background:var(--sky)}
+.menu-panel a.go{margin-top:6px;background:var(--yellow);color:var(--navy-deep);text-align:center;font-family:var(--f-disp);font-weight:400}
+section.band[id]{scroll-margin-top:12px}
+.hero-top{padding-right:130px}
+@media (max-width:560px){.menu-btn{height:42px;padding:0 12px}.menu-btn .mtx{display:none}.hero-top{padding-right:56px}}
+/* ===== スマホ用に詰める（11/22） ===== */
+.swipe{display:none}
+@media (max-width:560px){
+  body{font-size:15px;line-height:1.8}
+  .band{padding-block:40px}
+  .wave{height:30px}
+  .head{margin-bottom:22px}
+  .head .guide,.head .guide.r{display:none}
+  .h2{font-size:23px}
+  .lead{font-size:14px;margin-top:8px}
+  .swipe{display:block;text-align:center;font-size:12px;font-weight:900;color:var(--ink-soft);margin:0 0 8px}
+  .deep .swipe{color:#a9c2f2}
+  /* トップ */
+  .hero-grid{gap:18px;padding-bottom:32px}
+  .hero-kawa{display:none}
+  .hero .sub{font-size:15px}
+  .chip{font-size:12.5px;padding:3px 10px}
+  /* 魅力ベスト3 */
+  .best{gap:22px}
+  .b-img,.b-card:nth-child(even) .b-img{min-height:0;aspect-ratio:16/9}
+  .b-txt{padding:24px 18px 18px}
+  .b-txt h3{font-size:20px;margin:4px 0 8px}
+  .b-txt p{font-size:14.5px}
+  .num{width:48px;height:48px;font-size:22px;top:-16px}
+  .who{padding:8px 12px;margin-top:8px}
+  .who b{font-size:16px}
+  /* 鮮魚ボックス */
+  .game{gap:18px}
+  .game-side h3{font-size:20px}
+  .boxlist{font-size:13px}
+  .result{font-size:15px;min-height:0}
+  /* スケジュール */
+  .tl li.past{display:none}
+  .tl::before{left:52px}
+  .tl li{grid-template-columns:42px 22px minmax(0,1fr);gap:0 8px;padding:5px 0}
+  .tl .d{font-size:15px}
+  .tl .d small{font-size:10.5px;margin-top:2px}
+  .tl .dot{width:16px;height:16px;border-width:3px}
+  .tl .t h3{font-size:16px;line-height:1.4}
+  .tl li.main .t{grid-template-columns:minmax(0,1fr);padding:9px 12px;border-radius:14px}
+  .tl li.main .t img{display:none}
+  .tl li.main .t .one{font-size:13px;line-height:1.6;margin-top:2px}
+  .tl .t p{font-size:13px}
+  .arc{font-size:14px;padding:10px 14px;margin-top:16px}
+  /* グランプリ */
+  .gp-steps{grid-template-columns:minmax(0,1fr);gap:6px}
+  .gp-steps li{display:grid;grid-template-columns:36px minmax(0,1fr);align-items:center;gap:0 10px;text-align:left;padding:10px 12px;border-radius:14px}
+  .gp-steps .n{width:32px;height:32px;font-size:16px;grid-row:span 2;box-shadow:0 3px 0 #c9a800}
+  .gp-steps b{font-size:16px;margin:0}
+  .gp-steps p{margin:0;font-size:13px;line-height:1.55}
+  .gp-steps img{display:none}
+  .prize{margin-top:14px;gap:10px}
+  .prize-main{padding:16px 18px;border-radius:18px}
+  .prize-main h3{font-size:17px;margin:6px 0 2px}
+  .prize-all{padding:14px 18px;border-radius:18px}
+  .prize-all b{font-size:15px}
+  .prize-all p{font-size:13.5px}
+  .gp-last{font-size:14px;margin-top:12px}
+  .gp-last b{font-size:20px}
+  /* プラン */
+  .plans{gap:10px;row-gap:22px}
+  .plan .pic{aspect-ratio:16/9}
+  .plan .l{font-size:26px;margin-top:8px}
+  .plan .n{font-size:13px;margin-top:4px}
+  .plan .p{font-size:19px}
+  .plan ul{margin-top:6px;font-size:11.5px;line-height:1.7}
+  .buy{margin:10px 8px 0;min-height:40px;font-size:12.5px}
+  .incl{padding:16px 16px;margin-top:22px}
+  .incl dl,.incl ul{font-size:13.5px}
+  .ship{font-size:12px}
+  /* 講師：写真を左に小さく */
+  .tchs{gap:12px}
+  .tch{flex-direction:row;align-items:stretch;border-radius:18px}
+  .tch .pic{aspect-ratio:auto;width:108px;flex:none}
+  .tch.kw .pic img{height:100%;width:100%;object-fit:cover;object-position:50% 15%}
+  .tch .body{padding:12px 14px}
+  .tch .role{font-size:11px}
+  .tch h3{font-size:19px;margin:2px 0 4px}
+  .tch h3 small{font-size:11.5px;margin-left:4px}
+  .tch p{font-size:13px;line-height:1.65}
+  /* メッセージ */
+  .msg{gap:20px}
+  .msg-body .hook{font-size:19px;margin-bottom:12px}
+  .msg-body p{font-size:14.5px;margin-bottom:.8em}
+  .msg-photo{max-width:200px}
+  .doors-lead{margin-top:28px;font-size:16px}
+  .doors{gap:12px}
+  .door figcaption{font-size:12.5px}
+  /* 声：横にスワイプ */
+  .stats span{font-size:12.5px;padding:4px 12px}
+  .stats b{font-size:17px}
+  .voices{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:30px 2px 6px;margin:0 -2px;scrollbar-width:none}
+  .voices::-webkit-scrollbar{display:none}
+  .voice{flex:0 0 82%;scroll-snap-align:center;padding:22px 18px 16px}
+  .voice p{font-size:14px}
+  /* スポンサー：4社は横にスワイプ */
+  .sp-main .ph-img{min-height:0;aspect-ratio:16/8}
+  .sp-main .body{padding:18px 18px}
+  .catch{font-size:15px}
+  .sp p,.sp-main p{font-size:13.5px;line-height:1.75}
+  .sp-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;scrollbar-width:none;padding-bottom:4px}
+  .sp-grid::-webkit-scrollbar{display:none}
+  .sp-grid .sp{flex:0 0 84%;scroll-snap-align:center}
+  .sp .ph-img{aspect-ratio:16/8}
+  .sp .body{padding:14px 16px 16px}
+  .logo-plate{height:48px}
+  .logo-plate img{max-height:38px;max-width:160px}
+  .sp-sub{margin-top:22px}
+  .sp.sp-small .ph-img{aspect-ratio:16/7}
+  .sp-extra{margin-top:18px;font-size:12.5px;gap:8px}
+  .thanks{margin-top:18px;font-size:15px}
+  .thanks img{width:60px}
+  /* よくある質問 */
+  .faq{gap:8px}
+  .faq details{padding:0 14px;border-radius:14px}
+  .faq summary{padding:12px 0;font-size:14.5px;gap:8px}
+  .faq details p{font-size:14px;margin-bottom:14px}
+  .faq-sub{font-size:15px;margin-top:14px}
+  /* 最後 */
+  .final .stage img{width:72px}.final .stage img.me{width:120px}
+  .final h2{font-size:24px}
+}
+
+/* 横スライド（スマホだけ）：点で位置を見せる */
+.dots{display:none}
+@media (max-width:560px){
+  .slider{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .slider::-webkit-scrollbar{display:none}
+  .slider > *{scroll-snap-align:center}
+  .best.slider{gap:12px;padding:20px 4px 6px;margin:0 -4px}
+  .best.slider .b-card{flex:0 0 86%;grid-template-columns:minmax(0,1fr)}
+  .best.slider .b-card .b-img{order:0;border-radius:30px 30px 0 0}
+  .best.slider .b-card .num{left:16px;right:auto}
+  .doors.slider{gap:12px;padding:10px 6px 12px;margin:22px -6px 0}
+  .doors.slider .door{flex:0 0 62%}
+  .dots{display:flex;justify-content:center;gap:6px;margin-top:6px}
+  .dots i{width:7px;height:7px;border-radius:50%;background:var(--line);transition:width .2s,background .2s}
+  .dots i.on{width:18px;border-radius:999px;background:var(--navy)}
+  .deep .dots i{background:rgba(255,255,255,.3)}
+  .deep .dots i.on{background:var(--yellow)}
+}
 </style>
 </head>
 <body>
 <div lang="ja">
+<button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuPanel"><span class="bars" aria-hidden="true"></span><span class="mtx">メニュー</span></button>
+<nav class="menu-panel" id="menuPanel" aria-label="ページ内メニュー" hidden>
+  <a href="#best3">魅力ベスト3</a>
+  <a href="#box">鮮魚ボックス</a>
+  <a href="#schedule">スケジュール</a>
+  <a href="#grandprix">料理図鑑グランプリ</a>
+  <a href="#plans">プランと料金</a>
+  <a href="#teachers">講師</a>
+  <a href="#message">かわちゃんのメッセージ</a>
+  <a href="#voice">参加した方の声</a>
+  <a href="#sponsors">スポンサー</a>
+  <a href="#faq">よくある質問</a>
+  <a class="go" href="https://sakana0213.stores.jp" target="_blank" rel="noopener">STORESで申し込む</a>
+</nav>
 
 <!-- ===== HERO ===== -->
 <header class="hero">
@@ -465,7 +639,8 @@ footer.page{background:var(--navy-deep);color:#c1cff0;font-size:13px;text-align:
         <h2 class="h2"><span class="ph">ウィンタースクールだけの</span><span class="ph"><span class="mk">魅力ベスト3</span></span></h2>
       </div>
     </div>
-    <div class="best">
+    <p class="swipe" aria-hidden="true">← 横にスワイプ →</p>
+    <div class="best slider">
       <article class="b-card rv">
         <span class="num">1</span>
         <div class="b-img"><img src="assets/winter/sensei.jpg" alt="タイを持つ早武忠利先生" loading="lazy"></div>
@@ -543,7 +718,7 @@ footer.page{background:var(--navy-deep);color:#c1cff0;font-size:13px;text-align:
       <img class="guide r bob" src="assets/winter/k_run.png" alt="" aria-hidden="true">
     </div>
     <ol class="tl">
-      <li class="rv"><span class="d">11/6<small>金</small></span><span class="dot"></span><div class="t"><span class="k">STORESで</span><h3>申込スタート</h3></div></li>
+      <li class="rv past"><span class="d">11/6<small>金</small></span><span class="dot"></span><div class="t"><span class="k">STORESで</span><h3>申込スタート</h3></div></li>
       <li class="rv"><span class="d">12/8<small>火</small></span><span class="dot"></span><div class="t"><span class="k">全プラン</span><h3>申込締切</h3><p>包丁・鮮魚ボックスは数に限りがあります。お早めに！</p></div></li>
       <li class="rv main"><span class="d">12/15<small>火 19:00</small></span><span class="dot"></span><div class="t"><div><span class="k">第1回</span><h3>入門！レンチンフィッシュ</h3><p class="one">火も包丁も使わない！レンジでチンするだけのおさかな料理を、かわちゃんと作ろう。見るだけでもOK</p></div><img src="assets/winter/f_saba.png" alt="" aria-hidden="true"></div></li>
       <li class="rv main"><span class="d">12/20<small>日 14:00</small></span><span class="dot"></span><div class="t"><div><span class="k">第2回</span><h3>本番！プロの料理人のさばき方講座</h3><p class="one">スーパーで買ったアジや好きな魚を、ハヤタケ先生といっしょにおうちのキッチンでさばこう</p></div><img src="assets/winter/f_aji.png" alt="" aria-hidden="true"></div></li>
@@ -679,7 +854,7 @@ footer.page{background:var(--navy-deep);color:#c1cff0;font-size:13px;text-align:
       <figure class="msg-photo rv"><img src="assets/winter/ph_fishhold.jpg" alt="釣った大きなハタを持って笑うかわちゃん" width="768" height="1024" loading="lazy"><figcaption>さかなは、釣っても食べてもおもしろい！</figcaption></figure>
     </div>
     <p class="doors-lead rv">さかなには、たくさんの入口がある！</p>
-    <div class="doors">
+    <div class="doors slider">
       <figure class="door rv" style="--r:-3deg;--n:0"><img src="assets/winter/ph_buri.jpg" alt="船の上で大きなブリを持つかわちゃん" loading="lazy"><figcaption>釣ってうれしい</figcaption></figure>
       <figure class="door rv" style="--r:2deg;--n:1"><img src="assets/winter/ph_aquarium.jpg" alt="魚が泳ぐ大きな水槽の前で両手を広げるかわちゃん" loading="lazy"><figcaption>水族館でたのしい</figcaption></figure>
       <figure class="door rv" style="--r:-1.5deg;--n:2"><img src="assets/winter/ph_backyard.jpg" alt="水族館のバックヤードで自撮りするかわちゃん" loading="lazy"><figcaption>裏側ものぞいて</figcaption></figure>
@@ -700,7 +875,8 @@ footer.page{background:var(--navy-deep);color:#c1cff0;font-size:13px;text-align:
         <div class="stats"><span><b>219</b>人が参加</span><span><b>152</b>作品の図鑑が集まった</span><span>アンケート<b>44</b>人中<b>43</b>人が「満足」</span></div>
       </div>
     </div>
-    <div class="voices">
+    <p class="swipe" aria-hidden="true">← 横にスワイプ →</p>
+    <div class="voices slider">
       <blockquote class="voice rv"><img class="pu bob" src="assets/winter/p_orca.png" alt="" aria-hidden="true"><p>外見のかわいさだけでなく、生き物がどこで生きて何を食べているかという背景に興味を持ち、図鑑などを細かく観察しながら絵を描くことが増えました。</p><footer>昨年の参加保護者さま</footer></blockquote>
       <blockquote class="voice rv"><img class="pu bob2" src="assets/winter/p_kopi.png" alt="" aria-hidden="true"><p>第一線で活躍される専門家のお話を聞けたことが大きな刺激となり、自身の将来の夢や進路に向けたモチベーションを高める貴重な時間になりました。</p><footer>昨年の参加保護者さま</footer></blockquote>
       <blockquote class="voice rv"><img class="pu bob" src="assets/winter/p_hanabi.png" alt="" aria-hidden="true"><p>細やかな準備や楽しい企画の数々に親子で大満足しています。これからも子どもたちに夢とハッピーを届けてくれる活動を心から応援しています！</p><footer>昨年の参加保護者さま</footer></blockquote>
@@ -732,7 +908,8 @@ footer.page{background:var(--navy-deep);color:#c1cff0;font-size:13px;text-align:
       </div>
     </article>
 
-    <div class="sp-grid">
+    <p class="swipe" aria-hidden="true">← 横にスワイプ →</p>
+    <div class="sp-grid slider">
       <article class="sp rv">
         <div class="ph-img"><img src="assets/winter/sp_aoki.jpg" alt="包丁をつくる職人" loading="lazy"></div>
         <div class="body">
@@ -931,6 +1108,24 @@ footer.page{background:var(--navy-deep);color:#c1cff0;font-size:13px;text-align:
   stage.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
   document.getElementById('again').addEventListener('click',open);
 
+
+  /* メニュー */
+  var mb=document.getElementById('menuBtn'), mp=document.getElementById('menuPanel');
+  function setMenu(o){mb.setAttribute('aria-expanded',o?'true':'false');mp.hidden=!o;}
+  mb.addEventListener('click',function(){setMenu(mp.hidden)});
+  mp.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+  document.addEventListener('click',function(e){if(!mp.hidden&&!mp.contains(e.target)&&!mb.contains(e.target))setMenu(false)});
+
+  /* 横スライドの点 */
+  document.querySelectorAll('.slider').forEach(function(sl){
+    var items=Array.from(sl.children); if(items.length<2) return;
+    var d=document.createElement('div'); d.className='dots'; d.setAttribute('aria-hidden','true');
+    items.forEach(function(){d.appendChild(document.createElement('i'))});
+    sl.after(d);
+    function upd(){var c=sl.scrollLeft+sl.clientWidth/2,best=0,bd=1e9;items.forEach(function(it,i){var m=Math.abs(it.offsetLeft+it.offsetWidth/2-c);if(m<bd){bd=m;best=i}});Array.from(d.children).forEach(function(x,i){x.classList.toggle('on',i===best)})}
+    sl.addEventListener('scroll',function(){requestAnimationFrame(upd)},{passive:true}); upd();
+  });
 })();
 </script>
 
