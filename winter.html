@@ -122,7 +122,7 @@ a{color:inherit}
 .hero-cta{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:22px}
 
 /* ===== MESSAGE ===== */
-.msg{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:44px;align-items:center}
+.msg{display:block;max-width:46em;margin:0 auto}
 .msg-body p{margin:0 0 1.05em;font-size:17px}
 .msg-body .hook{font-family:var(--f-disp);font-size:clamp(22px,3vw,30px);line-height:1.5;color:var(--navy);margin:0 0 22px}
 .msg-body .sig{font-family:var(--f-disp);color:var(--navy);font-size:20px;margin-top:6px}
@@ -528,10 +528,8 @@ section.band[id]{scroll-margin-top:12px}
   .sp-main .body{padding:18px 18px}
   .catch{font-size:15px}
   .sp p,.sp-main p{font-size:13.5px;line-height:1.75}
-  .sp-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;scrollbar-width:none;padding-bottom:4px}
-  .sp-grid::-webkit-scrollbar{display:none}
-  .sp-grid .sp{flex:0 0 84%;scroll-snap-align:center}
-  .sp .ph-img{aspect-ratio:16/8}
+  .sp-grid{gap:12px}
+  .sp .ph-img{aspect-ratio:16/7}
   .sp .body{padding:14px 16px 16px}
   .logo-plate{height:48px}
   .logo-plate img{max-height:38px;max-width:160px}
@@ -568,6 +566,24 @@ section.band[id]{scroll-margin-top:12px}
   .dots i.on{width:18px;border-radius:999px;background:var(--navy)}
   .deep .dots i{background:rgba(255,255,255,.3)}
   .deep .dots i.on{background:var(--yellow)}
+}
+
+/* 入口の写真：PCもスマホも1列で横にスライド */
+.doors-wrap{position:relative;margin-top:22px}
+.doors.slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;gap:22px;padding:14px 8px 18px;margin:0}
+.doors.slider::-webkit-scrollbar{display:none}
+.doors.slider .door{flex:0 0 250px;scroll-snap-align:center}
+.dnav{position:absolute;top:50%;transform:translateY(-60%);z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:26px;line-height:1;cursor:pointer;box-shadow:0 4px 0 var(--navy-deep)}
+.dnav.p{left:-8px}.dnav.n{right:-8px}
+.dnav[disabled]{opacity:0;pointer-events:none}
+.past{text-align:center;margin-top:22px}
+.past .cta{min-height:56px;font-size:17px;padding:0 28px}
+@media (max-width:560px){
+  .doors.slider .door{flex:0 0 64%}
+  .dnav{display:none}
+  .past .cta{min-height:50px;font-size:15px}
+  .tch.kw .pic{background:linear-gradient(180deg,#bfe9f3,#7fd0e6);display:flex;align-items:flex-end;justify-content:center}
+  .tch.kw .pic img{object-fit:contain;object-position:50% 100%;height:96%;width:100%}
 }
 </style>
 </head>
@@ -851,15 +867,21 @@ section.band[id]{scroll-margin-top:12px}
         <p>この冬、一緒に新しいことに挑戦しよう！</p>
         <p class="sig">さかなのおにいさん かわちゃん</p>
       </div>
-      <figure class="msg-photo rv"><img src="assets/winter/ph_fishhold.jpg" alt="釣った大きなハタを持って笑うかわちゃん" width="768" height="1024" loading="lazy"><figcaption>さかなは、釣っても食べてもおもしろい！</figcaption></figure>
     </div>
     <p class="doors-lead rv">さかなには、たくさんの入口がある！</p>
-    <div class="doors slider">
+    <div class="doors-wrap">
+      <button class="dnav p" type="button" aria-label="前の写真へ">‹</button>
+      <div class="doors slider" id="doors">
+      <figure class="door rv" style="--r:2deg;--n:0"><img src="assets/winter/ph_fishhold.jpg" alt="釣った大きなハタを持って笑うかわちゃん" loading="lazy" style="object-position:50% 30%"><figcaption>釣っても食べてもおもしろい！</figcaption></figure>
       <figure class="door rv" style="--r:-3deg;--n:0"><img src="assets/winter/ph_buri.jpg" alt="船の上で大きなブリを持つかわちゃん" loading="lazy"><figcaption>釣ってうれしい</figcaption></figure>
       <figure class="door rv" style="--r:2deg;--n:1"><img src="assets/winter/ph_aquarium.jpg" alt="魚が泳ぐ大きな水槽の前で両手を広げるかわちゃん" loading="lazy"><figcaption>水族館でたのしい</figcaption></figure>
       <figure class="door rv" style="--r:-1.5deg;--n:2"><img src="assets/winter/ph_backyard.jpg" alt="水族館のバックヤードで自撮りするかわちゃん" loading="lazy"><figcaption>裏側ものぞいて</figcaption></figure>
       <figure class="door rv" style="--r:3deg;--n:3"><img src="assets/winter/ph_kids.jpg" alt="シャチのぬいぐるみを掲げて盛り上がる子どもたち" loading="lazy" style="object-position:50% 30%"><figcaption>この冬は、食べておいしい！</figcaption></figure>
     </div>
+      <button class="dnav n" type="button" aria-label="次の写真へ">›</button>
+    </div>
+    <div class="past rv"><a class="cta" href="https://aquarium.yasasea.com/school/" target="_blank" rel="noopener">過去のスクールの様子を見る
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   </div>
 </section>
 <svg class="wave" style="--fr:var(--sky);--to:var(--paper)" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 300 56 520 0 760 26 S 1180 56 1440 22 V56 H0Z"/></svg>
@@ -908,8 +930,7 @@ section.band[id]{scroll-margin-top:12px}
       </div>
     </article>
 
-    <p class="swipe" aria-hidden="true">← 横にスワイプ →</p>
-    <div class="sp-grid slider">
+    <div class="sp-grid">
       <article class="sp rv">
         <div class="ph-img"><img src="assets/winter/sp_aoki.jpg" alt="包丁をつくる職人" loading="lazy"></div>
         <div class="body">
@@ -1126,6 +1147,14 @@ section.band[id]{scroll-margin-top:12px}
     function upd(){var c=sl.scrollLeft+sl.clientWidth/2,best=0,bd=1e9;items.forEach(function(it,i){var m=Math.abs(it.offsetLeft+it.offsetWidth/2-c);if(m<bd){bd=m;best=i}});Array.from(d.children).forEach(function(x,i){x.classList.toggle('on',i===best)})}
     sl.addEventListener('scroll',function(){requestAnimationFrame(upd)},{passive:true}); upd();
   });
+
+  /* 入口の写真の矢印（PC） */
+  var dr=document.getElementById('doors');
+  if(dr){var dp=document.querySelector('.dnav.p'),dn=document.querySelector('.dnav.n');
+    function dupd(){dp.disabled=dr.scrollLeft<=4;dn.disabled=dr.scrollLeft+dr.clientWidth>=dr.scrollWidth-4}
+    dp.addEventListener('click',function(){dr.scrollBy({left:-280,behavior:'smooth'})});
+    dn.addEventListener('click',function(){dr.scrollBy({left:280,behavior:'smooth'})});
+    dr.addEventListener('scroll',function(){requestAnimationFrame(dupd)},{passive:true}); addEventListener('resize',dupd); dupd();}
 })();
 </script>
 
