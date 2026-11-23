@@ -1,9 +1,19 @@
 {
- "count": 188,
- "nextLive": "3gjdJiBwBWY",
- "nextLiveDate": "2026-11-23T00:00:00+00:00",
- "nextLiveTitle": "カラフルなさかな",
+ "count": 189,
+ "nextLive": "eKi1AT5R_Uo",
+ "nextLiveDate": "2026-11-30T11:00:00+00:00",
+ "nextLiveTitle": "おさかなアドベントカレンダー",
  "items": [
+  {
+   "id": "1Dh-G_ljwbm2VgxW_WE8SSm8ekm3azKAr",
+   "title": "はたらくさかな",
+   "date": "2026.11.23",
+   "iso": "2026-11-23",
+   "cat": "weekly",
+   "thumb": "https://drive.google.com/thumbnail?id=1Dh-G_ljwbm2VgxW_WE8SSm8ekm3azKAr&sz=w800",
+   "dl": "https://drive.google.com/uc?export=download&id=1Dh-G_ljwbm2VgxW_WE8SSm8ekm3azKAr",
+   "video": "3gjdJiBwBWY"
+  },
   {
    "id": "1mihI7-ncqiPOj-hogBRoegSoC81GquQP",
    "title": "カラフルなさかな",
